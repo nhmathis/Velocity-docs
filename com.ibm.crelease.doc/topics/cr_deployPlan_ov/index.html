@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Deployment plans", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_deployplan_manage/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_deployplan_manage/" class="btn btn-xs btn-link">
+        Managing deployment plans
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.crelease.doc/topics/cr_restore_archive/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.crelease.doc/topics/cr_restore_archive/" class="btn btn-xs btn-link">
+        Restoring archived releases, plans, and templates
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="deployment-plans">Deployment plans</h1>
+<p>A deployment plan is a container for tasks. Tasks define the activities that your team runs to complete a software deployment.</p>
+<p>You create a deployment plan by assigning a team to manage it and then adding tasks to the plan. Team members add tasks to the plan and run the tasks during deployments. The managing team also determines which UrbanCode Deploy applications are available. After an integration is configured, all applications that are managed by the team in UrbanCode Deploy are available.</p>
+<p>When you use the Pipeline feature, releases and deployment plans are automatically generated as you add stages and applications to the pipeline. You can start deployments directly from the pipeline, or open the deployment plan and start the deployment by running an eligible task.</p>
+<p>The tasks define the activities that the team performs to complete a deployment. You can create new tasks, copy tasks from other deployment plans or import tasks from CSV files. When you are satisfied with the plan, you can schedule a deployment. You can also run a deployment at any time by starting one of the plan's tasks.</p>
+<p>Tasks are displayed on individual rows in deployment plans. Each row contains information that identifies the task and provides its status. Each row also contains action icons that are used during deployments, such as <strong>Start</strong> task or <strong>Skip</strong>.</p>
+<p>By default, tasks run sequentially beginning with the first task, or topmost task, in the plan. After the first task finishes, the second task is eligible to run, and so forth. The order in which tasks are eligible to run is called the execution order.</p>
+<p>The execution order can be modified by combining tasks into groups. <a href="../cr_task_groups/">When you create a group</a>, you set the group's execution pattern, which can be sequential or parallel. If a group has a sequential execution pattern, its tasks run sequentially starting with the first task. A deployment plan's default execution pattern is sequential. If a group has a parallel execution pattern, tasks in the group can be started in any order and they can run simultaneously. If a plan consists entirely of parallel tasks, you can start any task regardless of its position in the list.</p>
+<p>Task eligibility can also be effected by task dependencies. <a href="../cr_task_depend/">If a task has any prerequisites</a>, it cannot start, even if it is otherwise eligible, until all prerequisite tasks are resolved.</p>
+<p>Some tasks start automatically as soon as they are eligible to run, while other tasks are started manually. Whether a task starts automatically or not depends on its type. Manual tasks, as the name implies, are started manually. UrbanCode Deploy and Delayed-type tasks automatically start as soon as they are eligible.</p>
+<p>Eligible tasks display a <strong>Start Task</strong> button. To start a deployment, you start one of a plan's eligible tasks. Scheduled deployments start automatically at the scheduled time if an eligible task is of a type that can start automatically, such as UrbanCode Deploy.</p>
+<ul>
+<li><strong><a href="../cr_deployplan_manage/">Managing deployment plans</a></strong><br />
+You can change existing deployment plans and view current status from the deployment plan detail page.</li>
+<li><strong><a href="../cr_deployPlan_create/">Creating deployment plans</a></strong><br />
+You can start with a blank plan that has no defined tasks, copy an existing plan, or start with a plan template. You can also auto-create them by assigning applications to pipelines. When you copy a plan or use a template, many tasks are already defined.</li>
+<li><strong><a href="../cr_deployPlan_importTasks/">Importing tasks into deployment plans</a></strong><br />
+You can import tasks that are defined in comma-separated values (CSV) files into a deployment plan.</li>
+<li><strong><a href="../cr_deployPlan_promote/">Copying deployment plans</a></strong><br />
+You can duplicate deployment plans by copying them.</li>
+<li><strong><a href="../cr_deployPlan_template/">Managing deployment plan templates</a></strong><br />
+You can convert deployment plans to create deployment plan templates.</li>
+<li><strong><a href="../cr_deployPlan_archive/">Archiving deployment plans</a></strong><br />
+You can remove deployment plans from releases by archiving them.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../c_node_releases/">Release management</a></p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_deployplan_manage/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_deployplan_manage/" class="btn btn-xs btn-link">
+        Managing deployment plans
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.crelease.doc/topics/cr_restore_archive/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.crelease.doc/topics/cr_restore_archive/" class="btn btn-xs btn-link">
+        Restoring archived releases, plans, and templates
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

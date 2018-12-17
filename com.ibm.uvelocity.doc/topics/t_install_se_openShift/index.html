@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing onto OpenShift - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing as an OpenShift application", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_remove_ucv/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_remove_ucv/" class="btn btn-xs btn-link">
+        Uninstalling the server
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.uvelocity.doc/topics/t_install_ICP/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.uvelocity.doc/topics/t_install_ICP/" class="btn btn-xs btn-link">
+        Installing on IBM Cloud Private
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="installing-as-an-openshift-application">Installing as an OpenShift application</h1>
+<p>The ID that you use must be able to make changes to the host environment. The tools required by all installation scenarios include the following items:</p>
+<ul>
+<li>Docker. The commands used during installation retrieve files and container images from remote locations. If you are unable to access the internet during installation, the install images will need to have been previously downloaded and placed in a Docker repository that the installation commands can access.</li>
+<li>
+<p>IBM UrbanCode™ Deploy Version 6.2.3 and later. Although not strictly required, many UrbanCode™ Velocity features assume integration with UrbanCode Deploy. It doesn't matter which product you install first.</p>
+<p>If you are using an UrbanCode Deploy version prior to V6.2.5, you must install the patch located at the following website: <a href="http://public.dhe.ibm.com/software/products/UrbanCode/plugins/ucsync/patches/ibmucd/">http://public.dhe.ibm.com/software/products/UrbanCode/plugins/ucsync/patches/ibmucd/</a>. Select from the index the appropriate version that is installed on your computer.</p>
+<p>UrbanCode Velocity can connect to an UrbanCode Deploy server on the same network. If you install UrbanCode Velocity with Kubernetes, the Kubernetes cluster must be on the same network as the UrbanCode Deploy server.</p>
+</li>
+<li>
+<p>Git and a GitHub account.</p>
+</li>
+</ul>
+<p>In addition to the requirements for all installation scenarios, you need the following items:</p>
+<ul>
+<li>Configured OpenShift client instance. This topic uses Minishift for local instance installations.</li>
+<li>OpenShift command line tool, OC, installed on the client.</li>
+<li>Access to the PEM-format certificate and private key that you can use to configure an OpenShift route.</li>
+<li>Master node: 2 vCPU, 8 GB RAM, 30 GB storage.</li>
+<li>Other nodes: 1vCPU, 8 GB RAM, 15 GB storage.</li>
+</ul>
+<p>You will install UrbanCode Velocity into a OpenShift project. During installation, you configure a MongoDB for your project, and add the UrbanCode Velocity service to your OpenShift project catalog.</p>
+<ol>
+<li>
+<p>Get an access key. </p>
+<p>The access key enables you to complete installation. <a href="https://uc-velocity.com/">Visit the UrbanCode Velocity web portal to obtain your key</a>. After completing the form, you can copy the access key. Store the key in a readily-available location; you use it during installation.</p>
+<p><strong>Note:</strong> Make sure that you select a key for the product version that you want to install. Keys for the Standard Edition do not work with the Community Edition and vice-versa.</p>
+</li>
+<li>
+<p>Configure the containers to be run by root user. Several service containers require the admin user. From the OpenShift client command line, run the following commands:</p>
+<p><code>oc login -u system:admin -n default
+oc adm policy add-scc-to-group anyuid system:authenticated</code></p>
+</li>
+<li>
+<p>From the OpenShift dashboard, create a project for UrbanCode Velocity. When the project is created, in the <strong>My Projects</strong>area, select the project, and then click <strong>Browse Catalog</strong>.</p>
+</li>
+<li>Install the UrbanCode Velocity service in the project catalog by completing the following steps:. <ol>
+<li><a href="https://github.com/IBM/velocity-se/releases">Download the UrbanCode Velocity template for OpenShift</a>. The file is named velocity-se-1-1-0-openshift.yaml </li>
+<li>From OpenShift project catalog, use the <strong>Add to Project</strong> > <strong>Import YAML/JSON</strong> command to import the service into the catalog </li>
+<li>Select <strong>Create</strong>, than check <strong>Save Template</strong> and uncheck <strong>Process the Template</strong>. After refreshing the browser, you will see the UrbanCode Velocity service in the OpenShift project catalog.</li>
+</ol>
+</li>
+<li>
+<p>Create a MongoDB service for the project by completing the following steps: </p>
+<ol>
+<li>From the OpenShift project catalog, select <strong>MongoDB</strong>. </li>
+<li>
+<p>On the MongoDB configuration page, in the <strong>MongoDB Admin Password</strong> field, enter a password for admin user. You can accept the default values for the other parameters.</p>
+<p><strong>Note:</strong> The user must be the admin user.</p>
+</li>
+<li>
+<p>Click <strong>Create</strong>. </p>
+</li>
+<li>On the MogoDB has been created page, copy the <code>Connection URL</code> string and store it in a readily-accessible location, then close configuration window. You use the connection string to configure your UrbanCode Velocity project.</li>
+<li>Create UrbanCode Velocity service by completing these steps. </li>
+<li>From project catalog, select <strong>Velocity</strong> <img alt="OpenShift Catalog" src="../../images/OpenShiftCatalog.PNG" />. The Velocity configuration window is displayed.</li>
+<li>Click <strong>Next</strong>, and then, in the <strong>Name</strong> field, enter a service name. </li>
+<li>
+<p>In the <strong>Hostname</strong> field, enter the service host name. </p>
+<p>The host name must resolve to a name on your DNS server, or in the server's hosts file. On Linux, the file location is etc/hosts; on Windows, the location is C:\Windows\System32\drivers\etc\hosts.</p>
+</li>
+<li>
+<p>In the <strong>Access Key</strong> field, paste the UrbanCode Velocity access key received earlier. </p>
+</li>
+<li>
+<p>In the <strong>Mongo URL</strong> field, paste MongoDB connection string for the MongoDB service. Do not use the default user or database name. Use the admin user and password you created for the admin. For example:</p>
+<p><code>mongo://admin:password@mongodb</code></p>
+<p>If you do not want to use the admin user, log on to the MongoDB and use a command similar to this one to grant admin permissions to the user:</p>
+<p>```</p>
+<p>db.grantRolesToUser( "mongo", ["readWriteAnyDatabase", "dbAdminAnyDatabase", "clusterAdmin"]  )
+```</p>
+</li>
+<li>
+<p>Accept the default values for the other parameters and click <strong>Create</strong>. </p>
+</li>
+<li>
+<p>From project dashboard, click <strong>Applications</strong> > <strong>Routes</strong> > <strong>Create Route</strong>, and then create a route by completing the following steps: </p>
+</li>
+<li>
+<p>In the <strong>Name</strong> field, provide a name for the route. </p>
+</li>
+<li>In the <strong>Hostname</strong> field, enter the host name you specified earlier for UrbanCode Velocity. </li>
+<li>In the <strong>Service</strong> field, select the <code>velocity-router</code> service. </li>
+<li>Check <strong>Secure route</strong> and then upload your PEM-format certificate and key into the fields provided for them. </li>
+<li>Click <strong>Create</strong>. 
+The new route is listed on the Routes page.</li>
+</ol>
+</li>
+</ol>
+<p>After the installation is complete, access UrbanCode Velocity by clicking the route name link. The default user name is admin and the default password is admin.</p>
+<p><strong>Parent topic:</strong> <a href="../c_install_se_roadmap/">Installation roadmap</a></p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_remove_ucv/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_remove_ucv/" class="btn btn-xs btn-link">
+        Uninstalling the server
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.uvelocity.doc/topics/t_install_ICP/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.uvelocity.doc/topics/t_install_ICP/" class="btn btn-xs btn-link">
+        Installing on IBM Cloud Private
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

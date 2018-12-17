@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Tasks overview - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Tasks", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_task_manage/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_task_manage/" class="btn btn-xs btn-link">
+        Managing tasks
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.crelease.doc/topics/cr_deployRun_scheduled/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.crelease.doc/topics/cr_deployRun_scheduled/" class="btn btn-xs btn-link">
+        Running scheduled deployments
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="tasks">Tasks</h1>
+<p>A task represents a business-meaningful activity that is associated with a software deployment. Each task is defined on a separate row in a deployment plan. During a deployment, you run tasks defined in the deployment plan to complete the deployment.</p>
+<p>Most tasks have a starting and ending point, and a measurable duration. A task can have other attributes depending on its type. A task can be of one of following types:</p>
+<ul>
+<li>
+<p><strong>Delayed</strong></p>
+<p>Represents a critical event that happens at a specific time.</p>
+</li>
+<li>
+<p><strong>Deployment Risk Analysis</strong></p>
+<p>use the IBM Cloud service DevOps Insights..???</p>
+</li>
+<li>
+<p><strong>Email</strong></p>
+<p>Sends an email message.</p>
+</li>
+<li>
+<p><strong>Header/Note</strong></p>
+<p>an organizational element. For example, you might use a header task to identify a task group.</p>
+</li>
+<li>
+<p><strong>Jenkins</strong></p>
+<p>Runs a Jenkins job or pipeline.</p>
+</li>
+<li>
+<p><strong>Manual</strong></p>
+<p>Represents any activity that is associated with a software deployment, such as taking a server offline or updating a database. Users assigned manual tasks can be sent email notifications when their tasks start or fail.</p>
+</li>
+<li>
+<p><strong>Run another plan</strong></p>
+<p>Runs deployments for other deployment plans participating in the same release event. This is an experimental task type.</p>
+</li>
+<li>
+<p><strong>ServiceNow</strong></p>
+<p>Creates and manages ServiceNow tickets.</p>
+</li>
+<li>
+<p><strong>UrbanCode Deploy</strong></p>
+<p>Represents an IBM UrbanCode Deploy application. Use this task to run UrbanCode Deploy applications.</p>
+</li>
+<li>
+<p><strong>Wait for approval</strong></p>
+<p>Pauses a deployment until the designated users approve the task.</p>
+</li>
+</ul>
+<p>You can add tasks to deployment plans by one of the following methods:</p>
+<ul>
+<li>Create a new task</li>
+<li>Import from CSV files that are created by UrbanCode Release or another application</li>
+<li>Copy tasks from other deployment plans</li>
+</ul>
+<p>Additionally, tasks are auto-created when you add an application to a <a href="../cr_pipelines_ov/">pipeline</a>.</p>
+<ul>
+<li><strong><a href="../cr_task_manage/">Managing tasks</a></strong><br />
+A list of associated tasks can be viewed from a deployment plan page. The list of tasks include details about the task. You use action icons to change the task's status during a deployment, such as start or skip a task.</li>
+<li><strong><a href="../cr_task_create/">Creating tasks</a></strong><br />
+By default, new tasks are inserted at the bottom of the deployment plan. After a task is created, you can move it, or copy it and paste it into another deployment plan. <a href="../cr_task_depend/">You can also create dependencies with other tasks</a>.</li>
+<li><strong><a href="../cr_task_depend/">Managing task dependencies</a></strong><br />
+You can make a task a prerequisite for other tasks. If a task is a prerequisite, dependent tasks cannot start, even if they are otherwise eligible, until the prerequisite task is resolved.</li>
+<li><strong><a href="../cr_task_groups/">Creating task groups</a></strong><br />
+You can combine two or more tasks into a task group. When you create a group, you define the whether the group task are executed sequentially or in parallel.</li>
+<li><strong><a href="../cr_task_groups_manage/">Managing task groups</a></strong><br />
+You can combine two or more tasks into a task group. When you create a group, you define the whether the group task are executed sequentially or in parallel.</li>
+<li><strong><a href="../cr_task_tags/">Managing task tags</a></strong><br />
+Tags are organizing elements that you can add to tasks. You can filter deployment plans by tag. For example, during a deployment to a production environment, you might disable tasks with the `DEV_only` tag, which is intended to be used only in development environments.</li>
+<li><strong><a href="../cr_taskType_another/">Creating run another plan tasks</a></strong><br />
+A run another plan task runs a deployment for another deployment plan.</li>
+<li><strong><a href="../cr_taskType_delay/">Creating delay tasks</a></strong><br />
+Delayed-type tasks represent milestones or critical events during a deployment. With delayed tasks, you can ensure that important tasks start at the expected time. Typically, delayed tasks are prerequisites for other important tasks.</li>
+<li><strong><a href="../cr_taskType_DRA/">Deployment risk analysis tasks</a></strong><br />
+Use deployment risk analysis (DRA) tasks to enforce quality standards and gates.</li>
+<li><strong><a href="../cr_taskType_email/">Creating email tasks</a></strong><br />
+An email task sends an email message when the task runs. You specify the email's recipients and message when you create the task. Email tasks are auto tasks and run as soon as they are eligible.</li>
+<li><strong><a href="../cr_taskType_header/">Creating header/note tasks</a></strong><br />
+Header tasks represent organization elements that you can add to deployment plans. If you create a task group, you might identify the group with a header task. Header tasks can have dependencies like any other task.</li>
+<li><strong><a href="../cr_taskType_Jenkins/">Creating Jenkins tasks</a></strong><br />
+A Jenkins task runs a job in your integrated Jenkins instance.</li>
+<li><strong><a href="../cr_taskType_manual/">Creating manual tasks</a></strong><br />
+Manual tasks represent some activity that is associated with a software release. Manual tasks have a start point, end point, and a measurable duration.</li>
+<li><strong><a href="../cr_taskType_serviceNow/">Creating ServiceNow tasks</a></strong><br />
+A ServiceNow task can create and update ServiceNow change requests.</li>
+<li><strong><a href="../cr_taskType_UCD/">Creating UrbanCode Deploy tasks</a></strong><br />
+Use UrbanCode Deploy tasks to run UrbanCode Deploy applications.</li>
+<li><strong><a href="../cr_taskType_waitForApproval/">Creating wait for approval tasks</a></strong><br />
+A Wait for approval task pauses a deployment until a designated user provides approval. Email notifications are sent to users when the task starts.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../c_node_releases/">Release management</a></p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_task_manage/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_task_manage/" class="btn btn-xs btn-link">
+        Managing tasks
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.crelease.doc/topics/cr_deployRun_scheduled/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.crelease.doc/topics/cr_deployRun_scheduled/" class="btn btn-xs btn-link">
+        Running scheduled deployments
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

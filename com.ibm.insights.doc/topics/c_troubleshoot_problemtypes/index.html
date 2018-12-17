@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Types of problems and checks to perform - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Types of problems and checks to perform", url: "#_top", children: [
+              {title: "Images are not displaying", url: "#images-are-not-displaying" },
+              {title: "MongoDB connection error", url: "#mongodb-connection-error" },
+              {title: "Domain cannot be accessed", url: "#domain-cannot-be-accessed" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.insights.doc/topics/t_troubleshoot_logfiles/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.insights.doc/topics/t_troubleshoot_logfiles/" class="btn btn-xs btn-link">
+        Viewing log files
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="types-of-problems-and-checks-to-perform">Types of problems and checks to perform</h1>
+<p>This topic contains tips for troubleshooting</p>
+<h2 id="images-are-not-displaying">Images are not displaying</h2>
+<p>If there was an error pulling the images, there might be a network issue. Verify that the cluster can pull images from docker-hub and install the product again.</p>
+<h2 id="mongodb-connection-error">MongoDB connection error</h2>
+<p>If there is a MongoDB connection error, verify that the MongoDB is active and accessible from the Kubernetes cluster. This chart does not install MongoDB.</p>
+<h2 id="domain-cannot-be-accessed">Domain cannot be accessed</h2>
+<p>Verify that the value for the <strong>url.domain</strong> is correct in the value file. The value is usually the Ingress host name or the hostname of your Kubernetes master node. If you have any reverse proxy in front of your Kubernetes cluster, that becomes your domain. Do not use the IP address.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.uvelocity.doc/topics/c_node_troubleshoot/">Troubleshooting</a></p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.insights.doc/topics/t_troubleshoot_logfiles/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.insights.doc/topics/t_troubleshoot_logfiles/" class="btn btn-xs btn-link">
+        Viewing log files
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

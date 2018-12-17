@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing into a Kubernetes cluster - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing into a Kubernetes cluster", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+
+    <h1 id="installing-into-a-kubernetes-cluster">Installing into a Kubernetes cluster</h1>
+<p>You can install UrbanCode Velocity into a Kubernetes cluster.</p>
+<p>Review the <a href="../c_install_se_requirements/">System requirements</a> before starting, and ensure that the following applications are installed in the target environment:</p>
+<ul>
+<li>Kubernetes 1.4+ with Beta APIs enabled</li>
+<li>MongoDB database with persistent volume</li>
+<li>Helm v2.6.0 or later.</li>
+</ul>
+<p>You will install UrbanCode™ Velocity into a Kubernetes cluster using Helm commands. The commands pull the UrbanCode Velocity node images from a GitHub repository and places them into the Kubernetes clusters defined in Helm Charts.</p>
+<ol>
+<li>
+<p>Clone the UrbanCode Velocity repository. </p>
+<p><code>git clone https://github.com/IBM/velocity-se</code></p>
+</li>
+<li>
+<p>Issue the following command to obtain the Helm charts used for the installation. </p>
+<p>```</p>
+<p>$ helm init
+$ helm repo add urbancode-se https://raw.githubusercontent.com/IBM/velocity-se/master/kubernetes/repo
+$ helm repo add ibm-stable https://raw.githubusercontent.com/IBM/charts/master/repo/stable/
+$ helm repo update
+```</p>
+</li>
+<li>
+<p>If you do not have a MongoDB database installed, you can install one now. Go to <a href="https://github.com/kubernetes/charts/tree/master/stable/mongodb">MongoDB</a> GitHub repository to install. Below is a sample command for installing the MongoDB. Based on your environment, you might need to modify or add to the sample command.</p>
+<p>```</p>
+<p>helm install   \
+   --set database.password=mongo \
+   --set database.user=mongo \
+   --set database.name=velocity \
+   --name velocity-mongo ibm-stable/ibm-mongodb-dev
+```</p>
+</li>
+<li>
+<p>Determine the configuration properties to specify. You can customize the installation by specifying configuration properties on the helm install command. </p>
+<p>Some of the properties that you specify are dependent on your environment. However, there are several properties that must be specified. Below are the required properties.</p>
+<ul>
+<li>
+<p><strong>access.key</strong></p>
+<p>The product access key obtained from Passport Advantage.</p>
+</li>
+<li>
+<p><strong>apitoken</strong></p>
+<p>A random string or GUID that is used verify the authenticity of API calls and data.</p>
+</li>
+<li>
+<p><strong>ciphertoken</strong></p>
+<p>A 32-byte Hex that is used verify the authenticity of API calls and data.</p>
+</li>
+<li>
+<p><strong>hamackey</strong></p>
+<p>A 32-byte Hex that is used verify the authenticity of API calls and data.</p>
+</li>
+<li>
+<p><strong>loglevel</strong></p>
+<p>The level of logging. Values for this property are: all, debug, info, warn, error, fatal, and off. The default is <strong>all</strong>.</p>
+</li>
+<li>
+<p><strong>mongo.url</strong></p>
+<p>The URL of the MongoDB. Specify the following parameters.</p>
+<ul>
+<li>
+<p><strong>username</strong></p>
+<p>The user ID to authenticate with the MongoDB database.</p>
+</li>
+<li>
+<p><strong>password</strong></p>
+<p>The associated password to authenticate with the MongoDB database.</p>
+</li>
+<li>
+<p><strong>port</strong></p>
+<p>The port number for the MongoDB database. Use the value shown in the example, which is 27017.</p>
+</li>
+<li>
+<p><strong>service_name</strong></p>
+<p>The MongoDB URL or the MongoDB service name if it is running within the Kubernetes cluster.</p>
+</li>
+<li>
+<p><strong>database_name</strong></p>
+<p>The name of the database to be used by UrbanCode™ Velocity.</p>
+</li>
+</ul>
+<p><strong>Note:</strong> If you used the install command in the previous step to install the MongoDB, use the following values for the <strong>mongo.url</strong> property.</p>
+<p><code>mongodb://mongo:mongo@velocity-mongo-ibm-mongodb-dev:27017/admin</code></p>
+<p>If you use the default IBM MongoDB, make sure to grant the MongoDB user full write privileges.</p>
+</li>
+<li>
+<p><strong>rabbit.url</strong></p>
+<p>The URL of the RabbitMQ installed in the previous step. Specify the following parameters.</p>
+<ul>
+<li>
+<p><strong>username</strong></p>
+<p>The user ID to authenticate with the RabbitMQ server.</p>
+</li>
+<li>
+<p><strong>password</strong></p>
+<p>The associated password to authenticate with the RabbitMQ server.</p>
+</li>
+<li>
+<p><strong>port</strong></p>
+<p>The port number for the RabbitMQ server. Use the value shown in the example, which is 5672.</p>
+</li>
+<li>
+<p><strong>service_name</strong></p>
+<p>The RabbitMQ URL or the RabbitMQ service name if it is running within the Kubernetes cluster.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>url.domain</strong></p>
+<p>The hostname of your Kubernetes master node or the Ingress host name. If there is a reverse proxy in front of the Kubernetes cluster, it becomes the domain name.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Run the <code>helm install</code> command to install the UrbanCode Velocity images into your Kubernetes cluster. The following example shows the required configuration properties, depending on your environment other might be required. </p>
+<p>```</p>
+<p>helm install \
+--set access.key=access_key \
+--set url.domain=hostname \
+--set mongo.url=mongodb://mongo:mongo@velocity-mongo-ibm-mongodb-dev:27017/admin \
+--set rabbitmq.url=amqp://rabbit:carrot@velocity-rabbitmq:5672/ \
+--name velocity-se urbancode-se/velocity
+```</p>
+</li>
+</ol>
+<p>Access the administrator user interface to complete the configuration. Refer to the NOTES section displayed after the <code>helm install</code> command completes for the location of the administrator user interface. The user name is admin and the default password is admin.</p>
+
+  <br>
+    
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

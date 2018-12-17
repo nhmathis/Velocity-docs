@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="None">
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>UrbanCode Velocity</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+      <script src="../js/elasticlunr.min.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = (window === window.parent);
+        
+        var pageToc = [
+          {title: "UrbanCode Velocity V1.1.0 documentation", url: "#_top", children: [
+              {title: "Getting started", url: "#getting-started" },
+              {title: "Using UrbanCode Velocity", url: "#using-urbancode-velocity" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<nav class="navbar wm-page-top-frame">
+  <div class="container-fluid wm-top-container">
+    
+    <div class="wm-top-tool pull-right wm-vcenter">
+      <form class="dropdown wm-vcentered" id="wm-search-form" action="../search.html">
+        
+        <button id="wm-search-show" class="btn btn-sm btn-default" type="submit"
+          ><i class="fa fa-search" aria-hidden="true"></i></button>
+
+        <div class="input-group input-group-sm wm-top-search">
+          <input type="text" name="q" class="form-control" id="mkdocs-search-query" placeholder="Search" autocomplete="off">
+          <span class="input-group-btn" role="search">
+            
+            <button class="btn btn-default dropdown-toggle collapse" data-toggle="dropdown" type="button"><span class="caret"></span></button>
+            <ul id="mkdocs-search-results" class="dropdown-menu dropdown-menu-right"></ul>
+            <button id="wm-search-go" class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </form>
+    </div>
+
+    
+    <div class="wm-top-tool wm-vcenter pull-right wm-small-left">
+      <button id="wm-toc-button" type="button" class="btn btn-sm btn-default wm-vcentered"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+    </div>
+
+    
+    
+
+    
+    <a href="" class="wm-top-brand wm-top-link wm-vcenter">
+      
+      <div class="wm-top-title">
+        UrbanCode Velocity<br>
+        
+      </div>
+    </a>
+  </div>
+</nav>
+
+  <div id="main-content" class="wm-page-top-frame">
+    
+<nav class="wm-toc-pane">
+  
+  <ul class="wm-toctree">
+        <li class="wm-toc-li wm-toc-lev1 "><a href="ucv_version_welcome/" class="wm-article-link wm-toc-text">Welcome</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Overview</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/c_overview_se/" class="wm-article-link wm-toc-text">Overview of UrbanCode Velocity</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/c_overview_release/" class="wm-article-link wm-toc-text">Introduction to releases and pipelines</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/c_overview_se_homepage/" class="wm-article-link wm-toc-text">Home page</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/c_overview_ce/" class="wm-article-link wm-toc-text">Overview of the community edition</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/c_overview_concepts/" class="wm-article-link wm-toc-text">Concepts</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/c_overview_report/" class="wm-article-link wm-toc-text">Report overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/c_overview_terms/" class="wm-article-link wm-toc-text">Key terminology</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="UCDVelocityGDPRguidelines.md" class="wm-article-link wm-toc-text">UrbanCode Velocity for GDPR Readiness</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/c_node_setup/" class="wm-article-link wm-toc-text">Setup the environment</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/t_setup_gettingstarted/" class="wm-article-link wm-toc-text">Getting started</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Installing the standard edition</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/c_install_se_roadmap/" class="wm-article-link wm-toc-text">Installing UrbanCode Velocity SE</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/t_install_se_docker/" class="wm-article-link wm-toc-text">Installing onto Docker Compose</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/t_install_minikube/" class="wm-article-link wm-toc-text">Installing on Minikube</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/t_install_ICP/" class="wm-article-link wm-toc-text">Installing on IBM Cloud Private</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/t_install_se_openShift/" class="wm-article-link wm-toc-text">Installing onto OpenShift</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/t_install_se_remove_ucv/" class="wm-article-link wm-toc-text">Uninstalling the server</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Installing the Community Edition</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.insights.doc/topics/c_install_roadmap/" class="wm-article-link wm-toc-text">Installation roadmap</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.insights.doc/topics/c_install_requirements/" class="wm-article-link wm-toc-text">System requirements</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.insights.doc/topics/t_install_docker/" class="wm-article-link wm-toc-text">Installing as a Docker Compose application</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.insights.doc/topics/t_install_kubernetes/" class="wm-article-link wm-toc-text">Installing into a Kubernetes cluster</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.insights.doc/topics/c_install_kubernetes_config/" class="wm-article-link wm-toc-text">Kubernetes configuration properties</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Administration</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/c_node_admin/" class="wm-article-link wm-toc-text">Overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Managing integrations</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/c_node_integrations/" class="wm-article-link wm-toc-text">Overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/t_integration_UCD/" class="wm-article-link wm-toc-text">Managing UrbanCode Deploy integrations</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/t_integration_Jenkins/" class="wm-article-link wm-toc-text">Managing Jenkins integrations</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/c_integration_dra/" class="wm-article-link wm-toc-text">Integrating deployment risk analysis</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/c_integration_jira/" class="wm-article-link wm-toc-text">Integrating with JIRA</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/c_integration_servicenow/" class="wm-article-link wm-toc-text">Integrating with ServiceNow</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/t_admin_emailServer/" class="wm-article-link wm-toc-text">Configuring an email server</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/t_admin_calendar/" class="wm-article-link wm-toc-text">Calendar settings</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Security</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/c_node_security/" class="wm-article-link wm-toc-text">Security overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/c_admin_roles/" class="wm-article-link wm-toc-text">Roles and permissions</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/t_admin_authentication/" class="wm-article-link wm-toc-text">Managing users</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/cr_security_groups/" class="wm-article-link wm-toc-text">Managing user groups</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/cr_security_teams/" class="wm-article-link wm-toc-text">Managing teams</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/cr_security_permissions/" class="wm-article-link wm-toc-text">Managing user permissions</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/cr_security_UCDteams/" class="wm-article-link wm-toc-text">Managing UrbanCode Deploy teams</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">License management</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/licenseManage/" class="wm-article-link wm-toc-text">License overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/license_scenarios/" class="wm-article-link wm-toc-text">License scenarios</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.uvelocity.doc/topics/license_apply/" class="wm-article-link wm-toc-text">Managing licenses</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Administration for the Community Edition</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.insights.doc/topics/t_admin_environments/" class="wm-article-link wm-toc-text">Managing logical environments</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.insights.doc/topics/t_admin_environments_map/" class="wm-article-link wm-toc-text">Environment mapping</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.insights.doc/topics/t_admin_linesofbusiness/" class="wm-article-link wm-toc-text">Managing lines of businesses</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.insights.doc/topics/t_admin_linesofbusiness_map/" class="wm-article-link wm-toc-text">Mapping lines of business</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Release management</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/c_node_releases/" class="wm-article-link wm-toc-text">Release management overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_release_managedetails/" class="wm-article-link wm-toc-text">Managing a release</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_release_manage/" class="wm-article-link wm-toc-text">Managing releases</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_release_create/" class="wm-article-link wm-toc-text">Creating releases</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_release_archive/" class="wm-article-link wm-toc-text">Archiving releases</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_events_ov/" class="wm-article-link wm-toc-text">Events and tags</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_restore_archive/" class="wm-article-link wm-toc-text">Restoring archived releases, plans, and templates</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Deployment plans</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployPlan_ov/" class="wm-article-link wm-toc-text">Overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployplan_manage/" class="wm-article-link wm-toc-text">Managing deployment plans</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployPlan_create/" class="wm-article-link wm-toc-text">Creating deployment plans</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployPlan_importTasks/" class="wm-article-link wm-toc-text">Importing tasks into deployment plans</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployPlan_promote/" class="wm-article-link wm-toc-text">Copying deployment plans</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployPlan_template/" class="wm-article-link wm-toc-text">Managing deployment plan templates</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployPlan_archive/" class="wm-article-link wm-toc-text">Archiving deployment plans</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Running deployments</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployRun_ov/" class="wm-article-link wm-toc-text">Overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployRun_manual/" class="wm-article-link wm-toc-text">Starting deployments manually</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployRun_taskResolve/" class="wm-article-link wm-toc-text">Resolving tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployPlan_importTasks/" class="wm-article-link wm-toc-text">Importing tasks into deployment plans</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="com.ibm.crelease.doc/topics/cr_deployRun_scheduled/" class="wm-article-link wm-toc-text">Running scheduled deployments</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Tasks</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_task_ov/" class="wm-article-link wm-toc-text">Tasks overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_task_manage/" class="wm-article-link wm-toc-text">Managing tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_task_create/" class="wm-article-link wm-toc-text">Creating tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_task_depend/" class="wm-article-link wm-toc-text">Managing task dependencies</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_task_groups/" class="wm-article-link wm-toc-text">Creating task groups</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_task_groups_manage/" class="wm-article-link wm-toc-text">Managing task groups</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_task_tags/" class="wm-article-link wm-toc-text">Managing task tags</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_taskType_another/" class="wm-article-link wm-toc-text">Creating run another plan tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_taskType_delay/" class="wm-article-link wm-toc-text">Creating delay tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_taskType_DRA/" class="wm-article-link wm-toc-text">Deployment risk analysis tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_taskType_email/" class="wm-article-link wm-toc-text">Creating email tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_taskType_header/" class="wm-article-link wm-toc-text">Creating header/note tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_taskType_Jenkins/" class="wm-article-link wm-toc-text">Creating Jenkins tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_taskType_manual/" class="wm-article-link wm-toc-text">Creating manual tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_taskType_serviceNow/" class="wm-article-link wm-toc-text">Creating ServiceNow tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_taskType_UCD/" class="wm-article-link wm-toc-text">Creating UrbanCode Deploy tasks</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_taskType_waitForApproval/" class="wm-article-link wm-toc-text">Creating wait for approval tasks</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Properties</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_properties_ov/" class="wm-article-link wm-toc-text">Properties overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_properties_create/" class="wm-article-link wm-toc-text">Creating properties</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_properties_ref/" class="wm-article-link wm-toc-text">Using properties</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Pipelines</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_pipelines_ov/" class="wm-article-link wm-toc-text">Pipelines overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_pipeline_create/" class="wm-article-link wm-toc-text">Creating pipelines</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_pipeline_manage/" class="wm-article-link wm-toc-text">Managing pipelines</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.crelease.doc/topics/cr_pipeline_run/" class="wm-article-link wm-toc-text">Running deployments with pipelines</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Reports</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/c_node_reports/" class="wm-article-link wm-toc-text">Overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/c_reports_custom/" class="wm-article-link wm-toc-text">Custom reports</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/c_reports_card/" class="wm-article-link wm-toc-text">Cards</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/c_reports_charts/" class="wm-article-link wm-toc-text">Charts</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/c_reports_efficiency/" class="wm-article-link wm-toc-text">Delivery Transformation reports</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/c_reports_events/" class="wm-article-link wm-toc-text">Events</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">How to</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/c_node_howto/" class="wm-article-link wm-toc-text">About</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/t_ui_access/" class="wm-article-link wm-toc-text">Access the user interface</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/t_report_create/" class="wm-article-link wm-toc-text">Create a report</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/t_filter_data/" class="wm-article-link wm-toc-text">Filter report data</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/t_reports_format/" class="wm-article-link wm-toc-text">Format Custom reports</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/t_report_manage/" class="wm-article-link wm-toc-text">Manage reports</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/t_reports_share/" class="wm-article-link wm-toc-text">Share reports</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Troubleshooting</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.uvelocity.doc/topics/c_node_troubleshoot/" class="wm-article-link wm-toc-text">Overview</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/c_troubleshoot_contactsupport/" class="wm-article-link wm-toc-text">Contacting support</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/t_troubleshoot_logfiles/" class="wm-article-link wm-toc-text">Viewing log files</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="com.ibm.insights.doc/topics/c_troubleshoot_problemtypes/" class="wm-article-link wm-toc-text">Types of problems and checks to perform</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</nav>
+
+    <div class="wm-content-pane">
+      <iframe class="wm-article" name="article"></iframe>
+    </div>
+  </div>
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+
+    <h1 id="urbancode-velocity-v110-documentation">UrbanCode Velocity V1.1.0 documentation</h1>
+<p>Welcome to the IBM UrbanCode Velocity V1.1.0 documentation, where you can find information about how to install, maintain, and use IBM UrbanCode Velocity.</p>
+<h2 id="getting-started">Getting started</h2>
+<p><a href="/com.ibm.insights.doc/topics/c_node_overview.html">Product overview</a></p>
+<p><a href="/com.ibm.insights.doc/topics/t_setup_gettingstarted.html">Getting started</a></p>
+<p><a href="https://developer.ibm.com/urbancode/products/urbancode-velocity/whats-new/">What's new</a></p>
+<p><a href="/com.ibm.uvelocity.doc/topics/notices.html">Notices</a></p>
+<p><a href="/com.ibm.insights.doc/topics/c_install_roadmap.html">Installing the community edition</a></p>
+<p><a href="/com.ibm.uvelocity.doc/topics/c_install_se_roadmap.html">Installing Version 1.1.0</a></p>
+<h2 id="using-urbancode-velocity">Using UrbanCode Velocity</h2>
+<p><a href="/com.ibm.uvelocity.doc/topics/c_node_admin.html">Administration</a></p>
+<p><a href="/com.ibm.uvelocity.doc/topics/c_node_reports.html">Reports</a></p>
+<p><a href="/com.ibm.uvelocity.doc/topics/c_node_howto.html">How to</a></p>
+<p>Copyright HCL 2018</p>
+
+  <br>
+    
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
+<!--
+MkDocs version : 1.0.4
+Build Date UTC : 2018-12-17 22:02:20
+-->

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating delay tasks - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating delay tasks", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_taskType_DRA/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_taskType_DRA/" class="btn btn-xs btn-link">
+        Deployment risk analysis tasks
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.crelease.doc/topics/cr_taskType_another/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.crelease.doc/topics/cr_taskType_another/" class="btn btn-xs btn-link">
+        Creating run another plan tasks
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="creating-delay-tasks">Creating delay tasks</h1>
+<p>Delayed-type tasks represent milestones or critical events during a deployment. With delayed tasks, you can ensure that important tasks start at the expected time. Typically, delayed tasks are prerequisites for other important tasks.</p>
+<p>A delayed task starts as soon as it is eligible to run, and it finishes at a user-specified time. A started delayed-type task has a status of `In Progress` until it reaches its planned-for time, when it then changes its status to `Complete`. When a delayed tasks completes, auto tasks that are dependent on it start running.</p>
+<p>Complete the following tasks to create a delayed task:</p>
+<ol>
+<li>On the Deployment plan detail page, click <strong>Create Task</strong>. If you want to insert a task at a specific position in the plan, select a task before using the <strong>Create Task</strong>. The new task is inserted above the selected task.</li>
+<li>On the Create Task dialog box, in the <strong>Type</strong> list, select <strong>Delayed</strong>. </li>
+<li>In the <strong>Name</strong> field, enter a name for the task. </li>
+<li>In the <strong>Delay type</strong> field, select the method used to determine the length of the delay. If you select **Delay by selecting a time and time zone**, use the **Time** and **Time Zone** fields to specify when the task will complete. Otherwise, enter a property name in the **Delay property** field. The property value can be set at run-time when the deployment starts. [See the Properties reference for information about properties](/docs/services/UCCR/UCCR_property_ref.html#property_overview)</li>
+<li>Click <strong>Save</strong>. The task is inserted into the deployment plan.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../cr_task_ov/">Tasks</a></p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_taskType_DRA/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_taskType_DRA/" class="btn btn-xs btn-link">
+        Deployment risk analysis tasks
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.crelease.doc/topics/cr_taskType_another/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.crelease.doc/topics/cr_taskType_another/" class="btn btn-xs btn-link">
+        Creating run another plan tasks
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

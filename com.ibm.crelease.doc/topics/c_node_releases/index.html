@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Release management overview - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Release management", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_release_managedetails/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_release_managedetails/" class="btn btn-xs btn-link">
+        Managing a release
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.insights.doc/topics/t_admin_linesofbusiness_map/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.insights.doc/topics/t_admin_linesofbusiness_map/" class="btn btn-xs btn-link">
+        Mapping lines of business
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="release-management">Release management</h1>
+<p>A release is a container for deployment plans, events, and properties.</p>
+<p>A release is a repeatable plan that is used to drive deployments. You can schedule a release at any point in your development-operations lifecycle. Your releases can represent all kinds of events, from major events in the life of your company to comparatively minor events, like recurring maintenance.</p>
+<p>Typically, a release contains deployment plans and events that are related in some business-meaningful way. For example, the deployment plans might represent the phases in a software development lifecycle, such as development, QA, and production. An event might represent a blackout that affects the release.</p>
+<p>If a deployment plan in a release has user-defined properties, the tasks in the release's other deployment plans can reference them. In other words, properties have release scope.</p>
+<p>If you add events to a release, you can use the calendar to filter the Releases page to display releases and deployment plans.</p>
+<p>You can use pipelines to manage releases. Every application added to a pipeline has release and deployment plan templates generated for it. As jobs and apps are added to a pipeline, tasks are inserted in the default deployment plan. You can run deployments directly from the Pipeline page or from the Deployment plan detail page.</p>
+<ul>
+<li><strong><a href="../cr_release_managedetails/">Managing a release</a></strong><br />
+Use the release details page to view details about a specific release.</li>
+<li><strong><a href="../cr_release_manage/">Managing releases</a></strong><br />
+Release management is the process of managing, planning, scheduling and controlling a software build through different stages and environments; including testing and deploying software releases.</li>
+<li>
+<p><strong><a href="../cr_release_create/">Creating releases</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../cr_release_archive/">Archiving releases</a></strong><br />
+You can archive a release to remove it from the list of releases.</p>
+</li>
+<li><strong><a href="../cr_events_ov/">Events and tags</a></strong><br />
+An event represents a release-related activity that you manage with the calendar. A tag is a label that you can add to a release or an event. You can use tags to filter the Activities list on the Releases page. Tags do not appear on the calendar.</li>
+<li><strong><a href="../cr_restore_archive/">Restoring archived releases, plans, and templates</a></strong><br />
+You can restore archived releases, deployment plans, and templates.</li>
+<li><strong><a href="../cr_deployPlan_ov/">Deployment plans</a></strong><br />
+A deployment plan is a container for tasks. Tasks define the activities that your team runs to complete a software deployment.</li>
+<li><strong><a href="../cr_deployRun_ov/">Running deployments</a></strong><br />
+Complete deployments by resolving the tasks in a deployment plan.</li>
+<li><strong><a href="../cr_task_ov/">Tasks</a></strong><br />
+A task represents a business-meaningful activity that is associated with a software deployment. Each task is defined on a separate row in a deployment plan. During a deployment, you run tasks defined in the deployment plan to complete the deployment.</li>
+<li><strong><a href="../cr_properties_ov/">Using properties</a></strong><br />
+A deployment plan can contain user-defined properties. Properties values can be defined at design- or run-time.</li>
+</ul>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_release_managedetails/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_release_managedetails/" class="btn btn-xs btn-link">
+        Managing a release
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.insights.doc/topics/t_admin_linesofbusiness_map/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.insights.doc/topics/t_admin_linesofbusiness_map/" class="btn btn-xs btn-link">
+        Mapping lines of business
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

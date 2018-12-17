@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Security overview - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Security", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.uvelocity.doc/topics/c_admin_roles/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.uvelocity.doc/topics/c_admin_roles/" class="btn btn-xs btn-link">
+        Roles and permissions
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.uvelocity.doc/topics/t_admin_calendar/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.uvelocity.doc/topics/t_admin_calendar/" class="btn btn-xs btn-link">
+        Calendar settings
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="security">Security</h1>
+<p>The UrbanCode Velocity security model is organization- and team-based. The organization is the base element; teams belong to organizations. Team members manage releases, events, and deployments. Administrators manage teams and assign users to them.</p>
+<p>The team-based security model means that teams manage releases, reports, pipelines, events, and run deployments. Only team members can create or modify team-managed objects. Users can be assigned to more than one team. Users are identified by email address. The UrbanCode Velocity administrator manages the security system and manages teams and users.</p>
+<p>After UrbanCode Velocity is <a href="../t_integration_UCD/">integrated with IBM UrbanCode Deploy</a>, UrbanCode Deploy teams and applications can be imported into UrbanCode Velocity. When a team is imported, all team members are imported. Users are identified by email address. Administrators can also create users.</p>
+<ul>
+<li><strong><a href="../c_admin_roles/">Roles and permissions</a></strong><br />
+A number of roles are defined in the product that can be assigned to an user or group. Roles set boundaries on the release tasks that an user or group member can perform.</li>
+<li><strong><a href="../t_admin_authentication/">Managing users</a></strong><br />
+Use the User authentication settings page to manage user authentication.</li>
+<li><strong><a href="../cr_security_groups/">Managing user groups</a></strong><br />
+You can combine users into groups. When you grant permissions to the group, you simultaneously grant them to the group members. When you assign a group to a team, all group members are simultaneously assigned to the team.</li>
+<li><strong><a href="../cr_security_teams/">Managing teams</a></strong><br />
+To prepare a team, you create the team and then add users or user groups to it. After you add users, you assign permissions to them.</li>
+<li><strong><a href="../cr_security_permissions/">Managing user permissions</a></strong><br />
+Permissions define the scope of user actions. Administrators assign permissions when they add users to teams. Permissions are granted to individual users or user groups. Users can have different permissions for different teams.</li>
+<li><strong><a href="../cr_security_UCDteams/">Managing UrbanCode Deploy teams</a></strong><br />
+When an UrbanCode Deploy team is imported, in addition to the roster of team members, all applications that are managed by the team are also imported. Imported applications can be used in any deployment that is managed by the team.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../c_node_admin/">Administration</a></p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.uvelocity.doc/topics/c_admin_roles/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.uvelocity.doc/topics/c_admin_roles/" class="btn btn-xs btn-link">
+        Roles and permissions
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.uvelocity.doc/topics/t_admin_calendar/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.uvelocity.doc/topics/t_admin_calendar/" class="btn btn-xs btn-link">
+        Calendar settings
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing UrbanCode Velocity SE - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installation roadmap", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_docker/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_docker/" class="btn btn-xs btn-link">
+        Installing onto Docker Compose
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.insights.doc/topics/t_setup_gettingstarted/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.insights.doc/topics/t_setup_gettingstarted/" class="btn btn-xs btn-link">
+        Getting started
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="installation-roadmap">Installation roadmap</h1>
+<p>The installation roadmap is a description of the high-level steps for installing UrbanCode™ Velocity.</p>
+<p>UrbanCode Velocity is provided in two versions. The full-featured Standard Edition (SE) is free to use for 60 days, at which time you need a license. <a href="../../../com.ibm.insights.doc/topics/c_install_roadmap/">You can also install the free-to-use Community Edition (CE)</a>, which contains many UrbanCode Velocity features.</p>
+<p>Both editions of consist of services and other tools that are stored in Docker containers. You can install the containers in one of the container orchestrators, such as Docker Compose, Kubernetes, or any environment that supports the container orchestrators, including bare-metal servers and cloud-based platforms, such as the environments listed here:</p>
+<ul>
+<li>Windows</li>
+<li>Linux</li>
+<li>MacOS</li>
+<li>IBM Cloud Private</li>
+<li>IBM Cloud services</li>
+<li>OpenShift</li>
+</ul>
+<p>Both editions require an access key. You apply the free access key during installation. When you license the SE version, in addition to you license key, your receive a permanent access key.</p>
+<p>If you are evaluating UrbanCode Velocity and are unsure about which versions to install, many users find the Docker Compose installation process to be easiest because it is the most automated.</p>
+<p>In outline, the installation process consists of the following general steps:</p>
+<ol>
+<li>
+<p><strong>Review the system requirements</strong></p>
+<p>The ID that you use must be able to make changes to the host environment. The tools required by all installation scenarios include the following items:</p>
+<ul>
+<li>Docker. The commands used during installation retrieve files and container images from remote locations. If you are unable to access the internet during installation, the install images will need to have been previously downloaded and placed in a Docker repository that the installation commands can access.</li>
+<li>
+<p>IBM UrbanCode™ Deploy Version 6.2.3 and later. Although not strictly required, many UrbanCode Velocity features assume integration with UrbanCode Deploy. It doesn't matter which product you install first.</p>
+<p>If you are using an UrbanCode Deploy version prior to V6.2.5, you must install the patch located at the following website: <a href="http://public.dhe.ibm.com/software/products/UrbanCode/plugins/ucsync/patches/ibmucd/">http://public.dhe.ibm.com/software/products/UrbanCode/plugins/ucsync/patches/ibmucd/</a>. Select from the index the appropriate version that is installed on your computer.</p>
+<p>UrbanCode Velocity can connect to an UrbanCode Deploy server on the same network. If you install UrbanCode Velocity with Kubernetes, the Kubernetes cluster must be on the same network as the UrbanCode Deploy server.</p>
+</li>
+<li>
+<p>Git and a GitHub account.
+You can dynamically generate a system requirements report using the <a href="https://www.ibm.com/software/reports/compatibility/clarity/index.html">Software Product Compatibility Reports (SPCR)</a> tool.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Install UrbanCode Velocity for your target environment:</strong></p>
+<p><a href="../t_install_se_docker/">Installing UrbanCode Velocity with Docker Compose</a>.</p>
+<p><a href="../t_install_se_kubernetes/">Installing into a Kubernetes cluster</a>.</p>
+<p><a href="../t_install_se_openShift/">Installing as an OpenShift application</a></p>
+<p><a href="../t_install_ICP/">Installing on IBM Cloud Private</a></p>
+</li>
+<li>
+<p><strong>Integrate with external tools</strong></p>
+<p>After the installation is complete, you can access the configuration pages to integrate with <a href="../t_integration_UCD/">UrbanCode Deploy</a> and other external tools, such as <a href="../t_integration_Jenkins/">Jenkins</a>. Only sample report data is available until the integration process is complete.</p>
+</li>
+<li>
+<p><strong>Authenticate users</strong></p>
+<p>After the installation is complete, you can <a href="../t_admin_authentication/">authenticate users</a>. Authenticating users to access reports is not required. However; until users are authenticated, only the administrator user has access to reports and product features.</p>
+</li>
+<li>
+<p><strong><a href="./">Installation roadmap</a></strong><br />
+The installation roadmap is a description of the high-level steps for installing UrbanCode Velocity.</p>
+</li>
+<li><strong><a href="../t_install_se_docker/">Installing UrbanCode Velocity with Docker Compose</a></strong><br />
+Install UrbanCode Velocity into the Docker Compose container orchestrator.</li>
+<li><strong><a href="../t_install_minikube/">Installing on Minikube</a></strong><br />
+You can install UrbanCode Velocity onto a Minikube cluster on your local machine.</li>
+<li><strong><a href="../t_install_ICP/">Installing on IBM Cloud Private</a></strong><br />
+Install UrbanCode Velocity into a Kubernetes cluster on IBM Cloud Private (ICP).</li>
+<li>
+<p><strong><a href="../t_install_se_openShift/">Installing as an OpenShift application</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../t_install_se_remove_ucv/">Uninstalling the server</a></strong><br />
+You can uninstall UrbanCode Velocity by stopping the server and removing the product containers.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="./">Installation roadmap</a></p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_docker/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_docker/" class="btn btn-xs btn-link">
+        Installing onto Docker Compose
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.insights.doc/topics/t_setup_gettingstarted/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.insights.doc/topics/t_setup_gettingstarted/" class="btn btn-xs btn-link">
+        Getting started
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

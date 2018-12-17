@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing on IBM Cloud Private - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing on IBM Cloud Private", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_openShift/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_openShift/" class="btn btn-xs btn-link">
+        Installing onto OpenShift
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.uvelocity.doc/topics/t_install_minikube/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.uvelocity.doc/topics/t_install_minikube/" class="btn btn-xs btn-link">
+        Installing on Minikube
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="installing-on-ibm-cloud-private">Installing on IBM Cloud Private</h1>
+<p>Install UrbanCode Velocity into a Kubernetes cluster on IBM Cloud Private (ICP).</p>
+<p>The ID that you use must be able to make changes to the host environment. The tools required by all installation scenarios include the following items:</p>
+<ul>
+<li>Docker. The commands used during installation retrieve files and container images from remote locations. If you are unable to access the internet during installation, the install images will need to have been previously downloaded and placed in a Docker repository that the installation commands can access.</li>
+<li>
+<p>IBM UrbanCode™ Deploy Version 6.2.3 and later. Although not strictly required, many UrbanCode™ Velocity features assume integration with UrbanCode Deploy. It doesn't matter which product you install first.</p>
+<p>If you are using an UrbanCode Deploy version prior to V6.2.5, you must install the patch located at the following website: <a href="http://public.dhe.ibm.com/software/products/UrbanCode/plugins/ucsync/patches/ibmucd/">http://public.dhe.ibm.com/software/products/UrbanCode/plugins/ucsync/patches/ibmucd/</a>. Select from the index the appropriate version that is installed on your computer.</p>
+<p>UrbanCode Velocity can connect to an UrbanCode Deploy server on the same network. If you install UrbanCode Velocity with Kubernetes, the Kubernetes cluster must be on the same network as the UrbanCode Deploy server.</p>
+</li>
+<li>
+<p>Git and a GitHub account.</p>
+</li>
+</ul>
+<p>Before starting installation, ensure that the following applications are installed in the target environment:</p>
+<ul>
+<li>Kubectl installed on the client</li>
+<li>Helm v2.6.0 or later on client</li>
+<li><a href="https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.1/installing/install_containers.html">IBM Cloud Private account and a client instance ready to use</a></li>
+</ul>
+<p>You will install UrbanCode Velocity into a Kubernetes cluster on IBM Cloud Private. The commands pull the UrbanCode Velocity node images from a GitHub repository and places them into the ICP clusters.</p>
+<ol>
+<li>
+<p>Get an access key. </p>
+<p>The access key enables you to complete installation. <a href="https://uc-velocity.com/">Visit the UrbanCode Velocity web portal to obtain your key</a>. After completing the form, you can copy the access key. Store the key in a readily-available location; you use it during installation.</p>
+<p><strong>Note:</strong> Make sure that you select a key for the product version that you want to install. Keys for the Standard Edition do not work with the Community Edition and vice-versa.</p>
+</li>
+<li>
+<p><a href="https://github.com/IBM/velocity-se/releases/">Download the helm chart</a>. The file name is velocity-1-1-0-helm.tgz </p>
+<p>You can use a shell command to download the file. For example, if you are installing the product on Linux®, you can download the file with a command like this one:</p>
+<p><code>wget https://github.com/IBM/velocity-se/releases/velocity-1-1-0-helm.tgz</code></p>
+<p>.</p>
+</li>
+<li>
+<p>On you ICP Dashboard, select <strong>Configure Client</strong>, and then paste the provided Kubectl commands into a command shell on your client and run them. The Kubectl commands define your Kuberbetes context. Test the configuration by running the following commands:</p>
+<p><code>kubectl get nodes
+        kubectl get pods --all-namespaces</code></p>
+<p>If you see messages like the following examples, your configuration is ready to use.</p>
+<p><code>10.134.119.132   Ready     &lt;none&gt;    151d      v1.10.0+icp-ee
+10.134.119.24    Ready     &lt;none&gt;    151d      v1.10.0+icp-ee
+10.134.119.65    Ready     &lt;none&gt;    151d      v1.10.0+icp-ee
+10.134.119.9     Ready     &lt;none&gt;    151d      v1.10.0+icp-ee</code></p>
+</li>
+<li>
+<p>On ICP dashboard, click <strong>Manage</strong> > <strong>Namespaces</strong> > <strong>Create Namespace</strong> > ****, and enter a name for the name space. </p>
+</li>
+<li>Create MongoDB in the new namespace by completing the following steps: <ol>
+<li>On the ICP dashboard, select <strong>Catalog</strong> > <strong>ibm-mongodb-dev</strong>. </li>
+<li>On the ibm-mongodb-dev page, select <strong>Configure</strong>, and then, from the <strong>Target namespace</strong> list, select the namespace you created earlier. </li>
+<li>Complete configuration by entering a release name, and password for the MongoDB admin user, and then click <strong>Install</strong>. This creates a persistent volume claim.</li>
+</ol>
+</li>
+<li>
+<p>Click <strong>Platform</strong> > <strong>Storage</strong> > ****, and then create a persistent volume for your claim by completing the following steps: </p>
+<ol>
+<li>On Storage page, click <strong>Create Persistent Volume</strong>. </li>
+<li>On the Create Persistent Volume window, enter a name for the volume. </li>
+<li>
+<p>Turn <strong>JSON mode ON</strong>. The underlying JSON file for the persistent volume is displayed. In the JSON script for the <code>NFS</code> object, and specify the server's IP address, and the path for the new volume. The following code snippet illustrates a typical example:</p>
+<p><code>"nfs": {
+      "server": "ip\_address",
+      "path": "/volume\_path"
+    },</code></p>
+</li>
+<li>
+<p>Click <strong>Create</strong>. In the Storage window, check for the status of <code>Bound</code> for the new volume.</p>
+</li>
+<li>In a command shell on the client, use the following kubectl command to check pod status: <code>kubectl get pods -n persistentVolume\_name.</code> </li>
+<li>Grant additional permissions to the MongoDB user by completing the following steps: </li>
+<li>Using a client command shell, logon to the pod as the admin user. </li>
+<li>
+<p>Use the following command to grant additional permissions: </p>
+<p><code>db.grantRolesToUser( "mongo", ["readWriteAnyDatabase", "dbAdminAnyDatabase", "clusterAdmin"]  )</code></p>
+<p>If the command fails, an error message is displayed.</p>
+</li>
+<li>
+<p>If no message is displayed, type <code>exit</code> to leave the pod. </p>
+</li>
+<li>Using a client command shell, type <code>kubectl get services -n namespace</code> to display the MongoDB service. Te service name is the host name for the MongoDB service.</li>
+<li>Determine the configuration properties to specify. You can customize the installation by specifying configuration properties on the helm install command. </li>
+</ol>
+<p>Some of the properties that you specify are dependent on your environment. However, there are several properties that must be specified. Below are the required properties.</p>
+<ul>
+<li>
+<p><strong>access.key</strong></p>
+<p>The product access key obtained from Passport Advantage.</p>
+</li>
+<li>
+<p><strong>url.domain</strong></p>
+<p>The host name must resolve to a name on your DNS server, or in the server's hosts file. On Linux, the file location is etc/hosts; on Windows, the location is C:\Windows\System32\drivers\etc\hosts.</p>
+</li>
+<li>
+<p><strong>mongo.url</strong></p>
+<p>The URL of the MongoDB. Specify the following parameters.</p>
+<ul>
+<li>
+<p><strong>username</strong></p>
+<p>The user ID to authenticate with the MongoDB database.</p>
+</li>
+<li>
+<p><strong>password</strong></p>
+<p>The associated password to authenticate with the MongoDB database.</p>
+</li>
+<li>
+<p><strong>port</strong></p>
+<p>The port number for the MongoDB database. Use the value shown in the example, which is 27017.</p>
+</li>
+<li>
+<p><strong>service_name</strong></p>
+<p>The MongoDB service name you retrieved in Step 8.</p>
+</li>
+</ul>
+<p><strong>Note:</strong> If you used the install command in the previous step to install the MongoDB, use the following values for the <strong>mongo.url</strong> property.</p>
+<p><code>mongodb://mongo:mongo@velocity-mongo-ibm-mongodb-dev:27017/admin</code></p>
+<p>If you use the default IBM MongoDB, make sure to grant the MongoDB user full write privileges.</p>
+</li>
+<li>
+<p><strong>name</strong></p>
+<p>The name space where the Helm chart is applied, and the name of Helm chart.</p>
+<p><code>--name standard ./velocity-1-1-0-helm.tgz</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Run the <code>helm install</code> command to install the UrbanCode Velocity images into ICP. The following example shows the a typical configuration properties: </p>
+<p>```</p>
+<p>helm install \
+--set access.key=my_access_key \
+--set url.domain=my_hostname \
+--set mongo.url=mongodb://mongo:mongo@mongodb-servicename:27017/admin \
+--set url.protocol=https \
+--set ui.service.externalPort=80 \
+--set ingress.enable=true \
+--name standard ./velocity-1-1-0-helm.tgz
+```</p>
+</li>
+</ol>
+<p>Access UrbanCode Velocity at the URL you specified in the helm chart. You can refresh the status display by using the following kubectl command: <code>kubectl get pods</code>. The default admin user name is admin and the default password is admin.</p>
+<p><strong>Parent topic:</strong> <a href="../c_install_se_roadmap/">Installation roadmap</a></p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_openShift/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.uvelocity.doc/topics/t_install_se_openShift/" class="btn btn-xs btn-link">
+        Installing onto OpenShift
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.uvelocity.doc/topics/t_install_minikube/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.uvelocity.doc/topics/t_install_minikube/" class="btn btn-xs btn-link">
+        Installing on Minikube
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

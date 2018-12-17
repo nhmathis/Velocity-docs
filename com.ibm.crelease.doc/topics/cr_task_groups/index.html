@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating task groups - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating task groups", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_task_groups_manage/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_task_groups_manage/" class="btn btn-xs btn-link">
+        Managing task groups
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.crelease.doc/topics/cr_task_depend/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.crelease.doc/topics/cr_task_depend/" class="btn btn-xs btn-link">
+        Managing task dependencies
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="creating-task-groups">Creating task groups</h1>
+<p>You can combine two or more tasks into a task group. When you create a group, you define the whether the group task are executed sequentially or in parallel.</p>
+<p>Tasks can run in a parallel or sequential pattern. When you create the task you, you decide the execution pattern. Tasks without dependencies can execute in any order or simultaneously which is parallel execution. Tasks that must execute in specific order are sequential execution. Tasks are done in list-order starting with the first or top-most task.</p>
+<p>You can embed groups within other groups. A sequential-pattern group can be embedded within a parallel-pattern group, and vice versa. However, you cannot embed a sequential-pattern group within another sequential group, or a parallel-pattern group within another parallel group.</p>
+<ol>
+<li>On the details page for a deployment, select two or more tasks. </li>
+<li>
+<p>Depending on the type of group you want to create, complete one of the following. </p>
+<ul>
+<li>To create a parallel group, click the Parallel icon ) <img alt="sequential icon" src="../../images/para-icon.png" />). If you cannot create a parallel group with the selected tasks, the icon is disabled. For example, you cannot create a parallel group if all the selected tasks are already in a parallel group.</li>
+<li>To create a sequential group, click the Sequential icon ( <img alt="sequential icon" src="../../images/seq-icon.png" />).
+The group is formed and a group select bar is added to the deployment plan. If you selected discontiguous tasks, the tasks form a contiguous list starting with the topmost selected task.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../cr_task_ov/">Tasks</a></p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_task_groups_manage/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_task_groups_manage/" class="btn btn-xs btn-link">
+        Managing task groups
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.crelease.doc/topics/cr_task_depend/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.crelease.doc/topics/cr_task_depend/" class="btn btn-xs btn-link">
+        Managing task dependencies
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

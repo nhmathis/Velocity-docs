@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating releases - UrbanCode Velocity</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating releases", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_release_archive/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_release_archive/" class="btn btn-xs btn-link">
+        Archiving releases
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.crelease.doc/topics/cr_release_manage/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.crelease.doc/topics/cr_release_manage/" class="btn btn-xs btn-link">
+        Managing releases
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="creating-releases">Creating releases</h1>
+<ol>
+<li>On the Releases page, click <strong>Create release</strong> </li>
+<li>In the Create release window, type a name for the release in the <strong>Name</strong> field. This field can be referenced with the <code>${sys:release.name}</code> system property. A name is required.</li>
+<li>In the <strong>Tags</strong> list, select one or more events or tags. You can also create a tag by typing the name of the new tag in the field. If you want the event to appear on the calendar, select an event that is created on the Configure Calendar page. Tags that you create with the Create release window are not displayed on the calendar, which can prevent calendar clutter.</li>
+<li>In the <strong>Description</strong> field, type a description of the release. This field can be referenced with the <code>${sys:release.description}</code> system property. </li>
+<li>In the <strong>Deployment plan templates</strong> field, select one or more templates to add to the release. Each template that you select, adds a deployment plan to the release with the name <strong>Copy of template_name</strong>. You can convert any deployment plan into a template. If the selected templates have user-defined properties, you are prompted to provide values for them when you save the release.</li>
+<li>In the <strong>Start Time</strong> field, select a starting date and time. This field can be referenced with the <code>${sys:release.start}</code> system property. Starting times are required for all releases. </li>
+<li>In the <strong>End Time</strong> field, select the ending date and time. This field can be referenced with the <code>${sys:release.end}</code> system property. </li>
+<li>In the <strong>Team</strong> list, select a team to manage the release. You can add deployment plans from other teams to the release event, not just the team that manages the release. All the teams that you belong to are available. A team is required. </li>
+<li>
+<p>If the selected templates have properties, click <strong>Next</strong>, and then provide values for the properties. Otherwise, click <strong>Save</strong> and view details to save the release and open the release details page. If you added templates to the release, a deployment plan for each template is created and displayed. If you didn't select any templates, an empty deployment plan is added to the release with the name <strong>Plan: release_name</strong>. </p>
+<p>To display the release in the <strong>Activities</strong> list, ensure that the date range includes dates within the release's start or end times.</p>
+</li>
+</ol>
+<p>After the release is created, you can add deployment plans, events, and tags to it.</p>
+<p><strong>Parent topic:</strong> <a href="../c_node_releases/">Release management</a></p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="com.ibm.crelease.doc/topics/cr_release_archive/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="com.ibm.crelease.doc/topics/cr_release_archive/" class="btn btn-xs btn-link">
+        Archiving releases
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="com.ibm.crelease.doc/topics/cr_release_manage/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="com.ibm.crelease.doc/topics/cr_release_manage/" class="btn btn-xs btn-link">
+        Managing releases
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
