@@ -1,0 +1,207 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+nav {
+	height: 40px;
+	border-bottom: solid 1px #CCCCCC;
+	color: #666666;
+}
+
+
+/**/
+nav .UClogo {
+	float: left;
+	margin-left: 100px;
+}
+
+nav .UClogo .UClogo_logo {
+	float: left;
+	padding: 12px 30px 0px 0px;
+	border-right: 1px solid #CCCCCC;
+	height: 28px;
+}
+
+nav .UClogo .UClogo_typeFace{
+	float: left;
+	margin: 11px 0px 0px 30px;
+	font: 16px Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif"
+}
+
+
+/**/
+nav .mainNav {
+	float: right;
+	font: bold 14px Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+	margin-right: 60px;
+}
+
+nav .mainNav ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+nav .mainNav li {
+	float: left;
+}
+
+nav .mainNav li a:hover {
+	color: #333333;
+}
+
+nav .mainNav .active {
+	color: #333333;
+}
+
+/**/
+nav .mainNav li a, .dropbtn {
+  display: inline-block;
+  color: #666666;
+  text-align: left;
+  padding: 12px 20px;
+  text-decoration: none;
+}
+
+nav .mainNav .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #FFFFFF;
+	border: solid 1px #CCCCCC;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+
+nav .mainNav .dropdown-content a {
+  color: #666666;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+
+
+
+/**/
+.heroImage_wrapper {
+	width: 1280px; 
+	height: 415px;
+	margin: 0px auto 0px auto;
+	background: url("../img/brain.png") no-repeat;
+	background-position: right;
+	
+}
+
+.heroImage_textWrapper {
+	float: left;
+	width: 570px;
+	margin: 80px 0px 0px 0px;
+	color: #666666;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+}
+
+.heroHeadline_01 {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.heroHeadline_02 {
+	font-size: 55px;
+	margin-bottom: 10px;
+	line-height: 55px;
+	margin: 10px 0px 25px 0px;
+}
+
+.heroHeadline_03 {
+	font-size: 20px;
+}
+
+/**/
+.productBanner_wrapper {
+	background-image: linear-gradient(to right, #91DAF9, #4FACE7);
+	overflow: auto;
+}
+
+.productBanner_innnerWrapper {
+	width: 1280px;
+	margin: 0px auto 0px auto;
+}
+
+.productWrapper {
+	float: left;
+	width: 25%;
+	padding: 20px 0px;
+	text-align: center;
+	color: #FFFFFF;
+}
+
+.productCircle {
+	width: 200px;
+	height: 200px;
+	-webkit-border-radius: 100px;
+	-moz-border-radius: 100px;
+	border-radius: 100px;
+	background: #FFFFFF;
+	margin: 0px auto 20px auto;
+    }
+
+.productBanner_UC {
+	font: bold 12px Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+}
+
+.productBanner_productName {
+	font: 26px Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+}
+
+.UC_button {
+	display: block;
+	color: #FFFFFF;
+	border: 3px solid #FFFFFF;
+	background-color: rgba(0, 0, 0, 0);
+	padding: 8px 28px;
+	font-size: 16px;
+	cursor: pointer;
+	text-align: center;
+	margin: 15px auto 15px auto;
+}
+
+.UC_button a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.UC_button:hover {
+	background-color: rgba(255, 255, 255, 0.3);
+	padding: 8px 28px;
+}
+
+.productTextLink {
+	font: 14px Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+	color: #FFFFFF; 
+	text-decoration: none;
+	line-height: 20px;
+}
+
+.productTextLink:hover {text-decoration: underline;}
+
+
+
+
+
+
+
+
+
