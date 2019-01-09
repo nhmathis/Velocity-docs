@@ -100,7 +100,7 @@ nav .mainNav .dropdown-content a {
 	width: 1280px; 
 	height: 415px;
 	margin: 0px auto 0px auto;
-	background: url("../img/brain.png") no-repeat;
+	background: url("../images/brain.png") no-repeat;
 	background-position: right;
 	
 }
@@ -135,18 +135,34 @@ nav .mainNav .dropdown-content a {
 	overflow: auto;
 }
 
+
+/* --------------------------------------------- */
+/* --------------------------------------------- */
+/* --------------------------------------------- */
+
 .productBanner_innnerWrapper {
-	width: 1280px;
+	width: 800px;   /* THIS IS A NEW EDIT */
 	margin: 0px auto 0px auto;
 }
 
 .productWrapper {
 	float: left;
-	width: 25%;
+	width: 50%; /* THIS IS A NEW EDIT */
 	padding: 20px 0px;
 	text-align: center;
 	color: #FFFFFF;
 }
+
+/* THIS IS A NEW EDIT */
+.productIcon {
+	margin-top: 50px;
+}
+
+/* --------------------------------------------- */
+/* --------------------------------------------- */
+/* --------------------------------------------- */
+
+
 
 .productCircle {
 	width: 200px;
