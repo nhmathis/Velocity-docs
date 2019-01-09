@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_roles_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating roles and assigning permissions - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating roles and assigning permissions", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-roles-and-assigning-permissions">Creating roles and assigning permissions</h1>
+<p>You can create roles on the server and assign permissions to them.</p>
+<p>By default, new roles have no permissions. Therefore, when you create a role, you must add all the permissions for that role. For example, if you do not add permission to view the pages of the server user interface in the <strong>Web UI</strong> section, users can log in to the server but cannot see any information.</p>
+<p>Several default roles are available. These roles have matching default users.</p>
+<ul>
+<li><strong>Administrator</strong>: This role has all permissions. It is appropriate for administrators.</li>
+<li><strong>Automation Engineer</strong>: This is an example of a role for a typical non-adminstrator user. It includes permissions to create and edit most things on the server, including applications, component, and processes, but not the permission to delete things, change permissions, or change system settings.</li>
+<li><strong>UC Auto Configure</strong>: This role has the permissions to create resources.</li>
+<li><strong>UC Auto Discovery</strong>: This role is used by plug-ins that discover information about systems, such as the WebSphere® Application Server - Deploy plug-in.</li>
+<li>
+<p><strong>UC Version Import</strong>: This role has only the permission to manage versions.</p>
+</li>
+<li>
+<p>On the server, click <strong>Settings</strong> > <strong>Role Configuration</strong>. </p>
+</li>
+<li>In the Role Configuration pane, click <strong>Create Role</strong>.</li>
+<li>In the Create User Role dialog box, enter a name for the role, and then click <strong>Save</strong>. </li>
+<li>Click the role to select it. </li>
+<li>
+<p>With the role selected, select the object type to which you want to assign permissions, such as environments, applications, or components. All security types for the selected object type are displayed. For information about creating security types, see <a href="../security_types_create/">Creating security types</a>.</p>
+<p>In the following figure, the security types for the <strong>Agent</strong> product area are displayed. Because the agentSuper role is selected, only that role is affected by permission changes to the Standard Agent and agentManager security types. That is, if you select the <strong>Agent</strong> object type for the deploySuper role, the granted permissions reflect the settings that were defined the last time that role was modified.</p>
+<p><strong>Tip:</strong> If you upgraded to version 6.2.2, some users might no be unable to see agent relays in the user interface, even though they were visible before the upgrade. You can set the permission for these users to view agent relays: Click <strong>Agent Relay</strong> in the permissions area list, and then select <strong>View Agent Relays</strong>.</p>
+<p><img alt="Product area security types" src="../../images/permissions.gif" /></p>
+</li>
+<li>
+<p>In the Permissions Granted to Role Members pane, grant permissions by selecting the associated check box for a security type.You can select all edit subpermissions by selecting the <strong>Edit</strong> check box. To deselect all subpermissions, clear the corresponding check boxes. Select individual subpermissions by expanding the <strong>Edit</strong> list and clicking the corresponding check boxes. For information about editing subpermissions, see <a href="../security_types/">Security types</a></p>
+<p><strong>Note:</strong> If a role grants the Create permission for some object type, such as components, it is important that the role also grant the Edit Basic Settings and Manage Teams permissions for that type. Otherwise, the options for creating the object are limited.</p>
+<p>For information on the permissions that are available, see <a href="../security_roles_permission_ref/">Permission reference</a>.</p>
+</li>
+<li>
+<p>Click the <strong>Web UI</strong> category, and specify the pages in the server user interface that the role can access. Each option in this list refers to a top-level page in the user interface. For example, if you do not select the <strong>Applications Tab</strong> option in this list, users with this role do not see the top-level <strong>Applications</strong> tab when they log in to the server. You can select each tab separately.</p>
+</li>
+<li>If the role users need system permissions, such as the ability to change permissions, click <strong>Server Configuration</strong>, and specify those permissions. For more information, see <a href="../security_system/">Setting server configuration security</a>.</li>
+</ul>
+<p>Assign roles to users by adding users or groups to teams. You cannot assign a role to a user directly; users must be assigned roles when they are added to teams. See <a href="../security_teams_users/">Assigning users to teams</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../security_roles/">Roles and permissions</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_roles_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

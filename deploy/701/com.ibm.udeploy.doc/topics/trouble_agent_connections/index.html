@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/trouble_agent_connections/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Troubleshooting agent connections - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Troubleshooting agent connections", url: "#_top", children: [
+          ]},
+          {title: "Wed, 20 May 2015 15:41:27 -0500", url: "#wed-20-may-2015-154127-0500", children: [
+          ]},
+          {title: "Wed Feb 05 12:19:15 CST 2014", url: "#wed-feb-05-121915-cst-2014", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="troubleshooting-agent-connections">Troubleshooting agent connections</h1>
+<p>You can answer a number of questions to help isolate the issue behind problems with agents.</p>
+<p>By default, the logs for the agent are in the folder agent_install/var/log.</p>
+<p>If you are having trouble with an agent, see the following troubleshooting information for the state of the agent:</p>
+<ul>
+<li><a href="#agent_no_show">A new agent isn't displayed in the user interface, or the agent is reported as offline</a>.</li>
+<li><a href="#agent_connecting">The agent is reported as connecting</a>.</li>
+<li><a href="#agent_online">The agent is reported as online</a>.</li>
+<li><a href="#clock_skew">The agent cannot connect to the server</a></li>
+</ul>
+<p><strong>If the agent isn't displayed in the user interface, or if the agent is reported as offline, complete these actions:</strong></p>
+<ul>
+<li>
+<p>Verify that the agent started successfully:</p>
+<ul>
+<li>
+<p>Look for error messages in the log. If the agent started successfully, the agent.out file has a message that says something like this:</p>
+<p><code>2017-07-18 08:37:47,575 INFO  AgentWorkerThread com.urbancode.air.agent.AgentWorker - Agent started</code></p>
+</li>
+<li>
+<p>Check the prerequisites for the agent. See <a href="../../../com.ibm.udeploy.install.doc/topics/agent_install_ov/">Installing agents</a>.</p>
+</li>
+<li>If the agent prompt returns right away or the window flashes and closes after you try to start it, check the Java version and Java home. This situation typically happens when Java cannot be found.</li>
+<li>Verify that the system that hosts the agent has enough free disk space, and that the file system and permissions are properly configured.</li>
+<li>If the agent is configured as a service on Linux, start the agent from the command line. If you cannot start the agent from the command line, the problem is likely related to the way that the service was configured. See <a href="../../../com.ibm.udeploy.install.doc/topics/agent_install_service/">Running agents as services on Linux</a>.</li>
+<li>Verify that the agent installation properties are correct. See <a href="../../../com.ibm.udeploy.install.doc/topics/agent_properties/">Agent installation properties</a>.</li>
+<li>If the agent is configured as a service on Windows, complete these actions:<ol>
+<li>Remove the service and add it again. See step 5d in <a href="../jre_change_agent/#del_add_agent_svc">Changing or updating the JRE of agents</a>.</li>
+<li>Remove the service and try to start the agent from the command line. If it starts, check permissions for the user who is running the service. See step 3 of <a href="../../../com.ibm.udeploy.install.doc/topics/agentInstall/#rmv_svc">Installing agents from the command line</a>.</li>
+</ol>
+</li>
+<li>
+<p>If the information that is displayed in the log file or shell or command window doesn't continue beyond the following two example lines, a Java Message Service (JMS) communication issue exists:</p>
+<p><code>2016-06-24 12:05:21,766 INFO com.urbancode.air.agent.AgentWorker - Logging configured
+ 2016-06-24 12:05:21,789 INFO com.urbancode.air.agent.AgentWorker - Agent version: 6.1.1.4.665694</code></p>
+<p>To resolve this issue, complete these steps:</p>
+<ol>
+<li>Use Telnet to connect to the JMS port: <code>telnet server\_name/agent\_relay port</code>.</li>
+<li>If the agent was configured to connect to a host name rather than an IP address, verify that the host name resolves correctly. In some cases where the agent didn't resolve correctly, adding the host and IP address to the /etc/hosts file resolved the issue.</li>
+<li>If the agent started successfully but the server shows the agent as offline or does not show the agent at all, check these things:<ul>
+<li>If the agent connects through an agent relay, verify that the relay is running.</li>
+<li>Verify that the system that hosts the server has enough free disk space, and that the file system and permissions are properly configured.</li>
+<li>Search the user interface for the agent endpoint ID from the installed.properties file. If an agent with the same name is already in the system (in the following example, see <code>agent1</code> in bold), HCL® UrbanCode™ Deploy adds the agent to the user interface as agent-&lt;agent id>. It is possible that the agent is there, but not by a name that you might be looking for. This can happen if you clone a virtual machine or create a cloud environment without changing the agent name.</li>
+</ul>
+</li>
+</ol>
+<p>```</p>
+<h1 id="wed-20-may-2015-154127-0500">Wed, 20 May 2015 15:41:27 -0500</h1>
+<h1 id="wed-feb-05-121915-cst-2014">Wed Feb 05 12:19:15 CST 2014</h1>
+<p>IBM\ UrbanCode\ Deploy/java.home=C\:\IBM\Java70SDK
+locked/agent.brokerUrl=failover\:(ah3\://localhost\:7918)
+locked/agent.home=C\:\IBM\ucd\agent1
+locked/agent.http.proxy.host=
+locked/agent.http.proxy.port=
+<strong>locked/agent.id=P6km5J6GxzCxVbUkM7kP</strong>
+locked/agent.jms.remote.host=localhost
+locked/agent.jms.remote.port=7918
+locked/agent.keystore=../conf/ibm-ucd.keystore
+locked/agent.keystore.pwd=pbe{026vXYdcSWEUXdpiBUi7bXkCWz2JoBVnHnXa1bkbEUs\=}
+locked/agent.mutual_auth=false
+locked/agent.name=agent1
+system.default.encoding=Cp1252
+agent.HttpFailoverHandler.disabled=null
+```</p>
+</li>
+<li>
+<p>If the agent is using failover, make sure that failover is configured correctly.</p>
+</li>
+<li>If you are using mutual authentication, verify that it is set up correctly and check for certificate errors.</li>
+<li>Check for licensing issues.</li>
+<li>Check the network connection between the agent and the server or between the agent and agent relay:<ul>
+<li>Verify that a firewall is not preventing the agent from connecting to the server or agent relay. Agents always initiate connections to servers and agent relays, not the other way around.</li>
+<li>Check to see that the agent system can ping the HCL UrbanCode Deploy server or agent relay.</li>
+<li>If agents are not connecting correctly on high-availability environments, make sure that the servers have cluster connections to each other.</li>
+<li>Firewalls might prevent the agent from communicating with the server, particularly if the agent is on a public cloud and trying to connect to an HCL UrbanCode Deploy server that is within a firewall. In this case, use an agent relay.</li>
+<li>If the agent is on a cloud environment and the target cloud environment can connect to the HCL UrbanCode Deploy server, log in to the cloud image and check the <code>cloud-init</code> log files in this folder:/var/lib/cloud/instance/.</li>
+<li>If an agent on a cloud environment times out with a message like <code>Agent did not come online after 6.0 minutes! Process not executed.</code>, check to see that the agent package was downloaded correctly. If it did, try lengthening the timeout by increasing the value of the agent_timeout parameter in the blueprint or configuration file.</li>
+<li>Check for DNS issues that might prevent the agent from resolving the host name of the server or agent relay.</li>
+</ul>
+</li>
+<li>Can the built-in admin ID see the agent online? If so, permissions might be incorrectly configured on the agent. Remember that the built-in admin ID bypasses the team's checking.</li>
+</ul>
+</li>
+</ul>
+<p>If you do not know the location of the agent that cannot connect to the server, go to the agent properties, which include the last known host name and IP address of the agent.</p>
+<p><strong>If the agent is reported as connecting, complete these actions:</strong></p>
+<ol>
+<li>When this situation occurs, the problem is an HTTP communication issue. To resolve this issue:<ol>
+<li>Check the external agent URL in settings. In the product, click <strong>Settings</strong>, and then click <strong>System Settings</strong>. Make sure that the host name or IP address matches or resolves to the entry in the agents installed.property file.</li>
+<li>Use Telnet to connect to the HTTP port on the Server.</li>
+</ol>
+</li>
+</ol>
+<p><strong>If the agent is reported as online but you continue to have problems, complete these actions:</strong></p>
+<ol>
+<li>Verify that the agent and agent relay are running the recommended and minimum versions as indicated in the user interface.</li>
+<li>Check the server, agent relay, and agent logs for errors. Look for matching time stamps among the logs.</li>
+<li>
+<p>Enable more detailed logging by inserting these lines in the agent_install/conf/agent/log4j file:</p>
+<p><code>log4j.logger.com.urbancode.air=TRACE</code></p>
+<p><code>log4j.logger.org.apache.activemq=TRACE</code></p>
+<p>Check the output for errors.</p>
+</li>
+</ol>
+<p><strong>If you cannot connect server to an agent and the agent receives a clock skew exception, complete these actions:</strong></p>
+<p>Set the system time on the server and the computers that agents are running on to times that are the same or within a few minutes of each other. The server and agent clock times must be close together if using end-to-end encryption. They do not need to be in the same time zone, but must agree about the global time within approximately 5 minutes.</p>
+<p><strong>Parent topic:</strong> <a href="../trouble_serveragents_ov/">Troubleshooting the HCL UrbanCode Deploy server and agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/trouble_agent_connections.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

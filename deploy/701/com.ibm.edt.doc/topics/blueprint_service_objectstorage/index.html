@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_service_objectstorage/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Modeling object storage - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modeling object storage with Amazon S3 and OpenStack Swift", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modeling-object-storage-with-amazon-s3-and-openstack-swift">Modeling object storage with Amazon S3 and OpenStack Swift</h1>
+<p>Object storage systems (such as Amazon Simple Storage Service (S3) and OpenStack Swift) host collections of files and provide them on demand. These collections are sometimes called object storage containers object storage buckets. By including containers in a blueprint, you can provide information about those containers to applications.</p>
+<p>In your components, create properties that refer to the location or other details about object storage systems. For example, add component environment properties that refer to the location of the object storage. Then, you can use those properties in component processes. In this way, you provide information about the object storage to the application components.</p>
+<p>You can model a new container or an existing container in a blueprint.</p>
+<p>The following object storage systems are supported:</p>
+<ul>
+<li>Amazon Simple Storage Service, which refers to containers as object storage buckets</li>
+<li>
+<p>OpenStack Swift, which refers to containers as object storage containers</p>
+</li>
+<li>
+<p>In the blueprint designer, from the <strong>Storage</strong> drawer, drag the <strong>New Object Storage Bucket</strong> to the blueprint. </p>
+</li>
+<li>Specify the name for the container or bucket.To create a container, specify a new name in the name property. To refer to an existing container, specify the name of an existing container.</li>
+<li>
+<p>If you are creating a container, specify other properties for the container.If the container exists, these properties are ignored. For example, you can specify the access control for the container with the X-Container-Read and X-Container-Write properties. For example, the following code creates a new container that is named <code>my_object_storage</code> and specifies that the users <code>jsmith</code> and <code>jwilson</code> have read access.</p>
+<p><code>my_object_storage:
+  type: OS::Swift::Container
+  properties:
+    name: MyObjectStorage
+    X-Container-Read: jsmith, jwilson</code></p>
+</li>
+<li>
+<p>From the <strong>Components</strong> drawer, add one or more components to images in the blueprint. In the blueprint, the component resources have properties that refer to the properties on the HCL® UrbanCode™ Deploy server.</p>
+</li>
+<li>
+<p>Link the properties in the component to the properties of the container resource.To link a component to the <code>my_object_storage</code> container, the code might look like the following example. In this example, the component has a property that is named <code>StorageContainerURL</code>. The component uses this property value to access object storage. To provide the value for the property, refer to the matching property on the container resource, as in the following example:</p>
+<p><code>MyComponent_sw_config:
+  type: IBM::UrbanCode::SoftwareConfig::UCD
+  properties: 
+    name: "MyComponent"
+    component_process: deploy
+    application: { get_attr: [resource_tree, application_name] }
+    environment_name: { get_attr: [resource_tree, environment_name] }
+    inputs:
+      **StorageContainerURL : \{ get\_attr: \[my\_object\_storage, WebsiteURL\] \}**</code></p>
+</li>
+<li>
+<p>If you are connecting to an Amazon S3 bucket, create a configuration file and map the <code>OS::Swift::Container</code> resource type to the <code>IBM::S3::Bucket</code> resource type.</p>
+</li>
+</ul>
+<p>When you provision an environment from this blueprint, the component can access the object storage container.</p>
+<p><strong>Note:</strong> When you delete an environment that contains an object storage container, the container is not deleted.</p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_service_ov/">Modeling software services</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_service_objectstorage.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

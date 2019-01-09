@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/cloud_connect_openstack_ldap/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Connecting to OpenStack-based clouds with LDAP authentication - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Connecting to OpenStack-based clouds with LDAP authentication", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="connecting-to-openstack-based-clouds-with-ldap-authentication">Connecting to OpenStack-based clouds with LDAP authentication</h1>
+<p>To connect to an OpenStack cloud and use accounts from an LDAP server for authentication, create a cloud connection and cloud projects manually. Then, add the cloud projects to teams and add LDAP users to those teams.</p>
+<ul>
+<li>Configure the images for use with the blueprint designer. See <a href="../cloud_connect_openstack_images/">Configuring OpenStack images</a>.</li>
+<li>Extend the Heat engine that is associated with the OpenStack server. You must use an OpenStack Heat engine that is installed with the OpenStack server, not an engine that you install with HCL® UrbanCode™ Deploy. See <a href="../../../com.ibm.udeploy.install.doc/topics/install_server_bds/">Installing the blueprint design server</a>.</li>
+<li>Install the blueprint design server. See <a href="../../../com.ibm.udeploy.install.doc/topics/install_server_bds/">Installing the blueprint design server</a>.</li>
+<li>Connect the blueprint design server to the server. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Ensure that the blueprint design server can connect to the cloud. You can verify the connection path with the curl or telnet commands. For example, make sure that no firewall, proxy, or security settings prevent communication between the blueprint design server and the cloud.</li>
+</ul>
+<p>The following diagram shows a typical topology for this scenario. The blueprint design server connects to the OpenStack-based cloud and the OpenStack Heat engine. The engine is extended for use with the blueprint design server. The blueprint design server connects to the LDAP server, from which it retrieves user account information. It also accesses the Keystone identity service. The blueprint design server retrieves authentication information from this Keystone identity service.</p>
+<p><img alt="A topology that includes the blueprint design server, an OpenStack-based cloud, an OpenStack Heat engine, a Keystone server, and an LDAP server" src="../../images/cloud_connect_openstack_ldap_a.gif" /></p>
+<ol>
+<li>Log in to the blueprint designer as a user with the following <strong>System</strong> permissions: <ul>
+<li>Configure Security</li>
+<li>Manage Users &amp; Groups</li>
+</ul>
+</li>
+<li>Create a connection to the cloud: <ol>
+<li>Click <strong>Settings</strong> > <strong>Clouds</strong>. </li>
+<li>Click <strong>Add New Connection</strong>. </li>
+<li>Specify a name for the cloud connection.</li>
+<li>
+<p>In the <strong>Facing Type</strong> list, select the type of URL for the Heat engine. You can determine the type of Heat URL by examining the Keystone endpoint list. To view the Keystone endpoint list, run the following command:</p>
+<p><code>openstack endpoint list</code></p>
+<ul>
+<li>If you connect through a private URL, select <strong>Internal</strong>.</li>
+<li>If you connect through a public URL, select <strong>Public</strong>.<ol>
+<li>Specify the functional ID and password. </li>
+<li>Specify the tenant. </li>
+<li>Specify the domain. </li>
+<li>In the Identity URL field, specify the location of your engine, such as <code>http://engine.example.com:8004</code>. </li>
+<li>Select the cost center to use to estimate the cost of environments on this cloud. </li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+</li>
+<li>Create cloud projects for this connection. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_projects/">Creating cloud projects for the blueprint designer</a>.</li>
+<li>Add the cloud projects to teams.</li>
+<li>Create an LDAP authentication realm and import users from that realm.See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_realms_ldap/">Creating LDAP authentication realms for the blueprint designer</a>.</li>
+<li>Add the users to the teams and assign those users one or more roles.The users in the team have access to the cloud projects that are associated with that team.</li>
+<li>Make sure that the team roles include the appropriate permissions for those users, such as creating and editing blueprints. </li>
+<li>If the cloud uses SSL security, configure SSL security on the blueprint design server. See <a href="../cloud_connect_ssl/">Configuring SSL security for OpenStack clouds</a>. </li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<p>Users can log in to the blueprint designer with the accounts on the LDAP server. At the top of the page, users can select the cloud connection, cloud project, and region. When they edit blueprints, the palette shows resources that are available from the cloud that the user account is associated with.</p>
+<p><strong>Note:</strong> When a user logs in to the blueprint designer, the blueprint designer matches the user name to the authentication realms, starting at the top of the list. If the user name is present in more than one authentication realm, the blueprint designer uses the listing in the highest authentication realm.</p>
+<p><strong>Parent topic:</strong> <a href="../cloud_connect_openstack/">Connecting to OpenStack and OpenStack-based clouds</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/cloud_connect_openstack_ldap.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

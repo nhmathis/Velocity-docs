@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_zos_UCDrelated/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>UCD security configuration related to z/OS - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "UCD security configuration related to z/OS", url: "#_top", children: [
+              {title: "Links to security related plugin documents", url: "#links-to-security-related-plugin-documents" },
+              {title: "Links to Knowledge Center topics for z/OS security configuration", url: "#links-to-knowledge-center-topics-for-zos-security-configuration" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ucd-security-configuration-related-to-zos">UCD security configuration related to z/OS</h1>
+<p>Information for the HCL® UrbanCode™ Deploy (UCD) server’s security model and the security configurations related to server agent communication for IBM® z/OS® are referenced in this topic.</p>
+<h2 id="links-to-security-related-plugin-documents">Links to security related plugin documents</h2>
+<p>UrbanCode Deploy provides deployment functions can be extended by the open plugin architecture. Some plugins have their own security requirement. The following is a list of links to some of the plugin documents that are security related.</p>
+<ul>
+<li>CICS TS plugin - <a href="https://developer.ibm.com/urbancode/plugindoc/ibmucd/cics-ts-plug/0-1/usage-6/connecting-securely-with-ssl/">Connecting securely with SSL</a></li>
+<li>WebSphere Application Server (deployment) plugin - <a href="https://developer.ibm.com/urbancode/plugin/websphere-application-server-deployment/">WebSphere Application Server – Deployment</a></li>
+<li>SQL-JDBC - <a href="https://developer.ibm.com/urbancode/plugindoc/ibmucd/sql-jdbc/1-2/usage/">Use Passticket Authentication with DB2 for zOS</a></li>
+</ul>
+<h2 id="links-to-knowledge-center-topics-for-zos-security-configuration">Links to Knowledge Center topics for z/OS security configuration</h2>
+<p>|<strong>Starting agents</strong>|<a href="https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.install.doc/topics/run_agent.html">https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.install.doc/topics/run_agent.html</a>|
+|<strong><em>[Optional]</em></strong><strong>Agent impersonation</strong>|<a href="https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.doc/topics/arch_appx_impersonation_zos.html">https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.doc/topics/arch_appx_impersonation_zos.html</a>|
+|<strong><em>[Optional]</em></strong><strong>Authentication for job submission</strong>|<a href="https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.install.doc/topics/zos_using_job_monitor.html">https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.install.doc/topics/zos_using_job_monitor.html</a>|
+|<strong>Authenticating with user ID and Password</strong>|<a href="https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.install.doc/topics/zos_using_job_monitor.html">https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.install.doc/topics/zos_using_job_monitor.html</a>|
+|<strong>Authenticating with PassTickets</strong>|<a href="https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.install.doc/topics/zos_using_job_monitor.html">https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.install.doc/topics/zos_using_job_monitor.html</a>|
+|<strong>PassTicket profile examples</strong>|<a href="https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.install.doc/topics/zos_using_job_monitor.html">https://www.ibm.com/support/knowledgecenter/SS4GSP_7.0.0/com.ibm.udeploy.install.doc/topics/zos_using_job_monitor.html</a>|
+|<strong><em>[Optional]</em></strong><strong>Run MVS Command</strong>| <a href="https://apac01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdeveloper.ibm.com%2Furbancode%2Fplugindoc%2Fibmucd%2Fzos-utility-plug%2F1-2%2Fusage%2Frunning-mvs-system-commands%2F&amp;data=02%7C01%7Ckaren.dular%40hcl.com%7C377999dbac4443737c2008d60e704a8a%7C189de737c93a4f5a8b686f4ca9941912%7C0%7C0%7C636712272781751550&amp;sdata=mHBFWAlZ2iwyWCsuBKEoco6iZ9Nk5a9F1%2FHyvmjK1xM%3D&amp;reserved=0">https://developer.ibm.com/urbancode/plugindoc/ibmucd/zos-utility-plug/1-2/usage/running-mvs-system-commands/</a>|</p>
+<p><strong>Parent topic:</strong> <a href="../security_zos/">Security requirements on IBM z/OS computers</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_zos_UCDrelated.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

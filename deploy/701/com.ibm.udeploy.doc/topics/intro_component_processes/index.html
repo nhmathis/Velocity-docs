@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/intro_component_processes/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Component processes", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="component-processes">Component processes</h1>
+<p>A component process is a series of user-defined steps that operate on a component's artifacts. Each component has at least one process that is defined for it and can have several.</p>
+<p>A component process can be as simple as a single step or contain numerous steps and relationships. The switch step, for instance, creates conditional processes. For example, you might take artifacts from a source like an IBM® Anthill Pro project and map the artifacts that get deployed to an HTTP server into one component. Then, you might map the artifacts that get deployed to a Java™ Platform, Enterprise Edition container to another component. You might map the artifacts that get deployed to a database to yet another component. Or, to take another example, a single-component deployment might consist of two processes: the first moves component files to a target server on Friday night (a lengthy operation), while the second deploys the files Saturday morning.</p>
+<p><img alt="A process that includes a switch step" src="../../images/intro_component_processes_a.gif" /></p>
+<p><strong>Important:</strong> When you begiu to create a component process, you must assign a type by making a selection from <strong>Process Type</strong> menu. The type that you select can determine whether the application process that you create later functions as intended. For example, if the object of the component process you are creating is to deploy the current component and you select <strong>Operational (with version)</strong> in <strong>Process Type</strong>, the process will fail. See <a href="../comp_process_types/">Component process types</a>.</p>
+<p>Component processes are created with the process editor. The process editor is visual drag-and-drop editor where you can drag process steps onto the design space and configure them as you go. As more steps are placed, you visually define their relationships with one another. Process steps are selected from a menu of standard steps that replace typical deployment scripts and manual processes. HCL® UrbanCode™ Deploy provides steps for several utility processes, such as inventory management, and workflow control. Other process steps are provided by plug-ins. Plug-ins provide integration with common deployment tools and application servers, such as WebSphere®, Microsoft™ IIS, and many others. Without any additions, HCL UrbanCode Deploy provides plug-ins for many common processes, such as downloading and uploading artifacts, and retrieving environment information. A component process can have steps from more than one plug-in.</p>
+<p>Like other processes, component processes begin with the Start step and must end with the Finish step.</p>
+<p>A component process is defined for a specific component. A component can have more than one process that is defined for it, but each component requires at least one process.</p>
+<p>For example, deploying an EAR file to an IBM WebSphere Application Server typically consists of the following operations:</p>
+<ol>
+<li>Transfer the EAR file to the target server.</li>
+<li>Stop the target server instance.</li>
+<li>Run wsAdmin with deployment properties.</li>
+<li>Start the target server instance.</li>
+<li>Verify that the deployment succeeded by accessing a specified URL.</li>
+</ol>
+<p>The WebSphere Application Server - Deploy plug-in provides a configurable process step for each operation.</p>
+<p>A frequently used component process can be saved as a template and applied later to new components.</p>
+<p>Component processes are run by HCL UrbanCode Deploy agents on hosts. One instance of a component process is started for each resource that is mapped to a component in the target environment. See <a href="../resources_ch/">Resources</a>.</p>
+<ul>
+<li><strong><a href="../comp_process_types/">Component process types</a></strong><br />
+Different types of component processes deploy, configure, or uninstall component versions.</li>
+<li><strong><a href="../comp_process_configure/">Creating component processes</a></strong><br />
+A component process is a series of user-defined steps that operate on a component's artifacts. You create a component process in two steps: first, you configure basic information, such as name; second, you use the process editor to assemble the process.</li>
+<li><strong><a href="../comp_process_run/">Running component processes</a></strong><br />
+Component processes are typically run from within application processes. However, you can also run component processes directly to test the processes or to correct an error in an urgent situation.</li>
+<li><strong><a href="../comp_tasks_config_create/">Creating configuration files in component processes</a></strong><br />
+Configuration templates are templates for files that are created during a component process. Typically, the data is for configurations for web servers, but the files can be used for any application that you deploy.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../comp_workflow/">Processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/intro_component_processes.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

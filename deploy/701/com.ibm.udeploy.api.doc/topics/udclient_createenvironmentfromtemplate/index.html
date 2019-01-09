@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/udclient_createenvironmentfromtemplate/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>createEnvironmentFromTemplate - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "createEnvironmentFromTemplate", url: "#_top", children: [
+              {title: "Format", url: "#format" },
+              {title: "Parameters", url: "#parameters" },
+              {title: "Template", url: "#template" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="createenvironmentfromtemplate">createEnvironmentFromTemplate</h1>
+<p>Create a new environment from template</p>
+<p>This command creates and Environment from a template and attaches it to the specified application.</p>
+<h2 id="format">Format</h2>
+<pre><code>udclient [\[global-args...\]](../../com.ibm.udeploy.reference.doc/topics/cli_command_format.md) [\[global-flags...\]](../../com.ibm.udeploy.reference.doc/topics/cli_command_format.md)
+  createEnvironmentFromTemplate [JSON file]
+</code></pre>
+
+<h2 id="parameters">Parameters</h2>
+<p>None.</p>
+<h2 id="template">Template</h2>
+<p>This command takes a JSON request string or file. Use the following template for the request:</p>
+<pre><code>{
+  &quot;applicationId&quot;: &quot;Application ID associated with the 
+  Environment template.&quot;,
+  &quot;description&quot;: &quot;Description (optional)&quot;,
+  &quot;name&quot;: &quot;Environment name&quot;,
+  &quot;teamMappings&quot;: [{
+    &quot;resourceRoleId&quot;: &quot;Id of Resource Type to apply to 
+  this team mapping (optional, can specify either this or 
+  resourceRoleLabel&quot;,
+    &quot;resourceRoleLabel&quot;: &quot;Name of Resource Type to apply 
+  to this team mapping (optional, can specify either this or 
+  resourceRoleId&quot;,
+    &quot;teamId&quot;: &quot;ID of a team, either this field or 
+  teamLabel are needed to specify a team&quot;,
+    &quot;teamLabel&quot;: &quot;Name of the team to map the environment 
+  to, either this field or teamId are needed to specify a 
+  team&quot;
+  }],
+  &quot;templateId&quot;: &quot;ID of the template to use, either this 
+  field or templateName are required.&quot;,
+  &quot;templateName&quot;: &quot;Name of a template to use, either this 
+  field or templateId are required.&quot;
+}
+
+</code></pre>
+
+<p>Related REST command: <a href="../rest_cli_environment_createenvironmentfromtemplate_put/">Create a new environment from template</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.reference.doc/topics/cli_commands/">CLI Commands</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/udclient_createenvironmentfromtemplate.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_approvalCreate/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating an approval process - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating an approval process", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-an-approval-process">Creating an approval process</h1>
+<p>An approval process is configured for an application environment when your organization requires formal decisioning of a deployment. The approval process identifies the deployment that needs approval and the role of the approver. Approval to deploy is granted or denied by the approver.</p>
+<p>Before an approval process can be configured, these prerequisites must be met.</p>
+<ul>
+<li>
+<p>An <strong>ApprovalCompleted</strong> notification template exists for use in the approval process.</p>
+</li>
+<li>
+<p><strong>Require Approvals</strong> is enabled for an environment. In the application environment, select <strong>Configuration</strong> at the task bar and ensure that the <strong>Require Approvals</strong> check box is enabled in the Basic Settings window. <strong>Approval Process</strong> will be enabled in the environments task bar.</p>
+</li>
+</ul>
+<p><strong>Tip:</strong> The environment developer can also select the <strong>No Self-Approvals</strong> check box that follows the <strong>Require Approvals</strong> check box. When this check box is selected, the user who sets up of the approval process cannot subsequently approve the process.</p>
+<ol>
+<li>To create an approval process, display the Approval Process Design pane (<strong>Applications</strong> > <strong>application name</strong> > <strong>Environments</strong> > <strong>Environment: environment name</strong> > <strong>Approval Process</strong>. </li>
+<li>
+<p>Configure the steps that need approval from the process editor. The steps are based on job type and the role of the approver. You have the option of selecting three job types: the application, component, or environment. For help on the process editor, see <a href="../comp_workflow/">Processes</a>. </p>
+<p><strong>Note:</strong> If a scheduled deployment that requires approval reaches its start time and the approval is not given, the process does not run and acts as a rejected request. To resubmit a request, you must request a new process. If a process with an approval does not have a scheduled deployment time, the process remains idle until a response is made.</p>
+</li>
+<li>
+<p>To view the status of the request, display the Deployment Detail pane on the Reports tab. If a request is approved, it is displayed as a success. However, if the request was rejected, it shows as failed. If a request is failed, display the Application Process Request by clicking <strong>view request</strong>. </p>
+</li>
+<li>To view the status of the request, display the Deployment Detail pane on the Reports tab. If a request is approved, it is displayed as a success. However, if the request was rejected, it shows as failed. If a request is failed, display the Application Process Request by clicking <strong>view request</strong>. </li>
+<li>
+<p>If a comment is made regarding the process, you can view it by clicking the log push button in the actions column on the Application Process Request. </p>
+<p>An example of a default <strong>ApprovalCreated</strong> notification template that is sent to indicate that an approval is required is shown.</p>
+<p><img alt="Example ApprovalCreated Notification Template" src="../../images/NotifyTemp_approvalpending.jpg" /> </p>
+</li>
+<li>
+<p><strong><a href="../app_approvals_workitems/">Work items</a></strong><br />
+If a job requires approval, an approval process must be created. Then, the job displays in the approver’s Work Items tab.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../applications_ch/">Applications</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_approvalCreate.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

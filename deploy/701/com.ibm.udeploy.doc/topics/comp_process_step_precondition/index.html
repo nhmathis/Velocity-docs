@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_process_step_precondition/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Process step preconditions - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Process step preconditions", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="process-step-preconditions">Process step preconditions</h1>
+<p>Most steps in a process can have a precondition. If the <strong>Precondition</strong> field is available, the process supports a precondition. This precondition determines whether the step runs. Like post-processing scripts, preconditions use JavaScript™ 1.7.</p>
+<p><strong>Note:</strong> The syntax for preconditions is similar to the syntax for post-processing scripts. See <a href="../comp_postProcess/">Post-processing scripts</a>.</p>
+<p>Preconditions return Boolean values. If the precondition returns <code>True</code>, the step runs as usual.</p>
+<p>If the precondition returns anything other than <code>True</code>, the process skips that step. In the process request, the step is labeled "Precondition Failed." However, in this case, the process continues to run; the process follows the success links from that step as though the step succeeded.</p>
+<p>The precondition has access to the same properties that the step does. Application processes have access to the following properties:</p>
+<ul>
+<li>Application properties</li>
+<li>Application process properties</li>
+<li>Environment properties, including component environment properties</li>
+<li>System properties</li>
+<li>Output properties from previous steps. See <a href="../output_properties/">Output properties</a>.</li>
+</ul>
+<p>Property availability depends on your context. See <a href="../ud_properties_avail/">Property availability</a> for information about which properties you can access.</p>
+<p>After you run a process, you can see the properties that the process had access to by opening the process request and clicking the <strong>Properties</strong> tab.</p>
+<p>To access a property, use the properties.get() command. For example, the following code retrieves the value of an application property:</p>
+<pre><code>properties.get(&quot;application/property1&quot;)
+</code></pre>
+
+<p>The following example precondition allows the step to run only if the application property <code>property1</code> exists and is not null:</p>
+<pre><code>properties.get(&quot;application/property1&quot;) !== undefined &amp;&amp; 
+properties.get(&quot;application/property1&quot;) !== null &amp;&amp; 
+properties.get(&quot;application/property1&quot;) !== &quot;&quot;
+</code></pre>
+
+<p><strong>Important:</strong> Do not use notation such as <code>${p:component.myProperty}</code> in the precondition script. For example, to check the value of a component property in a component process, use <code>properties.get("myProperty") == "myValue"</code>.</p>
+<p>Precondition scripts can access the process properties. For example, if the process has a property that is named <code>processProperty1</code>, you can access that property with the following code:</p>
+<pre><code>properties.get(&quot;processProperty1&quot;)
+</code></pre>
+
+<p>Precondition scripts in component processes and generic processes can access the output properties of previous steps. For example, assume that the post-processing script of a step that is named <code>Step1</code> specifies a property that is named <code>OutputProp1</code>. The following precondition script allows another step to run only if the value of this property is <code>value1</code>:</p>
+<pre><code>properties.get(&quot;Step1/OutputProp1&quot;) == &quot;value1&quot;
+</code></pre>
+
+<p>Preconditions have access to a property that is named <code>hasFailures</code>. This property is <code>True</code> if any of the steps in the process fail. It is undefined if no steps fail. For example, to run a step only if no other steps in the process fail, use the following precondition:</p>
+<pre><code>properties.get('hasFailures') == undefined
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../process_steps/">Process step types and logic</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_process_step_precondition.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

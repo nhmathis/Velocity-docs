@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/settings_system/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Server settings - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Server settings", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="server-settings">Server settings</h1>
+<p>These tables list the settings for several system-wide settings for the server.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>External Agent URL*</strong></td>
+<td>This is the URL that the HCL® UrbanCode™ Deploy server provides to agents as their point of contact. When an agent wants to contact the server, it retrieves this URL and opens a connection on it. This URL must point to the HTTP or HTTPS port of the server.</td>
+</tr>
+<tr>
+<td><strong>External User URL*</strong></td>
+<td>The URL that users enter to connect to the HCL UrbanCode Deploy server. The URL is also used when creating a notification template and when integrating blueprints with HCL UrbanCode Deploy.</td>
+</tr>
+<tr>
+<td><strong>Validate Agent IP</strong></td>
+<td>Requires that the agent IP and host name are validated against values that are used the first time that the agent is connected to the HCL UrbanCode Deploy server.</td>
+</tr>
+<tr>
+<td><strong>Skip Property Updates for Existing Agents</strong></td>
+<td>When this toggle button is set to On, when new agents come online, the server does not update their properties. This improves performance, but in this case, agent properties can become out of date.</td>
+</tr>
+<tr>
+<td><strong>Enable UI Debugging</strong></td>
+<td>Facilitates debugging with the user interface. If this setting is enabled, the performance of the user interface might be affected.</td>
+</tr>
+<tr>
+<td><strong>Require a Comment For Process Design Changes</strong></td>
+<td>Requires that the user provides a comment when the user changes processes.</td>
+</tr>
+<tr>
+<td><strong>Components copy to CodeStation by default</strong></td>
+<td>If this toggle is set to On, newly created components copy artifacts to CodeStation by default. You can still change this setting on individual components.</td>
+</tr>
+<tr>
+<td><strong>Default Locale</strong></td>
+<td>The default language for the user interface.</td>
+</tr>
+<tr>
+<td><strong>Default Snapshot Lock Type</strong></td>
+<td>Determines the default lock type when users create snapshots. Lock types are the following values: <strong>Only Component Versions</strong>, <strong>Only Configuration</strong>, or <strong>Component Versions and Configuration</strong>. The initial value is <strong>Component Versions and Configuration</strong>. Changes are effective after the server is restarted.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Components copy to CodeStation by default</strong></td>
+<td>If this toggle is set to On, newly created components copy artifacts to CodeStation by default. You can still change this setting on individual components.</td>
+</tr>
+<tr>
+<td><strong>Enforce Deployed Version Integrity</strong></td>
+<td>When this toggle button is set to On, deployed component version artifacts cannot be changed.</td>
+</tr>
+<tr>
+<td><strong>Automatic Version Import Check Period (seconds)*</strong></td>
+<td>The number of seconds between the times that HCL UrbanCode Deploy polls components for new versions. If this value is changed, the server must be restarted before the change becomes effective. Set this value no lower than 15 seconds.</td>
+</tr>
+<tr>
+<td><strong>Use Agent Tag For Integration</strong></td>
+<td>Enables any agent that is identified by a specific tag to import component versions. If this setting is selected, the <strong>Agent Tag for version imports</strong> field is shown. Otherwise, the <strong>Agent for Version Imports</strong> field is displayed. For information about tagging objects, see <a href="../../../com.ibm.udeploy.doc/topics/addingtags_tsk/">Adding tags to objects</a></td>
+</tr>
+<tr>
+<td><strong>Agent for Version Imports</strong></td>
+<td>The agent that is used to import component versions. The agent must have access to component artifacts. The agent becomes the default agent for new components. This value can be overridden when a component is created. This field is displayed if the <strong>Use Agent Tag for Integration</strong> toggle button is set to Off. To import artifacts from the server location, install an agent in the same location and specify that agent.</td>
+</tr>
+<tr>
+<td><strong>Agent Tag for version imports</strong></td>
+<td>Any agent with the specified tag can import component versions. All tagged agents must have access to the artifacts. Tagged agents become the default values for new components. This value can be overridden when a component is created. This field is displayed if the <strong>Use Agent Tag for Integration</strong> toggle button is set to On.</td>
+</tr>
+<tr>
+<td><strong>Enable Safe Edit of Component Processes</strong></td>
+<td>Enables you to test component processes before making them available in normal environments. Make updates to your component process, test those updates safely, and then promote to a new version when you are ready, when toggle is set to On.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hour to Clean Versions*</strong></td>
+<td>The time when versions are cleaned. The value must be an integer from 0 (midnight) to 23 (11 pm). To preview the component versions that are scheduled for cleaning, click <strong>Preview Version Cleanup</strong>. See <a href="../../../com.ibm.udeploy.doc/topics/settings_system_preview/">Cleaning up component versions</a>.</td>
+</tr>
+<tr>
+<td><strong>Days to Keep Versions*</strong></td>
+<td>The number of days component versions are kept, by default. A value of <code>-1</code> means that they are kept indefinitely. Component and environment settings can override this setting.</td>
+</tr>
+<tr>
+<td><strong>Number of Versions to Keep*</strong></td>
+<td>The number of component versions to keep, by default. A value of <code>-1</code> specifies that all are kept. Component and environment settings can override this setting.</td>
+</tr>
+<tr>
+<td><strong>Archive Path</strong></td>
+<td>The path where the compressed file that contains the archived component versions is written. If this field is blank, the compressed file is not written, and no archive is kept.</td>
+</tr>
+<tr>
+<td><strong>Preview Version Cleanup</strong></td>
+<td>To see the versions that are archived using the current settings, click <strong>Preview Version Cleanup</strong>. See <a href="../../../com.ibm.udeploy.doc/topics/settings_system_preview/">Cleaning up component versions</a>.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enable Deployment History Cleanup</strong></td>
+<td>When this toggle button is set to On, deployment history files are reduced. See <a href="../../../com.ibm.udeploy.doc/topics/depl_history_cleanup/">Cleaning up deployment history files</a>.</td>
+</tr>
+<tr>
+<td><strong>Daily Cleanup Start Time</strong></td>
+<td>The hour that the daily cleanup process starts.</td>
+</tr>
+<tr>
+<td><strong>Daily Cleanup Duration (hours)</strong></td>
+<td>The number of hours that the cleanup process runs daily.</td>
+</tr>
+<tr>
+<td><strong>Days to Retain Deployment History</strong></td>
+<td>The number of days to retain deployment history. This setting can be overridden with the related environment setting.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enable Audit Log Entries for Read Events</strong></td>
+<td>When this option is disabled, no READ events are recorded in the audit log.</td>
+</tr>
+<tr>
+<td><strong>Enable Audit Log Cleanup</strong></td>
+<td>When this option is enabled, audit log entries older than the number of days specified in the <strong>Days to Retain Audit Log Entries</strong> field are removed beginning at the time specified by the <strong>Daily Cleanup Start Time</strong> field. By default, this option is disabled. See <a href="../../../com.ibm.udeploy.doc/topics/troubleshoot_logDownload/">Automatically downloading audit log files</a>.</td>
+</tr>
+<tr>
+<td><strong>Daily Cleanup Start Time</strong></td>
+<td>If <strong>Enable Audit Log Cleanup</strong> is enabled, the time the audit log cleanup starts. The default value is 12:00 AM.</td>
+</tr>
+<tr>
+<td><strong>Days to Retain Audit Log Entries</strong></td>
+<td>If <strong>Enable Audit Log Cleanup</strong> is enabled, the number of days that audit log records are retained. The default value is 30.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Minimum Password Length*</strong></td>
+<td>Determines the minimum length for passwords.</td>
+</tr>
+<tr>
+<td><strong>Require Complex Passwords</strong></td>
+<td>If selected, passwords must contain at least two of the four character classes and must meet the specified minimum length requirement. The 4 classes are uppercase, lowercase, digits, and special characters.</td>
+</tr>
+<tr>
+<td><strong>Discovery Auth Token Expiration Delay(seconds)</strong></td>
+<td>Delay in seconds for auth tokens that are created for Auto Discovery Steps to expire. Must be 300 seconds or more.</td>
+</tr>
+<tr>
+<td><strong>Configure Auth Token Expiration Delay(seconds)</strong></td>
+<td>Delay in seconds for auth tokens that are created for Auto Configure Steps to expire. Must be 300 seconds or more.</td>
+</tr>
+<tr>
+<td><strong>Version Import Auth Token Expiration Delay(seconds)</strong></td>
+<td>Delay in seconds for auth tokens that are created for Version Import Steps to expire. Must be 300 seconds or more.</td>
+</tr>
+<tr>
+<td><strong>Plugin Step Auth Token Expiration Delay(seconds)</strong></td>
+<td>Delay in seconds for auth tokens that are created for Plug-in Steps to expire. Must be 300 seconds or more.</td>
+</tr>
+<tr>
+<td><strong>Use Default Auth Token Restriction if not specified</strong></td>
+<td>Enable the default authentication token restriction for processes that are created in HCL UrbanCode Deploy 6.2.6.x and earlier. For these versions, the default token is applied to the most current process version but not other versions. If you want to apply the default token restriction to all pre-6.2.7 process versions, turn on this option. By default, the option is turned off. For more information, see <a href="../security_token_restrict/">Restricting authentication tokens</a>.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>WinRS Agent</strong></td>
+<td>The agent that is used to run agent installation processes on Windows™ computers. The WinRS agent is configured to use the Windows winrs command, which enables remote systems to run Windows commands. Typically, the agent that is designated as the WinRS agent is used exclusively for this purpose. <strong>Note:</strong> A WinRS agent must be designated before agents can be installed remotely on Windows computers.</td>
+</tr>
+</tbody>
+</table>
+<p>|
+|<strong>WinRS User</strong>|The user name for Windows Remote Management.|
+|<strong>WinRS Password</strong>|The user password for Windows Remote Management.|</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mail Server Host</strong></td>
+<td>The host name of the mail server that is used for notifications. HCL UrbanCode Deploy can send notifications to users based on user-configured trigger events (to set up notifications, see <a href="../../../com.ibm.udeploy.doc/topics/notify_create/">Creating Notifications in a Notification Scheme</a>). HCL UrbanCode Deploy requires an external SMTP mail server to send messages. To disable notifications, leave the field blank.</td>
+</tr>
+<tr>
+<td><strong>Mail Server Port</strong></td>
+<td>The SMTP port that is used by the notifications mail server.</td>
+</tr>
+<tr>
+<td><strong>Secure Mail Server Connection</strong></td>
+<td>Specifies whether the SMTP connection is secure. The default value is <strong>Off</strong>.</td>
+</tr>
+<tr>
+<td><strong>Mail Server Sender Address</strong></td>
+<td>The sender address for email notifications.</td>
+</tr>
+<tr>
+<td><strong>Mail Server Username</strong></td>
+<td>The user name for sending email notifications. Some email servers and firewalls treat emails with different sender and user names suspiciously. Therefore, consider specifying the same name for both fields.</td>
+</tr>
+<tr>
+<td><strong>Mail Server Password</strong></td>
+<td>The user password for sending email notifications.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enable "Show Inactive" Links</strong></td>
+<td>By default, user-created objects that were made inactive in product versions earlier than 6.0, are hidden. If this option is selected, hidden objects are displayed and can be used or deleted.</td>
+</tr>
+<tr>
+<td><strong>Enable "Prompt On Use"</strong></td>
+<td>Controls whether user-entered values can be specified at process run time. If this parameter is inactive (the default setting), values must be entered on the plug-in step during process creation. If this option is selected, process designers have the option of requiring users to enter values during run time.</td>
+</tr>
+<tr>
+<td><strong>Enable "Allow Failure"</strong></td>
+<td>Shows an <strong>Allow Failure</strong> check box on steps.</td>
+</tr>
+<tr>
+<td><strong>Fail Processes With Unresolved Properties</strong></td>
+<td>Any running process that cannot resolve a property automatically fails. This setting is enabled by default.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Automatic Agent Licensing</strong></td>
+<td>If this toggle button is set to On, the HCL UrbanCode Deploy server automatically attempts to license agents as they connect to the server. See <a href="../../../com.ibm.udeploy.install.doc/topics/license_apply/">Applying licenses to servers and agents</a>.</td>
+</tr>
+<tr>
+<td><strong>Server License Type</strong></td>
+<td>Contains the license type that is retrieved from the Rational Common Licensing server. See <a href="../../../com.ibm.udeploy.install.doc/topics/license_scenarios/">License scenarios</a>.</td>
+</tr>
+<tr>
+<td><strong>RCL Server Path</strong></td>
+<td>In most cases, specify the host name and port of the Rational Common Licensing server. The format is port@hostname. For more information, see <a href="../../../com.ibm.udeploy.install.doc/topics/license_apply/">Applying licenses to servers and agents</a>.</td>
+</tr>
+<tr>
+<td><strong>Download License Log</strong></td>
+<td>Download the license usage log files. The log file contains all license violations. Messages are listed in descending order of violation time, so the most recent violation is displayed first.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/settings_ch/">Server settings and configuration</a></p>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/settings_system.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

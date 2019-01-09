@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_token/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Tokens", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="tokens">Tokens</h1>
+<p>Tokens provide authorization for agents, agent relays, users, and external systems or applications from the server. Agents use tokens when they run process steps and communicate with the HCL® UrbanCode™ Deploy server and external services.</p>
+<p>Users can use tokens with the command-line interface (CLI) client instead of supplying a user name and password in certain situations. For information, see <a href="../../../com.ibm.udeploy.reference.doc/topics/cli_ch/">Command-line client (CLI) reference</a>.</p>
+<p>Follow these steps to create a token. You can also create a token through the CLI; see <a href="../../../com.ibm.udeploy.api.doc/topics/udclient_createauthtoken/">createAuthToken</a>.</p>
+<ol>
+<li>Log in as a user with the "Manage Security" permission. See <a href="../security_system/">Setting server configuration security</a>.</li>
+<li>On the server, click <strong>Settings</strong> > <strong>Tokens</strong> > <strong>Create Token</strong>. The Create Token dialog box.</li>
+<li>
+<p>From the <strong>User</strong> list, select the user for the token. You can limit the actions available to the token by applying a token restriction to it. For information about creating and applying token restrictions, see <a href="../security_token_restrict/">Restricting authentication tokens</a>.</p>
+<p><strong>Note:</strong> </p>
+<p>If you are using the token to integrate with IBM® UrbanCode Release, you must specify the administrator.</p>
+<p>If the token is for an agent relay that is intended to use component version replication, the user must have a role that has the Read Artifact Set List permission. For information about the Read Artifact Set List permission, see <a href="../security_system/">Setting server configuration security</a>.</p>
+</li>
+<li>
+<p>Specify the expiration date and time.</p>
+</li>
+<li>
+<p>To limit the use of the token to certain IP addresses, specify one or more IPv4 addresses in CIDR notation in the <strong>Allowed IPs</strong> field, such as <code>10.15.10.0/24</code>.</p>
+<p><strong>Note:</strong> If you are using clustered servers as described in <a href="../../../com.ibm.udeploy.doc/topics/server_install_clustered/">Setting up high-availability clusters</a>, leave this field blank.</p>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+<p><strong>Important:</strong> The token is shown only one time after you create it. Copy the token immediately, because you cannot see it again.</p>
+</li>
+</ol>
+<p>Tokens can be used immediately after they are created. You can revoke a token at any time by clicking <strong>Delete</strong> in the <strong>Actions</strong> column.</p>
+<ul>
+<li><strong><a href="../security_token_restrict/">Restricting authentication tokens</a></strong><br />
+Limit authentication token actions by applying token restrictions to process plug-in steps.</li>
+<li><strong><a href="../security_settings_tokens/">Token expiration settings</a></strong><br />
+Tokens provide authorization for agents, agent relays, users, and external systems or applications from the server. Agents use tokens when they run process steps and communicate with the HCL UrbanCode Deploy server and external services. In the <strong>Security</strong> settings area you can set time limits for three tokens types.</li>
+<li><strong><a href="../security_token_update/">Updating the agent relay authentication token password</a></strong><br />
+The authentication token password for the agent relay is specified during installation of the agent relay. You can update the authentication token and provide a password for the token by updating the agent relay properties file.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_token.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

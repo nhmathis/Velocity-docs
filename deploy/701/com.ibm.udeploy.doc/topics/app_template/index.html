@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_template/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Application templates", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="application-templates">Application templates</h1>
+<p>With an application template, you can save and reuse a collection of resources, environments, processes, and tagged components or component templates to create a standardized application.</p>
+<p>An application template is a standard framework for users to employ when they create applications. In the application template, you can specify the application properties, environment properties, and environment gates for an application. You can also create a framework that describes attributes of the components, environments, and application processes that an application initially contains. Application templates can contain as many of these elements as required to guide users through the application creation process and to standardize their environments.</p>
+<ul>
+<li>
+<p><strong>Application and environment properties</strong></p>
+<p>You specify which application and environment properties are included in applications that are created from the application template. Users must provide values for these properties when they create an application from the application template, and users cannot remove these properties from the application.</p>
+</li>
+<li>
+<p><strong>Environment gates</strong></p>
+<p>You specify which statuses a component version must contain before you can deploy it to an environment. The users cannot modify environment gates in environments that were created by using an application template. To add a version status to a component version, see <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_status_using/">Adding version statuses</a>.</p>
+</li>
+<li>
+<p><strong>Components</strong></p>
+<p>Instead of identifying which components must be used in the application, you can specify which tags that the components that users assign to the application must use.</p>
+<p>To control which components users can assign to an application by using the template, you must create a naming scheme for component tags that is relevant to your company. You must also consistently apply the tags to components and component templates. See <a href="../addingtags_tsk/">Adding tags to objects</a>.</p>
+<p>For example, a simple three-tier web application uses a database, web interface, and application logic. You might tag these components with the following tags: <code>database</code>, <code>web_ui</code>, and <code>app_logic</code>. When you create an application template for this web application, you can specify that the application contain three components, one that uses each of those tags. When users create an application from the template, they can assign to the application one component per tag.</p>
+</li>
+<li>
+<p><strong>Environments</strong></p>
+<p>You can allow users to select environments from the application template. If you do, you must create resource templates that describe the resource tree for each environment. The resource tree can include any agent prototypes, and, if you specify component tags, you can assign the component tags to the agent prototypes. Upon application creation, the components that contain these tags are assigned to the resource tree for the environment. See <a href="../resources_templates_create/">Creating resource templates</a>.</p>
+<p><strong>Note:</strong> If you create an environment with an environment template and then add component mappings to the resource template, the new component mappings are added to the environment. However, if you remove component mappings from the resource template, the component mappings are not removed from the environment.</p>
+</li>
+<li>
+<p><strong>Application process</strong></p>
+<p>You can define a simple application process that installs multiple components. Instead of specifying the component and selecting a process, you specify component tags.</p>
+</li>
+</ul>
+<p>To ensure that users can create only applications that adhere to templates, you might create a role for users who create applications from templates. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_roles_create/">Creating roles and assigning permissions</a>. For more information about role permissions that prevent users from modifying applications to deviate from the application templates, see <a href="../../../com.ibm.udeploy.admin.doc/topics/app_template_ref/">Application template permissions reference</a>.</p>
+<p><strong>Note:</strong> If users are granted the certain permissions, they can add or remove components, environments, and application templates after they create an application from the template.</p>
+<ul>
+<li><strong><a href="../app_template_create/">Creating application templates</a></strong><br />
+Define application templates so that users can create applications that contain the types of components, the environments, and the resource tree that you specify.</li>
+<li><strong><a href="../app_template_using/">Creating applications from application templates</a></strong><br />
+Create an application from a template to apply a set of tagged components, environments, and the specified resource tree to the application.</li>
+<li><strong><a href="../app_environment_template_create/">Creating environment templates</a></strong><br />
+When you create an application template, you can define environment templates that model environments for the applications that you create by using the application template.</li>
+<li><strong><a href="../app_template_export/">Exporting application templates</a></strong><br />
+Exporting a template creates a JSON file (file extension .json) that contains the template's configuration information, resource templates, environment templates, approval processes, application processes, and generic processes.</li>
+<li><strong><a href="../app_template_import/">Importing application templates</a></strong><br />
+If you exported an application template, you can import the template to a different server. When you import an application template, you can create an entirely new template or upgrade an existing one.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../applications_ch/">Applications</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_template.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/server_install_eval/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing the server in evaluation mode - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing the server in evaluation mode", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-the-server-in-evaluation-mode">Installing the server in evaluation mode</h1>
+<p>To explore the features of HCL® UrbanCode™ Deploy, install the server in evaluation mode.</p>
+<ul>
+<li>The following instructions are for exploring the features of HCL UrbanCode Deploy in evaluation mode. Do not follow these instructions if you are installing a production server. For instructions on installing a production server, see <a href="../server_install_interactive/">Installing the server in interactive mode</a>.</li>
+<li>You can evaluate the product for a trial period of up to 60 days.</li>
+<li>
+<p>Ensure that a supported version of a Java™ Runtime Environment (JRE) or Java Development Kit (JDK) is installed on the computer on which you are installing HCL UrbanCode Deploy. For more information, see <a href="http://www-01.ibm.com/support/docview.wss?uid=swg27038801">System Requirements for IBM® UrbanCode Deploy</a>.</p>
+<p><strong>Important:</strong> </p>
+<p>For best results, download and use the latest available version of the IBM Java Runtime Environment (JRE) for the HCL UrbanCode Deploy server and agent relays. An IBM JRE is available as a separate download. See the <a href="https://www.ibm.com/developerworks/java/jdk/">IBM developer kits</a> page to get the latest version. Install the IBM JRE according to the documentation on the page. Be sure to set the JAVA_HOME system variable to the location of the IBM JRE. If you are updating or changing the JRE to the latest version, see <a href="../../../com.ibm.udeploy.doc/topics/jre_change/">Changing or updating the JRE of servers</a> and <a href="../../../com.ibm.udeploy.doc/topics/update_JRE_agent_relays/">Updating the JRE location for agent relays</a> for instructions. For documentation on the IBM JRE, see <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2/welcome_javasdk_family.html">IBM SDK, Java Technology Edition</a>.</p>
+<p>Using JREs or Java development kits other than those provided by IBM might cause unexpected results.</p>
+</li>
+<li>
+<p>Set the JAVA_HOME system variable to the location of the JRE or JDK that you are using.</p>
+</li>
+<li>Ensure that the IBM JRE or JDK is a supported version and supported service refresh (SR) level. For more information, see <a href="http://www-01.ibm.com/support/docview.wss?uid=swg27038801">System Requirements for IBM UrbanCode Deploy</a>.</li>
+<li>If you are installing on AIX®, the unzip program is required.</li>
+</ul>
+<p><strong>Note:</strong> HCL UrbanCode Deploy is also available as a hosted service. In this case, IBM hosts the server for you. For more information, see the <a href="https://www.ibm.com/us-en/marketplace/application-release-automation">IBM Marketplace</a>.</p>
+<p>The properties that are set during installation are recorded in the file server_install/conf/server/installed.properties on the server.</p>
+<ol>
+<li>Download and extract the installation files for HCL UrbanCode Deploy. These files are available for download from the IBM Passport Advantage® website. See the <a href="https://www.ibm.com/software/passportadvantage/pao_customer.html">IBM UrbanCode Deploy download document</a>. </li>
+<li>
+<p>From the command line, run the server installer program. </p>
+<ul>
+<li>On Windows™, run the install-server.bat file.</li>
+<li>On Linux™, run ./install-server.sh.
+Depending on your system settings, you might need to run this file as an administrator.</li>
+</ul>
+</li>
+<li>
+<p>Read the license agreements for the software package. Press Enter to show one page at a time, or press F and then press Enter to show the entire license at once.</p>
+</li>
+<li>If you agree to the terms of all of the license agreements, press Y and then press Enter.</li>
+<li>
+<p>Specify the following information as the installation program prompts you. Accept the default values (displayed within brackets) by pressing Enter. If two options are given, such as <code>[Y/n]</code>, the capitalized option is the default value.</p>
+<ul>
+<li>
+<p><strong><em>*Enter the directory where the HCL® UrbanCode™ Deploy server should be installed.</em></strong>*</p>
+<p>Specify the installation directory for the server. The default server installation directory is /opt/ucd/server on Linux™ and C:\Program Files\ucd\server on Windows™.</p>
+<p><strong>Note:</strong> Do not use any shell expansions or abbreviations, such as the tilde character (<code>~</code>).</p>
+</li>
+<li>
+<p><strong><em>*The specified directory does not exist. Do you want to create it?</em></strong>*</p>
+<p>Press Y to create the installation directory.</p>
+</li>
+<li>
+<p><strong><em>*Please enter the home directory of the JRE/JDK used to run the server.</em></strong>*</p>
+<p>Specify the location of the JRE or JDK for the server.</p>
+</li>
+<li>
+<p><strong><em>*Will this server be used as a node in a high availability cluster?</em></strong>*</p>
+<p>Press N. Do not add servers to high-availability clusters in evaluation mode.</p>
+</li>
+<li>
+<p><strong><em>*Where should the server store application data such as logs, plugins, and keystores?</em></strong>*</p>
+<p>Type the name of the application data directory. The directory must be accessible to the server, and you must have the appropriate permissions. The default directory is /server_installation_directory/appdata.</p>
+<p>Depending on whether the shared folder exists or is empty, you are prompted with one of the following options:</p>
+<ul>
+<li>If the folder does not exist, you are prompted with the following option: <strong>The specified directory for application data doesn't exist. Do you want to create it?</strong>. Press Y to create the application data directory. If you select <code>N</code>, the installation process ends.</li>
+<li>If the shared folder exists and is not empty, you are prompted with the following option: <strong>The specified directory for shared resources already exists and is non-empty. Do you want to use the existing data?</strong>. Press Y to use the data. If you select <code>N</code>, the installation process ends; in this case, you must manually clear the application data folder to use it.</li>
+<li>If the shared folder exists but is empty, the folder is used and you are not prompted to use the existing data.
+<strong>Note:</strong> Do not use any shell expansions or abbreviations, such as the tilde character (<code>~</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong><em>*What host name will users access the web UI at?</em></strong>*</p>
+<p>Specify the host name of the computer that hosts the server.</p>
+<p>The server listens on all IP addresses that are available to it, not just this host name or IP address.</p>
+</li>
+<li>
+<p><strong><em>*Do you want the Web UI to always use secure connections using SSL?</em></strong>*</p>
+<p>Press N. Do not use secure connections in evaluation mode.</p>
+</li>
+<li>
+<p><strong><em>*Enter the port on which the Web UI should redirect unsecured HTTP requests.</em></strong>*</p>
+<p>Specify the HTTP port for the server. The default value is <code>8080</code>.If you are installing HCL® UrbanCode™ Deploy, UrbanCode Velocity, and IBM® UrbanCode™ Release, be sure to use a different port for each product. If you are installing multiple instances of HCL® UrbanCode™ Deploy on the same computer, be sure to use a different port for each instance.</p>
+</li>
+<li>
+<p><strong><em>*Enter the initial password for the admin user.</em></strong>*</p>
+<p>Specify the starting password for the administrator account on the server. The administrator user name is <code>admin</code>. Then, type the password again to verify it.</p>
+</li>
+<li>
+<p><strong><em>*Enter the port to use for agent communication.</em></strong>*</p>
+<p>Specify the port that agents use to contact the server. The default value is <code>7918</code>.</p>
+</li>
+<li>
+<p><strong><em>*Do you want the Server and Agent communication to require mutual authentication? This requires a manual key exchange between the server and each agent. See the documentation for more details.</em></strong>*</p>
+<p>Do not use mutual authentication in evaluation mode.</p>
+</li>
+<li>
+<p><strong><em>*Enter the RCL server path(s).</em></strong>*</p>
+<p>Do not specify connection information for a license server. You can evaluate the product for a trial period of up to 60 days without a license.</p>
+</li>
+<li>
+<p><strong><em>*Create database schema</em></strong>*</p>
+<p>Press Y to create new schema definitions in the database.</p>
+</li>
+<li>
+<p><strong><em>*Enter the database type to use.</em></strong>*</p>
+<p>Select <code>derby</code>.</p>
+<p><strong>Warning:</strong> Derby is for evaluation purposes only; do not use Derby for a production server.</p>
+</li>
+<li>
+<p><strong><em>*Enter the database username.</em></strong>*</p>
+<p>Specify the user name for the database.</p>
+</li>
+<li>
+<p><strong><em>*Enter the database password.</em></strong>*</p>
+<p>Specify the password for the database.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If you are installing on Windows, the installation program prompts you with the following questions after a pause: </p>
+<ul>
+<li>
+<p><strong><em>*Do you want to install the Server as Windows service?</em></strong>*</p>
+<p>Press Y to install the server as a Windows™ service.</p>
+</li>
+<li>
+<p><strong><em>*Enter a unique service name. No spaces allowed.</em></strong>*</p>
+<p>Specify a name for the Windows™ service. The name must be unique on the system and must not contain spaces.</p>
+</li>
+<li>
+<p><strong><em>*Enter the user account name including domain path to run the service</em></strong>*</p>
+<p>Specify the user account with which to run the service, including the domain path. Prefix local accounts with a period, such as .\localsystem.</p>
+</li>
+<li>
+<p><strong><em>*Do you want to start the service automatically?</em></strong>*</p>
+<p>Press Y to start the server automatically. Otherwise, you can start and stop the server manually. See <a href="../run_server/">Starting and stopping the server</a>.</p>
+</li>
+<li>
+<p><strong><em>*User account password</em></strong>*</p>
+<p>Specify the password for the user account.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>The installation program installs the server.</p>
+<p>To start the server, see <a href="../run_server/">Starting and stopping the server</a>.</p>
+<p>When you run the server for the first time, you might see an error message that says that no agent or tag is configured to import new component versions. To import component versions, including built artifacts, you must use an agent, and the server requires that you specify a default agent for this purpose. You can override this default setting when you create a component. Follow these steps to specify a default agent or agent tag:</p>
+<ul>
+<li>To specify a default agent, click <strong>System</strong> > <strong>System Settings</strong> and under <strong>General Settings</strong>, clear the <strong>Use Agent Tag For Integration</strong> check box. Then, select an agent in the <strong>Agent for Version Imports</strong> list. Then, at the bottom of the page, click <strong>Save</strong>.</li>
+<li>To specify a default agent tag, click <strong>Settings</strong> > <strong>System Settings</strong> and under <strong>General Settings</strong>, clear the <strong>Use Agent Tag For Integration</strong> check box. Then, select an agent tag in the <strong>Agent Tag for version imports</strong> list. Then, at the bottom of the page, click <strong>Save</strong>. If no tags are listed, add a tag to one or more agents on the server.</li>
+</ul>
+<p>On Windows, if you see "Out of memory" errors, increase the amount of memory that is available to the HCL UrbanCode Deploy service. To increase the memory for the server on Windows for a non-service installation, follow these steps:</p>
+<ol>
+<li>Stop the server.</li>
+<li>In the bin/set_env.cmd file, increase the memory in the <code>JAVA_OPTS</code> parameter.</li>
+<li>Restart the server.</li>
+</ol>
+<p>For servers that are running as a service on Windows, see the following technote: <a href="http://www-01.ibm.com/support/docview.wss?uid=swg21698228">http://www-01.ibm.com/support/docview.wss?uid=swg21698228</a>.</p>
+<p>You might see the following error in the results of the installation program:</p>
+<pre><code>[echo]     waiting for db to start - 6 seconds remaining
+[echo]     waiting for db to start - 3 seconds remaining
+[echo] Could not start database
+[echo] Stopping embedded database ...
+[java] Tue Feb 04 09:11:25 EST 2014 : Could not connect 
+  to Derby Network Server on host localhost, port 11377: 
+  Connection refused
+</code></pre>
+
+<p>If you see this error, you must change the default security settings for the Java installation on the server:</p>
+<ol>
+<li>Open the Java security policy file in a text editor. If you are using a Java Runtime Environment (JRE), this file is at the location JAVA_HOME/lib/security/java.policy, where JAVA_HOME is the base folder of the Java installation. If you are using a Java Development Kit (JDK), the file is at the location JAVA_HOME/jre/lib/security/java.policy.</li>
+<li>
+<p>In the java.policy file, in the section that is labeled <code>// default permissions granted to all domains</code>, within the <code>grant{}</code> block, add the following code:</p>
+<p><code>permission java.net.SocketPermission "localhost:11377", "listen";</code></p>
+</li>
+<li>
+<p>Run the installation program again.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../serverInstall/">Installing the server</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/server_install_eval.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

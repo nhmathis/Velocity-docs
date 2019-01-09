@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/custom_start/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Customizing the Getting Started window - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Customizing the Getting Started window", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="customizing-the-getting-started-window">Customizing the Getting Started window</h1>
+<p>You can customize the URLs that are contained in the Getting Started with IBM UrbanCode Deploy window that is displayed the first time that a user logs in to the HCL® UrbanCode™ Deploy server.</p>
+<p>The first time a user logs in to an HCL UrbanCode Deploy server, the following Getting Started with IBM UrbanCode Deploy window is displayed:</p>
+<p><img alt="The Getting Started with IBM UrbanCode Deploy window contains the following links: TUTORIAL, INSTRUCTIONAL VIDEOS, QUESTIONS, and DOCUMENTATION." src="../../images/getting_started_splash.gif" /></p>
+<p>By clicking the <strong>TUTORIAL</strong>, <strong>INSTRUCTIONAL VIDEOS</strong>, <strong>QUESTIONS</strong>, and <strong>DOCUMENTATION</strong> links, you can access content that is designed to assist new users as they begin working with the server. To update the URLs that are contained in the links on this window, you add the URLs to a settings file.</p>
+<ol>
+<li>On the HCL UrbanCode Deploy server host, open the /server_installation/server/appdata/conf/server/getting-started-custom-urls.properties file. For the server_installation value, specify the folder in which the HCL UrbanCode Deploy server is installed.</li>
+<li>
+<p>Add URLs to the properties in the file. You can provide override values for any number of the available URLs.</p>
+<ul>
+<li>To change the <strong>TUTORIAL</strong> link, provide a value for the server.getting_started_tutorial.url parameter.</li>
+<li>To change the <strong>INSTRUCTIONAL VIDEOS</strong> link, provide a value for the server.getting_started_video.url parameter.</li>
+<li>To change the <strong>QUESTIONS</strong> link, provide a value for the server.getting_started_question.url parameter.</li>
+<li>To change the <strong>DOCUMENTATION</strong> link, provide a value for the server.getting_started_documentation.url parameter.
+For example, to direct the links to custom content on your intranet, the properties in the getting-started-custom-urls.properties file might resemble the following code:</li>
+</ul>
+<p>```
+server.getting_started_tutorial.url=http://your_intranet.com/tutorials
+server.getting_started_question.url=http://your_intranet.com/forum
+server.getting_started_video.url=http://your_intranet.com/videos
+server.getting_started_documentation.url=http://your_intranet.com/docs</p>
+<p>```</p>
+</li>
+<li>
+<p>Save the getting-started-custom-urls.properties file. </p>
+</li>
+<li>Restart the server. See <a href="../../../com.ibm.udeploy.install.doc/topics/run_server/">Starting and stopping the server</a>.</li>
+</ol>
+<p>When users access the Getting Started with IBM UrbanCode Deploy window, the links lead to the URLs that you specified.</p>
+<p>To return the links to their default values, remove the URLs from the getting-started-custom-urls.properties file and restart the server.</p>
+<p><strong>Parent topic:</strong> <a href="../settings_ch/">Server settings and configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/custom_start.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_projects/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating cloud projects for the blueprint designer - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating cloud projects for the blueprint designer", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-cloud-projects-for-the-blueprint-designer">Creating cloud projects for the blueprint designer</h1>
+<p>A cloud project for the blueprint designer represents a tenant or project on a cloud system. You can give users access to cloud systems through cloud projects.</p>
+<ul>
+<li>Connect the blueprint design server to a cloud. See <a href="../../../com.ibm.edt.doc/topics/security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</li>
+<li>On that cloud system, create one or more accounts and configure their access. The blueprint designer users use these functional IDs to access the cloud. You can create multiple functional IDs for each cloud and grant the functional IDs appropriate access for each team that you configure on the blueprint designer.</li>
+<li>
+<p>If you do not use the Keystone server that was supplied with the engine, create one or more Keystone accounts. You can create one account with all permissions, including creating instances, or you can create separate accounts with different permissions. The accounts must be members of the administrative tenant. If you create one account, you can define access to resources for each team.</p>
+<p><strong>Note:</strong> If you use the Keystone server that is supplied with engine, you can use the default account on the administrative tenant. The The Keystone server's default administrative tenant user name is <code>admin</code> and the default password is <code>openstack1</code>.</p>
+</li>
+<li>
+<p>Log in to the blueprint designer as a user with the following <strong>System</strong> permissions: </p>
+<ul>
+<li>Configure Security</li>
+<li>Manage Users &amp; Groups</li>
+</ul>
+</li>
+<li>Click <strong>Settings</strong> > <strong>Clouds</strong>.</li>
+<li>Select the cloud connection to use.</li>
+<li>On the <strong>Authorization</strong> tab, click <strong>Add Project</strong>.</li>
+<li>
+<p>Specify the following information, depending on the type of cloud: </p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name (Project name from OpenStack)</strong></td>
+<td>For OpenStack Keystone version 3, specify the OpenStack project name. For Keystone version 2, specify the tenant name. If you use the Keystone server that is provided with the engine, the default value is admin.</td>
+</tr>
+<tr>
+<td><strong>Functional ID</strong></td>
+<td>Enter the ID of the functional account on the OpenStack system. If you use the Keystone server that is provided with the engine, the default value is <code>admin</code>.</td>
+</tr>
+<tr>
+<td><strong>Password</strong></td>
+<td>Enter the password for the functional account. If you use the Keystone server that is provided with the engine, the default value is <code>openstack1</code>.</td>
+</tr>
+<tr>
+<td><strong>Domain</strong></td>
+<td>If your OpenStack identity service uses the Identity API v3, enter the domain that the project is on. If you use the Keystone server that is provided with the engine, the default value is <code>default</code>.</td>
+</tr>
+<tr>
+<td><strong>Identity URL</strong></td>
+<td>Specify the location of the identity service, such as <code>http://example.com:5000/v2.0</code> or <code>http://example.com:5000/v3</code>. Do not include a trailing slash.</td>
+</tr>
+<tr>
+<td><strong>Timeout in Mins</strong></td>
+<td>Specify the amount of time in minutes to wait for a provision request to be completed. If you deploy HCL® UrbanCode™ Deploy components, allow sufficient time for the cloud to provision your instance, the agent to come online, and all processes to run. See <a href="../../../com.ibm.edt.doc/topics/timeout_config/">Creating a HCL UrbanCode Deploy timeout configuration file</a>.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>Specify the name of the SoftLayer cloud project.</td>
+</tr>
+<tr>
+<td><strong>Default Orchestration Service</strong></td>
+<td>Select the orchestration service.</td>
+</tr>
+<tr>
+<td><strong>SoftLayer User ID</strong></td>
+<td>Enter the account ID for SoftLayer.</td>
+</tr>
+<tr>
+<td><strong>SoftLayer API Key</strong></td>
+<td>Enter The API key for SoftLayer.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>Specify the name of the Amazon cloud project.</td>
+</tr>
+<tr>
+<td><strong>Default Orchestration Service</strong></td>
+<td>Select the orchestration service.</td>
+</tr>
+<tr>
+<td><strong>Amazon Access ID</strong></td>
+<td>Enter the ID for AWS.</td>
+</tr>
+<tr>
+<td><strong>Amazon Secret Key</strong></td>
+<td>Enter the password for AWS.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>Specify the name of the VMware vCenter cloud project.</td>
+</tr>
+<tr>
+<td><strong>Default Orchestration Service</strong></td>
+<td>Select the orchestration service.</td>
+</tr>
+<tr>
+<td><strong>VMware vCenter User ID</strong></td>
+<td>Enter the user ID for VMware vCenter.</td>
+</tr>
+<tr>
+<td><strong>VMware vCenter Password</strong></td>
+<td>Enter the password for VMware vCenter.</td>
+</tr>
+<tr>
+<td><strong>VMware vCenter Host</strong></td>
+<td>Enter the host name of the VMware vSphere API for vCenter server. This is the host name portion of the property <code>VirtualCenter.VimApiUrl</code>.</td>
+</tr>
+<tr>
+<td><strong>VMware vCenter Port</strong></td>
+<td>Enter the port of the VMware vSphere API for vCenter server. This is the port portion of the property <code>VirtualCenter.VimApiUrl</code>.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>Specify the name of the VMware vRealize cloud project.</td>
+</tr>
+<tr>
+<td><strong>Default Orchestration Service</strong></td>
+<td>Select the orchestration service.</td>
+</tr>
+<tr>
+<td><strong>VRA User ID</strong></td>
+<td>Enter the user ID for VMware vRealize Automation.</td>
+</tr>
+<tr>
+<td><strong>VRA Password</strong></td>
+<td>Enter the password for VMware vRealize Automation.</td>
+</tr>
+<tr>
+<td><strong>VRA Host</strong></td>
+<td>Enter the URL that hosts the VMware vRealize Automation server.</td>
+</tr>
+<tr>
+<td><strong>VRA Tenant Name</strong></td>
+<td>Enter the tenant name from the VMware vRealize Automation server.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>Specify the name of the Azure cloud project.</td>
+</tr>
+<tr>
+<td><strong>Default Orchestration Service</strong></td>
+<td>Select the orchestration service.</td>
+</tr>
+<tr>
+<td><strong>Azure Subscription ID</strong></td>
+<td>Enter the subscription ID to use. You can find this information in the Azure web portal or by running the CLI command azure account list.</td>
+</tr>
+<tr>
+<td><strong>Azure Client ID</strong></td>
+<td>Enter the ID of the application to associate the connection with. You can create a temporary application with the azure ad app create command.</td>
+</tr>
+<tr>
+<td><strong>Azure Client Secret</strong></td>
+<td>Enter the password of the application. You specified this password when you created the application with the azure ad app create command.</td>
+</tr>
+<tr>
+<td><strong>Azure Tenant ID</strong></td>
+<td>Enter the tenant ID to use. You can find this information by running the CLI command azure account list.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>Specify the name of the Google Cloud Platform cloud project.</td>
+</tr>
+<tr>
+<td><strong>Default Orchestration Service</strong></td>
+<td>Select the orchestration service.</td>
+</tr>
+<tr>
+<td><strong>Upload your Google Cloud credentials</strong></td>
+<td>Upload the file for your Google Cloud service account key that contains your API key credentials. Only JSON key files are supported. See <a href="../../../com.ibm.edt.doc/topics/cloud_connect_google_cloud_keyfile/">Creating a key file for Google Cloud Platform</a>.    1.  Click <strong>Choose File</strong>.</td>
+</tr>
+<tr>
+<td>2.  Select the JSON key file on your computer, and click <strong>Open</strong>. The JSON file name is in this format: <code>service\_account\_name-12\_digits\_of\_its\_private\_key\_id</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>If your VMware cloud requires NSX networking types, select the <strong>Configure NSX access</strong> check box and specify the following information: </p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NSX User ID</strong></td>
+<td>Enter the NSX user ID.</td>
+</tr>
+<tr>
+<td><strong>NSX Password</strong></td>
+<td>Enter the password for the NSX user ID.</td>
+</tr>
+<tr>
+<td><strong>NSX Host</strong></td>
+<td>Enter the VMWare NSX API host IP address and port number.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Click <strong>Test Connection</strong> to verify that the connection information is correct.</p>
+</li>
+<li>Click <strong>Save</strong>.</li>
+</ul>
+<p>Assign the cloud project to a team:</p>
+<ol>
+<li>Click <strong>Teams</strong>, and then select a team.</li>
+<li>Go to the <strong>Cloud Authorization</strong> tab, and click <strong>Add</strong>.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_projects.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/arch_agent_relays/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Agent relays - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Agent relays", url: "#_top", children: [
+              {title: "Example", url: "#example" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="agent-relays">Agent relays</h1>
+<p>Agent relays coordinate communication between agents and the HCL® UrbanCode™ Deploy server. Agent relays improve the performance of communication between the server and agents. Relays also allow agents to communicate through firewalls.</p>
+<p>To enhance performance and reduce maintenance, HCL UrbanCode Deploy can use agent relays to communicate with remote agents. Instead of each agent connecting directly to the server, agents connect to agent relays, which then connect directly to the server. Using agent relays in this way reduces load on the server because the server has fewer direct connections.</p>
+<p>Agent relays also simplify communication across networks and firewalls. If multiple agents are in a remote network without an agent relay, each agent must connect to the server individually. In this case, each agent must have network permission to connect to the server, including firewall permissions. With an agent relay, the agents connect only to the relay, and the relay is the only system that contacts the server directly, such as with a VPN or tunnel.</p>
+<p>Agent relays are often convenient when the agents are on cloud systems, because cloud systems are often separated from the HCL UrbanCode Deploy server by a firewall or require a VPN or tunnel to reach the server.</p>
+<p>The following figure is a simple diagram of communication between agents, an agent relay, and the server across a firewall. The agents connect directly to the agent relay, and the agent relay is the only system that connects to the server through the firewall.</p>
+<p><img alt="A diagram of how an agent relay enables agents to communicate with a server through a firewall" src="../../images/intro_arch_f5.gif" /></p>
+<p>The agent relay communicates with the server and the agents by using the same combination of JMS, HTTP, and HTTPS communication protocols that the agents use. As long as there is at least a low-bandwidth WAN connection between the server and agent relay, the HCL UrbanCode Deploy server can send work to agents in other locations.</p>
+<p>Agent relays open the connections to the HCL UrbanCode Deploy server; the server never opens connections to the agent relays. Agents open the connections to the agent relay; the agent relay never opens connections to the agent. By default, agent relays open connections on the following ports for communication:</p>
+<ul>
+<li>7918 for direct JMS connections to the server</li>
+<li>8080 and 8443 for HTTP and HTTPS connections to the server</li>
+</ul>
+<p>Agent relays accept connections on the following default ports:</p>
+<ul>
+<li>7916 for JMS connections from agents</li>
+<li>20080 For HTTP proxy connections from agents</li>
+<li>20081 for artifact cache requests from agents</li>
+</ul>
+<p>The server does not open connections to agents or agent relays.</p>
+<p>The following diagram shows the main default ports that are involved in communication between agents, agent relays, and the server.</p>
+<p><img alt="A diagram of the ports that agents, agent relays, and servers use to communicate; these are the same posts in the lists above" src="../../images/arch_agents_a.png" /></p>
+<p>You can also cache artifacts on agent relays to improve system performance. See <a href="../../../com.ibm.udeploy.install.doc/topics/t_agent_relay_cache_setup/">Caching artifacts on agent relays</a>.</p>
+<h2 id="example">Example</h2>
+<p>The following simple artifact move illustrates the mechanics of remote communications:</p>
+<ol>
+<li>A remote agent starts and establishes a connection to the agent relay through JMS</li>
+<li>The agent relay alerts the HCL UrbanCode Deploy server through JMS that the remote agent is online.</li>
+<li>The server sends an artifact download command to the relay through JMS, and the relay delivers the message to the remote agent, also through JMS.</li>
+<li>The server locates the artifacts. If the artifacts are not in the relay's CodeStation cache, the server sends the artifacts to the relay over HTTP or HTTPS.</li>
+<li>The agent relay streams the artifacts directly to the agent over the server-relay HTTP or HTTPS connection.</li>
+<li>After the remote agent completes the work, it informs the server through the agent relay JMS connection.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../resources_ch/">Resources</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/arch_agent_relays.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

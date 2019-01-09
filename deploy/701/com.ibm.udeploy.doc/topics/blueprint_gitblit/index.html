@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/blueprint_gitblit/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Changing the local Git server password - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Changing the local Git server password", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="changing-the-local-git-server-password">Changing the local Git server password</h1>
+<p>To improve the security of your local Git repository, change the default password.</p>
+<ol>
+<li>
+<p>Access the local Git server management page from your web browser. The URL for the Git server management page is derived from the URL for your blueprint designer and is listed on the <strong>System Settings</strong> tab. If you access your blueprint designer from <code>https://blueprint_designer.my_company:8443/landscaper</code>, then you access your local Git server management page from <code>https://blueprint_designer.my_company:8443/gitblit</code>.</p>
+<p><strong>Note:</strong> If you cannot access the local Git server, then restart the blueprint design server. If you installed the blueprint design server on AIX® or z/OS®, you must restart the blueprint design server to access the local Git server.</p>
+</li>
+<li>
+<p>Enter the local Git server user name and password, and click <strong>login</strong>. By default, both the user name and password are gitadmin.</p>
+</li>
+<li>Click the user icon, and select <strong>change password</strong> from the list. </li>
+<li>Enter the new password in both the <strong>password</strong> and <strong>confirm password</strong> fields, and click <strong>save</strong>. </li>
+<li>Return to the blueprint design server, and log in as a user who has the Admin role. </li>
+<li>Click <strong>Settings</strong> > <strong>System Settings</strong>. </li>
+<li>In the <strong>Password</strong> field of the Local Git Server section, enter the new password. </li>
+<li>Click <strong>Save</strong>. </li>
+</ol>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/blueprint_gitblit.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

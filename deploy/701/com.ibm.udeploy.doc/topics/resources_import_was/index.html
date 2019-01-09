@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/resources_import_was/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Importing resources from WebSphere Application Server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Importing resources from WebSphere Application Server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="importing-resources-from-websphere-application-server">Importing resources from WebSphere Application Server</h1>
+<p>Use the WebSphere® Application Server - Deploy plug-in to import information about an IBM® WebSphere Application Server system into a collection of resources. Typically, importing information by using the plug-in takes less time than manually creating resources to match the IBM WebSphere Application Server.</p>
+<ul>
+<li>Install the WebSphere Application Server - Deploy plug-in. To download plug-ins, see the <a href="https://developer.ibm.com/urbancode/plugins/ibm-urbancode-deploy/">IBM UrbanCode™ Developer Center</a>. Use the most recent version of the plug-in.</li>
+<li>Create a top-level resource group to contain agents. See <a href="../resources_createGroup/">Creating groups</a>.</li>
+<li>Install an agent on the WebSphere Application Server system and add the agent as an agent resource under the top-level resource group.</li>
+</ul>
+<p>Plug-ins can be developed and updated more frequently than HCL® UrbanCode™ Deploy provides release cycles. For the latest version of the WebSphere Application Server - Deploy plug-in and the latest documentation, see the <a href="https://developer.ibm.com/urbancode/plugins/ibm-urbancode-deploy">IBM UrbanCode Deploy Plug-ins</a> site.</p>
+<ol>
+<li>On the HCL UrbanCode Deploy server, click <strong>Resources</strong> to view the Resource Tree page. </li>
+<li>
+<p>If the wsadmin file is in a different location than one of the default locations, specify the file location as the value of the wsadmin.path property on the agent resource. </p>
+<p>The default location of the wsadmin file on Linux™ is /opt/IBM/WebSphere/AppServer/bin/wsadmin.sh. The default locations on Microsoft™ Windows™ are C:\IBM\WebSphere\AppServer\bin\wsadmin.bat and C:\Program Files\IBM\WebSphere\AppServer\bin\wsadmin.bat.</p>
+</li>
+<li>
+<p>Click the <strong>Actions</strong> push button that is associated with the top-level group, and then click <strong>Add Agent</strong>. </p>
+</li>
+<li>In the Create Resource window, select the agent and then click <strong>Save</strong>. The new agent resource is displayed in the resource tree. Eventually, another resource is displayed under the agent resource. This resource is named <code>WebSphereCell</code> and represents the WebSphere Application Server cell. You might need to click <strong>Refresh</strong> to see the cell resource, and it can take several minutes for the cell resource to be displayed.</li>
+<li>Click the WebSphere Application Server cell resource and then click <strong>Configuration</strong> > <strong>Basic Settings</strong>. The cell resource has the <code>WebSphereCell</code> role, which includes several properties that are related to the cell.</li>
+<li>
+<p>In the section that is labeled <strong>Role Properties</strong> for the <code>WebSphereCell</code> role, specify the connection information for the cell, including the locations of the profile and wsadmin file and the user name and password for the WebSphere Application Server system, as in the following figure: </p>
+<p><img alt="Specifying the information for the cell resource" src="../../images/resources_import_was_a.gif" /></p>
+</li>
+<li>
+<p>Click <strong>Save</strong>. </p>
+</li>
+<li>On the Resources page, click the <strong>Actions</strong> push button that is associated with the cell resource, and then click <strong>Configure using WebSphere Topology Discovery</strong>. The discovery step runs. This step might take several minutes. A log is displayed to show progress.</li>
+<li>When the discovery process completes, close the log window, and then refresh the resource tree. </li>
+</ol>
+<p>Resources that represent the WebSphere Application Server components are displayed in the resource tree. These new resources are displayed under the agent resource that you used to import the WebSphere Application Server components. Each node, cluster, and server has a matching resource. The following figure shows resources that represent a WebSphere Application Server system with three nodes:</p>
+<p><img alt="Resources that represent the components of a WebSphere Application Server system, under the agent in the resource tree" src="../../images/resources_import_was_c.gif" /></p>
+<p>Add these resources to an environment by opening the Resources page for the environment and then clicking <strong>Add Base Resources</strong>.</p>
+<p><strong>Parent topic:</strong> <a href="../resources_ch/">Resources</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/resources_import_was.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

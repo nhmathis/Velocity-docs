@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/cloud_configure/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring virtual system pattern-based clouds - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring virtual system pattern-based clouds", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-virtual-system-pattern-based-clouds">Configuring virtual system pattern-based clouds</h1>
+<p>To create dynamic environments on a cloud system that uses virtual system patterns, you must install a script package on your cloud system.</p>
+<p>You must have a user account on a cloud system. This account must have permission to create script packages, to read information about virtual system patterns, IP groups, cloud groups, and environment profiles, and to create and delete virtual environments. See the documentation for your cloud system for more information about setting up permissions. For example, for IBM® PureApplication® System, see <a href="https://www.ibm.com/support/knowledgecenter/SSCRSX_2.1.0/doc/iwd/aac_user_permissions.dita">https://www.ibm.com/support/knowledgecenter/SSCRSX_2.1.0/doc/iwd/aac_user_permissions.dita</a>.</p>
+<p>For this type of cloud integration, the following cloud systems are supported:</p>
+<ul>
+<li>IBM Cloud Orchestrator version 2.4 or later</li>
+<li>IBM SmartCloud® Orchestrator versions 2.2 and 2.3</li>
+<li>IBM PureApplication System version 1.0 or later</li>
+<li>IBM Workload Deployer version 3.1.0.6 or later</li>
+</ul>
+<p>Within these cloud systems, you can provision the virtual resources in environment profiles or in cloud groups. You can also assign the virtual resources to IP groups, but only when you assign the resources to an environment profile first. For more information, see <a href="../../../com.ibm.udeploy.doc/topics/app_environment_create/">Creating environments</a>. You can also use virtual images with no more than one virtual network card. HCL® UrbanCode™ Deploy does not support selecting different flavors of virtual resources or virtual nodes that have a multiplicity greater than 1.</p>
+<p>To connect to OpenStack and OpenStack-based clouds, SoftLayer®, Amazon Elastic Compute Cloud, VMware vCenter, or Microsoft™ Azure, see <a href="../../../com.ibm.edt.doc/topics/security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</p>
+<p>The Install HCL UrbanCode Deploy Agent package automatically installs agents on cloud resources. When you provision an environment from the cloud system, this script package installs an agent on each node in the cloud resource request. Then, these agents contact the HCL UrbanCode Deploy server, and the server adds them to the environment.</p>
+<ol>
+<li>Download and extract the file for agents on dynamic cloud environments.This file, which is named ibm-ucd-agent-script-package.zip, is available at the following location: <a href="https://developer.ibm.com/urbancode/plugin/urbancode-deploy-agent-package-dynamic-cloud-environments/">https://developer.ibm.com/urbancode/plugin/urbancode-deploy-agent-package-dynamic-cloud-environments/</a></li>
+<li>
+<p>In your cloud system, create a script package and upload the file ibm-ucd-agent-script-package.zip to the script package.The process differs slightly for different cloud systems. For example, for most cloud systems, follow these steps:</p>
+<ol>
+<li>Click <strong>Catalog</strong> > <strong>Script Packages</strong>.</li>
+<li>Click <strong>New</strong> <img alt="" src="../../../com.ibm.udeploy.doc/images/new_script_package.gif" />.</li>
+<li>
+<p>In the <strong>Script name</strong> field, specify the following name:</p>
+<p><code>Install IBM UrbanCode Deploy Agent</code></p>
+<p>The new script package opens.</p>
+</li>
+<li>
+<p>In the <strong>Script package file</strong> field, upload the file ibm-ucd-agent-script-package.zip. 
+You do not need to specify default values for the parameters in this script package. The server specifies these parameters when you create an environment.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>Next, model cloud environments for this cloud. See <a href="../../../com.ibm.edt.doc/topics/blueprint_edit_clouds_vsp/">Modeling environments for clouds that use virtual system patterns</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/integrat_ov/">Overview of integrations</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/cloud_configure.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

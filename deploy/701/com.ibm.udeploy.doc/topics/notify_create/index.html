@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/notify_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating Notifications in a Notification Scheme - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating Notifications in a Notification Scheme", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-notifications-in-a-notification-scheme">Creating Notifications in a Notification Scheme</h1>
+<p>Notifications are defined in a notification scheme. This topic describes how to configure notifications as part of a notification scheme. The notification scheme is assigned to an application and the notifications are sent during the deployment of that application.</p>
+<p>Each notification in a notification schemes must specify the group of users that will receive the notifications. Each user in the group must have a valid email address defined on the HCL® UrbanCode™ Deploy server. An external SMTP mail server is also required.</p>
+<p>Prior to configuring notifications, the following prerequisites must be met.</p>
+<table>
+<thead>
+<tr>
+<th>Prerequisite</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>An external SMTP mail server is required to send notifications.</td>
+<td>For information about configuring a mail server, see <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_system/">Server settings</a></td>
+</tr>
+<tr>
+<td>Notification recipients must have defined security system roles.</td>
+<td>See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_ch/">Managing security</a></td>
+</tr>
+<tr>
+<td>Notification recipients must have email addresses defined on the UrbanCode Deploy server.</td>
+<td>See <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_system/">Server settings</a><strong>Note:</strong> Email addresses are not automatically imported from authentication servers such as LDAP servers. Click <strong>Settings</strong> > <strong>Authentication</strong>, edit a user, and ensure that the user has an e-mail address attached.</td>
+</tr>
+</tbody>
+</table>
+<p>|</p>
+<p>Notification schemes can be configured to hold multiple notifications related to an application. Since notification schemes are a system-resource, they and can be shared across applications for ease of use.</p>
+<p>Each notification you configure in a notification scheme must specify: a notification template, a triggering event, and a user group role to receive the notification. The user group role is inherited from the security system. For example, it is common for an administrator or environment owner to be notified when a work item is generated.</p>
+<p><strong>Note:</strong> Notifications are <strong>not</strong> sent to users assigned to any role on the System Team, regardless of whether or not that role is configured to receive notifications for the application.</p>
+<ol>
+<li>
+<p>Create the new notification scheme. Later, you can come back to add more notifications to the scheme or edit existing notifications. Display the Notifications pane. Click <strong>Settings</strong> > <strong>Notification Schemes</strong> <img alt="The list of available notification schemes" src="../../images/createnotificationscheme.gif" /></p>
+</li>
+<li>
+<p>Click <strong>Create Notification Scheme</strong> and provide a <strong>Name</strong> and <strong>Description</strong> for the new notification scheme. (To edit an existing notification scheme, select that scheme in the list.) </p>
+</li>
+<li>
+<p>Configure a notification for the notification scheme. Click <strong>Add Notification Entry</strong>, and supply parameters for the notification at the Add Notification Entry window. Notification parameters are listed in the following table. <img alt="The Add Notification Entry window and parameters" src="../../images/notify_intro.gif" /></p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Values</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Role</strong></td>
+<td><strong>Role</strong> corresponds to the roles in the security system. The notification message goes to any user who has the specified role on a team that is associated with the <strong>Target</strong> element. For example, a deployment engineer would be interested in being notified about a failed deployment.</td>
+<td>&lt;user group role></td>
+</tr>
+<tr>
+<td><strong>Event Type</strong></td>
+<td>This field lists the type of event that will trigger the notification. For example, you can trigger a notification when a processes completes successfully. You can also trigger a notification when an approval is declined.<strong>Note:</strong> The <strong>Event Type</strong> selected should correspond to the type of process (generic, application, environment, resource, or approval) that triggers the event.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<p>Refer to <a href="../comp_workflow/">Processes</a> and <a href="../app_approvalCreate/">Creating an approval process</a>.</p>
+<p>|Select these event types for generic and application processes:     -   <strong>Process Success</strong>
+    -   <strong>Process Failure</strong>
+    -   <strong>Process Started</strong>
+Select these event types for approval processes:</p>
+<pre><code>-   **Approval Completed**
+-   **Approval Failed**
+</code></pre>
+<p>|
+    |<strong>Target</strong>|The <strong>Target</strong> specifies the area of the deployment where the <strong>Event Type</strong> occurs. The target refers to the general concept of an application, environment, or resource in the deployment.|     -   <strong>Application</strong>
+    -   <strong>Environment</strong>
+    -   <strong>Resource</strong>
+ |
+    |<strong>Type</strong>| The target can be further refined using the <strong>Type</strong> field. The <strong>Type</strong> pull-down lists the security types defined in a role's application, environment or resource permissions. Notifications will only be sent to users with roles that are configured with the selected security type indicated in the <strong>Type</strong> pull-down. Refer to <a href="../../../com.ibm.udeploy.admin.doc/topics/security_roles_create/">Creating roles and assigning permissions</a> </p>
+<p>For example, if the <strong>Target</strong> field is set to <strong>Application</strong>, notifications are only sent to users that are configure in that specific application permission security type when the application is deployed.</p>
+<p>|&lt;security type>|
+    |<strong>Template Name</strong>|Default notification templates are provided for use. The templates contain fields that are automatically populated and formatted in the email when the notification is sent to the selected role. The template you select should be based on the <strong>Event Type</strong>, or reason for the notification. You can select a default notification template or a notification template you have created. See <a href="../../../com.ibm.udeploy.reference.doc/topics/notification_ov/">Creating notification templates</a>.</p>
+<p><strong>Note:</strong> The <strong>ApprovalCreated</strong> notification template is NOT intended for use in a notification scheme. It appears in the <strong>Template Name</strong>drop-down, but should only be assigned as a single template when <a href="../app_approvalCreate/">Creating an approval process</a> to notify an approver that an approval is required.</p>
+<p>| Use these default notification templates for <strong>Process Success</strong>, <strong>Process Failure</strong>, or <strong>Process Started</strong> event types.</p>
+<pre><code> -   **ProcessRequestStarted** - indicates that a specific application, user group environment, or application resource was initiated.
+-   **ApplicationDeploymentSuccess** or **ApplicationDeploymentFailure**- indicates that a specific application deployment succeeded or failed.
+-   **TaskCreated** - reports on the state of manual tasks.
+-   **DeploymentReadied** - notifies the role that the deployment requires approval.
+-   **GenericProcessRequestStarted** - indicates that a [Generic processes](genProcess_ch.md#) was started.
+-   **GenericProcessSuccess** or **GenericProcessFailure** - indicates that a [Generic processes](genProcess_ch.md#) succeeded or failed.
+</code></pre>
+<p>Use these notification templates for <strong>Approval Completed</strong> or <strong>Approval Failed</strong> event types.</p>
+<pre><code> -   **Deployment Readied** - indicates that an approval was granted for an approval process.
+-   **ApprovalFailed** - indicates that approval was denied for an approval process.
+</code></pre>
+<p>|</p>
+<ol>
+<li>Assign a notification scheme to an application or approval process. For an application process, click the application, go to the <strong>Configuration</strong> tab, and in the <strong>Notification Scheme</strong> list, select the notification scheme. For an approval process, click the application, go to the <strong>Approval Process</strong> tab, edit the required process step and assign the approval notification template at the Edit Properties for Component Approval Task window. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../notify_work_with/">Working with Notifications</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/notify_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

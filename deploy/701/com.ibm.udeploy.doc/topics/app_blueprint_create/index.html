@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_blueprint_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating application blueprints - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating application blueprints", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-application-blueprints">Creating application blueprints</h1>
+<p>To create an application blueprint, map the components of the application to a resource template.</p>
+<p>Create a resource template as described in <a href="../resources_templates_create/">Creating resource templates</a>.</p>
+<p><strong>Note:</strong> To create blueprints for cloud systems, see <a href="../../../com.ibm.edt.doc/topics/blueprint_ov/">Modeling cloud environments with the blueprint designer</a>.</p>
+<ol>
+<li>Click <strong>Applications</strong>, click your application, and then click <strong>Blueprints</strong>.</li>
+<li>Click <strong>Create Blueprint</strong>. </li>
+<li>Specify a name for the blueprint and select the resource template.</li>
+<li>Click <strong>Save</strong>.The new blueprint opens, showing the contents of the template, including the agent prototypes.</li>
+<li>
+<p>Map the components of the application to the agent prototypes: </p>
+<ol>
+<li>Hover the mouse over an agent prototype and then click <strong>Actions</strong> > <strong>Add Component</strong>. </li>
+<li>In the window that opens, select a component, specify its information, and click <strong>Save</strong>. </li>
+<li>Repeat this process to add the application components to the agent prototypes. Depending on how your application is organized, you can add the same component to multiple agent prototypes or multiple components to the same agent prototype.
+<strong>Note:</strong> If you create an environment from this blueprint and then add component mappings to the blueprint, the component mappings are also added to the environment. However, if you remove component mappings from the blueprint, the component mappings are not removed from the environment.</li>
+</ol>
+</li>
+</ol>
+<p>The complete application blueprint shows how the components are mapped to the agent prototypes. The following example shows a simple blueprint. The resource template contains two agent prototypes. In the blueprint, one component is mapped to each agent prototype.</p>
+<p><img alt="A simple blueprint that was created from a two-node resource template" src="../../images/app_blueprint_create_a.gif" /></p>
+<p>Create environments that are based on this blueprint.</p>
+<p><strong>Parent topic:</strong> <a href="../app_blueprint/">Application blueprints</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_blueprint_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

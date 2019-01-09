@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/component_tags/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Component tags - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Component tags and component resource tags", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="component-tags-and-component-resource-tags">Component tags and component resource tags</h1>
+<p>You can tag components while you work on the <strong>Components</strong> tab, or you can tag components while you work in the <strong>Resources</strong> tab. However, the tags that you associate with components in these two contexts behave differently. Furthermore, you can also include components in a resource by using the tags that are associated with components in the <strong>Component</strong> tab.</p>
+<p>In the <strong>Components</strong> tab, you can tag components according to your requirements. See <a href="../addingtags_tsk/">Adding tags to objects</a>. You can organize and associate components by using tags.</p>
+<p>In the <strong>Resources</strong> tab, you can tag components and other objects just as in other tabs. When you tag a component in the <strong>Resources</strong> tab, that tag is not applied to the component throughout all tabs. The component resource tag applies to the component only when the component is related to a resource.</p>
+<p>As you develop processes, you can use the component resource tag for a few things. You can specify a set of components to be used for an Install Multiple Components or Rollback Multiple Components step in an application process. Specifying a set of components this way runs a process for each component with the specified component tag in the environment. Alternatively, you can also add a component resource tag to an agent resource in the resource tree. Adding the tag is a way of directing that this is a component slot that can be fulfilled with any component that is tagged with the corresponding component tag.</p>
+<p><strong>Tip:</strong> In the <strong>Resources</strong> tab, you can click the <strong>Actions</strong> menu, click <strong>Component Tag</strong>, and select the tag of components you want to add to the resource. By adding components this way, you automate the components that are included in resources. Otherwise, you have to add components manually and individually to resources.</p>
+<p><strong>Parent topic:</strong> <a href="../tags_ch/">Tags</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/component_tags.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

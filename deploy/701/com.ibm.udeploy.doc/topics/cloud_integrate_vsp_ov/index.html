@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/cloud_integrate_vsp_ov/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Connecting to clouds through HCL UrbanCode Deploy - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Connecting to clouds through HCL UrbanCode Deploy", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="connecting-to-clouds-through-hcl-urbancode-deploy">Connecting to clouds through HCL UrbanCode Deploy</h1>
+<p>The HCL® UrbanCode™ Deploy server can use virtual system patterns from cloud systems such as IBM® Cloud Orchestrator to create dynamic environments.</p>
+<p>You must have a user account on a cloud system. This account must have permission to create script packages, to read information about virtual system patterns, IP groups, cloud groups, and environment profiles, and to create and delete virtual environments. See the documentation for your cloud system for more information about setting up permissions. For example, for IBM PureApplication® System, see <a href="https://www.ibm.com/support/knowledgecenter/SSCRSX_2.1.0/doc/iwd/aac_user_permissions.dita">https://www.ibm.com/support/knowledgecenter/SSCRSX_2.1.0/doc/iwd/aac_user_permissions.dita</a>.</p>
+<p>For this type of cloud integration, the following cloud systems are supported:</p>
+<ul>
+<li>IBM Cloud Orchestrator version 2.4 or later</li>
+<li>IBM SmartCloud® Orchestrator versions 2.2 and 2.3</li>
+<li>IBM PureApplication System version 1.0 or later</li>
+<li>IBM Workload Deployer version 3.1.0.6 or later</li>
+</ul>
+<p>Within these cloud systems, you can provision the virtual resources in environment profiles or in cloud groups. You can also assign the virtual resources to IP groups, but only when you assign the resources to an environment profile first. For more information, see <a href="../app_environment_create/">Creating environments</a>. You can also use virtual images with no more than one virtual network card. HCL UrbanCode Deploy does not support selecting different flavors of virtual resources or virtual nodes that have a multiplicity greater than 1.</p>
+<p>To connect to OpenStack and OpenStack-based clouds, SoftLayer®, Amazon Elastic Compute Cloud, VMware vCenter, or Microsoft™ Azure, see <a href="../../../com.ibm.edt.doc/topics/security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</p>
+<p><strong>Note:</strong> If you installed a FIPS-compliant server as described in <a href="../../../com.ibm.udeploy.install.doc/topics/server_install_interactive/">Installing the server in interactive mode</a>, the HCL UrbanCode Deploy server cannot integrate with cloud systems through virtual system patterns. Your JVM connects to only FIPS 140-2 certified IBM providers. The blueprint design server can still connect to clouds through OpenStack Heat.</p>
+<ol>
+<li>Configure the cloud system to install agents automatically. See <a href="../../../com.ibm.udeploy.install.doc/topics/cloud_configure/">Configuring virtual system pattern-based clouds</a>.</li>
+<li>
+<p>Create a connection to a cloud system. </p>
+<ol>
+<li>Click <strong>Resources</strong> > <strong>Cloud Connections</strong> and then click <strong>New Connection</strong>.</li>
+<li>In the <strong>Name</strong> field, specify a name for the connection.</li>
+<li>In the <strong>Management Console</strong> field, specify the host name of the cloud system.</li>
+<li>In the <strong>Username</strong> field, specify the user name of an account that has permission to request cloud resources. The server stores this user name and password and uses it to request cloud resources when you use this cloud connection.</li>
+<li>In the <strong>Password</strong> field, specify the password for the user account.</li>
+<li>In the <strong>Description</strong> field, specify a description for the connection.</li>
+<li>In the <strong>Teams</strong> field, specify the teams that have access to this connection.</li>
+<li>Set the timeout for cloud requests by opening the file installed.properties on the server and specifying the cloud.requestTimeout property. This property specifies the timeout in seconds. The default value is 7200 seconds, or two hours.</li>
+<li>Click <strong>Save</strong>.
+The new cloud connection is included in the <strong>Cloud Connections</strong> pane.</li>
+</ol>
+</li>
+</ol>
+<p>Model environments for this cloud. See <a href="../../../com.ibm.edt.doc/topics/blueprint_edit_clouds_vsp/">Modeling environments for clouds that use virtual system patterns</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../integrat_ov/">Overview of integrations</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/cloud_integrate_vsp_ov.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

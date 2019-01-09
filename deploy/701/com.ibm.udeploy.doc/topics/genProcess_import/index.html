@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/genProcess_import/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Importing and exporting generic processes - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Importing and exporting generic processes", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="importing-and-exporting-generic-processes">Importing and exporting generic processes</h1>
+<p>You can move generic processes between servers by exporting and importing them.</p>
+<p>Exporting a generic process creates a JSON file (with a json file extension) that contains the process and the properties that are associated with the process.</p>
+<p>When you export components, applications, processes, or templates, and then import them on a different computer, the same versions of the same plug-ins must be installed on both computers.</p>
+<p>Importing a generic process makes the exported version of the process available from another server.</p>
+<ol>
+<li>On the first server, click <strong>Processes</strong> to open the <strong>Processes</strong> tab. </li>
+<li>
+<p>Click <strong>Export</strong> in the <strong>Actions</strong> column to export the process. You can load the file into a text editor or save it.</p>
+<p><strong>Important:</strong> You must create the JSON file that contains the process definition from a server that uses the same version of HCL® UrbanCode™ Deploy as the destination server.</p>
+</li>
+<li>
+<p>Save the file. A file is created with the same name as the selected process. The file name takes the form of this example: exampleprocess.json.</p>
+</li>
+<li>Make the file available to the second server. </li>
+<li>On the second server, click <strong>Processes</strong> > <strong>Import Process</strong> to open the Import Process window. </li>
+<li>Click <strong>Choose File</strong>, and then select the JSON file that contains the process definition. </li>
+<li>
+<p>To upgrade an existing process, select <strong>Upgrade Process</strong>. If the name of the process in the JSON file matches an existing process, the process parameters are updated with new values. If the process name is not found, the command has no effect.</p>
+<p><strong>Note:</strong> An existing process must match the name of the process in the JSON file, not the name of the file itself. The process name is the first parameter in the JSON file. The following text is the JSON representation of a process named <code>Post-process test</code>.</p>
+<p><code>"name": "Post-process test",</code></p>
+</li>
+<li>
+<p>Click <strong>Submit</strong>.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../genProcess_ch/">Generic processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/genProcess_import.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

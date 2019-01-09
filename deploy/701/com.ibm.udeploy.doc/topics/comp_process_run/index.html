@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_process_run/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Running component processes - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Running component processes", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="running-component-processes">Running component processes</h1>
+<p>Component processes are typically run from within application processes. However, you can also run component processes directly to test the processes or to correct an error in an urgent situation.</p>
+<p>To run a component process in an application process, add the appropriate step to the application process and specify the component process. For example, to run a deployment component process, use the Install Component step. The step that you use depends on the type of component process. For more information, see <a href="../comp_process_types/">Component process types</a>.</p>
+<p>You can run certain types of component process from generic processes. See <a href="../genProcess_ch/">Generic processes</a>.</p>
+<p>You can also run component processes directly:</p>
+<ol>
+<li>Click an application, and go to the <strong>Components</strong> tab.</li>
+<li>Next to the component, click <strong>Run Process</strong>.</li>
+<li>In the <strong>Environment</strong> and <strong>Resource</strong> lists, select where to run the process.</li>
+<li>In the <strong>Process</strong> list, select the component process.</li>
+<li>If the component process requires a component version, in the <strong>Version</strong> list, select the component version.</li>
+<li>If the component process requires other properties, specify values for those properties.</li>
+<li>Click <strong>Submit</strong>.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../intro_component_processes/">Component processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_process_run.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

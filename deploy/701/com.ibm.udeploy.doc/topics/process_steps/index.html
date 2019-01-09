@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/process_steps/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Process step types and logic", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="process-step-types-and-logic">Process step types and logic</h1>
+<p>When you design processes, you use different kinds of process steps and joining techniques. You can assign properties to process steps and use them to control step execution.</p>
+<ul>
+<li><strong><a href="../comp_process_conditional/">Conditional processes</a></strong><br />
+Every connection (except connections from the Start step) has a delete tool and conditional flag. The conditional flag sets a condition on a connection.</li>
+<li><strong><a href="../comp_process_switch/">Switch steps</a></strong><br />
+A switch step is a utility step that you use to branch process, based on the value of a property.</li>
+<li><strong><a href="../comp_process_join/">Branching and joining steps</a></strong><br />
+You can branch processes so that multiple steps run at the same time. You can also merge processes to return to running a single step at a time.</li>
+<li><strong><a href="../comp_process_step_properties/">Process step properties</a></strong><br />
+All steps have the following properties: <code>exitCode</code>, <code>status</code>, and <code>lines of interest</code> (LOI, which are items that the post-processing script finds in the step's output log).</li>
+<li><strong><a href="../comp_process_step_precondition/">Process step preconditions</a></strong><br />
+Most steps in a process can have a precondition. If the <strong>Precondition</strong> field is available, the process supports a precondition. This precondition determines whether the step runs. Like post-processing scripts, preconditions use JavaScript™ 1.7.</li>
+<li><strong><a href="../comp_postProcess/">Post-processing scripts</a></strong><br />
+Post-processing scripts run after a step finishes. Typically, post-processing scripts ensure that expected results occurred.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../comp_workflow/">Processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/process_steps.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

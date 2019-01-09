@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/deploying_zos/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Deploying to the z/OS platform", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="deploying-to-the-zos-platform">Deploying to the z/OS platform</h1>
+<p>Use the toolkit to deploy to the IBM® z/OS® platform.</p>
+<p>Deploying to the IBM z/OS platform is similar to deploying to other platforms. Create an application, components, environments, and resources. Import versions of artifacts to the components, and then create an application process that deploys the components to a target environment. When you create a component for z/OS artifacts, select <strong>z/OS</strong> as the component type.</p>
+<p>Versions can be imported to a z/OS component by using the zOS File source configuration plug-in or by using the buztool command line from an z/OS agent.</p>
+<ol>
+<li>Install the z/OS agent. </li>
+<li>Create a ship list file.See <a href="../zos_shiplistfiles/">Ship list files</a>.</li>
+<li>Create a deployable component version.See <a href="../zos_runtools/">Creating z/OS component versions</a>.</li>
+<li>
+<p>Create component processes and application processes as you would for any other deployment, by using the z/OS Utility plug-in for process steps that retrieve and deploy z/OS artifacts. For example, use Download Artifacts for z/OS process steps to retrieve z/OS artifacts. Use the Deploy Data Set process step to deploy z/OS data sets and HFS files. The z/OS Utility plug-in also includes process steps for rolling back data sets, for running commands from the time sharing option (TSO) command line, and for running ISPF commands. To learn more about the z/OS Utility plug-in, see the HCL® UrbanCode™ Deploy <a href="http://developer.ibm.com/urbancode/plugins/ibm-urbancode-deploy/">plug-in site</a>. It is also recommended to create component using the MVSCOMPONENT template which has built-in deploy processes.</p>
+</li>
+<li>
+<p><strong><a href="../zos_shiplistfiles/">Ship list files</a></strong><br />
+The ship list file describes the files from the build to include in the new component version to deploy. Ship list files can also use generic artifacts to describe changes that are not physical files, such as configuration changes.</p>
+</li>
+<li><strong><a href="../zos_search_inventory/">Searching the z/OS environment inventory</a></strong><br />
+The z/OS search feature is available for any application that contains a z/OS type component. Search is performed for a specific file in the artifacts belonging to the z/OS components deployed to that environment.</li>
+<li><strong><a href="../zos_runtools/">Creating z/OS component versions</a></strong><br />
+You can create z/OS component version by running the buztool.sh command from job control language (JCL) or from the z/OS UNIX System Services command line. You can also create z/OS component version by using the z/OS File Source Config plug-in.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../deployment_ov/">Deploying</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/deploying_zos.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

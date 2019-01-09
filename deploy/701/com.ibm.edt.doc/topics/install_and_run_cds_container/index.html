@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/install_and_run_cds_container/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing and running the Cloud Discovery Service as a container - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing and running the Cloud Discovery Service as a container", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-and-running-the-cloud-discovery-service-as-a-container">Installing and running the Cloud Discovery Service as a container</h1>
+<p>You can install and run the Cloud Discovery Service as a container.</p>
+<p>The Cloud Discovery Service container image is for the x86_64 platform.</p>
+<ol>
+<li>From the command line, change to the installation_directory/ibm-ucd-patterns-install/web-install/containers folder. </li>
+<li>Copy the <code>ibm-cloud-discovery-service-container-image-&lt;version&gt;.tar</code> file, and move it to a machine that hosts a Docker engine. </li>
+<li>
+<p>Log into the Docker engine machine as a user that belongs to the Docker group. Then, run this command: </p>
+<p><code>docker load -i ibm-cloud-discovery-service-container-image-&lt;version\&gt;.tar</code></p>
+</li>
+<li>
+<p>To verify that you have successfully uploaded the ibm-ucd-cloud-discovery-service container image, run this command: </p>
+<p><code>docker images local/ibm-ucd-cloud-discovery-service</code></p>
+</li>
+<li>
+<p>To accept the license, run this command: </p>
+<p><code>docker run -d -e LICENSE="accept" -p 7575:7575 local/ibm-ucd-cloud-discovery-service:&lt;version\_tag\&gt;</code></p>
+<p><strong>Note:</strong> If you have a custom Cloud Discovery Service file, you can use the CLOUDDISCOVERYSERVICE_SETTINGS_FILE variable to specify the file mounted path. The file must be mounted to the container. For more information, see the Docker help, <a href="https://docs.docker.com/engine/admin/volumes/volumes/">Use volumes</a>.</p>
+</li>
+<li>
+<p>Log into the HCL® UrbanCode™ Deploy blueprint designer. </p>
+</li>
+<li>In the upper-right corner, click the <strong>Settings</strong> icon, and then click <strong>System Settings</strong>. </li>
+<li>
+<p>In the General Settings section, update the <strong>Cloud Discovery Service URL</strong> field. </p>
+<p><strong>Note:</strong> You must ensure that the HCL UrbanCode Deploy blueprint designer can access the exposed port of the machine that hosts the HCL UrbanCode Deploy Cloud Discovery Service.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../install_server_bds/">Installing the blueprint design server</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/install_and_run_cds_container.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

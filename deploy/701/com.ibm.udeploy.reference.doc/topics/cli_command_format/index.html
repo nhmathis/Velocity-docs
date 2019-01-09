@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/cli_command_format/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Command format - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Command format", url: "#_top", children: [
+              {title: "Authenticating", url: "#authenticating" },
+              {title: "Passing parameters", url: "#passing-parameters" },
+              {title: "Passing JSON strings", url: "#passing-json-strings" },
+              {title: "Global parameters and flags", url: "#global-parameters-and-flags" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="command-format">Command format</h1>
+<p>To run a command, open a command-line window and specify the command and its parameters. In some cases, you must pass a JSON string with information for a command.</p>
+<p>Commands have the following format:</p>
+<pre><code>udclient [global-args...] [global-flags...] &lt;command&gt; [args...]
+</code></pre>
+
+<p><strong>Note:</strong> You must enter CLI commands on one line.</p>
+<p><strong>Note:</strong> CLI commands and parameters are case-sensitive.</p>
+<p><strong>Note:</strong> Using CLI commands requires the same permissions as using the web interface. For information about permissions, see <a href="../../../com.ibm.udeploy.admin.doc/topics/security_roles/">Roles and permissions</a>.</p>
+<h2 id="authenticating">Authenticating</h2>
+<p>You can authenticate to the server in any of the following ways:</p>
+<ul>
+<li>You can specify a user name and password in the username and password parameters, and the location of the server in the weburl parameter, as shown in the following examples.</li>
+<li>You can specify a user name and password in the DS_USERNAME and DS_PASSWORD system variables, and the location of the server in the DS_WEB_URL system variable.</li>
+<li>You can specify a token in the authtoken parameter or in the DS_AUTH_TOKEN system variable.</li>
+<li>You can use the <a href="../../../com.ibm.udeploy.api.doc/topics/udclient_login/">login</a> command to create a temporary authentication to the server.</li>
+</ul>
+<h2 id="passing-parameters">Passing parameters</h2>
+<p>Most commands require one or more parameters. Parameters can change how the server interprets the command.</p>
+<p>For example, if you do not pass any parameters to the getResources command (except the required global parameters), the server lists the top-level resources:</p>
+<pre><code>udclient -weburl http://ucdserver.example.com:8080 
+  -username admin 
+  -password admin 
+  getResources
+</code></pre>
+
+<p>However, if you pass the path or ID of a resource in the parent parameter, the command returns the resources that are under that resource, as in the following example:</p>
+<pre><code>udclient -weburl http://ucdserver.example.com:8080 
+  -username admin 
+  -password admin 
+  getResources
+  -parent &quot;/My Agents&quot;
+</code></pre>
+
+<h2 id="passing-json-strings">Passing JSON strings</h2>
+<p>Some commands require a JSON string or file instead of or in addition to the parameters.</p>
+<p>For example, the createApplication command creates an application. To use this command, you must pass a valid JSON string that specifies the name, description, and some properties of the new application. The JSON string for this command must follow this template:</p>
+<pre><code>{
+  &quot;description&quot;: &quot;Description&quot;,
+  &quot;enforceCompleteSnapshots&quot;: &quot;Specify true to require 
+     an explicit version for each component&quot;,
+  &quot;name&quot;: &quot;Application name or ID&quot;,
+  &quot;notificationScheme&quot;: &quot;Notification scheme&quot;
+}
+</code></pre>
+
+<p><strong>Note:</strong> To see the JSON template that a command requires, run the command with the <code>-t</code> switch, as in the following example:</p>
+<pre><code>udclient -weburl http://ucdserver.example.com:8080 
+  -username admin 
+  -password admin 
+  createApplication
+  -t
+</code></pre>
+
+<p>This template is also listed in the reference information for the command; see <a href="../../../com.ibm.udeploy.api.doc/topics/udclient_createapplication/">createApplication</a>.</p>
+<p>For example, the following JSON string represents an application that is named <code>My Application</code>:</p>
+<pre><code>{
+  &quot;description&quot;: &quot;My new application&quot;,
+  &quot;enforceCompleteSnapshots&quot;: &quot;false&quot;,
+  &quot;name&quot;: &quot;My Application&quot;,
+  &quot;notificationScheme&quot;: &quot;Default Notification Scheme&quot;
+}
+</code></pre>
+
+<p>To pass this JSON string, save the string to a file and pass the file to the command. For example, if you save the string to a file that is named newApplication.json, the command looks like the following example:</p>
+<pre><code>udclient -weburl http://ucdserver.example.com:8080 
+  -username admin 
+  -password admin 
+  createApplication
+  newApplication.json
+</code></pre>
+
+<p><strong>Note:</strong> The string that you pass to the command must be a valid JSON string.</p>
+<h2 id="global-parameters-and-flags">Global parameters and flags</h2>
+<p>The following table lists the global parameters for the commands. These global parameters are listed as <code>[global-args...]</code> in code examples.</p>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-authtoken, --authtoken</td>
+<td>Optional. Can be set with the DS_AUTH_TOKEN environment variable. An authentication token (authtoken) that is generated by the server. Either an authtoken or a user name and password are required.</td>
+</tr>
+<tr>
+<td>-password, --password</td>
+<td>Optional. Can be set with the DS_PASSWORD environment variable. A password to authenticate with the server. Either an authtoken or a user name and password are required.</td>
+</tr>
+<tr>
+<td>-proxyHost, --proxyHost</td>
+<td>Optional. Can be set with the proxyHost environment variable. The host name of a proxy (for example, an agent relay) to use instead of a direct connection to the server.</td>
+</tr>
+<tr>
+<td>-proxyPassword, --proxyPassword</td>
+<td>Optional. Can be set with the proxyPassword environment variable. A password to use to authenticate with the proxy.</td>
+</tr>
+<tr>
+<td>-proxyPort, --proxyPort</td>
+<td>Optional. Can be set with the proxyPort environment variable. The proxy port to use if a proxy host name is specified.</td>
+</tr>
+<tr>
+<td>-proxyUser, --proxyUser</td>
+<td>Optional. Can be set with the proxyUser environment variable. A user name to use to authenticate with the proxy.</td>
+</tr>
+<tr>
+<td>-username, --username</td>
+<td>Optional. Can be set with the DS_USERNAME environment variable. A user name to authenticate with the server. Either an authtoken or a user name and password are required.</td>
+</tr>
+<tr>
+<td>-weburl, --weburl</td>
+<td>Required. Can be set with the DS_WEB_URL environment variable. The base URL of the HCL UrbanCode Deploy server. For example, http://ds.example.com:8585.</td>
+</tr>
+</tbody>
+</table>
+<p>The following table shows the global flags. These global flags are listed as <code>[global-flags...]</code> in code examples.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-t, --getTemplate</td>
+<td>Show the JSON template for the command instead of running the command. If a file argument is provided, the template is output to the specified file.</td>
+</tr>
+<tr>
+<td>-h, --help</td>
+<td>Print the full description and help of the command instead of running the command.</td>
+</tr>
+<tr>
+<td>-v, --verbose</td>
+<td>Print extra information.</td>
+</tr>
+</tbody>
+</table>
+<p>When you specify objects such as applications, components, agents, and resources on the command line, you can use the name of the object or the object ID. The ID of an object is part of the URL that is displayed when you inspect the object in HCL UrbanCode Deploy. For example, if you browse to a specific component and the URL is https://ucdeploy.example.com:8443/#component/2f153e93-00c3-44ef-a7fd-87e544e698d4, then the ID of the component is 2f153e93-00c3-44ef-a7fd-87e544e698d4.</p>
+<p>This example shows the getResources command:</p>
+<pre><code>udclient -weburl http://localhost:8080 -username admin -password admin getResources
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../cli_ch/">Command-line client (CLI) reference</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/cli_command_format.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

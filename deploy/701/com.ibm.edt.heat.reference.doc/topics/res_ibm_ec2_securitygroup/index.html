@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_ec2_securitygroup/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM EC2 SecurityGroup - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::EC2::SecurityGroup", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmec2securitygroup">IBM::EC2::SecurityGroup</h1>
+<p>This resource type represents a security group on Amazon EC2. It extends the type OS::Neutron::SecurityGroup.</p>
+<p>The blueprint uses the core properties and extended properties, if any, from this resource type. Review and configure the applicable heat resources that apply to your configuration information.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Description of the security group.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>A string specifying a symbolic name for the security group, which is not required to be unique.</td>
+</tr>
+<tr>
+<td>rules</td>
+<td>Map</td>
+<td>False</td>
+<td>Core</td>
+<td>List of security group rules.</td>
+</tr>
+<tr>
+<td>vpc_id</td>
+<td>String</td>
+<td>True</td>
+<td>Extended</td>
+<td>The VPC ID in which to create the security group.</td>
+</tr>
+</tbody>
+</table>
+<p>The rules parameter requires a list of rules for the security group. The following table shows the properties in each list item.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>direction</td>
+<td>String</td>
+<td>False</td>
+<td>The direction in which the security group rule is applied. For a compute instance, an ingress security group rule matches traffic that is incoming (ingress) for that instance. An egress rule is applied to traffic leaving the instance. Valid values are <code>ingress</code> and <code>egress</code>.</td>
+</tr>
+<tr>
+<td>ethertype</td>
+<td>String</td>
+<td>False</td>
+<td>Ethertype of the traffic. Valid values are <code>IPv4</code> and <code>IPv6</code>.</td>
+</tr>
+<tr>
+<td>port_range_max</td>
+<td>Integer</td>
+<td>False</td>
+<td>The maximum port number in the range that is matched by the security group rule. The port_range_min attribute constrains the port_range_max attribute. If the protocol is ICMP, this value must be an ICMP type.</td>
+</tr>
+<tr>
+<td>port_range_min</td>
+<td>Integer</td>
+<td>False</td>
+<td>The minimum port number in the range that is matched by the security group rule. If the protocol is TCP or UDP, this value must be less than or equal to the value of the port_range_max attribute. If the protocol is ICMP, this value must be an ICMP type.</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>String</td>
+<td>False</td>
+<td>The protocol that is matched by the security group rule. Valid values include <code>tcp</code>, <code>udp</code>, and <code>icmp</code>.</td>
+</tr>
+<tr>
+<td>remote_group_id</td>
+<td>String</td>
+<td>False</td>
+<td>The remote group ID to be associated with this security group rule. If no value is specified then this rule will use this security group for the remote_group_id.</td>
+</tr>
+<tr>
+<td>remote_ip_prefix</td>
+<td>String</td>
+<td>False</td>
+<td>The remote IP prefix (CIDR) to be associated with this security group rule.</td>
+</tr>
+<tr>
+<td>remote_mode</td>
+<td>String</td>
+<td>False</td>
+<td>Whether to specify a remote group or a remote IP prefix. Valid values are remote_ip_prefix and remote_group_id.</td>
+</tr>
+</tbody>
+</table>
+<p>This resource type has no attributes.</p>
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_ec2_ov/">Amazon Elastic Compute Cloud resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_ec2_securitygroup.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

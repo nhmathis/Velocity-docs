@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_template_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating component templates - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating component templates", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-component-templates">Creating component templates</h1>
+<p>To create a component template, specify information about the template, such as which plug-in it is related to.</p>
+<ol>
+<li>To create a template:</li>
+<li>
+<p>Display the Create Component Template dialog box (<strong>Components</strong> > <strong>Templates</strong> > <strong>Create Template</strong>). </p>
+<p><img alt="The Create Component Template window" src="../../images/comp_template_create_a.gif" /></p>
+</li>
+<li>
+<p>Enter the template's name in the <strong>Name</strong> field. </p>
+</li>
+<li>Enter a description in the <strong>Description</strong> field. The description can be used to convey more information about the template.</li>
+<li>In the <strong>Teams</strong> fields, specify the access information for the template.</li>
+<li>In the <strong>Component Type</strong> list, select <strong>z/OS</strong> for System z® components and <strong>Standard</strong> for all other components.</li>
+<li>
+<p>In the <strong>Source Configuration Type</strong> list, select the source type of the component. Selecting a value other than the default <code>None</code>, displays more fields that are associated with your selection. Source-dependent fields are used to identify and configure the artifacts. If you select a source, components that are based on the template use the same source.</p>
+<p>For information about creating components of specific types, see <a href="../comp_create_filesystem/">Creating components from the file system</a>, <a href="../comp_create_buildTools/">Creating components from build integration tools</a>, or <a href="../comp_create_scm/">Creating components from source-code management systems</a>.</p>
+<p><strong>Note:</strong> </p>
+<p>If you select a source, any properties you configure are set for any components that are created with the template.</p>
+</li>
+<li>
+<p>Click <strong>Save</strong> to save the template. Saved templates are listed in the Component Templates pane.</p>
+</li>
+<li>Add components, processes, and properties to the template. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../comp_template/">Component templates</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_template_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/log_log4j/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Changing the server output log contents - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Changing the server output log contents", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="changing-the-server-output-log-contents">Changing the server output log contents</h1>
+<p>The server stores its log by using Apache Log4j version 1.2.16. You can edit the Log4j settings to change the format of the log and the information that is added to the log.</p>
+<p>The Log4j logging settings are stored in the file app_data/conf/server/log4j.properties, where app_data is the application data folder. You can edit this file directly on the server or open it by clicking <strong>Settings</strong> > <strong>Logging</strong>.</p>
+<p><strong>Note:</strong> Do not change the name and location of the server log. If the location of the deployserver.out file is changed in log4j.properties, you will not be able to view or download the server log file from the user interface.</p>
+<p>For example, to log all REST calls that are made to the server, uncomment the following lines of code at the bottom of the file:</p>
+<pre><code>log4j.appender.audit=org.apache.log4j.RollingFileAppender
+log4j.appender.audit.File=../var/log/user_audit.log
+log4j.appender.audit.MaxFileSize=10MB
+log4j.appender.audit.MaxBackupIndex=5
+log4j.appender.audit.layout=org.apache.log4j.PatternLayout
+log4j.appender.audit.layout.ConversionPattern=%d{ISO8601} - %m%n
+
+log4j.additivity.com.urbancode.ds.web.filter.LoggingFilter=false
+log4j.logger.com.urbancode.ds.web.filter.LoggingFilter=DEBUG, audit
+</code></pre>
+
+<p>Now, all REST calls are stored in the file server/var/log/user_audit.log, as in the following example:</p>
+<pre><code>2015-08-05 11:20:23,882 - User admin from host 127.0.0.1
+accessing: GET @ /rest/deploy/environment
+2015-08-05 11:20:24,009 - User admin from host 127.0.0.1
+accessing: POST @ /rest/deploy/environment/compliancies
+</code></pre>
+
+<p>To log authentication failures, add the following line of code to the log4j.properties file:</p>
+<pre><code>log4j.logger.com.urbancode.security.persistence.hibernate.HibernateUserFactory=TRACE
+</code></pre>
+
+<p>For more information on Log4j, see <a href="http://logging.apache.org/log4j/1.2/">http://logging.apache.org/log4j/1.2/</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../log_ov/">Logging</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/log_log4j.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

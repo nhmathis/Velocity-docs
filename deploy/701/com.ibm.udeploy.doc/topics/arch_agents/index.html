@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/arch_agents/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Agent security and communication - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Agent security and communication", url: "#_top", children: [
+              {title: "Agent overview", url: "#agent-overview" },
+              {title: "Agent security", url: "#agent-security" },
+              {title: "Agent communication", url: "#agent-communication" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="agent-security-and-communication">Agent security and communication</h1>
+<p>Agents use SSL-secured JMS, WebSocket, HTTP, and HTTPS protocols to communicate with the server.</p>
+<h2 id="agent-overview">Agent overview</h2>
+<p>Agents do the actual work of deployment, which removes the task from the server. Agents are an important part of scalability in HCL® UrbanCode™ Deploy.</p>
+<p>There are two agent types. Web agents use WebSocket connections and HTTP(S) for agent-server communication. <a href="../web_agents/">Web agents were introduced with version 7.0.0</a>. Agents delivered before version 7.0.0 are called JMS agents. JMS agent use JMS and HTTP(S) to communicate with the server. You determine agent type when you install the agent.</p>
+<p>Although an agent is typically considered as a single process, technically an agent consists of a worker process and a monitor process. The worker process is a multithreaded process that runs the deployment work after it receives commands from the server. Work commands come from plug-in steps, which provide integration with many third-party tools. The monitor is a service that manages the worker process: starting and stopping, handling restarts, upgrades, and security, for example. After an agent is installed, it can be managed from the HCL UrbanCode Deploy web application.</p>
+<h2 id="agent-security">Agent security</h2>
+<p>All processes, including packaging, configuration, and deploying, that the HCL UrbanCode Deploy server requests run on hardware that is assigned to agents. For added security, agents do not listen to ports, but open direct connections to the server instead. After an installed agent starts, the agent opens a socket connection to the HCL UrbanCode Deploy server based on the installation information.</p>
+<p>For JMS agents, most communication between server and agents uses a Java™ Message Service (JMS) based protocol. The communication can be secured with SSL, with optional mutual key-based authentication for each end point. This communication protocol is stateless and resilient to network outages.</p>
+<p>Web agents use public-key pinning for strong out-of-box security. Agents and servers identify each other with SSL certificates. The public keys in the certificates are pinned on initial connection. When a public key is pinned, any certificate asserting the same identity must be generated with the same public/private key pair that was used to create the original certificate. Connections from clients or servers that do not correctly identify themselves are closed.</p>
+<p>Agents on networks other than the one where the server is located might need to open a firewall to establish connection. After communication is established, the agent will be visible in the HCL UrbanCode Deploy web application where it can be configured. Active agents, regardless of operating system, can be upgraded with the web application.</p>
+<h2 id="agent-communication">Agent communication</h2>
+<p>JMS agents use the JMS channel as the primary control channel. JMS agents use this channel to retrieve commands from the server. However, some JMS agent activities access the web tier with HTTP and HTTPS. For example, posting logs, transmitting test results, or posting files to CodeStation use HTTP and HTTPS.</p>
+<p>Web agents use WebSocket connects for tacking agent status and notifications, and HTTP for everything else.</p>
+<p>The following diagram shows the main default ports that are involved in communication between agents, agent relays, and the server.</p>
+<p><img alt="A diagram of the ports that agents, agent relays, and servers use to communicate; these are the same posts in the lists above" src="../../images/arch_agents_a.png" /></p>
+<p>For more information about firewall configuration and port usage, see <a href="../../../com.ibm.udeploy.install.doc/topics/sysRequire/">System requirements and performance considerations</a> and <a href="../../../com.ibm.udeploy.install.doc/topics/agent_firewalls/">Firewall and communication configuration</a>.</p>
+<p>For JMS agents, the agent monitor service uses JMS for all server communications and for sending commands, such as the run step command, to the worker process. The worker process uses JMS for system communications and HTTP REST services when it completes plug-in steps or retrieves information from the server.</p>
+<p>Stateless server-agent communication provides significant benefits to performance, security, availability, and disaster recovery. Because each agent request is self-contained, a transaction consists of an independent message, which can be synchronized to auxiliary storage as it occurs. Either endpoint, server or agent, can be stopped and restarted without repercussion, other than lost time. If communications fail midtransaction, no messages are lost. After they are reconnected, the server and agent automatically determine which messages got through and what work was completed. After an outage, the system synchronizes the endpoints and recovers affected processes. The results of work that an agent completes during the outage are communicated to the server.</p>
+<p><strong>Note:</strong> </p>
+<p>If an agent is reinstalled use the Forget JMS Certificate button by clicking Resources > Agents > Agent name > Configuration > Agent Security > Forget JMS Certificate on the server. Next you will need to regenerate the <a href="https://www.ibm.com/support/knowledgecenter/en/SS4GSP_6.2.7/com.ibm.udeploy.admin.doc/topics/api_key.html">API key of the agent</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../configure_agents/">Agents and agent relay configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/arch_agents.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

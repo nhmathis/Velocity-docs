@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/ref_create_postprocessing/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>The post-processing element - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "The post-processing element", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="the-post-processing-element">The <code>post-processing</code> element</h1>
+<p>When a plug-in step's <code>&lt;command&gt;</code> element finishes processing, the step's mandatory <code>&lt;post-processing&gt;</code> element runs.</p>
+<p>The <code>&lt;post-processing&gt;</code> element sets the step's output properties (step name/property name, see <a href="../../../com.ibm.udeploy.doc/topics/output_properties/">Output properties</a>) and provides error handling. The <code>&lt;post-processing&gt;</code> element can contain any valid JavaScript™ 1.7 script (unlike the <code>&lt;command&gt;</code> element, <code>&lt;post-processing&gt;</code> scripts must be written in JavaScript 1.7). Users can also provide their own scripts when they define the step in the HCL® UrbanCode™ Deploy editor; see <a href="../../../com.ibm.udeploy.doc/topics/comp_postProcess/">Post-processing scripts</a>.</p>
+<p>Post-processing scripts have access to the following objects:</p>
+<ul>
+<li>
+<p>The properties object is an instance of the class java.util.Properties. This variable has several special properties: <code>exitCode</code> contains the process exit code and <code>Status</code> contains the step's status. A <code>Status</code> value of <code>Success</code> means that the step completed successfully.</p>
+<p>This object is the same Java™ properties object that the step returns. Therefore, you can use the properties object in the post-processing script to change the output properties of the step. For example, to add an output property that is named <code>OutputProp1</code> with the value <code>value1</code>, add the following code to the post-processing script:</p>
+<p><code>properties.put("OutputProp1","value1");</code></p>
+<p>Then, the precondition scripts of other steps can access this property. See <a href="../../../com.ibm.udeploy.doc/topics/comp_process_step_precondition/">Process step preconditions</a>.</p>
+<p>For more information about this object, see the Java reference for java.util.Properties.</p>
+</li>
+<li>
+<p>The scanner object can scan the step's output log (scanning occurs on the agent) and run commands based on the results. scanner has several public methods:</p>
+<ul>
+<li><code>register(String regex, Function script)</code> registers a function to be called when the regular expression is matched. The function accepts two parameters: the first parameter is the line number that matched the regular expression, and the second parameter is the line of text that matched that expression.</li>
+<li><code>addLOI(Integer lineNumber)</code> adds a line to the lines of interest list, which are highlighted in the Log Viewer. The scanner adds all matching lines to this list automatically, but you can add other lines by calling this method.</li>
+<li><code>getLinesOfInterest()</code> returns a java.util.List of lines of interest; can be used to remove lines.</li>
+<li><code>scan()</code> scans the log. Call this method after you have registered all regular expressions with register(). If you do not call this method, the registered matchers do not run.</li>
+</ul>
+</li>
+<li>
+<p>The commandOut object is an instance of the class java.io.PrintStream. You can use this object to write to the log, as in the following example:</p>
+<p><code>commandOut.println("Log message.");</code></p>
+<p>For more information about this object, see the Java reference for java.io.PrintStream.</p>
+</li>
+</ul>
+<p>Post-processing scripts must set the Status property to specify the status of the script. The script can specify any value for the Status property. For example, to specify that the script was a success, run the following command in the post-processing script:</p>
+<pre><code>properties.put(&quot;Status&quot;,&quot;Success&quot;);
+</code></pre>
+
+<p>You can use a post-processing script to set output properties that can be used in other steps in the same process, which enables complex workflows. In a post-processing (or precondition) script, refer to prior step output properties this way:</p>
+<pre><code>properties.get(&quot;stepName/propName&quot;)
+</code></pre>
+
+<p>For example, to set a property named <code>myProp</code> whose value is included in the output log, enter this script:</p>
+<pre><code>var exit = properties.get('exitCode');
+ scanner.register(&quot;^myProp:&quot;, function(lineNumber, line) {     
+      properties.put('myProp', line.substring(7))
+ });
+ if (exit == 0) {
+     properties.put('Status', 'Success');
+ }
+ else{
+    properties.put('Status', 'Failure');
+ }
+</code></pre>
+
+<p>In instances other than post-processing and precondition scripts, refer to prior step output properties this way:</p>
+<pre><code>${p:stepName/propName}
+</code></pre>
+
+<p>The script that is defined in the <code>&lt;post-processing&gt;</code> element is the step's default behavior. Users can also provide their own script, overriding the default behavior, when they define the step in the process editor. See <a href="../../../com.ibm.udeploy.doc/topics/comp_workflow_edit/">Editing processes</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../reference_plugins_create/">Creating plug-ins</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/ref_create_postprocessing.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

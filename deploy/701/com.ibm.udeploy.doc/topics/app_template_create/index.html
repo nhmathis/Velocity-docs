@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_template_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating application templates - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating application templates", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-application-templates">Creating application templates</h1>
+<p>Define application templates so that users can create applications that contain the types of components, the environments, and the resource tree that you specify.</p>
+<ol>
+<li>Click <strong>Applications</strong> > <strong>Templates</strong> > <strong>Create Application Template</strong>. </li>
+<li>
+<p>Define the application template: </p>
+<ol>
+<li>Enter a name and description, and select the teams that can access the application template. </li>
+<li>From the <strong>Notification Scheme</strong> list, select a notification scheme. </li>
+<li>To require that a version be provided for each component when a snapshot is created, select <strong>Enforce Complete Snapshots</strong>. </li>
+<li>
+<p>To set the tags that components must use to be assigned to an application during creation, select tags from the <strong>Required Component Tags</strong> list. You specify the minimum, maximum, or exact number of components that contain the tag that the user must select. </p>
+<p><strong>Note:</strong> </p>
+<p>By selecting component tags, you limit only the components that a user can assign to an application during its creation. If they have permission, users can add other components to an application after they exit the wizard.</p>
+</li>
+<li>
+<p>Click <strong>Save</strong>. </p>
+</li>
+<li>Define application properties. The application properties that you define are included in all applications that use this application template.</li>
+<li>Click <strong>Configuration</strong>. This <strong>Configuration</strong> tab is associated with the application template that you created, not the main <strong>Configuration</strong> tab. </li>
+<li>Click <strong>Application Property Definitions</strong>. </li>
+<li>Click <strong>Add Property</strong>, define the property, and click <strong>Save</strong>. </li>
+<li>Create an application process. The application process that you define is included in all applications that use this application template.</li>
+<li>Click <strong>Processes</strong>. This <strong>Processes</strong> tab is associated with the application template that you created, not the main <strong>Processes</strong> tab. </li>
+<li>Click <strong>Create Process</strong> to open the Create an Application Process dialog box, and create the application process. See <a href="../app_process_create/">Creating application processes</a>. </li>
+<li>
+<p>Edit the process in the process editor. See <a href="../comp_workflow_edit/">Editing processes</a>. </p>
+<p><strong>Note:</strong> In the process editor, you can select only a limited number of process steps, such as the <strong>Install Multiple Components</strong> and <strong>Run Operational Process for Multiple Components</strong> steps.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Create environment templates. The environments that you define can be used by all applications that use this application template. When applications are created from application templates, multiple environments can be created from each environment template. You must assign a resource template to an environment template. See <a href="../app_environment_template_create/">Creating environment templates</a>.</p>
+<p><strong>Note:</strong> To minimize additional steps after you create an application from this template, ensure that the resource template that you select specifies both agent prototypes and the component tags that you selected.</p>
+<p><strong>Note:</strong> If you create an environment with an environment template and then add component mappings to the resource template used by the template, the new component mappings are added to the environment. However, if you remove component mappings from the resource template, the component mappings are not removed from the environment.</p>
+</li>
+<li>
+<p>Create environment gates. The environments gates that you define must be used by all applications that use this application template and cannot be removed from these applications. See <a href="../app_gate_create/">Creating environment gates</a>.</p>
+</li>
+</ol>
+<p>By using team object mapping, grant the team access to application template, agents, component instances, component templates, environment templates, and resource templates. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_teams_mapping/">Mapping teams to objects</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../app_template/">Application templates</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_template_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

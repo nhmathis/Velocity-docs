@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.api.doc/topics/security_cloudprovider__post/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Create a cloud provider - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Create a cloud provider", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example", url: "#example" },
+              {title: "Example JSON request", url: "#example-json-request" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="create-a-cloud-provider">Create a cloud provider</h1>
+<p>This command creates a cloud provider from the supplied JSON string.</p>
+<h2 id="request">Request</h2>
+<pre><code>POST http://{hostname}:{port}
+  /landscaper/security/cloudprovider/
+Accept: application/json
+Content-Type: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p>This command takes a JSON request string or file. Use the following template for the request:</p>
+<pre><code>{
+  &quot;description&quot;: &quot;Description&quot;,
+  &quot;name&quot;: &quot;Cloud provider name&quot;,
+  &quot;properties&quot;: [{
+    &quot;name&quot;: &quot;Property name&quot;,
+    &quot;value&quot;: &quot;Property value&quot;
+  }],
+  &quot;type&quot;: &quot;The type of cloud provider&quot;
+}
+
+</code></pre>
+
+<h2 id="example">Example</h2>
+<pre><code>curl -u jsmith:passwd 
+   -H 'Content-Type: application/json'
+  -d @createProvider.json
+  http://myserver.example.com:8080/landscaper/security/cloudprovider/ -X POST
+</code></pre>
+
+<h2 id="example-json-request">Example JSON request</h2>
+<pre><code>{
+  &quot;description&quot;: &quot;Cloud provider from REST&quot;,
+  &quot;name&quot;: &quot;New cloud provider&quot;,
+  &quot;properties&quot;: [
+    {
+      &quot;id&quot;: &quot;71531286-bab0-428b-aa91-97243dacd695&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;name&quot;: &quot;orchestrationEngineUrl&quot;,
+      &quot;secure&quot;: false,
+      &quot;value&quot;: &quot;http://openstack.example.com:8004&quot;
+    },
+    {
+      &quot;id&quot;: &quot;787c87c6-ae69-428a-9226-23457fee6993&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;name&quot;: &quot;timeoutMins&quot;,
+      &quot;secure&quot;: false,
+      &quot;value&quot;: &quot;10&quot;
+    },
+    {
+      &quot;id&quot;: &quot;9b2e3dab-9f38-232c-87e5-7a95379becff&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;name&quot;: &quot;url&quot;,
+      &quot;secure&quot;: false,
+      &quot;value&quot;: &quot;http://localhost:5000/v2.0/&quot;
+    },
+    {
+      &quot;id&quot;: &quot;14692f9d-5b91-4e72-55db-8fca87c112f4&quot;,
+      &quot;label&quot;: &quot;&quot;,
+      &quot;name&quot;: &quot;useDefaultOrchestration&quot;,
+      &quot;secure&quot;: false,
+      &quot;value&quot;: &quot;false&quot;
+    }
+  ],
+  &quot;type&quot;: &quot;AUTH_REALM&quot;
+}
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../security_cloudprovider_/">security/cloudprovider resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.api.doc/topics/security_cloudprovider__post.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

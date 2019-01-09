@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/ssl_config/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring SSL on Apache Tomcat and LDAP servers - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring SSL on Apache Tomcat and LDAP servers", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-ssl-on-apache-tomcat-and-ldap-servers">Configuring SSL on Apache Tomcat and LDAP servers</h1>
+<p>The steps for configuring secure HTTP connections with the HCL® UrbanCode™ Deploy server are similar to the steps for any Java™ Platform, Enterprise Edition server.</p>
+<p>To set up SSL security, you must have a certificate for the server. If you use certificates that are self-signed or certificates that are issued by a certificate authority that is not trusted, you must import these certificates into the trust store. A trust store contains trusted certificates from servers and certificate authorities. Import the self-signed certificates, certificate authority certificates, and intermediate certificate authority certificates to the JRE_install/jre/lib/security/cacerts file. For an example of importing a certificate to a trust store, see the <a href="http://www.ibm.com/support/knowledgecenter/SSYKE2_7.0.0/com.ibm.java.security.component.70.doc/security-component/keytoolDocs/ex_importcertreply.html">Importing the Certificate Reply from the CA</a> topic in the IBM® SDK, Java Technology Edition help.</p>
+<p>In the case of LDAP servers, SSL certificates must have valid chains of authority. If you use your own certificate authority, add that certificate authority to the local trust store.</p>
+<p>Because the HCL UrbanCode Deploy server runs on Apache Tomcat, you can refer to the instructions for configuring security on Tomcat <a href="http://tomcat.apache.org/tomcat-6.0-doc/ssl-howto.html#Certificates">on the Apache Tomcat website</a>. You can enable SSL security for Apache Tomcat when you install HCL UrbanCode Deploy. If you enable SSL security during installation, a self-signed certificate is generated and added to the tomcat.keystore file. The common name (CN) in the self-signed certificate is set to 0.0.0.0.</p>
+<p><strong>Note:</strong> The presence of a self-signed certificate is flagged as a warning by many web browsers when you connect to an HCL UrbanCode Deploy server that uses a self-signed certificate in the tomcat.keystore file.</p>
+<ol>
+<li>Setting up SSL security for the server involves these general steps:</li>
+<li>Transfer the files for the certificate to the computer that hosts the HCL UrbanCode Deploy server. </li>
+<li>Add the certificate to the server keystore.The server has a default keystore in the server_install/opt/tomcat/conf/tomcat.keystore file. The default password for this keystore is <code>changeit</code>.</li>
+<li>Open the \opt\tomcat\conf\server.xml file that is on the HCL UrbanCode Deploy server. </li>
+<li>
+<p>Add the following line after <code>keystoreFile="conf/tomcat.keystore"</code>: </p>
+<p><code>keyAlias="alias\_of\_your\_certificate\_in\_tomcat\_keystore"</code></p>
+<p>The following code provides an example of an added certificate alias line. In the example, the certificate alias is <code>ucdserver.example.com</code>.</p>
+<p><code>&lt;Server port="0" shutdown="SHUTDOWN" debug="0"&gt;
+  &lt;Service name="Catalina"&gt;
+    &lt;Connector port="${install.server.web.https.port}"
+               address="${install.server.web.ip}"
+               server="SERVER"
+               maxThreads="150"
+               minSpareThreads="25"
+               maxSpareThreads="75"
+               enableLookups="false"
+               acceptCount="100"
+               debug="0"
+               connectionTimeout="20000"
+               disableUploadTimeout="true"
+               compression="1024"
+               noCompressionUserAgents="gozilla, traviata"
+               compressableMimeType="text/html,text/xml,text/javascript,text/css,text/plain,application/json"
+               algorithm="${install.server.ssl.algorithm}"
+               SSLEnabled="true"
+               scheme="https"
+               secure="true"
+               clientAuth="false"
+               URIEncoding="UTF-8"
+               ciphers="${install.server.ssl.enabledCiphers}"
+               sslEnabledProtocols="${install.server.ssl.enabledProtocols}"
+               keystoreFile="conf/tomcat.keystore"
+                **keyAlias="ucdserver.example.com"**
+               keystorePass="changeit" /&gt;</code></p>
+</li>
+<li>
+<p>Restart the server.</p>
+</li>
+<li>Similarly, add the same certificate to the keystore of each agent and agent relay. For example, the default location of an agent keystore is agent_install/conf/agent.keystore.</li>
+<li>To configure secure communication between the HCL UrbanCode Deploy server and an LDAP server, add the LDAP server certificate to the JRE_install/jre/lib/security/cacerts file. This file is on the HCL UrbanCode Deploy server. Use the installation folder of the JRE for JRE_install. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../SSLinstall/">SSL configuration</a></p>
+<p><strong>Parent topic:</strong> <a href="../c_node_configuring/">Configuring</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/ssl_config.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

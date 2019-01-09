@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/troubleshoot_logsize/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Increasing the size of the log file - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Increasing the size of the log file", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="increasing-the-size-of-the-log-file">Increasing the size of the log file</h1>
+<p>Log data contains information that is written by components within the product. The log provides a snapshot of the flow and transfer of information between components. The log data includes the time frames for when problem occurred on the server, client, and agent. Because the log file holds a limited amount of data, data related to a problem can be overwritten.</p>
+<p>The server and agent store log data by using Apache Log4j. Settings for Log4j logging are in the log4j.properties file, which resides on both the server and agent. This file contains multiple sections for different purposes defining Log4j appenders. Some sections are enabled by default, such as the server file appender and cleanup appender. Other sections are disabled by default, such as the server audit logging and SSL appender. When you report a problem to IBM Software Support, the support specialist will guide you through which sections to enable.</p>
+<p>You can edit the Log4j settings to avoid losing relevant data because the log file is overwritten too soon. Setting for Log4j are in the log4j.properties on the HCL® UrbanCode™ Deploy server and agent.</p>
+<ul>
+<li>For the server, this file is in the server/appdata/conf/server/ directory.</li>
+<li>For the agent, this file is in the agent/conf/agent/ directory.</li>
+</ul>
+<p>The <strong>MaxBackupIndex</strong> parameter specifies how many backup log files are maintained beyond the current log file. The default value is two. An IBM support specialist can help determine the appropriate value to specify.</p>
+<p>When you increase the number of log files more disk space is needed. In the following code example, the size of each file is 50 MB. The disk space that is needed for additional files is (MaxBackupIndex_value * 50MB) + size of current log file.</p>
+<pre><code> log4j.appender.file=org.apache.log4j.RollingFileAppender 
+log4j.appender.file.File=../var/log/deployserver.out 
+log4j.appender.file.MaxFileSize=50MB 
+log4j.appender.file.MaxBackupIndex=2
+</code></pre>
+
+<ol>
+<li>Edit the log4j.properties file. Use a text editor to edit the file. For the server, you can also access the file by clicking<strong>Settings</strong> > <strong>Logging</strong>. </li>
+<li>Change the value of the <strong>MaxBackupIndex</strong> parameter. </li>
+<li>Restart the server. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../log_ov/">Logging</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/troubleshoot_logsize.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

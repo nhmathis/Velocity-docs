@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_gc_server/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM Google Server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::Google::Server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmgoogleserver">IBM::Google::Server</h1>
+<p>This resource type represents a server on Google Cloud Platform. It extends the type OS::Nova::Server.</p>
+<p>The blueprint uses the core properties and extended properties, if any, from this resource type. Review and configure the applicable heat resources that apply to your configuration information.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>admin_pass</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The administrator password for the server.</td>
+</tr>
+<tr>
+<td>admin_user</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Name of the administrative user to use on the server. This property will be removed from Juno in favor of the default cloud-init user that is set up for each image (for example, "ubuntu" for Ubuntu 12.04+, "fedora" for Fedora 19+ and "cloud-user" for CentOS/Red Hat Enterprise Linux 6.5).</td>
+</tr>
+<tr>
+<td>cpus</td>
+<td>Integer</td>
+<td>False</td>
+<td>Extended</td>
+<td>CPUS on the instance.</td>
+</tr>
+<tr>
+<td>availability_zone</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Name of the availability zone for server placement.</td>
+</tr>
+<tr>
+<td>auto_delete_boot_disk</td>
+<td>Boolean</td>
+<td>False</td>
+<td>Extended</td>
+<td>If <code>True</code>, boot disk is deleted when instance is deleted.</td>
+</tr>
+<tr>
+<td>block_device_mapping</td>
+<td>List</td>
+<td>False</td>
+<td>Core</td>
+<td>Block device mappings for this server. Use either the block_device_mapping property or the block_device_mapping_v2 property. See <a href="#block_device_mapping">Table 2</a>.</td>
+</tr>
+<tr>
+<td>block_device_mapping_v2</td>
+<td>List</td>
+<td>False</td>
+<td>Core</td>
+<td>Expanded block device mappings for this server. Use either the block_device_mapping property or the block_device_mapping_v2 property. See <a href="#block_device_mapping_v2">Table 3</a>.</td>
+</tr>
+<tr>
+<td>block_project_ssh_keys</td>
+<td>String</td>
+<td>False</td>
+<td>Extended</td>
+<td>If <code>True</code>, project-wide ssh keys cannot access the instance.</td>
+</tr>
+<tr>
+<td>config_drive</td>
+<td>Boolean</td>
+<td>False</td>
+<td>Core</td>
+<td>If <code>True</code>, enable config drive on the server.</td>
+</tr>
+<tr>
+<td>diskConfig</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Control how the disk is partitioned when the server is created. Valid values are <code>AUTO</code> and <code>MANUAL</code>.</td>
+</tr>
+<tr>
+<td>disk_size</td>
+<td>Integer</td>
+<td>False</td>
+<td>Extended</td>
+<td>Disk size in GB of the base disk of the instance.</td>
+</tr>
+<tr>
+<td>flavor</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The ID or name of the flavor to boot onto.</td>
+</tr>
+<tr>
+<td>flavor_update_policy</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Policy on how to apply a flavor update; either by requesting a server resize or by replacing the entire server. Valid values are <code>RESIZE</code> and <code>REPLACE</code>.</td>
+</tr>
+<tr>
+<td>image</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The ID or name of the image to boot with.</td>
+</tr>
+<tr>
+<td>image_update_policy</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Policy on how to apply an image-id update; either by requesting a server rebuild or by replacing the entire server. Valid values are -   <code>REPLACE</code> (the default)</td>
+</tr>
+<tr>
+<td>-   <code>REBUILD</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>REBUILD_PRESERVE_EPHEMERAL</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|
+|key_name|String|False|Core|Name of key pair to inject into the server.|
+|memory|Integer|False|Extended|Memory in MB of the instances.|
+|metadata|Map|False|Core|Arbitrary key/value metadata to store for this server. Both keys and values must be 255 characters or less. Non-string values are serialized to JSON (and the serialized string must be 255 characters or less).|
+|name|String|False|Core|Server name.|
+|networks|List|False|Core|An ordered list of NICs to be added to this server, with information about connected networks, fixed IP addresses, and ports. See <a href="#networks">Table 4</a>.|
+|personality|Map|False|Core|A map of files to create/overwrite on the server upon boot. Keys are file names and values are the file contents.|
+|reservation_id|String|False|Core|A UUID for the set of servers requested.|
+|scheduler_hints|Map|False|Core|Arbitrary key-value pairs that are specified by the client to help boot a server.|
+|security_groups|List|False|Core|List of security group names or IDs. Cannot be used if neutron ports are associated with this server; assign security groups to the ports instead.|
+|software_config_transport|String|False|Core|Specifies how the server receives the metadata that is required for software configuration. <code>POLL_SERVER_CFN</code> allows calls to the Cloud Formation API action DescribeStackResource authenticated with the provided key pair. <code>POLL_SERVER_HEAT</code> allows calls to the Heat API action resource-show by using the provided keystone credentials.|
+|user_data|String|False|Core|User data script to be run by cloud-init.|
+|user_data_format|String|False|Core|How the user_data is formatted for the server. For <code>HEAT_CFNTOOLS</code>, the user_data is bundled as part of the <code>heat-cfntools cloud-init</code> boot configuration data. For <code>RAW</code> the <code>user_data</code> is passed to Nova unmodified. For <code>SOFTWARE_CONFIG</code> the <code>user_data</code> is bundled as part of the software configuration data, and metadata is derived from any associated SoftwareDeployment resources.|</p>
+<p>The block_device_mapping parameter requires a list of storage volume mappings for the server. The following table shows the properties in each list item.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>delete_on_termination</td>
+<td>Boolean</td>
+<td>False</td>
+<td>Indicates whether the volume is deleted when the server is stopped.</td>
+</tr>
+<tr>
+<td>device_name</td>
+<td>String</td>
+<td>False</td>
+<td>A device name where the volume is attached in the system at /dev/device_name. This value is typically <code>vda</code>.</td>
+</tr>
+<tr>
+<td>snapshot_id</td>
+<td>String</td>
+<td>False</td>
+<td>The ID of the snapshot to create a volume from.</td>
+</tr>
+<tr>
+<td>volume_id</td>
+<td>String</td>
+<td>False</td>
+<td>The ID of the volume to boot from. Provide either the volume_id property or the snapshot_id property but not both.</td>
+</tr>
+<tr>
+<td>volume_size</td>
+<td>Integer</td>
+<td>False</td>
+<td>The size of the volume, in GB. You can leave this property blank and have the Compute service infer the size.</td>
+</tr>
+</tbody>
+</table>
+<p>The block_device_mapping_v2 parameter requires an expanded list of storage volume mappings for the server. The following table shows the properties in each list item.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>boot_index</td>
+<td>Integer</td>
+<td>False</td>
+<td> </td>
+</tr>
+<tr>
+<td>delete_on_termination</td>
+<td>Boolean</td>
+<td>False</td>
+<td>Indicates whether the volume is deleted when the server is stopped.</td>
+</tr>
+<tr>
+<td>device_name</td>
+<td>String</td>
+<td>False</td>
+<td>A device name where the volume is attached in the system at /dev/device_name. This value is typically <code>vda</code>.</td>
+</tr>
+<tr>
+<td>device_type</td>
+<td>String</td>
+<td>False</td>
+<td> </td>
+</tr>
+<tr>
+<td>disk_bus</td>
+<td>String</td>
+<td>False</td>
+<td> </td>
+</tr>
+<tr>
+<td>image_id</td>
+<td>String</td>
+<td>False</td>
+<td> </td>
+</tr>
+<tr>
+<td>snapshot_id</td>
+<td>String</td>
+<td>False</td>
+<td>The ID of the snapshot to create a volume from.</td>
+</tr>
+<tr>
+<td>swap_size</td>
+<td>Integer</td>
+<td>False</td>
+<td> </td>
+</tr>
+<tr>
+<td>volume_id</td>
+<td>String</td>
+<td>False</td>
+<td>The ID of the volume to boot from. Provide either the volume_id property or the snapshot_id property but not both.</td>
+</tr>
+<tr>
+<td>volume_size</td>
+<td>Integer</td>
+<td>False</td>
+<td>The size of the volume, in GB. You can leave this property blank and have the Compute service infer the size.</td>
+</tr>
+</tbody>
+</table>
+<p>The networks parameter requires a list of NICs for the server. The following table shows the properties in each list item.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fixed_ip</td>
+<td>String</td>
+<td>False</td>
+<td>Fixed IP address to specify for the port that is created on the requested network</td>
+</tr>
+<tr>
+<td>network</td>
+<td>String</td>
+<td>False</td>
+<td>Name or ID of network to create a port on.</td>
+</tr>
+<tr>
+<td>port</td>
+<td>String</td>
+<td>False</td>
+<td>ID of an existing port to associate with this server.</td>
+</tr>
+<tr>
+<td>uuid</td>
+<td>String</td>
+<td>False</td>
+<td>ID of network to create a port on.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>accessIPv4</td>
+<td>The manually assigned alternative public IPv4 address of the server.</td>
+</tr>
+<tr>
+<td>accessIPv6</td>
+<td>The manually assigned alternative public IPv6 address of the server.</td>
+</tr>
+<tr>
+<td>addresses</td>
+<td>A dict of all network addresses with corresponding port_id. The port ID may be obtained through the following expression: <code>{get_attr: [server, addresses, network\_name, 0, port]}</code></td>
+</tr>
+<tr>
+<td>console_urls</td>
+<td>URLs of server's consoles. To get a specific console type, the requested type can be specified as parameter to the <code>get_attr</code> function,as shown in the following code: <code>get_attr: [ server, console_urls, novnc ]</code>. The following types are allowed:-   <code>novnc</code></td>
+</tr>
+<tr>
+<td>-   <code>xvpvnc</code></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>spice-html5</code></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>rdp-html5</code></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>serial</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|
+|cpu_platform|The CPU platform used by this instance.|
+|first_address|A convenience attribute to fetch the first assigned network address, or an empty string if nothing is assigned. Result might not be predictable if the server has addresses from more than one network.|
+|instance_name|A Google Cloud Platform compatible instance name.|
+|metadata_fingerprint|Fingerprint of metadata contents.|
+|name|The name of the server.|
+|networks|A dict of assigned network addresses of the form: <code>{"public": [ip1, ip2...], "private": [ip3, ip4]}</code>.|
+|public_ip_address|Returns public IP address for this instance, if one exists.|
+|self_link|Server-defined URL for this resource.|
+|show|A dict of all server details as returned by the API.|
+|tags_fingerprint|Fingerprint of tags contents.|</p>
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_gc_ov/">Google Cloud Platform resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_gc_server.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

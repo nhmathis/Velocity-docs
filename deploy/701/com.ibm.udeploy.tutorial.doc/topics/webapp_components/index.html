@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/webapp_components/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lesson 1 Adding components - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lesson 1: Adding components", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="lesson-1-adding-components">Lesson 1: Adding components</h1>
+<p>Components are groups of deployable artifacts that make up an application. Components include runnable files, images, databases, and configuration instructions.</p>
+<ul>
+<li>Make sure that your HCL® UrbanCode™ Deploy server has the prerequisites that are listed in <a href="../webapp_intro/#prereqs">Prerequisites</a>.</li>
+<li>Make sure that you have set up the agent for the sample application as described in <a href="../webapp_configure_agent/">Configuring the agent and target system</a>.</li>
+</ul>
+<p>These steps describe how to create the components of the sample application.</p>
+<p>The JPetStore sample application includes three components:</p>
+<ul>
+<li>The application component includes the logic of the application. This component consists of a single web archive file that is named JPetStore.war.</li>
+<li>The web component includes the static web content for the application, including images for the web interface.</li>
+<li>The database component includes the database for the application and scripts that upgrade the database schema to new versions.</li>
+</ul>
+<p>In most cases, you add components by connecting the HCL UrbanCode Deploy server to the system that hosts the artifacts. The server can import artifacts from many build systems and source-code management systems. The server can create new versions of the components automatically as the artifacts change or as new builds run. However, for simplicity, in this lesson you copy the files for the components to the server and access them from there. For more information about creating components from artifacts on build systems and source-code management systems, see <a href="../../../com.ibm.udeploy.doc/topics/comp_create/">Creating components</a>.</p>
+<ol>
+<li>
+<p>Download the artifacts.zip file by clicking the following link:<a href="http://download.boulder.ibm.com/ibmdl/pub/software/rationalsdp/documentation/product_doc/UrbanCode/uDeploy/version_6-1/artifacts.zip">artifacts.zip</a>.</p>
+<p>You can also find this file in the Files section of the Learning Circle:<a href="https://www.ibm.com/developerworks/community/groups/service/html/communityview?communityUuid=860ff390-6cab-4f95-ab37-66d2ca7521b4">HCL UrbanCode Deploy and IBM® UrbanCode Release Learning Circle</a></p>
+</li>
+<li>
+<p>Copy the artifacts.zip file to the HCL UrbanCode Deploy agent computer and extract it.This file contains separate folders for each of the components; these folders are named app, web, and db. Each of these folders contains one or more folders with names such as 1.0 or 1.1; these folders represent different versions of the artifacts.</p>
+<p>For the tutorial, these folders must be on the same system that hosts the HCL UrbanCode Deploy agent. Note the locations of these folders, because you will need the locations later.</p>
+</li>
+<li>
+<p>Log in to the HCL UrbanCode Deploy server. </p>
+</li>
+<li>Create the application component: <ol>
+<li>Click the <strong>Components</strong> tab, and then click <strong>Create Component</strong>. In this window, you specify where the artifacts for the component are.</li>
+<li>In the <strong>Name</strong> field, type JPetStore-APP. </li>
+<li>In the <strong>Source Configuration Type</strong> list, select <strong>File System (Versioned)</strong>.</li>
+<li>In the <strong>Base Path</strong> field, specify the location of the app folder on the server, such as /home/user1/artifacts/shared/app. </li>
+<li>Under <strong>Default Version Type</strong>, click <strong>Import new component versions using a single agent</strong>, and then select your agent in the <strong>Agent for Version Imports</strong> list </li>
+<li>Accept the default values for the other fields on the page.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+</li>
+<li>
+<p>Import the versions of the component: </p>
+<ol>
+<li>Click the <strong>Versions</strong> tab. </li>
+<li>Click <strong>Import New Versions</strong>. The import process is listed in the Currently Running Version Imports section. Then the process is finished, the server creates versions of the component based on the folders in the app folder. In this case, the server creates a single version of the component that is based on the app/1.0 folder. Importing versions of small components like this one typically takes a few seconds. You might need to refresh the page or click the <strong>Refresh</strong> link at the bottom of the table to see the new version.</li>
+<li>
+<p>Verify that version 1.0 of the component is included in the list of versions, as in the following figure: </p>
+<p><img alt="The first version of the new component is shown on the Versions tab" src="../../images/webapp_components_a.gif" /></p>
+<p>If the version import failed, make sure that the files are available on the agent system and that the location of these files is correct on the component <strong>Configuration</strong> tab.</p>
+</li>
+</ol>
+<p>The component is available to be used in one or more applications.</p>
+</li>
+<li>
+<p>Create the database component: </p>
+<ol>
+<li>Click the <strong>Components</strong> tab, and then click <strong>Create Component</strong> again. </li>
+<li>Specify the name to be JPetStore-DB. </li>
+<li>In the <strong>Source Configuration Type</strong> list, select <strong>File System (Versioned)</strong>.</li>
+<li>In the <strong>Base Path</strong> field, specify the location of the db folder on the server, such as /home/user1/artifacts/shared/db. </li>
+<li>Under <strong>Default Version Type</strong>, click <strong>Import new component versions using a single agent</strong> and then select your agent in the <strong>Agent for Version Imports</strong> list </li>
+<li>Accept the default values for the other fields on the page.</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Click <strong>Versions</strong> and then click <strong>Import New Versions</strong>.
+Now the server shows two versions of the database component.</li>
+</ol>
+</li>
+<li>
+<p>Create the web component: </p>
+<ol>
+<li>Click the <strong>Components</strong> tab and then click <strong>Create Component</strong> again. </li>
+<li>Specify the name to be JPetStore-WEB. </li>
+<li>In the <strong>Source Configuration Type</strong> list, select <strong>File System (Versioned)</strong>.</li>
+<li>In the <strong>Base Path</strong> field, specify the location of the web folder on the server, such as /home/user1/artifacts/shared/web. </li>
+<li>Under <strong>Default Version Type</strong>, click <strong>Import new component versions using a single agent</strong> and then select your agent in the <strong>Agent for Version Imports</strong> list </li>
+<li>Accept the default values for the other fields on the page.</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Click <strong>Versions</strong> and then click <strong>Import New Versions</strong>.
+Now the server shows two versions of the web component.</li>
+</ol>
+</li>
+<li>
+<p>So that you can try updating the components later, delete the newest versions of the database and web components: </p>
+<ol>
+<li>Click <strong>Components</strong> and then click the <code>JPetStore-DB</code> component.</li>
+<li>Click <strong>Versions</strong>.</li>
+<li>In the list of versions, in the same row as the version that is named <code>1.1</code>, click <strong>Delete</strong> and then click <strong>OK</strong>.You will import this version again later.</li>
+<li>Similarly, delete version <code>1.1</code> of the <code>JPetStore-Web</code> component. </li>
+</ol>
+</li>
+</ol>
+<p>In this lesson, you added components that are based on files in the file system. In a production scenario, you would connect the component to a source-code management system such as Subversion or a build system such as Jenkins.</p>
+<p>On the Components page, you now have three components, each with one version, as shown in the following figure:</p>
+<p><img alt="The three components on the Components tab" src="../../images/webapp_components_b.gif" /></p>
+<p>In a later lesson, you add these components to an application.</p>
+<p>In addition to files and other artifacts, components also contain component processes, which describe how to deploy, install, uninstall, update, or run other tasks on a component. In the next lesson, you create processes that describe how to install the components.</p>
+<p>For more information about creating components, see <a href="../../../com.ibm.udeploy.doc/topics/comp_create/">Creating components</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../webapp_abstract/">Deploying a simple web application</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/webapp_components.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

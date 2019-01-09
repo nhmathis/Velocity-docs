@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/troubleshoot_infocollect/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>General information to collect - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "General information to collect", url: "#_top", children: [
+              {title: "Topology", url: "#topology" },
+              {title: "Product components and versions", url: "#product-components-and-versions" },
+              {title: "Time zones", url: "#time-zones" },
+              {title: "Sending data to IBM Support", url: "#sending-data-to-ibm-support" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="general-information-to-collect">General information to collect</h1>
+<p>Different issues require different set of information to diagnose and solve problems. However, there is a set of general information used to diagnosis all issues.</p>
+<p>When contacting IBM Software Support for assistance with resolving product issues, having topology, product components and version, and time zone information available is helpful.</p>
+<h2 id="topology">Topology</h2>
+<p>It is important that the support representative understands the server topology. You should be able to provide enough information that a graph can be sketched representing the topology. Answers to the following questions provide information about the topology.</p>
+<ul>
+<li>What topology do you use, such as: core, multi-region, high-availability clustered, Blueprint design topology? For information about the types of topologies, see the <a href="../ov_systems/">Systems and topology overview</a> topic.</li>
+<li>Do you use a single-server or high-availability topology?</li>
+<li>What configuration do you use for high-availability, cold-standby or active-active?</li>
+<li>How do you load-balance the topology? Which protocol and scheduling scheme are used?</li>
+</ul>
+<h2 id="product-components-and-versions">Product components and versions</h2>
+<p>Clarify the core product components and their version. For details about the HCL UrbanCode Deploy topology components, see <a href="../ov_systems/">Systems and topology overview</a>.</p>
+<ul>
+<li>The version of the IBM UrbanCode Deploy server can be found in the deploy-server/conf/installed.version file in the <strong>installed.version</strong> property.</li>
+<li>Provide the database product and version being used. If the problem is a performance issue, know the number of allowed parallel connections and active locks. For localization issues, knowing how strings are compared is relevant.</li>
+</ul>
+<p>It is important to understand the network components between different components involved in issues. Because networks might not be reachable, have different latencies, have restrictive firewall rules, load balancers, proxies, single sign-on solutions, and more; it is important to understand the network between different components involved in issues.</p>
+<ul>
+<li>Browser and the IBM UrbanCode Deploy server</li>
+<li>IBM UrbanCode Deploy server and agents or the relay</li>
+<li>IBM UrbanCode Deploy and the database</li>
+<li>IBM UrbanCode Deploy agent and source configuration from which you import</li>
+<li>IBM UrbanCode Deploy client or IBM UrbanCode Deploy post-build publisher</li>
+<li>IBM UrbanCode Deploy Jenkins publisher and server</li>
+</ul>
+<h2 id="time-zones">Time zones</h2>
+<p>In a globalized work environment, the various product components and users might be located in different time zones creating log data for the issue to have different timestamps. For example, an user reports a problem with times from their time zone, the server writes the time to the log files in its time zone, and the agent on which step runs is in a different time zone.</p>
+<h2 id="sending-data-to-ibm-support">Sending data to IBM Support</h2>
+<p>The data you collect needs to be in a format that IBM Support specialists can use. The following table outlines the data type and the format for sending to IBM Support.</p>
+<table>
+<thead>
+<tr>
+<th>Data Type</th>
+<th>File Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Documents</td>
+<td>PDF</td>
+</tr>
+<tr>
+<td>Logs</td>
+<td>Plain text</td>
+</tr>
+<tr>
+<td>Compressed files</td>
+<td>ZIP, TAR, GZ, TAR.GZ,.BZ2</td>
+</tr>
+<tr>
+<td>Images</td>
+<td>PNG, JPG</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../c_troubleshooting_and_support_resources/">General product troubleshooting</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/troubleshoot_infocollect.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

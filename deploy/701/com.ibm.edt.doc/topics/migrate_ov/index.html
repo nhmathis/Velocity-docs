@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/migrate_ov/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Moving blueprints and configuration files - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Moving blueprints and configuration files", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="moving-blueprints-and-configuration-files">Moving blueprints and configuration files</h1>
+<p>After you upgrade from a version of the blueprint design server earlier than version 6.1.1, you must move blueprints and configuration files from the file system to the Git repository.</p>
+<p>To move the blueprints and configuration files, you must have administrative access to the blueprint designer. Complete the following steps after the blueprint design server is upgraded to version 6.1.1.</p>
+<p>When you create blueprints and configuration files in versions of the blueprint designer earlier than version 6.1.1, the blueprints and configuration files are stored on the file system of the blueprint design server, in the workspace folder in the blueprint design server installation directory. After you upgrade to the blueprint design server Version 6.1.1, blueprints and configuration files are stored in Git repositories in the repositories folder in the blueprint design server installation directory. Existing blueprints and configuration files are not available until you move them from the file system to the Git repository.</p>
+<ol>
+<li>Log in to the blueprint designer. Log in from the user account that you plan to use to work with the blueprints and configuration files. </li>
+<li>Click <strong>Repositories</strong>.</li>
+<li>Click <strong>Repositories</strong> in the list. The repository list opens and No Content is displayed.</li>
+<li>Click <strong>Init Repository</strong>, and then type default for the <strong>New folder</strong> name. </li>
+<li>Click <strong>Submit</strong>. The default folder is created in a directory structure under the repositories folder in the blueprint design server installation directory. The exact path is determined by the user name. For a user named user1, the default folder is created in blueprint_design_server_installation_directory/workspace/repositories/us/user1_id/OrionContent. The default installation directory is /opt/ibm-ucd-patterns on Linux™ and C:\Program Files\ibm-ucd-patterns on Windows™.</li>
+<li>Log in to a command line on the computer that is running the blueprint design server. You must log in with administrator privileges.</li>
+<li>Copy all files from blueprint_design_server_installation_directory/workspace to the default folder that you created in step 5. Additionally, ensure that the owner of the files and directories is the root account.</li>
+</ol>
+<p>The blueprints and configuration files that were stored in the workspace folder are now available to the user account where you created the default repository.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_upgrading/">Upgrading and migrating</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/migrate_ov.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

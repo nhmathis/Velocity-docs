@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/ref_create_steptype/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Plug-in steps the step-type element - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Plug-in steps: The step-type element", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="plug-in-steps-the-step-type-element">Plug-in steps: The <code>step-type</code> element</h1>
+<p>You define plug-in steps with the <code>step-type</code> element; each <code>step-type</code> element represents a single step in the HCL® UrbanCode™ Deploy process editor.</p>
+<p>A <code>step-type</code> element has a name attribute and up to four child elements:</p>
+<ul>
+<li><code>description</code></li>
+<li><code>properties</code></li>
+<li><code>command</code></li>
+<li><code>post-processing</code></li>
+</ul>
+<p>The mandatory name attribute identifies the step. The description and name are shown in the web application and on informational pages for the plug-in. The contents of the description determine which icon is displayed with the step.</p>
+<pre><code>&lt;step-type name=&quot;Start&quot;&gt;
+&lt;description&gt;Start Apache HTTP server&lt;/description&gt;
+
+</code></pre>
+
+<p><strong>Note:</strong> A step name cannot contain the forward slash (/) character.</p>
+<ul>
+<li><strong><a href="../ref_create_properties/">Step properties: the properties element</a></strong><br />
+The <code>properties</code> element is a container for properties, which are defined with the <code>property</code> tag.</li>
+<li><strong><a href="../ref_create_icons/">Plug-in step icons</a></strong><br />
+A keyword in the description determines which icon is displayed in the plug-in step.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../reference_plugins_create/">Creating plug-ins</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/ref_create_steptype.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

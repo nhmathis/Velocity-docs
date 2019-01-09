@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/zos_start_agent/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Starting z/OS agents from the z/OS UNIX command line - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Starting z/OS agents from the z/OS UNIX command line", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="starting-zos-agents-from-the-zos-unix-command-line">Starting z/OS agents from the z/OS UNIX command line</h1>
+<p>The UCD z/OS agent can be started from ISPF as a started task or from the z/OS UNIX command line. To start an agent from ISPF as a started task refer to <a href="../run_agent/">Starting agents</a>. To start the z/OS agent from the z/OS UNIX command line, follow this procedure.</p>
+<p>Make sure that the server is running. Also, if the agent runs through an agent relay, make sure that the relay is started.</p>
+<ol>
+<li>Login to the z/OS UNIX shell using the TSO OMVS command or by using a TELNET client. </li>
+<li>Go to the agent_install_dir/bin directory. </li>
+<li>
+<p>Run the following script: </p>
+<p><code>./agent start</code></p>
+<p>To stop the agent, run the following script from the same directory:</p>
+<p><code>./agent.stop</code></p>
+</li>
+</ol>
+<p>When the agent is started from the command line, the current login user ID is used as the agent user ID.</p>
+<p><strong>Parent topic:</strong> <a href="../runProduct/">Starting HCL UrbanCode Deploy</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/zos_start_agent.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_azure_publicip/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM Azure PublicIP - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::Azure::PublicIP", url: "#_top", children: [
+              {title: "Example", url: "#example" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmazurepublicip">IBM::Azure::PublicIP</h1>
+<p>This resource type represents a public IP address on an Microsoft Azure image.</p>
+<p>This resource type extends the OpenStack resource type <code>OS::Neutron::FloatingIP</code>.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>allocation_method</td>
+<td>String</td>
+<td>False</td>
+<td>Extended</td>
+<td>Defines whether the IP address is static or dynamic. Valid values are <code>Dynamic</code> (the default) and <code>Static</code>.</td>
+</tr>
+<tr>
+<td>domain_name_label</td>
+<td>String</td>
+<td>False</td>
+<td>Extended</td>
+<td>The domain name label. The domain name label and regionalized DNS zone make up the FQDN for the public IP address. If a domain name label is specified, a DNS record is created for the public IP in the Azure DNS system.</td>
+</tr>
+<tr>
+<td>idle_timeout_in_minutes</td>
+<td>String</td>
+<td>False</td>
+<td>Extended</td>
+<td>The idle timeout of the public IP address.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>True</td>
+<td>Extended</td>
+<td>The public IP address name.</td>
+</tr>
+<tr>
+<td>port_id</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The network interface to associate with this public IP address.</td>
+</tr>
+<tr>
+<td>region</td>
+<td>String</td>
+<td>True</td>
+<td>Extended</td>
+<td>The Azure location. The blueprint designer specifies this property automatically, based on the selected region.</td>
+</tr>
+<tr>
+<td>resource_group</td>
+<td>String</td>
+<td>True</td>
+<td>Extended</td>
+<td>The resource group name.</td>
+</tr>
+<tr>
+<td>reverse_fqdn</td>
+<td>String</td>
+<td>False</td>
+<td>Extended</td>
+<td>A user-visible, fully qualified domain name that resolves to this public IP address. If this property is specified, a PTR DNS record is created pointing from the IP address in the <code>in-addr.arpa</code> domain to the reverse FQDN.</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>List</td>
+<td>False</td>
+<td>Extended</td>
+<td>A list of name-value pairs to set as tags on the resource.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fqdn</td>
+<td>String</td>
+<td>The fully qualified domain name of the public IP address.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of the IP address.</td>
+</tr>
+<tr>
+<td>public_ip</td>
+<td>String</td>
+<td>The public IP address.</td>
+</tr>
+<tr>
+<td>public_ip_address_id</td>
+<td>String</td>
+<td>The Azure ID of the IP address.</td>
+</tr>
+<tr>
+<td>show</td>
+<td>String</td>
+<td>The details of the public IP address.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<p>This example creates a public IP address with a tag and associates it to an existing network interface.</p>
+<pre><code>  azure_public_ip:
+    type: IBM::Azure::PublicIP
+    properties:
+      port_id: test-azure-nic
+    metadata:
+      azure_properties:
+        resource_group: test-rg
+        name: testpublicip1
+        tags:
+          tag2: iptag
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_azure_ov/">Microsoft Azure resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_azure_publicip.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/settings_postScripts/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Storing reusable post-processing scripts - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Storing reusable post-processing scripts", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="storing-reusable-post-processing-scripts">Storing reusable post-processing scripts</h1>
+<p>You can store post-processing scripts on the server so you can reuse them in component processes and in generic processes.</p>
+<p>When a step finishes, the agent runs the post-processing script for that step. When the agent runs the script, it first loads the server log file. It finds the exit code property of the target step with regular expressions that are defined in the script. It then applies any actions that are defined in the script before it runs the next step.</p>
+<p>The HCL® UrbanCode™ Deploy server log file is normally found in the following location: server_installation_directory/var/log/deployserver.out.</p>
+<ol>
+<li>
+<p>Click <strong>Settings</strong> > <strong>Post Processing Scripts</strong> and then click <strong>Create Script</strong>. The Edit Script window opens, as shown in the following figure.</p>
+<p><img alt="The Edit Script window, showing fields for the name and description of the script and for the content of the script" src="../../images/settings_postscripts_a.gif" /></p>
+</li>
+<li>
+<p>Specify a name for the process step.</p>
+</li>
+<li>
+<p>Enter or paste the script into the <strong>Script Body</strong> field. See the roll-over help next to the field for information about the properties and variables that are available for user-defined scripts.</p>
+<p>Post-processing scripts must set the Status property to specify the status of the script. The script can specify any value for the Status property. For example, to specify that the script was a success, run the following command in the post-processing script:</p>
+<p><code>properties.put("Status","Success");</code></p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/comp_postProcess/">Post-processing scripts</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/settings_postScripts.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

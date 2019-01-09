@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/install_database_mysql_bds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring a MySQL or MariaDB database for the blueprint design server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring a MySQL or MariaDB database for the HCL UrbanCode Deploy blueprint design server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-a-mysql-or-mariadb-database-for-the-hcl-urbancode-deploy-blueprint-design-server">Configuring a MySQL or MariaDB database for the HCL UrbanCode Deploy blueprint design server</h1>
+<p>To use a MySQL or MariaDB database with the blueprint design server, before you install the blueprint design server, install the database and provide the Java™ Database Connectivity (JDBC) JAR file for the blueprint design server installation process.MySQL and MariaDB are similar databases. Which one you use depends on your operating system and version.</p>
+<p>Before you install the blueprint design server, install the database. If you are evaluating HCL® UrbanCode™ Deploy, you can install the database on the same system as the blueprint design server.</p>
+<p>For example, the command to install MariaDB on a system that runs Red Hat Enterprise Linux™ version 7 resembles the following example:</p>
+<pre><code>yum install -y mariadb mariadb-server
+</code></pre>
+
+<p>To set the database to run automatically and start the MariaDB database on a Linux system that uses <code>systemctl</code>, run the following command:</p>
+<pre><code>systemctl enable mariadb; systemctl start mariadb
+</code></pre>
+
+<p><strong>Note:</strong> The database must be encoded in UTF-8.</p>
+<p>Follow these steps to set the database encoding:</p>
+<ol>
+<li>On the system that hosts the database, open MySQL or MariaDB configuration file. The location of the file depends on the operating system. On Linux, the file is named my.cnf, and many distributions put the file in the folder /etc or /etc/mysql. On Windows, the file is named my.ini.</li>
+<li>
+<p>In the <code>[mysqld]</code> section of the configuration file, add the following lines:</p>
+<p><code>character-set-server=utf8
+character-set-filesystem=utf8</code></p>
+</li>
+<li>
+<p>Restart the database. For example, to restart MariaDB on Linux, use this command:</p>
+<p><code>systemctl restart mariadb</code></p>
+</li>
+<li>
+<p>Open a command-line window and log in to the database as a user with table-creation privileges. For example, run this command from the command line:</p>
+<p><code>mysql -u root</code></p>
+<p>The command line shows a prompt that looks like this example:</p>
+<p><code>MariaDB&gt;</code></p>
+</li>
+<li>
+<p>Create a user for the blueprint design server to use and assign the user a password, as in the following example command. This example creates a user that is named <code>ibm_ucdp</code> with the password as a <code>ibm_ucdp</code>.</p>
+<p><code>CREATE USER 'ibm_ucdp'@'localhost' IDENTIFIED BY 'password';</code></p>
+<p>Remember this user name and password because you must have them when you install the blueprint design server.</p>
+</li>
+<li>
+<p>Create a database for the blueprint design server, as in the following example command: </p>
+<p><code>CREATE DATABASE ibm_ucdp;</code></p>
+</li>
+<li>
+<p>Grant permissions for the user to work with the database: </p>
+<p><code>GRANT ALL ON ibm_ucdp.* TO 'ibm_ucdp'@'%' IDENTIFIED BY 'password' WITH GRANT OPTION;</code></p>
+</li>
+<li>
+<p>Type <code>quit</code> to exit the database command line. </p>
+</li>
+<li>Obtain the MySQL or MariaDB JDBC driver. </li>
+<li>Either note the location of the JDBC JAR file or place the file in the installation_directory/ibm-ucd-patterns-install/web-install/media/server/opt/tomcat/lib folder. </li>
+<li>Begin blueprint design server installation. See <a href="../install_server_bds/">Installing the blueprint design server</a>. When you are prompted for the database type, enter mysql. </li>
+<li>Provide the JDBC driver class that the blueprint design server uses to connect to the database. The default value is <code>com.mysql.jdbc.Driver</code>.</li>
+<li>
+<p>Next, provide the JDBC connection string. Typically, it is similar to the following code:</p>
+<p><code>jdbc:mysql://DB\_URL:DB\_PORT/DB\_NAME</code></p>
+<p>For example, the connection string to database that is on the same computer as the blueprint design server and that uses the default port resembles the following code:</p>
+<p><code>jdbc:mysql://localhost:3306/ibm_ucdp</code></p>
+</li>
+<li>
+<p>Finish by entering the database user name and password. </p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../install_database_bds_ov/">Blueprint design server database configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/install_database_mysql_bds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

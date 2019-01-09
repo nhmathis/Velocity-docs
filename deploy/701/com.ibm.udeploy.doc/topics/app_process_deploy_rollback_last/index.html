@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_process_deploy_rollback_last/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Rolling back components that fail to deploy - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Rolling back components that fail to deploy", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="rolling-back-components-that-fail-to-deploy">Rolling back components that fail to deploy</h1>
+<p>If an application process fails to deploy a component, you can add a rollback step to the process to reverse the deployment. In this case, you use the <strong>Replace with Last Deployed</strong> option.</p>
+<p>For a video demonstration of rolling back components, see <a href="https://www.youtube.com/watch?v=8hH25vJ2f3E">Rollback Scenarios in IBM UrbanCode™ Deploy</a>.</p>
+<p>To roll back a component in this way, you add a step in the application process that runs if the component is not deployed. This <strong>Rollback Component</strong> step with the <strong>Replace with Last Deployed</strong> option redeploys the previously installed component version. The specified inventory still shows the new version and that the environment is noncompliant because the deployment of that version failed.</p>
+<p>This method works best if you want to roll back a component within the same application process that attempted to deploy it. For example, you can install a component, run tests on it, and if the tests fail, roll back the component.</p>
+<p>If the component is already installed and you want to switch to a different version, you can do one of these procedures:</p>
+<ul>
+<li>Install the new component version over the existing component version.</li>
+<li>
+<p>Use the uninstall process for the component to remove the unwanted version.</p>
+<p>Create a rollback process that uses the <strong>Remove Undesired Incremental Versions</strong> option to roll back to a snapshot. See <a href="../app_process_deploy_rollback/">Rolling back to a snapshot</a>.</p>
+</li>
+<li>
+<p>In an application process, add a step to deploy a component version as usual. </p>
+</li>
+<li>In the process, add a <strong>Rollback Component</strong> step. </li>
+<li>
+<p>In the <strong>Rollback Component</strong> step, specify the following information: </p>
+<ul>
+<li>
+<p><strong><em>*Component</em></strong>*</p>
+<p>Specify the component to roll back.</p>
+</li>
+<li>
+<p><strong><em>*Component process</em></strong>*</p>
+<p>Specify the process to run on the previously deployed version. In most cases, specify the deployment process for the component.</p>
+</li>
+<li>
+<p><strong><em>*Rolback Type</em></strong>*</p>
+<p>Select <strong>Replace with Last Deployed</strong>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Set a failure link from the deployment step to the rollback step so that the rollback step runs only if the deployment fails. </p>
+</li>
+</ul>
+<p>Assume that version 1 of a component is deployed to an environment. You want to install version 2, but if that installation fails, you want to roll back to version 1. The application process looks like the following example. In this application process, the first step deploys the component version as usual. If that step fails, the rollback step runs with the <strong>Replace with Last Deployed</strong> option. In this case, the rollback step deploys version 1, which is the version that was in the inventory before the process started. However, the inventory is still noncompliant because you tried to deploy version 2 and failed.</p>
+<p><img alt="A simple application process that has a rollback step; this step runs if a component deployment step fails" src="../../images/app_process_deploy_rollback_last_a.gif" /></p>
+<p><strong>Parent topic:</strong> <a href="../app_process/">Application processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_process_deploy_rollback_last.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

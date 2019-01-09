@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/agent_properties/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Agent installation properties - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Agent installation properties", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="agent-installation-properties">Agent installation properties</h1>
+<p>The agent properties in the installed.properties file control details about the agent, including how it connects to the server.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Default value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent.HttpFailoverHandler.disabled</td>
+<td><code>null</code></td>
+<td>If this property is set to anything other than <code>true</code>, the agent recreates its HTTP proxy connection when it receives JMS messages from a host other than the one configured in http.proxy.host. Setting this property to <code>true</code> disables this behavior.</td>
+</tr>
+<tr>
+<td>agent.jms.disable_full_encryption</td>
+<td><code>false</code></td>
+<td>If this property is set to <code>true</code>, the agent does not use end-to-end encryption for the JMS protocol. See <a href="../ssl_addl_security_2/">Ensuring end-to-end JMS encryption</a>.</td>
+</tr>
+<tr>
+<td>agentcomm.server.uri</td>
+<td>```</td>
+<td></td>
+</tr>
+<tr>
+<td>random:(wss://ucd1.example.com:7919,wss://ucd2.example.com:7919)</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<pre><code>
+ |For Web agents, the WebSocket connection that is used to communicate with the server. The WebSocket secure URL must have the format `wss://host-or-ip:port`. Each server must have a unique URL, and every server in a HA cluster must be able to connect to this URL.|
+|agentcomm.proxy.uri| ```
+random:(http://relay1:20080,http://relay2:20080
+</code></pre>
+
+<p>|For Web agents, the WebSocket connection that is used to communicate with an agent relay.|
+|com.urbancode.shell.impersonation.unix.scriptLocation|None|The location to which the impersonation scripts are written before they are run on the agent. For example, to write scripts to the folder /opt/ibm/ucd/scripts, use this code:```
+com.urbancode.shell.impersonation.unix.scriptLocation=/opt/ucd/scripts</p>
+<pre><code>
+|
+|com.urbancode.shell.impersonation.unix.scriptMode|None|This property represents the file permissions to use for the scripts that are written for each impersonation step. For example, to set the file permissions to 0750, which means that the owner can read, write, and execute, and the group can read and execute but not write, use this code:```
+com.urbancode.shell.impersonation.unix.scriptMode=0750
+</code></pre>
+
+<p>|
+|com.urbancode.shell.impersonation.unix.scriptPostExecuteAction|None|With this property, you can specify a script to run after each step that uses impersonation. For example: ```
+com.urbancode.shell.impersonation.unix.scriptPostExecuteAction=/opt/ucd/agent/bin/sudoPostAction.sh</p>
+<pre><code>
+|
+|com.urbancode.shell.impersonation.unix.scriptPreExecuteAction|None|With this property, you can specify a script to run before each step that uses impersonation. For example: ```
+com.urbancode.shell.impersonation.unix.scriptPreExecuteAction=/opt/ucd/agent/bin/sudoPreAction.sh
+</code></pre>
+
+<p>|
+|java.home|None.|The location of the installation of Java™ to use.|
+|locked/agent.brokerUrl|<code>failover\:(ah3\://hostname\:7918,ah3\://localhost\:7918)</code>|This property specifies the server or relay to connect to, in the form of a list of one or more ActiveMQ brokers. You do not specify this property manually at installation time; it is added automatically during installation or upgrade based on the values of the locked/agent.jms.remote.host and locked/agent.jms.remote.port properties. If you specify a value for this property as described in <a href="../agent_install_silent/">Installing agents in silent mode</a> and install or upgrade the agent, the installation process overwrites the value. After the agent is installed, you can update this property. This property must list at least one server or agent relay. The property can contain only servers or only agent relays, not both. In a simple scenario, the property lists the server that the agent connects to, such as in the following example:</p>
+<pre><code>locked/agent.brokerUrl=failover\:(ah3\://ucd.example.com\:7918)
+</code></pre>
+
+<p>This property can refer to multiple relays or servers by separating them with commas. This property cannot refer to load balancers. It can refer to a DNS round robin that resolves to one or more agent relays.</p>
+<p><strong>Note:</strong> To assemble this property correctly, you must also specify hosts in the locked/agent.jms.remote.host property and the ports for those hosts in the locked/agent.jms.remote.port property. Each entry in the locked/agent.jms.remote.host property must have a matching value in the locked/agent.jms.remote.port, even if multiple brokers use the same port.</p>
+<p>To configure the agent to contact other servers or agent relays in the case of a failover, see <a href="../configure_agent_failover/">Configuring agents for failover</a>.</p>
+<p>For information on the format of this property, see <a href="http://activemq.apache.org/failover-transport-reference.html">http://activemq.apache.org/failover-transport-reference.html</a>.</p>
+<p>|
+|locked/agent.home|<code>/opt/urbancode/ucdagent</code>|The installation directory for the agent.|
+|locked/agent.http.proxy.host|None.|The host name or IP address of the initial proxy connection, if a proxy is used. This information is used if the agent connects to an agent relay. This property cannot be the host name of a load balancer.If agent.HttpFailoverHandler.disabled is set to anything other than true, the agent can change to a new proxy without updating this property.</p>
+<p>|
+|locked/agent.http.proxy.port|20080|The HTTP proxy port of the agent relay, if used. See the information about the property locked/agent.http.proxy.host.|
+|locked/agent.initial.teams|None.|Use this option to assign a team to your agent. The value to specify is the team name|
+|locked/agent.jms.remote.host|<code>localhost</code>|The host name or IP address of the server or agent relay to which the agent connects.This property is used in installation and upgrades. When you install an agent silently, you specify this property in the silent installation file. The installation program uses this value to populate the locked/agent.brokerUrl property.</p>
+<p>This property is not used on an installed agent. Instead, the locked/agent.brokerUrl property specifies the server or relay that the agent connects to.</p>
+<p>|
+|locked/agent.jms.remote.port|7918|For JMS agents, the port that the agent uses to connect to the server or agent relay. This property is used in installation and upgrades. When you install an agent silently, you specify this property in the silent installation file. The installation program uses this value to populate the locked/agent.brokerUrl property.</p>
+<p>This property is not used on an installed agent. Instead, the locked/agent.brokerUrl property specifies the server or relay that the agent connects to.</p>
+<p><strong>Note:</strong> This property must have the same number of entries as the locked/agent.jms.remote.host property, even if some of the brokers use the same ports. When the agent is installed, the installation program checks that the locked/agent.jms.remote.host and locked/agent.jms.remote.port properties have the same number of entries. If they do not, the installation fails. When the agent is upgraded, if the locked/agent.brokerUrl property is not specified, the upgrade process recreates the locked/agent.brokerUrl property based on the locked/agent.jms.remote.host and locked/agent.jms.remote.port properties.</p>
+<p>|
+|locked/agent.keystore|/opt/urbancode/keys/common.keystore|The path to the agent keystore.|
+|locked/agent.keystore.pwd|<code>changeit</code>|The agent keystore password.|
+|locked/agent.mutual_auth|<code>false</code>|Specify <code>true</code> to require mutual authentication between servers and agents. See <a href="../ssl_mutual_auth/">Configuring mutual authentication</a>.|
+|locked/agent.name|<code>ucdagent</code>|The name of the agent. Agent names must be unique. You cannot change an agent name by editing this value. Rename agents in the graphical user interface by clicking the <strong>Edit</strong> icon that is associated with an agent in the resource tree.|
+|locked/agent.service|<code>true</code>|Specify <code>true</code> to configure the agent to run as a service on Windows™.|
+|locked/agent.service.name|<code>ucdagent</code>|The name of the agent service. This property applies only when the agent is installed as a service on Windows.|
+|locked/agent.service.login|.\\localsystem|The service user account. The account must have the correct permissions to run a service. This property applies only when the agent is installed as a service on Windows.|
+|locked/agent.service.password|<code>nopass</code>|The password that is associated with the service user. This property applies only when the agent is installed as a service on Windows.|
+|locked/agent.service.autostart|<code>false</code>|Specify <code>true</code> to configure the agent to run automatically when Windows starts. This property applies only when the agent is installed as a service on Windows.|
+|verify.server.identity|<code>false</code>|Specify <code>true</code> to configure the agent to reject self-signed certificates when connecting to the server. See <a href="../ssl_addl_security/">Enabling server identity verification</a>.|
+|server.token| | An authentication token to be used to import z/OS component versions. The token is encrypted after the first time it is used.</p>
+<p>|
+|server.url|<code>https://0.0.0.0:8443</code>|The web URL for the HCL UrbanCode Deploy server.|
+|repository.type|<code>CODESTATION</code>| Specify <code>CODESTATION</code> to store versions in the HCL UrbanCode Deploy.</p>
+<p>Specify HFS to store versions in an HFS folder in the LPAR where the version is imported.</p>
+<p>For more information, see <a href="../codestation_choose_plan/">Choosing a CodeStation and planning storage</a>.</p>
+<p>This property applies only when the agent is installed on IBM z/OS</p>
+<p>|</p>
+<p><strong>Parent topic:</strong> <a href="../agent_install_ov/">Installing agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/agent_properties.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

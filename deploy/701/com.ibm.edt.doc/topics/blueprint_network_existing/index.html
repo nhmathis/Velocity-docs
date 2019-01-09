@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_network_existing/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Attaching resources to existing networks - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Attaching resources to existing networks", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="attaching-resources-to-existing-networks">Attaching resources to existing networks</h1>
+<p>Existing internal and external networks are included in the blueprint designer palette. You can attach new resources, such as virtual images, to those network resources.</p>
+<p>Verify that you are connected to the correct cloud project. The blueprint designer palette shows network resources for the current cloud project.</p>
+<p>A common use case is to provision new virtual images on an existing network:</p>
+<ol>
+<li>In the blueprint designer, create one or more virtual image resources in a blueprint.</li>
+<li>From the <strong>Networks</strong> drawer of the palette, drag a network to the blueprint.</li>
+<li>
+<p>Drag the virtual images to the network, or drag a connector from the images to the network. The images are linked to the network; when you provision an environment from the blueprint, the new virtual images are attached to the network. The following image shows a simple virtual image that is connected to a network.</p>
+<p><img alt="A blueprint with a single virtual image that is connected to a network" src="../../images/blueprint_network_existing_a.gif" /></p>
+</li>
+<li>
+<p>If the network has more than one subnet, from the Choose subnet window, select an available subnet.</p>
+<p><strong>Note:</strong> If you are using Amazon Web Services, the subnet you select must be configured in the availability zone that you are using.</p>
+</li>
+</ol>
+<p>The images can access the network and the resources that are on the network. For example, many virtual networks have an internal network and an external network. The external network provides public IP addresses to images that require IP addresses. In this case, you often have to connect a virtual image to an internal network and then retrieve a floating IP address from the external network. In this case, follow these general steps. These steps are appropriate for OpenStack-based clouds and for Amazon AWS.</p>
+<ol>
+<li>Add virtual images to the blueprint.</li>
+<li>Add the internal network to the blueprint.</li>
+<li>Connect the virtual images to the internal network.</li>
+<li>
+<p>At the lower right of an image, click <strong>No Elastic IPs</strong> <img alt="" src="../../images/icons/ip_not_set.gif" />. The lower right of the image changes to show that it has an elastic IP <img alt="" src="../../images/icons/ip_set.gif" />. Also, the source code for the blueprint includes a parameter that represents the external network, as shown in the following blueprint code:</p>
+<p><code>public_network_id:
+  type: string
+  description: Generated for floating IP
+  default: 'TODO'</code></p>
+<p>At provisioning time, the blueprint designer prompts you for the name of this external network.</p>
+</li>
+<li>
+<p>To set the default network that represents this external network (that is, the network that provides elastic IP addresses), follow these steps:</p>
+<ol>
+<li>
+<p>Add the external network from the palette to the blueprint. Like the other existing networks, the external network is not displayed as a resource but as a reference in the blueprint code, as in the following example:</p>
+<p><code>## REFERENCE {"d5238086-cab5-4b4f-b0b6-1234bac9ef28":{"type": "OS::Neutron::Net", "properties": {"name": "my_external_network", "network_id": "d5238086-cab5-4b4f-b0b6-1234bac9ef28"}}}</code></p>
+</li>
+<li>
+<p>From the reference, copy the network ID to the parameter that represents the external network. For example, if you use the network in the previous code, the parameter looks like this code:</p>
+<p><code>public_network_id:
+  type: string
+  description: Generated for floating IP
+  default: 'd5238086-cab5-4b4f-b0b6-1234bac9ef28'</code></p>
+<p>When you provision environments from this blueprint, this network is the default source of floating IP addresses.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>SoftLayer® networks are modeled slightly differently. To connect a virtual image to an external network on a SoftLayer cloud, you must connect the image to both the internal and external networks. Then, you click <strong>No Elastic IPs</strong> <img alt="" src="../../images/icons/ip_not_set.gif" /> and select the network from which the image gets an IP address, as shown in the following figure.</p>
+<p><img alt="Selecting the network that provides IP addresses when an image is connected to more than one network" src="../../images/blueprint_network_existing_b.gif" /></p>
+<p>When you provision an environment from the blueprint, the images are connected to the networks.</p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_network_ov/">Modeling networks</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_network_existing.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

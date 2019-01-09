@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/agent_confgure/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Reconfiguring agents - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Reconfiguring agents", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="reconfiguring-agents">Reconfiguring agents</h1>
+<p>You can use the agent configuration script to change agents. For example, you can connect an agent to a new server.</p>
+<p>By default, the agent reconfiguration script is in the location agentInstall/bin, where agentInstall is the installation location for the agent. The default installation location is /opt/ucd/agent.</p>
+<p>To run the script, go to the agentInstall/bin folder and run the following command:</p>
+<ul>
+<li>
+<p>Linux™:</p>
+<p><code>./configure-agent hostname port agentName</code></p>
+</li>
+<li>
+<p>Windows™:</p>
+<p><code>./configure-agent.cmd hostname port agentName</code></p>
+</li>
+</ul>
+<p><strong>Important:</strong> You must specify each parameter in this command. If you do not want to change one of the values, you must specify the existing value for the parameter.</p>
+<ul>
+<li>
+<p><strong><code>hostname</code></strong></p>
+<p>Specify the host name of the HCL® UrbanCode™ Deploy server that the agent connects to. You can specify a new server or specify the existing server to keep the value unchanged. You cannot change this value on an agent that connects to an agent relay. Also, you cannot change a host name that refers to a server to one that refers to an agent relay.</p>
+</li>
+<li>
+<p><strong><code>port</code></strong></p>
+<p>Specify the server port to connect to. The default value is <code>7918</code>. You can specify a new value or specify the existing value to keep the value unchanged.</p>
+</li>
+<li>
+<p><strong><code>agentName</code></strong></p>
+<p>Specify the name for the agent. This name appears in the list of agents on the server. You can specify a new value or specify the existing value to keep the name unchanged.</p>
+</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../agent_install_ov/">Installing agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/agent_confgure.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

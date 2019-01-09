@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/dbinstall_sqlserver/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring a Microsoft SQL Server database - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring a Microsoft SQL Server database for the HCL UrbanCode Deploy server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-a-microsoft-sql-server-database-for-the-hcl-urbancode-deploy-server">Configuring a Microsoft SQL Server database for the HCL UrbanCode Deploy server</h1>
+<p>To use an SQL Server database with the server, before you install the server, install the SQL Server database and provide the driver file for the server installation process.</p>
+<p>Before you install the HCL® UrbanCode™ Deploy server, install an SQL Server database. Specify case-sensitive collation for the database. If you are evaluating HCL UrbanCode Deploy, you can install the database on the same system as the HCL UrbanCode Deploy server.</p>
+<p>When you install HCL UrbanCode Deploy, you need the SQL Server connection information, and a user account with table-creation privileges.</p>
+<p><strong>Note:</strong> The user account cannot have the sysadmin role.</p>
+<p>For example, the commands to create a database, create an SQL server user, and configure the database, might look like the following example:</p>
+<pre><code>CREATE DATABASE ibm_ucd;
+
+USE ibm_ucd;
+
+CREATE LOGIN ibm_ucd WITH PASSWORD = 'password';
+
+CREATE USER ibm_ucd FOR LOGIN ibm_ucd WITH DEFAULT_SCHEMA = ibm_ucd;
+
+CREATE SCHEMA ibm_ucd AUTHORIZATION ibm_ucd;
+
+GRANT ALL TO ibm_ucd;
+</code></pre>
+
+<p><strong>Note:</strong> It is recommended that the database be encoded in UTF-8. Changing the database to a case-sensitive collation is also recommended.</p>
+<ol>
+<li>
+<p>Obtain the SQL Server JDBC driver files from the Microsoft™ site. </p>
+<p>When multiple drivers are available, you might need to consult with the database provider to determine which driver to use. The JDBC driver version that you must use might depend on the version of the database and the version of Java™ used by the HCL UrbanCode Deploy server.</p>
+</li>
+<li>
+<p>Put the JDBC JAR file to installer_directory\lib\ext. </p>
+</li>
+<li>Begin server installation. See <a href="../serverInstall/">Installing the server</a>. When you are prompted for the database type, enter sqlserver. </li>
+<li>Provide the JDBC driver class HCL UrbanCode Deploy uses to connect to the database.The default value is <code>com.microsoft.sqlserver.jdbc.SQLServerDriver</code>.</li>
+<li>
+<p>Next, provide the JDBC connection string.The format depends on the JDBC driver. Typically, it is similar to the following code:</p>
+<p><code>jdbc:sqlserver://DB\_URL:DB\_PORT;databaseName=DB\_NAME</code></p>
+<p>For example, the connection string to database that is on the same computer as the HCL UrbanCode Deploy server and that uses the default port resembles the following code:</p>
+<p><code>jdbc:sqlserver://localhost:1433;databaseName=ibm_ucd</code></p>
+<p>If your database server uses integrated security, include the integratedSecurity parameter, as in the following example:</p>
+<p><code>jdbc:sqlserver://database\_server:1433;databaseName=ibm_ucd;integratedSecurity=true;</code></p>
+<p><strong>Note:</strong> Before using the <code>integratedSecurity=true</code> option, place the <code>sqljdbc_auth.dll</code> file in the <code>\bin</code> directory of your JRE. The file can be found in the <code>\auth\x86</code> or <code>\auth\x64</code> directory of the SQL Server installation files.</p>
+</li>
+<li>
+<p>Finish by entering the database user name and password. </p>
+</li>
+<li>
+<p>Before you start the server, log into the database and run the following command: </p>
+<p><code>ALTER DATABASE database\_name SET READ_COMMITTED_SNAPSHOT ON</code></p>
+<p>Use the name of the database for <code>database\_name</code>.</p>
+</li>
+<li>
+<p>Start the server. </p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../DBinstall/">Installing the server database</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/dbinstall_sqlserver.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

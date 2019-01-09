@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/ref_heat_types_ec2_ov/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Amazon Elastic Compute Cloud resource types", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="amazon-elastic-compute-cloud-resource-types">Amazon Elastic Compute Cloud resource types</h1>
+<p>These Heat resource types represent elements on Amazon Elastic Compute Cloud (EC2).</p>
+<p>To install these types into a Heat engine, see <a href="../../../com.ibm.udeploy.install.doc/topics/extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>.</p>
+<ul>
+<li><strong><a href="../res_ibm_ec2_alarm/">IBM::EC2::Alarm</a></strong><br />
+This resource type represents an alarm on Amazon Elastic Compute Cloud. It extends the type OS::Ceilometer::Alarm.</li>
+<li><strong><a href="../res_ibm_ec2_autoscalinggroup/">IBM::EC2::AutoScalingGroup</a></strong><br />
+This resource type represents an automatic scaling group on Amazon Elastic Compute Cloud. It extends the type OS::Heat::AutoScalingGroup.</li>
+<li><strong><a href="../res_ibm_ec2_autoscalingpolicy/">IBM::EC2::AutoScalingPolicy</a></strong><br />
+This resource type represents an automatic scaling policy on Amazon Elastic Compute Cloud. It extends the type OS::Heat::ScalingPolicy.</li>
+<li><strong><a href="../res_ibm_ec2_eip/">IBM::EC2::EIP</a></strong><br />
+This resource type represents an elastic IP (EIP) address on Amazon Elastic Compute Cloud. It extends the type OS::Neutron::FloatingIP.</li>
+<li><strong><a href="../res_ibm_ec2_eipassociation/">IBM::EC2::EIPAssociation</a></strong><br />
+This resource type represents an elastic IP address (EIP) association on Amazon Elastic Compute Cloud. It extends the type OS::Neutron::FloatingIPAssociation.</li>
+<li><strong><a href="../res_ibm_ec2_internetgateway/">IBM::EC2::InternetGateway</a></strong><br />
+This resource type represents an Internet gateway on Amazon Elastic Compute Cloud. It extends the type OS::Neutron::RouterGateway.</li>
+<li><strong><a href="../res_ibm_ec2_launchconfiguration/">IBM::EC2::LaunchConfiguration</a></strong><br />
+This resource type represents a launch configuration on Amazon Elastic Compute Cloud.</li>
+<li><strong><a href="../res_ibm_ec2_port/">IBM::EC2::Port</a></strong><br />
+This resource type represents a port on Amazon Elastic Compute Cloud. It extends the type OS::Neutron::Port.</li>
+<li><strong><a href="../res_ibm_ec2_routetable/">IBM::EC2::RouteTable</a></strong><br />
+This resource type represents a route table on Amazon Elastic Compute Cloud. It extends the type OS::Neutron::Router.</li>
+<li><strong><a href="../res_ibm_ec2_routetableassociation/">IBM::EC2::RouteTableAssociation</a></strong><br />
+This resource type represents a route table association on Amazon Elastic Compute Cloud. It extends the type OS::Neutron::RouterInterface.</li>
+<li><strong><a href="../res_ibm_ec2_securitygroup/">IBM::EC2::SecurityGroup</a></strong><br />
+This resource type represents a security group on Amazon EC2. It extends the type OS::Neutron::SecurityGroup.</li>
+<li><strong><a href="../res_ibm_ec2_server/">IBM::EC2::Server</a></strong><br />
+This resource type represents a server on Amazon Elastic Compute Cloud. It extends the type OS::Nova::Server.</li>
+<li><strong><a href="../res_ibm_ec2_subnet/">IBM::EC2::Subnet</a></strong><br />
+This resource type represents a subnet on Amazon Elastic Compute Cloud. It extends the type OS::Neutron::Subnet.</li>
+<li><strong><a href="../res_ibm_ec2_volume/">IBM::EC2::Volume</a></strong><br />
+This resource type represents a volume on Amazon Elastic Compute Cloud. It extends the type OS::Cinder::Volume.</li>
+<li><strong><a href="../res_ibm_ec2_volumeAttachment/">IBM::EC2::VolumeAttachment</a></strong><br />
+This resource type represents a volume attachment on Amazon Elastic Compute Cloud (EC2). It extends the type OS::Cinder::VolumeAttachment.</li>
+<li><strong><a href="../res_ibm_ec2_vpc/">IBM::EC2::VPC</a></strong><br />
+This resource type represents a virtual private cloud (VPC) on Amazon Elastic Compute Cloud. It extends the type OS::Neutron::Net.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_ov/">Heat resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/ref_heat_types_ec2_ov.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

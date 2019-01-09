@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/ha_upgrading/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Upgrading high-availability installations - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Upgrading high-availability installations", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="upgrading-high-availability-installations">Upgrading high-availability installations</h1>
+<p>All servers that are configured for the HA feature must be on the same version. Thus, all servers must be upgraded at the same time.</p>
+<ol>
+<li>Back up the database. </li>
+<li>Ensure that no application and generic processes are running. Open the <strong>Dashboard</strong> and confirm that no processes are running. If processes are running, you can wait for them to complete or by clicking <strong>Cancel</strong> in the same row as each process, cancel them.</li>
+<li>Download and extract the installation package. Upgrades are done with the same package used to perform new installations.</li>
+<li>
+<p>Shut down the servers. </p>
+<p><strong>Warning:</strong> Ensure that all servers are stopped. If any servers are accessing the database when the upgrade happens, the upgrade will cause errors.</p>
+</li>
+<li>
+<p>Ensure that each server is stopped and unable to connect to the load balancer. </p>
+<ol>
+<li>Check to ensure that there is no file server.pid in the server_install/var folder. </li>
+<li>Check for running system processes. For example, on Linux™, you can use the netstat or ps commands. For example, if the server is running on port 8443, use the command <code>netstat -nap | grep 8443</code>. You can also run <code>ps -ef | grep server</code> and look for the server system process in the results.</li>
+<li>If any server processes are still running, stop them. 
+If a server process is still running, when you install the new version, you see an error that says "A previously installed version of HCL® UrbanCode™ Deploy is running. Please shutdown the running HCL UrbanCode Deploy and start the installation again."</li>
+</ol>
+</li>
+<li>
+<p>If you are upgrading from a version before 6.1.1.5, update the network storage to match the folders in the new version. For information about how to structure the folders, see <a href="../../../com.ibm.udeploy.doc/topics/server_install_clustered/">Setting up high-availability clusters</a>.</p>
+<p>Depending on how you set up network storage for the high-availability cluster in the previous version, you might need to move files and folders to put them in the place that the new version of the server expects to find them. When you run the installation program, specify the location of the app_data folder in the <strong>Where should the server store application data such as logs, plugins, and keystores?</strong> prompt.</p>
+<p>For more information, see <a href="../../../com.ibm.udeploy.doc/topics/server_install_clustered/">Setting up high-availability clusters</a>.</p>
+</li>
+<li>
+<p>Run the server installation script.</p>
+</li>
+<li>
+<p>From the command line, run the server installer program. </p>
+<ul>
+<li>On Windows™, run the install-server.bat file.</li>
+<li>On Linux, run ./install-server.sh.</li>
+<li>
+<p>To install a FIPS-compliant server, add the switch <code>-fips</code> to the command, such as <code>install-server.sh -fips</code>.</p>
+<p><strong>Note:</strong> If you install a FIPS-compliant server, cloud provisioning is not available. Your JVM connects to only FIPS 140-2 certified IBM® providers.</p>
+</li>
+</ul>
+<p>Depending on your system settings, you might need to run this file as an administrator.</p>
+</li>
+<li>
+<p>When prompted for the location of the installation directory, enter the path to one of the servers.By specifying an existing installation, you are asked if you want to upgrade the current installation. If you answer yes, the script leads you through the upgrade steps.</p>
+</li>
+<li>Restart the upgraded server. Always use service scripts to start or stop the server. See <a href="../../../com.ibm.udeploy.install.doc/topics/run_server/">Starting and stopping the server</a>.</li>
+<li>After the first server is back online, upgrade the other servers. After you upgrade the first node, you will not be prompted to upgrade the database when you upgrade the other nodes. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_upgrading/">Upgrading and migrating</a></p>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/ha_upgrading.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

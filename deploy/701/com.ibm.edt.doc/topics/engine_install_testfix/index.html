@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/engine_install_testfix/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing test fixes to the engine - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing test fixes to the engine", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-test-fixes-to-the-engine">Installing test fixes to the engine</h1>
+<p>Test fixes are provided by IBM® support to correct specific issues with the Heat orchestration engine. You replace individual files in the directory that contains the installed engine.</p>
+<p>Ensure that you installed the correct version of the engine, as listed in the readme file for the test fix.</p>
+<p>In most cases, test fixes come with specific instructions. In general, these instructions look like the following steps. However, always use the instructions in the readme file or the instructions that are provided by IBM support.</p>
+<ol>
+<li>Log in to the server that hosts the engine as the root user. </li>
+<li>Stop the engine. See <a href="../stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</li>
+<li>Change to the directory that contains the Heat plug-in. <ul>
+<li>If you installed an engine that is provided with HCL® UrbanCode™ Deploy, change to the /usr/lib/heat directory.</li>
+<li>If you extended an engine, change to the plug-in directory for that engine. The location of the plug-in directory is the value of the plugin_dirs parameter in the heat.conf file. By default, on a Red Hat Enterprise Linux™ system, the Heat plug-in location is /usr/lib/heat, and on an Ubuntu system, the plug-in location is /usr/local/lib/heat.</li>
+</ul>
+</li>
+<li>
+<p>Determine the file permissions and file owner of the contents of the Heat plug-in. To obtain this information, you can run the following command:</p>
+<p><code>ls -l | grep heat</code></p>
+<p>The permissions output resembles the following code:</p>
+<p><code>drwxr-xr-x 2 root root 4096 Dec 24 08:49 heat</code></p>
+<p>In this case, the file permissions are <code>drwxr-xr-x</code>, which has an octal value of 755, and owner of the file is the user <code>root</code> in the <code>root</code> group.</p>
+</li>
+<li>
+<p>Download the file or files for the test fix and extract them. </p>
+</li>
+<li>
+<p>Change the file permissions and owner of the test fix files to match the values of the existing Heat plug-in files. </p>
+<p><strong>Note:</strong> You must use the permission, owner, and group values that you obtained in step <a href="#step_3">4</a>.</p>
+<p>To change the owner and group of the files, run the following command:</p>
+<p><code>chown -R user\_name:group\_name /extracted\_fix\_location</code></p>
+<p>To change the permissions of the files, run the following command:</p>
+<p><code>chmod -R octal\_permissions\_value /extracted\_fix\_location</code></p>
+<p>In this command, you must use the octal value of the file permissions, such as 755.</p>
+</li>
+<li>
+<p>Archive the files that are replaced in the test fix. </p>
+<ol>
+<li>Locate files in the /usr/lib/heat/ibm-cloud-ext/ directory that contain the same names as the files in the test fix folder. </li>
+<li>Rename each file that the test fix contains to indicate that it is outdated. For example, if the test fix contains the vra_server.py file, rename the installed file to vra_server.py.old.</li>
+</ol>
+</li>
+<li>Copy the test fix files from the archive file to the appropriate folders within the /usr/lib/heat/ibm-cloud-ext/ directory. Ensure that each file is placed in the correct folder. For example, the vra_server.py file is located in the /usr/lib/heat/ibm-cloud-ext/resources/vra directory.</li>
+<li>Start the engine. See <a href="../start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</li>
+</ol>
+<p>To remove the test fix from the engine, stop the engine, delete the files that you added, and restore the original file names to the replaced files.</p>
+<p><strong>Parent topic:</strong> <a href="../install_ch_bpd/">Installing the blueprint designer</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/engine_install_testfix.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

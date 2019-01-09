@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/ud_properties_context/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Property contexts - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Property contexts", url: "#_top", children: [
+              {title: "Example: Overriding server locations", url: "#example-overriding-server-locations" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="property-contexts">Property contexts</h1>
+<p>Properties are available in various contexts. Not all properties are available for all contexts. To plan and set properties, you must know where to access properties and how that setting behaves in context.</p>
+<p>The following table shows the contexts in which properties are available and how you can use the properties.</p>
+<p><strong>Tip:</strong> The context that you set a property in can have narrow or widespread influence. For example, if you set a system property, that property persists in all areas. The key to setting properties effectively is to find a balance to setting narrowly as possible without setting them so narrow that you create extra work for yourself.</p>
+<h2 id="example-overriding-server-locations">Example: Overriding server locations</h2>
+<p>Consider this example: Initially you have one Tomcat server. To store the location of that server, you create an application property with the name <code>Tomcat.server.url</code> and the location of that server. Your environments refer to that property to know where the Tomcat server is.</p>
+<p>Then, suppose that you add a second Tomcat server. This Tomcat server is intended for use only by specific environments. So on those specific environments, you create an environment property with the same name <code>Tomcat.server.url</code> and the location of the second server.</p>
+<p>Now the environment has two properties with the same name: one system property and one environment property. The order of precedence determines which property value is used. Environment properties come before system properties in the order of precedence. Therefore, the environment uses the value of the environment property instead of the system property. In this way, you can use system properties to set defaults and then you can override those properties in specific contexts.</p>
+<p>The following table shows the order of precedence of properties.</p>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Process</td>
+<td>Available on the <strong>Configuration</strong> tab of the process, whether it is a generic process, application process, or component process.</td>
+</tr>
+</tbody>
+</table>
+<p>Reference syntax: ${p:propertyName}.</p>
+<p>|
+|Component version| Available on the component <strong>Configuration</strong> tab. Click <strong>Component</strong> > <strong>selected component</strong> > <strong>Configuration</strong> > <strong>Version Property Definitions</strong>. Then, specify values on individual component versions.</p>
+<p>Referenced: ${p:version/propertyName}.</p>
+<p>|
+|Resource| Available on the resource <strong>Configuration</strong> tab. Click <strong>Resources</strong> > <strong>selected resource</strong> > <strong>Configuration</strong> > <strong>Resource Properties</strong>.</p>
+<p>Referenced: ${p:resource/propertyName}.</p>
+<p>You can also use the following syntax to get a comma-separated list of all properties: <code>${p:resource/allProperties}</code>.</p>
+<p>|
+|Agent|Available on the agent <strong>Configuration</strong> tab. Click <strong>Resources</strong> > <strong>Agents</strong> > <strong>selected agent</strong> > <strong>Configuration</strong> > <strong>Agent properties</strong>.Referenced: <code>${p:agent/propertyName}</code>.</p>
+<p>In a For Each Agent context, you can use the following syntax to get a comma-separated list of all properties: <code>${p:iteration/allProperties}</code>.</p>
+<p>|
+|Environment| Environment properties are available on the <strong>Configuration</strong> tab for environments. Also, components can have component environment properties; these properties transfer to the environment when the component is deployed. An environment property overrides the value that is set on a component environment property that has the same name.</p>
+<p>Reference syntax: <code>${p:environment/propertyName}</code>.</p>
+<p>You can also use the following syntax to get a comma-separated list of all properties: <code>${p:environment/allProperties}</code>.</p>
+<p>Both the component and environment properties use the same syntax.</p>
+<p>For example, assume that you are deploying a web application to three environments. Each environment might have the application server in a different location. You can specify this location in an environment property on each environment.</p>
+<p>|
+|Component| Available on the component <strong>Configuration</strong> tab. Click <strong>Component</strong> > <strong>selected component</strong> > <strong>Configuration</strong> > <strong>Component Properties</strong>.</p>
+<p>Referenced: <code>${p:component/propertyName}</code>.</p>
+<p>You can also use the following syntax to get a comma-separated list of all properties: <code>${p:component/allProperties}</code>.</p>
+<p>|
+|Application| Available on the application <strong>Properties</strong> tab. Click <strong>Applications</strong> > <strong>selected application</strong> > <strong>Configuration</strong> > <strong>Application Properties</strong>.</p>
+<p>Reference syntax: <code>${p:application/propertyName}</code>.</p>
+<p>|
+|System| System (global) properties are available on the <strong>Settings</strong> tab. Click <strong>Settings</strong> > <strong>Properties</strong>.</p>
+<p>Reference syntax: <code>${p:system/propertyName}</code>.</p>
+<p>The system property is broadest. If you plan to deploy an application, use application properties because it's more specific.</p>
+<p>If you have an <code>xyz</code> system property and an <code>xyz</code> application property, and you want to use the value of the system property, you must provide the entire context. Otherwise, the value resolves to the application property.</p>
+<p>You can also use the following syntax to get a comma-separated list of all properties: <code>${p:system/allProperties}</code>.</p>
+<p>|</p>
+<p><strong>Parent topic:</strong> <a href="../ud_properties_overview/">Properties</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/ud_properties_context.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

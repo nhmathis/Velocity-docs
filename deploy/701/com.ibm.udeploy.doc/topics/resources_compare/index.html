@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/resources_compare/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Comparing and synchronizing resources - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Comparing and synchronizing resources", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="comparing-and-synchronizing-resources">Comparing and synchronizing resources</h1>
+<p>You can compare the contents of a resource group to another group or a resource template and then apply changes to the group or template.</p>
+<p>You can compare a group in the resource tree to another group or a resource template. You can apply changes, including properties and their values, from the first group that you select to the resource tree or second group.</p>
+<ol>
+<li>Open the Resource Tree page. In addition to the Resource Tree page, resources can be displayed in several ways, such as by adding resources to an environment.</li>
+<li>Display the <strong>Action</strong> menu for the folder that contains the source group and click <strong>Compare or Synchronize</strong>. </li>
+<li>Compare the contents of a resource to either a resource template or another resource. <ul>
+<li>To compare the contents of the resource to the contents of a resource template, take the following actions:<ol>
+<li>From the Compare Resources window, select <strong>Compare With Resource Template</strong>.</li>
+<li>From the <strong>Resource Template</strong> list, select the name of the target resource template.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+</li>
+<li>To compare the contents of the resource to the contents of another resource, take the following actions:<ol>
+<li>From the Compare Resources window, select <strong>Compare With Resource</strong>.</li>
+<li>From the Compare Resources list, click <strong>Set</strong>.</li>
+<li>From the Select Resource window, select the target resource. You can expand resources and select a nested resource for the comparison.</li>
+<li>Click <strong>OK</strong>.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>On the Resource Comparison page, expand both resource trees. </li>
+<li>Clear <strong>Only show changes</strong>. </li>
+<li>
+<p>Select each different resource from the left-hand, or source, resource to apply to the right-hand, or target, resource. The differences between the two resource trees are displayed. Each line of the resource tree can be one of the following states: Children Changed, Added, Deleted, or No Change. For example, the following image shows that the source resource tree contains three more agents than the target resource tree. All three additional agents will be added to the right-hand, or target, resource tree.</p>
+<p><img alt="The Resource Comparison page displays two resource trees. One contains an agent and four components, and the other contains an agent and one component. The statuses of the three additional agents in the Difference column are Added, and these agents are selected." src="../../images/resources_compare_a.gif" /></p>
+</li>
+<li>
+<p>To review your changes, click <strong>Continue</strong>. The changes to the right-hand resource tree are displayed in the Preview Changes window.</p>
+</li>
+<li>Click <strong>Apply Changes</strong>. An Alert window confirms that the resource changes were applied successfully.</li>
+<li>
+<p>Click <strong>Close</strong>. The Resource Comparison page displays the updated status of the right-hand resource tree, as shown in the following image.</p>
+<p><img alt="The Resource Comparison page displays two resource trees. Each contains the same agent and components, so the statuses in the Difference column are all No Change." src="../../images/resources_compare_b.gif" /></p>
+<p>Since the contents of the groups are now identical, the statuses in the <strong>Difference</strong> column are all <strong>No Change</strong>.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../resource_tree_modify/">Modifying the resource tree</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/resources_compare.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_tosca/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Converting TOSCA files to blueprints - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Converting TOSCA files to blueprints for the blueprint designer", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="converting-tosca-files-to-blueprints-for-the-blueprint-designer">Converting TOSCA files to blueprints for the blueprint designer</h1>
+<p>You can convert Topology and Orchestration Specification for Cloud Applications (TOSCA) files to the HOT format and import them into the blueprint designer.</p>
+<p>Create a TOSCA template that describes your cloud environment. The TOSCA template format standardizes how a web application is deployed, including the ability to specify artifacts.</p>
+<p><strong>Note:</strong> You must use absolute paths to any resources that are used in the TOSCA template.</p>
+<ol>
+<li>In the blueprint editor of the blueprint designer, click <strong>New</strong>. </li>
+<li>In the Add a New File window, specify a name and description for the blueprint. </li>
+<li>If your workspace contains multiple repositories, select a project from the <strong>Repository</strong> list. If your workspace contains a single repository, the <strong>Repository</strong> list is not displayed.</li>
+<li>In the <strong>Type</strong> list, select <strong>Blueprint</strong>. </li>
+<li>From the <strong>Clone</strong> list, select <strong>Clipboard or File</strong>. </li>
+<li>Provide the TOSCA file to the blueprint designer by using one of the following steps. <ul>
+<li>Paste the entire TOSCA template into the template field.</li>
+<li>Click <strong>Choose File</strong>, select the TOSCA file, and then click <strong>Open</strong>. The file name is displayed in the Add a New File window.</li>
+</ul>
+</li>
+<li>In the <strong>Translator</strong> field, specify the conversion service to use. To use IBM's TOSCA to HOT converter that is hosted on Bluemix®, enter this URL: <code>http://tosca-translator.mybluemix.net/tosca/v1.0/translate</code> </li>
+<li>
+<p>Click <strong>Save</strong>. The new blueprint opens in the editor. Any conversion errors are listed at the top of the blueprint. If you use the converter that is hosted on Bluemix, the errors contain both an error name and explanation, as shown in the following text:</p>
+<p><code>UnknownFieldError: Template contains unknown field "descriptions". Refer to the definition to verify valid values.</code></p>
+<p>Since conversion errors might prevent you from provisioning your blueprint, you must review the blueprint before you provision it.</p>
+</li>
+<li>
+<p>You can modify the contents of the blueprint. See <a href="../blueprint_edit/">Creating files with the blueprint designer</a>.</p>
+</li>
+<li>You can provision environments from the blueprint. See <a href="../env_provision_edt/">Provisioning environments from the blueprint designer (through OpenStack Heat)</a>.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../blueprint_create/">Editing blueprints with the blueprint designer</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_tosca.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

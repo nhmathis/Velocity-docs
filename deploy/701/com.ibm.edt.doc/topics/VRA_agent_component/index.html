@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/VRA_agent_component/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating agent components in vRealize Automation - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating agent components in VMware vRealize Automation", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-agent-components-in-vmware-vrealize-automation">Creating agent components in VMware vRealize Automation</h1>
+<p>After you configure the integration with VMware vRealize Automation Enterprise, you can create software components for HCL® UrbanCode™ Deploy agents.</p>
+<p>You can import VMware vRealize Automation Enterprise catalog items into empty blueprints in the blueprint designer. To add HCL UrbanCode Deploy components to images in these catalog items without creating a new blueprint in vRealize automation, the image must contain a vRealize Automation software component for an HCL UrbanCode Deploy agent.</p>
+<ol>
+<li>To create vRealize Automation software components for the agent, complete the following steps:</li>
+<li>Extract the installation files for the agent components. </li>
+<li>
+<p>From the command line, change to the installation_directory/ibm-ucd-patterns-install/agent-package-install/ folder, and run the installation program: </p>
+<ul>
+<li>
+<p>On a Linux™ computer, run the following command:</p>
+<p><code>./create-ucd-windows-agent-swcomp-for-vra.ps1 
+-s &lt;VRA\_SERVER\_URL&gt; 
+-u &lt;VRA\_USERNAME&gt; 
+-p &lt;VRA\_PASSWORD&gt; 
+-t &lt;VRA\_TENANT&gt;</code></p>
+<p>This command is split onto separate lines for clarity, but it must be entered on a single line.</p>
+<ul>
+<li>VRA_SERVER_URL is the URL of the vRealize Automation server</li>
+<li>VRA_USERNAME is a vRealize Automation user that is assigned a role with permission to create a software component, such as the Infrastructure Architect or Software Architect role.</li>
+<li>VRA_PASSWORD is the password for that user.</li>
+<li>VRA_TENANT is the tenant that can access the component.
+<strong>Note:</strong> The VRA_SERVER_URL and VRA_TENANT values must match the values that were used to configure the vRealize Automation cloud project in the blueprint designer.</li>
+</ul>
+</li>
+<li>
+<p>On a Windows™ computer, run the following command:</p>
+<p><code>./create-ucd-windows-agent-swcomp-for-vra.ps1 
+-s &lt;VRA\_SERVER\_URL&gt; 
+-u &lt;VRA\_USERNAME&gt; 
+-p &lt;VRA\_PASSWORD&gt; 
+-t &lt;VRA\_TENANT&gt;</code></p>
+<p>This command is split onto separate lines for clarity, but it must be entered on a single line.</p>
+<ul>
+<li>VRA_SERVER_URL is the URL of the vRealize Automation server</li>
+<li>VRA_USERNAME is a vRealize Automation user that is assigned a role with permission to create a software component, such as the Infrastructure Architect or Software Architect role.</li>
+<li>VRA_PASSWORD is the password for that user.</li>
+<li>VRA_TENANT is the tenant that can access the component.
+<strong>Note:</strong> The VRA_SERVER_URL and VRA_TENANT values must match the values that were used to configure the vRealize Automation cloud project in the blueprint designer.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>Now you can create vRealize Automation blueprints that contain software components for the agents. Then, users can import catalog items that are based on the blueprint into the blueprint designer and add HCL UrbanCode Deploy components to images that contain an agent. They can provision these blueprints from the blueprint designer without modifying or creating assets in vRealize Automation.</p>
+<p><strong>Parent topic:</strong> <a href="../cloud_connect_vra/">Connecting to VMware vRealize Automation v7 and v7.1</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/VRA_agent_component.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

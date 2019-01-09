@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/zos_runtools_uss/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating z/OS component versions from z/OS UNIX System Services - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating z/OS component versions from z/OS UNIX System Services", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-zos-component-versions-from-zos-unix-system-services">Creating z/OS component versions from z/OS UNIX System Services</h1>
+<p>To create IBM® z/OS® component versions from z/OS UNIX™ System Services, submit the buztool.sh command from a z/OS UNIX shell.</p>
+<ol>
+<li>Open a z/OS UNIX shell.</li>
+<li>
+<p>Use the buztool.sh createzosversion command to create the component version.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-c</td>
+<td>true</td>
+<td>The name of the component in HCL® UrbanCode™ Deploy. The component name can contain only letters, numbers, and spaces.</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>false</td>
+<td>The name of the version to create. If a version is not specified, a version name is generated from the current time stamp. The version name can contain only letters, numbers, and spaces.</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>true</td>
+<td>The location of the ship list file.</td>
+</tr>
+<tr>
+<td>-verb</td>
+<td>false</td>
+<td>To display a trace log, set this parameter to true</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>false</td>
+<td>Full path name of the file where the output of version creation is written.</td>
+</tr>
+<tr>
+<td>-t</td>
+<td>false</td>
+<td>The type of the version to create. Set to full to create a full version. Default is incremental.</td>
+</tr>
+</tbody>
+</table>
+<p>For example, the following command creates a new version in the CICSModules component:</p>
+<p><code>buztool.sh createzosversion -c CICSModules -v fixbug100 -s /u/ucduser/build/shiplist.xml</code></p>
+<p>If an argument contains spaces, enclose the argument in double quotation marks, as shown in the following example:</p>
+<p><code>buztool.sh createzosversion -c "CICS Modules" -v "fixbug 100" -s /u/ucduser/build/shiplist.xml</code></p>
+</li>
+</ol>
+<p>The content that the ship list file specifies is available in a component in HCL UrbanCode Deploy.</p>
+<p><strong>Parent topic:</strong> <a href="../zos_runtools/">Creating z/OS component versions</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/zos_runtools_uss.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

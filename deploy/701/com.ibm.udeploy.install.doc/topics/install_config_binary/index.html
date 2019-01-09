@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/install_config_binary/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing binary and config to different directories - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing the binary and config files to different directories", url: "#_top", children: [
+              {title: "Installing agent binary files", url: "#installing-agent-binary-files" },
+              {title: "Installing agent config files", url: "#installing-agent-config-files" },
+              {title: "Upgrading agent", url: "#upgrading-agent" },
+              {title: "Limitations", url: "#limitations" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-the-binary-and-config-files-to-different-directories">Installing the binary and config files to different directories</h1>
+<p>By default, the agent installer installs the binary and config files into the same directory. You can customize the installation so that these files are installed into different directories. Also, multiple agent configurations can share the same copy of binary files which makes security control and product upgrading easier.</p>
+<h2 id="installing-agent-binary-files">Installing agent binary files</h2>
+<p>Agent binary files are installed by running the agent-install.sh script with the <strong>-binary</strong> parameter. Note that all agent data sets are considered binary files. Depending on the installation method, agent data sets are either installed by the SMP/E process or by submitting the BUZEXPD job.</p>
+<p>After the binary files are installed, they can be used by multiple agents. Typically, they are installed to a shared volume and made accessible by multiple systems in read-only mode.</p>
+<h2 id="installing-agent-config-files">Installing agent config files</h2>
+<p>Agent config files are installed by running the agent-install.sh script with the <strong>-config</strong> parameter. The installation program prompts you to specify the directory of the agent binary before installation the process can start. You should specify a different directory for the agent config.</p>
+<p>The HFS CodeStation and the deploy backup directories are also located in the agent config directory. The storage space calculation described in the <a href="../codestation_choose_plan/">Choosing a CodeStation and planning storage</a> topic applies to the agent config directory.</p>
+<h2 id="upgrading-agent">Upgrading agent</h2>
+<p>In the binary and config installation mode, only the agent binary needs to be upgraded. When needed the agent config is automatically upgraded, when you start the agent or run the buztool.sh script.</p>
+<h2 id="limitations">Limitations</h2>
+<p>The following are limitations related to the binary and config installation mode.</p>
+<ul>
+<li>Upgrading agents from the Web user interface is not supported for agents installed using the binary and config mode.</li>
+<li>The binary and config installation mode can only be used when installing new agents.</li>
+<li>Silent mode installation using install-agent-from-file.sh does not support binary and config mode.</li>
+<li>Config files must be installed using the install-agent.sh script. It is not supported to copy files or data sets to other locations.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../zos_installing_ov/">Installing the z/OS agent</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/install_config_binary.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

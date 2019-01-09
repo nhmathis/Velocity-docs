@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/trouble_deployments/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Troubleshooting deployments - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Troubleshooting deployments", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="troubleshooting-deployments">Troubleshooting deployments</h1>
+<p>If you are having trouble with provisioning a blueprint, here are some things that might help.</p>
+<ul>
+<li>
+<p><strong>Timeout errors</strong></p>
+<ul>
+<li>Timeout errors can mean that an agent in the new environment cannot contact the HCL® UrbanCode™ Deploy server. Log in to the provisioned instance to see whether you can ping the HCL® UrbanCode™ Deploy server.</li>
+<li>This error can also mean that the cloud took too long to download component artifacts, to obtain data from HCL® UrbanCode™ Deploy server, or to run component processes. Increase the timeout period in the agent_timeout, ucd_client_timeout, and component_process_timeout properties. Ensure that the sum of the periods in the agent_timeout and component_process_timeout properties is smaller than the value of the Timeout in Mins field in the cloud settings.</li>
+<li>Ensure that the blueprint design server can connect to the cloud. You can verify the connection path with the curl or telnet commands. For example, make sure that no firewall, proxy, or security settings prevent communication between the blueprint design server and the cloud.</li>
+<li><strong>Keystone token timeout errors</strong></li>
+</ul>
+<p>If the blueprint takes longer to provision than the amount of time that the Keystone authentication token is valid, the following error is displayed:</p>
+<p><code>Unauthorized:  resources.resource\_type:  The request you have made requires authentication.  (HTTP 401)</code></p>
+<p>To provision the blueprint, increase the duration of the Keystone token.</p>
+<ol>
+<li>
+<p>Stop the Keystone service. If you use a Kilo-level engine, including an engine that was provided with HCL® UrbanCode™ Deploy version 6.2.1.1 or later, run this command:</p>
+<p><code>systemctl stop openstack-keystone.service</code></p>
+</li>
+<li>
+<p>Increase the token timeout value by increasing the value of the expiration parameter. Open the /etc/keystone/keystone.conf file and set a new, larger value for the expiration parameter. The value of the expiration is the amount of time in seconds that the Keystone token is valid.</p>
+</li>
+<li>
+<p>Start the Keystone service. If you use a Kilo-level engine, including an engine that was provided with HCL® UrbanCode™ Deploy version 6.2.1.1 or later, run this command:</p>
+<p><code>systemctl start openstack-keystone.service</code></p>
+</li>
+<li>
+<p>Provision the blueprint.</p>
+</li>
+<li><strong>Accessing blueprints</strong></li>
+</ol>
+<p>If you are trying to create an environment from a blueprint and the blueprint is not visible, make sure that the user name in the blueprint designer integration can access the blueprint. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</p>
+</li>
+<li>
+<p><strong>Secure connections between engines and the blueprint design server</strong></p>
+<p>If you provision an environment from a blueprint that contains a nested blueprint, the engine must access that nested blueprint during the provisioning process. In this case, the engine uses the URL in the configuration file to access the nested blueprint, as in this configuration file example:</p>
+<p><code>resource_registry:
+  UC::Blueprint::NestedBlueprint: https://designserver.example.com:8443/
+    landscaper/rest/orchestration/blueprints/
+    jsmith_00000000_0000_0000_0000_000000000002/default/
+    NestedBlueprint/NestedBlueprint.yaml
+  OS::Nova::Server : IBM::EC2::Server
+  OS::Cinder::Volume : IBM::EC2::Volume</code></p>
+<p>In this example, the URL of the nested blueprint uses HTTPS. If you try to provision an environment from this blueprint and the engine is not configured for secure connections to the blueprint design server, you see this error:</p>
+<p><code>HT-EA96E26 HT-EA96E26 HT-64408AE Message objects do not support str() because they may contain non-ascii characters. Please use unicode() or translate() instead.</code></p>
+<p>To resolve this error, retrieve the security certificate from the blueprint design server and import that certificate into the computer that hosts the engine. You can also change the URL in the configuration file to use the HTTP protocol and the matching HTTP port for the blueprint design server.</p>
+</li>
+<li>
+<p><strong>Deployment failures</strong></p>
+<p>To troubleshoot deployment errors, review the details of the application process request. In HCL® UrbanCode™ Deploy, click <strong>Application</strong> > <strong>application_name</strong> > <strong>History</strong>, and then in the same row as your request, click <strong>View Request</strong>. Expand the failed step, and by the virtual image that was provisioned by the blueprint, click <strong>Output log</strong>.</p>
+<p>If the environment does not appear on the HCL® UrbanCode™ Deploy server or on the blueprint designer, check the blueprint design server logs for errors. You can also run the command <code>heat stack-list</code> to see whether the engine has a record of the environment. If so, you can use other Heat commands to get information about the environment.</p>
+<p>If your image is attached to multiple networks and you see a <strong>Resource CREATE failed: NameError: resources.component_name: Agent did not show up even after agent_timeout_value seconds!</strong> error, change the naming pattern of the agent and provision the blueprint again. See step <a href="../blueprint_deploy_app/#agent_name">4</a> of <a href="../blueprint_deploy_app/">Deploying applications with blueprints</a>.</p>
+<p>If you provision to SoftLayer® and see a <strong>Resource CREATE failed: KeyError: resources.vm1: 'x-account-meta-temp-url-key'</strong> error message, you must apply the master API key to the object storage for your SoftLayer® account. Either upgrade to version 6.2.1.2 or later of the blueprint designer or take the following steps:</p>
+<ol>
+<li>From the SoftLayer® console, obtain the public <strong>Authentication Endpoint</strong> and <strong>API Key</strong> for the object storage.</li>
+<li>
+<p>To obtain a return token that contains the X-Auth-Token and X-Storage-Url parameters, from a console, run the following command:</p>
+<p><code>curl -i -H "X-Auth-User: username" -H "X-Auth-Key: API\_Key" public\_endpoint\_value</code></p>
+<p>In this command, the username value is the SoftLayer® user name of the user who provisions, and the API_Key and public_endpoint_value values are obtained from the SoftLayer® console.</p>
+<p>This command returns the X-Auth-Token and X-Storage-Url values.</p>
+</li>
+<li>
+<p>By using the X-Auth-Token and X-Storage-Url values, list the SoftLayer® containers and confirm that the X-Account-Meta-Temp-Url-Key parameter is listed. Run the following command:</p>
+<p><code>curl -i -H "X-Auth-Token: X-Auth-Token-value" X-Storage-Url-value</code></p>
+<p>If the X-Account-Meta-Temp-Url-Key parameter is not listed, then the <strong>Resource CREATE failed: KeyError: resources.vm1: 'x-account-meta-temp-url-key'</strong> is valid, and you cannot authorize the object storage account.</p>
+</li>
+<li>
+<p>To associate the object storage credentials with your API key, run the following command:</p>
+<p><code>curl -i -H "X-Account-Meta-Temp-URL-Key: Secret-Key" -H "X-Auth-Token: X-Auth-Token" -X POST X-Storage-Url-value</code></p>
+<p>In this command, Secret-Key is an arbitrary secret key that is used for security purposes.</p>
+<p>If this command returns a value of 204, then the secret key was added to the object storage account.</p>
+</li>
+<li>
+<p>To verify that the API key was applied to the object storage, run the following command:</p>
+<p><code>curl -i -H "X-Auth-Token: X-Auth-Token-value" X-Storage-Url-value</code></p>
+<p>If the X-Account-Meta-Temp-Url-Key is set to your Secret-Key value, the API key was applied to the object storage.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Google Cloud Platform socket error</strong></p>
+<p>If you provision multiple components to Google Cloud Platform, you might see a runtime socket error that is similar to this error:</p>
+<p><code>RuntimeError: resources.tc_2: Second simultaneous read on fileno 15 detected. Unless you really know what you're doing, make sure that only one greenthread can read any particular socket. Consider using a pools.Pool. If you do know what you're doing and want to disable this error, call eventlet.debug.hub_prevent_multiple_readers(False) - MY THREAD=; THAT THREAD=FdListener('read', 15, , )</code></p>
+<p>To resolve this error, specify the deployment order of the components in your blueprint, and provision the environment again. See step <a href="../blueprint_deploy_env/#deployment_order">9</a> of <a href="../blueprint_deploy_env/">Deploying components with blueprints</a>.</p>
+</li>
+</ul>
+<p>For more troubleshooting information, see the UrbanCode community on IBM® developerWorks®: <a href="https://developer.ibm.com/answers/?community=urbancode">https://developer.ibm.com/answers/?community=urbancode</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/trouble_blueprints_ov/">Troubleshooting modeling and provisioning cloud environments</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/trouble_deployments.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

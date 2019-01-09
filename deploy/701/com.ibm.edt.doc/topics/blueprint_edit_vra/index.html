@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_edit_vra/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Modeling environments for vRealize Automation - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modeling environments for VMware vRealize Automation", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modeling-environments-for-vmware-vrealize-automation">Modeling environments for VMware vRealize Automation</h1>
+<p>To model a VMware vRealize Automation Enterprise (vRA) environment, log in with a vRealize Automation cloud project and specify the vRealize Automation-specific information in a blueprint.</p>
+<ul>
+<li>Connect the blueprint design server to a cloud system. See <a href="../security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</li>
+<li>Make sure that your user account is authenticated to a cloud system. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_auth_bds/">Setting up access to clouds in the blueprint designer</a>.</li>
+<li>Connect the blueprint design server to the server. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Log in to the blueprint designer.</li>
+<li>At the top of the page, select the cloud project and region to use.</li>
+</ul>
+<p>After you integrate the blueprint designer with vRA, you can access many vRA artifacts from the blueprint designer. These artifacts include images in the vCenter cloud that is integrated with vRA, vRA catalog items that represent vRA blueprints, and networks. Your vRA permissions determine the kinds of blueprints that you can create and provision from the blueprint designer.</p>
+<table>
+<thead>
+<tr>
+<th>Blueprint type</th>
+<th>Blueprint description</th>
+<th>Applicable vRA roles</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The blueprint contains a customized existing vRA catalog item.</td>
+<td>These blueprints contain only a vRA catalog item and the HCL® UrbanCode™ Deploy software components that you add to it. When you provision this blueprint, no additional assets are created on your vRA server. To provision this environment, the catalog item must contain a vRA software resource that represents an HCL UrbanCode Deploy agent. See <a href="../VRA_agent_component/">Creating agent components in VMware vRealize Automation</a>.</td>
+<td>-   Support User</td>
+</tr>
+<tr>
+<td>-   Business User</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   Infrastructure Architect</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   Software Architect</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|
+|The blueprint contains an assembly of vRA artifacts.|These blueprints do not involve a vRA catalog item. They can comprise any other vRA artifacts and HCL UrbanCode Deploy components. When you provision this environment, vRA assets, including blueprints and software components for the HCL UrbanCode Deploy agents that install HCL UrbanCode Deploy components on images, are created.| -   Infrastructure Architect
+-   Software Architect</p>
+<p>|
+|The blueprint contains artifacts that were imported from an existing vRA catalog item.|When you import a vRA catalog item into a blueprint, you add all the artifacts that the catalog item contains to the blueprint. You can add more vRA assets and HCL UrbanCode Deploy components to the blueprint. When you provision this environment, vRA assets, including blueprints and software components for the HCL UrbanCode Deploy agents that install HCL UrbanCode Deploy components on images, are created. The original vRA catalog item is unchanged.| -   Infrastructure Architect
+-   Software Architect</p>
+<p>|</p>
+<p>When you provision some blueprints, the blueprint designer creates artifacts on your vRA server. These artifacts represent the HCL UrbanCode Deploy blueprint that you provisioned and HCL UrbanCode Deploy agents that are installed on the new images. You cannot provision this blueprint from vRA, and you must not delete the blueprints or software components from vRA.</p>
+<ol>
+<li>Create the blueprint. See <a href="../blueprint_edit/">Creating files with the blueprint designer</a>.</li>
+<li>
+<p>Add resources from vRealize Automation catalog items to the blueprint. </p>
+<ol>
+<li>From the <strong>VRA Catalog</strong> drawer, drag a catalog item to the blueprint. </li>
+<li>
+<p>In the VRA Catalog Options window, select the catalog item type. The vRA roles available to your cloud project determine which option you select. See <a href="#blueprint_types">Table 1</a>.</p>
+<p>In version 6.2.3.1 and later, select from these options:</p>
+<ul>
+<li><strong>Import artifacts from this catalog item</strong>: Import all of the artifacts that are contained in the vRA catalog item to the blueprint.</li>
+<li>
+<p><strong>Customize this catalog item</strong>: Customize an existing vRA catalog item within the blueprint.
+In version 6.2.3, select from these options:</p>
+</li>
+<li>
+<p><strong>Import Catalog Item</strong>: Import all of the artifacts that are contained in the vRA catalog item to the blueprint.</p>
+</li>
+<li><strong>Request Existing Catalog Item</strong>: Customize an existing vRA catalog item within the blueprint.<ol>
+<li>Click <strong>OK</strong>. </li>
+</ol>
+</li>
+<li>Add resources from the palette to the blueprint. The roles that your vRealize Automation account is assigned determine which resources you can include in the blueprints that you provision. See <a href="#blueprint_types">Table 1</a>.</li>
+</ul>
+</li>
+</ol>
+<p>The palette shows resources from the currently connected cloud, which is shown in the upper-right corner of the page. For more information on working with the blueprint designer, see <a href="../blueprint_diagram/">Editing blueprint diagrams</a> and <a href="../blueprint_source/">Editing blueprint source code</a>.</p>
+</li>
+<li>
+<p>Specify the vRealize Automation service and entitlement. If you did not configure a new service and a new entitlement for use with the blueprint designer, you must specify the service and entitlement to use. Add the service_name and entitlement_name properties to the IBM::VRA::Deployment resource and define their values, as shown in the following code:</p>
+<p><code>vra_deployment:
+  type: IBM::VRA::Deployment
+    properties:
+      deploy_timeout: 8000
+      destroy_timeout:8000
+      **entitlement\_name: My\_Entitlement\_Name**
+      **service\_name: My\_Service\_Name**
+         servers:
+         - { get_resource: sever1 }
+         - { get_resource: server2 }</code></p>
+<p><strong>Note:</strong> If you configured a default service and entitlement for the blueprint designer, you do not need to specify them in this resource. See <a href="../VRA_service_entitle/">Configuring services and entitlements in VMware vRealize Automation</a>.</p>
+</li>
+<li>
+<p>Create a configuration file and externalize properties to the file. See <a href="../blueprint_configs/">Editing configuration files</a>.</p>
+</li>
+<li>
+<p>In the configuration file, ensure that the core OpenStack types are mapped to VMware vRealize Automation types. The configuration file must have mapping similar to the following code:</p>
+<p><code>resource_registry:
+  OS::Nova::Server : IBM::VRA::Server
+  OS::Neutron::Port : IBM::VRA::NetworkInterface
+  OS::Neutron::FloatingIP : IBM::VRA::FloatingIP
+  OS::Neutron::FloatingIPAssociation : IBM::VRA::FloatingIPAssociation
+  OS::Neutron::SecurityGroup : IBM::VRA::SecurityGroup</code></p>
+</li>
+</ol>
+<p>Add the components of your application to the blueprint. See <a href="../blueprint_deploy_env/">Deploying components with blueprints</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_edit_clouds/">Modeling environments for clouds through OpenStack Heat</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_edit_vra.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

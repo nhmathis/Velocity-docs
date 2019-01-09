@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/arch_appx_impersonation_windows/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Impersonation on Windows systems - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Impersonation on Windows systems", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="impersonation-on-windows-systems">Impersonation on Windows systems</h1>
+<p>For agents that are running on Windows™, HCL® UrbanCode™ Deploy provides a program that handles impersonation.</p>
+<p>You implement impersonation for agents on Windows the same way you do for agents on UNIX™ or Linux™: when you configure a process step, you specify the user credentials that are used when the step is processed. These credentials are the user that the agent is impersonating. In this way, two user accounts are active: the user that the agent runs as normally and the user that the agent is impersonating while it runs the step.</p>
+<p>To run steps on Windows, the agent must be running as LocalSystem as a service or running in an administrator command prompt. Also, this user must have the following privileges, at a minimum:</p>
+<ul>
+<li>SE_RESTORE_NAME (Restore files and directories)</li>
+<li>SE_BACKUP_NAME (Back up files and directories)</li>
+<li>SE_INCREASE_QUOTA_NAME (Adjust memory quotas for a process)</li>
+<li>SE_ASSIGNPRIMARYTOKEN_NAME (Replace a process-level token)</li>
+<li>The user must also have access to the agent working directory.</li>
+</ul>
+<p>Also, to impersonate an administrator, the agent user account must have the SE_TCB_NAME (Act as part of the operating system) permission.</p>
+<p>The user that the agent is impersonating must have at least one of the following privileges:</p>
+<ul>
+<li>SE_BATCH_LOGON_NAME (Log on as a batch job)</li>
+<li>SE_INTERACTIVE_LOGON_NAME (Log on locally)</li>
+<li>SE_SERVICE_LOGON_NAME (Log on as a service)</li>
+</ul>
+<p>In Windows Vista and later versions of Windows, when the agent logs in as the impersonated user, the operating system returns a restricted token. If the impersonated user is a member of the Administrators group, the agent attempts to get an elevated token. However, if the agent user account does not have the SE_TCB_NAME permission, the agent does not receive an elevated token. In this case, the agent attempts to run the step with the restricted token, but it does not have administrator permissions.</p>
+<p>You can also impersonate the Windows LocalSystem account. The LocalSystem account is installed on every Windows system and is the equivalent of the root user on UNIX and Linux. It always has the privileges that are listed above.</p>
+<p><strong>Note:</strong> For agents on Windows, the sudo option is ignored if selected.</p>
+<p><strong>Parent topic:</strong> <a href="../arch_appx_sudo/">User impersonation for process steps</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/arch_appx_impersonation_windows.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

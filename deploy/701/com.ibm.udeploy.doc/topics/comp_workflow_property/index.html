@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_workflow_property/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Adding process properties - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Adding process properties", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="adding-process-properties">Adding process properties</h1>
+<p>A process property provides a way to add user-supplied information to a process. A running process can prompt users for information and then incorporate it into the process. For example, if the process entails authenticating with another server, you can require that a user enter an ID and a password for the process to continue. Properties are defined in the Edit Property dialog box.</p>
+<ol>
+<li>Open the process.</li>
+<li>
+<p>On the <strong>Configuration</strong> tab, click <strong>Component Process Properties</strong>, <strong>Application Process Properties</strong>, or <strong>Process Properties</strong>, depending on the type of process. The Configuration tab looks like the following figure:</p>
+<p><img alt="The properties for the process, shown in the Configuration tab for the process" src="../../images/comp_workflow_property_a.gif" /></p>
+</li>
+<li>
+<p>In the Edit Properties dialog box, enter a name in the <strong>Name</strong> field. </p>
+</li>
+<li>Optionally, enter a description in the <strong>Description</strong> field. </li>
+<li>Enter a label in the <strong>Label</strong> field. The label is associated with the property in the user interface.</li>
+<li>In <strong>Pattern</strong>, enter a regular expression to require that user input values for this property match a specific pattern. Leave this field blank to accept any values. </li>
+<li>If the property is required, check the <strong>Required</strong> check box.The default value is that the property is not required.</li>
+<li>Specify the type of expected value with the <strong>Type</strong> list. Supported types are: <code>text</code>, <code>text area</code>, <code>check box</code>, <code>select</code>, <code>multi select</code>, and <code>secure</code>. Default type is <code>text</code>.</li>
+<li>In the <strong>Default Value</strong> field, enter a default value (if any).</li>
+<li>To save your work, click <strong>Save</strong>. To discard changes, click <strong>Cancel</strong>.</li>
+</ol>
+<p>To use a property in a process, reference it when you configure (see <a href="../comp_process/">Component processes</a>) a step that uses it.</p>
+<p><strong>Parent topic:</strong> <a href="../comp_workflow/">Processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_workflow_property.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

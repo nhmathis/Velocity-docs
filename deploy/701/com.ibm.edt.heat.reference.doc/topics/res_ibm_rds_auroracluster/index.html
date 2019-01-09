@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_rds_auroracluster/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM RDS AuroraCluster - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::RDS::AuroraCluster", url: "#_top", children: [
+              {title: "Example", url: "#example" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmrdsauroracluster">IBM::RDS::AuroraCluster</h1>
+<p>This resource type represents an Aurora cluster on Amazon RDS.</p>
+<p>The blueprint uses the core properties and extended properties, if any, from this resource type. Review and configure the applicable heat resources that apply to your configuration information.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>availability_zone</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The Amazon RDS availability zone in which the cache cluster is created.</td>
+</tr>
+<tr>
+<td>db_name</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The name of the database.</td>
+</tr>
+<tr>
+<td>engine_version</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The version of the cache engine.</td>
+</tr>
+<tr>
+<td>master_password</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td> </td>
+</tr>
+<tr>
+<td>master_username</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td> </td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The name of the cache cluster.</td>
+</tr>
+<tr>
+<td>num_cache_nodes</td>
+<td>Integer</td>
+<td>False</td>
+<td>Core</td>
+<td>The number of cache nodes. The default value is 1.</td>
+</tr>
+<tr>
+<td>parameter_group</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The name of the cache parameter group that is associated with this cache cluster.</td>
+</tr>
+<tr>
+<td>port</td>
+<td>Integer</td>
+<td>False</td>
+<td>Core</td>
+<td>The port number on which cache nodes accept connections.</td>
+</tr>
+<tr>
+<td>subnet_group</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The cache subnet group that is associated with a cache cluster. Specify this property if you are launching into a VPC.</td>
+</tr>
+<tr>
+<td>vpc_security_group_ids</td>
+<td>List</td>
+<td>False</td>
+<td>Core</td>
+<td>A list of VPC security group IDs.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<p>This example creates an Amazon RDS Aurora cluster without any instances.</p>
+<pre><code> resources:
+   rds-aurora-cluster:  
+    type: IBM::RDS::AuroraCluster
+    properties:
+      name: rds-aurora-cluster
+      port: 3306
+      db_name: ibm_ucdp
+      engine_version: 5.6.10a
+      master_password: ucdpadmin
+      master_username: ucdpadmin
+      parameter_group: { get_resource: rds-cluster-parameter_group }
+      subnet_group: {get_resource: rds-subnet_group }
+      availability_zones:
+        - us-east-2c
+        - us-east-2a
+        - us-east-2b
+      vpc_security_group_ids:
+        - sg-e119b189 #sg-e119b189(tranb)
+
+    rds-subnet_group:
+     type: IBM::RDS::SubnetGroup
+     properties:
+      name: os-subnet_group
+      description: For aurora cluster
+      subnet_ids: [subnet-1b342251, subnet-c9b31ca0, subnet-22b44659]
+
+    rds-cluster-parameter_group:
+     type: IBM::RDS::ParameterGroup
+     properties:
+      name: my_rds_parameter_group
+      description: My RDS Parameter Group (Cluster)
+      family: aurora5.6
+      type: CLUSTER
+
+    rds-instance-parameter_group:
+     type: IBM::RDS::ParameterGroup
+     properties:
+      name: my_rds_parameter_group
+      description: My RDS Parameter Group (Instance)
+      family: aurora5.6
+
+## REFERENCE{&quot;vpc-9f08d5f6&quot;:{&quot;type&quot;:&quot;OS::Neutron::Net&quot;,&quot;properties&quot;:{&quot;network_id&quot;:&quot;vpc-9f08d5f6&quot;,
+&quot;external&quot;:&quot;false&quot;,&quot;subnets&quot;:[{&quot;cidr&quot;:&quot;172.31.32.0\/20&quot;,&quot;availability_zone&quot;:&quot;us-east-2c&quot;,&quot;name&quot;:&quot;subnet
+-1b342251&quot;,&quot;id&quot;:&quot;subnet-1b342251&quot;},{&quot;cidr&quot;:&quot;172.31.0.0\/20&quot;,&quot;availability_zone&quot;:&quot;us-east-2a&quot;,&quot;name&quot;:&quot;subnet
+-c9b31ca0&quot;,&quot;id&quot;:&quot;subnet-c9b31ca0&quot;},{&quot;cidr&quot;:&quot;172.31.16.0\/20&quot;,&quot;availability_zone&quot;:&quot;us-east-2b&quot;,&quot;name&quot;:&quot;subnet
+-22b44659&quot;,&quot;id&quot;:&quot;subnet-22b44659&quot;}]}}}
+
+outputs: 
+ blueprint_url:
+  description: Blueprint Origin URL
+  value: https://127.0.0.1:8443/landscaper/view/projects?open=ucdpadmin_00000000_0000_0000_0000_0000000
+00002-OrionContent/Internal-Team/rds_part1.yaml.yml
+
+
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_rds/">Amazon RDS resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_rds_auroracluster.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

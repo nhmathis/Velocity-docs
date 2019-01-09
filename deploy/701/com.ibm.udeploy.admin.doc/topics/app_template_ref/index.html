@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/app_template_ref/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Permissions reference for using application templates - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Permissions reference for using application templates", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="permissions-reference-for-using-application-templates">Permissions reference for using application templates</h1>
+<p>Permissions for roles that create applications from templates.</p>
+<p>Application templates can contain information about the components and environments that are initially available to applications that are created from the templates. The composition of the application template determines which role permissions are needed to create an application from a template.</p>
+<p><strong>Note:</strong> The role permissions in the following tables are only the permissions that are required to create the application from a template. More permissions are necessary to add elements to an application, run processes, or complete a deployment.</p>
+<p>To create an application from a template, the user's role must have the following minimum permissions.</p>
+<p><strong>Note:</strong> The user cannot select components or create environments for the application.</p>
+<table>
+<thead>
+<tr>
+<th>Product area</th>
+<th>Permissions</th>
+<th>Subpermissions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td>-   <strong>View Applications</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|Edit-   <strong>Edit Basic Settings</strong>
+-   <strong>Manage Properties</strong>
+-   <strong>Manage Teams</strong></p>
+<p>Create-   <strong>Create Applications From Template</strong></p>
+<p>|
+|Application Template| -   <strong>View Application Templates</strong></p>
+<p>| |
+|Resource| -   <strong>Create Resources</strong></p>
+<p>|Edit-   <strong>Manage Teams</strong></p>
+<p>|</p>
+<p>To assign existing components to an application from the application template wizard, the user's role must also have the following permissions.</p>
+<p><strong>Note:</strong> To create an application from the application template wizard, the user's role must also have the permissions that are listed in Table 1.</p>
+<table>
+<thead>
+<tr>
+<th>Product area</th>
+<th>Permissions</th>
+<th>Subpermissions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Application</td>
+<td> </td>
+<td>Edit-   <strong>Manage Components</strong></td>
+</tr>
+</tbody>
+</table>
+<p>|
+|Component| -   <strong>View Components</strong></p>
+<p>| |</p>
+<p>To create environments for an application from the application template wizard, the user's role must also have the following permissions. To map resources to the environments from the application wizard, the role must also have the permissions in Table 2.</p>
+<p><strong>Note:</strong> To create an application from the application template wizard, the user's role must also have the permissions that are listed in Table 1.</p>
+<table>
+<thead>
+<tr>
+<th>Product area</th>
+<th>Permissions</th>
+<th>Subpermissions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent</td>
+<td>-   <strong>View Agents</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>| |
+|Application| |Edit-   <strong>Manage Approvals</strong>
+-   <strong>Manage Environments</strong></p>
+<p>|
+|Environment| -   <strong>View Environments</strong></p>
+<p>|Edit-   <strong>Edit Basic Settings</strong>
+-   <strong>Manage Base Resources</strong>
+-   <strong>Manage Properties</strong></p>
+<p>Create-   <strong>Create Environments From Template</strong></p>
+<p>|
+|Environment Template| -   <strong>View Environment Templates</strong></p>
+<p>| |
+|Resource| -   <strong>View Resources</strong></p>
+<p>|Edit-   <strong>Manage Children</strong>
+-   <strong>Map to Environments</strong>
+-   <strong>Manage Teams</strong></p>
+<p>|
+|Resource Template| -   <strong>View Resource Templates</strong></p>
+<p>| |</p>
+<p><strong>Parent topic:</strong> <a href="../security_roles/">Roles and permissions</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/app_template_ref.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

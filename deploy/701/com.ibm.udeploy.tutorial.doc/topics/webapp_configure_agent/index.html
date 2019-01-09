@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/webapp_configure_agent/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring the agent and target system - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring the agent and target system", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-the-agent-and-target-system">Configuring the agent and target system</h1>
+<p>To deploy applications with HCL® UrbanCode™ Deploy, you need one or more agents. The server uses the agents to deploy the application components on target systems.</p>
+<p>Before you begin the tutorial, make sure that you completed the <a href="../webapp_intro/#prereqs">Prerequisites</a>.</p>
+<p>To work through this tutorial, you need an agent that is running on a target computer system. This target computer can be a cloud resource, a virtual image, or a physical computer. You must have access to this computer and be able to install MySQL/MariaDB, Apache Tomcat, and the HCL UrbanCode Deploy agent on it. Follow these steps to set up an agent and a target system for your work with the tutorial:</p>
+<ol>
+<li>Prepare a computer for use as the target system. This computer must meet the system requirements that are listed in <a href="../../../com.ibm.udeploy.install.doc/topics/sysRequire/">System requirements and performance considerations</a>. Most of the examples in this tutorial show information for a simple Linux™ operating system such as Red Hat Enterprise Linux version 7.</li>
+<li>Install an agent on the target system.See <a href="../../../com.ibm.udeploy.install.doc/topics/agent_install_ov/">Installing agents</a>.</li>
+<li>
+<p>On the HCL UrbanCode Deploy server, verify that the agent is installed by clicking <strong>Resources</strong> > <strong>Agents</strong>. Your agent must appear in the list of agents with a status of <strong>Online</strong>, as shown in the following figure:</p>
+<p><img alt="The agent in the list of agents; the Status column shows that the agent is online" src="../../images/webapp_configure_a.gif" /></p>
+</li>
+<li>
+<p>Add the agent as a resource: </p>
+<ol>
+<li>To the left of the <strong>Agents</strong> tab, click the <strong>Resource Tree</strong> tab. </li>
+<li>Click <strong>Create Top-Level Group</strong>, give the new group a name such as JPetStore agents and click <strong>Save</strong>.This group is a container for resources, such as agents.</li>
+<li>
+<p>On the same row as the new resource group, click <strong>Actions</strong> > <strong>Add Agent</strong>, as shown in the following figure:</p>
+<p><img alt="Adding an agent to the resource group" src="../../images/webapp_configure_c.gif" /></p>
+</li>
+<li>
+<p>In the Create Resource window, select the agent in the <strong>Agent</strong> field and click <strong>Save</strong>. 
+The agent is now listed as a child of the resource group. You must add agents to resource groups in this way so that applications can access the agents through the resource group.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Install and start the MySQL/MariaDB server on the target system. The application uses a MySQL/MariaDB database. If you are using a Linux operating system, you can use the package manager to install and start MySQL/MariaDB. For example, on Red Hat Enterprise Linux version 7, run the following commands:</p>
+<p><code>yum install mariadb mariadb-server</code></p>
+<p><code>systemctl enable mariadb</code></p>
+<p><code>systemctl start mariadb</code></p>
+<p>On Windows, you can use a graphical installer or download a binary package for the database server. Then, start the server by going to the bin folder and running the mysqld command.</p>
+</li>
+<li>
+<p>Create an empty database for the application to use: </p>
+<ol>
+<li>
+<p>Open a command-line window and log in to the database as the root user. For example, run this command from the command line:</p>
+<p><code>mysql -u root</code></p>
+<p>The command line now shows a prompt that looks like this prompt:</p>
+<p><code>MariaDB&gt;</code></p>
+</li>
+<li>
+<p>Create the database with the following command: </p>
+<p><code>create database jpetstore;</code></p>
+<p>If the command runs properly, you see the message <code>Query OK, 1 row affected</code>.</p>
+</li>
+<li>
+<p>Create the database user with the following command: </p>
+<p><code>create user 'jpetstore'@'localhost' identified by 'jppwd';</code></p>
+<p>If the command runs properly, you see the message <code>Query OK, 0 rows affected</code>.</p>
+</li>
+<li>
+<p>Give the user access rights to the database with the following command:</p>
+<p><code>grant all privileges on jpetstore.* to 'jpetstore'@'localhost';</code></p>
+<p>If the command runs properly, you see the message <code>Query OK, 0 rows affected</code>.</p>
+</li>
+<li>
+<p>Type quit to exit the MySQL command line.</p>
+</li>
+<li>Verify that the user can access the database: </li>
+<li>
+<p>From the command-line window, log in to the database as the new user: </p>
+<p><code>mysql -u jpetstore -pjppwd</code></p>
+</li>
+<li>
+<p>Run the following command to list the databases on the system:</p>
+<p><code>show databases;</code></p>
+</li>
+<li>
+<p>Verify that the <code>jpetstore</code> database appears in the list, as shown in the following figure:</p>
+<p><img alt="The list of databases on the system, including the jpetstore database" src="../../images/webapp_configure_b.gif" /></p>
+</li>
+<li>
+<p>Type quit to exit the database command line. </p>
+</li>
+<li>Install Apache Tomcat on the target system. You can use Tomcat version 6 through version 8. A simple way to install Tomcat on a Linux operating system is to download and install the binary distribution of Tomcat, as in the following steps:</li>
+<li>Download the binary distribution of Tomcat, such as apache-tomcat-6.0.39.tar.gz . </li>
+<li>
+<p>Extract this file to a folder on the target computer, such as /opt/apache-tomcat-6.0.39 . For example, on a Linux operating system you might run the following command:</p>
+<p><code>tar -xf apache-tomcat-6.0.39.tar.gz ; mv apache-tomcat-6.0.39/ /opt</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Add an administrative user to the Tomcat server in the conf/tomcat-users.xml file. This user account is necessary to deploy applications to Tomcat. For example, for Tomcat version 6, open the file conf/tomcat-users.xml and uncomment the <code>role</code> and <code>user</code> tags at the bottom of the file. Then, add the following lines of code to those tags:</p>
+<p><code>&lt;role rolename="manager"/&gt;
+&lt;user username="tomcatmanager" password="tomcatmanager" roles="manager"/&gt;</code></p>
+<p>The end of the file looks like the following example:</p>
+<p>```
+<role rolename="tomcat"/>
+  <role rolename="role1"/>
+  <user username="tomcat" password="tomcat" roles="tomcat"/>
+  <user username="both" password="tomcat" roles="tomcat,role1"/>
+  <user username="role1" password="tomcat" roles="role1"/></p>
+<p><role rolename="manager"/>
+  <user username="tomcatmanager" password="tomcatmanager" roles="manager"/></p>
+<p></tomcat-users>
+```</p>
+<p>For Tomcat version 7 or 8, open the file conf/tomcat-users.xml and uncomment the <code>role</code> and <code>user</code> tags at the bottom of the file. Remove the text <code>&lt;must-be-changed&gt;</code> and replace it with passwords for the default user accounts. If you do not remove this text, the configuration file is unreadable and your sample application will not be able to access Tomcat. Then, add the following lines of code to those tags:</p>
+<p><code>&lt;role rolename="manager-script"/&gt;
+&lt;role rolename="manager-gui"/&gt;
+&lt;user username="tomcatmanager" password="tomcatmanager" roles="manager-script,manager-gui"/&gt;</code></p>
+<p>The end of the file might look like the following example:</p>
+<p>```
+<role rolename="tomcat"/>
+  <role rolename="role1"/>
+  <user username="tomcat" password="tomcat" roles="tomcat"/>
+  <user username="both" password="tomcat" roles="tomcat,role1"/>
+  <user username="role1" password="tomcat" roles="role1"/></p>
+<p><role rolename="manager-script"/>
+  <role rolename="manager-gui"/>
+  <user username="tomcatmanager" password="tomcatmanager" roles="manager-script,manager-gui"/></p>
+<p></tomcat-users>
+```</p>
+</li>
+<li>
+<p>In the conf/server.xml file, modify the default HTTP ports to avoid conflicts. </p>
+<ol>
+<li>
+<p>Replace all instances of port number <code>8080</code> with port number <code>8081</code>. To update the port numbers from the command line, run this command:</p>
+<p><code>sed -i 's/8080/8081/g' /opt/tomcat\_directory/conf/server.xml</code></p>
+</li>
+<li>
+<p>Replace all instances of port number <code>8443</code> with port number <code>8445</code>. To update the port numbers from the command line, run this command:</p>
+<p><code>sed -i 's/8443/8445/g' /opt/tomcat\_directory/conf/server.xml</code></p>
+</li>
+</ol>
+</li>
+</ol>
+<p>Now the agent and the target system are configured for your work with the sample application. You need the passwords and locations that you specified later.</p>
+<p><strong>Parent topic:</strong> <a href="../webapp_abstract/">Deploying a simple web application</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/webapp_configure_agent.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

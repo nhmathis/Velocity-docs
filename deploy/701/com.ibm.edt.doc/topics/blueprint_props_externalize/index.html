@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_props_externalize/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Externalizing properties in blueprints - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Externalizing properties in blueprints", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="externalizing-properties-in-blueprints">Externalizing properties in blueprints</h1>
+<p>Rather than hardcoding values in a blueprint, you can externalize properties to parameters. Then, you can specify values in a configuration file or specify values when you provision an environment.</p>
+<p>To provide property values in blueprints, you can put the values in parameters and then externalize the parameters to a configuration file. Externalizing properties in this way is an important part of creating blueprints that can be provisioned on different cloud systems. You can keep the basic information in the blueprint and create configuration files for the specific details for different clouds or different situations.</p>
+<ol>
+<li>To externalize a property:</li>
+<li>In the blueprint designer, on the <strong>Diagram</strong> tab, click a resource to select it. </li>
+<li>At the left of the editor, in the <strong>Properties</strong> list, next to the property, click <strong>Set Property</strong> <img alt="" src="../../images/icons/setproperty.gif" />.</li>
+<li>
+<p>From the Set Property window, select an existing parameter or type the name of a new parameter, as shown in the following figure. In this example, the <code>flavor</code> property is externalized to a new parameter that is named <code>MyImageFlavor</code>.</p>
+<p><img alt="The Set Property window, showing a list of properties and a field in which you can type the name for a new property" src="../../images/blueprint_props_externalize_a.gif" /></p>
+</li>
+<li>
+<p>In the Set Property window, if you selected an existing parameter, click <strong>Set</strong>. If you typed the name of a new parameter, click <strong>Create Parameter</strong>. The blueprint designer shows the parameter in place of the value. Similarly, the resulting code for the property uses the get_param function to retrieve the parameter value, as in the following example code:</p>
+<p><code>MyServer:
+    type: OS::Nova::Server
+    properties:
+      name: MyServer
+      image: "MyImage" 
+      flavor: { get_param: MyImageFlavor }
+      key_name: { get_param: key_name }
+      availability_zone: { get_param: availability_zone }</code></p>
+<p>The new parameter appears at the top of the blueprint, in the <code>parameters</code> section:</p>
+<p><code>MyImageFlavor:
+  type: string
+  description: Generated</code></p>
+</li>
+<li>
+<p>Create a configuration file or open an existing configuration file. For more information about configuration files, see <a href="../blueprint_configs/">Editing configuration files</a>.</p>
+</li>
+<li>In the configuration file, click <strong>Add</strong> <img alt="" src="../../images/icons/add.gif" />. </li>
+<li>In the Choose Blueprint window, select the blueprint, and then click <strong>OK</strong>. </li>
+</ol>
+<p>The configuration file contains externalized property and parameter values for the blueprint.</p>
+<p>When you provision an environment from this blueprint, the blueprint designer prompts you for a value for the parameters, as shown in the following figure. You can also specify a configuration file to use the values that are in that file.</p>
+<p><img alt="The Provision Blueprint to new Environment window, showing the property from the blueprint" src="../../images/blueprint_props_externalize_b2.gif" /></p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/blueprint_props_ov/">Blueprint properties, attributes, and parameters</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_props_externalize.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

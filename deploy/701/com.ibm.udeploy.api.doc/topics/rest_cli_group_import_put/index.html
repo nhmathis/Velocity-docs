@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/rest_cli_group_import_put/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Import a group - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Import a group", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example JSON request", url: "#example-json-request" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="import-a-group">Import a group</h1>
+<p>Specify the details about the group in the JSON file. You can list one or more members of the new group in the 'users' array, or you can leave the array blank to create an empty group. Groups can be created only in Internal Storage authorization realms.</p>
+<h2 id="request">Request</h2>
+<pre><code>PUT https://{hostname}:{port}
+    /cli/group/import
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p>This command takes a JSON request string or file. Use the following template for the request:</p>
+<pre><code>{
+  &quot;authorizationRealm&quot;: &quot;Authorization realm name&quot;,
+  &quot;name&quot;: &quot;Group name&quot;,
+  &quot;users&quot;: [&quot;User names&quot;]
+}
+
+</code></pre>
+
+<h2 id="example-json-request">Example JSON request</h2>
+<pre><code>{
+  &quot;name&quot;: &quot;group1&quot;,
+  &quot;authorizationRealm&quot;: &quot;Internal Security&quot;,
+  &quot;users&quot;: [
+    &quot;jdoe&quot;,
+    &quot;jsmith&quot;
+  ]
+}
+</code></pre>
+
+<h2 id="example-response">Example response</h2>
+<pre><code>{
+  &quot;id&quot;: &quot;9dc44e77-e241-480e-8fbb-50f84b64b24b&quot;,
+  &quot;name&quot;: &quot;group1&quot;,
+  &quot;enabled&quot;: true
+}
+</code></pre>
+
+<p>Related CLI command: <a href="../udclient_importgroup/">importGroup</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../rest_cli_group/">group resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/rest_cli_group_import_put.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

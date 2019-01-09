@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/plugins_worklight_buildanddeploy/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Building and deploying mobile applications", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="building-and-deploying-mobile-applications">Building and deploying mobile applications</h1>
+<p>You can set up your development environment so that you can build your mobile applications and, by using the IBM® MobileFirst Platform Foundation (formerly Worklight®) plug-in forHCL® UrbanCode™ Deploy, deploy the build results to the MobileFirst Platform Foundation Server.</p>
+<p>Ensure that the following software is installed and running:</p>
+<ul>
+<li>HCL UrbanCode Deploy</li>
+<li>IBM MobileFirst Platform Foundation Server with the Application Center and Console running.</li>
+<li>IBM MobileFirst Platform Foundation Studio</li>
+</ul>
+<p>Extra software might be required, such as:</p>
+<ul>
+<li>Source control management (SCM) system.</li>
+<li>Build engine.</li>
+<li>Application server.</li>
+<li>Database.</li>
+</ul>
+<p>Before you can build and deploy mobile applications to the MobileFirst Platform Foundation Server, you must complete the following configuration steps:</p>
+<ol>
+<li><a href="../plugins_worklight_buildresources/">Configure the build system</a>.</li>
+<li>Configure HCL UrbanCode Deploy, including the following steps:<ul>
+<li>Create components.</li>
+<li>Create component processes or application processes that include steps from the MobileFirst Platform Foundation plug-in to deploy the application. See <a href="../plugins_worklight_deploy/">Deploying mobile applications</a>.</li>
+</ul>
+</li>
+<li>
+<p><a href="../plugins_worklight_configserver/">Configure Worklight Server Console</a>, including the following steps:</p>
+<ul>
+<li>Create and configure a database.</li>
+<li>Configure the MobileFirst Platform Foundation project web archive (WAR) file.</li>
+</ul>
+</li>
+<li>
+<p>After you set up the build, HCL UrbanCode Deploy and MobileFirst Platform Foundation Server console, you can build and deploy mobile applications by using the following high-level steps:</p>
+</li>
+<li>Check in (commit) changes from MobileFirst Platform Foundation Studio into a source control management (SCM) system.</li>
+<li>
+<p>Build the application and add a version to HCL UrbanCode Deploy. </p>
+<p><strong>Tip:</strong> Assign a version to the mobile application that is deployed to the Application Center. This version must match the version that is assigned in HCL UrbanCode Deploy.</p>
+<p>For example, if the mobile application has a commercial version of 1.0 on the Application Center and the internal version from the latest build is 16, assign version 1.0.16 to the application in HCL UrbanCode Deploy. Keeping the version numbers synchronized helps you to recover if you encounter a problem. For example, if the latest version of the mobile application was not deployed successfully to the Application Center.</p>
+</li>
+<li>
+<p>Request deployment in HCL UrbanCode Deploy. </p>
+</li>
+<li>View the mobile artifacts in the MobileFirst Platform Foundation Console, install, and test the application from the Application Center. </li>
+</ol>
+<p>The mobile application artifacts are deployed to the MobileFirst Platform Foundation Server and can be installed on the target device.</p>
+<p>Optionally, create extra component and application processes in HCL UrbanCode Deploy to <a href="../plugins_worklight_rollback/">roll back deployments</a> (for example, to recover from an error condition or an incomplete deployment.)</p>
+<ul>
+<li><strong><a href="../plugins_worklight_build/">Building mobile applications</a></strong><br />
+To set up a continuous integration and delivery cycle for your mobile applications, you must build the mobile application artifacts before you deploy them to the IBM MobileFirst Platform Foundation Server. TheRational® solution for Collaborative Lifecycle Management, MobileFirst Platform Foundation, and HCL UrbanCode Deploy products integrate to help automate the build and deployment of mobile applications.</li>
+<li><strong><a href="../plugins_worklight_add_artifacts/">Adding mobile artifacts to HCL UrbanCode Deploy</a></strong><br />
+You can use the build scripts to add your build artifacts to HCL UrbanCode Deploy for deployment to the IBM MobileFirst Platform Foundation Server.</li>
+<li><strong><a href="../plugins_worklight_configserver/">Configuring the MobileFirst Platform Foundation Server</a></strong><br />
+You must configure the IBM MobileFirst Platform Foundation Server before you can run the process steps to deploy mobile application artifacts.</li>
+<li><strong><a href="../plugins_worklight_deploy/">Deploying mobile applications</a></strong><br />
+You can use the process steps in the IBM MobileFirst Platform Foundation (formerly Worklight) plug-in to deploy mobile applications to MobileFirst Platform Foundation Server.</li>
+<li><strong><a href="../plugins_worklight_rollback/">Rolling back mobile applications</a></strong><br />
+There are a number of ways to roll back a mobile application that is deployed to IBM MobileFirst Platform Foundation Server. One option is to remove the native application from the Application Center and then redeploy the application. Alternatively, you can manually roll back deployments.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../applications_ch/">Applications</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/plugins_worklight_buildanddeploy.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

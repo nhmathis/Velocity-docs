@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/plugins_worklight_buildtemplates/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Build scripts - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Build scripts", url: "#_top", children: [
+              {title: "Build script tasks", url: "#build-script-tasks" },
+              {title: "Sample build script task flow", url: "#sample-build-script-task-flow" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="build-scripts">Build scripts</h1>
+<p>You can create Ant build scripts for MobileFirst Platform Foundation projects that contain applications and adapters. By using these build scripts, you can automate your mobile application builds.</p>
+<h2 id="build-script-tasks">Build script tasks</h2>
+<p>You can create build scripts that use the following types of Ant tasks:</p>
+<table>
+<thead>
+<tr>
+<th>Type of Ant task</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Built in tasks from Apache Ant</td>
+<td>Includes tasks such as:-   <code>&lt;echo&gt;</code></td>
+</tr>
+<tr>
+<td>-   <code>&lt;report&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>&lt;mkdir&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>&lt;exec&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>&lt;replaceregexp&gt;</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|
+|Tasks from IBM® MobileFirst Platform Foundation|These tasks complete the following actions:-   Build MobileFirst Platform Foundation applications and adapters, such as <code>&lt;app-builder&gt;</code> and <code>&lt;adapter-builder&gt;</code>. MobileFirst Platform Foundation provides a set of Ant tasks that help you to build adapters and MobileFirst Platform Foundation applications for your MobileFirst Platform Foundation Server.
+-   Build MobileFirst Platform Foundation web archive projects. MobileFirst Platform Foundation provides the <code>&lt;war-builder&gt;</code> Ant task for building the MobileFirst Platform Foundation project WAR file.</p>
+<p>|
+|Tasks from the Rational® Team Concert™ Build System Toolkit|The following tasks provide information to the build results:-   <code>&lt;startBuildActivity&gt;</code>
+-   <code>&lt;linkPublisher&gt;</code>
+-   <code>&lt;artifactPublisher&gt;</code></p>
+<p>|</p>
+<h2 id="sample-build-script-task-flow">Sample build script task flow</h2>
+<p>You can create build scripts for MobileFirst Platform Foundation projects that contain different numbers of applications or adapters. The following sample task flow describes the overall design of a build script for a MobileFirst Platform Foundation project that has a single MobileFirst Platform Foundation application and a single adapter.</p>
+<ol>
+<li>Use Ant <code>&lt;property&gt;</code> elements to set the properties.</li>
+<li>Use a hybrid target to build MobileFirst Platform Foundation applications, adapters, and MobileFirst Platform Foundation web archive projects. The hybrid target contains the following actions:<ol>
+<li>URLs that point to the MobileFirst Platform Foundation Server Console and the Application Center are published to either the Ant build log or the Rational Team Concert™ build results.</li>
+<li>The MobileFirst Platform Foundation <code>&lt;app-builder&gt;</code> Ant task builds the MobileFirst Platform Foundation application.</li>
+<li>The resulting .wlapp file is stored in the build output.</li>
+<li>The MobileFirst Platform Foundation <code>&lt;adapter-builder&gt;</code> Ant task builds the adapter.</li>
+<li>The resulting .adapter file is stored in the build output.</li>
+<li>The MobileFirst Platform Foundation <code>&lt;war-builder&gt;</code> Ant task builds the MobileFirst Platform Foundation web archive project.</li>
+<li>The resulting WAR file is stored in the build output.</li>
+<li>Optional. If you use Rational Team Concert, you can publish the .wlapp, .adapter, and WAR files to the Rational Team Concert build results.</li>
+</ol>
+</li>
+<li>When you build an Android application, include the following actions to build the native Android APK file:<ol>
+<li>Run the android command-line tool from the Android SDK to generate the Android build.xml file.</li>
+<li>Run the generated Android build.xml file to build the APK file.</li>
+<li>Optional. Publish the Android APK file to the location where you store your build output. For example, if you use Rational Team Concert, publish the APK file to the Rational Team Concert build results.</li>
+</ol>
+</li>
+<li>When you build an iOS application, include the following actions to build the native iOS IPA file:<ol>
+<li>Run the xcodebuild command-line tool from the Xcode SDK to build the iOS application.</li>
+<li>Run the xcrun command-line tools from the Xcode SDK to package the iOS application into an IPA file.</li>
+<li>Optional. Publish the iOS IPA file to the location where you store your build output. For example, if you use Rational Team Concert, publish the IPA file to the Rational Team Concert build results.</li>
+</ol>
+</li>
+<li>
+<p>Add your MobileFirst Platform Foundation application, adapter, MobileFirst Platform Foundation web archive project (WAR file), and native application (Android APK file or iOS IPA file) to HCL® UrbanCode™ Deploy as a new version.</p>
+<p><strong>Tip:</strong> You can have multiple MobileFirst Platform Foundation applications and adapters. If you have more than one MobileFirst Platform Foundation application or adapter, repeat calls to tasks to build the mobile artifacts, add new property values, and then add the new artifacts to HCL UrbanCode Deploy.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../plugins_worklight_build/">Building mobile applications</a></p>
+<p><strong>Previous topic:</strong> <a href="../plugins_worklight_buildresources/">Build computer resources</a></p>
+<p><strong>Next topic:</strong> <a href="../plugins_worklight_jazzbuild/">Rational Team Concert Build</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/plugins_worklight_buildtemplates.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

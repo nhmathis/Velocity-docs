@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_edit/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating files with the blueprint designer - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating files with the blueprint designer", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-files-with-the-blueprint-designer">Creating files with the blueprint designer</h1>
+<p>You can create blueprints, configuration files, text files, binary files, and folders in the blueprint designer.</p>
+<ul>
+<li>Connect the blueprint design server to a cloud system. See <a href="../security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</li>
+<li>Make sure that your user account is authenticated to a cloud system. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_auth_bds/">Setting up access to clouds in the blueprint designer</a>.</li>
+<li>Connect the blueprint design server to the server. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Log in to the blueprint designer.</li>
+<li>
+<p>At the top of the page, select the cloud project and region to use.</p>
+</li>
+<li>
+<p>Click <strong>Blueprints</strong>. </p>
+</li>
+<li>Click <strong>New</strong>. </li>
+<li>In the <strong>Type</strong> list, select the file type. The following file types are available:<ul>
+<li>Select <strong>Folder</strong> to create an internal folder for an existing repository.</li>
+<li>Select <strong>Blueprint</strong> to create a file that defines a cloud environment and its components.</li>
+<li>Select <strong>Configuration</strong> for your cloud type to define a file that defines properties and values that a blueprint requires to provision an environment to that cloud. See <a href="../blueprint_configs/">Editing configuration files</a>.</li>
+<li>Select <strong>Text File</strong> to create a text file that is used in or by a blueprint. Text files might contain Heat property values that are accessed by using the following format: <code>property\_name: { get_file: filepath }</code>.</li>
+<li>Select <strong>Binary File</strong> to create a file that contains a script that can be run by the blueprint. The binary files are accessed by using the following format: <code>property\_name: { get_file: filepath }</code>.</li>
+</ul>
+</li>
+<li>
+<p>In the Add a New window, specify a name for the file. </p>
+<p><strong>Note:</strong> You must use a unique name. If your blueprint name contains the same sequence of alphanumeric characters with different capitalization as an existing blueprint, only one blueprint will be available to provision from the HCL® UrbanCode™ Deploy server.</p>
+</li>
+<li>
+<p>To set the repository in which the file is saved, select a project from the <strong>Repository</strong> list. The repository list contains the default project and a project for each team. Each project except the default project corresponds to both a team and a Git repository of the same name. The default project is not associated with a team, and files that are associated with the default project cannot be shared with other users.</p>
+</li>
+<li>To set the folder in which the file is saved, select the folder name from the <strong>Folder</strong> list. </li>
+<li>To copy the contents of an existing source, click <strong>Clone</strong>. If you selected an existing file, you can create a copy of that file. You can also import the contents of a file from your file system or paste the contents into the new file.</li>
+<li>Add a description of the file. </li>
+<li>For only binary files, click <strong>Choose File</strong> to select the binary file to import. </li>
+<li>Click <strong>Save</strong>. </li>
+</ul>
+<p>To open a file, go to the <strong>Blueprints</strong> page, and in the <strong>Files</strong> list, click the file.</p>
+<p>If you created a blueprint, you can work with it in the diagram editor or the source-code editor. You can also add configuration files to provide different sets of parameter values for different situations.</p>
+<p><strong>Note:</strong> You can also clone a repository and access it from within the blueprint designer. From the <strong>Repositories</strong> list, click <strong>Clone Repository</strong>, and then specify a URL.</p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_create/">Editing blueprints with the blueprint designer</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_edit.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

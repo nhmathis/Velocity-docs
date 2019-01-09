@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/rest_cli_team_info_get/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>List information about a team - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "List information about a team", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example", url: "#example" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="list-information-about-a-team">List information about a team</h1>
+<h2 id="request">Request</h2>
+<pre><code>GET https://{hostname}:{port}
+    /cli/team/info?{parameters}
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>team</td>
+<td>string</td>
+<td>true</td>
+<td>Name of the team</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<pre><code>curl -k -u jsmith:passwd 
+
+  &quot;https://myserver.example.com:8443/cli/team/info
+  ?team=MyNewTeam&quot; -X GET -H &quot;Accept: application/json&quot;
+</code></pre>
+
+<h2 id="example-response">Example response</h2>
+<pre><code>{
+  &quot;id&quot;: &quot;769c2486-ed40-4a3a-ac52-faa33d30cfd5&quot;,
+  &quot;name&quot;: &quot;MyNewTeam&quot;,
+  &quot;isDeletable&quot;: true,
+  &quot;roleMappings&quot;: [
+    {
+      &quot;user&quot;: {
+        &quot;id&quot;: &quot;20000000000000000000000001000000&quot;,
+        &quot;name&quot;: &quot;admin&quot;,
+        &quot;displayName&quot;: &quot;admin&quot;,
+        &quot;deleted&quot;: false,
+        &quot;deletedDate&quot;: 0,
+        &quot;authenticationRealm&quot;: &quot;20000000000000000000000000000001&quot;,
+        &quot;isLockedOut&quot;: false,
+        &quot;isDeletable&quot;: true
+      },
+      &quot;role&quot;: {
+        &quot;id&quot;: &quot;20000000000000000000000000010001&quot;,
+        &quot;name&quot;: &quot;Administrator&quot;,
+        &quot;description&quot;: &quot;&quot;,
+        &quot;isDeletable&quot;: true
+      }
+    },
+    {
+      &quot;user&quot;: {
+        &quot;id&quot;: &quot;2d2c8241-ba69-4b63-abf0-de90b7d4ceeb&quot;,
+        &quot;name&quot;: &quot;jdoe&quot;,
+        &quot;actualName&quot;: &quot;Jane Doe&quot;,
+        &quot;displayName&quot;: &quot;Jane Doe (jdoe)&quot;,
+        &quot;email&quot;: &quot;&quot;,
+        &quot;deleted&quot;: false,
+        &quot;deletedDate&quot;: 0,
+        &quot;authenticationRealm&quot;: &quot;20000000000000000000000000000001&quot;,
+        &quot;isLockedOut&quot;: false,
+        &quot;isDeletable&quot;: true
+      },
+      &quot;role&quot;: {
+        &quot;id&quot;: &quot;90f5f9a0-3d01-4aaa-a276-74214188fd1d&quot;,
+        &quot;name&quot;: &quot;Developer&quot;,
+        &quot;isDeletable&quot;: true
+      }
+    },
+    {
+      &quot;user&quot;: {
+        &quot;id&quot;: &quot;b1e20a57-2897-4372-b6c6-662c719e6dda&quot;,
+        &quot;name&quot;: &quot;jsmith&quot;,
+        &quot;actualName&quot;: &quot;Joe Smith&quot;,
+        &quot;displayName&quot;: &quot;Joe Smith (jsmith)&quot;,
+        &quot;email&quot;: &quot;&quot;,
+        &quot;deleted&quot;: false,
+        &quot;deletedDate&quot;: 0,
+        &quot;authenticationRealm&quot;: &quot;20000000000000000000000000000001&quot;,
+        &quot;isLockedOut&quot;: false,
+        &quot;isDeletable&quot;: true
+      },
+      &quot;role&quot;: {
+        &quot;id&quot;: &quot;e407437d-0c5f-446f-939f-9fa4d7df4d5e&quot;,
+        &quot;name&quot;: &quot;Observer&quot;,
+        &quot;isDeletable&quot;: true
+      }
+    }
+  ]
+}
+
+</code></pre>
+
+<p>Related CLI command: <a href="../udclient_getteam/">getTeam</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../rest_cli_team/">team resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/rest_cli_team_info_get.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

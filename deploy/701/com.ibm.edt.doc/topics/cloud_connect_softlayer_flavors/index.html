@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/cloud_connect_softlayer_flavors/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring SoftLayer image flavors - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring SoftLayer image flavors", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-softlayer-image-flavors">Configuring SoftLayer image flavors</h1>
+<p>Flavors represent the capacity of images, including memory, storage space, and processor capacity. You must configure a set of flavors for the SoftLayer® cloud.</p>
+<p>Configure the cloud discovery service. See <a href="../../../com.ibm.udeploy.doc/topics/cds_configure/">Setting up images, regions, and flavors for the cloud discovery service and engine</a>.</p>
+<p>After you configure flavors, you can select a flavor at provisioning time to specify the size of the environment.</p>
+<ol>
+<li>Open the cloud discovery service configuration file. If you do not have a cloud discovery service configuration file, see <a href="../../../com.ibm.udeploy.doc/topics/cds_configure/">Setting up images, regions, and flavors for the cloud discovery service and engine</a>.</li>
+<li>
+<p>In the section of this file that is labeled <code>softlayer</code>, add flavors.Each flavor has the following parameters:</p>
+<ul>
+<li>
+<p><strong>flavor</strong></p>
+<p>The name of the flavor. This name appears in the list of flavors when you provision the environment.</p>
+</li>
+<li>
+<p><strong>memory</strong></p>
+<p>The amount of memory in megabytes.</p>
+</li>
+<li>
+<p><strong>disk</strong></p>
+<p>The size of the storage in gigabytes.</p>
+</li>
+<li>
+<p><strong>vcpu</strong></p>
+<p>The number of virtual CPUs.</p>
+</li>
+</ul>
+<p>For example, the following code creates five flavors:</p>
+<p><code>"softlayer": {
+    "flavors": [
+        {
+            "flavor": "m1.tiny",
+            "memory": 1024,
+            "disk": 20,
+            "vcpu": 1
+        },
+        {
+            "flavor": "m1.small",
+            "memory": 2048,
+            "disk": 20,
+            "vcpu": 2
+        },
+        {
+            "flavor": "m1.medium",
+            "memory": 4096,
+            "disk": 40,
+            "vcpu": 2
+        },
+        {
+            "flavor": "m1.large",
+            "memory": 8192,
+            "disk": 80,
+            "vcpu": 4
+        },
+        {
+            "flavor": "m1.xlarge",
+            "memory": 16384,
+            "disk": 100,
+            "vcpu": 8
+        }
+    ]
+}</code></p>
+</li>
+<li>
+<p>Save the file and restart the cloud discovery service. To restart the cloud discovery service, see <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a> and <a href="../../../com.ibm.udeploy.install.doc/topics/stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+<li>On the system that hosts the engine, open the /usr/lib/heat/ibm-cloud-ext/resources/ibm-cloud-discovery.conf file. </li>
+<li>
+<p>In this file, add the same flavors to the <code>[softlayer]</code> section. For example, the following code contains five flavors that match the flavors in the previous example:</p>
+<p>```
+[softlayer]
+flavors: [
+    {
+        "flavor": "m1.tiny",
+        "memory": 1024,
+        "disk": 20,
+        "vcpu": 1
+    }, {
+        "flavor": "m1.small",
+        "memory": 2048,
+        "disk": 20,
+        "vcpu": 2
+    }, {
+        "flavor": "m1.medium",
+        "memory": 4096,
+        "disk": 40,
+        "vcpu": 2
+    }, {
+        "flavor": "m1.large",
+        "memory": 8192,
+        "disk": 80,
+        "vcpu": 4
+    }, {
+        "flavor": "m1.xlarge",
+        "memory": 16384,
+        "disk": 100,
+        "vcpu": 8
+    }]</p>
+<p>```</p>
+</li>
+<li>
+<p>Save the file and restart the engine. </p>
+</li>
+</ol>
+<p>Now when you provision environments, the flavors are listed in the <strong>Flavor</strong> list under <strong>Image Parameters</strong>.</p>
+<p><strong>Parent topic:</strong> <a href="../cloud_connect_softlayer/">Connecting to the SoftLayer cloud</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/cloud_connect_softlayer_flavors.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

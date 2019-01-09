@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/configuration_properties/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Viewing resource configuration inventories - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Viewing resource configuration inventories", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="viewing-resource-configuration-inventories">Viewing resource configuration inventories</h1>
+<p>You can view the configuration inventory for a component, which includes all properties that are associated with the component resource.</p>
+<p>When you deploy a component, you store all the properties that are associated with the component, its application, and its environment on your deployment's resource target. From the resource tree, you can view which properties are active on the component resource.</p>
+<ol>
+<li>To view the resource tree, complete one of these steps: <ul>
+<li>To view the entire resource tree, click <strong>Resources</strong>.</li>
+<li>To view the resource tree for a specific application environment, click <strong>Applications</strong> > <strong>application name</strong> > <strong>environment name</strong>.</li>
+</ul>
+</li>
+<li>Click the component's name. </li>
+<li>From within the resource, click the <strong>Inventory</strong> tab. </li>
+<li>In the Configuration Inventory pane, locate the property to examine.You might have to expand several levels to locate the properties. To view the properties that are associated with the component, expand both <strong>Components</strong> and the component itself.</li>
+<li>In the same row as the properties, click <strong>View</strong>. The Property Details dialog box is shown.</li>
+<li>Review the contents of the Property Details dialog box. The dialog box contains the following information:<ul>
+<li>The versions of properties that are stored on the resource target</li>
+<li>The name and value of each stored property</li>
+</ul>
+</li>
+<li>Click <strong>Cancel</strong> to return to the resource tree. </li>
+</ol>
+<p>If the resource target does not contain the correct version of the properties, you can configure a component process to update the properties. See <a href="../comp_process_types/">Component process types</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../inventory_ch/">Inventories</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/configuration_properties.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/docker_scale/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Scaling the UrbanCode Deploy server in a Kubernetes cluster - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Scaling the server in a Kubernetes cluster", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="scaling-the-server-in-a-kubernetes-cluster">Scaling the server in a Kubernetes cluster</h1>
+<p>Scaling the HCL® UrbanCode™ Deploy server may become necessary when the demand for system resources changes. For example, when server requests increase in a high-availability cluster in a container, you can add another UrbanCode Deploy server instance to the server cluster.</p>
+<p>Log in to the IBM Cloud Private cluster where your UrbanCode Deploy server container is running.</p>
+<p>The number of HCL UrbanCode Deploy server instances/replicas can be increased or decreased using the IBM Cloud® Private (ICP) user interface or the kubectl command line client. Then, the number of server instances must be manually added or removed from the UCD server Network page.</p>
+<ol>
+<li>At your IBM Cloud Private dashboard, select <strong>Workloads > Statefulsets</strong> and click the <strong>Action</strong> ellipsis for the statefulset associated with your Helm release. The name of your statefulset will be &lt;ReleaseName>-ibm-ucd-prod, where &lt;ReleaseName"> is the Helm release name you specified when you installed your HCL UrbanCode Deploy server. </li>
+<li>At the Action menu, click <strong>Scale</strong>. <img alt="Scale selected at Action menu" src="../../images/docker_scalestateful.jpg" /> </li>
+<li>At the Scale screen, specify the number of instances/replicas you want and click <strong>Scale Statefulset</strong>. </li>
+<li>
+<p>Manually add (scale up) or remove (scale down) JMS Cluster Member entries, as required, from the Network settings for the UrbanCode Deploy server. </p>
+<p><strong>Note:</strong> WebSocket Secure (WSS) entries are automatically added to the cluster members.</p>
+<p><strong>Scaling up: adding JMS cluster member entries</strong></p>
+<p>In the UrbanCode Deploy server user interface, go to <strong>Settings > System Settings >Network</strong>.</p>
+<p>Add information for each server instance you are running. Click <strong>Add Server To Server Cluster</strong> and provide the following at the Connect Server to Server Cluster dialog.</p>
+<p><img alt="Connect Server to Server Cluster dialog" src="../../images/docker_connectcluster.jpg" /></p>
+<table>
+<thead>
+<tr>
+<th>UrbanCode Deploy Server Instance Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>Enter the Kubernetes pod name for the UrbanCode Deploy server instance. The pod name will be &lt;ReleaseName>-ibm-ucd-prod-N, where &lt;ReleaseName> is the Helm release name you specified when you installed your UrbanCode Deploy server and N is the server instance number (0-based).</td>
+</tr>
+<tr>
+<td><strong>Host</strong></td>
+<td>Enter &lt;PodName>&lt;HeadlessServiceName>, where &lt;PodName> is the same value entered for Name and &lt;HeadlessServiceName> is &lt;ReleaseName>-ibm-ucd-prod-hl.</td>
+</tr>
+<tr>
+<td><strong>Port</strong></td>
+<td>The JMS port (default port is 7918).</td>
+</tr>
+</tbody>
+</table>
+<p>When all the information is complete, the Cluster Members: JMS Configuration page is displayed with the updated clusters.</p>
+<p><img alt="Updated JMS Configuration" src="../../images/docker_clustermember.jpg" /></p>
+<p><strong>Scaling down: removing JMS cluster member entries</strong></p>
+<p>In the UrbanCode Deploy server user interface, go to <strong>Settings > System Settings >Network</strong>.</p>
+<p>Delete each UrbanCode Deploy server instance that is no longer running.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Instruction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>JMS Configuration</strong></td>
+<td>In the <strong>JMS Configuration</strong> section of the Network page, click <strong>Delete</strong> in the <strong>Actions</strong> column of each UCD server/instance you scaled down. For example, if you scaled down from 3 UCD server instances to 1 instance, you would delete the JMS Cluster Member entries for &lt;ReleaseName>-ibm-ucd-prod-2 and &lt;ReleaseName>-ibm-ucd-prod-1.</td>
+</tr>
+<tr>
+<td><strong>WebSocket Configuration</strong></td>
+<td>In the <strong>WebSocket Configuration</strong> section of the Network page, hover over each line that corresponds to the UCD server instances you scaled down. Click the ellipsis to the right of the <strong>Server Id</strong> and select <strong>Delete</strong>. You can use the value in the <strong>Host</strong> field to determine which WebSocket Configuration entries to delete.</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<p>Each UrbanCode Deploy server instance that remains in the server cluster will write a message to its log file, periodically reporting a failure to connect to the UrbanCode Deploy server instances that were removed from the cluster. These messages will continue until each running server has been restarted.</p>
+<p>You can restart an UrbanCode Deploy server instance by stopping the pod where the server is running, or by stopping the server itself from within the pod. In both cases, the pod will be restarted, which will restart the UrbanCode Deploy server. To stop the pod, use the kubectl command line client with the following command, where N is the server instance number.</p>
+<p>kubectl delete pod &lt;ReleaseName>-ibm-ucd-prod-N</p>
+<p>You can also stop and restart the UrbanCode Deploy server by pushing a shell into the pod and running the server stop command.</p>
+<pre><code>kubectl exec -it &lt;ReleaseName&gt;-ibm-ucd-prod-N bash
+root@&lt;ReleaseName&gt;-ibm-ucd-prod-N:# cd/opt/ibm-ucd/server
+root@&lt;ReleaseName&gt;-ibm-ucd-prod-N:# bin/server stop
+root@&lt;ReleaseName&gt;-ibm-ucd-prod-N:#
+
+</code></pre>
+
+<p>When the UCD server process terminates, the pod will stop and be restarted, also restarting the UrbanCode Deploy server instance.</p>
+<p><strong>Parent topic:</strong> <a href="../docker_cloud_over/">Installing the server in a Kubernetes cluster</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/docker_scale.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

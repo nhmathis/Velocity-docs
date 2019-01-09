@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/env_provision_ov/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Provisioning cloud environments - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Provisioning cloud environments", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="provisioning-cloud-environments">Provisioning cloud environments</h1>
+<p>You can provision an environment from the server or from the blueprint designer. Several different scenarios for provisioning cloud environments are available.</p>
+<p>When you provision a cloud environment, you set aside resources on the specified cloud that you specified through a blueprint. HCL® UrbanCode™ Deploy supports two main methods of provisioning resources on clouds. The method that you choose depends on whether you automate activity on the cloud with virtual system patterns or with OpenStack Heat.</p>
+<ul>
+<li>
+<p><strong>Clouds that use virtual system patterns</strong></p>
+<p>To provision environments on clouds that use virtual system patterns, you create blueprints on the HCL® UrbanCode™ Deploy server. For the types of clouds on which the server can provision environments through this method, see <a href="../../../com.ibm.udeploy.doc/topics/cloud_integrate_vsp_ov/">Connecting to clouds through HCL UrbanCode Deploy</a>.</p>
+<p>To create blueprints on clouds that use virtual system patterns, see <a href="../blueprint_edit_clouds_vsp/">Modeling environments for clouds that use virtual system patterns</a>.</p>
+<p>To provision environments based on these blueprints, you create environments on the HCL® UrbanCode™ Deploy server using the blueprint as a model. See <a href="../../../com.ibm.udeploy.doc/topics/env_provision_vsp/">Provisioning environments through the server (through virtual system patterns)</a>.</p>
+</li>
+<li>
+<p><strong>Clouds that you connect to via OpenStack Heat</strong></p>
+<p>To provision environments on clouds via OpenStack Heat, you create blueprints with the blueprint designer. For the types of clouds that the server can provision environments on using OpenStack Heat, see <a href="../../../com.ibm.udeploy.install.doc/topics/sysRequire/">System requirements and performance considerations</a>. For individual instructions for connecting to each type of supported cloud with this method, see <a href="../security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</p>
+<p>There are several different ways that you can use these blueprints to provision environments on clouds via OpenStack Heat. To provision an environment directly from the blueprint designer, see <a href="../env_provision_edt/">Provisioning environments from the blueprint designer (through OpenStack Heat)</a>. To provision an environment from the HCL® UrbanCode™ Deploy server, either as part of creating a new application environment or as part of running an application process, see <a href="../env_provision_ucd/">Provisioning environments from the HCL UrbanCode Deploy server (through OpenStack Heat)</a>.</p>
+<p><strong>Restriction:</strong> If your heat engine is at the Juno level, you cannot provision from a composite blueprint. See <a href="../blueprint_import/">Creating composite blueprints</a>.</p>
+</li>
+<li>
+<p><strong><a href="../env_provision_edt/">Provisioning environments from the blueprint designer (through OpenStack Heat)</a></strong><br />
+If you connect to the target cloud through OpenStack Heat, you can provision an environment directly from the blueprint designer.</p>
+</li>
+<li><strong><a href="../env_provision_ucd/">Provisioning environments from the HCL UrbanCode Deploy server (through OpenStack Heat)</a></strong><br />
+You can create application environments in the HCL UrbanCode Deploy server by using blueprints from the blueprint designer.</li>
+<li><strong><a href="../../../com.ibm.udeploy.doc/topics/env_provision_vsp/">Provisioning environments through the server (through virtual system patterns)</a></strong><br />
+You can provision environments on a cloud system as part of creating an application environment on the HCL UrbanCode Deploy server.</li>
+<li><strong><a href="../blueprint_apply/">Applying changes to a provisioned environment</a></strong><br />
+After you provision a blueprint, you can modify the HCL UrbanCode Deploy components and cloud images in the environment that you provisioned.</li>
+<li><strong><a href="../env_update/">Updating environments</a></strong><br />
+You can apply a blueprint to a running environment to update the environment.</li>
+<li><strong><a href="../env_delete/">Deleting cloud environments</a></strong><br />
+You can delete provisioned cloud environments from the HCL UrbanCode Deploy server or from the blueprint designer.</li>
+</ul>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/env_provision_ov.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

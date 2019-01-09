@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/ref_heat_types_ov/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Heat resource types", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="heat-resource-types">Heat resource types</h1>
+<p>The engine includes custom Heat resource types that represent resources on cloud systems and artifacts from the HCL® UrbanCode™ Deploy server.</p>
+<p>These custom Heat types are in addition to the standard Heat resource types. For more information about the Heat Orchestration Templates (HOT), see the following reference information.<a href="http://docs.openstack.org/developer/heat/template_guide/hot_spec.html">http://docs.openstack.org/developer/heat/template_guide/hot_spec.html</a>. The standard resource types are described on the following page: <a href="http://docs.openstack.org/developer/heat/template_guide/index.html">http://docs.openstack.org/developer/heat/template_guide/index.html</a>.</p>
+<p>To see a list of the types that are installed on your engine, open a command-line window and run the following command:</p>
+<pre><code>heat resource-type-list
+</code></pre>
+
+<p>To see information about a specific type, including its properties, use the heat resource-type-show command. For example, to see information about the <code>IBM::UrbanCode::SoftwareDeploy::UCD</code> type, run the following command:</p>
+<pre><code>heat resource-type-show IBM::UrbanCode::SoftwareDeploy::UCD
+</code></pre>
+
+<ul>
+<li><strong><a href="../heat_types_properties/">Resource type properties: core and extended</a></strong><br />
+In blueprints, Heat resource types have two types of properties: core and extended. Core properties are inherited from a base type and extended properties are added to a type that comes with HCL UrbanCode Deploy.</li>
+<li><strong><a href="../ref_heat_types_ec2_ov/">Amazon Elastic Compute Cloud resource types</a></strong><br />
+These Heat resource types represent elements on Amazon Elastic Compute Cloud (EC2).</li>
+<li><strong><a href="../ref_heat_types_elasticache_ov/">Amazon ElastiCache resource types</a></strong><br />
+These Heat resource types represent elements on Amazon ElastiCache.</li>
+<li><strong><a href="../ref_heat_types_elasticloadbalancing_ov/">Amazon ElasticLoadBalancing resource types</a></strong><br />
+These Heat resource types represent elements on Amazon ElasticLoadBalancing.</li>
+<li><strong><a href="../ref_heat_types_rds/">Amazon RDS resource types</a></strong><br />
+These Heat resource types represent elements of Amazon Relational Database Service.</li>
+<li><strong><a href="../ref_heat_types_route53/">Amazon Route 53 resource types</a></strong><br />
+These Heat resource types represent elements of Amazon Route 53 domain name system (DNS) service.</li>
+<li><strong><a href="../ref_heat_types_s3_ov/">Amazon S3 resource types</a></strong><br />
+These Heat resource types represent elements on Amazon Simple Storage System (S3).</li>
+<li><strong><a href="../ref_heat_types_gc_ov/">Google Cloud Platform resource types</a></strong><br />
+This Heat resource type represents elements on Google Cloud Platform.</li>
+<li><strong><a href="../ref_heat_types_ucd_ov/">HCL UrbanCode Deploy resource types</a></strong><br />
+These Heat resource types represent elements on the server.</li>
+<li><strong><a href="../ref_heat_types_azure_ov/">Microsoft Azure resource types</a></strong><br />
+These Heat resource types represent elements on the Microsoft Azure Cloud.</li>
+<li><strong><a href="../ref_heat_types_sl_ov/">SoftLayer resource types</a></strong><br />
+This Heat resource type represents elements on SoftLayer.</li>
+<li><strong><a href="../ref_heat_types_vc_ov/">VMware vCenter resource types</a></strong><br />
+These Heat resource types represent elements on VMware vCenter.</li>
+<li><strong><a href="../VRA_heat_types_ov/">VMware vRealize Automation resource types</a></strong><br />
+These Heat resource types represent elements on the cloud. To install these types into a Heat engine, see</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_extending/">Extending product function</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/ref_heat_types_ov.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

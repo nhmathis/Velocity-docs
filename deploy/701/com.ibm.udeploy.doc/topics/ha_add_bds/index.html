@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/ha_add_bds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Adding blueprint design servers to clusters - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Adding blueprint design servers to clusters", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="adding-blueprint-design-servers-to-clusters">Adding blueprint design servers to clusters</h1>
+<p>To add a blueprint design server to a cluster, connect it to the shared database and network storage. Then, configure the load balancer to send traffic to it.</p>
+<ul>
+<li>Set up a cluster of blueprint design servers, including setting up a load balancer, shared database, and network storage. See <a href="../ha_config_bds/">Setting up clusters of blueprint design servers</a>.</li>
+<li>Each blueprint design server must run the same version of HCL® UrbanCode™ Deploy.</li>
+</ul>
+<p>You can add many blueprint design server nodes to the cluster as you need. Each node includes the blueprint designer and the cloud discovery service.</p>
+<ol>
+<li>
+<p>On the new node, install the blueprint design server as described in <a href="../../../com.ibm.udeploy.install.doc/topics/install_server_bds/">Installing the blueprint design server</a>, with the following settings. </p>
+<ul>
+<li>For the public address of the system, specify the IP address of the load balancer.</li>
+<li>Do not use SSL encryption.</li>
+<li>When asked whether you want to create the database schema, say yes if this is the first blueprint design server node or no if it is not.</li>
+<li>For the database, specify the shared blueprint design server database.
+<strong>Important:</strong> Do not start the blueprint design server or cloud discovery service yet.</li>
+</ul>
+</li>
+<li>
+<p>Mount the shared folders on the network storage to the following locations: </p>
+<ul>
+<li>/opt/ibm-ucd-patterns/repositories</li>
+<li>
+<p>/opt/ibm-ucd-patterns/workspace
+For example, if you are using NFS for the network storage on the <code>nfs-host.example.com</code> host name, run the following commands to install NFS and mount the shared folders:</p>
+</li>
+<li>
+<p>```
+yum -y install nfs-utils nfs-utils-lib</p>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>
+    2.  ```
+service rpcbind start
+</code></pre>
+
+<pre><code>3.  ```
+</code></pre>
+<p>chkconfig nfs on</p>
+<pre><code>
+    4.  ```
+service nfs start
+</code></pre>
+
+<pre><code>5.  ```
+</code></pre>
+<p>mount -t nfs
+          nfs-host.example.com:/opt/ibm-ucd-patterns/workspace /opt/ibm-ucd-patterns/workspace</p>
+<pre><code>
+    6.  ```
+mount -t nfs
+          nfs-host.example.com:/opt/ibm-ucd-patterns/repositories /opt/ibm-ucd-patterns/repositories
+</code></pre>
+
+<pre><code>Then, verify that the folders are mounted by running the following command:
+
+```
+mount | grep nfs
+```
+
+If the node cannot access the folders, make sure that the node is authorized to access the folders in the /etc/exports file on the network storage.
+</code></pre>
+<ol>
+<li>Set the new server to use the same security certificate as the existing servers. For example, you can copy the certificate in the /opt/tomcat/conf/tomcat.keystore file to the other servers. When you import the certificate into other servers, in the server.xml file, set the keyAlias property to point to the imported certificate.</li>
+<li>Start the cloud discovery service. </li>
+<li>Start the blueprint designer. </li>
+<li>
+<p>Configure the load balancer to send traffic on the following ports to the new node: </p>
+<ul>
+<li>8080, or the HTTP port that you specified when you installed the blueprint design server</li>
+<li>7575, for the cloud discovery service
+For example, if you are using HAProxy, the configuration file might have code that is similar to the following snippets. In this code, it is assumed that the blueprint design server nodes have these host names: <code>designer1.example.com</code>, <code>designer2.example.com</code>, and <code>designer3.example.com</code>.</li>
+</ul>
+<p>```
+frontend ucdp
+    bind *:8080
+    default_backend ucdp_back</p>
+<p>frontend cds
+    bind *:7575
+    default_backend cds_back
+```</p>
+<p>```</p>
+<p>backend ucdp_back
+    balance     roundrobin
+    server      designernode1 designer1.example.com:8080 check
+    server      designernode2 designer2.example.com:8080 check
+    server      designernode3 designer3.example.com:8080 check
+    option      httpchk OPTIONS /
+    option      forwardfor
+    option      http-server-close
+    appsession JSESSIONID len 52 timeout 3h</p>
+<p>backend cds_back
+    balance     roundrobin
+    server      designernode1 designer1.example.com:7575 check
+    server      designernode2 designer2.example.com:7575 check
+    server      designernode3 designer3.example.com:7575 check
+    option      httpchk</p>
+<p>```</p>
+</li>
+<li>
+<p>Verify that the load balancer is sending traffic to the new node. For example, if HAProxy is installed on a system with the host name <code>ucd-patterns.example.com</code>, you can go to the following URL to see the status of the nodes: <code>http://ucd-patterns.example.com:1936/haproxy?stats</code> </p>
+</li>
+<li>Verify that the new blueprint designer node is connected to the cluster by creating a blueprint and verifying that the blueprint is included on the network storage. <ol>
+<li>Go to <code>http://ucd-patterns.example.com:8080/landscaper</code> in a web browser. </li>
+<li>In the default repository, create a blueprint, and verify that you can edit the blueprint. </li>
+<li>On the network storage, find the blueprint file to verify that it is stored on the network storage. The default location for blueprints in the default repository is /opt/ibm-ucd-patterns/workspace/repositories/initials/username_userid/OrionContent/default, where:<ul>
+<li>initials is the first two letters of the user name</li>
+<li>username is the user name that you used to create the blueprint</li>
+<li>userid is the unique ID of the user</li>
+</ul>
+</li>
+<li>In the Internal-Team repository, create another blueprint. </li>
+<li>On the network storage, find the blueprint file to verify that it is stored on the network storage. The default location for blueprints in the Internal-Team repository is /opt/ibm-ucd-patterns/workspace/repositories/initials/username_userid/OrionContent/Internal-Team, where:<ul>
+<li>initials is the first two letters of the user name</li>
+<li>username is the user name that you used to create the blueprint</li>
+<li>userid is the unique ID of the user</li>
+</ul>
+</li>
+<li>On the <strong>Repository</strong> tab, push the new Internal-Team blueprint to the team repository. </li>
+<li>Verify that the blueprint exists in the Gitblit repository by going to the URL <code>http://ucd-patterns.example.com:8080/gitblit/summary/Internal-Team.git</code> in a web browser. The default user name and password are <code>gitadmin</code>.</li>
+</ol>
+</li>
+</ol>
+<p>The blueprint design server is part of the cluster.</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/ha_add_bds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/process_drafts/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Working on processes in safe edit mode - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Working on processes in safe edit mode", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="working-on-processes-in-safe-edit-mode">Working on processes in safe edit mode</h1>
+<p>Safe editing enables you to test component processes before making them available in normal environments. Make updates to your component process, test those updates safely, and then promote to a new version when you are ready.</p>
+<p>Enable Safe Edit mode by completing the following steps:</p>
+<ol>
+<li>Open installed.properties file in a text editor and add experimental.safeEdit.enabled=true. Navigate to the file by clicking <strong>(ucd)>server>conf>server>installed.properties</strong>.</li>
+<li><strong>Save</strong> file and restart the server.</li>
+<li>
+<p>Click <strong>Settings > System Settings</strong>. Two new parameters are displayed below Component Settings. Select <strong>Enable Safe Edit of Component Processes</strong>, optionally select<strong>Require Approval to Promote Component Process</strong> and then click <strong>Save</strong> at the bottom of the System Settings page.</p>
+<p><strong>Note:</strong> After server restarts, a background upgrade begins. You are unable to set new settings until the upgrade is complete. A progress bar is displayed next to Component Settings.</p>
+</li>
+<li>
+<p>Click <strong>Settings > System Settings</strong>. Two new parameters are displayed below Component Settings. Select <strong>Enable Safe Edit of Component Processes</strong>, optionally select<strong>Require Approval to Promote Component Process</strong> and then click <strong>Save</strong> at the bottom of the System Settings page.</p>
+</li>
+<li>If <strong>Require Approval to Promote Component Process</strong> is enabled, after a draft is promoted you see Promotion Pending where the Promote push button was. The <strong>Promotion Pending</strong> button is inactive while an approval is pending. Approval requests go to anyone with manage processes permission on component. Under <strong>Work Items</strong>, there is a new Component Process promotion table with <strong>Approve</strong> and <strong>Reject</strong> actions. These actions link to latest promoted version and draft processes for which promotion was requested.</li>
+</ol>
+<p><img alt="Component Settings containing two new parameters." src="../../images/component_settings_safe_edit.png" /> </p>
+<p>You can edit component processes and component template processes without affecting deployments to protected environments.</p>
+<ol>
+<li>Under <strong>Environments</strong>, when you are editing the <strong>Allow Process Drafts to be deployed</strong> option, a new setting becomes available. After you select <strong>Allow Drafts to be Deployed</strong>, a new field, <strong>Component using Process Drafts</strong>, is displayed. Choose components for draft processes to run on.</li>
+<li>On the Components tab, click the component name.</li>
+<li>To <strong>Edit</strong> draft process, on the Processes tab, hover the cursor over the process to edit, and click the <img alt="pencilicon," src="../../images/pencil_icon.jpg" /> the pencil icon. <img alt="Process Designer with draft process buttons" src="../../images/process_draft_designer.png" /></li>
+<li>Design your draft process, and then click <strong>Save</strong>.</li>
+<li>Test the process in the environment you set up in step one.</li>
+<li>When process works as expected, go back to the process designer, and click <strong>Promote</strong>. This action makes the process available for use or creates a promotion approval.</li>
+<li>Click <strong>Lock</strong> to lock draft.The name of the person who locked the draft is displayed under <strong>Locked By</strong> on the Processes page. Only the person who holds the lock can edit the process. Under <strong>Actions</strong> a <strong>Force Unlock</strong> option is available.</li>
+</ol>
+<p>Environments that are set to allow draft processes can use draft process for deployments. Other environments must use the promoted processes.</p>
+<p><strong>Note:</strong> Snapshots can only lock to versions of component processes. They cannot lock to drafts. If a snapshot is deployed to an environment that allows drafts then one of these conditions apply:</p>
+<ul>
+<li>If the snapshot is using the latest version of a process, the draft will be used.</li>
+<li>If the snapshot is using a specific version of a process, then that specific version will be used.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../comp_workflow/">Processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/process_drafts.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

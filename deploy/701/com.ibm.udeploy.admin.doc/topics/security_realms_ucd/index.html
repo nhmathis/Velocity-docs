@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_realms_ucd/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Importing user accounts from HCL UrbanCode Deploy to the blueprint design server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Importing user accounts from HCL UrbanCode Deploy to the blueprint design server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="importing-user-accounts-from-hcl-urbancode-deploy-to-the-blueprint-design-server">Importing user accounts from HCL UrbanCode Deploy to the blueprint design server</h1>
+<p>You can use an authentication realm to import user accounts from an HCL® UrbanCode™ Deploy server. Then, users can log in to the blueprint design server with the same accounts as the HCL UrbanCode Deploy server.</p>
+<ul>
+<li>Importing accounts in this way requires HCL UrbanCode Deploy version 6.1.1.2 or later.</li>
+<li>Obtain either a token or a user name and password for the HCL UrbanCode Deploy server.</li>
+<li>
+<p>On the HCL UrbanCode Deploy server, set permissions for the users, including giving the users access to components.</p>
+<p><strong>Note:</strong> When a user logs in to the blueprint designer with an account from HCL UrbanCode Deploy, that user sees only the components that they could see if they logged in to the HCL UrbanCode Deploy server. If a user logs in with account from a different authentication realm, that user sees the components that are associated with the token or user account that is on the <strong>System Settings</strong> page.</p>
+</li>
+<li>
+<p>Log in to the blueprint designer as a user with the following <strong>System</strong> permissions: </p>
+<ul>
+<li>Configure Security</li>
+<li>Manage Users &amp; Groups</li>
+</ul>
+</li>
+<li>Click <strong>Settings</strong> > <strong>Users</strong>.</li>
+<li>Click <strong>Create New Realm</strong>. </li>
+<li>Specify a name and description for the new authentication realm.</li>
+<li>In the <strong>Allowed Login Attempts</strong> list, specify the number of times that a user can attempt to log in before the account is locked.A blank value means that an unlimited number of attempts are allowed.</li>
+<li>In the <strong>Type</strong> list, select <strong>UrbanCode Deploy</strong>.</li>
+<li>In the <strong>UrbanCode Server URL</strong> field, specify the full URL of the server, such as <code>https://ucdserver.example.com:8443</code>. </li>
+<li>To authenticate with a token, select <strong>Token Based Authentication</strong> and specify the token in the <strong>Token</strong> field. </li>
+<li>To authenticate with a user name and password, clear <strong>Token Based Authentication</strong> and specify the user name and password. </li>
+<li>Click <strong>Save</strong>.The new realm opens, showing the table of users.</li>
+<li>Click <strong>Import Users</strong>, and then click <strong>Import</strong> to import users from the authentication realm.</li>
+</ul>
+<p>Now users can use the same credentials on the HCL UrbanCode Deploy server and on the blueprint design server.</p>
+<p>Add the users to groups and teams. You must add users to teams to give the users permission to work with blueprints and cloud resources.</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_realms_ucd.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

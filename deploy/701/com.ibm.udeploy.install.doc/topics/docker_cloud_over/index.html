@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/docker_cloud_over/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing the server in a Kubernetes cluster", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-the-server-in-a-kubernetes-cluster">Installing the server in a Kubernetes cluster</h1>
+<p>The HCL® UrbanCode™ Deploy server can be installed in a cloud-based environment, as a containerized server cluster, managed by Kubernetes. UrbanCode Deploy works with Kubernetes to simplify application deployment and manage versions in the containers.</p>
+<p>The core installation of UrbanCode Deploy includes a server, database, and agents. In a typical containerized topology, the UrbanCode Deploy server is installed as a single server in a container or can be scaled to a server cluster managed by Kubernetes. The database is installed in a container or an on-premises location. Agents can be installed on cloud environments, virtual machines (VMs), containers, or physical systems.</p>
+<p><img alt="System topology diagram for Kubernetes cluster" src="../../images/ov_systems_kuber.jpg" /> </p>
+<p>The server cluster is configured in either of two cloud-based environments and their compatible versions.</p>
+<ul>
+<li>
+<p>IBM® Cloud™ Private (ICP)</p>
+<p>IBM Cloud Private is an application platform for managing on-premises, containerized applications. It includes the container orchestrator Kubernetes, a private image registry, a management console, and monitoring frameworks.</p>
+</li>
+<li>
+<p>IBM® Cloud™ Kubernetes® Service (IKS)</p>
+<p>IBM Cloud Kubernetes Service provides dedicated core and memory allocations, as well as features like image templates. In this environment, you perform configuration and management tasks using both the IBM Cloud infrastructure customer portal and the API. Virtual servers are deployed to the same VLANs as physical servers, allowing you to spread workloads across UrbanCode Deploy servers, while maintaining interoperability. UrbanCode Deploy server scalability in IKS is supported by a Kubernetes orchestrator.</p>
+</li>
+<li>
+<p><strong><a href="../docker_install_icp/">Installing the server in IBM Cloud Private</a></strong><br />
+You can install a containerized version of the HCL UrbanCode Deploy server in an IBM Cloud Private (ICP) cluster. The UrbanCode Deploy server is installed using a Helm chart. After the server is installed, you can manage it with the ICP Management console.</p>
+</li>
+<li><strong><a href="../docker_install_iks/">Installing the server in IBM Cloud Kubernetes Service</a></strong><br />
+You can install a containerized version of the HCL UrbanCode Deploy server in an IBM Cloud Kubernetes Service. The UrbanCode Deploy server is installed using a Helm chart. After the server is installed, you can manage it with the ICP Management console.</li>
+<li><strong><a href="../docker_upgrade/">Upgrading the containerized server</a></strong><br />
+You can upgrade your containerized version of the HCL UrbanCode Deploy server 6.2.7 to the 7.0.0 version in an IBM® Cloud private and IBM® Cloud Kubernetes Service cluster.</li>
+<li><strong><a href="../docker_scale/">Scaling the server in a Kubernetes cluster</a></strong><br />
+Scaling the HCL UrbanCode Deploy server may become necessary when the demand for system resources changes. For example, when server requests increase in a high-availability cluster in a container, you can add another UrbanCode Deploy server instance to the server cluster.</li>
+<li><strong><a href="../docker_helmparametersdita/">Helm chart configuration parameters</a></strong>  </li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../install_ch/">Installing HCL UrbanCode Deploy</a></p>
+<p><strong>Related information</strong>  </p>
+<p><a href="https://developer.ibm.com/urbancode/docs/getting-started-ibm-urbancode-deploy-containers/">https://developer.ibm.com/urbancode/docs/getting-started-ibm-urbancode-deploy-containers/</a></p>
+<p><a href="https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/kc_welcome_containers.html">https://www.ibm.com/support/knowledgecenter/SSBS6K_3.1.0/kc_welcome_containers.html</a></p>
+<p><a href="https://console.bluemix.net/docs/containers/container_index.html#container_index">https://console.bluemix.net/docs/containers/container_index.html#container_index</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/docker_cloud_over.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

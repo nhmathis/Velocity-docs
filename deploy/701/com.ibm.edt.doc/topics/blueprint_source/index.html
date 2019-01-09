@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_source/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Editing blueprint source code - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Editing blueprint source code", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="editing-blueprint-source-code">Editing blueprint source code</h1>
+<p>You can edit the Heat Orchestration Template (HOT) source code of blueprints directly.</p>
+<ul>
+<li>Connect the blueprint design server to a cloud system. See <a href="../security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</li>
+<li>Make sure that your user account is authenticated to a cloud system. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_auth_bds/">Setting up access to clouds in the blueprint designer</a>.</li>
+<li>Connect the blueprint design server to the server. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Log in to the blueprint designer.</li>
+<li>At the top of the page, select the cloud project and region to use.</li>
+</ul>
+<p>To edit a blueprint in the code editor, open the blueprint by clicking <strong>Blueprints</strong>. In the <strong>Files</strong> list, click a blueprint, and then click the <strong>Source</strong> tab.</p>
+<p><img alt="Source mode of blueprint editor." src="../../images/blueprint_source.gif" /></p>
+<p>To edit a blueprint in a graphical editor, click the <strong>Diagram</strong> tab. For more information, see <a href="../blueprint_diagram/">Editing blueprint diagrams</a>.</p>
+<p>The palette at the right side of the editor shows resources that you can add to the blueprint. The palette is filtered based on the cloud system and region that you are connected to, and the palette is divided into multiple drawers. If the <strong>Components</strong>, <strong>Images</strong>, <strong>Networks</strong>, or <strong>Templates</strong> drawers contain many items, the contents are separated across tabs, by type onto up to five tabs. The tabs are arranged in decreasing order of number of related items that they contain, from left to right. If only a few items of a type are available, all the items for multiple types are shown on the same tab, as shown in the <strong>Images</strong> drawer of the previous figure. If many items are available for many types, the four types with the most items are shown on separate tabs and all the rest are shown on the same tab. On tablet computers, the palette on the right side of the editor is collapsed by default. If you are using a tablet computer, to add elements to a blueprint, typically you click <strong>Add</strong> <img alt="" src="../../images/icons/add_resource.gif" /> to open the Add Element window.</p>
+<p><strong>Note:</strong> The Heat resources that are displayed in the palette show the available resources on the current OpenStack cloud system. For more information about the core concepts referenced in the palette, see the <a href="https://docs.openstack.org">OpenStack</a> documentation.</p>
+<ul>
+<li>If you import a blueprint into another blueprint, the <strong>Imported</strong> drawer shows the components from the imported blueprint that must be placed in the active blueprint.</li>
+<li>
+<p>The <strong>Components</strong> drawer shows components and tags from the HCL® UrbanCode™ Deploy server. If you integrated with Chef, this drawer also shows Chef roles, and, if you integrated with a VMware vRealize Automation Enterprise cloud, this drawer also shows the vRealize Automation software components. You can drag these components to a virtual image. If you drag a component tag to a virtual image, all the components on the HCL UrbanCode Deploy server that contain that tag are added to the blueprint.</p>
+<p>This drawer also includes a resource that is named Referenced Component. This resource represents a generic component. You can use the referenced component to represent a component that you specify later.</p>
+</li>
+<li>
+<p>The <strong>Images</strong> drawer shows virtual images that are available on the current cloud system. You can drag these images to the blueprint.</p>
+<p>This drawer also includes a resource that is named Referenced Image. This resource represents a generic virtual image. You can use the referenced image to represent a virtual image that you specify later. By using referenced images in this way, you can create one blueprint that you can provision on multiple clouds; see <a href="../blueprint_configs/">Editing configuration files</a>.</p>
+<p><strong>Restriction:</strong> To be used with the blueprint designer, the virtual images must meet the requirements in <a href="../cloud_connect_vm_requirements/">Configuring images for use with the blueprint designer</a>.</p>
+</li>
+<li>
+<p>If you are connected to a VMware vRealize Automation cloud, the <strong>VRA Catalog</strong> drawer lists assets from vRealize Automation blueprints that are available for use. To reuse these existing catalog items, you can drag one onto an empty blueprint.</p>
+</li>
+<li>The <strong>Networks</strong> drawer shows networks that are available on the cloud. If the connected cloud system supports routers, the <strong>Networks</strong> drawer also shows routers that are available. The New Internal Network resource represents a new network. The Referenced Network resource represents a network for which you provide information later. The Referenced Router resource represents a router for which you provide information later. See <a href="../blueprint_edit_vra/">Modeling environments for VMware vRealize Automation</a>.</li>
+<li>The <strong>Security</strong> drawer shows security configurations that you can apply to virtual images. The New Security Group resource represents a new security configuration. The Referenced Security Group resource represents a security configuration for which you provide information later.</li>
+<li>The <strong>Storage</strong> drawer shows cloud storage volumes. To add a storage volume, drag a volume to a virtual image and specify the mount point for the volume. The New Storage Volume resource represents a new storage volume. The Referenced Storage Volume resource represents a storage volume for which you provide information later.</li>
+<li>The <strong>Policies</strong> drawer includes resources such as load balancers and autoscaling groups.</li>
+<li>
+<p>The <strong>Templates</strong> drawer includes all the Heat resources that are available on your cloud, including resources that are not supported by the blueprint diagram editor. To add any resource, drag it onto the blueprint. You can add resources only by using this method in the graphical editor.</p>
+<p>When you add a resource to a blueprint, you must update its properties in the source editor. Each property is formatted to accept the correct inputs, and all required properties in the resource are labeled. The names of resources that you add from the <strong>Templates</strong> drawer are appended with <code>-dsp</code> in the source editor. If you add the <code>-dsp</code> suffix to the names of existing resources, they are displayed in the graphical editor.</p>
+</li>
+</ul>
+<p>You can click and drag resources from the palette just like when you edit the diagram.</p>
+<p><strong>Note:</strong> Ensure that you drag your resources into the correct section of the source file.</p>
+<p>The left side of the editor shows the following sections:</p>
+<ul>
+<li>The <strong>Outline</strong> section shows the structure of the blueprint.</li>
+<li>The <strong>Parameters</strong> section shows the parameters in the blueprint. Click a parameter to go to its definition, or drag it to the blueprint.</li>
+<li>The <strong>Parameter groups</strong> section shows the parameter groups in the blueprint.</li>
+<li>The <strong>Resources</strong> section shows the resources that are in the template, such as virtual images.</li>
+<li>The <strong>Outputs</strong> section shows the output parameters, usually attributes, for the blueprint. The attributes in this section usually show relevant derived values, such as the URL of virtual instances.</li>
+</ul>
+<p>If the blueprint contains an error, warning, or unfinished TODO item, you cannot provision from it. If at least one of these items is present in a blueprint, an icon that represents the most serious type of item is displayed to the right of <strong>Toggle Comment</strong><img alt="" src="../../images/icons/toggle_comment.gif" />. For example, if the blueprint contains at least one error, the error icon <img alt="" src="../../images/icons/error.gif" /> is displayed. Hover over the icon to display a list of all items that you must correct or complete before you provision the blueprint.</p>
+<p><strong>Note:</strong> When you add components to the blueprint, the editor automatically adds the <code>resource_tree</code> resource to the blueprint. This resource represents the additions to the resources on the HCL UrbanCode Deploy server. If your blueprint contains no components, remove this resource before you use the blueprint to provision the environment.</p>
+<pre><code>resource_tree:
+  type: IBM::UrbanCode::ResourceTree
+  properties: 
+     urbancode_deploy_url: { get_param: ucd_server_url }
+     username: { get_param: ucd_user }
+     password: { get_param: ucd_password }
+     team_mappings: 
+     application: MyApplication
+     base_resource_group: MyResources
+</code></pre>
+
+<p>If you edit the <code>base_resource_group</code> property, a forward slash character (/) indicates a hierarchical relationship. If you specify <code>base_resource_group: Cloud/Environment/OtherResources</code>, then three resources are created. The <code>OtherResources</code> resource is the child of the <code>Environment</code> resource, and the <code>Environment</code> resource is the child of the <code>Cloud</code> resource.</p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_create/">Editing blueprints with the blueprint designer</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_source.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

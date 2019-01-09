@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/terraform_setup/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Setting up Terraform - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Setting up Terraform", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="setting-up-terraform">Setting up Terraform</h1>
+<p>The HCL® UrbanCode™ Deploy extensions for Terraform include both a <em>provider</em> and a <em>provisioner</em>. The Terraform provider resources support interactions with the HCL UrbanCode Deploy server to manage the lifecycle of tasks, such as environment creation, component mapping, and application process execution. The Terraform provisioner for HCL UrbanCode Deploy automates the installation and configuration of an HCL UrbanCode Deploy agent on new virtual machines, in any cloud, and on multiple operating systems.</p>
+<ul>
+<li>Install Terraform from <a href="https://www.terraform.io/downloads.html">https://www.terraform.io/downloads.html</a>. Version 0.10.0 or later is required.</li>
+<li>If you installed an earlier version of the HCL UrbanCode Deploy extensions for Terraform, do the following steps:<ol>
+<li>In your Terraform installation folder, delete the provider and provisioner files.</li>
+<li>
+<p>Remove the following lines in the ~/.terraformrc file for Unix-like systems and the %APPDATA%/terraform.rc file for Windows:</p>
+<p><code>providers {
+  ucd = "&lt;path_to_terraform_installation_folder&gt;/terraform-provider-urbancode-deploy"
+  ucdagent = "&lt;path_to_terraform_installation_folder&gt;/terraform-provisioner-urbancode-deploy"
+}</code></p>
+</li>
+</ol>
+</li>
+</ul>
+<p>To use the Terraform extensions for HCL UrbanCode Deploy to orchestrate full-stack provisioning of an HCL UrbanCode Deploy application, complete the following setup steps.</p>
+<ol>
+<li>Download and extract the installation files for the engine. These files are available for download from the IBM® Passport Advantage® website. See the <a href="https://www.ibm.com/software/passportadvantage/pao_customer.html">IBM UrbanCode Deploy download document</a>. </li>
+<li>Change to the ibm-ucd-patterns-install/engine-install/resources/ibm-ucd-terraform directory. </li>
+<li>
+<p>Copy the provider and provisioner files for your platform to the Terraform third-party plugins folder. </p>
+<ul>
+<li>On Windows, in the sub-path terraform.d/plugins beneath your user's "Application Data" directory.</li>
+<li>On all other systems, in the sub-path .terraform.d/plugins in your user's home directory.
+The <code>terraform init</code> script searches this directory for additional plugins during plugin initialization.</li>
+</ul>
+<p><strong>Note:</strong> The naming scheme for provider plugins is <code>terraform-provider-NAME-vX.Y.Z</code>, and Terraform uses the name to understand the name and version of a particular provider binary.</p>
+<p><strong>Note:</strong> Ensure that the copied files are in an executable format.</p>
+</li>
+<li>
+<p>Change to the ibm-ucd-terraform/test folder. For example, run this command: </p>
+<p><code>cd &lt;extracted_location&gt;/ibm-ucd-patterns-install/engine-install/resources/ibm-ucd-terraform/test</code></p>
+</li>
+<li>
+<p>Use the sample Terraform configuration to test both the provider and provisioner. </p>
+<ol>
+<li>
+<p>Install the AWS and TLS providers: </p>
+<p><code>terraform init</code></p>
+</li>
+<li>
+<p>Apply the configuration: </p>
+<p>```
+terraform apply</p>
+<p>```</p>
+</li>
+</ol>
+<p>Your HCL UrbanCode Deploy server must be directly accessible from your Terraform runtime server. You are individually prompted for each of these variable values:</p>
+<ul>
+<li>AWS Access ID</li>
+<li>AWS Secret Key</li>
+<li>The name of the AWS Key Pair to create</li>
+<li>UrbanCode Deploy Server URL</li>
+<li>UrbanCode Deploy User</li>
+<li>UrbanCode Deploy Password</li>
+<li>To verify the results of the apply, log into your HCL UrbanCode Deploy server, and click <strong>Resources</strong>. In the Resource Tree, expand the <strong>provider-test-base-resource-group</strong> resource group. If the resource group contains an agent, and the agent is online, the apply succeeded. </li>
+<li>Clean up the resources after your test: </li>
+</ul>
+<p><code>terraform destroy</code></p>
+<p>All resources should be destroyed. To verify the results, return to your HCL UrbanCode Deploy server, and click <strong>Resources</strong>. The entry for the <strong>provider-test-base-resource-group</strong> resource group is no longer in the resource tree.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../terraform_ch/">Terraform</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/terraform_setup.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

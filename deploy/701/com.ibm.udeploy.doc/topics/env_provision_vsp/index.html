@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/env_provision_vsp/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Provisioning environments through the server \(through virtual system patterns\ - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Provisioning environments through the server (through virtual system patterns)", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="provisioning-environments-through-the-server-40through-virtual-system-patterns41">Provisioning environments through the server (through virtual system patterns)</h1>
+<p>You can provision environments on a cloud system as part of creating an application environment on the HCL® UrbanCode™ Deploy server.</p>
+<p>This method works for blueprints that were created on the server to provision environments on virtual system pattern-based clouds.</p>
+<ul>
+<li>Connect to a cloud system and create blueprints for that cloud. See <a href="../cloud_integrate_vsp_ov/">Connecting to clouds through HCL UrbanCode Deploy</a>.</li>
+<li>
+<p>Ensure that you have at least one base resource to associate with the new environment. See <a href="../resources_ch/">Resources</a>.</p>
+</li>
+<li>
+<p>Click <strong>Applications</strong>, click your application's name, and click <strong>Create Environment</strong>. The Create Environment dialog box opens, as shown in the following figure:</p>
+<p><img alt="The Create Environment window, which shows fields for the name, description, blueprint, teams, and other properties" src="../../images/env_create.gif" /></p>
+</li>
+<li>
+<p>Specify the environment name. The name is used as part of the deployment process and typically corresponds to the target environment. If you deploy to an integration environment, you might name the environment <code>SIT</code>.</p>
+<p><strong>Restriction:</strong> If you provision this environment to a cloud that uses virtual system patterns, the environment name cannot contain asterisk (*), backslash (\), or forward slash (/) characters. See <a href="../../../com.ibm.edt.doc/topics/blueprint_edit_clouds_vsp/">Modeling environments for clouds that use virtual system patterns</a>.</p>
+</li>
+<li>
+<p>Provide the following information: </p>
+<ol>
+<li>Specify a description. </li>
+<li>If you created the application from an application template, in the <strong>Environment Template</strong> list, select the environment template to use for the environment. You can assign any security type to this environment.</li>
+<li>In the <strong>Blueprint</strong> list, select the blueprint to use for the environment. </li>
+<li>Next to <strong>Base Resource</strong> click <strong>Set</strong>, select an agent from the Select Resource dialog box, and then click <strong>OK</strong>. This field appears only if you are using a blueprint that is managed on the HCL UrbanCode Deploy server. It does not appear for blueprints that are managed on the blueprint designer.</li>
+<li>To grant teams access to the environment and set its security type, click the <strong>plus sign</strong> icon by <strong>Teams</strong>, select values from the <strong>Team</strong> and <strong>Type</strong> lists, and click <strong>Add</strong>. </li>
+<li>To ensure that components cannot be deployed to the environment without first being approved, select the <strong>Require Approvals</strong> check box. If selected, HCL UrbanCode Deploy enforces an approval process before the deployment can be deployed to the environment. Initial deployments are typically done in uncontrolled environments. After the deployment works as designed, you can configure an approval process as the application moves along the development pipeline. If you are setting up more than one environment, consider creating an approval process for at least one of them. </li>
+<li>To prohibit the user who makes an approval request from approving the same request, select <strong>No Self-Approvals</strong>. </li>
+<li>To exempt processes from approvals, click <strong>None</strong> by <strong>Exempt Processes</strong>, select the check boxes beside the application processes to exempt, and click <strong>OK</strong>. </li>
+<li>To prevent changes to snapshots in this environment after you deploy them, select the <strong>Lock Snapshots</strong> check box. </li>
+<li>If you selected the <strong>Lock Snapshots</strong> check box, from the <strong>Snapshot Lock Type</strong> list, select the lock type: <ul>
+<li>To lock only component versions, select <strong>Only Component Versions</strong>.</li>
+<li>To lock snapshot configurations, select <strong>Only Configuration</strong>.</li>
+<li>To lock both component versions and configurations, select <strong>Component Versions and Configuration</strong>.</li>
+<li>To use the system default value, select <strong>System Default</strong>. The default value is determined by the <strong>Default Snapshot Lock Type</strong> field on the System Settings page. For information about system settings, see <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_system/">Server settings</a>.</li>
+</ul>
+</li>
+<li>Select <strong>Require Snapshot</strong> to require that snapshots are deployed to the environment. When this option is selected, only snapshots can be deployed to the environment.</li>
+<li>Select a color to apply to the environment. </li>
+<li>To apply the component version and snapshot cleanup settings that are specified on the System Settings page, select the <strong>Use Default Artifact Cleanup Settings</strong> check box. If this check box is cleared, you must specify how long to keep snapshots and component versions. For more information about cleaning up snapshots, see <a href="../app_snapshot_cleanup/">Cleaning up snapshots</a>. For more information about cleaning up component versions, see <a href="../settings_system_preview/">Cleaning up component versions</a>. </li>
+<li>To use deployment history cleanup, select <strong>Use Deloyment History Retention</strong>. You can use the default settings that are specified on the Systems Settings page by clicking <strong>Use Default Deployment History Retention</strong>, or in <strong>Days to Retain Deployment History</strong> you can specify a number of days to retain deployment history records.</li>
+</ol>
+</li>
+<li>Click <strong>Next</strong>. On the next page, you can customize the properties for each virtual node in the resource request, such as starting user names and passwords.<img alt="The Environment Blueprint Properties window, which shows the name of the new environment and links to customize the properties for each node" src="../../images/app_environment_create_a.gif" /> </li>
+<li>
+<p>On this page, specify the following information about the cloud resource request: </p>
+<ol>
+<li>In the <strong>Cloud Connection</strong> field, make sure that the connection to your cloud system is listed. This list shows connections that you have access to, based on the security settings for those connections. This list shows only connections to clouds that use virtual system patterns; to provision environments on clouds through OpenStack Heat, see <a href="../../../com.ibm.edt.doc/topics/env_provision_edt/">Provisioning environments from the blueprint designer (through OpenStack Heat)</a>. </li>
+<li>
+<p>In the <strong>Choose Location</strong> field, specify where to store the virtual nodes and how to allocate IP addresses to those nodes. Select <strong>Cloud Group</strong> to store the virtual nodes on one of the hypervisors in a cloud group. Select <strong>Environment Profile</strong> to provision the virtual nodes according to an environment profile. For more information about cloud groups and environment profiles, see the documentation for your cloud system. </p>
+<p><strong>Note:</strong> If you have to specify both the environment profile and the IP group, first specify the environment profile on this page. Then, on the properties page for each node, specify the IP group for each node.</p>
+<p><strong>Restrictions:</strong> </p>
+<ul>
+<li>For IBM PureApplication® System, you must use an environment profile; cloud groups are not supported.</li>
+<li>To provision resources with the <strong>Use VSys.Next patterns</strong> option, you must select an environment profile; you cannot use a cloud group.<ol>
+<li>If you selected <strong>Cloud Group</strong>, select a cloud group in the <strong>Cloud Group</strong> field. </li>
+<li>If you selected <strong>Environment Profile</strong>, select an environment profile in the <strong>Environment Profile</strong> field. </li>
+<li>Under <strong>Set property values for nodes to be created for this environment</strong>, you can customize the properties for the request. To customize these properties, click the node. A window opens that shows the properties for the node, including virtual image properties such as memory, number of processors, and starting passwords. The window also shows the properties for each script package on the node. </li>
+</ol>
+</li>
+</ul>
+<p><strong>Note:</strong> In some cases, you must specify certain properties before you can submit the request. In this case, when you click <strong>Save</strong>, a dialog box lists the required properties that are not specified.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Click <strong>Create</strong> to submit the request. </p>
+</li>
+</ul>
+<p>The new environment is displayed in the <strong>Environments</strong> pane and the server submits the cloud resource request. When the cloud resources are ready, the agents contact the server and are added to the environment. You can see the cloud resources by opening the console for your cloud system.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.edt.doc/topics/env_provision_ov/">Provisioning cloud environments</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/env_provision_vsp.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

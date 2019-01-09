@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/ud_properties_overview/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Properties - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Properties", url: "#_top", children: [
+              {title: "Providing information that varies in different contexts", url: "#providing-information-that-varies-in-different-contexts" },
+              {title: "Storing secure information", url: "#storing-secure-information" },
+              {title: "Providing property values to other processes, resources, and steps", url: "#providing-property-values-to-other-processes-resources-and-steps" },
+              {title: "Setting system variables", url: "#setting-system-variables" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="properties">Properties</h1>
+<p>Properties are variables that store information about many different elements, including components, environments, processes, and applications. You can also set global properties for the system.</p>
+<p>Common uses of properties are to store the locations of files, folders, servers, tools, or other resources that might change. For example, the application in the tutorial <a href="../../../com.ibm.udeploy.tutorial.doc/topics/webapp_abstract/">Deploying a simple web application</a> uses properties to store the location of a web server and a database. In the tutorial, you set the location of a database in an environment property that is named <code>db.url</code>. Then, any time that you want to refer to the location of the database, such as when you configure an application to store data in that database, you can use the property value <code>${p:environment/db.url}</code>. If you need to change the location of the database, you only need to change the property value, and all references of the property now point to the new location.</p>
+<p>In this case, you set the property by opening the environment, clicking its <strong>Configuration</strong> tab, and then clicking <strong>Environment Properties</strong>, as shown in the following figure. Components, applications, and processes have equivalent properties tabs.</p>
+<p><img alt="The Properties tab of an environment, showing several environment properties" src="../../images/ud_properties_overview_b.gif" /></p>
+<p>You can then refer to the properties in processes. For example, the following step is in a component process that accesses the database. In one of the step parameters, the value <code>${p:environment/db.url}</code> represents the database location.</p>
+<p><img alt="A process step, showing a property reference" src="../../images/ud_properties_overview_c.gif" /></p>
+<p>Properties have scope, which limits where they can be accessed and which properties take precedence over others with the same name. For example, environment properties can be accessed from within the environment, including from components and applications that are deployed to that environment. For more information on property scope, see <a href="../ud_properties_context/">Property contexts</a>.</p>
+<p>The following diagram shows some of the major properties that are available and where they can be set and accessed.</p>
+<p><img alt="A diagram showing the most popular types of properties and where they are most commonly accessed" src="../../images/ud_properties_overview_a.gif" /></p>
+<ul>
+<li>The box at the bottom of the diagram represents the properties that you can set at the system level or the resource tree level. These properties include system properties, which are available in all contexts. The server also stores properties on agents and resources, and these properties are available in all contexts in which these agents and resources are used.</li>
+<li>
+<p>The box at the center of the diagram represents the properties that you can set on components. Components have component properties, but components also have several types of properties that are specified in a way that is different from other properties. These properties are defined on the component, but their values are set in other places:</p>
+<ul>
+<li>
+<p><strong>Component environment properties</strong></p>
+<p>Component environment properties are defined on components, but they are not given a value until the component is deployed to an environment. Then, the property behaves much like an environment property; it is available within the scope of the environment.</p>
+</li>
+<li>
+<p><strong>Component resource properties</strong></p>
+<p>Component resource properties are defined on components, but they are not given a value until the component is added to an environment as a resource. Then, the property behaves much like a resource property. Because a component can be added to an environment multiple times, each instance of the component can have a different value for the component resource property.</p>
+</li>
+<li>
+<p><strong>Component version properties</strong></p>
+<p>Component version properties are defined on components, but they are not given a value until you import a component version. Thus, each component version has a different value for the component version property. When you deploy the component to an environment, the component version property behaves much like an ordinary component property.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>The boxes at right show which properties are defined in applications and environments, and which properties are accessible in applications and environments. Applications, environments, and the processes and resources in those applications and environments can all have properties. Also, with environments, you can access the properties of components that are deployed to those environments.</p>
+<p>You set properties on these HCL UrbanCode Deploy elements to achieve four primary goals:</p>
+<ul>
+<li><a href="#environments">Providing information that varies in different contexts</a></li>
+<li><a href="#store_secure">Storing secure information</a></li>
+<li><a href="#pass_on_props">Providing property values to other processes, resources, and steps</a></li>
+<li><a href="#system_props">Setting system variables</a></li>
+</ul>
+<h2 id="providing-information-that-varies-in-different-contexts">Providing information that varies in different contexts</h2>
+<p>Environments are configured differently, which can make automating deployments difficult. With properties, however, you can provide the correct information to each set of components in each environment.</p>
+<p>An application might be deployed to several target environments. Each of these environments might be configured differently; for example, tools and resources might be in different directories, or the application must use different ports depending on the environment. Environment properties provide information about those different environments. For example, an environment property can map to different ports as required by the target computers for applications that run on different ports and that communicate with different databases.</p>
+<p>As described in <a href="../ud_properties_context/">Property contexts</a>, you can also use properties to override defaults in certain areas. See <a href="../ud_properties_context/#example">Example: Overriding server locations</a>.</p>
+<h2 id="storing-secure-information">Storing secure information</h2>
+<p>To deploy applications, installing components on a target computer might require IDs and passwords that must remain secure. The user interface might display this information, and testing and debugging might require log reviews. In this case, use secure properties to store the passwords. These properties can contain the ID and password information, but they display in the user interface and in logs as asterisks (*).</p>
+<h2 id="providing-property-values-to-other-processes-resources-and-steps">Providing property values to other processes, resources, and steps</h2>
+<p>In complex processes and deployment scenarios, you want to automate as much as possible. Passing property values among processes, resources, and steps helps to limit the requirement to provide input manually and to maintain accuracy and reliability. For example, you can refer to output properties from one step in another step. See <a href="../output_properties/">Output properties</a>.</p>
+<h2 id="setting-system-variables">Setting system variables</h2>
+<p>Properties are flexible, and you can apply them to processes, environments, components, and even the system. However, keeping track of what properties are set where and on what element can present a challenge. One way to meet that challenge is to set system properties that apply to all situations. Of course, you must be judicious in setting system properties so that you can be flexible in applying properties to other elements. When you want to define a property one time and have it apply to all situations, the system property reduces set up time.</p>
+<p>Assume that you have one Maven repository for all your code. You might refer to the address for this repository many times in many different applications. You don't need to set the address for this repository more than once. You set a system property, for example: <code>maven.repository.url=/theURL/</code>. In most places in a deployment process, use this property in place of the actual address. If the address of the Maven repository changes, you can universally change all references by changing the system property.</p>
+<ul>
+<li><strong><a href="../resources_properties/">Creating, setting, and editing properties</a></strong><br />
+Properties can be created for most elements, including components, resources, applications, and agents. You can set and change properties in many different ways.</li>
+<li><strong><a href="../ud_properties_context/">Property contexts</a></strong><br />
+Properties are available in various contexts. Not all properties are available for all contexts. To plan and set properties, you must know where to access properties and how that setting behaves in context.</li>
+<li><strong><a href="../ud_properties_using/">Referring to properties</a></strong><br />
+HCL UrbanCode Deploy provides several ways to refer to properties.</li>
+<li><strong><a href="../propertiesreference/">Default properties</a></strong><br />
+Many default properties are available for use while a process runs. These properties provide information about the process and the elements that are involved in the process, such as applications, components, and resources.</li>
+<li><strong><a href="../output_properties/">Output properties</a></strong><br />
+Output properties are specialized properties that process steps generate. You use output properties to pass parameters to subsequent steps in a process.</li>
+<li><strong><a href="../../../com.ibm.udeploy.admin.doc/topics/settings_properties/">System properties</a></strong><br />
+System properties are global variables for the server.</li>
+<li><strong><a href="../ud_properties_avail/">Property availability</a></strong><br />
+The properties that are available to you depends on the context. For example, in a component process, you can access the component properties of the current component. In an application process, you can access the application properties and environment properties, but not any component properties. The following table shows the processes in which each type of property is available.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../part_using/">Modeling software deployment</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/ud_properties_overview.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

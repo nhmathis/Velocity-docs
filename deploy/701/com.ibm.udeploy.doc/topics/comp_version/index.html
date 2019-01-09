@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_version/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Component versions", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="component-versions">Component versions</h1>
+<p>Each time a component's artifacts are imported into the repository, including the first time, a separate version is stored in CodeStation. Versions can be assigned automatically by HCL® UrbanCode™ Deploy, applied manually, or come from a build server.</p>
+<p>Every time a component's artifacts are modified and imported, a new version of the component is created and an entry is made in the Component Version Import log. So a component might have several versions in CodeStation, and each version is unique.</p>
+<p><strong>Note:</strong> By default, the component version import log is cleaned up every 24 hours. Only the most recent 100 entries are maintained in the log after cleanup.</p>
+<p>Artifacts can be imported automatically or manually. By default, a complete copy of an artifact's content is imported into CodeStation. When you copy the artifact to CodeStation, the original artifact content is never modified.</p>
+<p>A version can be full or incremental. A full version contains all component artifacts; an incremental version contains only artifacts that are different from the previous version. When performing an incremental import you only need to upload only the changed artifacts. Artifacts that are the same as the base version do not need to be uploaded.</p>
+<p>Storing artifacts in CodeStation provides several benefits, such as tamper-proof storage, and the ability to review and validate artifacts with the HCL UrbanCode Deploy user interface. But if you have storage concerns or use a tool like Maven, you can limit CodeStation to using references to the artifacts instead of copying them into CodeStation.</p>
+<p><strong>Note:</strong> Do not give component versions the name <code>latest</code>, <code>latestVersion</code>, or <code>newest</code>. These names are reserved to represent the most recently created version for certain CLI commands, including <a href="../../../com.ibm.udeploy.api.doc/topics/udclient_requestapplicationprocess/">requestApplicationProcess</a> and <a href="../../../com.ibm.udeploy.api.doc/topics/udclient_createsnapshot/">createSnapshot</a>. You cannot use these keywords to represent component versions in the web interface.</p>
+<ul>
+<li><strong><a href="../comp_version_tracking/">Tracking environment inventory for components</a></strong><br />
+You can track the environment inventory for each component by clicking the component and then going to the <strong>Usage</strong> tab.</li>
+<li><strong><a href="../comp_version_import/">Importing versions manually</a></strong><br />
+If the component does not import new versions automatically, you can import versions manually.</li>
+<li><strong><a href="../settings_system_preview/">Cleaning up component versions</a></strong><br />
+You can configure the server to reduce the number of component versions by archiving them. You can specify global cleanup settings, cleanup settings for individual components, and cleanup settings for specific environments.</li>
+<li><strong><a href="../comp_version_restore/">Restoring archived component versions</a></strong><br />
+You can restore component versions by reloading archive files.</li>
+<li><strong><a href="../comp_version_delete/">Deleting versions</a></strong><br />
+If specific component versions meet the criteria for deletion, you can delete them.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../comp_ch/">Components</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_version.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

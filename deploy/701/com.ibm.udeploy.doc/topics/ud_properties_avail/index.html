@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/ud_properties_avail/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Property availability - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Property availability", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="property-availability">Property availability</h1>
+<p>The properties that are available to you depends on the context. For example, in a component process, you can access the component properties of the current component. In an application process, you can access the application properties and environment properties, but not any component properties. The following table shows the processes in which each type of property is available.</p>
+<p>To see the properties that are available to a process, run the process. When the process is finished, go to the <strong>Properties</strong> tab of the process request. This tab lists all the properties that are available to the process. The following table lists types of properties that are available to processes and which processes have access to each type of property.</p>
+<table>
+<thead>
+<tr>
+<th>Property type</th>
+<th>Processes that can access the property</th>
+<th>Sample syntax</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generic process properties</td>
+<td>Generic processes</td>
+<td><code>${p:ProcessProp1}</code></td>
+</tr>
+<tr>
+<td>Application process properties</td>
+<td>Application processes and component processes</td>
+<td><code>${p:ProcessProp1}</code></td>
+</tr>
+<tr>
+<td>Component process properties</td>
+<td>Component processes</td>
+<td><code>${p:ProcessProp1}</code></td>
+</tr>
+<tr>
+<td>Component version properties</td>
+<td>Component processes types that include versions, such as Deployment and Operational (with version)</td>
+<td><code>${p:version/VersionProp1}</code></td>
+</tr>
+<tr>
+<td>Resource properties</td>
+<td>Component processes and generic processes</td>
+<td><code>${p:resource/ResourceProp1}</code></td>
+</tr>
+<tr>
+<td>Environment properties</td>
+<td>Component processes and application processes</td>
+<td><code>${p:environment/EnvProp1}</code></td>
+</tr>
+<tr>
+<td>Application properties</td>
+<td>Application processes and component processes</td>
+<td><code>${p:application/AppProp1}</code></td>
+</tr>
+<tr>
+<td>System properties</td>
+<td>All processes</td>
+<td><code>${p:system/SystemProp1}</code></td>
+</tr>
+<tr>
+<td>Request properties</td>
+<td>All processes</td>
+<td>-   <code>${p:request.user.id}</code></td>
+</tr>
+<tr>
+<td>-   <code>${p:request.user.displayName}</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>${p:request.user.name}</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|
+|Iteration properties|Processes in the For Each Agent step context| -   <code>${p:iteration/agent.name}</code>
+-   <code>${p:iteration/agent/AGENT_HOME}</code></p>
+<p>|
+|Agent properties|Generic processes and component processes|<code>${p:agent/PropName}</code>|</p>
+<p><strong>Parent topic:</strong> <a href="../ud_properties_overview/">Properties</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/ud_properties_avail.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

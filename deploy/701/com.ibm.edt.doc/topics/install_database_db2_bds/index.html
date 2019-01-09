@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/install_database_db2_bds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring a DB2 database for the blueprint design server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring a DB2 database for the HCL UrbanCode Deploy blueprint design server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-a-db2-database-for-the-hcl-urbancode-deploy-blueprint-design-server">Configuring a DB2 database for the HCL UrbanCode Deploy blueprint design server</h1>
+<p>To use a DB2® database with the blueprint design server, before you install the blueprint design server, install the IBM® DB2 database and provide the JDBC JAR file for the server installation process.</p>
+<p>DB2 is bundled with HCL® UrbanCode™ Deploy.</p>
+<p>Before you install the blueprint design server, install and start a DB2 version 9.7 or later server on a Windows™ or Linux™ system. You must also create a DB2 user with table-creation privileges. See <a href="http://www.ibm.com/support/knowledgecenter/SSEPGG_10.5.0/com.ibm.db2.luw.kc.doc/welcome.html">IBM DB2 10.5 for Linux, Unix and Windows documentation</a>.</p>
+<p>When you install the HCL UrbanCode Deploy blueprint design server, you need the DB2 connection information and a user account with table-creation privileges. If you are evaluating the blueprint designer, you can install the database on the same host as the blueprint design server.</p>
+<p><strong>Note:</strong> The database must be encoded in UTF-8.</p>
+<ol>
+<li>
+<p>Open a command-line window and log in to the database as a user with table-creation privileges. The command to log in to the database server and start DB2 input interactive mode resembles this example:</p>
+<p><code>db2</code></p>
+<p>The command line shows a prompt that looks like this example:</p>
+<p><code>db2 =&gt;</code></p>
+</li>
+<li>
+<p>From the DB2 input interactive mode, create a database with a default page size of 32 K. Type the following text on the command line to create a database that is named ibm_ucdp:</p>
+<p><code>create database ibm_ucdp pagesize 32 K</code></p>
+</li>
+<li>
+<p>Type <code>quit</code> to exit the DB2 command line. </p>
+</li>
+<li>
+<p>Obtain the DB2 JDBC driver. The JDBC JAR file is included among the installation files for the database. The driver is unique to the edition you are using.</p>
+<p>When multiple drivers are available, you might need to consult with the database provider to determine which driver to use. The JDBC driver version that you must use might depend on the version of the database and the version of Java™ used by the HCL UrbanCode Deploy server.</p>
+</li>
+<li>
+<p>Either note the location of the JDBC JAR file or place the file in the installation_directory/ibm-ucd-patterns-install/web-install/media/server/opt/tomcat/lib folder. </p>
+</li>
+<li>Begin blueprint design server installation. See <a href="../install_server_bds/">Installing the blueprint design server</a>. When you are prompted for the database type, enter db2. </li>
+<li>Provide the JDBC driver class that the blueprint design server uses to connect to the database. The default value is <code>com.ibm.db2.jcc.DB2Driver</code>.</li>
+<li>
+<p>Next, provide the JDBC connection string. Typically, it is similar to the following code:</p>
+<p><code>jdbc:db2://DB\_URL:DB\_PORT/DB\_NAME</code></p>
+<p>In the following example, the value for DB_URL is <code>localhost</code>, the value for DB_PORT is <code>50000</code>, and the value for DB_NAME is <code>ibm_ucdp</code>:</p>
+<p><code>jdbc:db2://localhost:50000/ibm_ucdp</code></p>
+</li>
+<li>
+<p>Finish by entering the database user name and password. </p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../install_database_bds_ov/">Blueprint design server database configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/install_database_db2_bds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

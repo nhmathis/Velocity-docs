@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/r_t-shoot_heat_ext_plgin/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Troubleshooting Heat-engine plug-in extensions - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Troubleshooting Heat-engine plug-in extensions", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="troubleshooting-heat-engine-plug-in-extensions">Troubleshooting Heat-engine plug-in extensions</h1>
+<p>Installing the Blueprint Designer Heat extension plug-ins into an IBM Cloud Manager Heat engine results in stopping SSL communication.</p>
+<p>When you install the Blueprint Designer Heat orchestration extension plug-ins into IBM Cloud Manager with OpenStack and HTTPS is enabled on Keystone and Heat API endpoints, the following two types of error occur:</p>
+<ol>
+<li>```
+keystoneclient.exceptions.SSLError: SSL exception connecting to https://{keystone Identity Endpoint}/auth/tokens: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed</li>
+</ol>
+<pre><code>
+2.  ```
+heatclient.exc.HTTPUnauthorized: ERROR: Authentication required.
+</code></pre>
+
+<p><strong>Note:</strong> If HTTPS not enabled on Keystone and HEAT API endpoints of IBM Cloud Manager, which is the default configuration, the problem does not occur.</p>
+<p>When you install the Blueprint Designer Heat extension plug-ins, the installation deploys new Python module versions through Pip. The new Python module versions change the Python request module in the IBM Cloud Manager controller environment so that the Heat client is prevented from communicating over SSL.</p>
+<p>To continue HTTPS communications on the Keystone and Heat API endpoints of IBM Cloud Manager, install the Python request module:</p>
+<pre><code>yum reinstall python-requests-{version}.noarch
+</code></pre>
+
+<p>If you use your own CA certificate, import it again. The default location of the certificate for IBM Cloud Manager 4.3 is /etc/pki/tls/certs/ca-bundle.crt.</p>
+<p><strong>Parent topic:</strong> <a href="../trouble_engines/">Troubleshooting engines</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/r_t-shoot_heat_ext_plgin.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

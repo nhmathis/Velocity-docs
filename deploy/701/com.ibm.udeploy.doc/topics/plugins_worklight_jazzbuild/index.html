@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/plugins_worklight_jazzbuild/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Rational Team Concert Build - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Rational Team Concert Build", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="rational-team-concert-build">Rational Team Concert Build</h1>
+<p>The Rational Team Concert™ Build system defines resources that are used to describe and manage builds.</p>
+<p>The Rational Team Concert Build system in IBM® Rational® Team Concert™ defines the following types of logical resources that are used to describe and manage builds:</p>
+<ul>
+<li>
+<p><strong>Build definition</strong></p>
+<p>A build definition describes:</p>
+<ul>
+<li>The workspace to process.</li>
+<li>The Ant scripts and targets to run against the workspace.</li>
+<li>The schedule for the build.</li>
+<li>The properties to simplify the configuration of the build.</li>
+<li>The build engines that can handle build requests for the build definition.</li>
+<li><strong>Build engine</strong></li>
+</ul>
+<p>A build engine represents a Build System Toolkit Jazz™ Build Engine running on a designated build computer. A Jazz™ Build Engine running on a build computer correlates itself to a build engine in Rational® Team Concert™ by specifying the unique identifier of the build engine.</p>
+</li>
+<li>
+<p><strong>Build request</strong></p>
+<p>A build request represents a scheduled or explicitly issued request to run a build according to a specified build definition. Build definitions are submitted to a build queue. A Jazz™ Build Engine receives and processes the build request if its corresponding build engine in Rational® Team Concert™ is listed as a supporting build engine for the build definition.</p>
+</li>
+<li>
+<p><strong>Build result</strong></p>
+<p>A build result represents the output of a build.</p>
+</li>
+<li>
+<p><strong><a href="../plugins_worklight_buildtoolkit/">Build System Toolkit</a></strong><br />
+Each build computer contains an installation of the Rational Team Concert Build System Toolkit.</p>
+</li>
+<li><strong><a href="../plugins_worklight_builddef/">Build definitions</a></strong><br />
+In Rational Team Concert, a build definition describes the key components of a build.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../plugins_worklight_build/">Building mobile applications</a></p>
+<p><strong>Previous topic:</strong> <a href="../plugins_worklight_buildtemplates/">Build scripts</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/plugins_worklight_jazzbuild.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

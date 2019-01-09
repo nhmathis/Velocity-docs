@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/messaging_ov/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring messaging with event sources - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring messaging with event sources", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-messaging-with-event-sources">Configuring messaging with event sources</h1>
+<p>To receive messages from the OpenStack Heat-based cloud system, you can configure an event source in the blueprint designer. This event source accepts messages from a messaging system and shows those messages in the log for an environment.</p>
+<p>If you extended an existing Heat engine as described in <a href="../../../com.ibm.udeploy.install.doc/topics/extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>, ensure that messaging is turned on and configured. You must have the information in the /etc/rabbitmq/rabbitmq-env.conf file to set up messaging for the blueprint design server.</p>
+<p>By default, the engines that you install for the blueprint design server include a RabbitMQ messaging system. You can configure this messaging system to show information about the deployments that are running, such as messages when environments are created.</p>
+<p><strong>Note:</strong> By default, the event sources feature is disabled. To enable the event sources feature, you must add <code>feature.flags=eventSources</code> to the <code>server.properties</code> file.</p>
+<ol>
+<li>
+<p>If your engine is not on the same computer as the blueprint design server, follow these steps to configure the engine to provide messages to the blueprint design server. </p>
+<ol>
+<li>On the engine, open the /etc/rabbitmq/rabbitmq-env.conf file. </li>
+<li>
+<p>In this file, in the NODE_IP_ADDRESS parameter, specify the IP address of the blueprint design server. The messaging server provides messages only to requests from this IP address. As an alternative, you can specify <code>0.0.0.0</code> for the messaging server to provide messages to any system, as in the following example:</p>
+<p><code>NODE_IP_ADDRESS=0.0.0.0</code></p>
+</li>
+<li>
+<p>Save the file. </p>
+</li>
+<li>
+<p>Restart the RabbitMQ server. For example, if your engine host operating system is Red Hat Enterprise Linux™, version 7, run the following command:</p>
+<p><code>systemctl restart rabbitmq-server.service</code></p>
+<p>If your engine is on the same computer, you do not need to edit the /etc/rabbitmq/rabbitmq-env.conf file.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Follow these steps to configure the blueprint design server to receive messages from the engine:</p>
+</li>
+<li>In the blueprint designer, as an administrator, click <strong>Settings</strong> > <strong>Events</strong>. </li>
+<li>
+<p>On the <strong>Event Sources</strong> tab, click <strong>Add Event Sources</strong> and specify the following information: </p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>An identifier for the event source.</td>
+</tr>
+<tr>
+<td><strong>Event source Type</strong></td>
+<td>The type of message queue.</td>
+</tr>
+<tr>
+<td><strong>Host</strong></td>
+<td>The host name or IP address of the engine. If the engine and blueprint design server are on the same computer, specify <code>127.0.0.1</code> .</td>
+</tr>
+<tr>
+<td><strong>Port</strong></td>
+<td>The port for the message queue. The default value is 5672.</td>
+</tr>
+<tr>
+<td><strong>Exchange Name</strong></td>
+<td>The name of the exchange from which messages are taken. The default value is <code>heat</code>.</td>
+</tr>
+<tr>
+<td><strong>Routing Key</strong></td>
+<td>The name of the routing key with which to select messages. The default value is <code>notifications.info</code>.</td>
+</tr>
+<tr>
+<td><strong>Username</strong></td>
+<td>The user name of the account that is associated with the message queue. The default value is <code>guest</code> .</td>
+</tr>
+<tr>
+<td><strong>Password</strong></td>
+<td>The password of the account that is associated with the message queue. The default value is <code>guest</code> .</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+</ol>
+<p>When you provision an environment, you can open the environment and see the messages on the <strong>Events</strong> tab. Specifically, the blueprint design server can accept information for events of the following types:</p>
+<ul>
+<li><code>orchestration.stack</code>, such as <code>orchestration.stack.create.start</code> and <code>orchestration.stack.suspend.end</code>.</li>
+<li><code>orchestration.autoscaling</code>, such as <code>orchestration.autoscaling.start</code>.</li>
+</ul>
+<p>The following image shows an example of the messages that the <strong>Events</strong> tab displays. The calendar view on the right side of the page shows the <code>orchestration.stack.create.start</code> event, which means that the provisioning process started. The <code>orchestration.stack.create.end</code> event shows that the provisioning process is complete.</p>
+<p><img alt="The Events tab, showing the events for a specific environment on a calendar" src="../../images/messaging_ov_a.gif" /></p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.edt.doc/topics/c_node_administering_bds/">Blueprint design server configuration</a></p>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/messaging_ov.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

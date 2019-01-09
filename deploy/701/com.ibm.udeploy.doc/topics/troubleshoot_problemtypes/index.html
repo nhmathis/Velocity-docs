@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/troubleshoot_problemtypes/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Types of problems and checks to perform - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Types of problems and checks to perform", url: "#_top", children: [
+              {title: "Troubleshooting agent problems", url: "#troubleshooting-agent-problems" },
+              {title: "Troubleshooting database problems", url: "#troubleshooting-database-problems" },
+              {title: "Remote Agent Upgrade Issues", url: "#remote-agent-upgrade-issues" },
+              {title: "Troubleshooting performance problems", url: "#troubleshooting-performance-problems" },
+              {title: "Troubleshooting plug-in problems", url: "#troubleshooting-plug-in-problems" },
+              {title: "Troubleshooting server problems", url: "#troubleshooting-server-problems" },
+              {title: "Troubleshooting user interface problems", url: "#troubleshooting-user-interface-problems" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="types-of-problems-and-checks-to-perform">Types of problems and checks to perform</h1>
+<p>Before you contact IBM Software Support, gather background information and perform tasks that will assist in solving the problem. It helps to be as specific as possible and include all relevant information.</p>
+<p><a href="#problem_types">Table 1</a> lists several problem categories. The information in the table guides you on checks to perform and data to gather.</p>
+<table>
+<thead>
+<tr>
+<th>Problem Type</th>
+<th>Descriptions</th>
+<th>What to do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Database</td>
+<td>Database errors tend to show up on the server. Look for server errors which appear to be specific to databases, for example: ORA0001 Constraint Violation.</td>
+<td><a href="#database_problems">Troubleshooting database problems</a></td>
+</tr>
+<tr>
+<td>Integration with other products HCL® UrbanCode™ Deploy</td>
+<td>Attempts to connect to IBM® Cloud Orchestrator, IBM PureApplication® System, or IBM Workload Deployer to provision an image results in one of the following: -   Errors</td>
+<td></td>
+</tr>
+<tr>
+<td>-   No image is created</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   Agent cannot be contacted</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|<a href="http://www-01.ibm.com/support/docview.wss?uid=swg21661921">UrbanCode Deploy integration with Cloud providers (classic)</a>|
+|Attempts to integrate with LDAP for user authentication and authorization produce unexpected results.|<a href="http://www-01.ibm.com/support/docview.wss?uid=swg21680342">Integation with LDAP</a>|
+|Performance|Excessive page load times, processes taking longer than normal, and other time related problems.|<a href="#performance_problems">Troubleshooting performance problems</a>|
+|Plug-ins|Plug-in steps are not functioning as expected.|<a href="#plugin_problems">Troubleshooting plug-in problems</a>|
+|Server|Errors specific to the server. Errors in the deployserver.out file. Or, HTTP requests which return with the response code 500 Internal Server Error.|<a href="#server_problems">Troubleshooting server problems</a>|
+|User Interfaces|Pages are not rendering completely.|<a href="#interface_problems">Troubleshooting user interface problems</a>|</p>
+<h2 id="troubleshooting-agent-problems">Troubleshooting agent problems</h2>
+<p>For issues that appear to be specific to an agent, collect the following:</p>
+<ul>
+<li>&lt;agent>/conf/agent/installed.properties </li>
+<li>&lt;agent>/conf/installed.version </li>
+<li>&lt;agent>/conf/plugin-javaopts.conf </li>
+<li>&lt;agent>/var/log/agent.out</li>
+</ul>
+<p>For problems were the agent is not able to show <strong>Online</strong>, when viewing the status in the server user interface.</p>
+<ol>
+<li>
+<p>Add the following trace string to the agent &lt;agent>/conf/agent/ log4j.propertiesfile:</p>
+<p><code>log4j.logger.com.urbancode.air.agent=DEBUG log4j.logger.com.urbancode.air.devilfish=DEBUG</code></p>
+</li>
+<li>
+<p>Add the following trace string to the server in the product user interface. Click <strong>System Settings</strong><strong>Logging</strong> and add the following:</p>
+<p><code>log4j.logger.com.urbancode.ds.subsys.deploy.agent=DEBUG log4j.logger.com.urbancode.air.devilfish=DEBUG</code></p>
+</li>
+<li>
+<p>Stop the agent and then start the agent.</p>
+</li>
+<li>Send all the logs from &lt;agent>\var\logs to support.</li>
+<li>Send the &lt;server>\var\log\deployserver.out from the server or servers if running a high availability configuration to support.</li>
+</ol>
+<h2 id="troubleshooting-database-problems">Troubleshooting database problems</h2>
+<p>For issues that appear to be specific to the database include the database type and version. Additionally, ensure that your database administrator is available to perform diagnostic on the database server, as requested by IBM Support.</p>
+<p>If the issue is related to a user application process or component process capturing screen shots of the process and the step properties of steps that are failing are useful.</p>
+<h2 id="remote-agent-upgrade-issues">Remote Agent Upgrade Issues</h2>
+<p>For problems when upgrading an agent remotely from the server fails and leaves the agent offline, if possible produce the problem again and collect trace data.</p>
+<ol>
+<li>
+<p>Add the following trace string to the agent log4j.properties file:</p>
+<p><code>log4j.logger.com.urbancode.air.mw = DEBUG</code></p>
+</li>
+<li>
+<p>Perform the upgrade again. Hopefully, the problem occurs to collect trace data.</p>
+</li>
+</ol>
+<p>If the issue has already occurred, collect the following information:</p>
+<ol>
+<li>Check the agent bin directory for the upgrade.out file. If the file exists, send the file to support.</li>
+<li>Check if there is a directory in the bin directory called agent-upgrade and if there are any files inside it . Send a directory listing to support.</li>
+<li>Check if there is a file called upgrade.jarinside the agent's bin folder. Provide the size of that file to support.</li>
+<li>Send all the logs from &lt;agent>\var\logsto support.</li>
+<li>Send all the files from &lt;agent>\conf\agent to support.</li>
+<li>Check if there are any java processes running:<ul>
+<li>For Linux issue the following command: ps -ef |grep java</li>
+<li>For Windows use the Task Manager</li>
+</ul>
+</li>
+</ol>
+<p>Verify the complete command line commands of those processes to make sure that they belong to the agent. The agent normally has two running processes; the monitor and the worker.</p>
+<h2 id="troubleshooting-performance-problems">Troubleshooting performance problems</h2>
+<p>Symptoms indicating a performance problem includes: excessive page load times, processes taking longer than normal, and other time-related problems.</p>
+<p>If user interface pages are loading slowly, do the following:</p>
+<ul>
+<li>Use the browser console or tools such as the Google Chrome Developer Console to load the page and check the response times for the HTTP requests and responses. For HCL UrbanCode Deploy version 6.1.0.2 or higher, this information can be viewed from the user interface.<ol>
+<li>Log into the HCL UrbanCode Deploy server.</li>
+<li>Click <strong>Settings</strong> > <strong>System</strong> > <strong>Diagnostics</strong>. The Diagnostics page logs the amount of time HTTP requests take.</li>
+</ol>
+</li>
+</ul>
+<p>If the server is operating slowly, gather a set of thread dumps from the server. Ensure there is some time distance between them ranging from a few seconds to a minute.</p>
+<p><strong>Note:</strong> An IBM Support representative might request that you collect heap dumps. Do not perform this action if not requested because heap dumps can cause a large JVM pause.</p>
+<h2 id="troubleshooting-plug-in-problems">Troubleshooting plug-in problems</h2>
+<p>The primary symptoms of plug-in related problems is that the plug-in is not functioning as expected. There can also be issues with connections to other servers that the plug-in uses.</p>
+<p>Before contacting IBM Software Support verify that the plug-in steps are being used correctly and the required properties are specified.</p>
+<p>If you are experiencing problems installing the plug-in, you will need information about the server. For other problems, collect the following information:</p>
+<ul>
+<li>Description of how the plug-in is integrated. Is it a built-in or added plug-in.</li>
+<li>The full plug-in version including build number. This information is located in the info.xml file.</li>
+<li>A copy of the plug-in is needed if it has been modified or a custom plug-in.</li>
+<li>If the issue is related to the execution of a plug-in step, collect the following:<ul>
+<li>Input properties</li>
+<li>Output properties</li>
+<li>Output log</li>
+<li>Error log</li>
+</ul>
+</li>
+<li>A copy of any custom post-processing scripts.</li>
+<li>Screen shots that include the the complete HCL UrbanCode Deploy page</li>
+</ul>
+<h2 id="troubleshooting-server-problems">Troubleshooting server problems</h2>
+<p>Problems with the HCL UrbanCode Deploy server include HTTP requests that result in errors such as</p>
+<pre><code>Code 500 Internal Server Error
+</code></pre>
+
+<p>and error messages in the deployserver.out file. In addition to the type of operating system and version, description of what happened and what was being done at the time of the failure, collect the following information:</p>
+<ul>
+<li>
+<p>The Java type (JDK/JRE), version and update number. There are several ways to gather this information:</p>
+<ul>
+<li>Open the installed.properties file in the JVM installation directory. The <strong>install.java.home</strong> property contains the version of the JDK or JRE.</li>
+<li>Run the following command:<ul>
+<li>Unix: install.java.home/java -version</li>
+<li>
+<p>Windows: install.java.home\java -version </p>
+<p>Where install.java.home is the Java installation directory.</p>
+<p><strong>Note:</strong> Running the command with the absolute path is necessary to avoid the system JVM being selected instead of the one configured to run HCL UrbanCode Deploy.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>If the problem is related to agent connectivity, gather the logs from the following location: ucd_location/logs/connection/agent-name/*.</p>
+</li>
+<li>If the problem is related to agent auto discovery and configuration include the following:<ul>
+<li>ucd_location/logs/autoDiscover/agent-name/*</li>
+<li>ucd_location/logs/autoConfigure/agent-name/*</li>
+</ul>
+</li>
+<li>If the issue is related to a user application or component process, provide screen captures of the process and the step properties for the steps that are failing.</li>
+</ul>
+<p><strong>Considerations for Version 6.1.0.2 and later</strong> </p>
+<p>If you are using HCL UrbanCode Deploy version 6.1.0.2 and later, you can gather server information using the user interface.</p>
+<ol>
+<li>Log into the HCL UrbanCode Deploy server.</li>
+<li>
+<p>Click <strong>Settings</strong> > <strong>System</strong> > <strong>Diagnostics (Download)</strong> to download the diagnostics bundle.</p>
+<p>The diagnostic bundle includes the following:</p>
+<ul>
+<li>All files in the server /bin directory used for debugging configuration</li>
+<li>All files in the server /conf directory used for debugging configuration</li>
+<li>All files in the server patches directory</li>
+<li>All files in the server var/log[code] directory</li>
+<li>
+<p>The diagnostics directory, which contains the following:</p>
+<ul>
+<li>
+<p><strong>latest5000Requests.json</strong></p>
+<p>Timing and details about the last 5000 REST calls made to the server.</p>
+</li>
+<li>
+<p><strong>longestRequestsLast30Days.json</strong></p>
+<p>Timing and details about the longest requests over the last 30 days.</p>
+</li>
+<li>
+<p><strong>recordCounts.json</strong></p>
+<p>Counts of various types of objects present on the server .</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Considerations for Version 6.1.0.1 and earlier</strong></p>
+<p>If you are using HCL UrbanCode Deploy version 6.1.0.1 and earlier:</p>
+<ul>
+<li>Collect all the following files located on the HCL UrbanCode Deploy server. The most important file is the deployserver.out file.<ul>
+<li>bin/set_env</li>
+<li>conf/installed.version</li>
+<li>conf/log4j.properties</li>
+<li>conf/server/installed.properties </li>
+<li>var/log/deployserver.out</li>
+<li>var/log/*</li>
+</ul>
+</li>
+<li>Gather information about patches that have been included. Patches are JAR files containing replacement Java classes for HCL UrbanCode Deploy. The list of patches and the patched Java files can be viewed in the Patches page of the HCL UrbanCode Deploy user interface. To access this page, click <strong>Settings</strong> > <strong>System</strong> > <strong>Patches</strong>. When the server starts, it loads the classes in these JAR files before loading those from the server base installation. Multiple patches that overwrite the same file can conflict with each other; there is no clear way to tell which was loaded in this case. Include an archive file containing all the patches on the system and a screen capture of the Patches page.</li>
+</ul>
+<h2 id="troubleshooting-user-interface-problems">Troubleshooting user interface problems</h2>
+<p>Symptoms of user interface problems include pages not loading, missing pages, and pages with incorrect information. Some user interface issues may be the result of a server problem.</p>
+<p>In general, it is useful to identify the REST call that is causing the problem. Use a tool to that gathers timestamps for the HTTP responses and the return code if one was given. This capability is built into some browsers. such as Firebug.</p>
+<p>For all user interface related issues, there can never be to many screen captures. Ensure that the screen captures the full screen. Partial screen captures can lack relevant content.</p>
+<p>If the browser console is available, provide a screen capture of it. It might contains console errors helpful in troubleshooting.</p>
+<p><strong>Parent topic:</strong> <a href="../c_troubleshooting_and_support_resources/">General product troubleshooting</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/troubleshoot_problemtypes.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

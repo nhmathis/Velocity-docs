@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_teams_bds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring blueprint design server teams - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring blueprint design server teams", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-blueprint-design-server-teams">Configuring blueprint design server teams</h1>
+<p>In the blueprint designer, teams map users to roles. Teams also include a list of resources that the team owns and cloud projects that the team can use.</p>
+<p>Set up the users for the team in the blueprint designer and the roles to assign to those users.</p>
+<p>To set up a team, you specify the members of the team, including users and groups. Then, you assign roles to the users and groups to specify their permissions. The blueprint design server creates a repository for the team on the local Git server that team members can use to share blueprints and configuration files.</p>
+<p>You can also set resource access for the team which limits the cloud resources team members can use in the blueprint designer palette, when provisioning images, and in the REST API.</p>
+<p><strong>Note:</strong> The teams for the blueprint design server are separate from the teams for the server.</p>
+<ol>
+<li>In the blueprint designer, click <strong>Settings</strong> > <strong>Teams</strong>. </li>
+<li>Select a team or click <strong>Create New Team</strong> to create a new team. </li>
+<li>On the <strong>Members</strong> tab, use the <strong>Add User</strong> or <strong>Add Group</strong> lists to add users and groups to the team. You can filter users by selecting an authentication realm in the <strong>Realm</strong> list.</li>
+<li>Assign roles to the users and groups: <ol>
+<li>In the <strong>Members</strong> list, select a user or group. </li>
+<li>Under <strong>Roles</strong>, select the roles for that user or group. </li>
+</ol>
+</li>
+<li>
+<p>Give the team access to cloud projects that contain resources it can access: </p>
+<ol>
+<li>Go to the <strong>Cloud Authorization</strong> tab. </li>
+<li>Click <strong>Add</strong>. </li>
+<li>Select the cloud projects for the team and then click <strong>OK</strong>. <ul>
+<li>To apply a filter to the list of clouds, enter text in the field and press Enter.</li>
+<li>To grant access to all available clouds, select the check box by the field.
+The team can access all of the resource types for all of regions that are defined by this cloud project.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>For each cloud project, set the resource access. The resource access limits the resources that are available in the blueprint designer palette, when provisioning images, and in the REST API.</p>
+<ol>
+<li>From the <strong>Authorization</strong> list, select a cloud project. </li>
+<li>From the <strong>Region</strong> and <strong>Resource Type</strong> lists, select the region and resource type to set access to. </li>
+<li>Select the resources that the team can access. To search for a specific resource by name, click <strong>Show Filters</strong>, enter the resource name, and press Enter.</li>
+<li>In this way, set the resource access for each region and resource type. </li>
+</ol>
+</li>
+<li>Click <strong>Save</strong>. </li>
+</ol>
+<p>Now the users can work with all of the resources that they have access to. The roles that you selected for the users determine what the users can do with those resources. If you assigned cloud projects to the team, the users can use the functional IDs in those projects to deploy cloud instances. A clone of the team-based Git repository is created for each team member, and team members can change the shared files. See <a href="../../../com.ibm.edt.doc/topics/blueprint_org/">Sharing blueprints by using a Git repository</a>.</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_teams_bds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

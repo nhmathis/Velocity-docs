@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_snapshot_cleanup/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Cleaning up snapshots - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Cleaning up snapshots", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="cleaning-up-snapshots">Cleaning up snapshots</h1>
+<p>You can configure the server to reduce the number of snapshots by deleting old snapshots. You can specify global cleanup settings and cleanup settings for specific environments.</p>
+<p>Snapshot cleanup runs daily, at the same time as component version cleanup. The server deletes snapshots that do not meet any of the criteria for snapshots to keep. The effect is the same as if you delete the snapshot manually. These snapshots are not archived and are not recoverable.</p>
+<p>When cleaning up snapshots, the server retrieves the settings from the <strong>Settings</strong> > <strong>System Settings</strong> > <strong>Artifact Cleanup</strong> options first. Then it retrieves the settings for individual environments, which override the system settings. If any of these settings specify to keep the snapshot, it is not deleted.</p>
+<p>The settings for snapshot cleanup specify a number of days to keep snapshots. This time period is measured from the day that the snapshot is no longer the most recently deployed snapshot in an environment. For example, assume that the <strong>Default Application Snapshot Retention (days)</strong> system setting is set to 30 days. If a snapshot is deployed on day 1 and another snapshot is deployed on day 10, the first snapshot can not be cleaned up until day 40.</p>
+<p>The system setting also refers to the number of days since the snapshot was created. If a snapshot was created fewer days ago than the <strong>Default Application Snapshot Retention (days)</strong> system setting, it is kept.</p>
+<p>The criteria for keeping or deleting snapshots are as follows:</p>
+<ul>
+<li>If the snapshot is the most recently deployed snapshot in any environment, it is kept.</li>
+<li>In any environment, if the snapshot was the most recently deployed snapshot within the number of days in the system setting or the environment setting, it is kept.</li>
+<li>If the snapshot age in days is less than the system setting, it is kept.</li>
+</ul>
+<p>If none of these criteria are true, the snapshot is deleted, even if it was deployed to an environment in the past.</p>
+<ol>
+<li>
+<p>Specify the system snapshot cleanup settings: </p>
+<ol>
+<li>Click <strong>Settings</strong> > <strong>System Settings</strong>. </li>
+<li>Under <strong>Artifact Cleanup</strong>, in the <strong>Default Application Snapshot Retention (days)</strong> field, specify how long to retain snapshots, in days. </li>
+<li>Click <strong>Save</strong>. 
+For information about the other settings in this section, see <a href="../settings_system_preview/">Cleaning up component versions</a>.</li>
+</ol>
+</li>
+<li>
+<p>Specify cleanup settings for individual environments. These settings override the system settings.</p>
+<ol>
+<li>Click <strong>Applications</strong>, click an application, click an environment, click <strong>Configuration</strong>, and then click <strong>Basic Settings</strong>. </li>
+<li>Clear the <strong>Use Default Artifact Cleanup Settings</strong> check box. </li>
+<li>In the <strong>Days to Retain Application Snapshots</strong> field, specify how long to keep a snapshot after it is not the most recently deployed snapshot in the environment. </li>
+<li>Click <strong>Save</strong>. </li>
+</ol>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../app_snapshot/">Snapshots</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_snapshot_cleanup.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

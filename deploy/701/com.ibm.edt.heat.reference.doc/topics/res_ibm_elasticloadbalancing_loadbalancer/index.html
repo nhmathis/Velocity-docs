@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_elasticloadbalancing_loadbalancer/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM ElasticLoadBalancing LoadBalancer - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::ElasticLoadBalancing::LoadBalancer", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmelasticloadbalancingloadbalancer">IBM::ElasticLoadBalancing::LoadBalancer</h1>
+<p>This resource type represents a load balancer.</p>
+<p>The blueprint uses the core properties and extended properties, if any, from this resource type. Review and configure the applicable heat resources that apply to your configuration information.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>availablity_zones</td>
+<td>List</td>
+<td>False</td>
+<td>Extended</td>
+<td>A list of availability zones to load balance. You must specify a value for either availability_zones or subnets.</td>
+</tr>
+<tr>
+<td>cross_zone</td>
+<td>Boolean</td>
+<td>False</td>
+<td>Extended</td>
+<td>The state of load balancing across multiple availability zones. The default value is false.</td>
+</tr>
+<tr>
+<td>health_check</td>
+<td>Map</td>
+<td>True</td>
+<td>Extended</td>
+<td>Periodic application health check to confirm availability of the instances.</td>
+</tr>
+<tr>
+<td>listeners</td>
+<td>List</td>
+<td>True</td>
+<td>Extended</td>
+<td>A list of listeners, which are processes that listen for connection requests to attach to the load balancer.</td>
+</tr>
+<tr>
+<td>members</td>
+<td>List</td>
+<td>False</td>
+<td>Core</td>
+<td>The list of Nova server IDs that are load balanced.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>True</td>
+<td>Extended</td>
+<td>The name of the load balancer.</td>
+</tr>
+<tr>
+<td>pool_id</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The ID of the load balancing pool.</td>
+</tr>
+<tr>
+<td>protocol_port</td>
+<td>Integer</td>
+<td>False</td>
+<td>Core</td>
+<td>The port number of the pool members on which the loadbalanced servers run.</td>
+</tr>
+<tr>
+<td>scheme</td>
+<td>String</td>
+<td>False</td>
+<td>Extended</td>
+<td>The load balancer scheme. Specify internal to create an internal load balancer with a DNS name that resolves to private IP addresses or internet-facing to create a load balancer with a publicly resolvable DNS name that resolves to public IP addresses. The default value is internet_facing</td>
+</tr>
+<tr>
+<td>security_groups</td>
+<td>List</td>
+<td>False</td>
+<td>Extended</td>
+<td>A list of VPC security groups.</td>
+</tr>
+<tr>
+<td>subnets</td>
+<td>List</td>
+<td>False</td>
+<td>Extended</td>
+<td>A list of subnets to load balance. You must specify a value for either availability_zones or subnets.</td>
+</tr>
+</tbody>
+</table>
+<p>The health_check parameter requires a map of threshold properties. The following table shows the properties in each list item.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>healthy_threshold</td>
+<td>Integer</td>
+<td>True</td>
+<td>Specifies the number of consecutive health probe successes that are required before moving the instance to the Healthy state.</td>
+</tr>
+<tr>
+<td>interval</td>
+<td>Integer</td>
+<td>True</td>
+<td>Specifies the approximate interval, in seconds, between health checks of an individual instance.</td>
+</tr>
+<tr>
+<td>target</td>
+<td>String</td>
+<td>True</td>
+<td>Specifies the instance's protocol and port to check. The following protocol values are allowed: -   <code>TCP</code></td>
+</tr>
+<tr>
+<td>-   <code>HTTP</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>HTTPS</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>SSL</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The range of valid ports is 1 - 65535.<strong>Note:</strong> </p>
+<p>For TCP and SSL, you specify a port pair. For example, you can specify <code>TCP:5000</code> or <code>SSL:5000</code>. The health check attempts to open a TCP or SSL connection to the instance on the port that you specify. If the health check fails to connect within the configured timeout period, the instance is considered unhealthy.</p>
+<p>For HTTP or HTTPS, you specify a port and a path to ping (HTTP or HTTPS:port/PathtoPing). For example, you can specify <code>HTTP:80/weather/us/wa/seattle</code>. In this case, an HTTP GET request is issued to the instance on the specified port and path. If the health check receives any response other than <code>200 OK</code> within the configured timeout period, the instance is considered unhealthy. The total length of the HTTP or HTTPS ping target cannot be more than 1024 16-bit Unicode characters.</p>
+<p>|
+|timeout|Integer|True|Specifies the amount of time, in seconds, during which no response means a failed health probe. This value must be less than the value for Interval.|
+|unhealthy_threshold|Integer|True|Specifies the number of consecutive health probe failures that are required before moving the instance to the Unhealthy state.|</p>
+<p>The listeners parameter requires a list of ports. The following table shows the properties in each list item.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>instance_port</td>
+<td>Integer</td>
+<td>True</td>
+<td>Specifies the TCP port on which the instance server is listening.</td>
+</tr>
+<tr>
+<td>instance_protocol</td>
+<td>String</td>
+<td>False</td>
+<td>Specifies the protocol to use for routing traffic to back-end instances. The following values are allowed: -   <code>TCP</code></td>
+</tr>
+<tr>
+<td>-   <code>HTTP</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>HTTPS</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>SSL</code></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> </p>
+<p>If the front-end protocol is HTTP or HTTPS, instance_protocol must be at the same protocol layer. Likewise, if the front-end protocol is TCP or SSL, instance_protocol must be TCP or SSL.</p>
+<p>If there is another listener with the same instance_port whose instance_protocol is secure, for example HTTPS or SSL, the listener's instance_protocol must be secure, for example HTTPS or SSL. If there is another listener with the same instance_port whose instance_protocol is HTTP or TCP, the listener's instance_protocol must be either HTTP or TCP.</p>
+<p>|
+|load_balancer_port|Integer|True|Specifies the external load balancer port number.|
+|protocol|String|True|Specifies the load balancer transport protocol to use for routing. The following values are allowed: -   <code>TCP</code>
+-   <code>HTTP</code>
+-   <code>HTTPS</code>
+-   <code>SSL</code></p>
+<p>|
+|ssl_certificate_id|String|False|The ARN of the SSL certificate to use. For more information about SSL certificates, see <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingServerCerts.html">Managing Server Certificates</a> in the AWS Identity and Access Management documentation.|</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dns_name</td>
+<td>The DNS name for the load balancer.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_elasticloadbalancing_ov/">Amazon ElasticLoadBalancing resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_elasticloadbalancing_loadbalancer.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

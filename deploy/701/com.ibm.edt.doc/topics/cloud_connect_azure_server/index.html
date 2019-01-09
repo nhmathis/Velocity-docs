@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/cloud_connect_azure_server/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Connecting the blueprint design server to Azure - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Connecting the blueprint design server to Azure", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="connecting-the-blueprint-design-server-to-azure">Connecting the blueprint design server to Azure</h1>
+<p>To connect the blueprint design server to Microsoft™ Azure, map the Azure account information to a functional ID. Then, assign that functional ID to a team.</p>
+<ul>
+<li>Obtain a Heat engine and an OpenStack Keystone server. The engine version must match the version of the Keystone server. In most cases for deploying to non-OpenStack clouds, install a Heat engine and Keystone server through HCL® UrbanCode™ Deploy. See <a href="../../../com.ibm.udeploy.install.doc/topics/install_engine_silent/">Installing an engine in silent mode</a> or <a href="../../../com.ibm.udeploy.install.doc/topics/install_engine_interactive/">Installing an engine in interactive mode</a>.</li>
+<li>Create a functional user account on the Keystone server. This user account must be a member of the administrative tenant on the Keystone server. If you use the Keystone server that was supplied with the engine, you can use the default administrative tenant credentials. The Keystone server's default administrative tenant user name is <code>admin</code> and the default password is <code>openstack1</code>. Later, you associate the Azure account information with this functional ID. With this account, users can authenticate to Azure.</li>
+<li>Install the blueprint design server. See <a href="../../../com.ibm.udeploy.install.doc/topics/install_server_bds/">Installing the blueprint design server</a>.</li>
+<li>Connect the blueprint design server to the server. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Configure an authentication realm for the blueprint design server. You can import users from a variety of sources, including LDAP servers, Keystone identity services, the HCL UrbanCode Deploy server, or from the internal authentication realm. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_realms_create/">Creating authentication realms for the blueprint designer</a>.</li>
+<li>Ensure that the blueprint design server can connect to Azure. You can verify the connection path with the curl or telnet commands. For example, make sure that no firewall, proxy, or security settings prevent communication between the blueprint design server and the cloud. The blueprint design server must be able to access the Azure endpoints for the regions that you plan to use.</li>
+<li>Install or update the Azure command line client. For best results, use the most recent version of the Azure CLI. See <a href="https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install">https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-install</a>.</li>
+<li>Set up an account on Azure, including a subscription.</li>
+<li>On the Azure web portal, create a resource group. You must place any custom images, virtual networks, and storage accounts that your blueprints use in this resource group.</li>
+</ul>
+<p>The following diagram shows a typical topology for this scenario. The blueprint design server and engine connect to Azure. For authentication information, the blueprint design server connects to the Keystone identity service and, optionally, to an LDAP server.<img alt="A topology that includes the blueprint design server, an engine, Azure, a Keystone server, and an optional LDAP server" src="../../images/cloud_connect_azure_a.gif" /></p>
+<ol>
+<li>
+<p>Obtain the connection information for your Azure account. To do this, you must use the Azure command line client and retrieve the following information, as described in the following steps:</p>
+<ul>
+<li>Your subscription ID</li>
+<li>A tenant ID</li>
+<li>A client ID</li>
+<li>The client secret key</li>
+<li>
+<p>Using the Azure CLI, log in to Azure with the following command: </p>
+<p><code>azure login</code></p>
+<p>The command gives you a temporary authentication code and a URL.</p>
+</li>
+<li>
+<p>In a web browser, go to the URL, enter the authentication code, and follow the instructions on the page. </p>
+</li>
+<li>
+<p>Set the mode to Azure Resource Management by running the following command: </p>
+<p><code>azure config mode arm</code></p>
+</li>
+<li>
+<p>Retrieve your Azure tenant ID and subscription ID by running the following command: </p>
+<p><code>azure account list --json</code></p>
+<p>For example, assume that the output of the command looks like this:</p>
+<p><code>[
+  {
+    "id": "3a3d0c24-4ab8-4950-9e38-0335535985c3",
+    "name": "Free Trial",
+    "user": {
+      "name": "jsmith@example.com",
+      "type": "user"
+    },
+    "tenantId": "6c83cf8d-75c8-4edd-b544-5636dc0d7b73",
+    "state": "Enabled",
+    "isDefault": true,
+    "registeredProviders": [],
+    "environmentName": "AzureCloud"
+  }
+]</code></p>
+<p>In this case, the tenant ID is <code>6c83cf8d-75c8-4edd-b544-5636dc0d7b73</code> and the subscription ID is <code>3a3d0c24-4ab8-4950-9e38-0335535985c3</code>.</p>
+</li>
+<li>
+<p>Using the following command, create an application and a service principal. This application is not used; it is a placeholder for you to use to obtain the information that you need to connect the blueprint designer to Azure. A service principal is an instance of an application that can access other resources.</p>
+<p><code>azure ad sp create 
+  --name "applicationName" 
+  --password password</code></p>
+<p><strong>Note:</strong> You must enter this command on one line.</p>
+<ul>
+<li>For <code>applicationName</code>, specify the name of a placeholder application. This application is not used later, so you can enter any value, such as myTemporaryApplication.</li>
+<li>For <code>homePage</code>, enter any valid URL, such as https://example.com. This value is another placeholder and is not used again.</li>
+<li>For <code>identifierURI</code>, enter any valid URL, such as https://different-example.com. This value is another placeholder and is not used again.</li>
+<li>
+<p>For <code>password</code>, specify a new password.</p>
+<p><strong>Note:</strong> You will use this password to connect the blueprint designer to Azure, so you must remember it.</p>
+</li>
+</ul>
+<p>For example:</p>
+<p><code>azure ad sp create 
+  --name "myTemporaryApplication" 
+  --password passw0rd</code></p>
+</li>
+<li>
+<p>From the output of the azure ad sp create command, write down the application ID value and the service principal ID value. For example, assume that the output of the command looks like this:</p>
+<p>```
+info:    Executing command ad sp create
++ Creating application myTemporaryApplication
+| Creating service principal for application 36c08414-e467-4cb2-9d31-c6bb2f629d6
++
+data:    ObjectId:                8ceca473-ad95-4add-9367-5b4451d46902
+data:    DisplayName:             myTemporaryApplication
+data:    Service Principal Names:
+data:                             36c08414-e467-3cb2-91d1-c6bb2f629d64
+data:                             https://example.com</p>
+<p>```</p>
+<p>The application ID is on the line that begins "Creating service principal for application," in this case <code>36c08414-e467-4cb2-9d31-c6bb2f629d6</code>. The service principal ID on the line that begins "ObjectId," in this case <code>8ceca473-ad95-4add-9367-5b4451d46902</code>.</p>
+</li>
+<li>
+<p>Create a role by running the following command. A role is a set of permissions that you can use to access Azure resources.</p>
+<p><code>azure role assignment create 
+  --objectId servicePrincipalID
+  -o Contributor
+  -c /subscriptions/subscriptionID</code></p>
+<ul>
+<li>For <code>servicePrincipalID</code> use the service principal ID (labeled as "ObjectID") from the output of the azure ad sp create command. Other Azure CLI commands return object IDs in the output, but you must use the object ID from the output of the azure ad sp create command.</li>
+<li>For <code>subscriptionID</code>, use your Azure subscription ID.
+This command creates a role of the <code>Contributor</code> type, which provides the permissions that are needed to connect the blueprint designer to Azure. For example:</li>
+</ul>
+<p><code>azure role assignment create 
+  --objectId 8ceca473-ad95-4add-9367-5b4451d46902 
+  -o Contributor 
+  -c /subscriptions/3a3d0c24-4ab8-4950-9e38-0335535985c3</code></p>
+</li>
+</ul>
+<p>Now you have the following information:</p>
+<ul>
+<li>Your subscription ID, from the output of the azure account list command</li>
+<li>A tenant ID, from the output of the azure account list command</li>
+<li>An application ID, from the output of the azure ad sp create command</li>
+<li>The application password, which you created in the azure ad sp create command</li>
+<li>Log in to the blueprint designer as a user with the following <strong>System</strong> permissions: </li>
+<li>Configure Security</li>
+<li>Manage Users &amp; Groups</li>
+<li>Create a connection to the cloud: </li>
+<li>Click <strong>Settings</strong> > <strong>Clouds</strong>. </li>
+<li>Click <strong>Add New Connection</strong>. </li>
+<li>Specify a name for the cloud connection. </li>
+<li>In the <strong>Type</strong> list, select <strong>Microsoft Azure</strong>. </li>
+<li>Click <strong>Save</strong>. </li>
+<li>To create a cloud project, see <a href="../security_projects/">Creating cloud projects for the blueprint designer</a>. </li>
+<li>Select the cloud connection to Azure and then, on the <strong>Authorization</strong> tab, click <strong>Add Project</strong>. </li>
+<li>
+<p>Specify the following information: </p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name (Project name from OpenStack)</strong></td>
+<td>For OpenStack Keystone version 3, specify the OpenStack project name. For Keystone version 2, specify the tenant name. If you installed Keystone with the engine, the default value is admin.</td>
+</tr>
+<tr>
+<td><strong>Functional ID</strong></td>
+<td>Enter the ID of the functional account on the OpenStack system. If you use the Keystone server that is provided with the engine, the default value is <code>admin</code>.</td>
+</tr>
+<tr>
+<td><strong>Password</strong></td>
+<td>Enter the password for the functional account. If you use the Keystone server that is provided with the engine, the default value is <code>openstack1</code>.</td>
+</tr>
+<tr>
+<td><strong>Azure Subscription ID</strong></td>
+<td>Enter the subscription ID to use. You found this information by running the CLI command azure account list.</td>
+</tr>
+<tr>
+<td><strong>Azure Client ID</strong></td>
+<td>Enter the ID of the application that you created with the azure ad app create command.</td>
+</tr>
+<tr>
+<td><strong>Azure Client Secret</strong></td>
+<td>Enter the password of the application. You specified this password when you ran the azure ad app create command.</td>
+</tr>
+<tr>
+<td><strong>Azure Tenant ID</strong></td>
+<td>Enter the tenant ID to use. You found this information by running the CLI command azure account list.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Click <strong>Test Connection</strong> to verify that the connection information is correct. </p>
+</li>
+<li>Click <strong>Save</strong>. </li>
+<li>Assign the cloud project to a team: </li>
+<li>Click <strong>Teams</strong>, and then select a team. </li>
+<li>Go to the <strong>Cloud Authorization</strong> tab, and click <strong>Add</strong>. </li>
+<li>Click <strong>Save</strong>. </li>
+<li>Make sure that the team roles include the appropriate permissions for those users, such as creating and editing blueprints. </li>
+</ul>
+</li>
+</ol>
+<p>Users can log in to the blueprint designer and use the cloud connection. At the top of the page, users can select the Azure cloud connection, cloud project, and region. When they edit blueprints, the palette shows resources that are available to the Azure account, and they can provision blueprints to the selected region. See <a href="../blueprint_edit_azure/">Modeling environments for Microsoft Azure</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../cloud_connect_azure/">Connecting to Microsoft Azure</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/cloud_connect_azure_server.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

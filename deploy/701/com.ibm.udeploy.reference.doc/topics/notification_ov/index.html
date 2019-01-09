@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/notification_ov/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating notification templates - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating notification templates", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-notification-templates">Creating notification templates</h1>
+<p>Notification templates are the basis for emails that the server sends to users after an event occurs on the server. You can create customized notification templates by modifying the default templates provided, or by creating new templates of your own.</p>
+<p>Notification templates are in Apache Velocity format. You can use this format to put together a message template with scripts and parameters that are specified when the notification happens. For example, the template can include information about a process that started, succeeded, or failed. For more information about creating templates with Velocity, see <a href="https://velocity.apache.org/">https://velocity.apache.org/</a>.</p>
+<p>Notifications templates are in XML format. The XML references application-specific parameters that are used by Java code to produce the notification email sent to the user. The application-specific parameters that can be used to customize the XML templates are provided in the topic <a href="../notification_params/">Parameters for notification templates</a>.</p>
+<ol>
+<li>Duplicate an existing template. Starting in version 6.2.0.2, the application templates are in the folder application_data/conf/server/notification-templates, where application_data is the application data folder. The default location is /opt/ibm-ucd/server/appdata/conf/server/notification-templates on Linux™ and C:\Program Files\ibm-ucd\server\appdata\conf\server\notification-templates on Windows™. In version 6.0 to 6.2.0.1, the templates are in the folder server_install/conf/server/notification-templates.</li>
+<li>Open the new template in a text editor.</li>
+<li>In the <code>&lt;name&gt;</code> tag, give the new template a unique name.Each template must have a unique name.</li>
+<li>
+<p>In the template, add parameters and other information. </p>
+<p>To use information from the event that created the notification, use the parameters in <a href="../notification_params/">Parameters for notification templates</a>.</p>
+<p>For example, if you are creating a notification for an application process, you can use the parameter $applicationProcess.getName() to get the name of the process.</p>
+<p>You can also refer to properties just like you can in process steps. For example, to refer to the property environment.name, use the following code:</p>
+<p><code>$properties.get("environment.name")</code></p>
+<p>Similarly, if the step <code>myStep</code> creates the output property <code>outputProperty1</code>, you can refer to the property in the notification template with the following code:</p>
+<p><code>$properties.get("myStep/outputProperty1")</code></p>
+<p>You use the same syntax to refer to other properties, too. For example, if an application has an application property that is named <code>myApplicationProp</code>, you can refer to that property with the following code:</p>
+<p><code>$properties.get("application/myApplicationProp")</code></p>
+<p>Similarly, you can refer to environment properties with code that is similar to the following example:</p>
+<p><code>$properties.get("environment/myEnvironmentProp")</code></p>
+</li>
+<li>
+<p>Restart the server.The server loads notification templates at start time, so when you change a template, you must restart the server before you can use it.</p>
+</li>
+</ol>
+<p>Now you can use this template as part of a notification scheme. See <a href="../../../com.ibm.udeploy.doc/topics/notify_create/">Creating Notifications in a Notification Scheme</a>.</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/notification_ov.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

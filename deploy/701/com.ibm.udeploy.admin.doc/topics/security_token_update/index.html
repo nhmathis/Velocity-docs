@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_token_update/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Updating the agent relay authentication token password - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Updating the agent relay authentication token password", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="updating-the-agent-relay-authentication-token-password">Updating the agent relay authentication token password</h1>
+<p>The authentication token password for the agent relay is specified during installation of the agent relay. You can update the authentication token and provide a password for the token by updating the agent relay properties file.</p>
+<p>The new authentication token for the server must be available before changing the password. For information about creating a token, see <a href="../security_token/">Tokens</a>.</p>
+<ol>
+<li>Open the agentrelay.properties file located in agent_relay_home/conf directory. </li>
+<li>
+<p>Change the value for the <strong>agentrelay.codestation.server_password</strong> property to the new password value. The following is from the sample agentrelay.properties file. The password shown is encrypted.</p>
+<p><code>agentrelay.codestation.server_password=pbe{UlfTbYJYm2i7VIN4D0/8dYeqI6T54heliAURNECl0p4l8/3h72Fv2n3G3yylWwdCnRY57wXcLT8=}</code></p>
+<p>Specify the new password. The new password is encrypted when the agent relay is started.</p>
+<p><code>agentrelay.codestation.server_password=new\_password</code></p>
+</li>
+<li>
+<p>Save your changes and close the file. </p>
+</li>
+<li>Stop the agent relay. </li>
+<li>Start agent relay . </li>
+<li>Verify that the agents connected through the changed agent relay are connecting. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../security_token/">Tokens</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_token_update.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

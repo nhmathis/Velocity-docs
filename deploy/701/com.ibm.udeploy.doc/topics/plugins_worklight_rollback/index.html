@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/plugins_worklight_rollback/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Rolling back mobile applications - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Rolling back mobile applications", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="rolling-back-mobile-applications">Rolling back mobile applications</h1>
+<p>There are a number of ways to roll back a mobile application that is deployed to IBM® MobileFirst Platform Foundation Server. One option is to remove the native application from the Application Center and then redeploy the application. Alternatively, you can manually roll back deployments.</p>
+<ul>
+<li>
+<p>To automate rolling back a mobile application deployment, create processes that use the following general steps:</p>
+<ol>
+<li>
+<p>At the component level, create a process that removes the native application from the MobileFirst Platform Foundation Application Center, and overwrite any deployed artifacts by redeploying the application:</p>
+<ol>
+<li>
+<p>To remove the native application from the MobileFirst Platform Foundation Application Center, add the Remove Application from Application Center step.</p>
+<p><img alt="This process includes the single step Remove Application from Application Center." src="../../images/remove_app.gif" /></p>
+<p><strong>Tip:</strong> When you configure the Remove Application from Application Center step, specifying the Operating System and Version removes a specific native application, such as the version related to a failed deployment.</p>
+</li>
+<li>
+<p>Any artifacts that were successfully deployed to the MobileFirst Platform Foundation Console are not removed. To overwrite the deployed artifacts, add process steps to redeploy the mobile application as described in the topic <a href="../plugins_worklight_deploy/">Deploying mobile applications</a>.
+The following example process removes the native application from the MobileFirst Platform Foundation Application Center and redeploys the application:</p>
+</li>
+</ol>
+<p><img alt="An example process that removes the native application from the MobileFirst Platform Foundation Application Center and redeploys the application." src="../../images/rollback_comp.gif" /></p>
+</li>
+<li>
+<p>At the application process level, create a process that includes the <a href="../app_processsteps_rollback/">Rollback Component</a> process step, and configure the step to call the component process that you created in the preceding steps. The Rollback Component step replaces the component version with an earlier version.</p>
+<p>In the following application process example, if the Install Application step fails, then the Rollback Application step runs.</p>
+<p><img alt="In this process example, if the Install Application step fails, then the Rollback Application step runs." src="../../images/rollback.gif" /></p>
+</li>
+</ol>
+</li>
+<li>
+<p>To manually roll back a mobile application deployment:</p>
+<ol>
+<li>Delete the native application from the MobileFirst Platform Foundation Application Center.</li>
+<li>In the MobileFirst Platform Foundation Console, delete the adapters and applications. For details, see the topics in the section <a href="http://www-01.ibm.com/support/knowledgecenter/SSZH4A_6.1.0/com.ibm.worklight.deploy.doc/devref/t_working_with_the_ibm_worklight1.html">Administering adapters and apps in Worklight Console</a> in the MobileFirst Platform Foundation product help.</li>
+<li>Redeploy the previous version of the mobile application from HCL® UrbanCode™ Deploy.</li>
+</ol>
+</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../plugins_worklight_buildanddeploy/">Building and deploying mobile applications</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/plugins_worklight_rollback.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

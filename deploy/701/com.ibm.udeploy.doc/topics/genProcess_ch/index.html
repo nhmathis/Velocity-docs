@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/genProcess_ch/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Generic processes - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Generic processes", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="generic-processes">Generic processes</h1>
+<p>Generic processes are processes that are designed to run outside normal component or application processing. Generic processes are not specific to a particular component and can be used in any number of applications. They are like general purpose processes. You can use generic processes to download and install packages on the system or perform other configuration management related tasks such as configuring SSH or completing FTP tasks. With a generic process, for example, you can update Linux agents that were recently installed by using SSH to run as a service on a Linux computer. Linux agents cannot be updated in this way during a remote installation.</p>
+<p>Generic processes can be used anywhere an application or component process might not be needed. Generic processes are run by agents on hosts that are managed by the agents. You can use generic processes in these instances, for example:</p>
+<ul>
+<li>In conjunction with a number of different component processes that do not fit well into a component template</li>
+<li>When you want to run processes that directly affect HCL® UrbanCode™ Deploy agents that are unrelated to component, such as changing the agent configuration</li>
+</ul>
+<p>Like component processes, generic processes consist of plug-in steps. Generic processes are created in the same way that component processes are created: steps are placed and configured in the process design editor. All plug-ins can be used, but some might be of little or no use outside a deployment. See <a href="../comp_workflow/">Processes</a>.</p>
+<p>To run a generic process, click <strong>Processes</strong>, and then click the generic process. On the <strong>Dashboard</strong> tab for the process, specify a resource (in most cases, an agent) in the <strong>Resource</strong> list, and then click <strong>Submit</strong>.</p>
+<p>Generic processes can also be run from within component processes.</p>
+<p><strong>Tip:</strong> You can set a default resource for generic processes:</p>
+<ol>
+<li>Click the generic process to open it.</li>
+<li>Open the <strong>Configuration</strong> tab.</li>
+<li>Click <strong>Basic Settings</strong>.</li>
+<li>In the <strong>Default Resource</strong> field, specify the default resource to run the process on. In most cases, specify an agent.</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+<li>
+<p><strong><a href="../genProcess_import/">Importing and exporting generic processes</a></strong><br />
+You can move generic processes between servers by exporting and importing them.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../comp_workflow/">Processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/genProcess_ch.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

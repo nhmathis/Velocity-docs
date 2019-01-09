@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_service_cache/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Modeling cache clusters - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modeling Amazon Elasticache cache clusters", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modeling-amazon-elasticache-cache-clusters">Modeling Amazon Elasticache cache clusters</h1>
+<p>Cache clusters like Amazon ElastiCache store data in fast in-memory caches. By including cache clusters in a blueprint, you can connect applications to those clusters so that the applications can use the cached data.</p>
+<p>In your components, create properties that refer to the location or other details about the cache. For example, add component environment properties that refer to the location of the cache. Then, you can use those properties in component processes. In this way, you provide information about the cache to the application components.</p>
+<p>You can model a new container or an existing container in a blueprint. Amazon ElastiCache is the only type of cache cluster that is supported.</p>
+<ol>
+<li>In the blueprint designer, from the <strong>Services</strong> drawer, drag the <strong>New Cache Cluster</strong> to the blueprint to create a cache cluster, or drag an existing cache cluster to the blueprint. </li>
+<li>If this is a new cache cluster, specify the security group for the cluster by dragging the security group from the <strong>Security</strong> drawer of the palette.The security group controls which Virtual Private Cloud (VPC) the cache cluster is created in. By default, images can access only cache clusters that are in the same VPC.</li>
+<li>
+<p>If you are creating a cluster, specify the information for the cluster, such as the engine type (<code>redis</code> or <code>memcache</code>) and the security group.The following example shows a cache cluster that is named <code>my_cache_cluster</code>:</p>
+<p><code>my_cache_cluster:
+  type: IBM::ElastiCache::Cluster
+  properties:
+    name: MyNewCacheCluster
+    cache_node_type: cache.m1.small
+    engine: redis
+    engine_version: 2.8.6
+    availability_zone: { get_param: availability_zone }
+    vpc_security_group_ids:
+          - My security
+    subnet_group:
+    parameter_group:</code></p>
+</li>
+<li>
+<p>From the <strong>Components</strong> drawer, add one or more components to images in the blueprint. In the blueprint, the component resources have properties that refer to the properties on the HCL® UrbanCode™ Deploy server.</p>
+</li>
+<li>
+<p>Link the properties in the component to the properties of the cache cluster. </p>
+<ol>
+<li>Hover the mouse over the component.</li>
+<li>
+<p>Drag the connector to the cache cluster or replication group, as shown in the following figures.This connector appears only on components with one or more input properties.</p>
+<p><img alt="Selecting the connector on the component" src="../../images/blueprint_service_cache_a.gif" /></p>
+<p><img alt="Dragging the connector to the cache cluster" src="../../images/blueprint_service_cache_b.gif" /></p>
+<p>The Attach to Cache Cluster or Attach to Replication Group window appears.</p>
+</li>
+<li>
+<p>Use the window to map the component properties to the values in the cache cluster or replication group.In the case of a cache cluster, map the component properties to the endpoint and port of the cache cluster. For example, if the component has properties that are named <code>ClusterEndpointPort</code> and <code>ClusterEndpointAddress</code>, the window might look like the following figure:</p>
+<p><img alt="Mapping component properties to the cache cluster properties" src="../../images/blueprint_service_cache_c.gif" /></p>
+</li>
+<li>
+<p>Click <strong>OK</strong>.
+You can also map the properties by editing the code directly.</p>
+</li>
+</ol>
+<p>The blueprint code might look like the following example. In this example, the component has properties that are named <code>ClusterEndpointPort</code> and <code>ClusterEndpointAddress</code>. The component uses these property values to access the cache cluster. To provide the property values, refer to the matching property on the cache cluster resource, as in this example:</p>
+<p><code>CacheClusterComp_sw_config:
+  type: IBM::UrbanCode::SoftwareConfig::UCD
+  properties: 
+    name: "CacheClusterComp"
+    component_process: deploy
+    component_process_timeout: "300"
+    ucd_server_url: { get_param: ucd_server_url }
+    ucd_username: { get_param: ucd_user }
+    ucd_password: { get_param: ucd_password }
+    application: { get_attr: [resource_tree, application_name] }
+    environment_name: { get_attr: [resource_tree, environment_name] }
+    inputs:
+      **ClusterEndpointPort: \{ get\_attr: \[my\_cache\_cluster, first\_node\_endpoint\_address\]  \}
+      ClusterEndpointAddress : \{ get\_attr: \[my\_cache\_cluster, first\_node\_endpoint\_port\]  \}**</code></p>
+</li>
+<li>
+<p>Create a configuration file and map the types in the blueprint to the matching Amazon types.You must have a configuration file to provision environments from this blueprint, even though there are no OpenStack cache cluster resource types to map to AWS resource types.</p>
+</li>
+</ol>
+<p>When you provision an environment from this blueprint, the component can access the cache cluster.</p>
+<p><strong>Note:</strong> If you provision an environment that contains a new cache cluster and then delete the environment, the cache cluster is also deleted, unless the cache cluster is part of a replication group. Existing cache clusters that the blueprint references are not deleted. New and existing replication groups are not deleted.</p>
+<p>You can also model more complicated cache topologies. For example, you can add one master cluster and up to five read-only replica clusters to a replication group. In this way, you can put the replica clusters in different availability zones for fast access in those zones. To model this type of cache, follow these steps:</p>
+<ol>
+<li>From the <strong>Services</strong> drawer of the palette, drag a new or existing replication group to the blueprint.</li>
+<li>Drag the master cache cluster from the palette to the replication group.</li>
+<li>In the replication group, click <strong>No Replicas</strong>.</li>
+<li>In the Replication Group window, click <strong>Add</strong> to add replica cache clusters.</li>
+<li>Specify the availability zone for each cache cluster.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+<p>The complete cache cluster looks like the following image. This image shows a replication group and a master cache cluster. Click <strong>Replicas</strong> to see the replica clusters.</p>
+<p><img alt="An Amazon ElastiCache replication group, showing a master cache cluster" src="../../images/blueprint_service_cache_d.gif" /></p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_service_ov/">Modeling software services</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_service_cache.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

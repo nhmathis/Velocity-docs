@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/ha_add_engine/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Adding engines to clusters - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Adding engines to clusters", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="adding-engines-to-clusters">Adding engines to clusters</h1>
+<p>To add an engine to a cluster, connect it to the shared database. Then, configure the load balancer to send traffic to it.</p>
+<ul>
+<li>These steps are appropriate for engines that you install with HCL® UrbanCode™ Deploy and use to connect to non-OpenStack clouds. To set up clusters of OpenStack engines that you use to connect to OpenStack clouds, see the OpenStack documentation.</li>
+<li>Set up a cluster of engines, including setting up a load balancer and shared database. See <a href="../ha_config_engine/">Setting up clusters of engines</a>.</li>
+<li>Each engine must run the same version of HCL UrbanCode Deploy.</li>
+</ul>
+<p>You can add many engine nodes to the cluster as you need.</p>
+<ol>
+<li>On the new node, install the engine as described in <a href="../../../com.ibm.udeploy.install.doc/topics/install_engine/">Installing the engine</a>. For the public address of the system, specify the IP address of the load balancer. For the Keystone server, use the same Keystone server that you would use if you were installing a single engine.</li>
+<li>
+<p>After you install the engine, stop the Heat services. </p>
+<ul>
+<li>
+<p>On Red Hat Enterprise Linux™ (RHEL) version 6, run the following commands:</p>
+<p><code>cd /etc/init.d</code></p>
+<p><code>for s in $(ls openstack*); do service $s stop; done</code></p>
+</li>
+<li>
+<p>For an engine that was provided with HCL UrbanCode Deploy version 6.2.1.1 or later on RHEL version 7, run the following command:</p>
+<p><code>/extracted\_location/ibm-ucd-patterns-install/engine-install/resources/tools/engine-tools.sh -r</code></p>
+<p>In this command, extracted_location is the location of the installation files. This example is split onto separate lines for clarity, but the command must be entered on a single line.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If you use an engine that is provided with HCL UrbanCode Deploy version 6.2.1.1 or later, configure the engine for the cluster by running a script. The script configures the Heat engine on this node to use the shared MariaDB database and RabbitMQ service that you installed for the cluster of Heat engine servers. The script is provided with the installation media for the Heat engine. You can run this script on only a Red Hat Enterprise Linux (RHEL) version 7 server. Run the script by using the following command:</p>
+<p><code>/extracted\_location/ibm-ucd-patterns-install/engine-install/resources/tools/ha/add-engine2cluster.sh
+-a allowed\_uris
+-d database\_url
+-k keystone\_host
+-r rabbitmq\_host</code></p>
+<p>In this command, extracted_location is the location of the installation files, and you must provide a value for each option.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-a</code></td>
+<td>Set the authorized Keystone URIs. Separate each URI with a comma. For example, <code>http://first\_keystone:5000/v3,http://second\_keystone:5000/v2.0</code></td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>Set the URL of the Heat engine MariaDB database. For example, <code>jdbc:mariadb://heat:heat@engine-database.example.com:3306/heat?charset=utf8</code></td>
+</tr>
+<tr>
+<td><code>-k</code></td>
+<td>Set the Keystone host. For example, <code>engine-database.example.com</code></td>
+</tr>
+<tr>
+<td><code>-r</code></td>
+<td>Set the RabbitMQ host. For example, <code>engine-database.example.com</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>If you use an engine that is provided with versions of HCL UrbanCode Deploy before 6.2.1.1, configure the engine for the cluster by completing the following steps. The steps configure the Heat engine on this node to use the shared MySQL database and RabbitMQ service that you installed for the cluster of Heat engine servers. These commands are for RHEL version 6 servers.</p>
+<ol>
+<li>
+<p>Stop the MySQL database and prevent it from starting at system startup by running the following commands: </p>
+<p><code>service mysqld stop</code></p>
+<p><code>chkconfig mysqld off</code></p>
+<p>The engine does not require this service because it must use the shared engine database. If the cluster node does not require MySQL for any other purpose, you can uninstall MySQL from the cluster node.</p>
+</li>
+<li>
+<p>Open the /etc/heat/heat.conf file in a text editor. </p>
+</li>
+<li>
+<p>In the /etc/heat/heat.conf file, if you are connecting to a Keystone engine other than the default Keystone engine for the cloud, find the allowed_auth_uris property, and add the complete URL to the Keystone server to the property value. For example, if the engine connects to clouds at <code>cloud1.example.com</code> and <code>cloud2.example.com</code>, the property might look like the following example:</p>
+<p><code>allowed_auth_uris=http://cloud1.example.com:5000/v2.0,http://cloud2.example.com:5002/v2</code></p>
+</li>
+<li>
+<p>Find the sql_connection property, and change it to the location of the shared engine database. For example, if the shared engine database has the host name <code>engine-database.example.com</code>, the property looks as follows:</p>
+<p><code>sql_connection=mysql://heat:heat@engine-database.example.com:3306/heat?charset=utf8</code></p>
+</li>
+<li>
+<p>Find the auth_host property, and update it to point to the load balancer host name, as in the following example: </p>
+<p><code>auth_host=ucd-patterns.example.com</code></p>
+</li>
+<li>
+<p>Find the rabbit_host property, and update it to point to the host name of the shared engine database, as in the following example: </p>
+<p><code>rabbit_host=engine-database.example.com</code></p>
+</li>
+<li>
+<p>Stop the RabbitMQ service: </p>
+<p><code>service rabbitmq-server stop</code></p>
+</li>
+<li>
+<p>Prevent the RabbitMQ service from starting on system startup: </p>
+<p><code>chkconfig rabbitmq-server off</code></p>
+</li>
+<li>
+<p>Open the /etc/keystone/keystone.conf file in a text editor. </p>
+</li>
+<li>
+<p>In the /etc/keystone/keystone.conf file, find the connection parameter and update it to use shared engine database, as in the following example: </p>
+<p><code>connection=mysql://keystone:keystone@engine-database.example.com:3306/keystone?charset=utf8</code></p>
+</li>
+<li>
+<p>Start the Heat services by running the following commands: </p>
+<p><code>cd /etc/init.d</code></p>
+<p><code>for s in $(ls openstack*); do service $s start; done</code></p>
+<p><code>for s in $(ls openstack*); do service $s status; done</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>If you configured the engine by using a script, for only the first engine in the cluster, complete the following steps: </p>
+<ol>
+<li>
+<p>Synchronize the Keystone server and Heat engine databases. Run the following commands:</p>
+<p><code>keystone-manage db_sync
+heat-manage db_sync</code></p>
+</li>
+<li>
+<p>To initialize the OpenStack endpoints for the engine cluster, run the <code>configure-os-services.sh</code> script. Run the script by using the following command:</p>
+<p><code>/extracted\_location/ibm-ucd-patterns-install/engine-install/resources/tools/ha/configure-os-services.sh</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Configure the load balancer to send traffic on the following ports to the new engine node: </p>
+<ul>
+<li>5000</li>
+<li>35357</li>
+<li>8004</li>
+<li>8000</li>
+<li>8003
+For example, if you are using HAProxy, the configuration file might have code that is similar to the following snippets. In this code example, it is assumed that the engine nodes have these host names: <code>engine1.example.com</code>, <code>engine2.example.com</code>, and <code>engine3.example.com</code>.</li>
+</ul>
+<p>```
+frontend keystone_api
+    bind *:5000
+    default_backend keystone_api_back</p>
+<p>frontend keystone_admin
+    bind *:35357
+    default_backend keystone_admin_back</p>
+<p>frontend heat_api
+    bind *:8004
+    default_backend heat_api_back</p>
+<p>frontend heat_cfn
+    bind *:8000
+    default_backend heat_cfn_back</p>
+<p>frontend heat_cloudwatch
+    bind *:8003
+    default_backend heat_cloudwatch_back
+```</p>
+<p>```</p>
+<p>backend keystone_api_back
+    balance     roundrobin
+    server      enginenode1 engine1.example.com:5000 check
+    server      enginenode2 engine2.example.com:5000 check
+    server      enginenode3 engine3.example.com:5000 check
+    option      httpchk</p>
+<p>backend keystone_admin_back
+    balance     roundrobin
+    server      enginenode1 engine1.example.com:35357 check
+    server      enginenode2 engine2.example.com:35357 check
+    server      enginenode3 engine3.example.com:35357 check
+    option      httpchk</p>
+<p>backend heat_api_back
+    balance     roundrobin
+    server      enginenode1 engine1.example.com:8004 check
+    server      enginenode2 engine2.example.com:8004 check
+    server      enginenode3 engine3.example.com:8004 check
+    option      httpchk</p>
+<p>backend heat_cfn_back
+    balance     roundrobin
+    server      enginenode1 engine1.example.com:8000 check
+    server      enginenode2 engine2.example.com:8000 check
+    server      enginenode3 engine3.example.com:8000 check
+    option      httpchk</p>
+<p>backend heat_cloudwatch_back
+    balance     roundrobin
+    server      enginenode1 engine1.example.com:8003 check
+    server      enginenode2 engine2.example.com:8003 check
+    server      enginenode3 engine3.example.com:8003 check
+    option      httpchk
+```</p>
+</li>
+<li>
+<p>Restart the HAProxy service: </p>
+<p><code>service haproxy restart</code></p>
+</li>
+<li>
+<p>On the new engine node, run the following commands to verify that the engine is running: </p>
+<p><code>source ˜/clientrc</code></p>
+<p><code>heat stack-list</code></p>
+<p><code>keystone endpoint-list</code></p>
+<p>The endpoints that the keystone endpoint-list command returns must refer to the load balancer and not the engine node.</p>
+</li>
+<li>
+<p>Verify that the load balancer is sending traffic to the new node. For example, if HAProxy is installed on a system with the host name <code>ucd-patterns.example.com</code>, you can go to the following URL to see the status of the nodes: <code>http://ucd-patterns.example.com:1936/haproxy?stats</code> </p>
+</li>
+</ol>
+<p>The engine is part of the cluster.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/server_install_clustered/">Setting up high-availability clusters</a></p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_configuring/">Configuring</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/ha_add_engine.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

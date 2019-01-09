@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/zos_search_inventory/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Searching the z/OS environment inventory - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Searching the z/OS environment inventory", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="searching-the-zos-environment-inventory">Searching the z/OS environment inventory</h1>
+<p>The z/OS search feature is available for any application that contains a z/OS type component. Search is performed for a specific file in the artifacts belonging to the z/OS components deployed to that environment.</p>
+<p>Files in the z/OS environment can be identified with the <strong>Search Z Artifacts</strong> option available in the z/OS application environment.</p>
+<ol>
+<li>Navigate to the environment of interest (<strong>Applications</strong> > <strong>application name</strong> > <strong>Environments</strong> > <strong>Environment: environment name</strong>. </li>
+<li>From the Properties ellipsis for the environment, select <strong>Search Z Artifacts</strong>. <img alt="Search Z Artifacts selection" src="../../images/zOS_search.jpg" /> </li>
+<li>Enter the name of the file to search in the Search Z Artifacts dialog, then click <strong>Search.</strong> Results are returned in batches. A maximum of 1000 results are returned per batch, beginning with the most recent version deployed. If the file is not found in the most recent batch, a file not found message is displayed. </li>
+<li>
+<p>Select <strong>Search Earlier Inventory</strong> to return the next 1000 most recent instances of the file. Subsequent results can be returned until there are no more versions to search. </p>
+<p><strong>Note:</strong> </p>
+<p>The batch size of returned results is configurable and can be changed by adding the property zos.search.batch.size=&lt;number> to the servers installed.properties file.</p>
+<p>The following information is presented for each batch returned in the search results.</p>
+<pre><code>|**Name**|The name of the file, as imported into CodeStation. The file names are group according to the PDS \(container\) on the mainframe where they are located.|
+</code></pre>
+<p>|<strong>Deploy Type</strong>|The type of resource the file was mapped to when deployed.|
+|<strong>Inputs</strong>|The inputs to the artifact (like copybooks) provided in the shiplist file.|
+|<strong>Component</strong>|The name of the component that belongs to the file.|
+|<strong>Version</strong>|The version the file was deployed in.|
+|<strong>Deployment Time</strong>|The calendar date and time the file was deployed as mm/dd/yyy and hh:mm (12-hour clock).|</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../deploying_zos/">Deploying to the z/OS platform</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/zos_search_inventory.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

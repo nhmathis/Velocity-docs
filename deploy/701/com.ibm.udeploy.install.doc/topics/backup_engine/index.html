@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/backup_engine/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Backing up engines - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Backing up engines", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="backing-up-engines">Backing up engines</h1>
+<p>To back up a the Heat engine that is required for the HCL® UrbanCode™ Deploy blueprint designer, back up its database.</p>
+<p><strong>Note:</strong> These instructions are for an engine that you installed through HCL UrbanCode Deploy. If you extended a different Heat engine, follow the backup and restore instructions from the engine vendor.</p>
+<ol>
+<li>
+<p>To back up the engine manually, use the following steps: </p>
+<ol>
+<li>Stop the engine. See <a href="../stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</li>
+<li>
+<p>Back up the engine database. By default, the engine uses a MariaDB or MySQL database on the same system as the engine. However, if the engine is part of a high-availability cluster, the database might be on a different system. You must back up the database that is named <code>heat</code>. Also, if you installed a Keystone service with the engine, you must also back up the database that is named <code>keystone</code>. You can use the mysqldump command to create an SQL file backup of these databases, as in the following example:</p>
+<p><code>mysqldump --databases heat keystone -u root -ppassw0rd &gt; engineDBBackup.sql</code></p>
+</li>
+<li>
+<p>If you changed the engine configuration files in the /etc/heat/ folder, copy this folder to a secure backup location. </p>
+</li>
+<li>Start the engine. See <a href="../start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</li>
+<li>To back up the engine by using a script, use the following steps: </li>
+</ol>
+<p><strong>Note:</strong> The script that backs up the engine is available in only versions 6.2.1.1 and later. You should use the default Keystone service that you installed with the Heat engine.</p>
+<ol>
+<li>Stop the engine. See <a href="../stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</li>
+<li>
+<p>Run the engine backup script. The script is supplied with the engine installation media and is in the /extracted_location/ibm-ucd-patterns-install/engine_install/resources/tools/ folder, where extracted_location is where you extracted the engine installation media. The script performs the following actions:</p>
+<ul>
+<li>Creates a backup of the Heat engine database.</li>
+<li>Creates a backup of the Keystone service database.</li>
+<li>Creates copies of necessary configuration files.</li>
+<li>Packages all created files into a compressed file.</li>
+<li>Creates a restoreengine_versionEngine.sh file to run when you restore the engine. The value for the engine_version variable is Juno if you run a Juno level engine or Kilo if you run a Kilo level engine.</li>
+<li>Restarts the Heat engine and Keystone services.
+Run the following command:</li>
+</ul>
+<p><code>/extracted\_location/ibm-ucd-patterns-install/engine-install/resources/tools/create-engine-backup.sh</code></p>
+<p>The compressed file is at ./backup.package.number.tar.gz, where number represents the time of package creation.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>To restore HCL UrbanCode Deploy from a backup, see <a href="../../../com.ibm.udeploy.doc/topics/arch_data_recovery/">Restoring a backup</a>.</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/backup_engine.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_template_import/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Importing component templates - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Importing component templates", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="importing-component-templates">Importing component templates</h1>
+<p>When you import a template, you can create an entirely new template or upgrade an existing one.</p>
+<p>When you export components, applications, processes, or templates, and then import them on a different computer, the same versions of the same plug-ins must be installed on both computers.</p>
+<ol>
+<li>Display the Import Template dialog (<strong>Components</strong> > <strong>Templates</strong> > <strong>Import Template</strong>).</li>
+<li>
+<p>Click <strong>Choose File</strong>, and then select the JSON file that contains the template. </p>
+<p><strong>Note:</strong> You must create the JSON file that contains the template on a server that uses the same version of HCL® UrbanCode™ Deploy as the destination server.</p>
+</li>
+<li>
+<p>If you want to upgrade an existing template, check the <strong>Upgrade Template</strong> check box. To create a template, leave the box cleared.If the template's name in the JSON file (not the name of the file itself) matches an existing template, the template is upgraded. If the name is not found, the command has no effect.</p>
+<p><strong>Note:</strong> The template's name is the first parameter in the JSON file; for example,</p>
+<p><code>"name": "helloWorldTemplate",</code></p>
+</li>
+<li>
+<p>In the <strong>Generic Process Update Type</strong> list, specify how to handle generic processes that are being imported along with the component template and that have the same names as existing generic processes. </p>
+<p><strong>Note:</strong> This field affects only generic processes, not component template processes.</p>
+<ul>
+<li>
+<p><strong><em>*Use Existing Process</em></strong>*</p>
+<p>Select this option to ignore generic processes in the imported component template when those processes have the same name as existing generic processes.</p>
+</li>
+<li>
+<p><strong><em>*Create Process</em></strong>*</p>
+<p>Select this option to rename any generic processes that have the same name as existing processes.</p>
+</li>
+<li>
+<p><strong><em>*Fail If Process Exists</em></strong>*</p>
+<p>Select this option to cancel the import if the imported component template references any generic processes that have the same name as existing generic processes.</p>
+</li>
+<li>
+<p><strong><em>*Fail If Process Does Not Exist</em></strong>*</p>
+<p>Select this option to cancel the import if the imported component template references any generic processes that do not have the same name as existing generic processes.</p>
+</li>
+<li>
+<p><strong><em>*Upgrade If Exists</em></strong>*</p>
+<p>Select this option to update generic processes to match the imported generic processes.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Click <strong>Submit</strong>.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../comp_template/">Component templates</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_template_import.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

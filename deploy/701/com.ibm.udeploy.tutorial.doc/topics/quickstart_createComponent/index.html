@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/quickstart_createComponent/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lesson 1 Create the helloWorld component - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lesson 1: Create the helloWorld component", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="lesson-1-create-the-helloworld-component">Lesson 1: Create the helloWorld component</h1>
+<p>Components contain artifacts and processes. Artifacts include runnable files, images, databases, configuration instructions, and anything else that is associated with a software project. Processes define the activities that components can perform.</p>
+<p>Before you begin this lesson, make sure that you complete the steps that are described in <a href="../quickstart_configure/">Configure the helloWorld tutorial system</a>.</p>
+<p>In many cases, artifacts are added to a component by connecting the HCL® UrbanCode™ Deploy server to a computer system that hosts the artifacts. The server can import artifacts from build systems, source-code management systems, and file systems. Imported artifacts are stored in CodeStation, the artifact repository. The artifacts for the helloWorld component come from the file system where the HCL UrbanCode Deploy agent is located. For more information about creating components, see <a href="../../../com.ibm.udeploy.doc/topics/comp_create/">Creating components</a>.</p>
+<ol>
+<li>
+<p>To create the helloWorld component: </p>
+<ol>
+<li>Click the <strong>Components</strong> tab and then click <strong>Create Component</strong>. In the window that opens, you define the component and specify the location of the artifacts for it.</li>
+<li>In the <strong>Name</strong> field, type helloWorld. </li>
+<li>
+<p>In the <strong>Source Configuration Type</strong> list, select <strong>File System (Versioned)</strong>. This parameter defines the type of artifacts the component uses. All artifacts in a component share the source type. The File System (Versioned) type looks for the artifacts on the file system.</p>
+<p><strong>Note:</strong> The None type can be used for configuration-type or operational-type deployments. For more information about deployment types, see <a href="../../../com.ibm.udeploy.doc/topics/comp_process_configure/">Creating component processes</a>.</p>
+</li>
+<li>
+<p>In the <strong>Base Path</strong> field, specify the location of the helloWorld folder that you created earlier, such as /home/user1/artifacts/shared/helloWorld. The File System (Versioned) source type considers directories in the specified folder as representations of component versions. For this reason, make sure that you specify the helloWorld directory and not the helloWorld/1.0 directory.</p>
+</li>
+<li>Accept the default values for the other fields on the page.The <strong>Preserve Execute Permissions</strong> and <strong>Import Versions Automatically</strong> check boxes are cleared and the <strong>Copy to CodeStation</strong> check box is selected. The <strong>Default Version Type</strong> is set to <strong>Full</strong>.</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Create a component property.A property is user-defined parameter that can be set at design time or run time. Properties can be defined for components, processes, applications, environments, and other product elements. Here you set the property on the component, but in situations where multiple components share the property, you might set the property value on the environment instead of setting it on every component.</li>
+<li>On the "Component: helloWorld" page, click the <strong>Configuration</strong> tab and then click <strong>Component Properties</strong>.</li>
+<li>Click <strong>Add Property</strong>.</li>
+<li>In the Edit Property window, name the property something like helloHome. </li>
+<li>In the <strong>Value</strong> field, type the name of the directory that you created to hold the component artifacts, for example c:\helloWorld.The component process uses this property later to identify the target location for the component artifacts.</li>
+<li>Click <strong>Save</strong>.</li>
+<li>
+<p>Import the component version: </p>
+</li>
+<li>
+<p>Click the <strong>Versions</strong> tab. </p>
+</li>
+<li>Click <strong>Import New Versions</strong>. The server creates a version of the component that is based on the folder in the helloWorld folder, and imports the files in the helloWorld/1.0 directory. In this case, the server creates a single version of the component that is based on the helloWorld/1.0 folder. If other folders were in the helloWorld directory, they too would be imported and versions would be created from them.</li>
+<li>
+<p>Verify that the list of versions includes version 1.0 of the component, as in the following figure: </p>
+<p><img alt="The first version of the new component is shown on the Versions tab" src="../../images/quickstart-comp-ver.gif" /></p>
+</li>
+<li>
+<p>Click the version name, <strong>1.0</strong>. </p>
+</li>
+<li>
+<p>Verify that the list of artifacts includes the files in the helloWorld/1.0 directory, as in the following figure: </p>
+<p><img alt="The version artifacts are shown" src="../../images/quickstart-artifacts.gif" /></p>
+</li>
+</ol>
+<p>The helloWorld component is ready to use.</p>
+</li>
+</ol>
+<p>In this lesson, you created a component that is based on files in the file system, and imported the initial version into CodeStation, the artifact repository. On the helloWorld Component page, you have the initial version, 1.0, listed.</p>
+<p>Component processes describe different ways to use a component, such as how to deploy it, install it, update it, or do other tasks with it. In the next lesson, you create a process that defines how to deploy the component. For more information about creating components, see <a href="../../../com.ibm.udeploy.doc/topics/comp_create/">Creating components</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../quickstart_abstract/">Create a simple helloWorld deployment</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/quickstart_createComponent.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

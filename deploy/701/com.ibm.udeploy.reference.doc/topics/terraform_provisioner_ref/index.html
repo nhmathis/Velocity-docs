@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/terraform_provisioner_ref/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>HCL UrbanCode Deploy Terraform provisioner - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "HCL UrbanCode Deploy Terraform provisioner", url: "#_top", children: [
+              {title: "Argument reference", url: "#argument-reference" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="hcl-urbancode-deploy-terraform-provisioner"><strong>HCL UrbanCode Deploy Terraform provisioner</strong></h1>
+<p>The HCL® UrbanCode™ Deploy provisioner installs an HCL UrbanCode Deploy agent on a virtual machine that is created by a Terraform configuration.</p>
+<h2 id="argument-reference">Argument reference</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent_name</td>
+<td>True</td>
+<td>The agent name.</td>
+</tr>
+<tr>
+<td>agent_package_version</td>
+<td>False</td>
+<td>The agent package component version to install. The default is version 7.1.</td>
+</tr>
+<tr>
+<td>agent_team</td>
+<td>False</td>
+<td>The agent team.</td>
+</tr>
+<tr>
+<td>agent_relay_url</td>
+<td>False</td>
+<td>The agent relay URL when using an agent relay.</td>
+</tr>
+<tr>
+<td>jms_port</td>
+<td>False</td>
+<td>The JMS port used by the agent for communication to the HCL UrbanCode Deploy server. If connecting through an agent relay, the default is 7916. If connecting directly to the HCL UrbanCode Deploy server, the default is 7918.</td>
+</tr>
+<tr>
+<td>os_type</td>
+<td>False</td>
+<td>The operating system that the agent will be installed on. Specify either Linux or Windows. The default is Linux.</td>
+</tr>
+<tr>
+<td>ucd_proxy_port</td>
+<td>False</td>
+<td>The HCL UrbanCode Deploy server proxy port. The default is 20080.</td>
+</tr>
+<tr>
+<td>ucd_server_url</td>
+<td>True</td>
+<td>The HCL UrbanCode Deploy server URL.</td>
+</tr>
+<tr>
+<td>username</td>
+<td>True</td>
+<td>The HCL UrbanCode Deploy user name.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>True</td>
+<td>The HCL UrbanCode Deploy password.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example usage</strong></p>
+<pre><code>resource &quot;aws_instance&quot; &quot;server&quot; {
+     connection {
+         user = &quot;ubuntu&quot;
+         private_key = &quot;${file(&quot;./keys/private_key&quot;)}&quot;
+     }
+
+     provisioner &quot;ucd&quot; {
+         agent_name      = &quot;server-agent&quot;
+         ucd_server_url  = &quot;https://ucd-server.raleigh.ibm.com:8443&quot;
+         ucd_user        = &quot;admin&quot;
+         ucd_password    = &quot;admin_password&quot;
+     }
+
+     instance_type = &quot;t2.micro&quot;
+     ami = &quot;ami-13be557e&quot;
+ }
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../terraform_ch/">Terraform</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/terraform_provisioner_ref.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

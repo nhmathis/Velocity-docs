@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/api_key/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Checking the agent API key - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Checking and resetting the API key and certificate for agents", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="checking-and-resetting-the-api-key-and-certificate-for-agents">Checking and resetting the API key and certificate for agents</h1>
+<p>You can view the API key of an agent and reset the key.</p>
+<p>API keys can allow agents to access to the HCL® UrbanCode™ Deploy server. Without the correct API key, the server and an agent cannot exchange messages. The server rejects messages that purport to be from the agent if the messages are not encrypted with the key. Likewise, the agent rejects messages that purport to be from the server if the messages are not encrypted with the key. Finally, without the key, no one can read intercepted messages between the server and agent.</p>
+<p>The server generates the API key when an agent first requests one. Then, the identity of the agent is recorded as a certificate that the agent provides, and only that identity can request that a new key be generated to replace the existing key. If a key is lost, for example if an agent is reinstalled or compromised, retrieving or generating the exact again is not supported. You must revoke the old key and generate a new one.</p>
+<ol>
+<li>Follow these steps to view and regenerate the key of an agent:</li>
+<li>On the server, <strong>Settings</strong>, and then under Security, click <strong>API Keys And Certificates</strong>. The API Keys window opens. This window shows the API keys that agents are using to connect to the server.</li>
+<li>On the API Keys window, revoke the API key for the agent by selecting the key and clicking <strong>Actions</strong> > <strong>Revoke</strong>. To find the key that is associated with an agent, open the agent properties and find the property sys.locked/agent.id. The agent API key begins with <code>ucd-agent-</code> and the value of the sys.locked/agent.id property.</li>
+<li>On the system that hosts the agent, delete the file conf/agent/agent-key.properties. </li>
+<li>Restart the agent. </li>
+<li>Verify that the agent can connect to the server. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/api_key.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

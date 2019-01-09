@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.api.doc/topics/rest_blueprint_/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>rest/blueprint resource - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "rest/blueprint resource", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="restblueprint-resource">rest/blueprint resource</h1>
+<p>Resources for creating, editing, and deleting blueprints</p>
+<ul>
+<li><strong><a href="../rest_blueprint__post/">Create a blueprint</a></strong><br />
+This command creates a blueprint from the supplied JSON string.</li>
+<li>
+<p><strong><a href="../rest_bpid_delete/">Delete a blueprint</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_bpid_cost_put/">Estimate the cost for a blueprint in the cloud</a></strong><br />
+This command estimates the running cost of the blueprint in the selected cloud.</p>
+</li>
+<li><strong><a href="../rest_bpid_confid_version_configurationversion_document_get/">Get a configuration file</a></strong><br />
+This command returns a JSON representation of a specific version of a configuration file. You specify the configuration file in the Location header.</li>
+<li><strong><a href="../rest_bpid_version_blueprintversion_document_get/">Get a specific version of a blueprint</a></strong><br />
+The contents of the blueprint can be returned as either plain text or JSON depending on the "Accept" header. By default, JSON is returned.</li>
+<li><strong><a href="../rest_blueprint_environmentname_uniqueenvironmentname__get/">Get a unique environment name</a></strong><br />
+This command checks that an environment name is not already in use. If the specified name is in use, the command returns a similar unique name.</li>
+<li><strong><a href="../rest_bpid_get/">Get the contents of a blueprint</a></strong><br />
+This command returns the contents of the blueprint in either plain text or JSON depending on the "Accept" header. By default, it returns plain text.</li>
+<li><strong><a href="../rest_blueprint_resources_get/">List all blueprint resources</a></strong><br />
+This command returns a list of blueprints.</li>
+<li><strong><a href="../rest_blueprint__get/">List blueprints</a></strong><br />
+This command lists all blueprints that you have access to.</li>
+<li>
+<p><strong><a href="../rest_bpid_configuration_get/">List configuration files for a blueprint</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_bpid_cloudprojid_configuration_get/">List configuration files for a blueprint and the specified cloud</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_blueprint__appid_appname_get/">List the blueprints that refer to an application</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_bpid_environments__get/">List the environments that are provisioned from a blueprint</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_blueprint_outputs_get/">List the outputs of a blueprint</a></strong><br />
+Use the URL query parameter "t=UC::Blueprint::name" to specify the blueprint. To specify multiple blueprints, separate additional query parameters with an ampersand (&amp;).</p>
+</li>
+<li>
+<p><strong><a href="../rest_bpid_parameters_get/">List the parameters required to provision a blueprint</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_bpid_confid_common_additionalconfigurationid_parameters_get/">List the parameters required to provision a blueprint with a configuration and common configuration file</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_bpid_confid_parameters_get/">List the parameters required to provision a blueprint with a configuration file</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_bpid_version_get/">List the versions of a blueprint</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_bpid_confid_version_get/">List the versions of a configuration file</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_bpid_deploy_put/">Provision a blueprint</a></strong><br />
+This command provisions a blueprint to the cloud along with the parameters in the submitted JSON string.</p>
+</li>
+<li><strong><a href="../rest_bpid_put/">Update a blueprint</a></strong><br />
+This command updates a blueprint from the supplied JSON string. The JSON string must include the contents of the blueprint in the "document" attribute.</li>
+<li><strong><a href="../rest_bpid_envid_put/">Update an environment</a></strong><br />
+This command updates an environment by applying a blueprint to it.</li>
+<li><strong><a href="../rest_bpid_validate_put/">Validate a blueprint</a></strong><br />
+This command validates a blueprint with the parameters in a JSON string to ensure that the blueprint will deploy correctly.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.reference.doc/topics/rest_api_ref_commands_edt/">REST commands for the blueprint design server</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.api.doc/topics/rest_blueprint_.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

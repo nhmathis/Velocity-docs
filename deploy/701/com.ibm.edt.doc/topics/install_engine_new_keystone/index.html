@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/install_engine_new_keystone/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Connecting engines to Keystone servers - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Connecting engines to Keystone servers", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="connecting-engines-to-keystone-servers">Connecting engines to Keystone servers</h1>
+<p>If you have an engine that is configured to work with the blueprint design server, you can connect it to a Keystone server for a new cloud.</p>
+<ul>
+<li>You must have an engine that is configured to work with the blueprint design server. See <a href="../install_engine/">Installing the engine</a>.</li>
+<li>You must have an OpenStack Keystone server.</li>
+</ul>
+<p>These steps configure an engine to accept connections to a new cloud. They do not create a connection from the blueprint designer to that cloud; to create this connection, see <a href="../security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</p>
+<ol>
+<li>On the engine, open Heat configuration file.By default, this file is in the location /etc/heat/heat.conf .</li>
+<li>In this file, find the allowed_auth_uris property in both the auth_password and, if applicable, the ec2authtoken sections. This property is a comma-separated list of Keystone servers that the engine can contact.</li>
+<li>
+<p>Add the complete URL to the Keystone server to each allowed_auth_uris property. For example, if the engine connects to clouds at <code>cloud1.example.com</code> and <code>cloud2.example.com</code>, the property might look like the following example:</p>
+<p><code>allowed_auth_uris=http://cloud1.example.com:5000/v2.0,http://cloud2.example.com:5002/v2</code></p>
+</li>
+<li>
+<p>Save and close the file.</p>
+</li>
+<li>
+<p>Restart the engine: In version 6.2.1.1 or later, run the following command:</p>
+<p><code>systemctl restart openstack-heat-engine.service</code></p>
+<p>In versions before 6.2.1.1, run the following command:</p>
+<p><code>service openstack-heat-engine restart</code></p>
+</li>
+<li>
+<p>Restart the Heat API: In version 6.2.1.1 or later, run the following command:</p>
+<p><code>systemctl start openstack-heat-api.service</code></p>
+<p>In versions before 6.2.1.1, run the following command:</p>
+<p><code>service openstack-heat-api restart</code></p>
+</li>
+</ol>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/install_engine_new_keystone.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

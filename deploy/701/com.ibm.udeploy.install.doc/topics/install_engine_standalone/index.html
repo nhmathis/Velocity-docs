@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/install_engine_standalone/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing a standalone engine - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing a standalone engine", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-a-standalone-engine">Installing a standalone engine</h1>
+<p>To deploy environments to non-OpenStack clouds, such as Amazon Web Services, SoftLayer, VMware, Google Cloud, and Microsoft Azure, you install the blueprint design server and Heat engine through IBM UrbanCode Deploy. You can install the engine in interactive mode or in silent mode.</p>
+<ul>
+<li>Do not install an engine with these steps to connect to an OpenStack or OpenStack-based cloud. Instead, to extend an existing engine on the OpenStack-based cloud, see <a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>.</li>
+<li>The upgrade-standalone-ucd-heat-engine.sh script can only be used with the provided heat engine that comes with HCL® UrbanCode™ Deploy blueprint designer. It installs both the HCL UrbanCode Deploy plug-in and the ibm-cloud-ext package.</li>
+</ul>
+<p>Before you install the engine, ensure that you do the following steps:</p>
+<ol>
+<li>
+<p>You must install the engine on a host that runs a specific version of Red Hat Enterprise Linux™ (RHEL).</p>
+<ul>
+<li>In version 6.2.2 and later, the HCL UrbanCode Deploy installer can install engines for the blueprint design server only on RHEL version 7. No other operating system is supported, including RHEL version 6 or earlier.
+To use a different operating system, you can install an OpenStack Heat engine manually on that operating system and then extend that engine for use with the blueprint design server; see <a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>.</li>
+</ul>
+</li>
+<li>
+<p>The engine installer installs only a specific version of the OpenStack Heat orchestration engine.</p>
+<ul>
+<li>In version 6.2.2 and later, the installer installs only OpenStack Kilo engines.
+To use a different version of the OpenStack Heat orchestration engine, you can extend an existing engine of that version; see <a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>. You can extend OpenStack Icehouse, Juno, Kilo, Liberty, and Mitaka engines for use with the blueprint design server.</li>
+</ul>
+</li>
+<li>
+<p>The operating system must have the most recent package updates. For more information, see <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/part-Installing_and_Managing_Software.html">Installing and Managing Software</a> in the Red Hat Enterprise Linux customer portal.</p>
+</li>
+<li>Ensure that there is no limit on the maximum memory size and virtual memory size. For example, on most Linux systems, you can run the <code>ulimit -m</code> and <code>ulimit -v</code> commands and ensure that both return the value <code>unlimited</code>. To find out how to remove the limit on the maximum memory size and virtual memory size, see the documentation for the operating system.</li>
+<li>Root access is required for installation.</li>
+<li>The engine installs a MariaDB database automatically. You must install the engine on a system on which MariaDB is not installed. If the database is already installed on the system, the engine installation fails.</li>
+<li>The operating system must be configured with required packages and dependencies before you install the engine. The system might need network access to install these packages. Make sure that the system is connected to a package manager, such as a Yum server.</li>
+<li>Make sure that your system meets the system requirements. See <a href="../sysRequire/">System requirements and performance considerations</a>.</li>
+<li>Make sure that your networks and firewalls allow communication on the required ports. See <a href="../agent_firewalls/">Firewall and communication configuration</a>.</li>
+<li>
+<p>Install the following packages:</p>
+<ul>
+<li><code>gcc</code></li>
+<li><code>genisoimage</code></li>
+<li><code>libffi-devel</code></li>
+<li><code>python-devel</code></li>
+<li><code>openssl-devel</code>
+For example, the command to install these packages might resemble the following code:</li>
+</ul>
+<p><code>yum install -y gcc genisoimage libffi-devel python-devel openssl-devel</code></p>
+</li>
+<li>
+<p>Enable the optional "rhel-7-server-optional-rpms" repository.</p>
+<ul>
+<li>
+<p>On RHEL systems that use the Red Hat Network subscription-based package manager, use the following command:</p>
+<p><code>subscription-manager repos --enable=rhel-7-server-optional-rpms</code></p>
+</li>
+<li>
+<p>On virtual machines that are hosted on Amazon Web Services, run the following command:</p>
+<p><code>yum-config-manager --enable rhui-REGION-rhel-server-optional</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Determine whether the <code>akonadi</code> package is installed on the system.</p>
+<p><code>rpm -ql akonadi</code></p>
+</li>
+<li>
+<p>If the <code>akonadi</code> package is installed, remove it:</p>
+<p><code>yum remove -y akonadi</code></p>
+</li>
+<li>
+<p>Determine whether the program <code>qpid</code> is installed on the system.</p>
+<ul>
+<li>
+<p>On RHEL version 7, run the following command:</p>
+<p><code>systemctl status qpidd.service</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>If the program <code>qpid</code> is running on the system, stop its service.</p>
+<ul>
+<li>
+<p>On RHEL version 7, run the following command:</p>
+<p><code>systemctl stop qpidd.service</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Gather the URL and account information for the OpenStack Keystone service, if available.Rather than having its own list of users, the blueprint design server imports accounts from authentication realms, including OpenStack Keystone services and LDAP servers. This Keystone service is required regardless of the type of cloud you are using. If you do not have a Keystone server, you can install one that uses Identity API v3 during the engine installation.</p>
+</li>
+</ol>
+<p>Choose to install the engine in interactive mode or in silent mode:</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/install_engine_standalone.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

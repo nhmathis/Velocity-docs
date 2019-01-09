@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/web_agents/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Web agents - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Web agents", url: "#_top", children: [
+              {title: "Web agent overview", url: "#web-agent-overview" },
+              {title: "Web agent communication", url: "#web-agent-communication" },
+              {title: "Web agent security", url: "#web-agent-security" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="web-agents">Web agents</h1>
+<p>Web agents use WebSocket and HTTP connections for communication. Web agents do not use JMS.</p>
+<h2 id="web-agent-overview">Web agent overview</h2>
+<p>Introduced with HCL® UrbanCode™ Deploy version 7.0.0, Web-type agents are more scalable and secure than the previous agent type. The earlier type is called the JMS agent. JMS agents use JMS and HTTP(S) to communicate with the server. Both agent types are supported and you can mix types in a single topology. You determine the type when you install the agent.</p>
+<p>Web agents use the WebSocket protocol which is a bi-directional, point-to-point message protocol. WebSocket connections start as HTTP requests and upgrade to WebSocket protocol.</p>
+<p>In the product user interface, Web agents are recognized by the <strong>Web</strong> designation. On the Agents page, for example, Web agents have the type <strong>Web</strong>. Other agents have the type <strong>JMS</strong>.</p>
+<h2 id="web-agent-communication">Web agent communication</h2>
+<p>During server installation, you specify a secure WebSocket connection. The connection information has the following format <code>agentcomm.uri=wss://ucd-physical-host:port</code>, and is stored in the <code>ucd_server/conf/server/installed.properties</code> file. The default port is 7919. This port serves WebSocket endpoints used by servers and Web agents and a REST API used only by Web agents.</p>
+<p>When you use Web agents, each server in a cluster has a distinct URI and each server establishes a direct connection to every other server, which results in two connections between each server. The server-to-server connections advertise connected Web agents to the cluster and exchange messages for them.</p>
+<p>When a new server is added to a Web agent-enabled cluster, it connects to the previously defined servers. The other servers respond by connecting back to the new one. In normal operation, each server has two connections to each of its peers.</p>
+<p>When you install a Web agent, you specify the <code>agentcomm.server.uri</code> property. If there is one server or if all servers share an URL, it can be configured directly, for example <code>agentcomm.server.uri=wss://ucd.example.org:7919</code>. Configure multiple servers as a comma-separated list embedded in a random scheme, for example <code>agentcomm.server.uri=random:(wss://ucd1.example.org:7919,wss://ucd2.example.org:7919)</code>.</p>
+<p>Agents and relays connect to one or more servers at their respective URL port. They can be configured to use a common URL (for example, a load balancer), but servers must be configured with direct URLs. The <code>agentcomm.proxy.uri</code> property can define a single HTTP proxy URL, or define a list in a random scheme. The property is optional if the agent connects directly to servers.</p>
+<p>The following diagram shows the default ports that are involved in communication between Web agents, JMS agents, agent relays, and servers.</p>
+<p><img alt="A diagram of the ports that agents, agent relays, and servers use to communicate" src="../../images/web-agent-topology.png" /></p>
+<h2 id="web-agent-security">Web agent security</h2>
+<p>Web agents use public-key pinning for strong out-of-box security. Agents and servers identify each other with SSL certificates. The public keys in the certificates are pinned on initial connection. When a public key is pinned, any certificate asserting the same identity must be generated with the same public/private key pair that was used to create the original certificate. Connections from clients or servers that do not correctly identify themselves are closed.</p>
+<p><strong>Important:</strong> Do not lose the server public/private key! Recovery requires manually clearing the server certificate pins for every Web agent. We highly recommend making a secure backup of all server keystores.</p>
+<p>The server's configuration property <code>agentcomm.keystore</code> points to the keystore that contains the certificate and public and private key pair that the server uses to identity itself as the client. The server uses its JMS certificate to identity itself as the server in a connection.</p>
+<p>Agents store pinned server public keys in the $ucd_agent/conf/agent/pinned-server-public-keys folder. Keys are stored as certificates in PEM formatted files. The file name corresponds to the host name in the certificate DN, but host names that contain characters that are not universally safe have more complex encoding.</p>
+<p>Agents identify themselves with their end-to-end JMS encryption certificate and public/private key, which are stored in the $UCDAGENT/conf/agent.keystore folder. Agents only have a client identity.</p>
+<p><strong>Parent topic:</strong> <a href="../configure_agents/">Agents and agent relay configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/web_agents.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

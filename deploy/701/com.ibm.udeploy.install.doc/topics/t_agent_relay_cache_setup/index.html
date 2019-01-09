@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/t_agent_relay_cache_setup/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Caching artifacts on agent relays - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Caching artifacts on agent relays", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="caching-artifacts-on-agent-relays">Caching artifacts on agent relays</h1>
+<p>Agent relays can cache downloaded artifacts. Caching artifacts in this way improves performance because agents retrieve artifacts from agent relays instead of from the server.</p>
+<p>When you enable artifact caching on an agent relay, the agent relay maintains a local CodeStation repository. This repository stores cached versions of artifacts that are on the server CodeStation repository. By default, the first time an agent requests an artifact, the agent relay retrieves the artifact, caches it in its CodeStation repository, and provides it to the agent. The next time an agent requests the artifact, the relay checks if the cached artifact is up to date. Then, the agent relay updates the cached artifact if necessary and provides the artifact to the agent.</p>
+<p>By default, agent relays cache only artifacts that one or more agents request. You can also configure agent relays to pre-populate the cache with all artifacts with a specified status. In this case, the agent relays populate the cache with artifacts that have the specified status. Then, the artifacts are available immediately when agents request them.</p>
+<p>Caching artifacts improves performance if the server is a long distance from the agents. In this case, caching artifacts on an agent relay that is close to the agents reduces the time that it takes to copy artifacts to the agents. Caching artifacts also improves performance if many agents retrieve artifacts from the server at the same time. In this case, caching the artifacts transfers server load to the agent relays.</p>
+<p><strong>Note:</strong> By default, each hour, the agent relay checks the size of the artifact cache. If the cache is over the limit, the agent relay removes files based on which files have not been used in the longest time. Therefore, the total disk space used by the cache can exceed the cache limit. You must ensure that the agent relay has enough space to store all of the cached artifacts.</p>
+<p><strong>Note:</strong> If you cache files on the relay, do not put the CodeStation cache on an NFS file system.</p>
+<p>To pre-cache artifacts on agent relays, set up one or more component version statuses. Component versions with these statuses are cached on agent relays before agents request the component versions.</p>
+<p>If you did not configure agent relay artifact caching when you installed the agent relay, you can also configure it by modifying its properties.</p>
+<ol>
+<li>Open the /agent-relay-install/conf/agentrelay.properties file. </li>
+<li>
+<p>Control caching with the <code>agentrelay.codestation.enable_replication</code> property: </p>
+<ul>
+<li>To enable caching, set the property to <code>TRUE</code>. An example true property resembles this code: <code>agentrelay.codestation.enable_replication=true</code>.</li>
+<li>
+<p>To disable caching set the property to <code>FALSE</code>. An example false property resembles this code: <code>agentrelay.codestation.enable_replication=false</code>.</p>
+<p><strong>Note:</strong> If caching is enabled on an agent relay and disabled later, the cached artifacts are not deleted. To delete the artifacts manually, stop the agent relay and then delete the folders /agent-relay-install/var/repository/ptr and /agent-relay-install/var/repository/blob.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>To preload artifact versions that contain certain statuses, specify the statuses in the <code>agentrelay.codestation.geotags</code> property. Separate statuses with commas. If you edit a status that contains a comma, the comma must be escaped. A modified <code>agentrelay.codestation.geotags</code> property might resemble the following code: <code>agentrelay.codestation.geotags=Hello%2c World,Production</code></p>
+<p>Then, ensure that the component versions that you want to cache have one of these statuses.</p>
+</li>
+<li>
+<p>Modify the cache size with the <code>agentrelay.codestation.max_cache_size</code> property. You can specify a number of bytes, or use the extensions "<code>K</code>," "<code>M</code>," "<code>G</code>," or "<code>T</code>" to indicate kilobytes, megabytes, gigabytes, and terabytes. For example, to specify 5 gigabytes, type <code>5G</code>. </p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/configure_agents/">Agents and agent relay configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/t_agent_relay_cache_setup.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

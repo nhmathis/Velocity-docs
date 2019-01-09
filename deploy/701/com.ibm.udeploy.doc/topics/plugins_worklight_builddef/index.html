@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/plugins_worklight_builddef/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Build definitions - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Build definitions", url: "#_top", children: [
+              {title: "Supporting build engines", url: "#supporting-build-engines" },
+              {title: "Properties", url: "#properties" },
+              {title: "Ant build file and targets", url: "#ant-build-file-and-targets" },
+              {title: "Ant configuration", url: "#ant-configuration" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="build-definitions">Build definitions</h1>
+<p>In Rational® Team Concert™, a build definition describes the key components of a build.</p>
+<p>The build definition describes the following components:</p>
+<ul>
+<li>The workspace to process.</li>
+<li>The Ant scripts and targets to run against the workspace.</li>
+<li>The schedule for the build.</li>
+<li>The properties that simplify the configuration of the build.</li>
+<li>The build engines that can manage build requests for the build definition.</li>
+</ul>
+<p>The following sections describe the considerations that apply when you build IBM® MobileFirst Platform Foundation mobile applications.</p>
+<h2 id="supporting-build-engines">Supporting build engines</h2>
+<p>When you specify a build engine to run build requests for the build definition, ensure that any required SDKs (such as the Android SDK or Apple Xcode SDK) are installed and configured on the build engine.</p>
+<h2 id="properties">Properties</h2>
+<p>You can use properties to customize the build for a specific build definition. For example, you can set properties for the path to the build output or the native SDK.</p>
+<h2 id="ant-build-file-and-targets">Ant build file and targets</h2>
+<p>In the <strong>Build file</strong> field, use the following value to specify the location of the Ant build script that is loaded with the workspace: <code>load/${buildLabel}/*project*/*folder*/*script*</code></p>
+<p>Where:</p>
+<ul>
+<li>
+<p><strong>project</strong></p>
+<p>The name of the project that contains the build scripts.</p>
+</li>
+<li>
+<p><strong>folder</strong></p>
+<p>The name of the folder within the project that contains the build scripts.</p>
+</li>
+<li>
+<p><strong>script</strong></p>
+<p>The name of the build script XML file.</p>
+</li>
+</ul>
+<p><strong>Tip:</strong> If you choose a different relative location for your build script in the workspace, you must change the value of the loadDir property.</p>
+<p>In the <strong>Build targets</strong> field, specify any specific targets that you want to run in your build script. By default, build scripts run the all target.</p>
+<h2 id="ant-configuration">Ant configuration</h2>
+<p>Ant configuration includes the following tasks:</p>
+<ul>
+<li>Select the option to include the Jazz™ build toolkit tasks on the Ant library path.</li>
+<li>In the <strong>Ant home</strong> field, specify the location on the build computer where Apache Ant is installed.</li>
+<li>
+<p>In the <strong>Ant arguments</strong> field, specify the -lib argument that includes the worklight-ant.jar required library on the Ant library path. If you are building applications on the IBM Worklight® Server Version 6.1.0, you can use the worklight-ant-builder.jar file instead of worklight-ant.jar.</p>
+<p><strong>Important:</strong> Ensure that the version of the JAR library file that you use (worklight-ant.jar or worklight-ant-builder.jar) matches the version on the target server.</p>
+<p>Use the following format for the -lib argument: <code>-lib path\JAR file name</code> </p>
+<p>Where:</p>
+<ul>
+<li>
+<p><strong>path</strong></p>
+<p>The path to the directory on the build computer that contains the JAR file. The path might be a location on the build computer where the JAR libraries were preinstalled. The path might also point to a location within the loaded workspace if you chose to include the JAR libraries in the build workspace.</p>
+</li>
+<li>
+<p><strong>JAR file name</strong></p>
+<p>The name of the JAR file that is included in the library.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>In the <strong>Java home</strong> field, specify the location on the build computer where the Oracle JDK is installed.</p>
+</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../plugins_worklight_jazzbuild/">Rational Team Concert Build</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/plugins_worklight_builddef.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

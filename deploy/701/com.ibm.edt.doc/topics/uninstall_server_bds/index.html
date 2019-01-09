@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/uninstall_server_bds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Uninstalling the blueprint design server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Uninstalling the blueprint design server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="uninstalling-the-blueprint-design-server">Uninstalling the blueprint design server</h1>
+<p>To uninstall the blueprint design server, remove it from the Tomcat server.</p>
+<ol>
+<li>
+<p>Stop the Tomcat service: </p>
+<ul>
+<li>
+<p>On Linux™, run the following command:</p>
+<p><code>server\_installation\_directory/bin/server stop</code></p>
+<p>Use the location of the blueprint design server installation for <code>server\_installation\_directory</code>. The default installation directory is /opt/ibm-ucd-patterns. By default, the command looks like the following code:</p>
+<p><code>/opt/ibm-ucd-patterns/bin/server stop</code></p>
+</li>
+<li>
+<p>On Windows™, run the following command:</p>
+<p><code>C:\server\_installation\_directory\bin\stop_server</code></p>
+<p>Use the location of the blueprint design server installation for <code>server\_installation\_directory</code>. The default installation directory is C:\Program Files\ibm-ucd-patterns. By default, the command looks like the following code:</p>
+<p><code>"C:\Program Files\ibm-ucd-patterns\bin\stop_server"</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Delete the contents of the following folder, including any subfolders: server_installation_directory/opt/tomcat/webapps/landscaper </p>
+</li>
+<li>Delete the following file, if it exists: server_installation_directory/opt/tomcat/webapps/landscaper.war </li>
+<li>
+<p>Uninstall the cloud discovery service: </p>
+<ul>
+<li>
+<p>On Red Hat Enterprise Linux version 7, run the following command:</p>
+<p><code>pip uninstall clouddiscoveryservice -y</code></p>
+</li>
+<li>
+<p>On Windows, run the following command:</p>
+<p><code>C:\python\_installation\_directory\python.exe -m pip uninstall clouddiscoveryservice -y</code></p>
+<p>Use the location where Python is installed for <code>python\_installation\_directory</code>. The default installation directory is C:\Python27. By default, the command looks like this code:</p>
+<p><code>C:\Python27\python.exe -m pip uninstall clouddiscoveryservice -y</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>If Tomcat is no longer needed on the system, you can uninstall Tomcat. </p>
+</li>
+<li>
+<p>If Tomcat is still needed on the system, restart the Tomcat service: </p>
+<p><code>service tomcat6 start</code></p>
+</li>
+<li>
+<p>If you are still using Tomcat, you might have to add your database driver back to Tomcat if you removed the driver in the earlier steps. </p>
+</li>
+<li>On the HCL® UrbanCode™ Deploy server, delete the following components: <code>ucd-agent-linux-ppc64</code>, <code>ucd-agent-linux-x86_64</code>, <code>ucd-agent-win-x86_64</code>, and <code>ucd-agent-linux-s390x</code>. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.install.doc/topics/uninstall_ch/">Uninstalling HCL UrbanCode Deploy</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/uninstall_server_bds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

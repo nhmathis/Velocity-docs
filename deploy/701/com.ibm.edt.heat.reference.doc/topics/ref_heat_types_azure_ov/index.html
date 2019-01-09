@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/ref_heat_types_azure_ov/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Microsoft Azure resource types", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="microsoft-azure-resource-types">Microsoft Azure resource types</h1>
+<p>These Heat resource types represent elements on the Microsoft Azure Cloud.</p>
+<p>To install these types into a Heat engine, see <a href="../../../com.ibm.udeploy.install.doc/topics/extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>.</p>
+<ul>
+<li><strong><a href="../res_ibm_azure_availabilityset/">IBM::Azure::AvailabilitySet</a></strong><br />
+This type represents a Microsoft™ Azure availability set. It can create a new availability set.</li>
+<li><strong><a href="../res_ibm_azure_loadbalancerbackend/">IBM::Azure::BackendAddressPool</a></strong><br />
+This type represents a Microsoft™ Azure load balancing rule. It can create a backend address pool for a load balancer.</li>
+<li><strong><a href="../res_ibm_azure_disk/">IBM::Azure::Disk</a></strong><br />
+This type represents a Microsoft™ Azure disk. It can create a managed disk or copy, import, or snapshot an existing disk.</li>
+<li><strong><a href="../res_ibm_azure_diskattachment/">IBM::Azure::DiskAttachment</a></strong><br />
+This type represents the connection from a Microsoft™ Azure virtual machine to a disk.</li>
+<li><strong><a href="../res_ibm_azure_loadbalancerinbound/">IBM::Azure::InboundNatRule</a></strong><br />
+This type represents a Microsoft™ Azure load balancing rule. It can create an inbound NAT rule for a load balancer.</li>
+<li><strong><a href="../res_ibm_azure_loadbalancer/">IBM::Azure::LoadBalancer</a></strong><br />
+This type represents a Microsoft™ Azure load balancer. It can create a new load balancer.</li>
+<li><strong><a href="../res_ibm_azure_loadbalancerprobe/">IBM::Azure::LoadBalancerProbe</a></strong><br />
+This type represents a Microsoft™ Azure load balancer probe. It can create an inbound NAT rule for a load balancer.</li>
+<li><strong><a href="../res_ibm_azure_loadbalancerrule/">IBM::Azure::LoadBalancingRule</a></strong><br />
+This type represents a Microsoft™ Azure load balancing rule. It can create a load balancing rule for a load balancer.</li>
+<li><strong><a href="../res_ibm_azure_network_intrfc/">IBM::Azure::NetworkInterface</a></strong><br />
+This resource type represents a network interface on an Microsoft Azure image.</li>
+<li><strong><a href="../res_ibm_azure_networksecuritygroup/">IBM::Azure::NetworkSecurityGroup</a></strong><br />
+This type represents a Microsoft™ Azure network security group.</li>
+<li><strong><a href="../res_ibm_azure_publicip/">IBM::Azure::PublicIP</a></strong><br />
+This resource type represents a public IP address on an Microsoft Azure image.</li>
+<li><strong><a href="../res_ibm_azure_resourcegroup/">IBM::Azure::ResourceGroup</a></strong><br />
+This type represents a Microsoft™ Azure resource group.</li>
+<li><strong><a href="../res_ibm_azure_route/">IBM::Azure::Route</a></strong><br />
+This type represents a Microsoft™ Azure route.</li>
+<li><strong><a href="../res_ibm_azure_routetable/">IBM::Azure::RouteTable</a></strong><br />
+This type represents a Microsoft™ Azure route table.</li>
+<li><strong><a href="../res_ibm_azure_server/">IBM::Azure::Server</a></strong><br />
+This resource type represents a server on an Microsoft Azure virtual machine.</li>
+<li><strong><a href="../res_ibm_azure_server_extension/">IBM::Azure:ServerExtension</a></strong><br />
+This type represents a Microsoft™ Azure server extension. It can create a new server extension.</li>
+<li><strong><a href="../res_ibm_azure_storageaccount/">IBM::Azure::StorageAccount</a></strong><br />
+This type represents a Microsoft™ Azure storage account.</li>
+<li><strong><a href="../res_ibm_azure_subnet/">IBM::Azure::Subnet</a></strong><br />
+This type represents a Microsoft™ Azure subnet.</li>
+<li><strong><a href="../res_ibm_azure_template/">IBM::Azure::Template</a></strong><br />
+This type provides the ability to deploy Microsoft™ Azure Resource Manager (ARM) templates. ARM template outputs can be referenced by other HEAT resources in the blueprint.</li>
+<li><strong><a href="../res_ibm_azure_virtualnetwork/">IBM::Azure::VirtualNetwork</a></strong><br />
+This type represents a Microsoft™ Azure virtual network.</li>
+<li><strong><a href="../res_ibm_azure_virtualnetworkpeering/">IBM::Azure::VirtualNetworkPeering</a></strong><br />
+This type represents a Microsoft™ Azure virtual network peering.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_ov/">Heat resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/ref_heat_types_azure_ov.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

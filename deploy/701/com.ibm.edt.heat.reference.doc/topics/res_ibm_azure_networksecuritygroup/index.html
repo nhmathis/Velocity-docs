@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_azure_networksecuritygroup/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM Azure NetworkSecurityGroup - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::Azure::NetworkSecurityGroup", url: "#_top", children: [
+              {title: "Example", url: "#example" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmazurenetworksecuritygroup">IBM::Azure::NetworkSecurityGroup</h1>
+<p>This type represents a Microsoft™ Azure network security group.</p>
+<p>This resource type extends the OpenStack resource type <code>OS::Neutron::SecurityGroup</code>.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The name of the network security group.</td>
+</tr>
+<tr>
+<td>resource_group</td>
+<td>String</td>
+<td>True</td>
+<td>Extended</td>
+<td>The resource group name.</td>
+</tr>
+<tr>
+<td>region</td>
+<td>String</td>
+<td>True</td>
+<td>Extended</td>
+<td>The Azure location. The blueprint designer specifies this property automatically, based on the selected region.</td>
+</tr>
+<tr>
+<td>rules</td>
+<td>List</td>
+<td>True</td>
+<td>Extended</td>
+<td>The rules for the security group. See <a href="#rules_list">Table 2</a>.</td>
+</tr>
+<tr>
+<td>tags</td>
+<td>List</td>
+<td>False</td>
+<td>Extended</td>
+<td>A list of name-value pairs to set as tags on the resource.</td>
+</tr>
+</tbody>
+</table>
+<p>The rules parameter requires a list of rules for the security group. The following table shows the properties in each list item.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>access</td>
+<td>String</td>
+<td>True</td>
+<td>Whether network traffic is permitted or denied. Valid values are <code>Allow</code> and <code>Deny</code>.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>False</td>
+<td>A description of the rule.</td>
+</tr>
+<tr>
+<td>destination_address_prefix</td>
+<td>String</td>
+<td>True</td>
+<td>The destination CIDR or IP range. You can also specify an asterisk (<code>*</code>) to match all addresses.</td>
+</tr>
+<tr>
+<td>destination_port_range</td>
+<td>String</td>
+<td>Y</td>
+<td>The destination port or range of ports. You can specify a single port number or a range of ports between 0 and 65535. You can also specify an asterisk (<code>*</code>) to match all ports.</td>
+</tr>
+<tr>
+<td>direction</td>
+<td>String</td>
+<td>True</td>
+<td>The direction specifies whether the rule is evaluated on incoming or outgoing traffic. Valid values are <code>Inbound</code> and <code>Outbound</code>.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>False</td>
+<td>The name of the rule.</td>
+</tr>
+<tr>
+<td>priority</td>
+<td>Integer</td>
+<td>True</td>
+<td>The priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.</td>
+</tr>
+<tr>
+<td>protocol</td>
+<td>String</td>
+<td>True</td>
+<td>The network protocol that this rule applies to valid values are <code>Tcp</code> and <code>Udp</code>.</td>
+</tr>
+<tr>
+<td>source_address_prefix</td>
+<td>String</td>
+<td>True</td>
+<td>The source CIDR or IP range. You can also specify an asterisk (<code>*</code>) to match all addresses.</td>
+</tr>
+<tr>
+<td>source_port_range</td>
+<td>String</td>
+<td>True</td>
+<td>The source port or range of ports. You can specify a single port number or a range of ports between 0 and 65535. You can also specify an asterisk (<code>*</code>) to match all ports.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of the network security group.</td>
+</tr>
+<tr>
+<td>network_security_group_id</td>
+<td>String</td>
+<td>The ID of the network security group.</td>
+</tr>
+<tr>
+<td>show</td>
+<td>String</td>
+<td>The details of the network security group.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<p>This example creates a network security group with two tags.</p>
+<pre><code>azure_nsg_1:
+    type: IBM::Azure::NetworkSecurityGroup
+    properties:
+      name: testnsg1
+    metadata:
+      azure_properties:
+        resource_group: cmh-resourcegroup-1
+        rules:
+          - name: allow-3306
+            description: 'my rule 1 for 3306'
+            direction: Inbound
+            protocol: '*'
+            source_address_prefix: '*'
+            destination_address_prefix: '*'
+            destination_port_range: '*'
+            source_port_range: '3306'
+            access: Allow
+            priority: 201
+          - name: rule2
+            direction: Inbound
+            protocol: 'Tcp'
+            source_address_prefix: 'Internet'
+            destination_address_prefix: '*'
+            access: Deny
+            source_port_range: '*'
+            destination_port_range: '*'
+            priority: 202
+        tags:
+          tag1 : nsgtag1
+          tag2 : nsgtag2
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_azure_ov/">Microsoft Azure resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_azure_networksecuritygroup.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

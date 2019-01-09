@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_storage/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Blueprint storage on the blueprint design server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Blueprint storage on the blueprint design server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="blueprint-storage-on-the-blueprint-design-server">Blueprint storage on the blueprint design server</h1>
+<p>You store blueprints and configuration files that you create with the blueprint designer in Git repositories. By storing blueprints and configurations in the Git repository for a team, you can share the files with members of that team.</p>
+<p>Git is a distributed version control system, and OpenStack Heat template blueprints and configuration files are stored in Git repositories. You can store files in three kinds of repositories:</p>
+<ul>
+<li>The default Git repository</li>
+<li>A team-based repository on the local Git server, which is on the same computer as your blueprint design server</li>
+<li>An external Git repository</li>
+</ul>
+<p>By default, blueprint and configuration files are stored in a repository that is named default, and only the user that creates the files can access them.</p>
+<p><strong>Note:</strong> If you used a version of the blueprint designer, formerly IBM® UrbanCode™ Deploy with Patterns, earlier than version 6.1.1, you must move your existing blueprints and configuration files to the default repository. See <a href="../../../com.ibm.udeploy.install.doc/topics/migrate_ov/">Moving blueprints and configuration files</a>.</p>
+<p>In addition to the default repository, the blueprint design server creates a repository on the local Git server for each team. When you create blueprints in the team's repository, all members of the team can access those files. If the team name does not contain spaces, then the Git repository name is the team name. If the team name contains spaces, then the Git repository name contains dash characters (-) in place of the spaces.</p>
+<p>In addition to using the default and team-based repositories that the blueprint design server creates, you can also use an external Git repository. You can clone your repository and access it from within the blueprint designer. From the <strong>Repositories</strong> list, click <strong>Clone Repository</strong>, and then specify a URL. You can work with Git repositories that a system administrator sets up or with repositories on the web such as IBM Bluemix® DevOps Services. For example, connect to a Git repository on IBM Bluemix DevOps Services by specifying a URL that is similar to https://hub.jazz.net/git/user_name/project_name.</p>
+<p>If items are stored in the default repository, when you open a blueprint or configuration file in the blueprint designer, you always see the most recent version of that file. Saving a blueprint or configuration file updates the version in the Git repository automatically. No steps are necessary to store changes in the repository or retrieve updates from the repository.</p>
+<p>If items are stored in a team-based or external repository, you modify the items in an individual clone of that repository and push completed changes to the shared repository. When you open a blueprint or configuration file in the blueprint designer, you might not see the most recent version of that file. You must manipulate the files by using Git functions, such as commit, fetch, and push, to share your changes and view the changes others make. All Git functions that are available in the blueprint design server are displayed on the Repositories page. You can access the contents of a team-based repository only if you are a member of that team. If you are removed from a team, your clone of the team repository is deleted, along with any changed files that you did not push to the team repository.</p>
+<ul>
+<li><strong><a href="../blueprint_org/">Sharing blueprints by using a Git repository</a></strong><br />
+When you work with blueprints, you can organize and share them by using the Git distributed version control system.</li>
+<li><strong><a href="../blueprint_index/">Modifying file indexing</a></strong><br />
+You can index the blueprint and configuration files that you store in the default and team-based Git repositories for your blueprint designer.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../blueprint_edit_clouds/">Modeling environments for clouds through OpenStack Heat</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_storage.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

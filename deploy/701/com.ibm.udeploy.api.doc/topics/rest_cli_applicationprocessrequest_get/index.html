@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/rest_cli_applicationprocessrequest_get/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Get information about all application process requests on the server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Get information about all application process requests on the server", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example", url: "#example" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="get-information-about-all-application-process-requests-on-the-server">Get information about all application process requests on the server</h1>
+<p>This command returns a JSON representation of all application process requests, up to a maximum of 100.</p>
+<h2 id="request">Request</h2>
+<pre><code>GET https://{hostname}:{port}
+    /cli/applicationProcessRequest?{parameters}
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>startedAfter</td>
+<td>long</td>
+<td>false</td>
+<td>A timestamp, in milliseconds from the UNIX epoch. If you specify this parameter, the server includes the application process requests that were created after the specified timestamp.</td>
+</tr>
+<tr>
+<td>startIndex</td>
+<td>int</td>
+<td>false</td>
+<td>An index number that specifies the application process request to start with. You can use this index number to page through results.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<pre><code>curl -k -u jsmith:passwd 
+
+  &quot;https://myserver.example.com:8443/cli/applicationProcessRequest
+  ?startedAfter=1471603999000&amp;startIndex=200&quot; 
+
+</code></pre>
+
+<h2 id="example-response">Example response</h2>
+<pre><code>[
+  {
+    &quot;application&quot;: {
+      &quot;id&quot;: &quot;962d3544-c028-4d44-8d0d-52311043e83d&quot;,
+      &quot;securityResourceId&quot;: &quot;9543d94f-d9b9-4a34-a43a-f4d7d69b9987&quot;,
+      &quot;name&quot;: &quot;MyApplication&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;created&quot;: 1471534973567,
+      &quot;enforceCompleteSnapshots&quot;: false,
+      &quot;active&quot;: true,
+      &quot;tags&quot;: [],
+      &quot;deleted&quot;: false,
+      &quot;user&quot;: &quot;admin&quot;
+    },
+    &quot;applicationProcess&quot;: {
+      &quot;id&quot;: &quot;4a38f91e-41bb-49c0-8010-d406d65fa7ba&quot;,
+      &quot;name&quot;: &quot;deploy&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;active&quot;: true,
+      &quot;inventoryManagementType&quot;: &quot;AUTOMATIC&quot;,
+      &quot;offlineAgentHandling&quot;: &quot;PRE_EXECUTION_CHECK&quot;,
+      &quot;versionCount&quot;: 2,
+      &quot;version&quot;: 2,
+      &quot;commit&quot;: 17,
+      &quot;path&quot;: &quot;applications/962d3544-c028-4d44-8d0d-52311043e83d/processes/4a38f91e-41bb-49c0-8010-d406d65fa7ba&quot;,
+      &quot;deleted&quot;: false,
+      &quot;metadataType&quot;: &quot;applicationProcess&quot;
+    },
+    &quot;environment&quot;: {
+      &quot;id&quot;: &quot;8ecf9ba2-4f7a-4326-a4bd-309a0366b2a2&quot;,
+      &quot;securityResourceId&quot;: &quot;fdab7788-519a-4118-87a7-d1e4f0f391c9&quot;,
+      &quot;name&quot;: &quot;local&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;color&quot;: &quot;#00B2EF&quot;,
+      &quot;requireApprovals&quot;: false,
+      &quot;noSelfApprovals&quot;: false,
+      &quot;lockSnapshots&quot;: false,
+      &quot;calendarId&quot;: &quot;27c132c9-b805-4ece-b6f9-265a1b355c21&quot;,
+      &quot;active&quot;: true,
+      &quot;deleted&quot;: false,
+      &quot;cleanupDaysToKeep&quot;: 0,
+      &quot;cleanupCountToKeep&quot;: 0,
+      &quot;enableProcessHistoryCleanup&quot;: false,
+      &quot;useSystemDefaultDays&quot;: true,
+      &quot;historyCleanupDaysToKeep&quot;: 365,
+      &quot;conditions&quot;: []
+    },
+    &quot;id&quot;: &quot;3bc33fb8-98a6-4a24-a97b-d6e4b4b541a3&quot;,
+    &quot;submittedTime&quot;: 1471535097984,
+    &quot;traceId&quot;: &quot;46749e41-d571-4b3c-a3b2-6fd0b6f23858&quot;,
+    &quot;userName&quot;: &quot;admin&quot;,
+    &quot;onlyChanged&quot;: true,
+    &quot;description&quot;: &quot;&quot;,
+    &quot;startTime&quot;: 1471535098738,
+    &quot;result&quot;: &quot;SUCCEEDED&quot;,
+    &quot;state&quot;: &quot;CLOSED&quot;,
+    &quot;paused&quot;: false,
+    &quot;endTime&quot;: 1471535099134,
+    &quot;duration&quot;: 396
+  },
+  {
+    &quot;application&quot;: {
+      &quot;id&quot;: &quot;8ba25265-f313-4246-aa8a-4f8a9617ed2b&quot;,
+      &quot;securityResourceId&quot;: &quot;10935be7-678d-4dc6-bbd1-57644d619041&quot;,
+      &quot;name&quot;: &quot;MyApplication2&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;created&quot;: 1471535176734,
+      &quot;enforceCompleteSnapshots&quot;: false,
+      &quot;active&quot;: true,
+      &quot;tags&quot;: [],
+      &quot;deleted&quot;: false,
+      &quot;user&quot;: &quot;admin&quot;
+    },
+    &quot;applicationProcess&quot;: {
+      &quot;id&quot;: &quot;4d4d727c-a92e-45f0-8901-1277e92c09f4&quot;,
+      &quot;name&quot;: &quot;deploy&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;active&quot;: true,
+      &quot;inventoryManagementType&quot;: &quot;AUTOMATIC&quot;,
+      &quot;offlineAgentHandling&quot;: &quot;PRE_EXECUTION_CHECK&quot;,
+      &quot;versionCount&quot;: 2,
+      &quot;version&quot;: 2,
+      &quot;commit&quot;: 20,
+      &quot;path&quot;: &quot;applications/8ba25265-f313-4246-aa8a-4f8a9617ed2b/processes/4d4d727c-a92e-45f0-8901-1277e92c09f4&quot;,
+      &quot;deleted&quot;: false,
+      &quot;metadataType&quot;: &quot;applicationProcess&quot;
+    },
+    &quot;environment&quot;: {
+      &quot;id&quot;: &quot;03eae7bf-f97f-4e2d-81b5-8780ee1d5277&quot;,
+      &quot;securityResourceId&quot;: &quot;43fa87b2-1751-44d8-9abe-e788d7990608&quot;,
+      &quot;name&quot;: &quot;local&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;color&quot;: &quot;#00B2EF&quot;,
+      &quot;requireApprovals&quot;: false,
+      &quot;noSelfApprovals&quot;: false,
+      &quot;lockSnapshots&quot;: false,
+      &quot;calendarId&quot;: &quot;79fc6057-f0a6-42a1-be0f-939ac76dbd50&quot;,
+      &quot;active&quot;: true,
+      &quot;deleted&quot;: false,
+      &quot;cleanupDaysToKeep&quot;: 0,
+      &quot;cleanupCountToKeep&quot;: 0,
+      &quot;enableProcessHistoryCleanup&quot;: false,
+      &quot;useSystemDefaultDays&quot;: true,
+      &quot;historyCleanupDaysToKeep&quot;: 365,
+      &quot;conditions&quot;: []
+    },
+    &quot;id&quot;: &quot;0596ac0b-36c0-449a-a11b-a5aa0cccb98b&quot;,
+    &quot;submittedTime&quot;: 1471535228001,
+    &quot;traceId&quot;: &quot;e10524ee-e43c-44ea-9a5b-610d6dcbf2e8&quot;,
+    &quot;userName&quot;: &quot;admin&quot;,
+    &quot;onlyChanged&quot;: true,
+    &quot;description&quot;: &quot;&quot;,
+    &quot;startTime&quot;: 1471535228400,
+    &quot;result&quot;: &quot;SUCCEEDED&quot;,
+    &quot;state&quot;: &quot;CLOSED&quot;,
+    &quot;paused&quot;: false,
+    &quot;endTime&quot;: 1471535228502,
+    &quot;duration&quot;: 102
+  }
+]
+</code></pre>
+
+<p>Related CLI command: <a href="../udclient_getapplicationsprocessrequests/">getApplicationsProcessRequests</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../rest_cli_applicationprocessrequest/">applicationProcessRequest resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/rest_cli_applicationprocessrequest_get.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

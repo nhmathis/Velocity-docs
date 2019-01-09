@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/ssl_addl_security/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Enabling server identity verification - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Enabling server identity verification", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="enabling-server-identity-verification">Enabling server identity verification</h1>
+<p>Starting with version 6.2.1.1 of the product, you can enable extra security to configure the agents to verify the identity of the server for communication that uses the HTTPS protocol.</p>
+<p>Upgrade HCL® UrbanCode™ Deploy to version 6.2.1.1 or later. If you use agent relays, update to version 6.2.3 or later. Upgrade the following plug-ins to the latest versions that are available:</p>
+<ul>
+<li>All source configuration plug-ins</li>
+<li>WinRS Agent Install plug-in</li>
+<li>z/OS® Utility plug-in</li>
+<li>MobileFirst Platform Foundation (formerly Worklight) plug-in</li>
+<li>WebSphere® Application Server - Deployment plug-in</li>
+</ul>
+<p>Versions of these plug-ins that were released before March 2016 do not support server identity verification.</p>
+<p>Ensure that the keytool utility, which is provided with the Java™ developer kit and is not part of HCL UrbanCode Deploy, is available in the system path.</p>
+<p>When you install the HCL UrbanCode Deploy server, a private key and self-signed certificate with the alias server are stored in the server_installation_directory/opt/tomcat/conf/tomcat.keystore file. This certificate is presented to agents, agent relays, and users that connect to the server via HTTPS. Because the certificate that is associated with the private key has a generic distinguished name (DN), you must replace the key so that the agent or agent relay can correctly verify the host name of the server. After you configure the server to present a certificate with a valid host name, you then configure the agents to accept that trusted certificate and to require verification of the host name of the server.</p>
+<ol>
+<li>Stop the HCL UrbanCode Deploy server. </li>
+<li>Open a command-line window, and go to the server_installation_directory/opt/tomcat/conf directory. </li>
+<li>
+<p>Generate a private key that is associated with the correct host name to use for HTTP communication. Run a command similar to the following command: </p>
+<p><code>keytool -genkeypair -alias serverNewCN -keysize 2048 -sigalg SHA256withRSA -keyalg RSA -keystore tomcat.keystore</code></p>
+<p>The existing key is stored in the tomcat.keystore file with the server alias.</p>
+</li>
+<li>
+<p>Open the server.xml file in a text editor. In the HTTPS connector section of the file, add a property to specify the alias in the keystore that contains the certificate to use. </p>
+<p><code>keyAlias="serverNewCN"</code></p>
+<p>Enter the property in the location that this example shows:</p>
+<p><img alt="Location to insert the keyAlias=&quot;serverNewCN&quot; property" src="../../images/keyAlias.png" /></p>
+</li>
+<li>
+<p>Create a certificate signing request that uses the new private key, and then use an internal or external certificate authority to sign it. </p>
+</li>
+<li>
+<p>Export the server certificate. Run a command similar to the following command: </p>
+<p><code>keytool -exportcert -alias server -keystore tomcat.keystore -file server.cert</code></p>
+</li>
+<li>
+<p>Start the HCL UrbanCode Deploy server. </p>
+</li>
+<li>If you used a certificate authority that is not already trusted by the agents, copy the server certificate to the agent computer, and then import the certificate into the keystore of the JRE that is used to run the agent process. By default, the path to the keystore is $JAVA_HOME/lib/security/cacerts. If you use agent relays, repeat this step for all agent relays.</li>
+<li>
+<p>If you use agent relays, complete the following steps to configure the agents to verify the identity of the agent relays. </p>
+<p><strong>Note:</strong> Agent relays use separate keystores for HTTPS and JMS connections. Server identity verification uses the HTTPS, or codestation, keystores for the agent relays.</p>
+<ol>
+<li>Open a command-line window on the agent relay computer, and go to the /agent_relay_install/conf/ directory. By default, the agent-relay-install location is <code>/opt/ibm/agentrelay</code> on Linux™ and <code>C:\Program Files\IBM\agentrelay</code> on Windows™. </li>
+<li>
+<p>Generate a private key that is associated with the HTTPS connection for the agent relay. Run a command similar to the following command: </p>
+<p><code>keytool -genkeypair -alias agentrelay -keysize 2048 -sigalg  SHA256withRSA
+    -storepass changeit -keypass changeit -keyalg RSA -keystore codestation.keystore</code></p>
+<p>For the <code>-alias</code> argument, specify the certificate alias of the codestation keystore for the agent relay. The certificate is in the agentrelay.properties file for the agent relay, in the property codestation.cert.alias. The default value is <code>agentrelay</code>.</p>
+</li>
+<li>
+<p>Export the agent relay certificate. Run a command similar to the following command: </p>
+<p><code>keytool -exportcert -alias agentrelay -keystore codestation.keystore -file agentrelay.cert</code></p>
+</li>
+<li>
+<p>Copy the agent relay certificate to the agent computer, and then import the certificate into the keystore of the JRE that is used to run the agent process. By default, the path to the keystore is $JAVA_HOME/lib/security/cacerts.</p>
+</li>
+<li>Add verify.server.identity=true to the agent_installation_directory/conf/agent/installed.properties file on each agent. If you use agent relays to cache artifacts, repeat this step for all agent relays.</li>
+<li>Upgrade each agent or agent relay to version 6.2.1.1 or later. If an agent is already upgraded, restart the agent. Agents can communicate with the server during this process, so you can upgrade agents one at a time.</li>
+</ol>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/SSLinstall/">SSL configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/ssl_addl_security.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

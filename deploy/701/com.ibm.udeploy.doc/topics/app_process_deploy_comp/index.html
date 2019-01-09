@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_process_deploy_comp/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Deploying components in an application process - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Deploying components in an application process", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="deploying-components-in-an-application-process">Deploying components in an application process</h1>
+<p>You can deploy one or more components in an application process by calling component processes.</p>
+<ul>
+<li>Create an application and add one or more components to the application.</li>
+<li>Create an application process.</li>
+<li>
+<p>Create a component process of the Deployment type for each component.</p>
+<p><strong>Important:</strong> If <strong>Deployment</strong> is not selected for <strong>Type</strong>, the deployment process will not succeed.</p>
+</li>
+<li>
+<p>In an application process, add the Install Component step to the process, and click the edit icon <img alt="edit icon" src="../../images/edit_proc_step.gif" />. The Edit Properties window opens. </p>
+</li>
+<li>In the properties for this step, specify the component to deploy and the component process to run.For more information about this step, see <a href="../app_processsteps_install/">Install Component</a>.</li>
+<li>When you drag more steps to the process diagram, position the step so that the link between steps is highlighted, and then drop the step. The step is automatically linked to the earlier and subsequent steps. </li>
+<li>Verify that all processes are connected in the correct order and that the flow is connected to the Start and Finish nodes; then, save the process. </li>
+<li>Run the process on an environment.See <a href="../app_process_run/">Running application processes</a>.</li>
+</ul>
+<p>The following example application process deploys two components. The <code>Install Component A</code> and <code>Install Component B</code> steps call the deployment processes for each component.</p>
+<p><img alt="An example application process that uses the Install Component step twice to deploy two components" src="../../images/app_process_deploy_a.gif" /></p>
+<p><strong>Parent topic:</strong> <a href="../app_process/">Application processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_process_deploy_comp.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

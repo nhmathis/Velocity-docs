@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_process_every_tag/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>For Each Tag - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "For Each Tag", url: "#_top", children: [
+              {title: "Iteration properties", url: "#iteration-properties" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="for-each-tag">For Each Tag</h1>
+<p>This step iterates over resource tags in application processes.</p>
+<p><strong>Tip:</strong> </p>
+<p>Applications, components, and generic processes share some process steps. This step applies only to application processes, including application processes that are associated with application templates.</p>
+<p>This step iterates over one or more resource tags. If you have many agent resources mapped to an environment, you can use this step to choose which resources to run steps on. For example, if you are running a rolling deployment, you can use this step to deploy to a few resources first, and then run automated tests on those resources before deploying on the other resources. Also, if you are running a blue/green deployment, you can use this step to limit the deployment to the blue nodes or green nodes. Finally, you can select the order of the tags to iterate over, such as if you want to update specific canary nodes before all other nodes. For a video demo of Blue/Green deployments, see <a href="https://developer.ibm.com/urbancode/videos/bluegreen-deployments-ibm-urbancode/">Blue/Green deployments with IBM UrbanCode Deploy</a>.</p>
+<p>Like the For Each Agent step, this step creates an iteration container for subprocesses. You specify one or more resource tags, and the order of those resource tags, and the step runs the subprocess once for each resource tag. The workflow in the container has its own context, and its own start and finish steps, as shown in the following figure. You can use any application process step in the subprocess. An iteration container can connect to any step, even other iteration containers, but you cannot include other iteration containers within an iteration container.</p>
+<p><img alt="A process that includes a For Each Tag step" src="../../images/app_process_every_tag_a.gif" /></p>
+<p>To make it easier to control which resources you deploy to, such as in a staged, rolling, or blue/green deployment scenario, you can set the tags on the fly when you request the process. In the Request Process window, the list of tags for the container is shown. You can add or remove tags here, or change the order of the tags. This way, you can use one process to deploy in different scenarios. For example, if you want to deploy to a canary node first, put that resource tag first, and then follow with the other tags. The following figure shows a process request to a canary node first, and to the rest of the resources next.</p>
+<p><img alt="Requesting a process and selecting the tags to use in the For Each Tag step" src="../../images/app_process_every_tag_d.gif" /></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>A name for the iteration container.</td>
+</tr>
+<tr>
+<td><strong>Tags</strong></td>
+<td>A list of resource tags to use in the container. The subprocess runs once for each resource tag. You can order the resource tags by dragging and dropping them.</td>
+</tr>
+<tr>
+<td><strong>Max Concurrent Tags</strong></td>
+<td>The maximum number of tags for which to run the subprocess at a time. To run the subprocess on all of the tags at the same time, specify <code>-1</code>. To run the subprocess on only a few of the tags at a time, as in blue/green deployments or rolling deployments, specify an integer. The server attempts to resolve the value to an integer. If the value does not resolve to an integer, then the <code>-1</code> value is used by default. You can use a property in this field, as long as the property resolves to an integer.</td>
+</tr>
+</tbody>
+</table>
+<p>|</p>
+<h2 id="iteration-properties">Iteration properties</h2>
+<p>The For Each Tag step has properties, called iteration properties, that can be used to reference steps within the iteration context. By using these properties, for example, you can identify the current agent within the context. To reference iteration properties, use the following format: <code>${p:iteration/&lt;name&gt;}</code>. For example, the current tag name is in the property <code>${p:iteration/tag.name</code>.</p>
+<p><img alt="Iteration properties for the For Each Tag step" src="../../images/app_process_every_tag_b.gif" /></p>
+<p>When you run the application process, the log shows each iteration of the container as a separate entry. For example, the following log shows a For Each Tag step that ran over two tags:</p>
+<p><img alt="The log for an application process request that includes a For Each Tag step, showing two entries for the two resource tags that the step iterated over." src="../../images/app_process_every_tag_c.gif" /></p>
+<p>To view the iteration properties for the step, follow these steps:</p>
+<ol>
+<li>Open the log for the application process request by clicking <strong>Applications</strong> > <strong>application_name</strong> > <strong>History</strong> > <strong>View Request</strong>.</li>
+<li>Expand the container step and, next to one of the iterations, click <strong>Iteration Properties</strong><img alt="" src="../../images/viewproperties.gif" />.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../app_processSteps/">Process steps: Reference</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_process_every_tag.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

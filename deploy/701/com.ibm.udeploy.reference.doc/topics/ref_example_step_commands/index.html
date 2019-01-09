@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/ref_example_step_commands/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Step commands - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Step commands", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="step-commands">Step commands</h1>
+<p>The step's <code>command</code> element specifies the scripting tool that runs the step and identifies the file that contains the actual script.</p>
+<p>The agent that runs the step downloads the plug-in and expects to find the script among the downloaded files. The agent must also have access to the scripting tool. Any other arguments that are required by the script or tool can also be specified with the <code>arg file</code> attribute. The <code>arg file</code> attributes should be defined in the order compatible with the scripting tool.</p>
+<p>The Create File command script is written in Groovy. Groovy is scripting language similar to Java™. The following illustration shows a command that runs an external Groovy file that is named create_file.groovy.</p>
+<p><img alt="An illustration of how you can write an external script and use it as part of a step" src="../../images/samp_plug3.png" /></p>
+<p>This command instructs the Groovy interpreter to run create_file.groovy (more about Groovy and the particulars of this file in the following section).</p>
+<p>This line (which is part of every command):</p>
+<pre><code>&lt;arg file=&quot;${PLUGIN_INPUT_PROPS}&quot;/&gt;
+
+</code></pre>
+
+<p>sends a file that contains the properties that are required by the step to the agent. The properties in the file are those properties that are furnished at runtime and others that are defined earlier that are required by the step. See <a href="../reference_plugins_example/">Example plug-in</a>. The <code>${PLUGIN_INPUT_PROPS}</code> variable resolves to the location of this properties file.</p>
+<p>And this line (which is also part of every command):</p>
+<pre><code>&lt;arg file=&quot;${PLUGIN_OUTPUT_PROPS}&quot;/&gt;
+
+</code></pre>
+
+<p>refers to the file returned by the agent after finishing the step. The properties in this file are available to later steps in the process. The <code>${PLUGIN_OUTPUT_PROPS}</code> variable resolves to the location of this properties file.</p>
+<ul>
+<li><strong><a href="../ref_example_groovy/">create_file.groovy</a></strong><br />
+The create_file.groovy file contains the Groovy script that runs the step's command.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../reference_plugins_example/">Example plug-in</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/ref_example_step_commands.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/install_database_sql_bds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring a Microsoft SQL Server database for the blueprint design server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring a Microsoft SQL Server database for the blueprint design server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-a-microsoft-sql-server-database-for-the-blueprint-design-server">Configuring a Microsoft SQL Server database for the blueprint design server</h1>
+<p>To use a SQL Server database with the blueprint design server, before you install the blueprint design server, install the SQL Server database and provide the Java™ Database Connectivity (JDBC) JAR file for the blueprint design server installation process.</p>
+<p>Before you install the blueprint design server, install a SQL Server database. If you are evaluating the blueprint designer, you can install the database on the same system as the blueprint design server.</p>
+<p>When you install the blueprint design server, you need the SQL Server connection information, and a user account with table-creation privileges.</p>
+<p><strong>Note:</strong> The user account cannot have the sysadmin role.</p>
+<p><strong>Note:</strong> The database must be encoded in UTF-8.</p>
+<p>To create the SQL Server database and user account, run the following commands:</p>
+<pre><code>CREATE DATABASE ibm_ucdp;
+
+USE ibm_ucdp;
+
+CREATE LOGIN ibm_ucdp WITH PASSWORD = 'password';
+
+CREATE USER ibm_ucdp FOR LOGIN ibm_ucdp WITH DEFAULT_SCHEMA = ibm_ucdp;
+
+CREATE SCHEMA ibm_ucdp AUTHORIZATION ibm_ucdp;
+
+GRANT ALL TO ibm_ucdp;
+</code></pre>
+
+<ol>
+<li>
+<p>Obtain the SQL Server JDBC driver from the Microsoft™ site. The JDBC JAR file is not included among the installation files. Use the sqljdbc4.jar driver file, not the sqljdbc.jar file.</p>
+<p>When multiple drivers are available, you might need to consult with the database provider to determine which driver to use. The JDBC driver version to use might depend on the version of the database and the version of Java used by the blueprint design server.</p>
+</li>
+<li>
+<p>Either note the location of the JDBC JAR file or place the file in the installation_directory/ibm-ucd-patterns-install/web-install/media/server/opt/tomcat/lib folder. </p>
+</li>
+<li>Begin the blueprint design server installation. See <a href="../install_server_interactive_bds/">Installing the blueprint design server in interactive mode</a>. When you are prompted for the database type, enter sqlserver. </li>
+<li>Provide the JDBC driver class HCL® UrbanCode™ Deploy uses to connect to the database. The default value is <code>com.microsoft.sqlserver.jdbc.SQLServerDriver</code>.</li>
+<li>
+<p>Next, provide the JDBC database connection string. The format depends on the JDBC driver. Typically, it is similar to the following code:</p>
+<p><code>jdbc:sqlserver://DB\_URL:DB\_PORT;DatabaseName=DB\_NAME</code></p>
+<p>For example:</p>
+<p><code>jdbc:sqlserver://localhost:1433;DatabaseName=ibm_ucdp</code></p>
+<p>If your database server uses integrated security, include the integratedSecurity parameter, as in the following example:</p>
+<p><code>jdbc:sqlserver://database\_server:1433;databaseName=ibm_ucdp;integratedSecurity=true;</code></p>
+</li>
+<li>
+<p>Finish by entering the database user name and password. </p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../install_database_bds_ov/">Blueprint design server database configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/install_database_sql_bds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

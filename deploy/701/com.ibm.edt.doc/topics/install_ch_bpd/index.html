@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/install_ch_bpd/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing the blueprint designer", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-the-blueprint-designer">Installing the blueprint designer</h1>
+<p>The installation can include the blueprint design server and its engine and database.</p>
+<p>Typically, the database, engine, and blueprint design server are installed on separate systems, although for a simple evaluation they can all be installed on the same system.</p>
+<p>Install and configure the blueprint design server. To use the blueprint designer, you must complete the following steps:</p>
+<ol>
+<li>Acquire a Heat orchestration engine. To connect to OpenStack and OpenStack-based clouds, extend the existing Heat engine for the cloud; see <a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>. To connect to non-OpenStack clouds, such as Amazon Web Services and MIcrosoft Azure, install an engine with HCL® UrbanCode™ Deploy; see <a href="../install_engine/">Installing the engine</a>.</li>
+<li>Configure a database for the blueprint design server. See <a href="../install_database_bds_ov/">Blueprint design server database configuration</a>.</li>
+<li>Install the blueprint design server. See <a href="../install_server_bds/">Installing the blueprint design server</a>.</li>
+<li>Connect the blueprint design server to the server. See <a href="../ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Integrate with the cloud. See <a href="../security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</li>
+<li>
+<p>Set up access control. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_ov/">Configuring security for the blueprint design server</a>.</p>
+</li>
+<li>
+<p><strong><a href="../install_engine/">Installing the engine</a></strong><br />
+To connect the blueprint design server to a cloud system, you need a Heat orchestration engine. Heat orchestration engines interpret blueprints and use them as patterns for cloud resources. To connect to OpenStack-based clouds, you extend the engine that is associated with the cloud. To connect to all other clouds, you install an engine with HCL UrbanCode Deploy.</p>
+</li>
+<li><strong><a href="../install_server_bds/">Installing the blueprint design server</a></strong><br />
+Installing the blueprint design server involves installing an application on Apache Tomcat. You can install the blueprint design server in interactive mode or in silent mode.</li>
+<li><strong><a href="../runProduct/">Starting the HCL UrbanCode Deploy blueprint designer</a></strong><br />
+Both UNIX™ and Windows™ installations require the HCL UrbanCode Deploy server and at least one agent. If you are using a database other than Derby, make sure that the appropriate driver is installed and configured.</li>
+<li><strong><a href="../backup_recover/">Backing up and recovering</a></strong><br />
+You can back up and recover the contents of your HCL UrbanCode Deploy installation.</li>
+<li><strong><a href="../engine_install_testfix/">Installing test fixes to the engine</a></strong><br />
+Test fixes are provided by IBM® support to correct specific issues with the Heat orchestration engine. You replace individual files in the directory that contains the installed engine.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.install.doc/topics/install_ch/">Installing HCL UrbanCode Deploy</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/install_ch_bpd.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/integrate_azure_image/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Registering Azure marketplace images with the cloud discovery service - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Registering Azure marketplace images with the cloud discovery service", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="registering-azure-marketplace-images-with-the-cloud-discovery-service">Registering Azure marketplace images with the cloud discovery service</h1>
+<p>To use Microsoft™ Azure marketplace images in the blueprint designer, you must register images with the cloud discovery service.</p>
+<p>Before you register images, configure the cloud discovery service. See <a href="../../../com.ibm.udeploy.doc/topics/cds_configure/">Setting up images, regions, and flavors for the cloud discovery service and engine</a>.</p>
+<p>For version 6.2.1, Linux™ images that are preloaded with the <code>cloud-init</code> package are the only images that are supported. In version 6.2.1.1 and later, you can use Windows images, and you can use Linux images with or without the <code>cloud-init</code> package.</p>
+<ol>
+<li>
+<p>Obtain the following information for each image that you want to use in the blueprint designer: </p>
+<ul>
+<li>The publisher name, usually the name of the company that provides the image. For example, Canonical is the publisher of Ubuntu images.</li>
+<li>The SKU or stock-keeping unit parameter of the image, which is typically the version number of the operating system on the image.</li>
+<li>The offer parameter of the image, which is an identifier that describes the image, such as <code>ubuntuserver</code> or <code>openSUSE</code>. This identifier is not case-sensitive.
+To obtain this information, you can find the image in the Azure web portal or use the command-line interface. For example, to list information about images that are provided by Canonical and are available in the <code>East US</code> region, run the following command:</li>
+</ul>
+<p><code>azure vm image list eastus canonical</code></p>
+<p>To list information about SUSE images, run the following command:</p>
+<p><code>azure vm image list eastus SUSE</code></p>
+<p>From the resulting table of information, take the publisher name, the SKU value, and the offer identifier.</p>
+</li>
+<li>
+<p>Open the cloud discovery service configuration file in a text editor. </p>
+</li>
+<li>
+<p>If the cloud discovery service configuration file does not have an Azure section, create the Azure section: </p>
+<ol>
+<li>
+<p>To the <code>CLOUD_SETTINGS</code> section, add a section that looks like the following code: </p>
+<p>```
+"azure": {
+    "images": [</p>
+<pre><code>]
+</code></pre>
+<p>}</p>
+<p>```</p>
+</li>
+</ol>
+</li>
+<li>
+<p>To the Azure section of the cloud discovery service configuration file, add entries for each image that you want to use. Each entry follows this format:</p>
+<p><code>"publisher":"publisher",
+"sku":[listOfSKUs],
+"offer":"offer",
+"display_name":"displayName"</code></p>
+<ul>
+<li>For <code>publisher</code>, specify the publisher.</li>
+<li>For <code>listOfSKUs</code>, specify a comma-separated list of SKU values, in quotes.</li>
+<li>For <code>offer</code>, specify the offer value.</li>
+<li>For <code>display\_name</code>, specify a display name for the image in the blueprint designer.
+For example, the following code includes Ubuntu images, an openSUSE image, and CentOS images:</li>
+</ul>
+<p>```
+"azure": {
+    "images": [
+        {
+            "publisher": "Canonical",
+            "sku": ["12.10","14.04.3-LTS","15.10"],
+            "offer": "UbuntuServer",
+            "display_name": "UbuntuServer"
+        },
+        {
+            "publisher": "SUSE",
+            "sku": ["13.2"],
+            "offer": "openSUSE",
+            "display_name": "openSUSE"
+        },
+        {
+            "publisher": "openlogic",
+            "sku": ["6.5","6.6","7.0","7.1"],
+            "offer": "CentOS",
+            "display_name" : "CentOS"
+        }
+    ]
+}</p>
+<p>```</p>
+</li>
+<li>
+<p>Save the file and restart the cloud discovery service. To restart the cloud discovery service, see <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a> and <a href="../../../com.ibm.udeploy.install.doc/topics/stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+</ol>
+<p>Now you can add the images to blueprints.</p>
+<p><strong>Parent topic:</strong> <a href="../cloud_connect_azure/">Connecting to Microsoft Azure</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/integrate_azure_image.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

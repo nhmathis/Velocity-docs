@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/terraform_provider_ref/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>HCL UrbanCode Deploy Terraform provider - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "HCL UrbanCode Deploy Terraform provider", url: "#_top", children: [
+              {title: "Argument reference", url: "#argument-reference" },
+              {title: "Example usage", url: "#example-usage" },
+              {title: "Resources", url: "#resources" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="hcl-urbancode-deploy-terraform-provider">HCL UrbanCode Deploy Terraform provider</h1>
+<p>The HCL® UrbanCode™ Deploy provider contains the resources to interact with your HCL UrbanCode Deploy server.</p>
+<h2 id="argument-reference">Argument reference</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td>True</td>
+<td>The HCL UrbanCode Deploy user name.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>True</td>
+<td>The HCL UrbanCode Deploy password.</td>
+</tr>
+<tr>
+<td>ucd_server_url</td>
+<td>True</td>
+<td>The HCL UrbanCode Deploy server URL.</td>
+</tr>
+<tr>
+<td>proxy_url</td>
+<td>False</td>
+<td>The proxy server URL that is used to connect to an HCL UrbanCode Deploy server.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-usage">Example usage</h2>
+<pre><code>provider &quot;ucd&quot; {
+     username = &quot;admin&quot;
+     password = &quot;admin_password&quot;
+     ucd_server_url = &quot;https://ucd-server.raleigh.ibm.com:8443&quot;
+ }
+</code></pre>
+
+<h2 id="resources">Resources</h2>
+<ul>
+<li>
+<p><strong>ucd_agent_mapping</strong>: Add an agent to the resource tree.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent_name</td>
+<td>True</td>
+<td>The HCL UrbanCode Deploy agent name.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>False</td>
+<td>The description for the agent.</td>
+</tr>
+<tr>
+<td>dynamic</td>
+<td>False</td>
+<td>Determines if the agent is added as a dynamic group.</td>
+</tr>
+<tr>
+<td>parent_id</td>
+<td>True</td>
+<td>The ID of the resource in the resource tree where the agent is added. This is normally the base resource group ID.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example usage</strong></p>
+<p><code>resource "ucd_agent_mapping" "agent_resource" {
+     agent_name = "database_server_agent"
+     description = "Agent to manage the database server"
+     parent_id = "${ucd_resource_tree.tree.id}"
+ }</code></p>
+</li>
+<li>
+<p><strong>ucd_application_process_request</strong>: Run an application process on an environment.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>application</td>
+<td>True</td>
+<td>The application name.</td>
+</tr>
+<tr>
+<td>application_process</td>
+<td>True</td>
+<td>The application process.</td>
+</tr>
+<tr>
+<td>environment</td>
+<td>True</td>
+<td>The environment name.</td>
+</tr>
+<tr>
+<td>properties</td>
+<td>False</td>
+<td>The JSON string that represents properties.</td>
+</tr>
+<tr>
+<td>snapshot</td>
+<td>True</td>
+<td>The application snapshot.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example usage</strong></p>
+<p><code>resource "ucd_application_process_request" "application_process_request" {
+     application = "JKE"
+     application_process = "install"
+     environment = "${ucd_environment.environment.name}"
+     snapshot = "snapshot_v1"
+ }</code></p>
+</li>
+<li>
+<p><strong>ucd_component_mapping</strong>: Add a component to the resource tree.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>component</td>
+<td>True</td>
+<td>The component name.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>False</td>
+<td>The component description.</td>
+</tr>
+<tr>
+<td>parent_id</td>
+<td>True</td>
+<td>The ID of the resource in the resource tree under which to place this component. This is normally the agent.</td>
+</tr>
+<tr>
+<td>role_id</td>
+<td>False</td>
+<td>The component role ID.</td>
+</tr>
+<tr>
+<td>role_properties</td>
+<td>False</td>
+<td>The component role properties.</td>
+</tr>
+<tr>
+<td>use_impersonation</td>
+<td>False</td>
+<td>Determines whether or not to use default impersonation.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example usage</strong></p>
+<p><code>resource "ucd_component_mapping" "jke_resource" {
+     component = "jke.war"
+     description = "The JKE component"
+     parent_id = ""${ucd_agent.agent.id}"
+ }</code></p>
+</li>
+<li>
+<p><strong>ucd_component_process_request</strong>: Run a component process on an environment.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>application</td>
+<td>True</td>
+<td>The application name.</td>
+</tr>
+<tr>
+<td>component</td>
+<td>True</td>
+<td>The component name.</td>
+</tr>
+<tr>
+<td>environment</td>
+<td>True</td>
+<td>The environment name.</td>
+</tr>
+<tr>
+<td>process</td>
+<td>True</td>
+<td>The component process to run.</td>
+</tr>
+<tr>
+<td>resource</td>
+<td>True</td>
+<td>The ID of the component resource in the resource tree.</td>
+</tr>
+<tr>
+<td>sleep_delay</td>
+<td>False</td>
+<td>The amount of time to wait between checks for component process completion. The default is 10 seconds.</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>False</td>
+<td>The amount of time to wait for the component process to complete. The default is 300 seconds.</td>
+</tr>
+<tr>
+<td>version</td>
+<td>True</td>
+<td>The component version.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example usage</strong></p>
+<p><code>resource "ucd_component_process_request" "component_process_request" {
+     application = "JKE"
+     component = "jke.war"
+     environment = "${ucd_environment.environment.name}"
+     process = "deploy"
+     resource = "${ucd_component_mapping.component_resource.id}"
+     version = "4.0"
+ }</code></p>
+</li>
+<li>
+<p><strong>ucd_environment</strong>: Add an environment to the resource tree.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>application</td>
+<td>True</td>
+<td>The application name or ID for the environment.</td>
+</tr>
+<tr>
+<td>base_resource_group</td>
+<td>True</td>
+<td>The base resource group name or ID to add to the environment.</td>
+</tr>
+<tr>
+<td>color</td>
+<td>False</td>
+<td>The color for the environment.</td>
+</tr>
+<tr>
+<td>component_property</td>
+<td>False</td>
+<td>Sets a component environment property. Can be specified multiple times for each property.</td>
+</tr>
+<tr>
+<td>delete_attached_resources</td>
+<td>False</td>
+<td>Determines whether or not to delete the resources attached to this environments. The default value is true.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>False</td>
+<td>A description for the environment.</td>
+</tr>
+<tr>
+<td>exempt_process</td>
+<td>False</td>
+<td>The process exempt from approval.</td>
+</tr>
+<tr>
+<td>inherit_system_cleanup</td>
+<td>False</td>
+<td>Determines if the environment uses the component version cleanup settings for the system or component settings.</td>
+</tr>
+<tr>
+<td>lock_snapshots</td>
+<td>False</td>
+<td>All of the snapshots used in a request to the deployment are locked to prevent changes.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>True</td>
+<td>The environment name.</td>
+</tr>
+<tr>
+<td>require_approvals</td>
+<td>False</td>
+<td>Determines if the environment requires approvals for deployment.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example usage</strong></p>
+<p><code>resource "ucd_environment" "environment" {
+    name = "my_environment"
+    application = "JKE"
+    base_resource_group ="${ucd_resource_tree.tree.id}"
+    component_property {
+       component = "jke.war"
+       name = "JKE_DB_HOST"
+       value = "${aws_instance.db.private_ip}"
+    }
+ }</code></p>
+</li>
+<li>
+<p><strong>ucd_resource_tree</strong>: Create a top-level resource group.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>base_resource_group_name</td>
+<td>True</td>
+<td>The base resource group name.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>False</td>
+<td>A description for the base resource group.</td>
+</tr>
+<tr>
+<td>dynamic</td>
+<td>False</td>
+<td>Determines if the resource group is added as a dynamic group.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example usage</strong></p>
+<p><code>resource "ucd_resource_tree" "tree" {
+    base_resource_group_name = "my_tree"
+ }</code></p>
+</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../terraform_ch/">Terraform</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/terraform_provider_ref.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

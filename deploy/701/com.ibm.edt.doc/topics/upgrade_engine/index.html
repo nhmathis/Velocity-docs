@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/upgrade_engine/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Upgrading engines - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Upgrading engines", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="upgrading-engines">Upgrading engines</h1>
+<p>The instructions that you use to upgrade an engine depends on how you installed the engine. When you upgrade the engine, you must also upgrade the blueprint design server.</p>
+<ul>
+<li>To upgrade an engine that you installed with the HCL® UrbanCode™ Deploy installer in versions before 6.2.1.1, see <a href="../upgrade_engine_ucdp/">Upgrading engines that you installed with HCL UrbanCode Deploy</a>.</li>
+<li>To upgrade from a version before 6.2.1.1 to version 6.2.2 or later, you can either migrate or extend the engine. See <a href="../migrate_engine_ucdp_script/">Migrating engines that you installed with HCL UrbanCode Deploy</a> and <a href="../upgrade_engine_extended/">Upgrading engines that you extended</a>.</li>
+<li>To upgrade an engine that you installed with the HCL UrbanCode Deploy installer in versions 6.2.1.1 and later, see <a href="../upgrade_engine_extended/">Upgrading engines that you extended</a>.</li>
+<li>
+<p>To upgrade engines that you extended as described in <a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>, see <a href="../upgrade_engine_extended/">Upgrading engines that you extended</a>.</p>
+</li>
+<li>
+<p><strong><a href="../upgrade_engine_ucdp/">Upgrading engines that you installed with HCL UrbanCode Deploy</a></strong><br />
+To upgrade the engine, stop the related Heat services, install the new version, and restart the services. When you upgrade the engine, you must also upgrade the blueprint design server.</p>
+</li>
+<li><strong><a href="../migrate_engine_ucdp_script/">Migrating engines that you installed with HCL UrbanCode Deploy</a></strong><br />
+To migrate the Heat engine that is required for the HCL UrbanCode Deploy blueprint designer from Red Hat Enterprise Linux (RHEL) version 6 to RHEL 7, stop the related Heat services, migrate the databases, install the new version, and restart the services</li>
+<li><strong><a href="../upgrade_engine_extended/">Upgrading engines that you extended</a></strong><br />
+To upgrade a Heat orchestration engine that you extended, rerun the script that extends the engine.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_upgrading/">Upgrading and migrating</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/upgrade_engine.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

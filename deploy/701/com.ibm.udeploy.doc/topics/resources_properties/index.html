@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/resources_properties/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating, setting, and editing properties - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating, setting, and editing properties", url: "#_top", children: [
+              {title: "Setting properties manually", url: "#setting-properties-manually" },
+              {title: "Setting properties with the Configuration tab", url: "#setting-properties-with-the-configuration-tab" },
+              {title: "Setting properties in processes", url: "#setting-properties-in-processes" },
+              {title: "Setting properties with the REST API and command-line client", url: "#setting-properties-with-the-rest-api-and-command-line-client" },
+              {title: "Setting output properties", url: "#setting-output-properties" },
+              {title: "Passing properties from blueprints to the resource tree", url: "#passing-properties-from-blueprints-to-the-resource-tree" },
+              {title: "Setting properties from external files", url: "#setting-properties-from-external-files" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-setting-and-editing-properties">Creating, setting, and editing properties</h1>
+<p>Properties can be created for most elements, including components, resources, applications, and agents. You can set and change properties in many different ways.</p>
+<p>A property represents a user-defined parameter. Properties are typically accessed in processes. For information about using properties, see <a href="../ud_properties_using/">Referring to properties</a>.</p>
+<ul>
+<li><strong><a href="../props_from_http/">Retrieving property values from external files</a></strong><br />
+You can specify that a property takes a value from an XML or JSON file over HTTP. Then, when you run the process, the server prompts you with a list of values from that file.</li>
+<li><strong><a href="../env_props_BDS/">Passing properties from blueprints to the resource tree</a></strong><br />
+From the blueprint designer, you can set component environment properties and component resource properties in blueprint source code.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../ud_properties_overview/">Properties</a></p>
+<h2 id="setting-properties-manually">Setting properties manually</h2>
+<p>You can create and edit properties on many elements by opening the element and going to its <strong>Configuration</strong> tab.</p>
+<p>To edit most of the properties for an element, open the element, go to its <strong>Configuration</strong> tab (not the <strong>Configuration</strong> tab at the top of the page), and then click <strong>element_type Properties</strong>. For example, to edit component properties, click the component, click <strong>Configuration</strong>, and then click <strong>Component Properties</strong>, as shown in the following figure.</p>
+<p><img alt="Editing the properties of a component" src="../../images/resources_properties_a.gif" /></p>
+<p>However, if you created an application from a template, any environment or application properties that you specified are not available on the <strong>Configuration</strong> tabs. You can view and edit, but not delete, these properties by clicking the element's <strong>Configuration</strong> tab (not the <strong>Configuration</strong> tab at the top of the page), and then clicking <strong>Basic Settings</strong>.</p>
+<p>To add a property, click <strong>Add Property</strong>, and provide the information about the property, including its name, value, and description. You can also edit multiple properties at once by clicking <strong>Batch Edit</strong>. Then, in batch mode, specify the properties in name-value pairs that are separated by line breaks, as in the following example:</p>
+<pre><code>Property1=Value1
+Property2=Value2
+Property3=Value3
+</code></pre>
+
+<p>Escape backslash, equals, and colon characters (<code>\</code>, <code>=</code>, <code>:</code>) with a backslash, for example:</p>
+<pre><code>WindowsPath=C\:\\myfolder\\myfile.txt
+PropertyWithColons=This string\: has a colon
+</code></pre>
+
+<p>To create a property, put the new property and its value on a new line. To include a line break in a property value, use "<code>\n</code>". Be sure to click <strong>Save</strong> to save your changes when you are finished editing multiple properties. To close batch edit mode, use the <strong>Use Table</strong> command. Secured values are encrypted when they are displayed in batch mode. If you modify an encrypted value, the modifications are encrypted when you exit edit mode.</p>
+<h2 id="setting-properties-with-the-configuration-tab">Setting properties with the <strong>Configuration</strong> tab</h2>
+<p>On the top-level Configuration page you can directly manage properties for applications, components, and environments.</p>
+<p>Access the Configuration page by clicking the <strong>Configuration</strong> tab. From this page, you can add properties to applications, components, and environments.</p>
+<p><img alt="The Configuration page shows information about an application, including its components and environments." src="../../images/configTab1.gif" /></p>
+<h2 id="setting-properties-in-processes">Setting properties in processes</h2>
+<p>Several different steps are available to create and set properties in processes.</p>
+<p>For example, the <a href="https://developer.ibm.com/urbancode/plugin/ibm-urbancode-deploy-components/">IBM UrbanCode Deploy Components</a> plug-in contains the Create Component Property step. This step creates a component property or changes the value of an existing component property.</p>
+<p><img alt="Using steps to set a component property and an environment property" src="../../images/resources_properties_b.gif" /></p>
+<p><strong>Note:</strong> If you use these steps to change the value of a property, the new property value is not available until the next process runs. Later steps in the same process use the same value that the property had when the process started.</p>
+<h2 id="setting-properties-with-the-rest-api-and-command-line-client">Setting properties with the REST API and command-line client</h2>
+<p>Several commands in the REST API and in the command-line client can set properties. See <a href="../../../com.ibm.udeploy.reference.doc/topics/rest_api_ref_overview/">REST API reference</a> and <a href="../../../com.ibm.udeploy.reference.doc/topics/cli_ch/">Command-line client (CLI) reference</a>.</p>
+<h2 id="setting-output-properties">Setting output properties</h2>
+<p>To pass properties from one step to another within a process, you can use output properties. See <a href="../output_properties/">Output properties</a>.</p>
+<h2 id="passing-properties-from-blueprints-to-the-resource-tree">Passing properties from blueprints to the resource tree</h2>
+<p>You can pass properties from blueprints to the server. See <a href="../env_props_BDS/">Passing properties from blueprints to the resource tree</a>.</p>
+<h2 id="setting-properties-from-external-files">Setting properties from external files</h2>
+<p>You can retrieve property values from an external file. See <a href="../props_from_http/">Retrieving property values from external files</a>.</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/resources_properties.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

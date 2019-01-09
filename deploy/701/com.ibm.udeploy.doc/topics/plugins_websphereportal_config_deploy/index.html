@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/plugins_websphereportal_config_deploy/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Importing resources from WebSphere Portal - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Importing resources from WebSphere Portal", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="importing-resources-from-websphere-portal">Importing resources from WebSphere Portal</h1>
+<p>With the WebSphere® Portal plug-in, you can discover resources for a portal cell and use plug-in steps to deploy artifacts.</p>
+<ul>
+<li>Create a top-level resource group to contain agents. See <a href="../resources_createGroup/">Creating groups</a>.</li>
+<li>Install an agent on the system that hosts the portal node.</li>
+<li>
+<p>If IBM® WebSphere Application Server is deployed in a directory other than the default directory, specify the wsadmin.path property on the agent.</p>
+<ol>
+<li>Click <strong>Resources</strong> > <strong>Agents</strong> > <strong>agent name</strong> > <strong>Configuration</strong> > <strong>Agent Properties</strong>.</li>
+<li>Add a property named wsadmin.path.</li>
+<li>
+<p>Set the wsadmin.path property to the fully qualified path to the <code>wsadmin</code> script, including the script name.</p>
+<p>The default location of the wsadmin file on Linux™ is /opt/IBM/WebSphere/AppServer/bin/wsadmin.sh. The default locations on Microsoft™ Windows™ are C:\IBM\WebSphere\AppServer\bin\wsadmin.bat and C:\Program Files\IBM\WebSphere\AppServer\bin\wsadmin.bat.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Install the WebSphere Portal plug-in.</p>
+</li>
+<li>Install the WebSphere Application Server - Deploy plug-in.</li>
+</ul>
+<p>Plug-ins can be developed and updated more frequently than HCL® UrbanCode™ Deploy provides release cycles. For the latest version of the WebSphere Portal plug-in and the latest documentation, see the <a href="https://developer.ibm.com/urbancode/plugins/ibm-urbancode-deploy">IBM UrbanCode™ Deploy Plug-ins</a> site.</p>
+<ol>
+<li>On the HCL UrbanCode Deploy server, click <strong>Resources</strong> to view the Resource Tree page. </li>
+<li>Click the <strong>Actions</strong> push button that is associated with the top-level group, and then click <strong>Add Agent</strong>. </li>
+<li>In the Create Resource window, select the agent and then click <strong>Save</strong>. The new agent resource is displayed in the resource tree. Eventually, another resource is displayed under the agent resource. This resource is named <code>WebSphereCell</code> and represents the WebSphere Application Server cell. You might need to click <strong>Refresh</strong> to see the cell resource, and it can take several minutes for the cell resource to be displayed.</li>
+<li>Click the WebSphere Application Server cell resource and then click <strong>Configuration</strong> > <strong>Basic Settings</strong>. The cell resource has the <code>WebSphereCell</code> role, which includes several properties that are related to the cell.</li>
+<li>
+<p>In the section that is labeled <strong>Role Properties</strong> for the <code>WebSphereCell</code> role, specify the connection information for the cell, including the locations of the profile and wsadmin file and the user name and password for the WebSphere Application Server system, as in the following figure: </p>
+<p><img alt="Specifying the information for the cell resource" src="../../images/resources_import_was_a.gif" /></p>
+<p><strong>Note:</strong> Leave the <strong>Cell Name</strong> property blank.</p>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+<li>On the Resources page, click the <strong>Actions</strong> push button that is associated with the cell resource, and then click <strong>Configure using WebSphere Topology Discovery</strong>. The discovery step runs. This step might take several minutes. A log is displayed to show progress.</li>
+<li>Click <strong>Save</strong> to close the Auto Configure window.</li>
+<li>Wait 30-60 seconds, and then click <strong>Refresh</strong>. A twistie is now displayed next to <strong>WebSphereCell</strong>. Expand the twistie and verify that the resource tree matches your WebSphere Application Server topology. The resource tree contains deployable artifacts for WebSphere Portal (theme, PAA, WAR, ConfigEngine command, and XMLAccess script).</li>
+<li>On the <strong>WebSphereCell</strong> entry, click <strong>Edit</strong> and verify that <strong>Cell Name</strong> is correct. </li>
+<li>
+<p>Define properties for resources.Click the resource, then the <strong>Configuration</strong> tab, then <strong>Resource Properties</strong>.</p>
+<ul>
+<li>For an ND topology, define the properties for Portal Cluster, Portal Primary Node, and Portal Secondary Node resources.</li>
+<li>
+<p>For a stand-alone topology, define the properties for the Portal Node resource.
+Define the following properties:</p>
+</li>
+<li>
+<p>portal.home: Portal installation directory</p>
+</li>
+<li>portal.profile.home: Portal profile directory</li>
+<li>portal.admin.user: Portal administrator user name</li>
+<li>portal.admin.password: Portal administrator password</li>
+<li>portal.config.port: Portal configuration port</li>
+<li>websphere.password: WebSphere administrator password</li>
+<li>Create components for the resources. Create one component for each resource to deploy.</li>
+<li>Add the components to the resources. </li>
+<li>Navigate to the resource. </li>
+<li>Click <strong>Actions</strong> > <strong>Add Component</strong>. </li>
+<li>Select the component to add to the resource. </li>
+<li>Create the application. </li>
+<li>Click <strong>Applications</strong>. </li>
+<li>If you do not plan to use an existing application, click <strong>Create Application</strong>. You can also use an existing application that is attached to the cell to manage.</li>
+<li>Enter an application name, and then click <strong>Save</strong>. </li>
+<li>Click the <strong>Components</strong> tab, and then add the component that was created by the template generation procedure. </li>
+<li>Create an application environment. </li>
+<li>On the <strong>Environments</strong> page, click <strong>Create Environment</strong>. </li>
+<li>Enter an environment name, and then click <strong>Save</strong>. </li>
+<li>Navigate to the environment editor. </li>
+<li>Click the environment name, and then click <strong>Add Base Resource</strong>. Select the group for your example cell and environment.</li>
+<li>Edit the environment properties for the component. Click <strong>Configuration</strong> > <strong>Environment Properies</strong>. In the <strong>Component Environment Properties</strong> list, enter values for each property shown. If you provided values previously, the values are already completed with default values.</li>
+<li>Create an application process of the <strong>Deployment</strong> type for configuration and deployment. </li>
+<li>Click the <strong>Processes</strong> tab. </li>
+<li>Add a deployment step. </li>
+<li>
+<p>Drag the <strong>Install Component</strong> step onto the process editor. </p>
+<ol>
+<li>Select the component that you created for the resource.</li>
+<li>Choose the process for the component.
+For example, if you created a component to contain a Portal WAR file to deploy, select that component, and then choose the Deploy Portal WAR file process.</li>
+</ol>
+</li>
+<li>
+<p>Click <strong>Save</strong>. </p>
+</li>
+<li>Save the process. </li>
+<li>Run the process to test the newly created component. </li>
+</ul>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../resources_ch/">Resources</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/plugins_websphereportal_config_deploy.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

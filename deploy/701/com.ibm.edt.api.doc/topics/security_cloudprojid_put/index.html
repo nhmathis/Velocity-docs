@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.api.doc/topics/security_cloudprojid_put/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Update a cloud project - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Update a cloud project", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example", url: "#example" },
+              {title: "Example JSON request", url: "#example-json-request" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="update-a-cloud-project">Update a cloud project</h1>
+<p>This command updates a cloud project from the supplied JSON string</p>
+<h2 id="request">Request</h2>
+<pre><code>PUT http://{hostname}:{port}
+  /landscaper/security/cloudproject/{cloudProjectId}
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cloudProjectId</td>
+<td>string</td>
+<td>true</td>
+<td>ID of the cloud project</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p>This command takes a JSON request string or file. Use the following template for the request:</p>
+<pre><code>{
+  &quot;cloudProviderId&quot;: &quot;The cloud provider ID for this cloud 
+  project&quot;,
+  &quot;description&quot;: &quot;Description&quot;,
+  &quot;name&quot;: &quot;Cloud project name&quot;,
+  &quot;properties&quot;: [{
+    &quot;name&quot;: &quot;Property name&quot;,
+    &quot;value&quot;: &quot;Property value&quot;
+  }]
+}
+
+</code></pre>
+
+<h2 id="example">Example</h2>
+<pre><code>curl -u jsmith:passwd 
+   -H 'Content-Type: application/json'
+  -d @updateProject.json
+  http://myserver.example.com:8080/landscaper/security/cloudproject/1241aa10-5f98-4f11-be63-b21ad69c3e4b -X PUT
+</code></pre>
+
+<h2 id="example-json-request">Example JSON request</h2>
+<pre><code>{
+  &quot;cloudProviderId&quot;: &quot;fe8b00b5-0b1b-473a-b355-0f2294cd12b7&quot;,
+  &quot;description&quot;: &quot;Updated cloud project&quot;,
+  &quot;name&quot;: &quot;My updated cloud project&quot;,
+      &quot;properties&quot;: [
+        {
+            &quot;name&quot;: &quot;functionalId&quot;,
+            &quot;value&quot;: &quot;admin&quot;,
+            &quot;secure&quot;: &quot;false&quot;
+        },
+        {
+            &quot;name&quot;: &quot;functionalPassword&quot;,
+            &quot;value&quot;: &quot;password&quot;,
+            &quot;secure&quot;: true
+        }
+    ]
+}
+</code></pre>
+
+<p><strong>Note:</strong> The properties that you put in the JSON request overwrite all of the properties on the cloud project.</p>
+<p><strong>Note:</strong> You must specify the cloud provider ID in the JSON request, but you cannot change the cloud provider.</p>
+<p><strong>Parent topic:</strong> <a href="../security_cloudproject_/">security/cloudproject resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.api.doc/topics/security_cloudprojid_put.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

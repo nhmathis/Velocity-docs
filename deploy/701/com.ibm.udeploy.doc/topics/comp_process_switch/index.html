@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_process_switch/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Switch steps - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Switch steps", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="switch-steps">Switch steps</h1>
+<p>A switch step is a utility step that you use to branch process, based on the value of a property.</p>
+<p>When you add a switch step, you specify a property, either as the property name itself or in the same form as you would use in other steps, such as <code>${p:propertyName}</code>. Then, you add two or more outgoing connections from the step, each with a possible value for that property. At run time, the process follows the connection with the matching property value. The process also follows any connections with <code>fail</code> or <code>both</code> conditional flags.</p>
+<p>For example, the following figure shows a switch step for the myProperty component property. Two outgoing connections have different values for that property, including <code>value1</code> and <code>value2</code>. The third connection has the <code>default</code> value, which means that the process follows this connection if no other values are matched.</p>
+<p><img alt="A switch step with three outgoing connections, each with a different possible value for the property" src="../../images/comp_process_switch_a.gif" /></p>
+<p>To set the property to use, add the Switch step to the process and click the edit properties icon <img alt="The edit properties icon" src="../../images/edit_proc_step.gif" />. In the step properties, specify the property, either by specifying the property name by itself or in the same form as you would use in other steps, such as <code>${p:propertyName}</code>. You cannot use a secure property in this step.</p>
+<p>To check whether a property is defined, create a second property, and give that property a null value. Then you can compare other properties to that property to see whether they are defined. For example, the following process contains a property that is named nullProperty; this property is not defined. In the process, the switch step compares a property that is named myProperty to this null property. If the property is not defined, step 1 runs. If the property has the <code>othervalue</code> value, step 2 runs.</p>
+<p><img alt="A switch step that uses a property value as one of the possible values" src="../../images/comp_process_switch_b.gif" /></p>
+<p><strong>Parent topic:</strong> <a href="../process_steps/">Process step types and logic</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_process_switch.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

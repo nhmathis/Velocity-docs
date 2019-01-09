@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/installIntegrate_UCR_sync/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing IBM Bluemix DevOps Connect - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing IBM Bluemix DevOps Connect", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-ibm-bluemix-devops-connect">Installing IBM Bluemix DevOps Connect</h1>
+<p>Install IBM® Bluemix DevOps Connect to share data between HCL® UrbanCode™ Deploy, IBM UrbanCode Release, and IBM UrbanCode Cloud services and Bluemix Services.</p>
+<p>To register DevOps Connect, you must have an IBMid. If you do not have an IBMid, see <a href="https://www.ibm.com/account/profile/us?page=reg">https://www.ibm.com/account/profile/us?page=reg</a>.</p>
+<p>You must install a Java™ Runtime Environment version 7 or later on the host system and set the system <code>PATH</code> variable to its location.</p>
+<p>DevOps Connect is compatible with all versions of IBM UrbanCode Release and versions 6.2.1.2 and later of HCL UrbanCode Deploy. A patch is available for earlier versions of HCL UrbanCode Deploy. You can download the patch from IBM developerWorks. To install the patch, follow these steps:</p>
+<ol>
+<li>Stop the HCL UrbanCode Deploy server.</li>
+<li>Place the patch files in the \UCD_server\appdata\patches. If you renamed the appdata folder during installation, use that folder instead.</li>
+<li>Restart the HCL UrbanCode Deploy server.</li>
+</ol>
+<p>After you install a patch, DevOps Connect is compatible with HCL UrbanCode Deploy versions 6.2.0, 6.2.0.1, 6.2.0.2, 6.2.1, and 6.2.1.1. DevOps Connect is not compatible with HCL UrbanCode Deploy versions earlier than 6.2.0.</p>
+<p>The DevOps Connect installation file is an executable JAR file. After you download the file, place it on a computer that has access to the products that you want to integrate with, such as HCL UrbanCode Deploy. You start DevOps Connect by running the JAR file.</p>
+<p>After DevOps Connect starts, you can use a web browser to access the application's dashboard. The first time that you run DevOps Connect, you use your IBMid to register it with the IBM Cloud services. The IBM Cloud service issues an authentication token that is stored in the sync.properties file. On Windows, the sync.properties file and log files are stored in the \Users\my_directory\.ibm\cloud-sync folder on the computer that hosts DevOps Connect. On Linux, the sync.properties file is stored in the /home/my_directory/.ibm/cloud-sync folder.</p>
+<p><strong>Note:</strong> The /cloud-sync folder is created the first time that you run DevOps Connect.</p>
+<p>By default, only the user that registers DevOps Connect is authorized to use it. An authorized user can authorize other users to use the application. Authorized users can access the DevOps Connect web-based dashboard and install plug-ins and create integrations.</p>
+<ol>
+<li><a href="https://developer.ibm.com/urbancode/plugin/ibm-urbancode-sync/">Download DevOps Connect from the IBM developerWorks</a>. The downloaded file is an executable JAR file. You run this file to start DevOps Connect.</li>
+<li>Open a command window where you placed the JAR file and start DevOps Connect by using the following command: <code>java -jar devops-connect-build\_number.jar</code>. For example, <code>java -jar devops-connect-2.0.854198.jar</code>. DevOps Connect displays start-up messages in the command window.</li>
+<li>If you use a proxy, use this command to start DevOps Connect: <code>java -Dhttp.proxyHost=proxy_ip -Dhttp.proxyPort=proxy_port -jar cloud-sync-build_number.jar</code>. If you use a proxy and SSL, use this command: <code>java -Dhttps.proxyHost=proxy_ip -Dhttps.proxyPort=proxy_port -jar cloud-sync-build_number.jar</code>. The following is an example of a typical command: <code>java -Dhttps.proxyHost=10.0.0.100 -Dhttps.proxyPort=8800 -jar cloud-sync-1.0.787256.jar</code>. </li>
+<li>After DevOps Connect starts, use a web browser to access the application dashboard. The default URL is https://localhost:8443. You can change the port when you start the utility. For example, to change the port to <code>8444</code>, use this command to run the JAR file: <code>java -Dserver.port=8444 -jar devops-connect.jar</code>.</li>
+<li>On the registration page, if you are prompted to specify a name for the installation, provide a name. This name identifies the data from the installation in other places. </li>
+<li>Click <strong>Register</strong>. The first time that you access DevOps Connect, you are prompted to register.</li>
+<li>On the Sign-in to IBM page, enter your IBMid and password, and then click <strong>Sign In</strong>. The DevOps Connect dashboard is displayed. The email address of the user that registers the utility is saved in the <code>sync.registrar</code> property in the sync.properties file. Authorized users sign in each time they start the application.</li>
+<li>Click <strong>Settings</strong> and then, in the <strong>Allowed Users</strong> text box, enter the email addresses of users who are authorized to access the DevOps Connect dashboard. Separate addresses with commas. You can use the asterisk (*) wildcard character in the email addresses. For example, the pattern <code>*@.my_company.com</code> allows any user at <code>my_company.com</code> who has an IBMid to access the dashboard. Authorized users can install plug-ins and create integrations. The IBMid of the person who registered DevOps Connect is automatically authorized. The email addresses are saved in the <code>sync.user</code> property in the sync.properties file.</li>
+<li>To run DevOps Connect as a service on Linux, create a symlink from the DevOps Connect jar file to the init.d program. For example: <code>$ sudo ln -s /var/myapp/cloud-sync-build_number.jar /etc/init.d/myapp</code>. After you configure the application, you can use the standard service commands to manage DevOps Connect: <code>start</code>, <code>stop</code>, <code>restart</code>, and <code>status</code>. </li>
+</ol>
+<p>After you register, DevOps Connect generates a unique ID and saves it in the <code>sync.ID</code> property in the sync.properties file. The token that it receives from the IBM Cloud service is saved in the <code>sync.token</code> property. The token and ID identify the DevOps Connect instance.</p>
+<p>The plug-ins for IBM UrbanCode Release and HCL UrbanCode Deploy are already installed when you download the utility. Create integrations for one or both of the products.</p>
+<p>You can use values in the /home/my_directory/.ibm/cloud-sync/sync.properties file to manage various aspects of DevOps Connect. This table describes the available properties.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sync.installation.dir</code></td>
+<td>Directory where the devops-connect.jar file is located.</td>
+</tr>
+<tr>
+<td><code>sync.id</code></td>
+<td>Unique identifier that is used to authenticate DevOps Connect to the IBM Bluemix services. This property should not be modified.</td>
+</tr>
+<tr>
+<td><code>sync.name</code></td>
+<td>Optional name for the DevOps Connect instance. The name property can be used by IBM Bluemix services that integrate with multiple DevOps Connect instances.</td>
+</tr>
+<tr>
+<td><code>sync.token</code></td>
+<td>Unique identifier that is generated by IBM Bluemix services and used to authenticate DevOps Connect. This property should not be modified.</td>
+</tr>
+<tr>
+<td><code>sync.registrar</code></td>
+<td>IBMid of the user who registered DevOps Connect. This property should not be modified.</td>
+</tr>
+<tr>
+<td><code>sync.users</code></td>
+<td>Comma-delineated list of users who are authorized to use the DevOps Connect dashboard. This property should not be directly modified. Use the dashboard <strong>Settings</strong> tab to manage authorized users.</td>
+</tr>
+<tr>
+<td><code>sync.port</code></td>
+<td>DevOps Connect port number. If you set this property, you do not have to use the command line parameter when you start the application.</td>
+</tr>
+<tr>
+<td><code>http.proxyHost</code></td>
+<td>Proxy host URL. If you use a proxy, set this property and the <code>http.proxyPort</code> property.</td>
+</tr>
+<tr>
+<td><code>http.proxyPort</code></td>
+<td>Proxy port number.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../installIntegrate_UCR_cloud_cp/">Integrating with cloud and mobile services with IBM Bluemix DevOps Connect</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/installIntegrate_UCR_sync.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

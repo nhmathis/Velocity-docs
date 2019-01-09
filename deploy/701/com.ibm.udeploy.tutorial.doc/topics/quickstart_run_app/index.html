@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/quickstart_run_app/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lesson 6 Deploy the component - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lesson 6: Deploy the component", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="lesson-6-deploy-the-component">Lesson 6: Deploy the component</h1>
+<p>To deploy the component, run the application process on an environment.</p>
+<p>Using the application environment and process that you created in previous steps, you can deploy the component.</p>
+<ol>
+<li>Open the application page by clicking <strong>Applications</strong> and then clicking the application name.</li>
+<li>In the same row as your environment, click the <strong>Request Process</strong> icon <img alt="" src="../../images/request_process.gif" />.</li>
+<li>In the Run Process window, accept the default value for the <strong>Only Changed Versions</strong> parameter. If this check box is selected, no previously deployed component versions are deployed.</li>
+<li>In the <strong>Process</strong> list, select the <strong>hello App Process</strong> process.</li>
+<li>Click <strong>Choose Versions</strong>. The Component Versions window opens.</li>
+<li>In the Component Versions window, click <strong>Select For All</strong>, and then select <strong>Latest Available</strong>. Click <strong>OK</strong> to return to the Run Process window.</li>
+<li>
+<p>Click <strong>Submit</strong>.The Application Process Request page shows the progress of the request. From here, you can watch as the process runs. The following figure shows the running process.</p>
+<p><img alt="The Application Process Request page with running process" src="../../images/qs-plugin-design-12.gif" /></p>
+<p>If the process finishes, the <strong>Success</strong> status is shown, as in the following figure:</p>
+<p><img alt="The Application Process Request page with the Success status shown" src="../../images/qs-plugin-design-13.gif" /></p>
+<p>If the application process execution is not successful, click <strong>Expand All</strong> and in the same row as your application process, click <strong>View Child Execution</strong>. <strong>View Child Exection</strong> does not appear until you hover the mouse over the process. The Deployment of Component page shows the log for each step in the component process. From here, you can look at the output log for each step by clicking the <strong>Output Log</strong> icon <img alt="" src="../../images/output_log.gif" />.</p>
+</li>
+<li>
+<p>Open the target directory to confirm that the component artifacts are deployed.</p>
+</li>
+</ol>
+<p>The <code>helloWorld.zip</code> file is moved to the location that you specified in the <code>helloHome</code> property, as shown in the following figure:</p>
+<p><img alt="The component artifacts deployed" src="../../images/qs-plugin-design-14.gif" /></p>
+<p>The application process installed the helloWorld component into the target environment.</p>
+<p>Application processes can also uninstall or update components or run other configuration.</p>
+<p>For more information about running deployments, see <a href="../../../com.ibm.udeploy.doc/topics/deployment_ch/">Deploying applications</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../quickstart_abstract/">Create a simple helloWorld deployment</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/quickstart_run_app.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

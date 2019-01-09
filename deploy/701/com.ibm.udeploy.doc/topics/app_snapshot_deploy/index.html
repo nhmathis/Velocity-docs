@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_snapshot_deploy/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Deploying snapshots - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Deploying snapshots", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="deploying-snapshots">Deploying snapshots</h1>
+<p>After you create a snapshot, you can deploy the snapshot to an environment.</p>
+<p>Deploying a snapshot deploys the components in the snapshot. The components are deployed in the order in which they were added to the snapshot or to the environment on which the snapshot is based.</p>
+<ol>
+<li>From the HCL® UrbanCode™ Deploy dashboard, click <strong>Applications</strong>, and then select an application. </li>
+<li>On the application page, click <strong>Snapshots</strong>, and then select a snapshot.The environments that are defined for the application are listed at the bottom of the Dashboard page.</li>
+<li>For the environment where you plan to deploy the snapshot, click the <strong>Request Process</strong> icon.</li>
+<li>To deploy component versions whether or not they are already deployed, clear the <strong>Only Changed Version</strong> check box.By default, the <strong>Only Changed Version</strong> check box is selected so that only changed versions of components are deployed.</li>
+<li>Select the deployment process to run from the <strong>Process</strong> list. </li>
+<li>To run the process in the future, select the <strong>Schedule Deployment</strong> check box.If you select the <strong>Schedule Deployment</strong> check box, more fields become available so that you can specify the date and time to run the process, and configure the process to run on a recurring basis.</li>
+<li>Click <strong>Submit</strong>.Unless you scheduled the process to run in the future, the application process starts and deploys the snapshot.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../app_snapshot/">Snapshots</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_snapshot_deploy.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

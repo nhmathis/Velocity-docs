@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_agent_options/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Options for deploying agents - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Options for deploying agents", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="options-for-deploying-agents">Options for deploying agents</h1>
+<p>Typically, you do not edit the options that are used when HCL® UrbanCode™ Deploy agents are installed on virtual images. However, you can edit the code that is embedded in an agent resource to change how the agent is installed.</p>
+<p>When you create a blueprint, the editor adds a resource that represents the HCL UrbanCode Deploy agent, and this resource is installed automatically on each virtual image. The resource is named either <code>ucd_agent_install_win</code> or <code>ucd_agent_install_linux</code>, depending on the operating system that is installed on the virtual image. The resource includes a call to a script that installs the agent. On Linux™, the install-agent-with-options.sh script is called. On Microsoft™ Windows™, the install-agent-with-options.ps1 script is called. To change how the agent is installed, examine the code in the agent resource and adjust the arguments based on the information in the following table.</p>
+<table>
+<thead>
+<tr>
+<th>Option name</th>
+<th>Command-line parameter</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent name</td>
+<td>-n agent_name</td>
+<td>Required. The name of the agent to create.</td>
+</tr>
+<tr>
+<td>HCL UrbanCode Deploy remote host</td>
+<td>-s remote_host_URL</td>
+<td>Required. The host name of the HCL UrbanCode Deploy server or agent relay to connect to.</td>
+</tr>
+<tr>
+<td>Agent communication port</td>
+<td>-p port_number</td>
+<td>Required. The port number to use for communication with the remote host. By default, the port number is 7918 for HCL UrbanCode Deploy servers and 7916 for agent relays.</td>
+</tr>
+<tr>
+<td>Start option</td>
+<td>-x start_option</td>
+<td>Optional. After installation, starts the agent with the specified options. Valid options are start and run.</td>
+</tr>
+<tr>
+<td>Use agent relay</td>
+<td>-r</td>
+<td>Optional. Configures the agent for use with an agent relay.</td>
+</tr>
+<tr>
+<td>Initial team</td>
+<td>-t list_of_teams</td>
+<td>Optional. A list of team names, separated by commas, to add the agent to when it connects to the server. By default, the initial team is System Team.</td>
+</tr>
+<tr>
+<td>Proxy host</td>
+<td>-k proxy_host</td>
+<td>Optional. The host name of a proxy server to use with an agent relay.</td>
+</tr>
+<tr>
+<td>Proxy port</td>
+<td>-l proxy_port</td>
+<td>Optional. The port of a proxy server to use with an agent relay. By default, the proxy port number is 20080.</td>
+</tr>
+<tr>
+<td>Disable HTTP failover</td>
+<td>-d</td>
+<td>Optional. Disables HTTP failover handling for agents that connect through an agent relay.</td>
+</tr>
+<tr>
+<td>Install service</td>
+<td>-v</td>
+<td>Optional. This parameter works only on Linux computers. Installs the agent as a service.</td>
+</tr>
+<tr>
+<td>UCD install location</td>
+<td>-c</td>
+<td>Optional. Installs HCL UrbanCode Deploy agent to a desired location.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/blueprint_props_ov/">Blueprint properties, attributes, and parameters</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_agent_options.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

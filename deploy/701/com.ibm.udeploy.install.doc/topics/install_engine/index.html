@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/install_engine/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing the engine - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing the engine", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-the-engine">Installing the engine</h1>
+<p>To connect the blueprint design server to a cloud system, you need a Heat orchestration engine. Heat orchestration engines interpret blueprints and use them as patterns for cloud resources. To connect to OpenStack-based clouds, you extend the engine that is associated with the cloud. To connect to all other clouds, you install an engine with HCL® UrbanCode™ Deploy.</p>
+<ul>
+<li>See the system requirements in <a href="../sysRequire/">System requirements and performance considerations</a>.</li>
+<li>In the case that you are using Openstack Newton or higher, you must disable Heat convergence mode before installing the plugins. Open the <code>heat.conf</code> file (/etc/heat/heat.conf), and set <code>convergence_engine</code> to <code>False</code>. Then, restart the Heat engine services by running the <code>systemctl</code> stop and start commands.</li>
+</ul>
+<p>The blueprint designer uses OpenStack Heat engines that are customized with special resource types, which represent artifacts on HCL UrbanCode Deploy and on cloud systems. With these resource types, you can create blueprints that include HCL UrbanCode Deploy components and blueprints that you can provision to clouds.</p>
+<p>You can connect to non-OpenStack clouds by installing an engine provided by HCL UrbanCode Deploy, or you can connect to an OpenStack cloud by extending the Heat engine that is associated with the OpenStack cloud. For information that shows the typical topologies, see <a href="../../../com.ibm.udeploy.doc/topics/ov_systems/">Systems and topology overview</a>.</p>
+<p><strong>Connecting to a non-OpenStack cloud:</strong></p>
+<p>To connect to a non-OpenStack cloud, you must install a standalone engine provided by HCL UrbanCode Deploy.</p>
+<ul>
+<li><a href="../install_engine_standalone/">Installing a standalone engine</a>: To deploy environments to non-OpenStack clouds, such as Amazon Web Services, SoftLayer, VMware, Google Cloud, and Microsoft Azure, you install the blueprint design server and Heat engine through IBM UrbanCode Deploy. You can install the engine in interactive mode or in silent mode.</li>
+</ul>
+<p>In this scenario, you install by using the <code>install.sh</code> script. This script installs an OpenStack Keystone and Heat engine provided by the HCL UrbanCode Deploy blueprint designer. The Heat engine is installed with plugins that allow the blueprint designer to integrate with an HCL UrbanCode Deploy server and with non-OpenStack clouds.</p>
+<p><strong>Connecting to an OpenStack-based cloud:</strong></p>
+<p>To connect to an OpenStack-based cloud, you must extend the Heat engine that is associated with the OpenStack cloud; do not use an engine that is provided by HCL UrbanCode Deploy.</p>
+<ul>
+<li><a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>: To connect the blueprint design server to an OpenStack-based cloud, extend the Heat orchestration engine that is associated with the cloud. By extending the engine, you add custom types to it so that you can use it with the blueprint design server.</li>
+</ul>
+<p>In this scenario, you install the plugins by using the <code>extend-ucd-existing-engine.sh</code> script. This script installs the plugin into an already existing Heat engine of your OpenStack installation. This plugin allows the blueprint designer to integrate with an HCL UrbanCode Deploy server.</p>
+<p><strong>Related topics</strong>:</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/install_engine.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

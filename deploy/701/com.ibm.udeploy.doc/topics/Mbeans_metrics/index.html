@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/Mbeans_metrics/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Monitor operating details - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Monitor operating details with MBeans", url: "#_top", children: [
+              {title: "Agent summary information", url: "#agent-summary-information" },
+              {title: "Individual component information", url: "#individual-component-information" },
+              {title: "Component summary information", url: "#component-summary-information" },
+              {title: "Individual application information", url: "#individual-application-information" },
+              {title: "Viewing metrics with JConsole", url: "#viewing-metrics-with-jconsole" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="monitor-operating-details-with-mbeans">Monitor operating details with MBeans</h1>
+<p>With an external monitoring tool, such as IBM® Performance Management on Cloud 8.1.3 or New Relic, you can use Managed Beans (MBeans) to review numerous details about HCL® UrbanCode™ Deploy. For example, you can view statistics that specify how many components are available or see how long it takes for an application process to run to completion. You can use these statistics and details to assess the health of your deployments and deployment processes.</p>
+<p>You can request and specify metrics by using four MBeans. Two MBeans provide summary information for all the targeted elements. For example, the agent summary information MBean provides aggregate information about all agents. The other two MBeans provide specific information about elements. The individual component information MBean provides details about a particular component, which you specify by name. The following list shows the four areas and the structure of the data that each MBean provides. Access the data according to the requirements of your monitoring tool. Refer to the documentation for the tool as required.</p>
+<p>By default, the metrics monitoring is turned off. To enable the metrics monitoring, you must add a property to the installed.properties file. By default, this file is in the /opt/ibm-ucd/server/conf/server folder. To enable monitoring, add this line to the file:</p>
+<pre><code>jmx.monitoring.enabled=true
+</code></pre>
+
+<p>If your servers are working in high availability, you can specify how frequently the servers synchronize data to ensure that the servers maintain a consistent list of components and applications. In the installed.properties file, add the following line:</p>
+<pre><code>jmx.monitoring.ha.update.interval.minutes=measurement\_update\_time
+</code></pre>
+
+<p>where measurement_update_time is a whole number is greater than or equal to 30. You cannot get updates more frequently than every 30 minutes. This limit reduces the processing requirements on the servers.</p>
+<p>You can monitor four areas of operational details.</p>
+<h2 id="agent-summary-information">Agent summary information</h2>
+<p>JMX: com.urbancode.ds.agents:type=monitor  </p>
+<p><code>AllAgentCount</code> (The total number of agents)<br />
+<code>ConnectingAgentCount</code> (The number of agents that are currently attempting to connect to the server)<br />
+<code>UpgradeRecommendAgentCount</code> (The number of agents to upgrade to achieve best results)<br />
+<code>UpgradeRequiredAgentCount</code> (The number of agents that must be upgraded)<br />
+<code>ErrorAgentCount</code> (The number of agents that are in an error state)<br />
+<code>OfflineAgentCount</code> (The number of agents that are offline)<br />
+<code>InstallableAgentCount</code> (The number of agents that can be installed)<br />
+<code>OnlineAgentCount</code> (The number of agents that are online)<br />
+<code>LicensedAgentCount</code> (The number of the agents that have licenses)<br />
+<code>UnlicensedAgentCount</code> (The number of unlicensed agents)  </p>
+<p><code>PreFIPSAgentCount</code> (The number of agents that were created before version 6.0.1.0.4. After this version, HCL UrbanCode Deploy supported the installation of FIPS compliant servers.)  </p>
+<h2 id="individual-component-information">Individual component information</h2>
+<p>JMX: com.urbancode.ds.components.individual.monitor:type=<br />
+<code>COMPONENT\_NAME</code><br />
+<code>LatestVersionSizeInBytes</code> (The size in bytes of the most recent version of the specified component)<br />
+<code>PreviousVersionSizeInBytes</code> (The size in bytes of the previous version of the specified component)<br />
+<code>AverageVersionSizeInBytes</code> (The average in bytes size of all the versions of the specified components)  </p>
+<p>You can specify multiple components individually in three ways:</p>
+<ul>
+<li>
+<p>Name the component specifically, for example:</p>
+<p>```
+com.urbancode.ds.components.individual.monitor:type=
+     ComponentA</p>
+<p>com.urbancode.ds.components.individual.monitor:type=
+     ComponentB</p>
+<p>```</p>
+</li>
+<li>
+<p>Use wildcards to report components with names that match the sample, for example:</p>
+<p><code>com.urbancode.ds.components.individual.monitor:type=
+     Component\*</code></p>
+</li>
+<li>
+<p>Use a wildcard to report all components, for example:</p>
+<p><code>com.urbancode.ds.components.individual.monitor:type=*</code></p>
+</li>
+</ul>
+<h2 id="component-summary-information">Component summary information</h2>
+<p>JMX: com.urbancode.ds.components.summary:type=monitor<br />
+<code>TotalComponentCount</code> (The total number of components)<br />
+<code>FailedImportComponentCount</code> (The number of components whose latest version was not imported after an import request)<br />
+<code>ImportingComponentCount</code> (The number of components that are currently being imported)<br />
+<code>NoVersionComponentCount</code> (The number of components that do not have versions)  </p>
+<p><code>OKComponentCount</code> (The number of components whose latest versions were not imported successfully)</p>
+<h2 id="individual-application-information">Individual application information</h2>
+<p>JMX:com.urbancode.ds.applications.individual.monitor:type=<br />
+<code>APPLICATION\_NAME</code><br />
+<code>LatestDeploymentDurationInMS</code> (The amount of time that the most recently completed deployment process lasted for the specified component)<br />
+<code>PreviousDeploymentDurationInMS</code> (The amount of time that the previously completed deployment process lasted for the specified component)<br />
+<code>AverageDeploymentDurationInMS</code> (The average amount of time that completed deployment processes lasted for the specified component)</p>
+<ul>
+<li>
+<p>Name the component specifically, for example:</p>
+<p>```
+com.urbancode.ds.components.individual.monitor:type=
+     ApplicationA</p>
+<p>com.urbancode.ds.components.individual.monitor:type=
+     ApplicationB</p>
+<p>```</p>
+</li>
+<li>
+<p>Use wildcards to report components with names that match the sample, for example:</p>
+<p><code>com.urbancode.ds.components.individual.monitor:type=
+     Application\*</code></p>
+</li>
+<li>
+<p>Use a wildcard to report all components, for example:</p>
+<p><code>com.urbancode.ds.components.individual.monitor:type=*</code></p>
+</li>
+</ul>
+<h2 id="viewing-metrics-with-jconsole">Viewing metrics with JConsole</h2>
+<p>JConsole is one external monitoring tool that is immediately available to you. For information about JConsole and starting the tool, see <a href="http://docs.oracle.com/javase/7/docs/technotes/guides/management/jconsole.html">Using JConsole</a>. After you turn on monitoring as described earlier and start JConsole, select a new connection as shown in this illustration:</p>
+<p><img alt="Connection menu for JConsole" src="../../images/jconsole_conex.gif" />.</p>
+<p>Then, click the <strong>Mbeans</strong> tab. In the left navigation, select the metrics to view.</p>
+<p><img alt="Available metrics in JConsole" src="../../images/jconsole_mbean.gif" /></p>
+<p><strong>Parent topic:</strong> <a href="../reports_ch/">Reporting</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/Mbeans_metrics.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

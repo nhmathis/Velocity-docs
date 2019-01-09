@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/ud_properties_using/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Referring to properties - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Referring to properties", url: "#_top", children: [
+              {title: "Referring to properties", url: "#referring-to-properties_1" },
+              {title: "Properties in application processes and component processes", url: "#properties-in-application-processes-and-component-processes" },
+              {title: "Secure properties", url: "#secure-properties" },
+              {title: "Property order of precedence", url: "#property-order-of-precedence" },
+              {title: "Example: Overriding server locations", url: "#example-overriding-server-locations" },
+              {title: "Setting multiple component properties by environment", url: "#setting-multiple-component-properties-by-environment" },
+              {title: "Component version properties", url: "#component-version-properties" },
+              {title: "Using the ? wildcard in property references", url: "#using-the-wildcard-in-property-references" },
+              {title: "Escaped characters", url: "#escaped-characters" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="referring-to-properties">Referring to properties</h1>
+<p>HCL® UrbanCode™ Deploy provides several ways to refer to properties.</p>
+<h2 id="referring-to-properties_1">Referring to properties</h2>
+<p>Properties can be referred to by scope or without scope. The scope is the type of artifact that contains the property, such as the environment or component. You refer to a property by scope this way:</p>
+<pre><code>${p:scope/propertyName}
+</code></pre>
+
+<p>You refer to a property without scope this way:</p>
+<pre><code>${p:propertyName}
+</code></pre>
+
+<p>For example, if you create an environment variable that is named UAT, you can refer to it this way:</p>
+<pre><code>${p:environment/UAT}
+</code></pre>
+
+<p>You can refer to the same environment variable without scope this way:</p>
+<pre><code>${p:UAT}
+</code></pre>
+
+<p>In the same way, you can refer to many types of properties, such as application properties, system properties, and resource properties.</p>
+<p><strong>Warning:</strong> In some cases, you can refer to a property without the <code>p:</code> prefix, such as in the code <code>${myProperty}</code>. This method for referring to properties is deprecated and should not be used. Referring to properties in this way can conflict with shell script variables or other values.</p>
+<p>Use the <code>?</code> syntax if you are not sure about a property name:</p>
+<pre><code>${p?:propertyName}
+</code></pre>
+
+<p>This syntax returns a blank if the property is not found, and avoids the undefined property error.</p>
+<h2 id="properties-in-application-processes-and-component-processes">Properties in application processes and component processes</h2>
+<p>When you create or edit process steps for applications and components, you can use the autocomplete feature to determine which properties are available in a particular context. When you are editing an input field for a process step, if you type ${p:, a list of the available property scopes is displayed. Select a scope from the list. The list of all available properties in that scope is then displayed. Select the property to use from the list.</p>
+<h2 id="secure-properties">Secure properties</h2>
+<p>When you create a property, you can specify whether it is secure. Secure properties are stored in encrypted form. Secure properties are encrypted with an Advanced Encryption Standard (AES) algorithm and a 128-bit key. Secure properties are displayed in obscured form in the user interface.</p>
+<p>If you create a custom plug-in that uses secure properties, the property value is displayed in obscured form in the user interface. For example, if your plug-in prints the property value to standard output and you examine the standard output in the user interface, the property value is displayed in obscured form.</p>
+<p>If your custom plug-in writes the property value to a file, then the property value is not obscured.</p>
+<p><strong>Note:</strong> Use strong and complex values for secure properties. Because the secure property value is obscured in the output log, any other text that matches the secure property value is also obscured.</p>
+<h2 id="property-order-of-precedence">Property order of precedence</h2>
+<p>If a property is defined in multiple places, its value is determined by the property order of precedence. The following list defines the order of precedence from highest to lowest:</p>
+<p>|Process|
+|Component version|
+|Resource|
+|Agent|
+|Environment|
+|Component|
+|Application|
+|System|</p>
+<p>If you have an environment property that is named <code>${p:environment/db.hostname}</code> and a resource property with the same name, you can refer to the resource property by using <code>${p:db.hostname}</code> or <code>${p:resource/db.hostname}</code>. Because the resource property is higher on the order of precedence than the environment property, in this case you must refer to the environment property by using the scoped format: <code>${p:environment/db.hostname}</code>.</p>
+<h2 id="example-overriding-server-locations">Example: Overriding server locations</h2>
+<p>Consider this example: Initially you have one Tomcat server. To store the location of that server, you create an application property with the name <code>Tomcat.server.url</code> and the location of that server. Your environments refer to that property to know where the Tomcat server is.</p>
+<p>Then, suppose that you add a second Tomcat server. This Tomcat server is intended for use only by specific environments. So on those specific environments, you create an environment property with the same name <code>Tomcat.server.url</code> and the location of the second server.</p>
+<p>Now the environment has two properties with the same name: one system property and one environment property. The order of precedence determines which property value is used. Environment properties come before system properties in the order of precedence. Therefore, the environment uses the value of the environment property instead of the system property. In this way, you can use system properties to set defaults and then you can override those properties in specific contexts.</p>
+<h2 id="setting-multiple-component-properties-by-environment">Setting multiple component properties by environment</h2>
+<p>When components share a property, you can save time by setting the property value on the environment instead of setting it on every component. To use this feature:</p>
+<ol>
+<li>Click <strong>Components</strong> > <strong>selected component</strong> > <strong>Configuration</strong> > <strong>Environment Property Definitions</strong>.</li>
+<li>On the Environment Property Definitions page, define the property.</li>
+<li>Repeat the process for each effected component.</li>
+<li>On the environment that uses the components, click <strong>Configuration</strong> > <strong>Environment Properties</strong> > <strong>Set a Single Value</strong>.</li>
+<li>Set the property value.</li>
+</ol>
+<h2 id="component-version-properties">Component version properties</h2>
+<p>Properties can be defined for component versions. Each version can have a unique property value. To use this feature:</p>
+<ol>
+<li>Click <strong>Components</strong> > <strong>selected component</strong> > <strong>Configuration</strong> > <strong>Version Property Definitions</strong>.</li>
+<li>On the Version Property Definitions page, define the property. By default, this value is applied to every version that is created for this component.</li>
+<li>To override a component version property with a unique value, click <strong>Configuration</strong> > <strong>Version Properties</strong> for the version.</li>
+<li>Set the property value.</li>
+</ol>
+<h2 id="using-the-wildcard-in-property-references">Using the ? wildcard in property references</h2>
+<p>The question mark character, <code>?</code>, can be used to reference properties. The syntax is:</p>
+<pre><code>${p?:propertyName}
+</code></pre>
+
+<p>For example:</p>
+<pre><code>${p?:agent/wsadmin.path}
+</code></pre>
+
+<p>returns the value of the property if it exists, otherwise it returns an empty string.</p>
+<h2 id="escaped-characters">Escaped characters</h2>
+<p>HCL UrbanCode Deploy escapes the following characters:</p>
+<pre><code>
+\
+=
+,
+</code></pre>
+
+<p>Replace "\" with "\\"; "=" with "\="; and "," with "\,".</p>
+<p><strong>Parent topic:</strong> <a href="../ud_properties_overview/">Properties</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/ud_properties_using.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

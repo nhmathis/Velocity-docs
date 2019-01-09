@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/snapshot_abstract/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating and deploying snapshots - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating and deploying snapshots", url: "#_top", children: [
+              {title: "Learning objectives", url: "#learning-objectives" },
+              {title: "Time required", url: "#time-required" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-and-deploying-snapshots">Creating and deploying snapshots</h1>
+<p>In this tutorial, you deploy a simple web application to a new environment with HCL® UrbanCode™ Deploy. You create a snapshot of the components in an application, and then deploy the snapshot to an environment.</p>
+<h2 id="learning-objectives">Learning objectives</h2>
+<p>In this tutorial, you learn how to complete these tasks:</p>
+<ul>
+<li>Create a snapshot of an environment's components to quickly deploy its application to another environment.</li>
+<li>Configure environments on which to deploy applications.</li>
+<li>Select a snapshot while you run an application process to promote the snapshots to a new environment.</li>
+</ul>
+<h2 id="time-required">Time required</h2>
+<p>Approximately 1 hour</p>
+<p><strong>Note:</strong> You must complete <a href="../webapp_abstract/">Deploying a simple web application</a> before you begin this tutorial.</p>
+<ul>
+<li><strong><a href="../snapshot_intro/">Introduction</a></strong><br />
+In this tutorial, you deploy a simple web application to a new environment with HCL UrbanCode Deploy. You create a snapshot of the components in an application, and then deploy the snapshot to an environment.</li>
+<li><strong><a href="../snapshot_configure_agent/">Configuring the server and target system</a></strong><br />
+Modify the HCL UrbanCode Deploy server that you used in the previous tutorial. Create another agent resource and incorporate a new environment property to allow for easy reuse.</li>
+<li><strong><a href="../snapshot_snapshots/">Lesson 1: Adding snapshots</a></strong><br />
+Creating a snapshot involves saving a collection of component versions that are part of an application.</li>
+<li><strong><a href="../snapshot_environment/">Lesson 2: Creating an environment</a></strong><br />
+Environments are deployment targets for the application components that you specify. You create another environment in the application's delivery pipeline to facilitate multiple active applications. You apply an agent resource and specify which components the agent resource deploys.</li>
+<li><strong><a href="../snapshot_deploy/">Lesson 3: Deploying the snapshots</a></strong><br />
+To promote the snapshot to an environment, apply the snapshot when you run the application process.</li>
+<li><strong><a href="../snapshot_summary/">Summary</a></strong><br />
+In this tutorial, you created and deployed a snapshot to an environment in HCL UrbanCode Deploy.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_tutorials/">Tutorials</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/snapshot_abstract.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

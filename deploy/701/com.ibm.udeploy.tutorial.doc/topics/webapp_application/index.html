@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/webapp_application/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lesson 3 Creating an application and an environment - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lesson 3: Creating an application and an environment", url: "#_top", children: [
+              {title: "Creating an application", url: "#creating-an-application" },
+              {title: "Creating an environment", url: "#creating-an-environment" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="lesson-3-creating-an-application-and-an-environment">Lesson 3: Creating an application and an environment</h1>
+<p>Applications are collections of components. Environments represent systems on which you deploy the application components.</p>
+<p>Before you start this lesson, ensure that your agent is running. Click <strong>Resources</strong> > <strong>Agents</strong> and make sure that your agent is listed as <code>Online</code>, as in the following figure:</p>
+<p><img alt="The agent in the list of agents; the Status column shows that the agent is online" src="../../images/webapp_configure_a.gif" /></p>
+<p>In this lesson, you add the three components to an application and then create an environment on which to deploy the application. You also add your agent to the environment.</p>
+<p><strong>Parent topic:</strong> <a href="../webapp_abstract/">Deploying a simple web application</a></p>
+<h2 id="creating-an-application">Creating an application</h2>
+<p>Creating an application involves selecting the components that are in the application.</p>
+<ol>
+<li>Click the <strong>Applications</strong> tab, and then click <strong>Create Application</strong>. </li>
+<li>Name the new application <code>JPetStore</code>, and then click <strong>Save</strong>. </li>
+<li>Add the components to the application: <ol>
+<li>Click the <strong>Applications</strong> tab, and then click the new application, <code>JPetStore</code>. </li>
+<li>Click the <strong>Components</strong> tab for the application (not the <strong>Components</strong> tab at the top of the page), and then click <strong>Add Component</strong>. </li>
+<li>In the Add a Component window, in the <strong>Select a Component</strong> list, select the three components: <code>JPetStore-APP</code>, <code>JPetStore-WEB</code>, and <code>JPetStore-DB</code>.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+</li>
+</ol>
+<p>The application includes the three components, as shown in the following figure. Components can be included in any number of applications.</p>
+<p><img alt="The contents of the application on the Components tab, including the three components of the sample application" src="../../images/webapp_application_c.gif" /></p>
+<h2 id="creating-an-environment">Creating an environment</h2>
+<p>Creating an environment involves selecting one or more agent resources and specifying which components are deployed to each agent resource.</p>
+<ol>
+<li>Define an environment for the application: <ol>
+<li>Go to the <strong>Environments</strong> tab for the application.</li>
+<li>Click <strong>Create Environment</strong>. </li>
+<li>Specify the name to be Tutorial environment 1.</li>
+<li>Accept the defaults in the other fields in this window and click <strong>Save</strong>.</li>
+</ol>
+</li>
+<li>
+<p>Specify the properties for the environment.When you created the component processes, you included parameters that specify the location of artifacts on the target system, such as the location of the application server. Because these properties can vary on different target systems, you specify these properties as environment properties.</p>
+<ol>
+<li>Open the environment by clicking the environment name. </li>
+<li>Open the environment properties by clicking <strong>Configuration</strong> and then clicking <strong>Environment Properties</strong>. </li>
+<li>
+<p>Add the following properties one at a time by clicking <strong>Add Property</strong> and specifying the name and value of the property as shown in the following table:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tomcat.home</code></td>
+<td>The Tomcat home folder on the target computer</td>
+<td>/opt/apache-tomcat-6.0.39 on Linux™ or C:\apache-tomcat-6.0.39 on Windows™</td>
+</tr>
+<tr>
+<td><code>tomcat.contextroot</code></td>
+<td>The Tomcat webapp folder on the target computer, which is an identifier in the application URL</td>
+<td>For all versions of Tomcat, specify <code>JPetStoreDev</code></td>
+</tr>
+<tr>
+<td><code>db.url</code></td>
+<td>The URL to the MySQL database, relative to the target system</td>
+<td>If you installed MySQL on the same system as the agent and used the database name <code>jpetstore</code>, the URL looks like the following example: <code>jdbc:mysql://localhost:3306/jpetstore</code></td>
+</tr>
+<tr>
+<td><code>tomcat.manager.url</code></td>
+<td>The location of the Tomcat manager application</td>
+<td>For Tomcat version 6, specify <code>http://localhost:8081/manager</code> ; for Tomcat version 7 or 8, specify <code>http://localhost:8081/manager/text</code></td>
+</tr>
+<tr>
+<td><code>tomcat.start</code></td>
+<td>The location of the startup script for Tomcat</td>
+<td>/opt/apache-tomcat-6.0.39/bin/startup.sh on Linux or C:\apache-tomcat-6.0.39\bin\startup.bat on Windows</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</li>
+<li>
+<p>Add the agent to the environment.When you set up the agent, you added the agent as a resource to a resource group. Now you can use that resource as part of the environment, as described in the following steps:</p>
+<ol>
+<li>Click the <strong>Resources</strong> tab for the environment.Make sure that you are on the <strong>Resources</strong> tab for the environment and not the <strong>Resources</strong> tab at the top of the page.</li>
+<li>Click <strong>Add Base Resources</strong>. The Add Resource to Environment window shows all of the resources that are available on the server. </li>
+<li>Select the check box next to your agent and then click <strong>OK</strong>. 
+The resource is shown on the Resources tab for the environment, as shown in the following figure:</li>
+</ol>
+<p><img alt="The Resources tab for the environment, which shows the resource that is bound to the environment" src="../../images/webapp_application_a.gif" /></p>
+</li>
+<li>
+<p>Map the components to this agent resource. If you had many agents on a system with multiple nodes, you would specify which components run on each agent resource. In this case, you have only one agent resource, so all of the components run on this agent.</p>
+<ol>
+<li>On the same row as the agent resource, click <strong>Actions</strong> > <strong>Add Component</strong>.The <strong>Actions</strong> button does not appear until you hover the mouse over the resource.</li>
+<li>Select the application component and then click <strong>Save</strong>. </li>
+<li>
+<p>Repeat the process to add the other components to the resource.</p>
+<p><strong>Note:</strong> Be sure to add each component to the agent resource and not to another component. The components must be at the same hierarchy level, and not as child items of each other.</p>
+</li>
+</ol>
+<p>Now the components are mapped to the target system, as shown in the following figure:</p>
+<p><img alt="The Resources tab for the environment, showing the agent with three components that are mapped to it" src="../../images/webapp_application_b.gif" /></p>
+</li>
+</ol>
+<p>The new environment appears on the Environments tab. Now that the environment is prepared and the agent is running, you can run application processes on the environment to deploy the components.</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/webapp_application.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_import/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Importing applications - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Importing applications", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="importing-applications">Importing applications</h1>
+<p>If you exported an application, you can import the application on a different server. When you import an application, you can create an entirely new application or upgrade an existing one.</p>
+<p>To move applications between servers, you export the applications and import them to a different server.</p>
+<p><strong>Note:</strong> You must create the JSON file that contains an application on a server that uses the same version of HCL® UrbanCode™ Deploy as the destination server.</p>
+<p>When you import an application, components and other items that are associated with the application are also imported, including their properties and processes (if they are available to the importing server).</p>
+<p><strong>Note:</strong> Notification schemes are not imported.</p>
+<p>When you import an application, components and other items that are associated with the application are also imported, including their properties and processes (if they are available to the importing server).</p>
+<p>When you export components, applications, processes, or templates, and then import them on a different computer, the same versions of the same plug-ins must be installed on both computers.</p>
+<p>For information about templates that are associated with imported components, see <a href="../comp_import/">Importing components</a>.</p>
+<p><strong>Notes:</strong> </p>
+<ul>
+<li>If imported components have the Import Versions Automatically parameter set to true, HCL UrbanCode Deploy automatically imports component versions if the artifacts are accessible to the importing server.</li>
+<li>
+<p>You might receive an error message that indicates the Java™ heap space is out of memory when you attempt to import an application. To resolve the issue, increase the Java heap size. Open the server_directory/bin/set_env file, and set the Java heap size to a higher value, such as 2 GB.</p>
+</li>
+<li>
+<p>Open the Import Applications dialog box by clicking <strong>Applications</strong> > <strong>Import Applications</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Choose File</strong>, and then select the name of the JSON file that contains the application definition. </p>
+<p><strong>Note:</strong> You must create the JSON file that contains the application definition on a server that uses the same version of HCL UrbanCode Deploy as the destination server.</p>
+</li>
+<li>
+<p>To upgrade an existing application, select <strong>Upgrade Application</strong>. To create an application, leave <strong>Upgrade Application</strong> cleared. If the name of the application in the JSON file (not the name of the file itself) matches an existing application name, then the application parameters are updated. If items such as processes or properties exist, new versions are created. New items, such as processes, environments, components, or properties, are also added. If the name of the application is not found, the import action has no effect.</p>
+<p><strong>Note:</strong> The application name is the first parameter in the JSON file. This example shows the first parameter in the JSON file:</p>
+<p><code>"name": "helloWorldApplication",</code></p>
+</li>
+<li>
+<p>Configure how to import the items that are associated with the application. When you import an application, all application templates, components, generic processes, and resource templates that are associated with the application are also imported. For each item type, you must select the option from the list that determines how each item type is imported or upgraded. If your application does not contain items of a type, accept the default value.</p>
+<ul>
+<li>
+<p><strong><em>*Application Template Upgrade Type</em></strong>*</p>
+<p>If the application was created from an application template, you must specify how to import the application template.</p>
+</li>
+<li>
+<p><strong><em>*Component Upgrade Type</em></strong>*</p>
+<p>If the application contains components, you must specify how to import them.</p>
+<p><strong>Note:</strong> The components must be on the importing server.</p>
+</li>
+<li>
+<p><strong><em>*Generic Process Upgrade Type</em></strong>*</p>
+<p>If the application processes contain generic processes, you must specify how to import them. If you are also upgrading components, then the generic processes that are called in the component processes are also affected. The import process has different results if the generic processes exist or not.</p>
+<p><strong>Note:</strong> The server tracks generic processes by name. If a generic process on the server is assigned the same name as a generic process that is imported, then the generic process exists on the server.</p>
+</li>
+<li>
+<p><strong><em>*Resource Template Upgrade Type</em></strong>*</p>
+<p>The application template might also contain resource templates. Specify how to import resource templates that have the same names as existing resource templates.</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th> </th>
+<th> </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Use Existing Item Type</strong></td>
+<td>To use the same item that is used by the imported application, select this option. The new application contains references to the item.If you are upgrading, the application uses the imported item.</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>|
+    |<strong>Create Item Type</strong>|To create an item that is based on the item that the imported application uses, select this option. A new item is created that is based on the item of the imported application. If you are upgrading, the application uses the newly created item, and it no longer uses the item that it previously used.</p>
+<p>|
+    |<strong>Fail If Item Type Exists</strong>|When you want to create a fresh installation, select this option. If you are creating an application, HCL UrbanCode Deploy creates both a new application and item unless the item exists, in which case the application is not imported.If you are upgrading, the upgrade fails if the item exists on the importing server.</p>
+<p>|
+    |<strong>Fail If Item Type Does Not Exist</strong>|To ensure that an item is on the importing server, select this option. If you are creating an application, HCL UrbanCode Deploy creates both a new application and item unless the item does not exist, in which case the application is not imported. If you are upgrading, the upgrade fails if the imported item does not exist on the importing server.</p>
+<p>|
+    |<strong>Upgrade Item Type If Exists</strong>|To upgrade the existing item, select this option. This option creates an application and upgrades the existing item with data from the imported application. If you are upgrading and an existing item matches an imported one, the item is upgraded. If the imported item matches the existing one, the imported item is used.</p>
+<p>|</p>
+<ol>
+<li>Click <strong>Submit</strong>.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../app_create/">Creating applications</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_import.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/ha_add_server/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Adding servers to clusters - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Adding servers to clusters", url: "#_top", children: [
+              {title: "Installing new cluster servers", url: "#installing-new-cluster-servers" },
+              {title: "Moving existing servers to a cluster", url: "#moving-existing-servers-to-a-cluster" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="adding-servers-to-clusters">Adding servers to clusters</h1>
+<p>You can add new servers to a cluster at installation time, or you can move existing servers to be part of a cluster.</p>
+<p><strong>Parent topic:</strong> <a href="../server_install_clustered/">Setting up high-availability clusters</a></p>
+<h2 id="installing-new-cluster-servers">Installing new cluster servers</h2>
+<p>The easiest way to add servers to a cluster is to install new servers. The installation program sets them up to be part of the cluster.</p>
+<ul>
+<li>Set up a cluster of servers, including setting up a load balancer, shared database, and network storage. See <a href="../ha_config_server/">Setting up clusters of servers</a>.</li>
+<li>Each server must run the same version of HCL® UrbanCode™ Deploy.</li>
+<li>
+<p>Ensure that each server can connect to each other server on the network. For example, ensure that your firewall rules allow the servers to communicate over HTTPS and JMS.</p>
+</li>
+<li>
+<p>On the system on which you are installing the new server, set up a connection to the network storage. For example, on Linux™ systems, you might mount a remote drive to the local file system.</p>
+</li>
+<li>Install the server as described in <a href="../../../com.ibm.udeploy.install.doc/topics/server_install_interactive/">Installing the server in interactive mode</a> with the following details: <ul>
+<li>When the installation program asks for database information, specify the shared database for the cluster.</li>
+<li>When the installation program asks for the host name for users to access, specify the host name of the load balancer.</li>
+<li>When the installation program asks whether the server is part of a high-availability cluster, specify yes.</li>
+<li>When the installation program asks for the location of the application data, specify the same folder on the network storage that the other cluster servers are using. If this is the first server in the cluster, you can specify any folder on the network storage. In this case, other servers that you add to the cluster must also use this folder.</li>
+</ul>
+</li>
+<li>Set the new server to use the same security certificate as the existing servers. For example, you can copy the certificate in the /opt/tomcat/conf/tomcat.keystore file to the other servers. When you import the certificate into other servers, in the server.xml file, set the keyAlias property to point to the imported certificate.</li>
+<li>If there are other servers in the cluster, create a cluster connect on one of the existing servers to the new server. See <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_network/">Creating cluster connections</a>.</li>
+<li>Configure the load balancer to send HTTP/HTTS traffic to the new cluster server. </li>
+</ul>
+<h2 id="moving-existing-servers-to-a-cluster">Moving existing servers to a cluster</h2>
+<ul>
+<li>Set up a cluster of servers, including setting up a load balancer, shared database, and network storage. See <a href="../ha_config_server/">Setting up clusters of servers</a>.</li>
+<li>Each server must run the same version of HCL UrbanCode Deploy.</li>
+<li>
+<p>Ensure that each server can connect to each other server on the network. For example, ensure that your firewall rules allow the servers to communicate over HTTPS and JMS.</p>
+</li>
+<li>
+<p>On the system that hosts the server, set up a connection to the network storage. For example, on Linux systems, you might mount a remote drive to the local file system.</p>
+</li>
+<li>If the sever contains elements that you want to keep, such as components, applications, or processes, export those elements and import them into an existing cluster server. </li>
+<li>Stop the server. </li>
+<li>
+<p>Edit the installed.properties file on the server, located in the install_folder/conf/server directory. </p>
+<ol>
+<li>Set the server.appdata.dir property to the location of the application data folder that the cluster servers are using. </li>
+<li>Copy the value of the encryption.keystore.alias property to the equivalent file on the new cluster server from a server that is already in the cluster. </li>
+<li>
+<p>Add the following line of code to the file: </p>
+<p><code>com.urbancode.ds.UDeployServer.multiserver=true</code></p>
+</li>
+<li>
+<p>Update the database settings to use the same database as the other servers in the cluster. </p>
+</li>
+<li>Set the new server to use the same security certificate as the existing servers. For example, you can copy the certificate in the /opt/tomcat/conf/tomcat.keystore file to the other servers. When you import the certificate into other servers, in the server.xml file, set the keyAlias property to point to the imported certificate.</li>
+<li>Start the server. </li>
+<li>On the new cluster server, click <strong>Settings</strong> > <strong>System Settings</strong>, and set the <strong>External Agent URL</strong> and the <strong>External User URL</strong> to the URL for the load balancer. </li>
+<li>Click <strong>Save</strong>. </li>
+<li>On one of the existing cluster servers, create a network relay to the new server. See <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_network/">Creating cluster connections</a>.</li>
+<li>If the server has any agents or agent relays, configure them for failover. See <a href="../../../com.ibm.udeploy.install.doc/topics/configure_agent_failover/">Configuring agents for failover</a> and <a href="../../../com.ibm.udeploy.install.doc/topics/configure_relay_failover/">Configuring agent relays for failover</a>.</li>
+</ol>
+</li>
+</ul>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/ha_add_server.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

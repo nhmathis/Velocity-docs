@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/server_backup/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Backing up the server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Backing up the server", url: "#_top", children: [
+              {title: "Online backups", url: "#online-backups" },
+              {title: "Offline backups", url: "#offline-backups" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="backing-up-the-server">Backing up the server</h1>
+<p>To back up the server, make a backup copy of the database and application data directory. Both frequent online backups and occasional offline backups are required.</p>
+<p><strong>Parent topic:</strong> <a href="../backup_recover/">Backing up and recovering</a></p>
+<h2 id="online-backups">Online backups</h2>
+<p>Online backups happen frequently, and without stopping the server. For online backups, you need to back up only the database.</p>
+<p>Because the database data is more important for deployments to run than the file system data, online backups typically include only the database and not the server file system and application data directory. Use the backup options for your database system.</p>
+<p><strong>Note:</strong> To make the online backups easier to restore, configure your database to create full regular restore points and to enable transaction logging. For example, the database might make full backups once a month and log transactions all the time. That way, you can restore the database at any time.</p>
+<h2 id="offline-backups">Offline backups</h2>
+<p>Offline backups happen when the server is stopped, for example during a monthly maintenance window when you install operating system updates and other updates on the server and agent systems.</p>
+<p>Offline backups must include both the database and the server file system, including the application data directory.</p>
+<p><strong>Note:</strong> Always back up the server directory and the database at the same time. Using a backup of the server directory and the database taken from different times can cause problems when you restore the backups.</p>
+<p>Follow these steps to take an offline backup of the server:</p>
+<ol>
+<li>Stop the server. See <a href="../run_server/">Starting and stopping the server</a>.</li>
+<li>Create a full backup of the database. For instructions on backing up the database, see the documentation for your database.</li>
+<li>Back up the application data folder to a secure backup location. The default application data folder is /opt/ibm-ucd/server/appdata on Linux™ and C:\Program Files\ibm-ucd\server\appdata on Windows™. On high-availability systems, the application data folder is always on a shared network drive that each server can access. </li>
+<li>Back up the conf folder. The default location of this folder is /opt/ibm-ucd/server/conf on Linux and C:\Program Files\ibm-ucd\server\conf on Windows. On high-availability systems, back up this folder for each server.</li>
+<li>Start the server. </li>
+</ol>
+<p>To restore HCL® UrbanCode™ Deploy from a backup, see <a href="../../../com.ibm.udeploy.doc/topics/arch_data_recovery/">Restoring a backup</a>.</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/server_backup.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

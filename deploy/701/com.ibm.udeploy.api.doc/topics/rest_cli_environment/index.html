@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/rest_cli_environment/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "environment resource", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="environment-resource">environment resource</h1>
+<p>Resources for creating, editing, and provisioning environments.</p>
+<ul>
+<li>
+<p><strong><a href="../rest_cli_environment_addbaseresource_put/">Add a base resource to an environment</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_environment_teams_put/">Add an environment to a team</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_environment_createenvironment_put/">Create a new environment</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_environment_createenvironmentfromtemplate_put/">Create a new environment from template</a></strong><br />
+This command creates and Environment from a template and attaches it to the specified application.</p>
+</li>
+<li><strong><a href="../rest_cli_envid_redundantversions_componentid_delete/">Delete all redundant versions for a component in an environment</a></strong><br />
+A version is considered redundant if all of its files have been replaced by versions that have been deployed more recently to the same environment.</li>
+<li>
+<p><strong><a href="../rest_cli_envid_versions_componentid_delete/">Delete all versions for a component in an environment</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_environment_deleteenvironment_delete/">Delete an environment</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_envid_componentid_resourceid_overlappingartifacts_versionid_get/">Get all artifacts overlapped in the given version</a></strong><br />
+Get all artifacts that are overlapped by later versions. A version is considered safe to rollback if it does not contain overlapping artifacts. It is risky to roll back a version if that version contains overlapping artifacts. This command applies only to z/OS component versions.</p>
+</li>
+<li><strong><a href="../rest_cli_environment_getbaseresources_get/">Get all base resources for an environment</a></strong><br />
+This command returns a listing of all resources added as base resources to an environment.</li>
+<li><strong><a href="../rest_cli_environment_componentproperties_get/">Get component environment properties for an environment</a></strong><br />
+These properties are defined on the component and their values are set on the environment.</li>
+<li>
+<p><strong><a href="../rest_cli_environment_getproperties_get/">Get environment property values</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_environment_info_get/">Get information about an environment</a></strong><br />
+This command returns a JSON representation of an environment.</p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_env_snapshot_get/">Get the latest snapshot deployed to an environment</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_environment_getproperty_get/">Get the value of a custom property on an environment.</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_environment_provisionenvironment_put/">Provision a cloud environment</a></strong><br />
+This command provisions an instance of an application blueprint and creates an application environment based on that blueprint.</p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_environment_removebaseresource_put/">Remove a base resource from an environment</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_environment_teams_delete/">Remove an environment from a team</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_environment_componentproperties_put/">Set a component environment property value</a></strong><br />
+This command will set a component property value specifically for this environment.</p>
+</li>
+<li><strong><a href="../rest_cli_environment_propvalue_put/">Set a property on environment</a></strong>  </li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.reference.doc/topics/rest_api_ref_commands/">REST commands for the HCL UrbanCode Deploy server</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/rest_cli_environment.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

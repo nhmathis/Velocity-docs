@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_org/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Sharing blueprints by using a Git repository - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Sharing blueprints by using a Git repository", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="sharing-blueprints-by-using-a-git-repository">Sharing blueprints by using a Git repository</h1>
+<p>When you work with blueprints, you can organize and share them by using the Git distributed version control system.</p>
+<p>Create a blueprint that is stored in a team-based repository. See <a href="../blueprint_edit/">Creating files with the blueprint designer</a>.</p>
+<p>The blueprint design server stores blueprints and configuration files in Git repositories. The blueprint design server creates a Git repository for each team and a clone of that repository for each member of the team. To share blueprints and configuration files with other team members, associate the files with the repository for that team when you create them. Complete your changes to the files in your cloned repository, and then share the files by using Git commands.</p>
+<p>You can access the contents of a team-based repository only if you are a member of that team. If you are removed from a team, your clone of the team repository is deleted, along with any changed files that you did not push to the team repository.</p>
+<ol>
+<li>
+<p>To minimize conflicts between the commits that you make and the commits that you download from the repository, sync your workspace with the repository before you change files. </p>
+<ol>
+<li>Click <strong>Repositories</strong>. The Repositories page opens.</li>
+<li>From the <strong>REPOSITORY</strong> list, select the repository that contains the files. </li>
+<li>Click <strong>Sync</strong>. The <strong>Sync</strong> command downloads commits by using the fetch command, reorders the commits by using the rebase command, and moves your commits to the repository by using the push command.</li>
+<li>Enter the user name and password that you use to access the blueprint designer, and then click <strong>Submit</strong>. 
+All commits that you loaded are shown in the HISTORY pane.</li>
+</ol>
+</li>
+<li>
+<p>When your repository is up to date, make changes to blueprints in the blueprint designer as usual. </p>
+</li>
+<li>
+<p>After you complete your changes, commit all the files in the working directory to your Git repository. </p>
+<ol>
+<li>From the <strong>REPOSITORY</strong> list, select the repository that contains the files. </li>
+<li>In the Working Directory Changes pane, type a commit message in the text box. For example, type Adding second Ubuntu image.</li>
+<li>Click <strong>more</strong>, and then specify names and email addresses for <strong>Author</strong> and <strong>Committer</strong>. </li>
+<li>Select <strong>Save</strong> to save the author and committer information for future commits. </li>
+<li>Select <strong>Select All</strong>. </li>
+<li>Click <strong>Commit</strong>. 
+All files in the working directory are committed to the Git repository. The commit is shown in the OUTGOING pane.</li>
+</ol>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../blueprint_storage/">Blueprint storage on the blueprint design server</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_org.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/rest_cli_process_create_put/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Create a generic process - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Create a generic process", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="create-a-generic-process">Create a generic process</h1>
+<h2 id="request">Request</h2>
+<pre><code>PUT https://{hostname}:{port}
+    /cli/process/create
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p>This command takes a JSON request string or file. Use the following template for the request:</p>
+<pre><code>{
+  &quot;description&quot;: &quot;Description. This template includes 
+  three steps: Download Artifacts, Run Groovy, and Run 
+  Shell.&quot;,
+  &quot;name&quot;: &quot;Process name or ID&quot;,
+  &quot;notificationScheme&quot;: &quot;Name of notification scheme&quot;,
+  &quot;properties&quot;: {&quot;Property name&quot;: &quot;Property value 
+  (Optional)&quot;},
+  &quot;rootActivity&quot;: {
+    &quot;children&quot;: [
+      {
+        &quot;allowFailure&quot;: false,
+        &quot;children&quot;: [],
+        &quot;commandName&quot;: &quot;Download Artifacts&quot;,
+        &quot;impersonationUseSudo&quot;: false,
+        &quot;name&quot;: &quot;First step&quot;,
+        &quot;pluginName&quot;: &quot;Urbancode Versioned File Storage&quot;,
+        &quot;pluginVersion&quot;: 16,
+        &quot;properties&quot;: {
+          &quot;artifactSetBaseDir&quot;: &quot;&quot;,
+          &quot;compId&quot;: &quot;${p:component.id}&quot;,
+          &quot;directoryOffset&quot;: &quot;.&quot;,
+          &quot;fileExcludePatterns&quot;: &quot;&quot;,
+          &quot;fileIncludePatterns&quot;: &quot;**/*&quot;,
+          &quot;fullVerification&quot;: true,
+          &quot;label&quot;: &quot;${p:version.name&quot;,
+          &quot;repositoryId&quot;: &quot;${p:
+  component/code_station/repository}&quot;,
+          &quot;repositoryUrl&quot;: &quot;${p:server.url}/vfs&quot;,
+          &quot;resId&quot;: &quot;${p:resource.id}&quot;,
+          &quot;serverUrl&quot;: &quot;${p:server.url}&quot;,
+          &quot;setFileExecuteBits&quot;: false,
+          &quot;syncMode&quot;: true,
+          &quot;verifyFileIntegrity&quot;: false
+        },
+        &quot;showHIdden&quot;: false,
+        &quot;type&quot;: &quot;plugin&quot;,
+        &quot;useImpersonation&quot;: false
+      },
+      {
+        &quot;allowFailure&quot;: false,
+        &quot;children&quot;: [],
+        &quot;commandName&quot;: &quot;Shell&quot;,
+        &quot;impersonationUseSudo&quot;: false,
+        &quot;name&quot;: &quot;Second step&quot;,
+        &quot;pluginName&quot;: &quot;Shell&quot;,
+        &quot;pluginVersion&quot;: 3,
+        &quot;properties&quot;: {
+          &quot;directoryOffset&quot;: &quot;.&quot;,
+          &quot;outputFile&quot;: &quot;&quot;,
+          &quot;runAsDaemon&quot;: false,
+          &quot;scriptBody&quot;: &quot;echo \&quot;Hello World\&quot;&quot;,
+          &quot;shellInterpreter&quot;: &quot;&quot;
+        },
+        &quot;showHIdden&quot;: false,
+        &quot;type&quot;: &quot;plugin&quot;,
+        &quot;useImpersonation&quot;: false
+      },
+      {
+        &quot;children&quot;: [],
+        &quot;name&quot;: &quot;FINISH&quot;,
+        &quot;type&quot;: &quot;finish&quot;
+      }
+    ],
+    &quot;edges&quot;: [
+      {
+        &quot;to&quot;: &quot;First step&quot;,
+        &quot;type&quot;: &quot;ALWAYS&quot;,
+        &quot;value&quot;: &quot;&quot;
+      },
+      {
+        &quot;from&quot;: &quot;First step&quot;,
+        &quot;to&quot;: &quot;Second step&quot;,
+        &quot;type&quot;: &quot;ALWAYS&quot;,
+        &quot;value&quot;: &quot;&quot;
+      },
+      {
+        &quot;from&quot;: &quot;Second step&quot;,
+        &quot;to&quot;: &quot;FINISH&quot;,
+        &quot;type&quot;: &quot;ALWAYS&quot;,
+        &quot;value&quot;: &quot;&quot;
+      }
+    ],
+    &quot;name&quot;: &quot;GRAPH&quot;,
+    &quot;offsets&quot;: [
+      {
+        &quot;name&quot;: &quot;First step&quot;,
+        &quot;x&quot;: &quot;-65&quot;,
+        &quot;y&quot;: &quot;90&quot;
+      },
+      {
+        &quot;name&quot;: &quot;Second step&quot;,
+        &quot;x&quot;: &quot;-70&quot;,
+        &quot;y&quot;: &quot;210&quot;
+      },
+      {
+        &quot;name&quot;: &quot;FINISH&quot;,
+        &quot;x&quot;: &quot;-60&quot;,
+        &quot;y&quot;: &quot;450&quot;
+      }
+    ],
+    &quot;type&quot;: &quot;graph&quot;
+  },
+  &quot;workingDir&quot;: &quot;${p:resource/work.dir}/${p:process.name}&quot;
+}
+
+</code></pre>
+
+<p>Related CLI command: <a href="../udclient_creategenericprocess/">createGenericProcess</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../rest_cli_process/">process resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/rest_cli_process_create_put.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

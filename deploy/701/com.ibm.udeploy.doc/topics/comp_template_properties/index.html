@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_template_properties/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Component template properties - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Component template properties", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="component-template-properties">Component template properties</h1>
+<p>Component template properties ensure that every component created from a template has the same properties. The types of available properties are described in the following table.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Properties</td>
+<td>Custom property. Every component inherits the value that is defined in the template (it cannot be overridden by a component). If you change the value, the change is reflected in components that are created from the template, including components that were previously created.</td>
+</tr>
+<tr>
+<td>Component Property Definitions</td>
+<td>Every component has this property. It appears on the Create Component dialog box for every component that is created from this template (see <a href="../comp_create/">Creating components</a>). A value that is defined here can be changed by created components.</td>
+</tr>
+<tr>
+<td>Environment Property Definitions</td>
+<td>Every environment that uses a component that is created by this template has this property. The property appears on the environment's Component Mappings pane (<strong>Applications</strong> > <strong>selected application</strong> > <strong>Environments</strong> > <strong>selected environment</strong> > <strong>Component Mappings</strong>), see <a href="../app_environment/">Application environments</a>. A value that is defined here can be changed by environment.</td>
+</tr>
+<tr>
+<td>Resource Property Definitions</td>
+<td>This property appears on resources that the component is deployed to.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../comp_template/">Component templates</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_template_properties.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

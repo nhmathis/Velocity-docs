@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/arch_appx_sudo/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>User impersonation for process steps - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "User impersonation for process steps", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="user-impersonation-for-process-steps">User impersonation for process steps</h1>
+<p>HCL® UrbanCode™ Deploy can use user impersonation when an agent must run a command for which it might not otherwise have permission, or when a specific user must be employed for a process.</p>
+<p>On UNIX™ and Linux™ systems, the su and sudo commands are used to impersonate users; on Windows™ HCL UrbanCode Deploy provides a utility program to handle impersonation. You implement impersonation when you configure a component's plug-in process step or resource.</p>
+<ul>
+<li><strong><a href="../arch_appx_sudo_using/">Impersonation on Linux and UNIX systems</a></strong><br />
+The su command (as used by HCL UrbanCode Deploy) enables a user to start a shell as another user (process steps can be considered individual shells).</li>
+<li><strong><a href="../arch_appx_impersonation_windows/">Impersonation on Windows systems</a></strong><br />
+For agents that are running on Windows, HCL UrbanCode Deploy provides a program that handles impersonation.</li>
+<li><strong><a href="../arch_appx_impersonation_zos/">Impersonation on z/OS systems</a></strong><br />
+The su command is used to impersonate users on agent computers that are running IBM® z/OS®.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../comp_workflow/">Processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/arch_appx_sudo.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

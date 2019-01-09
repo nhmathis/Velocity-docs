@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/settings_network/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating cluster connections - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating cluster connections", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-cluster-connections">Creating cluster connections</h1>
+<p>A server connection to a cluster (formerly known as a network relay) is a setting on an HCL® UrbanCode™ Deploy server that opens a Java™ Message Service (JMS) port for communication with other servers. These cluster connections are necessary for servers in a cluster to communicate.</p>
+<p>Ensure that each server can connect to each other server on the network. For example, ensure that your firewall rules allow the servers to communicate over HTTPS and JMS.</p>
+<p>Cluster connections create a JMS mesh, which facilitates JMS communication between servers in a clustered high-availability server configuration. See <a href="../../../com.ibm.udeploy.doc/topics/server_install_clustered/">Setting up high-availability clusters</a>.</p>
+<p>Cluster connections are required only if you have more than one server. Also, they facilitate communication only among servers; cluster connections are not used for agents or agent relays. Because the servers use the same database, you can create connections on any server; the other servers all have access to those connections.</p>
+<p><strong>Note:</strong> In version 6.2.3 and many prior versions, using network relays to reverse the direction of JMS communication through a firewall is deprecated. Beginning in version 6.2.3.1, network relays and cluster connections do not reverse the connection of JMS communication through firewalls. Instead, you must set your firewall to allow HTTPS and JMS connections from agent relays to the server.</p>
+<ol>
+<li>On any server in the cluster, click <strong>Settings</strong> > <strong>Network</strong> > <strong>Add Server To Server Cluster</strong>. The Connect Server To Server Cluster dialog box is displayed.</li>
+<li>Enter a name for the cluster connection. </li>
+<li>In the <strong>Host</strong> field, enter the host name or IP address of the target server. </li>
+<li>In the <strong>Port</strong> field, enter the JMS communication port of the target server. The default server JMS communication port number is 7918.</li>
+<li>Select the <strong>Active</strong> check box. </li>
+<li>Click <strong>Save</strong>.</li>
+<li>On the same server, repeat the process to create a connection to each server in the cluster, including a connection that points to the current server itself. </li>
+<li>Restart the targeted servers. If you create the cluster connections on server A, for example, restart servers B and C to ensure that they can communicate with one another.</li>
+</ol>
+<p>The servers can now communicate via JMS.</p>
+<p>If you have four HCL UrbanCode Deploy servers in a clustered high-availability configuration, on only one of the servers, create four cluster connections. One connection points to each server, including a connection to the server on which you create the connections. A JMS request from any agent or agent relay is routed to the appropriate HCL UrbanCode Deploy server by using the JMS mesh and these connections.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/server_install_clustered/">Setting up high-availability clusters</a></p>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/settings_network.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

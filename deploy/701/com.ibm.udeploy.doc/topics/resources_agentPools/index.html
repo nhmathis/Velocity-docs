@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/resources_agentPools/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating and managing agent pools - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating and managing agent pools", url: "#_top", children: [
+              {title: "Creating an agent pool", url: "#creating-an-agent-pool" },
+              {title: "Managing agent pools", url: "#managing-agent-pools" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-and-managing-agent-pools">Creating and managing agent pools</h1>
+<p>Similar to resource groups, agent pools help you organize and manage agents that are installed in different environments.</p>
+<p>You can use an agent pool to spread the deployment processing work among participating agents and provide relief to otherwise overburdened agents. Users assign agents to pools and pools are assigned to resources, just like lone agents. When an agent pool is assigned to a resource, work items are sent to eligible agents. If you don't use a pool, then the agent that is assigned to the resource is assigned all the processing work regardless of its current workload. Such a workload might lead to bottlenecks.</p>
+<p><strong>Tip:</strong> The agent that does the actual work is chosen randomly from available online agents in the pool. The current workload that is running on the agents in the pool is not considered. The agent that was most recently selected to do work is not exempt from subsequent selections. The selected agent is always randomly selected from available online agents in the pool.</p>
+<p><strong>Parent topic:</strong> <a href="../configure_agents/">Agents and agent relay configuration</a></p>
+<h2 id="creating-an-agent-pool">Creating an agent pool</h2>
+<ol>
+<li>To create an agent pool, specify the agents that are the members of the pool.</li>
+<li>From the <strong>Resources</strong> tab, click <strong>Agent Pools.</strong> </li>
+<li>From the Agent Pools pane, click <strong>Create Agent Pool</strong>. The Create Agent Pool window opens.</li>
+<li>Specify the pool name. </li>
+<li>Enter a description in the <strong>Description</strong> field. </li>
+<li>To manage the teams that can access the agent pool, click the plus icon by <strong>Teams</strong>. </li>
+<li>To add agents to the pool, click the <strong>Add Agents</strong> field. A list of the available agents appears.</li>
+<li>Select the agent or agents to add to the pool. You can filter the listed agents by entering search text into the field.</li>
+<li>When you are finished, click <strong>Save</strong>. </li>
+</ol>
+<h2 id="managing-agent-pools">Managing agent pools</h2>
+<ol>
+<li>You can manage agent pools from the web interface.</li>
+<li>To display the Agent Pools pane, click <strong>Resources</strong> > <strong>Agent Pools</strong>. </li>
+<li>
+<p>Click an action link for the pool. Actions are described in the following table.</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Edit</td>
+<td>With this option, you can add or remove agents and edit the pool's name and description.</td>
+</tr>
+<tr>
+<td>Copy</td>
+<td>Creates a pool with the same agents as the selected pool.</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>Removes the agent pool.</td>
+</tr>
+</tbody>
+</table>
+<p>To deploy a resource to an agent pool, the resource must be a child of the agent pool.</p>
+</li>
+</ol>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/resources_agentPools.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

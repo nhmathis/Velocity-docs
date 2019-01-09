@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/settings_system_preview/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Cleaning up component versions - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Cleaning up component versions", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="cleaning-up-component-versions">Cleaning up component versions</h1>
+<p>You can configure the server to reduce the number of component versions by archiving them. You can specify global cleanup settings, cleanup settings for individual components, and cleanup settings for specific environments.</p>
+<p>The server archives a full or incremental component version if the version does not meet any of the criteria for versions to keep. When archiving versions, the server retrieves the settings from the <strong>Settings</strong> > <strong>System Settings</strong> > <strong>Artifact Cleanup</strong> options first. Then it retrieves the settings for the individual components, which override the system settings. Finally, it checks the settings on the environments to which the component has been deployed. If any of these settings specify to keep the component version, it is not archived.</p>
+<p>These settings include a number of days for which to retain versions and a number of versions to keep. The server settings and the component settings refer to the creation date of the version. For example, if the server settings or component settings keep versions for 30 days, a version is not archived until its creation date is more than 30 days in the past. Similarly, if the server settings or component settings keep the 10 most recent versions, a version is not archived until there are 10 more recently created versions. Component settings override server settings for that component.</p>
+<p>By contrast, the environment settings refer to the most recent deployment date of the version. For example, if the environment settings keep versions for 30 days, a version is not archived if it has been deployed in the last 30 days. If an environment does not have settings, the server uses the system settings instead. For example, if the server settings keep versions for 30 days and the version was created more than 30 days ago but was deployed to an environment within 30 days, the version is kept.</p>
+<p>The server uses the following criteria to determine which versions to keep and which to archive:</p>
+<p>First, the server checks the settings on the component. If the component has settings to keep versions, the server uses those settings. Otherwise, the server uses the defaults in the server settings.</p>
+<ul>
+<li>If the number of days to keep versions is set to -1, the version is kept.</li>
+<li>If the number of versions to keep is set to -1, the version is kept.</li>
+<li>If the version was created within the number of days to keep versions, it is kept.</li>
+<li>Based on the number of versions to keep, if the version is in the most recently created versions, it is kept.</li>
+</ul>
+<p>Then, the server checks the settings for each environment to which the component version has been deployed. If an environment does not have settings, the server uses the system settings for that environment. In the context of environments, the settings refer not to the creation date of the component but the date of the most recent deployment of that component. For example, if the system settings keep the 20 most recent versions, and the version is one of the 20 most recently deployed versions in an environment, the version is kept. Using these settings, the server uses the following criteria:</p>
+<ul>
+<li>If the version is currently deployed to any environment or is listed in the inventory of any resource, it is kept.</li>
+<li>If the version is part of any snapshot, it is kept.</li>
+<li>If the number of days to keep versions is set to -1 in any of the environments, the version is kept.</li>
+<li>If the number of versions to keep is set to -1 in any of the environments, the version is kept.</li>
+<li>If the version has been deployed within the number of days to keep versions, it is kept.</li>
+<li>Based on the number of versions to keep, if the version is in the most recently deployed versions, it is kept.</li>
+</ul>
+<p>If none of these criteria are true, the component version and the artifacts in it are archived, even if the version was deployed to an environment in the past.</p>
+<p><strong>Note:</strong> Beginning with version 6.1, the server stores full copies of each file in each component version, even if the files are duplicates.</p>
+<ol>
+<li>
+<p>Specify the global component version cleanup settings: </p>
+<ol>
+<li>Click <strong>Settings</strong> > <strong>System Settings</strong>. </li>
+<li>Under <strong>Artifact Cleanup</strong>, in the <strong>Daily Cleanup Start Time</strong> field, specify the hour of the day to start the cleanup process. </li>
+<li>In the <strong>Default Application Snapshot Retention (days)</strong> field, specify the minimum age in days to save snapshots. For more information, see <a href="../app_snapshot_cleanup/">Cleaning up snapshots</a>.</li>
+<li>In the <strong>Default Component Version Retention (days)</strong> field, specify the minimum age in days to save a component version. For example, to keep all component versions that are 5 days old or newer, specify 5. If you specify -1, all versions are saved, regardless of the setting in the <strong>Default Number of Versions to Retain</strong> field.</li>
+<li>
+<p>In the <strong>Default Number of Versions to Retain</strong> field, specify the minimum number of versions to keep. For example, to save the five most recent component versions, specify 5. If you specify -1, all versions are saved, regardless of the settings in the <strong>Default Component Version Retention (days)</strong> field.</p>
+<p>When the server runs the cleanup, it deletes or archives all component versions that are older than the minimum age. However, the server retains at least the number of versions in the <strong>Default Number of Versions to Retain</strong> field.</p>
+</li>
+<li>
+<p>In the <strong>Archive Path</strong> field, specify the path of the location on the server to write compressed versions of each version that is archived. If you do not specify a path, then the server does not store the component versions that it removes.</p>
+</li>
+<li>To preview the component versions to be archived the next time that an archive file is created, on the <strong>System Settings</strong> tab, click the <strong>Preview Version Cleanup</strong> link, and select a component. </li>
+<li>Click <strong>Save</strong>. </li>
+<li>Specify cleanup settings for individual components.These settings override the global settings.</li>
+<li>Click <strong>Components</strong>, click a component, go to the <strong>Configuration</strong> tab for the component, and then click <strong>Basic Settings</strong>.</li>
+<li>Clear the <strong>Use Default Component Cleanup Settings</strong> check box. </li>
+<li>In the <strong>Days to Retain Versions</strong> field, specify the minimum age in days to save a component version. </li>
+<li>In the <strong>Number of Versions to Retain</strong> field, specify the minimum number of versions to keep. </li>
+<li>Click <strong>Save</strong>.</li>
+<li>Specify cleanup settings for individual environments. These settings override the global settings.</li>
+<li>Click <strong>Applications</strong>, click an application, click an environment, click <strong>Configuration</strong>, and then click <strong>Basic Settings</strong>. </li>
+<li>Clear the <strong>Use Default Component Cleanup Settings</strong> check box. </li>
+<li>In the <strong>Days to Retain Versions</strong> field, specify the minimum age in days to save a component version. If you set bot both component and environment settings, the higher value is used. </li>
+<li>In the <strong>Number of Versions to Retain</strong> field, specify the minimum number of versions to keep. </li>
+<li>Click <strong>Save</strong>. </li>
+</ol>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../comp_version/">Component versions</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/settings_system_preview.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

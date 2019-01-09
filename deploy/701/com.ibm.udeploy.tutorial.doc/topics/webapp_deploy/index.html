@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/webapp_deploy/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lesson 5 Deploying the application components - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lesson 5: Deploying the application components", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="lesson-5-deploying-the-application-components">Lesson 5: Deploying the application components</h1>
+<p>To deploy the components in the application, run the application process on the new environment.</p>
+<p>Now that you have an environment and all the necessary processes, you can deploy the components by running the application process.</p>
+<ol>
+<li>Open the application page by clicking <strong>Applications</strong> and then clicking the application name.</li>
+<li>
+<p>In the same row as your environment, click the <strong>Request Process</strong> <img alt="" src="../../images/request_process.gif" /> icon, as shown in the following figure.</p>
+<p><img alt="Clicking Request Process on an environment" src="../../images/webapp_deploy_i.gif" /></p>
+</li>
+<li>
+<p>In the Run Process window, in the <strong>Process</strong> list, select the <code>Deploy JPetStore</code> process</p>
+</li>
+<li>Next to <strong>Versions</strong>, click <strong>Choose Versions</strong>.</li>
+<li>
+<p>In the Component Versions window, at the top left, click <strong>Select For All</strong> > <strong>Latest Available</strong>.Make sure that version 1.0 is selected for each component, as shown in the following figure:</p>
+<p><img alt="Selecting the most recent version of each component" src="../../images/webapp_deploy_h.gif" /></p>
+<p>You must select a version for each component; if you do not select a version, that component is not deployed.</p>
+</li>
+<li>
+<p>Click <strong>OK</strong>.</p>
+</li>
+<li>Click <strong>Submit</strong>.</li>
+</ol>
+<p>The web page shows you the progress of the application process request. From this page, you can watch as the processes run. The following figure the application process partially completed. The application component process is finished and the other two component processes are running.</p>
+<p><img alt="The log for the application process request, showing the component processes that are running" src="../../images/webapp_deploy_a.gif" /></p>
+<p>If the process runs successfully, the request shows that each component process is finished, as in the following figure:</p>
+<p><img alt="The log for the application process request, showing that the component processes ran successfully" src="../../images/webapp_deploy_b.gif" /></p>
+<p>In this case, you can view the running application at the following URL, by substituting the host name of your target system for hostname. This is the host name of the agent that you configured in <a href="../webapp_configure_agent/">Configuring the agent and target system</a>. In the URL, specify the tomcat.contextroot value that you entered for this environment after the port number.</p>
+<pre><code>http://hostname:8081/JPetStoreDev
+</code></pre>
+
+<p>The application shows a simple online shopping site in the form of a pet store. The following figure shows the home page:</p>
+<p><img alt="The home page of the JPetStore application, showing a link to enter the store" src="../../images/webapp_deploy_e.gif" /></p>
+<p>From the home page, click <strong>Enter the Store</strong> and then browse the items that are available, as shown in the following figure:</p>
+<p><img alt="The main menu page of the JPetStore application" src="../../images/webapp_deploy_f.gif" /></p>
+<p>If the application process did not run successfully, one of the component processes might have failed. In this case, the process is listed with a status of <code>Failed</code>. To troubleshoot this failed process, expand the log section for the component, and find the step that failed:</p>
+<p><img alt="The log for the application process request, showing a component process that did not complete" src="../../images/webapp_deploy_c.gif" /></p>
+<p>From here, you can look at the command-line output log for each step in the process by clicking the <strong>Output Log</strong> <img alt="" src="../../images/output_log.gif" /> icon.</p>
+<p>If one of your component processes did not complete, identify the step that did not complete. Verify that the properties for that step are correct and that the steps are in the correct order in the process. Then, run the application process again.</p>
+<p><strong>Note:</strong> If you run the application process again, be sure to clear the <strong>Only Changed Versions</strong> check box and select the versions of each component. If you leave this check box selected, the server runs the component processes only for components that have new versions.</p>
+<p><img alt="Clearing the Only Changed Versions check box so all of the components are deployed" src="../../images/webapp_deploy_g.gif" /></p>
+<p>This application process installed each of the components in the application by running their component processes.</p>
+<p>Application processes can also uninstall or update components or run other configuration tasks for the application and its components.</p>
+<p><strong>Parent topic:</strong> <a href="../webapp_abstract/">Deploying a simple web application</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/webapp_deploy.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

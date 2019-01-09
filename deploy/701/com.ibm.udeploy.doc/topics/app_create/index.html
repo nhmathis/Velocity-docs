@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating applications - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating applications", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-applications">Creating applications</h1>
+<p>You can create an application from scratch or import an existing one.</p>
+<p>Before you configure an application, ensure that at least one agent is installed in a target environment. For evaluation purposes, the agent can be on the same system as the server. See <a href="../resources_ch/">Resources</a>.</p>
+<p>See <a href="../app_import/">Importing applications</a> for information about importing applications.</p>
+<ol>
+<li>
+<p>Display the Create Application dialog box <strong>Applications</strong> > <strong>Create Application</strong>, and enter the following information: </p>
+<p><img alt="The Create Application window" src="../../images/app_create_b.gif" /></p>
+<ul>
+<li>
+<p>Typically the <strong>Name</strong> and <strong>Description</strong> correspond to the application you plan on deploying.</p>
+<p><strong>Restriction:</strong> If you deploy this application to a cloud that uses virtual system patterns, the application name cannot contain asterisk (*), backslash (\), or forward slash (/) characters. See <a href="../../../com.ibm.edt.doc/topics/blueprint_edit_clouds_vsp/">Modeling environments for clouds that use virtual system patterns</a>.</p>
+</li>
+<li>
+<p>To grant teams access to the application and set its security type, click the <strong>plus sign</strong> icon by <strong>Teams</strong>, select values from the <strong>Team</strong> and <strong>Type</strong> lists, and click <strong>Add</strong>.</p>
+</li>
+<li>To create an application from a template, from the <strong>Application Template</strong> list, select the application template name. Then, from the <strong>Application Template Version</strong> list, select either the application template version number or to ensure that the application always meets the latest requirements of the template, <strong>Always Use Latest</strong>. See <a href="../app_template_using/">Creating applications from application templates</a>.</li>
+<li><strong>Notification Scheme</strong>. HCL UrbanCode Deploy includes integrations with LDAP and email servers that enable it to send out notifications that are based on events. For example, the default notification scheme sends out an email when an application deployment fails or succeeds. Notifications also play a role in approving deployments: HCL UrbanCode Deploy can be configured to send out an email to either a single individual or to a group or people (based on their security role) notifying them that they must approve a requested deployment. See <a href="../notify_create/">Creating Notifications in a Notification Scheme</a>.</li>
+<li>If you want the application to require that every component is versioned, click the <strong>Enforce Complete Snapshots</strong> check box.</li>
+<li>Click <strong>Save</strong>.The new application opens.</li>
+<li>Add one or more components to the application: </li>
+<li>Within the application, click the <strong>Components</strong> tab, which is not to be confused with the global <strong>Components</strong> tab. </li>
+<li>Click <strong>Add Component</strong>. </li>
+<li>
+<p>In the Add a Component window, expand the <strong>Select a Component</strong> list and select the check boxes next to one or more components, as shown in the following figure.</p>
+<p><img alt="Selecting components to add to the application" src="../../images/app_create_a.gif" /></p>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>After you create an application, you:</p>
+<ul>
+<li>Create an environment (<a href="../app_environment_create/">Creating environments</a>)</li>
+<li>Associate an agent with the environment (<a href="../app_environment_mapping/">Mapping resources and components to environments</a>)</li>
+<li>
+<p>Create an application process (<a href="../app_process/">Application processes</a>)</p>
+</li>
+<li>
+<p><strong><a href="../app_import/">Importing applications</a></strong><br />
+If you exported an application, you can import the application on a different server. When you import an application, you can create an entirely new application or upgrade an existing one.</p>
+</li>
+<li><strong><a href="../app_export/">Exporting applications</a></strong><br />
+Exporting applications creates a JSON file (file extension json) that contains the properties, components (and their associated properties and processes), and processes of the applications.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../applications_ch/">Applications</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

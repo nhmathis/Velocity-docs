@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/keystore_encryption_change_password/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Changing passwords for the encryption KeyStore - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Changing passwords for the encryption KeyStore", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="changing-passwords-for-the-encryption-keystore">Changing passwords for the encryption KeyStore</h1>
+<p>You can change passwords for the encryption KeyStore.</p>
+<p>The encryption.keystore password must be identical to the certificate password.</p>
+<ol>
+<li>Stop the server. </li>
+<li>Open a command line window, and go to the app_data/conf directory. </li>
+<li>
+<p>To view the alias of the secret key, run the following command: </p>
+<p><code>keytool -keystore encryption.keystore -list -storetype jceks -storepass changeit</code></p>
+<p>Make a note of the alias of secret key, it is required in step <a href="#a">6</a>. The keytool application is included in the Java™ developer kit and is not part of HCL® UrbanCode™ Deploy.</p>
+</li>
+<li>
+<p>Back up the encryption.keystore file. </p>
+</li>
+<li>
+<p>Change the encryption KeyStore password by using the following command: </p>
+<p><code>keytool -storepasswd -new newPassword -keystore encryption.keystore -storetype jceks -storepass changeit</code></p>
+<p>The default password is changeit. Replace <code>newPassword</code> with your password of choice. The keytool application is included in the Java developer kit and is not part of HCL UrbanCode Deploy.</p>
+</li>
+<li>
+<p>Change the secret key password by using the following command: </p>
+<p><code>keytool -keypasswd -alias XXX -keypass changeit -new newpassword -keystore encryption.keystore -storetype jceks -storepass newpassword</code></p>
+<p>where <code>alias</code> is the one that you noted in step <a href="#b">3</a>, and the encryption KeyStore password and the secret key password must be the same.</p>
+</li>
+<li>
+<p>In a text editor, open the server-install\conf\server\secured-installed.properties file. Specify the new encryption.keystore password in the following line of code: </p>
+<p><code>encryption.keystore.password=newPassword</code></p>
+<p><strong>Note:</strong> The password that you specify here must be the same as the password for the encryption KeyStore password that you specified in step <a href="#c">5</a> and the secret key password that you specified in step <a href="#a">6</a>.</p>
+</li>
+<li>
+<p>Start the server. </p>
+</li>
+</ol>
+<p>Starting the server automatically encrypts the encryption.keystore password that you specified in the installed.properties file.</p>
+<p><strong>Parent topic:</strong> <a href="../settings_ch/">Server settings and configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/keystore_encryption_change_password.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

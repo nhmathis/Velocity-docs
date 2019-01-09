@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/configure_agent_failover/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring agents for failover - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring agents for failover", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-agents-for-failover">Configuring agents for failover</h1>
+<p>To configure agents for failover, you specify two or more target servers for the agent to use. If one of the servers fails, the agent switches to another server from the list.</p>
+<p>If you did not configure the agent for failover when you installed the agent, you can also configure it for failover by modifying its properties.</p>
+<p>An agent that is configured for failover has a list of servers or agent relays to contact. If one server or agent relay is not available, the agent tries other servers or agent relays in the list.</p>
+<p><strong>Restriction:</strong> The failover list must contain only servers or only agent relays. An agent can not have both servers and agent relays in its failover list.</p>
+<ol>
+<li>Open the /agent-install/conf/agent/installed.properties file. </li>
+<li>In the <code>locked/agent.brokerUrl=failover\:</code> parameter, provide a list of server locations or agent relay locations. This parameter can contain servers or agent relays, but not both. The agent configuration syntax is <code>IP\_or\_hostname\:JMS_port</code>. Separate each agent relay or server with a comma. When the agent starts, it selects one server or agent relay at random to use. If that server or agent relay fails, the agent selects a different server or agent relay from the list. The agent continues to use the server or agent relay until that server or agent relay fails. An example parameter that specifies two agent relays might resemble the following code: <code>locked/agent.brokerUrl=failover\:(ah3\://newyork-relay-server.example.com\:7916,ah3\://losangeles-relay-server.example.com\:7916)</code>.</li>
+<li>To make the agent use the servers or agent relays sequentially, append the code <code>?randomize=false</code> to the <code>locked/agent.brokerUrl=failover\:</code> parameter. By default, the agent uses entries in the list at random, including when it first starts. If you specify <code>?randomize=false</code>, the agent uses entries in the list in order, starting from the first entry. In either case, the agent continues to use the current server or agent relay until it fails, and then the agent switches to another entry in the list. For example, the parameter might look like the following code:<code>locked/agent.brokerUrl=failover\:(ah3\://newyork-relay-server.example.com\:7916,ah3\://losangeles-relay-server.example.com\:7916)?randomize=false</code> </li>
+<li>List the host names or IP addresses of the agent relays or servers in the agent.jms.remote.host property, separated by commas. </li>
+<li>
+<p>List the agent communication port numbers of the agent relays or servers in the agent.jms.remote.port property. For example, if the agent.jms.remote.host property listed two servers and both servers use port 7916 for agent communication, the agent.jms.remote.port looks like this:</p>
+<p><code>agent.jms.remote.port=7916,7916</code></p>
+<p>Each agent relay or server that is listed in the agent.jms.remote.host must have a corresponding port in the agent.jms.remote.port property, even if the port numbers are the same as other agent relays or servers.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_configuring/">Configuring</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/configure_agent_failover.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

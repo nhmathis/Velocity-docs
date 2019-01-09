@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/server_install_interactive/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing the server in interactive mode - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing the server in interactive mode", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-the-server-in-interactive-mode">Installing the server in interactive mode</h1>
+<p>In interactive mode, you install the server by typing configuration information on the command line.</p>
+<ul>
+<li>Make sure that you have a license server with available licenses. See <a href="../../../com.ibm.udeploy.doc/topics/licenseManage/">License management</a>.</li>
+<li>Ensure that the system that you are installing the server on meets the system requirements. See <a href="../sysRequire/">System requirements and performance considerations</a>.</li>
+<li>
+<p>Ensure that a supported version of a Java™ Runtime Environment (JRE) or Java Development Kit (JDK) is installed on the computer on which you are installing HCL UrbanCode Deploy. For more information, see <a href="http://www-01.ibm.com/support/docview.wss?uid=swg27038801">System Requirements for IBM® UrbanCode Deploy</a>. Supported JREs are included with the installation files.</p>
+<p><strong>Important:</strong> Beginning in version 6.2.2, the HCL UrbanCode Deploy server and agent relays require a Java Runtime Environment (JRE) or Java Development Kit (JDK) version 8.</p>
+<p><strong>Important:</strong> </p>
+<p>For best results, download and use the latest available version of the IBM Java Runtime Environment (JRE) for the HCL UrbanCode Deploy server and agent relays. An IBM JRE is available as a separate download. See the <a href="https://www.ibm.com/developerworks/java/jdk/">IBM developer kits</a> page to get the latest version. Install the IBM JRE according to the documentation on the page. Be sure to set the JAVA_HOME system variable to the location of the IBM JRE. If you are updating or changing the JRE to the latest version, see <a href="../../../com.ibm.udeploy.doc/topics/jre_change/">Changing or updating the JRE of servers</a> and <a href="../../../com.ibm.udeploy.doc/topics/update_JRE_agent_relays/">Updating the JRE location for agent relays</a> for instructions. For documentation on the IBM JRE, see <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2/welcome_javasdk_family.html">IBM SDK, Java Technology Edition</a>.</p>
+<p>Using JREs or Java development kits other than those provided by IBM might cause unexpected results.</p>
+</li>
+<li>
+<p>Set the JAVA_HOME system variable to the location of the JRE or JDK that you are using.</p>
+</li>
+<li>If you are installing the server to be compliant with Federal Information Processing Standards (FIPS), the computer must use a supported version of an IBM JRE or JDK.</li>
+<li>If you are installing the server in a production environment, install and configure the server database before you install the server. See <a href="../DBinstall/">Installing the server database</a>. If you are not installing in a production environment, you can install an instance of Apache Derby during the installation steps. You can migrate the database to a different database system later, as described in <a href="../migrate_database/">Migrating the server database</a>.</li>
+<li>If you are using a database other than Apache Derby for the server, place the JAR file for the database driver in the lib/ext folder of the installation program.</li>
+<li>If you are installing on AIX®, the unzip program is required.</li>
+<li>Make sure that your networks and firewalls allow communication on the required ports. See <a href="../agent_firewalls/">Firewall and communication configuration</a>.</li>
+<li>To install and run the server on Linux™ as a non-root user, create a user to use when you install and run the server. Also, ensure that the user has read and write permission to the folder to which you are installing the server.</li>
+<li>Ensure that there is no limit on the maximum memory size and virtual memory size. For example, on most Linux systems, you can run the <code>ulimit -m</code> and <code>ulimit -v</code> commands and ensure that both return the value <code>unlimited</code>. To find out how to remove the limit on the maximum memory size and virtual memory size, see the documentation for the operating system.</li>
+</ul>
+<p>If you are adding the server to a high-availability cluster, including as a cold standby server:</p>
+<ul>
+<li>Configure the high-availability cluster; see <a href="../../../com.ibm.udeploy.doc/topics/server_install_clustered/">Setting up high-availability clusters</a>.</li>
+<li>Ensure that the system on which you are installing the new server has a connection to the cluster network storage and that the system can connect to the database that the cluster is using.</li>
+<li>Each server in the cluster must run the same version of HCL UrbanCode Deploy.</li>
+</ul>
+<p>For information about high-availability clusters, see <a href="../../../com.ibm.udeploy.doc/topics/ha_config_ov/">High availability and failover</a>. For information about cold standby, see <a href="../server_install_cold/">Adding cold standby servers</a>.</p>
+<p><strong>Note:</strong> HCL UrbanCode Deploy is also available as a hosted service. In this case, IBM hosts the server for you. For more information, see the <a href="https://www.ibm.com/us-en/marketplace/application-release-automation">IBM Marketplace</a>.</p>
+<p>The properties that are set during installation are recorded in the file server_install/conf/server/installed.properties on the server.</p>
+<ol>
+<li>Download and extract the installation files for HCL UrbanCode Deploy. These files are available for download from the IBM Passport Advantage® website. See the <a href="https://www.ibm.com/software/passportadvantage/pao_customer.html">IBM UrbanCode Deploy download document</a>. </li>
+<li>If you are using a database other than Apache Derby, place the JAR file for the database in the lib/ext folder of the installation files.</li>
+<li>
+<p>From the command line, run the server installer program. </p>
+<ul>
+<li>On Windows, run the install-server.bat file.</li>
+<li>On Linux, run ./install-server.sh.</li>
+<li>
+<p>To install a FIPS-compliant server, add the switch <code>-fips</code> to the command, such as <code>install-server.sh -fips</code>.</p>
+<p><strong>Note:</strong> If you install a FIPS-compliant server, cloud provisioning is not available. Your JVM connects to only FIPS 140-2 certified IBM providers.</p>
+</li>
+</ul>
+<p>Depending on your system settings, you might need to run this file as an administrator.</p>
+</li>
+<li>
+<p>Specify the configuration information as the installation program prompts you. </p>
+<ul>
+<li>
+<p><strong><em>*Enter the directory of the server to upgrade(leave blank for installing to a clean directory).</em></strong>*</p>
+<p>To install HCL® UrbanCode™ Deploy, press Enter.</p>
+</li>
+<li>
+<p><strong><em>*Enter the home directory for the JRE/JDK that the new server or already installed server uses.</em></strong>*</p>
+<p>Specify the location of the JRE or JDK for the server. The default value is the value of the JAVA_HOME system variable.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Read the license agreements for the software package. Press Enter to show one page at a time, or press F and then press Enter to show the entire license at once.</p>
+</li>
+<li>If you agree to the terms of all of the license agreements, press Y and then press Enter.</li>
+<li>
+<p>Specify the following information as the installation program prompts you.Accept the default values (displayed within brackets) by pressing Enter. If two options are given, such as <code>[Y/n]</code>, the capitalized option is the default value.</p>
+<ul>
+<li>
+<p><strong><em>*Enter the directory where the HCL® UrbanCode™ Deploy server should be installed.</em></strong>*</p>
+<p>Specify the installation directory for the server. The default server installation directory is /opt/ucd/server on Linux™ and C:\Program Files\ucd\server on Windows™.</p>
+<p><strong>Note:</strong> Do not use any shell expansions or abbreviations, such as the tilde character (<code>~</code>).</p>
+</li>
+<li>
+<p><strong><em>*The specified directory does not exist. Do you want to create it?</em></strong>*</p>
+<p>Press Y to create the installation directory.</p>
+</li>
+<li>
+<p><strong><em>*Will this server be used as a node in a high availability cluster?</em></strong>*</p>
+<p>Press Y to add the server to a high-availability (HA) cluster, including cold standby clusters. Selecting this option sets the property com.urbancode.ds.UDeployServer.multiserver to true on the new server, which indicates that it is part of a high-availability installation.</p>
+</li>
+<li>
+<p><strong><em>*Where should the server store application data such as logs, plugins, and keystores?</em></strong>*</p>
+<p>Type the name of the application data directory. The directory must be accessible to the server, and you must have the appropriate permissions. If you are installing a node in a high-availability cluster, this directory must be on the cluster network storage. The default application data folder is /opt/ibm-ucd/server/appdata on Linux™ and C:\Program Files\ibm-ucd\server\appdata on Windows™.</p>
+<p>Depending on whether the shared folder exists or is empty, you are prompted with one of the following options:</p>
+<ul>
+<li>If the folder does not exist, you are prompted with the following option: <strong>The specified directory for application data doesn't exist. Do you want to create it?</strong>. Press Y to create the application data directory. If you select <code>N</code>, the installation process ends.</li>
+<li>If the shared folder exists and is not empty, you are prompted with the following option: <strong>The specified directory for shared resources already exists and is non-empty. Do you want to use the existing data?</strong>. Press Y to use the data. If you select <code>N</code>, the installation process ends; in this case, you must manually clear the application data folder to use it.</li>
+<li>If the shared folder exists but is empty, the folder is used and you are not prompted to use the existing data.
+<strong>Note:</strong> Do not use any shell expansions or abbreviations, such as the tilde character (<code>~</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong><em>*What host name will users access the web UI at?</em></strong>*</p>
+<p>If you are installing a stand-alone server, specify the host name of the computer that hosts the server. If you are installing a stand-alone server in a production environment, consider specifying a host name that is not tied to the physical computer. By specifying such a host name, you can expand the server to a high-availability system later. If you are installing a server in a high-availability cluster, specify the host name of the load balancer for the cluster.</p>
+<p>The server listens on all IP addresses that are available to it, not just this host name or IP address.</p>
+</li>
+<li>
+<p><strong><em>*Do you want the Web UI to always use secure connections using SSL?</em></strong>*</p>
+<p>Press Y to use secure connections to the server. If you select this option, you must configure a certificate for the server; see <a href="../../../com.ibm.udeploy.doc/topics/ssl_config/">Configuring SSL on Apache Tomcat and LDAP servers</a>.</p>
+</li>
+<li>
+<p><strong><em>*Enter the port on which the Web UI should listen for secure HTTPS requests.</em></strong>*</p>
+<p>Specify the HTTPS port for the server. The default value is <code>8443</code>. If you are installing HCL® UrbanCode™ Deploy, UrbanCode Velocity, and IBM® UrbanCode™ Release, be sure to use a different port for each product. If you are installing multiple instances of HCL® UrbanCode™ Deploy on the same computer, be sure to use a different port for each instance.</p>
+</li>
+<li>
+<p><strong><em>*Enter the port on which the Web UI should redirect unsecured HTTP requests.</em></strong>*</p>
+<p>Specify the HTTP port for the server. The default value is <code>8080</code>.If you are installing HCL® UrbanCode™ Deploy, UrbanCode Velocity, and IBM® UrbanCode™ Release, be sure to use a different port for each product. If you are installing multiple instances of HCL® UrbanCode™ Deploy on the same computer, be sure to use a different port for each instance.</p>
+</li>
+<li>
+<p><strong><em>*Enter the initial password for the admin user.</em></strong>*</p>
+<p>Specify the starting password for the administrator account on the server. The administrator user name is <code>admin</code>. Then, type the password again to verify it.</p>
+</li>
+<li>
+<p><strong><em>*Enter the port to use for JMS agent communication.</em></strong>*</p>
+<p>Specify the port that JMS agents use to contact the server. The default value is <code>7918</code>.</p>
+</li>
+<li>
+<p><strong><em>*Do you want the Server and Agent communication to require mutual authentication? This requires a manual key exchange between the server and each agent. See the documentation for more details.</em></strong>*</p>
+<p>If you use mutual authentication, you must manually exchange a key between the server and each agent. For more information about this option, see <a href="../ssl_mutual_auth/">Configuring mutual authentication</a>.</p>
+</li>
+<li>
+<p><strong><em>*Enter the web agent communication URL for this server.</em></strong>*</p>
+<p>The WebSocket secure URL must have the format <code>wss://host-or-ip:port</code>. For example, <code>wss://myUCD:7919</code>. The default WebSocket port is <code>7919</code>. Each server must have a unique URL, and every server in a HA cluster must be able to connect to this URL. Web agents use this URL to communicate with the sever. When you install an agent, you determine its type, either <strong>WEB</strong> or <strong>JMS</strong>.</p>
+</li>
+<li>
+<p><strong><em>*Enter the RCL server path(s).</em></strong>*</p>
+<p>Specify the connection information for the license server. You can specify the port and host name or IP address for the license server, such as <code>27000@RCLServer.example.com</code>. To avoid problems when a license server is not available, you can specify multiple license servers. In this case, separate each address with colons on Linux™ and UNIX™ or semicolons on Windows™, as in the following example: <code>27000@RCLServer.example.com;27000@backupRCLServer.example.com</code>. For more complicated license server scenarios, see this document: <a href="http://www-01.ibm.com/support/knowledgecenter/SSSTWP_8.1.4/com.ibm.rational.license.doc/topics/r_specify_lic_servers.html">http://www-01.ibm.com/support/knowledgecenter/SSSTWP_8.1.4/com.ibm.rational.license.doc/topics/r_specify_lic_servers.html</a>. For more information about setting up a Rational® Common Licensing server and applying licenses, see the Rational® Common Licensing help: <a href="http://www-01.ibm.com/support/knowledgecenter/SSSTWP_8.1.4/com.ibm.rational.license.doc/helpindex_RCL.html">Rational® Common Licensing v8.1.4 - 8.1.4.9 documentation</a> For more information about licensing, see <a href="../../../com.ibm.udeploy.doc/topics/licenseManage/">License management</a>. </p>
+<p><strong>Note:</strong> If you add the server to an existing high-availability cluster, you are not prompted to provide information about a license server.</p>
+</li>
+<li>
+<p><strong><em>*Create database schema?</em></strong>*</p>
+<p>In most cases, press Y to create new schema definitions in the database. However, if you have a pre-populated database, such as if you are adding a server to a cluster, press N. If you are adding the server to a high-availability cluster, press N unless the server is the first node in the cluster.</p>
+</li>
+<li>
+<p><strong><em>*Enter the database type to use.</em></strong>*</p>
+<p>Specify the type of database. If you select <code>derby</code>, the installation program installs a new instance of Apache Derby for the server to use. Depending on the type of database that you select, new fields appear for information about the database. Valid values are <code>derby</code>, <code>mysql</code>, <code>oracle</code>, <code>sqlserver</code>, <code>db2</code>, and <code>db2zos</code>.</p>
+<p><strong>Warning:</strong> Derby is for evaluation purposes only; do not use Derby for a production server. In addition, if you install the server as a node in a high-availability cluster, you cannot use Derby.</p>
+<p>If you specify <code>db2zos</code>, you are prompted to enter the database name, which is not necessarily the database location.</p>
+<p>If you specify a type other than <code>derby</code>, specify the following database-related parameters:</p>
+<ul>
+<li>
+<p><strong><em>*Enter the database driver.</em></strong>*</p>
+<p>Specify the class name of the database driver.</p>
+</li>
+<li>
+<p><strong><em>*Please place the jar file containing the driver for your database inside the lib/ext directory in the IBM UrbanCode Deploy installer.</em></strong>*</p>
+<p>Verify that you placed the JAR file for the database driver in the lib/ext folder of the installation program and then press Enter.</p>
+</li>
+<li>
+<p><strong><em>*Enter the database connection string.</em></strong>*</p>
+<p>Specify the complete connection string for the database, such as the following string:</p>
+<p><code>jdbc:db2://localhost:50000/ibm_ucd</code></p>
+</li>
+<li>
+<p><strong><em>*Enter the database schema name.</em></strong>*</p>
+<p>Specify the name of the database schema to create or use. This field is required on Windows™ if the user has the database administrator role. This field applies only to Oracle databases.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><em>*Enter the database username.</em></strong>*</p>
+<p>Specify the user name for the database. If you are creating the database schema, this user must have permission to create tables in the database.</p>
+</li>
+<li>
+<p><strong><em>*Enter the database password.</em></strong>*</p>
+<p>Specify the password for the database.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If you are installing on Windows, the installation program prompts you with the following questions after a pause:</p>
+<ul>
+<li>
+<p><strong><em>*Do you want to install the Server as Windows service?</em></strong>*</p>
+<p>Press Y to install the server as a Windows™ service.</p>
+</li>
+<li>
+<p><strong><em>*Enter a unique service name. No spaces allowed.</em></strong>*</p>
+<p>Specify a name for the Windows™ service. The name must be unique on the system and must not contain spaces.</p>
+</li>
+<li>
+<p><strong><em>*Enter the user account name including domain path to run the service</em></strong>*</p>
+<p>Specify the user account with which to run the service, including the domain path. Prefix local accounts with a period, such as .\localsystem.</p>
+</li>
+<li>
+<p><strong><em>*Do you want to start the service automatically?</em></strong>*</p>
+<p>Press Y to start the server automatically. Otherwise, you can start and stop the server manually. See <a href="../run_server/">Starting and stopping the server</a>.</p>
+</li>
+<li>
+<p><strong><em>*User account password</em></strong>*</p>
+<p>Specify the password for the user account.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>The installation program installs the server. If you install the server as a node in high-availability cluster, the installer loads the existing encryption keystore that is in the shared storage folder by using the default settings. If the default password is incorrect, you are prompted for the password. If after three attempts you do not enter the correct password, the installation process stops. If the keystore has more than one alias, you are prompted to specify an alias.</p>
+<p>To start the server, see <a href="../run_server/">Starting and stopping the server</a>.</p>
+<p>If you selected mutual authentication, set up the authentication. See <a href="../ssl_mutual_auth/">Configuring mutual authentication</a>.</p>
+<p>When you run the server for the first time, you might see an error message that says that no agent or tag is configured to import new component versions. To import component versions, including built artifacts, you must use an agent, and the server requires that you specify a default agent for this purpose. You can override this default setting when you create a component. Follow these steps to specify a default agent or agent tag:</p>
+<ul>
+<li>To specify a default agent, click <strong>System</strong> > <strong>System Settings</strong> and under <strong>General Settings</strong>, clear the <strong>Use Agent Tag For Integration</strong> check box. Then, select an agent in the <strong>Agent for Version Imports</strong> list. Then, at the bottom of the page, click <strong>Save</strong>.</li>
+<li>To specify a default agent tag, click <strong>Settings</strong> > <strong>System Settings</strong> and under <strong>General Settings</strong>, clear the <strong>Use Agent Tag For Integration</strong> check box. Then, select an agent tag in the <strong>Agent Tag for version imports</strong> list. Then, at the bottom of the page, click <strong>Save</strong>. If no tags are listed, add a tag to one or more agents on the server.</li>
+</ul>
+<p>If you see "Out of memory" errors, increase the amount of memory that is available to the HCL UrbanCode Deploy service. See <a href="../../../com.ibm.udeploy.doc/topics/server_memory/">Increasing the amount of memory that is available to the server</a>.</p>
+<p>If you are using Derby, you might see the following error in the results of the installation program:</p>
+<pre><code>[echo]     waiting for db to start - 6 seconds remaining
+[echo]     waiting for db to start - 3 seconds remaining
+[echo] Could not start database
+[echo] Stopping embedded database ...
+[java] Tue Feb 04 09:11:25 EST 2014 : Could not connect 
+  to Derby Network Server on host localhost, port 11377: 
+  Connection refused
+</code></pre>
+
+<p>If you see this error, you must change the default security settings for the Java installation on the server:</p>
+<ol>
+<li>Open the Java security policy file in a text editor. If you are using a Java Runtime Environment (JRE), this file is at the location JAVA_HOME/lib/security/java.policy, where JAVA_HOME is the base folder of the Java installation. If you are using a Java Development Kit (JDK), the file is at the location JAVA_HOME/jre/lib/security/java.policy.</li>
+<li>
+<p>In the java.policy file, in the section that is labeled <code>// default permissions granted to all domains</code>, within the <code>grant{}</code> block, add the following code:</p>
+<p><code>permission java.net.SocketPermission "localhost:11377", "listen";</code></p>
+</li>
+<li>
+<p>Run the installation program again.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../serverInstall/">Installing the server</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/server_install_interactive.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_edit_softlayer/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Modeling environments for SoftLayer - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modeling environments for SoftLayer", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modeling-environments-for-softlayer">Modeling environments for SoftLayer</h1>
+<p>To model a SoftLayer® environment, log in with a SoftLayer cloud project and specify the information that is specific to SoftLayer in a blueprint.</p>
+<ul>
+<li>Configure the images for use with the blueprint designer. See <a href="../cloud_connect_softlayer_images/">Configuring private SoftLayer images</a>.</li>
+<li>On the SoftLayer web portal, create an object storage account.</li>
+<li>Connect to SoftLayer. See <a href="../cloud_connect_softlayer/">Connecting to the SoftLayer cloud</a>.</li>
+<li>Connect the blueprint design server to the server. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Log in to the blueprint designer.</li>
+<li>
+<p>At the top of the page, select the cloud project and region to use.</p>
+</li>
+<li>
+<p>Create the blueprint. See <a href="../blueprint_edit/">Creating files with the blueprint designer</a>.</p>
+</li>
+<li>Add resources from the palette to the blueprint, such as virtual images. The palette shows resources from the currently connected cloud, which is shown in the upper-right corner of the page. For more information on working with the blueprint designer, see <a href="../blueprint_diagram/">Editing blueprint diagrams</a> and <a href="../blueprint_source/">Editing blueprint source code</a>.</li>
+<li>
+<p>Specify how to install the HCL® UrbanCode™ Deploy agent: </p>
+<ul>
+<li>By default, public images use the SoftLayer storage account to install the HCL UrbanCode Deploy agent. A script in the storage account installs the HCL UrbanCode Deploy agent when you provision an image.</li>
+<li>By default, private (custom) images use the <code>cloud-init</code> package to install the HCL UrbanCode Deploy agent.</li>
+<li>
+<p>To use the storage account to install the agent on a private image, set the use_cloudinit property to false, as shown in the following code:</p>
+<p><code>image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:**
+    softlayer\_properties:
+      storage\_account: \{ get\_param: storage\_account \}
+      storage\_datacenter: \{ get\_param: storage\_datacenter \}
+      use\_cloudinit: false**</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>If you host your engine in a private SoftLayer network and provision images to that private network, set the storage_private_url to <code>true</code>, as shown in the following code: </p>
+<p><code>image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:
+**    softlayer\_properties:
+      storage\_private\_url: true**</code></p>
+</li>
+<li>
+<p>In the blueprint source code, in the <code>metadata</code> property for the resource, specify any virtual image tags. To parametrize the data, you can specify a list of values. You can also specify a series of comma-separated strings. For example, to specify the parameterized tags <code>blue</code> and <code>mysql_database</code>, the code looks like the following example:</p>
+<p>```</p>
+<p>resources:
+  myImageType:
+    type: OS::Nova::Server
+    properties:
+      name: myImageType
+      image: myImageName
+      flavor: {get_param: flavor}
+      key_name: {get_param: key_name}
+    <strong>metadata:
+      tags: ['blue', 'mysql_database']</strong>
+```</p>
+<p>If you do not plan to reuse the tags as parameters, the code looks like the following example:</p>
+<p><code>resources:
+  myImageType:
+    type: OS::Nova::Server
+    properties:
+      name: myImageType
+      image: myImageName
+      flavor: {get_param: flavor}
+      key_name: {get_param: key_name}
+    **metadata:
+      tags: blue, mysql\_database**</code></p>
+</li>
+<li>
+<p>Create a configuration file, and externalize properties to the file.See <a href="../blueprint_configs/">Editing configuration files</a>.</p>
+</li>
+<li>
+<p>In the configuration file, ensure that the core OpenStack types are mapped to SoftLayer types. The configuration file must have mapping that is similar to this code:</p>
+<p>```
+resource_registry:
+  OS::Nova::Server : IBM::SoftLayer::Server</p>
+<p>```</p>
+</li>
+</ul>
+<p>Add the components of your application to the blueprint. See <a href="../blueprint_deploy_env/">Deploying components with blueprints</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_edit_clouds/">Modeling environments for clouds through OpenStack Heat</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_edit_softlayer.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

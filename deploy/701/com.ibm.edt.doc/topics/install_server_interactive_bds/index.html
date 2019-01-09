@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/install_server_interactive_bds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing the blueprint design server in interactive mode - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing the blueprint design server in interactive mode", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-the-blueprint-design-server-in-interactive-mode">Installing the blueprint design server in interactive mode</h1>
+<p>In interactive mode, you install the blueprint design server by typing configuration information in a command-line program. This installation includes the cloud discovery service.</p>
+<ul>
+<li>Ensure that your account has the required permissions:<ul>
+<li>If you install the blueprint design server on a Linux™ operating system, root access is required. The operating system must have the most recent package updates. For more information, see <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/part-Installing_and_Managing_Software.html">Installing and Managing Software</a> in the Red Hat Enterprise Linux customer portal.</li>
+<li>If you install the blueprint design server on a Windows™ operating system, your account must be a member of the Administrators group.</li>
+</ul>
+</li>
+<li>Make sure that your system meets the system requirements. See <a href="../sysRequire/">System requirements and performance considerations</a>.</li>
+<li>Make sure that your networks and firewalls allow communication on the required ports. See <a href="../agent_firewalls/">Firewall and communication configuration</a>.</li>
+<li>Make sure that you have a license server with available HCL UrbanCode Deploy licenses.</li>
+<li>Install or extend an engine. See <a href="../install_engine/">Installing the engine</a>.</li>
+<li>Install or upgrade the HCL UrbanCode Deploy server.</li>
+<li>Create an authorization token on the HCL UrbanCode Deploy server. You must have this token to retrieve information about components from the server.</li>
+<li>Configure a database for the blueprint design server. See <a href="../install_database_bds_ov/">Blueprint design server database configuration</a>.</li>
+<li>If you are using a database other than Apache Derby or PostgreSQL, either note the location of the JDBC JAR file for the database or place the file in the installation_directory/ibm-ucd-patterns-install/web-install/media/server/opt/tomcat/lib folder.</li>
+<li>
+<p>If you install the blueprint designer on a Linux operating system, install the following prerequisite packages:</p>
+<ul>
+<li><code>gcc</code></li>
+<li><code>python-devel</code></li>
+<li><code>openssl-devel</code></li>
+<li><code>libffi-devel</code>
+On a Red Hat Enterprise Linux system, the command to install these packages might resemble the following code:</li>
+</ul>
+<p><code>yum install -y gcc python-devel openssl-devel libffi-devel</code></p>
+</li>
+<li>
+<p>If you install the blueprint designer on a Windows system, install Python 2.7.9 or a higher 2.x version. Version 3 and later are not supported. You can install Python yourself, or the installation program will install a compatible version.</p>
+</li>
+<li>Ensure that there is no limit on the maximum memory size and virtual memory size. For example, on most Linux systems, you can run the <code>ulimit -m</code> and <code>ulimit -v</code> commands and ensure that both return the value <code>unlimited</code>. To find out how to remove the limit on the maximum memory size and virtual memory size, see the documentation for the operating system.</li>
+</ul>
+<p>When you install the blueprint design server, you also install its supporting services: the cloud discovery service and a Git server. The cloud discovery service provides information about your configured clouds to the blueprint designer. You can store the blueprints and configuration files that you create for the blueprint designer in the local Git server.</p>
+<ol>
+<li>Download and extract the installation files for the blueprint design server. These files are available for download from the IBM® Passport Advantage® website. See the <a href="https://www.ibm.com/software/passportadvantage/pao_customer.html">IBM UrbanCode Deploy download document</a>. </li>
+<li>From the command line, run the installation program. On Windows, you must use the command line instead of the Windows PowerShell.<ul>
+<li>On Linux, change to the installation_directory/ibm-ucd-patterns-install/web-install/ folder, and run the install.sh file.</li>
+<li>On Windows, change to the installation_directory folder, and run the install.bat file.</li>
+</ul>
+</li>
+<li>At the prompt <strong>If you do not have Python 2 installed, press 'y' and Python 2.7.9 will be installed on this machine</strong>, press y if Python is installed or if you want to install Python automatically. Press n to close the installer and install Python on your own. </li>
+<li>Read the license agreements for the software package. Press the Space bar to show one page at a time, or press F to show the entire license text. </li>
+<li>If you agree to the terms of all of the license agreements, press Y, and then press Enter. </li>
+<li>
+<p>Specify the following information as the installation program prompts you. You can accept the default values (displayed within brackets) by pressing Enter. If two options are given, such as <code>[Y/n]</code>, the uppercase option is the default value.</p>
+<ul>
+<li>
+<p><strong><em>*Specify the directory where the blueprint design server for UrbanCode Deploy should be installed.</em></strong>*</p>
+<p>Specify the directory to install the blueprint design server in. The default installation directory is /opt/ibm-ucd-patterns on Linux™ and C:\Program Files\ibm-ucd-patterns on Windows™.</p>
+</li>
+<li>
+<p><strong><em>*The specified directory does not exist. Do you want to create it?</em></strong>*</p>
+<p>Press <code>Y</code> to create the installation directory.</p>
+</li>
+<li>
+<p><strong><em>*Enter the public IP address or host name of this system.</em></strong>*</p>
+<p>Specify the public IP address or host name that other systems, such as the HCL® UrbanCode™ Deploy server, use to access this system. In most cases, specify the host name of the computer that hosts the server, such as <code>designserver.example.com</code>.</p>
+</li>
+<li>
+<p><strong><em>*Do you want the blueprint design server to always use secure connections using SSL?</em></strong>*</p>
+<p>Press Y to use secure connections to the blueprint design server. If you select this option, you must configure a certificate for the blueprint design server; see <a href="../ssl_config_server_bds/">Configuring SSL security on Apache Tomcat for the blueprint design server</a>.</p>
+</li>
+<li>
+<p><strong><em>*Enter the port on which the blueprint design server should listen for secure HTTPS requests.</em></strong>*</p>
+<p>Specify the HTTPS port for the blueprint design server. The default value is <code>8443</code>. If you are installing the HCL® UrbanCode™ Deploy server and the blueprint design server on the same computer, be sure to use a different port for each server.</p>
+</li>
+<li>
+<p><strong><em>*Enter the port to which the blueprint design server should redirect unsecured HTTP requests.</em></strong>*</p>
+<p>Specify the HTTP port for the blueprint design server. The default value is <code>8080</code>.If you are installing the HCL® UrbanCode™ Deploy server and the blueprint design server on the same computer, be sure to use a different port for each server.</p>
+</li>
+<li>
+<p><strong>Create database schema?</strong></p>
+<p>In most cases, press Y to create new schema definitions in the database. However, if you have a pre-populated database, press N.</p>
+</li>
+<li>
+<p><strong><em>*Enter the database type to use.</em></strong>*</p>
+<p>Specify the type of database to use. For production systems, specify mysql, mariadb, db2, oracle, sqlserver, or postgres. For evaluation systems, you can use one of these databases, or you can specify derby to have the installer create a database for you.</p>
+<p><strong>Note:</strong> Derby is not appropriate for production blueprint design servers.</p>
+<p>Specify the following information for the database connection:</p>
+<ul>
+<li>
+<p><strong><em>*Enter the database driver.</em></strong>*</p>
+<p>Specify the class name of the driver, such as <code>com.mysql.jdbc.Driver</code>. This field is required only if you are not using a Derby database.</p>
+</li>
+<li>
+<p><strong><em>*Enter the database connection string.</em></strong>*</p>
+<p>Specify the complete connection string for the database. For example, if you use a MySQL database, the connection string resembles the following code: <code>jdbc:mysql://hostname:3306/ibm_ucdp</code> , where hostname is the host name or IP address of the database server.</p>
+<p>If you are using the MySQL database on an engine, specify <code>jdbc:mysql://engine.example.org:3306/ibm_ucdp</code> , where engine.example.org is the host name or IP address of the engine.</p>
+</li>
+<li>
+<p><strong><em>*Enter the database username.</em></strong>*</p>
+<p>Specify the user name for the database. The default user name is <code>ibm_ucdp</code>. If you are connecting to a production database, specify the user name for an existing account on the database. If you are creating a Derby database, specify a new user name for the database.</p>
+</li>
+<li>
+<p><strong><em>*Enter the database password.</em></strong>*</p>
+<p>Specify the password for the database. The default password is <code>password</code>. If you are connecting to a production database, specify the password for the database account. If you are creating a Derby database, specify a new password for the database account.</p>
+</li>
+<li>
+<p><strong>Enter the path to the database library jar file to copy into your installation.</strong></p>
+<p>If you are using a production database, specify the location and file name of the database JDBC JAR file. For example, on Linux™ the path and file name might look like this string: /root/mysql-connector-java-5.1.27-bin.jar. On Windows™, the path and file might look like this string: C:\tmp\mysql-connector-java-5.1.27-bin.jar</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><em>*Enter the URI for the IBM UrbanCode Deploy server.</em></strong>*</p>
+<p>Specify the URL for the server, including the port. The default port is 8443, for example: <code>https://deployserver.example.org:8443</code>.</p>
+<p><strong>Note:</strong> Do not include a slash at the end of this URL.</p>
+<p>If you do not want to connect, leave this field blank.</p>
+</li>
+<li>
+<p><strong><em>*Enter the authentication token to access the UrbanCode Deploy server.</em></strong>*</p>
+<p>Specify the authentication token from the HCL® UrbanCode™ Deploy server. If you are not connecting, leave this field blank.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If you installed the blueprint design server on a Windows operating system, register the blueprint designer as a Windows service. </p>
+<ol>
+<li>
+<p>As an administrator, run the following command: </p>
+<p><code>C:\\installation\_directory\\bin\\service\\service.cmd install ucdp</code></p>
+<p>In this code, the installation_directory is the directory that you installed the blueprint design server in. By default, the command resembles the following code:</p>
+<p><code>C:\\Progra~1\\ibm-ucd-patterns\\bin\\service\\service.cmd install ucdp</code></p>
+</li>
+<li>
+<p>Specify the following information as the installation program prompts you. You can accept the default values (displayed within brackets) by pressing Enter. If two options are given, such as <code>[Y/n]</code>, the uppercase option is the default value.</p>
+<ul>
+<li>
+<p><strong>Enter the user account name including domain path to run the service as.</strong></p>
+<p>Specify the user account with which to run the service, including the domain path. Prefix local accounts with a period, such as .\localsystem.</p>
+</li>
+<li>
+<p><strong>Do you want to start the ucdp service automatically?</strong></p>
+<p>Press Y to start the server automatically. Otherwise, you can start and stop the server manually. See <a href="../start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</p>
+<p><strong>Note:</strong> The ucdp service starts only the blueprint designer. You must manually start the cloud discovery service.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Start the service by running the following command: </p>
+<p><code>net start ucdp</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Configure the cloud discovery service. While you can use the default settings for the cloud discovery service, you can also provide information about the specific regions, flavors, and images that you use with some clouds. If you want to customize the cloud discovery service, you can customize it now or when you connect to a cloud. See <a href="../../../com.ibm.udeploy.doc/topics/cds_configure/">Setting up images, regions, and flavors for the cloud discovery service and engine</a>.</p>
+</li>
+<li>
+<p>Start the cloud discovery service: </p>
+<ul>
+<li>
+<p>On Linux systems that manage services with the systemd system manager, use the systemctl command:</p>
+<p><code>systemctl start ibm-cloud-discovery.service</code></p>
+</li>
+<li>
+<p>On Linux systems that do not manage services with the systemd system, run the following command:</p>
+<p><code>cloud-discovery-service &amp;</code></p>
+</li>
+<li>
+<p>On Windows, run the following command:</p>
+<p><code>C:\python\_installation\_directory\Scripts\cloud-discovery-service.exe</code></p>
+<p>Use the location where Python is installed for <code>python\_installation\_directory</code>. The default installation directory is C:\Python27. By default, the command looks like this code:</p>
+<p><code>C:\Python27\Scripts\cloud-discovery-service.exe</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>If you installed the blueprint design server on the same computer that you installed the engine, restart the Heat services and Keystone, if applicable. See <a href="../start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+<li>
+<p>Start the blueprint design server: </p>
+<ul>
+<li>
+<p>On Linux, run the following command:</p>
+<p><code>server\_installation\_directory/bin/server start</code></p>
+<p>Use the location of the blueprint design server installation for <code>server\_installation\_directory</code>. The default installation directory is /opt/ibm-ucd-patterns. By default, the command looks like the following code:</p>
+<p><code>/opt/ibm-ucd-patterns/bin/server start</code></p>
+</li>
+<li>
+<p>On Windows, run the following command:</p>
+<p><code>C:\server\_installation\_directory\bin\start_server</code></p>
+<p>Use the location of the blueprint design server installation for <code>server\_installation\_directory</code>. The default installation directory is C:\Program Files\ibm-ucd-patterns. By default, the command looks like the following code:</p>
+<p><code>"C:\Program Files\ibm-ucd-patterns\bin\start_server"</code></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>You can access the blueprint design server by opening the following URL in a web browser: <code>https://hostname:port/landscaper</code> , where <code>hostname</code> is the host name of the blueprint design server and <code>port</code> is the HTTP port that you specified when you installed the blueprint design server. The default administrator user name is <code>ucdpadmin</code>, and the default password is <code>ucdpadmin</code> .</p>
+<p>After you install the blueprint design server, you can configure it. You might complete these tasks:</p>
+<ul>
+<li>Configure an authentication realm to import users to the blueprint design server. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_realms_create/">Creating authentication realms for the blueprint designer</a>.</li>
+<li>Connect to a cloud. See <a href="../security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</li>
+<li>Connect the blueprint design server to the HCL UrbanCode Deploy. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Configure the Git repository that contains the blueprints. You can connect to an external Git repository or use the Git server that included with the blueprint design server. See <a href="../../../com.ibm.udeploy.doc/topics/blueprint_gitblit/">Changing the local Git server password</a>.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../install_server_bds/">Installing the blueprint design server</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/install_server_interactive_bds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

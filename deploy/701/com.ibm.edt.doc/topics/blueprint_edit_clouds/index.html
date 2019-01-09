@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_edit_clouds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modeling environments for clouds through OpenStack Heat", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modeling-environments-for-clouds-through-openstack-heat">Modeling environments for clouds through OpenStack Heat</h1>
+<p>To model environments for clouds that you connect to through OpenStack Heat, create blueprints on the blueprint design server.</p>
+<p>This method does not apply to clouds that use virtual system patterns. To model environments for clouds that use virtual system patterns, see <a href="../blueprint_edit_clouds_vsp/">Modeling environments for clouds that use virtual system patterns</a>.</p>
+<ul>
+<li><strong><a href="../blueprint_edit_os/">Modeling environments for OpenStack and OpenStack-based clouds</a></strong><br />
+To model an OpenStack environment, log in with an OpenStack cloud project and use resources from your cloud system in a blueprint.</li>
+<li><strong><a href="../blueprint_edit_ec2/">Modeling environments for Amazon Web Services</a></strong><br />
+To model an Amazon Web Services (AWS) environment, log in with an AWS cloud project and specify the AWS-specific information in a blueprint.</li>
+<li><strong><a href="../blueprint_edit_softlayer/">Modeling environments for SoftLayer</a></strong><br />
+To model a SoftLayer® environment, log in with a SoftLayer® cloud project and specify the information that is specific to SoftLayer® in a blueprint.</li>
+<li><strong><a href="../blueprint_edit_vc/">Modeling environments for VMware vCenter</a></strong><br />
+To model a VMware vCenter environment, log in with a VCenter cloud project and specify the VCenter-specific information in a blueprint.</li>
+<li><strong><a href="../blueprint_edit_vra/">Modeling environments for VMware vRealize Automation</a></strong><br />
+To model a VMware vRealize Automation Enterprise (vRA) environment, log in with a vRealize Automation cloud project and specify the vRealize Automation-specific information in a blueprint.</li>
+<li><strong><a href="../blueprint_edit_azure/">Modeling environments for Microsoft Azure</a></strong><br />
+To model a Microsoft™ Azure environment, log in with an Azure cloud project and specify the Azure-specific information in a blueprint.</li>
+<li><strong><a href="../blueprint_edit_google_cloud/">Modeling environments for Google Cloud Platform</a></strong><br />
+To model a Google Cloud Platform environment, log in with a Google Cloud cloud project and specify the Google Cloud-specific information in a blueprint.</li>
+<li><strong><a href="../blueprint_deploy_env/">Deploying components with blueprints</a></strong><br />
+Add components to a blueprint so that when you provision environments from the blueprint, the engine automatically installs the components.</li>
+<li><strong><a href="../blueprint_deploy_app/">Deploying applications with blueprints</a></strong><br />
+Add all of the components in an application to a blueprint so that when you provision environments from the blueprint, the engine automatically installs the application.</li>
+<li><strong><a href="../blueprint_chef/">Applying Chef roles to environments</a></strong><br />
+Chef roles describe automation tasks to be run on a target system. You can apply roles to images in a blueprint.</li>
+<li><strong><a href="../../../com.ibm.udeploy.doc/topics/blueprint_props_ov/">Blueprint properties, attributes, and parameters</a></strong><br />
+Blueprint properties, attributes, and parameters store information that is used in provisioning cloud environments.</li>
+<li><strong><a href="../blueprint_create/">Editing blueprints with the blueprint designer</a></strong><br />
+When you work with blueprints, you can use a graphical editor or a source-code editor.</li>
+<li><strong><a href="../blueprint_storage/">Blueprint storage on the blueprint design server</a></strong><br />
+ You store blueprints and configuration files that you create with the blueprint designer in Git repositories. By storing blueprints and configurations in the Git repository for a team, you can share the files with members of that team.</li>
+<li><strong><a href="../blueprint_network_ov/">Modeling networks</a></strong><br />
+You can refer to existing network stacks in blueprints created on the blueprint design server, or you can create new network elements.</li>
+<li><strong><a href="../blueprint_service_ov/">Modeling software services</a></strong><br />
+You can add software services to blueprints that you create on the blueprint design server so that your applications can access those services at provisioning time.</li>
+<li><strong><a href="../blueprint_credentials/">Providing cloud credentials in a blueprint</a></strong><br />
+By default, when you provision an environment from a blueprint, the environment is created by using the cloud account information of its cloud project. However, when you create a blueprint for most kinds of clouds, you can specify different user credentials.</li>
+<li><strong><a href="../blueprint_autoscale/">Modeling autoscaling environments</a></strong><br />
+Autoscaling environments automatically add or remove resources as demand changes.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../blueprint_ov/">Modeling cloud environments with the blueprint designer</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_edit_clouds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

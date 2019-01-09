@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/rest_cli_component_info_get/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Get information about a component - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Get information about a component", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example", url: "#example" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="get-information-about-a-component">Get information about a component</h1>
+<p>This command returns a JSON representation of a component.</p>
+<h2 id="request">Request</h2>
+<pre><code>GET https://{hostname}:{port}
+    /cli/component/info?{parameters}
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>component</td>
+<td>string</td>
+<td>true</td>
+<td>Name or ID of the component</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<pre><code>curl -k -u jsmith:passwd 
+
+  &quot;https://myserver.example.com:8443/cli/component/info
+  ?component=JPetStore-APP&quot;
+</code></pre>
+
+<h2 id="example-response">Example response</h2>
+<pre><code>{
+  &quot;id&quot;: &quot;69a6a5bd-583b-4b40-bd47-54b28f5aa1e6&quot;,
+  &quot;name&quot;: &quot;JPetStore-APP&quot;,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;created&quot;: 1387315824908,
+  &quot;importAutomatically&quot;: false,
+  &quot;useVfs&quot;: true,
+  &quot;active&quot;: true,
+  &quot;deleted&quot;: false,
+  &quot;defaultVersionType&quot;: &quot;FULL&quot;,
+  &quot;cleanupDaysToKeep&quot;: 0,
+  &quot;cleanupCountToKeep&quot;: 0,
+  &quot;tags&quot;: [
+    {
+      &quot;id&quot;: &quot;d140ae5a-dfb0-477a-910b-762cc0d99cc6&quot;,
+      &quot;name&quot;: &quot;Tag2&quot;,
+      &quot;color&quot;: &quot;#7fff00&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;objectType&quot;: &quot;Component&quot;
+    }
+  ],
+  &quot;user&quot;: &quot;admin&quot;,
+  &quot;properties&quot;: [
+    {
+      &quot;id&quot;: &quot;91b61a4a-1454-46d9-af32-eb98e6ae7d3d&quot;,
+      &quot;name&quot;: &quot;code_station/repository&quot;,
+      &quot;value&quot;: &quot;9f19c4c5-84b9-4f4e-b1fc-df2c2f306b1c&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;secure&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;3702f391-09e1-4550-903a-d5ae286c94aa&quot;,
+      &quot;name&quot;: &quot;custom/Prop1&quot;,
+      &quot;value&quot;: &quot;value1&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;secure&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;4fcb6120-453d-45a5-8cb3-9e7945dc80a5&quot;,
+      &quot;name&quot;: &quot;FileSystemVersionedComponentProperties/basePath&quot;,
+      &quot;value&quot;: &quot;/root/shared/app&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;secure&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;8f3706d1-8255-4626-b349-6e503a1ed4e4&quot;,
+      &quot;name&quot;: &quot;FileSystemVersionedComponentProperties/extensions&quot;,
+      &quot;value&quot;: &quot;&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;secure&quot;: false
+    },
+    {
+      &quot;id&quot;: &quot;8bba5e9f-7937-4b24-ac12-ebd6250f0023&quot;,
+      &quot;name&quot;: &quot;FileSystemVersionedComponentProperties/saveFileExecuteBits&quot;,
+      &quot;value&quot;: &quot;false&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;secure&quot;: false
+    }
+  ],
+  &quot;applications&quot;: [
+    {
+      &quot;id&quot;: &quot;c8a45972-da39-4450-87f0-21fae710e0f5&quot;,
+      &quot;name&quot;: &quot;JPetStore&quot;,
+      &quot;description&quot;: &quot;&quot;,
+      &quot;created&quot;: 1387378155981,
+      &quot;enforceCompleteSnapshots&quot;: false,
+      &quot;active&quot;: true,
+      &quot;tags&quot;: [
+      ],
+      &quot;user&quot;: &quot;admin&quot;
+    }
+  ],
+  &quot;environmentPropSheetDef&quot;: {
+    &quot;id&quot;: &quot;8f9bf513-d434-43d4-ada4-6b8d16cfe4c2&quot;,
+    &quot;path&quot;: &quot;components/69a6a5bd-583b-4b40-bd47-54b28f5aa1e6/environmentPropSheetDef&quot;,
+    &quot;version&quot;: 1,
+    &quot;versionCount&quot;: 1,
+    &quot;commit&quot;: 6,
+    &quot;versioned&quot;: true
+  },
+  &quot;versionPropSheetDef&quot;: {
+    &quot;id&quot;: &quot;99bb8cce-44ee-49df-bebc-e84dbbdba2ac&quot;,
+    &quot;path&quot;: &quot;components/69a6a5bd-583b-4b40-bd47-54b28f5aa1e6/versionPropSheetDef&quot;,
+    &quot;version&quot;: 1,
+    &quot;versionCount&quot;: 1,
+    &quot;commit&quot;: 6,
+    &quot;versioned&quot;: true
+  },
+  &quot;propSheet&quot;: {
+    &quot;id&quot;: &quot;cb6049f9-bcce-4806-9d24-de5d729f40b3&quot;,
+    &quot;name&quot;: &quot;custom&quot;,
+    &quot;path&quot;: &quot;components/69a6a5bd-583b-4b40-bd47-54b28f5aa1e6/propSheetGroup/propSheets/cb6049f9-bcce-4806-9d24-de5d729f40b3&quot;,
+    &quot;version&quot;: 2,
+    &quot;versionCount&quot;: 2,
+    &quot;commit&quot;: 87,
+    &quot;versioned&quot;: true
+  },
+  &quot;templatePropSheet&quot;: {
+    &quot;id&quot;: &quot;e94a21c9-138c-4c36-91a0-ddc9d6f5cf07&quot;,
+    &quot;name&quot;: &quot;template&quot;,
+    &quot;path&quot;: &quot;components/69a6a5bd-583b-4b40-bd47-54b28f5aa1e6/propSheetGroup/propSheets/e94a21c9-138c-4c36-91a0-ddc9d6f5cf07&quot;,
+    &quot;version&quot;: 1,
+    &quot;versionCount&quot;: 1,
+    &quot;commit&quot;: 6,
+    &quot;versioned&quot;: true
+  },
+  &quot;resourceRole&quot;: {
+    &quot;id&quot;: &quot;06c00bb6-5ff0-4960-867f-5fb8d2e69222&quot;,
+    &quot;name&quot;: &quot;JPetStore-APP&quot;,
+    &quot;specialType&quot;: &quot;COMPONENT&quot;,
+    &quot;propSheetDef&quot;: {
+      &quot;id&quot;: &quot;100de7fc-182f-4fcf-8299-46fae5a06935&quot;,
+      &quot;name&quot;: &quot;JPetStore-APP&quot;,
+      &quot;versioned&quot;: false
+    },
+    &quot;propDefs&quot;: [
+      {
+        &quot;id&quot;: &quot;bb8404e1-c030-436e-ba2f-c2616216cf18&quot;,
+        &quot;name&quot;: &quot;myProp&quot;,
+        &quot;label&quot;: &quot;myProp&quot;,
+        &quot;pattern&quot;: &quot;&quot;,
+        &quot;type&quot;: &quot;TEXT&quot;,
+        &quot;value&quot;: &quot;42&quot;,
+        &quot;required&quot;: false,
+        &quot;description&quot;: &quot;&quot;
+      }
+    ]
+  },
+  &quot;systemCleanupDaysToKeep&quot;: -1,
+  &quot;systemCleanupCountToKeep&quot;: -1,
+  &quot;extendedSecurity&quot;: {
+    &quot;read&quot;: true,
+    &quot;write&quot;: true,
+    &quot;Create Components&quot;: true,
+    &quot;Edit Components&quot;: true,
+    &quot;Manage Versions&quot;: true,
+    &quot;View Components&quot;: true,
+    &quot;teams&quot;: [
+    ]
+  }
+</code></pre>
+
+<p>Related CLI command: <a href="../udclient_getcomponent/">getComponent</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../rest_cli_component/">component resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/rest_cli_component_info_get.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

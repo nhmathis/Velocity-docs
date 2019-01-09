@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/configure_agents/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Agents and agent relay configuration", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="agents-and-agent-relay-configuration">Agents and agent relay configuration</h1>
+<p>After you install an agent for HCL® UrbanCode™ Deploy, you can modify its configuration or create an agent relay to facilitate communication to remote relays.</p>
+<p>To monitor the status of the relay and the agents that are connected to it, click <strong>Resources</strong> > <strong>Agent Relays</strong>. This tab shows the number of active and offline agents that are connected to each relay, as shown in the following figure:</p>
+<p><img alt="Information about agent relays, including the number and state of connected agents" src="../../../com.ibm.udeploy.install.doc/images/agentRelayInstall_a.gif" /></p>
+<p>For more information about an agent relay, in the <strong>Name</strong> column, click the relay.</p>
+<ul>
+<li><strong><a href="../jre_change_agent/">Changing or updating the JRE of agents</a></strong><br />
+You can change the JRE of active agents by editing their configuration files.</li>
+<li><strong><a href="../keystore_agentrelay_change_password/">Changing passwords for the agent relay keystores</a></strong><br />
+You can change the Java™ keystore passwords for the agent relay.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/t_agent_relay_cache_setup/">Caching artifacts on agent relays</a></strong><br />
+Agent relays can cache downloaded artifacts. Caching artifacts in this way improves performance because agents retrieve artifacts from agent relays instead of from the server.</li>
+<li><strong><a href="../arch_agents/">Agent security and communication</a></strong><br />
+Agents use SSL-secured JMS, WebSocket, HTTP, and HTTPS protocols to communicate with the server.</li>
+<li><strong><a href="../web_agents/">Web agents</a></strong><br />
+Web agents use WebSocket and HTTP connections for communication. Web agents do not use JMS.</li>
+<li><strong><a href="../mass_agent_migration/">Migrating Agents to Web</a></strong><br />
+Agent Configuration Templates allow you to migrate JMS agents on a server to Web agents with the ability to revert back to the original JMS configuration. This allows you to specify connection details for groups of agents.</li>
+<li><strong><a href="../agent_service_windows/">Removing and reinstalling agents as Windows services</a></strong><br />
+If you installed an agent as a Windows™ service, you can remove and reinstall the service.</li>
+<li><strong><a href="../agent_manageremote/">Managing agents remotely</a></strong><br />
+After an agent is installed, you can manage (with the monitor process) many of its features from the HCL UrbanCode Deploy web application.</li>
+<li><strong><a href="../agent_properties/">Setting agent properties</a></strong><br />
+Agent properties store information that is relevant to a specific agent.</li>
+<li><strong><a href="../resources_agentPools/">Creating and managing agent pools</a></strong><br />
+Similar to resource groups, agent pools help you organize and manage agents that are installed in different environments.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../c_node_configuring/">Configuring</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/configure_agents.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

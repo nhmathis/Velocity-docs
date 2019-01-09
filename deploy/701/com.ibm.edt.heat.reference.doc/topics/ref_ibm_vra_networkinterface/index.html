@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/ref_ibm_vra_networkinterface/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM VRA NetworkInterface - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::VRA::NetworkInterface", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmvranetworkinterface">IBM::VRA::NetworkInterface</h1>
+<p>This resource represents a network interface on a VMware vRealize Automation image. It points to its software component type that is already defined in VMware vRealize Automation. You can set variables to the script type by using the input properties that follow. This new type for vRealize Automation is not overridden in the configuration file.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>admin_state_up</td>
+<td>Boolean</td>
+<td>False</td>
+<td>Core</td>
+<td>The administrative state of this port.</td>
+</tr>
+<tr>
+<td>allowed_address_pairs</td>
+<td>List</td>
+<td>False</td>
+<td>Core</td>
+<td>Additional MAC/IP address pairs allowed to pass through the port. See <a href="#allowed_address_pairs">Table 3</a>.</td>
+</tr>
+<tr>
+<td>binding:vnic_type</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The vnic type to be bound on the neutron port. To support SR-IOV passthrough networking, you can request that the neutron port to be realized as normal (virutal nic), direct (pci passthrough), or macvtap (virtual interface with a tap-like software interface). Note that this only works for Neutron deployments that support the bindings extension.</td>
+</tr>
+<tr>
+<td>device_id</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Device ID of this port.</td>
+</tr>
+<tr>
+<td>device_owner</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Name of the network owning the port. The value is typically <code>network:floatingip</code> or <code>network:router_interface</code> or <code>network:dhcp</code>.</td>
+</tr>
+<tr>
+<td>fixed_ips</td>
+<td>List</td>
+<td>False</td>
+<td>Core</td>
+<td>This property is provided with the engine, but it is not implemented.</td>
+</tr>
+<tr>
+<td>mac_address</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>MAC address to give to this port.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>A symbolic name for this port.</td>
+</tr>
+<tr>
+<td>network_id</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The network ID.</td>
+</tr>
+<tr>
+<td>replacement_policy</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Policy on how to respond to a stack-update for this resource. <code>REPLACE_ALWAYS</code> will replace the port regardless of any property changes. <code>AUTO</code> will update the existing port for any changed update-allowed property.</td>
+</tr>
+<tr>
+<td>security_groups</td>
+<td>List</td>
+<td>False</td>
+<td>Core</td>
+<td>Security group IDs to associate with this port.</td>
+</tr>
+<tr>
+<td>value_specs</td>
+<td>Map</td>
+<td>False</td>
+<td>Core</td>
+<td>Extra parameters to include in the <code>\"port"\</code> object in the creation request.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>admin_state_up</td>
+<td>The administrative state of this port.</td>
+</tr>
+<tr>
+<td>allowed_address_pairs</td>
+<td>Additional MAC/IP address pairs allowed to pass through a port.</td>
+</tr>
+<tr>
+<td>device_id</td>
+<td>Unique identifier for the device.</td>
+</tr>
+<tr>
+<td>device_owner</td>
+<td>Name of the network owning the port.</td>
+</tr>
+<tr>
+<td>fixed_ips</td>
+<td>Fixed IP addresses.</td>
+</tr>
+<tr>
+<td>mac_address</td>
+<td>MAC address of the port.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Friendly name of the port.</td>
+</tr>
+<tr>
+<td>network_id</td>
+<td>Unique identifier for the network owning the port.</td>
+</tr>
+<tr>
+<td>security_groups</td>
+<td>A list of security groups for the port.</td>
+</tr>
+<tr>
+<td>show</td>
+<td>All attributes.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>The status of the port.</td>
+</tr>
+<tr>
+<td>subnets</td>
+<td>A list of all subnet attributes for the port.</td>
+</tr>
+<tr>
+<td>tenant_id</td>
+<td>Tenant owning the port.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ip_address</td>
+<td>String</td>
+<td>True</td>
+<td>IP address to allow through this port.</td>
+</tr>
+<tr>
+<td>mac_address</td>
+<td>String</td>
+<td>False</td>
+<td>MAC address to allow through this port.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../VRA_heat_types_ov/">VMware vRealize Automation resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/ref_ibm_vra_networkinterface.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

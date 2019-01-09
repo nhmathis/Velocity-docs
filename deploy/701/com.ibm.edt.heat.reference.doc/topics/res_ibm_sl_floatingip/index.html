@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_sl_floatingip/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM SoftLayer FloatingIP - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::SoftLayer::FloatingIP", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmsoftlayerfloatingip">IBM::SoftLayer::FloatingIP</h1>
+<p>This resource type represents a floating IP address on SoftLayer.</p>
+<p>The blueprint uses the core properties and extended properties, if any, from this resource type. Review and configure the applicable heat resources that apply to your configuration information.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fixed_ip_address</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>IP address to use if the port has multiple addresses.</td>
+</tr>
+<tr>
+<td>floating_network</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Network to allocate floating IP from.</td>
+</tr>
+<tr>
+<td>floating_network_id</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td> </td>
+</tr>
+<tr>
+<td>port_id</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>ID of an existing port with at least one IP address to associate with this floating IP.</td>
+</tr>
+<tr>
+<td>value_specs</td>
+<td>map</td>
+<td>False</td>
+<td>Core</td>
+<td>Extra parameters to include in the <code>floatingip</code> object in the creation request. Parameters are often specific to installed hardware or extensions.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fixed_ip_address</td>
+<td>The IP address of the associated port, if specified.</td>
+</tr>
+<tr>
+<td>floating_ip_address</td>
+<td>The allocated address of this IP.</td>
+</tr>
+<tr>
+<td>floating_network_id</td>
+<td>The ID of the network in which this IP is allocated.</td>
+</tr>
+<tr>
+<td>port_id</td>
+<td>The ID of the port that is associated with this IP</td>
+</tr>
+<tr>
+<td>router_id</td>
+<td>ID of the router used as gateway, set when associated with a port.</td>
+</tr>
+<tr>
+<td>show</td>
+<td>Displays all attributes.</td>
+</tr>
+<tr>
+<td>tenant_id</td>
+<td>The tenant that owns this floating IP.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_sl_ov/">SoftLayer resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_sl_floatingip.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

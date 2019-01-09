@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.api.doc/topics/security_cloudprovid_get/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Get information about a cloud provider - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Get information about a cloud provider", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example", url: "#example" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="get-information-about-a-cloud-provider">Get information about a cloud provider</h1>
+<h2 id="request">Request</h2>
+<pre><code>GET http://{hostname}:{port}
+  /landscaper/security/cloudprovider/{cloudProviderId}
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cloudProviderId</td>
+<td>string</td>
+<td>true</td>
+<td>ID of the cloud provider</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<pre><code>curl -u jsmith:passwd 
+  http://myserver.example.com:8080/landscaper/security/cloudprovider/fe8b00b5-0b1b-473a-2462-0f2294cd12b7
+</code></pre>
+
+<h2 id="example-response">Example response</h2>
+<pre><code>{
+    &quot;dateCreated&quot;: 1406666208932,
+    &quot;description&quot;: &quot;&quot;,
+    &quot;id&quot;: &quot;fe8b00b5-0b1b-473a-2462-0f2294cd12b7&quot;,
+    &quot;name&quot;: My OpenStack server&quot;,
+    &quot;properties&quot;: [
+        {
+            &quot;id&quot;: &quot;212f4dac-ff34-4bc6-9031-0dc2c23405c6&quot;,
+            &quot;label&quot;: &quot;&quot;,
+            &quot;name&quot;: &quot;authentication_realm_id&quot;,
+            &quot;secure&quot;: false,
+            &quot;value&quot;: &quot;e323426fd-69d1-4f45-8b1b-edd7d68295e4&quot;
+        }
+    ],
+    &quot;readOnly&quot;: true,
+    &quot;type&quot;: &quot;AUTH_REALM&quot;
+}
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../security_cloudprovider_/">security/cloudprovider resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.api.doc/topics/security_cloudprovid_get.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_realms_openstack/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating OpenStack identity service authentication realms for the blueprint designer - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating OpenStack identity service authentication realms for the blueprint designer", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-openstack-identity-service-authentication-realms-for-the-blueprint-designer">Creating OpenStack identity service authentication realms for the blueprint designer</h1>
+<p>You can use an authentication realm to import user accounts from an OpenStack server to the blueprint design server. You must specify the URL and account information for the Keystone identity service.</p>
+<p>Install an engine for the OpenStack server. See <a href="../../../com.ibm.udeploy.install.doc/topics/install_engine/">Installing the engine</a>.</p>
+<p>These steps assume that you have user accounts on the OpenStack server and are managing user authentication on that server. To manage authentication through another source, create functional IDs on the OpenStack server and add those IDs to a cloud project, as described in <a href="../security_projects/">Creating cloud projects for the blueprint designer</a>.</p>
+<p>If your OpenStack identity service that uses API v3 contains multiple domains, you must create an authentication realm for each domain.</p>
+<ol>
+<li>Log in to the blueprint designer as a user with the following <strong>System</strong> permissions: <ul>
+<li>Configure Security</li>
+<li>Manage Users &amp; Groups</li>
+</ul>
+</li>
+<li>Click <strong>Settings</strong> > <strong>Users</strong>.</li>
+<li>Click <strong>Create New Realm</strong>. </li>
+<li>
+<p>Specify a name and description for the new authentication realm. </p>
+<p><strong>Note:</strong> If your OpenStack identity service uses API v3, include the domain name in the authentication realm.</p>
+</li>
+<li>
+<p>In the <strong>Allowed Login Attempts</strong> list, specify the number of times that a user can attempt to log in before the account is locked.A blank value means that an unlimited number of attempts are allowed.</p>
+</li>
+<li>In the <strong>Type</strong> list, select <strong>OpenStack Identity Service</strong>.</li>
+<li>In the <strong>OpenStack Identity Service</strong> section, in the <strong>Identity URL</strong> field, specify the location of the identity service, such as <code>https://example.com:5000/v2.0</code> or <code>https://example.com:5000/v3</code>. </li>
+<li>Specify the Heat orchestration engine to use. </li>
+<li>
+<p>Specify the administrator user name, password, and tenant or project for the OpenStack server. </p>
+<p><strong>Note:</strong> If your OpenStack identity service uses API v3, specify the administrator user name, password, and tenant or project for a domain on the OpenStack server.</p>
+<p><strong>Note:</strong> This administrator user must be a member of each tenant that you want to use.</p>
+</li>
+<li>
+<p>If your OpenStack identity service uses API v3, enter the domain that the administrator user that you specified belongs to. If your OpenStack identity service uses API v2.0, accept the default value.</p>
+</li>
+<li>Click <strong>Save</strong>.The new realm opens, showing the table of users.</li>
+<li>
+<p>Click <strong>Users</strong>, and then click <strong>Import User</strong> to import users from the authentication realm. If your OpenStack identity service uses API v2.0, all users on the server are imported. If your OpenStack identity service uses API v3, only the users from the specified domain are imported.</p>
+<p><strong>Note:</strong> If you cannot import users, click <strong>Edit</strong>, and then click <strong>Test Connection</strong> to view the failure details.</p>
+</li>
+</ol>
+<p>The blueprint design server creates an authentication realm and cloud connection based on the cloud information that you specified. The blueprint design server also creates a cloud project for each tenant or project on the cloud.</p>
+<ul>
+<li>Add the users to groups and teams. You must add users to teams to give the users permission to work with blueprints and cloud resources.</li>
+<li>Add the cloud projects to teams.</li>
+</ul>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_realms_openstack.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

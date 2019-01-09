@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/agent_install_service_AIX/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Running agents as services on IBM AIX - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Running agents as services on IBM AIX", url: "#_top", children: [
+          ]},
+          {title: "== END INSTALL MODIFICATIONS ===================", url: "#end-install-modifications", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="running-agents-as-services-on-ibm-aix">Running agents as services on IBM AIX</h1>
+<p>You can set up agents to run as system services.</p>
+<p>Install an agent.</p>
+<ol>
+<li>
+<p>Change the owner of the agent installation folder to the user that runs the agent. For example, if the user <code>ucdagent</code> run the agent and the agent installation folder is /opt/ucd/agent, run the following command:</p>
+<p><code>chown -R ucdagent /opt/ucd/agent/</code></p>
+<p>You can find the user that runs the agent by looking at the USER property on the agent.</p>
+</li>
+<li>
+<p>Similarly, change the group of the agent installation folder to the group that is associated with the user. For example, if the agent is installed in the folder /opt/ucd/agent, run the following command:</p>
+<p><code>chgrp -R ucdagent /opt/ucd/agent/</code></p>
+</li>
+<li>
+<p>Make a copy of the file agent-install/bin/init/agent, where agent-install is the installation folder of the agent. If you are running multiple agents on the system, give the file a unique name, such as ucdagent-A.</p>
+</li>
+<li>
+<p>In a text editor, edit the file: </p>
+<ul>
+<li>Set the property AGENT_USER to the name of the user that runs the agent.</li>
+<li>Set the property AGENT_GROUP to the name of the group that is associated with that user.</li>
+<li>Set the property SCRIPT to the location of the agent executable file. The default location is /opt/ucd/agent/bin/agent.
+The file might look like the following example:</li>
+</ul>
+<p>```
+AGENT_HOME="/opt/ucd/agent"
+AGENT_USER="ucdagent"
+AGENT_GROUP="ucdagent"</p>
+<h1 id="end-install-modifications">== END INSTALL MODIFICATIONS ===================</h1>
+<p>ANT_HOME="$AGENT_HOME/opt/apache-ant-1.8.4"
+GROOVY_HOME="$AGENT_HOME/opt/groovy-1.8.8"
+SCRIPT="/opt/ucd/agent/bin/agent"
+```</p>
+</li>
+<li>
+<p>Configure the agent to run when the system starts. The steps depend on how your IBM® AIX® system manages services. For example, for IBM AIX systems that use <code>init.d</code>, follow these steps:</p>
+<ol>
+<li>Copy the file to the folder /etc/rc.d/init.d/.</li>
+<li>
+<p>Add the file to run level 2. For example, if the file is named ucdagent, run the following command:</p>
+<p>```
+ln -s /etc/rc.d/init.d/ibm-ucdagent /etc/rc.d/rc2.d/S98ucdagent</p>
+<p>```</p>
+</li>
+</ol>
+<p>For more information on modifying the /etc/inittab file, see <a href="https://www.ibm.com/support/knowledgecenter/en/ssw_aix_71/com.ibm.aix.osdevice/modetc.htm">https://www.ibm.com/support/knowledgecenter/en/ssw_aix_71/com.ibm.aix.osdevice/modetc.htm</a> </p>
+</li>
+</ol>
+<p>The agent runs as a service. To verify that the agent is running as a service, run the following command and verify that two processes from the agent are running:</p>
+<pre><code>ps -ef | grep installFolder
+</code></pre>
+
+<p>For <code>installFolder</code>, specify the installation folder of the agent, such as /opt/ucd/agent.</p>
+<p>For information about the way that IBM AIX handles services, see <a href="http://www.ibm.com/support/docview.wss?uid=isg3T1000661">Starting and Stopping Software via RC Directories</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../agent_install_ov/">Installing agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/agent_install_service_AIX.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_azure_disk/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM Azure Disk - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::Azure::Disk", url: "#_top", children: [
+              {title: "Example", url: "#example" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmazuredisk">IBM::Azure::Disk</h1>
+<p>This type represents a Microsoft™ Azure disk. It can create a managed disk or copy, import, or snapshot an existing disk.</p>
+<p>This resource type extends the OpenStack resource type <code>OS::Cinder::Volume</code>.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>creation_option</td>
+<td>String</td>
+<td>True</td>
+<td>Extended</td>
+<td>How to create or access the disk. Valid values are:-   <code>Empty</code></td>
+</tr>
+<tr>
+<td>-   <code>Attach</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>FromImage</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>Import</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>Copy</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>Restore</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|
+|description|tring|False|Extended|A description of the disk.|
+|name|String|True|Core|The name of the managed disk.|
+|region|String|True|Extended|The Azure location. The blueprint designer specifies this property automatically, based on the selected region.|
+|resource_group_name|String|True|Extended|The name of the resource group.|
+|size|String|True|Core|The size of the disk in GB.|
+|source_resource_id|String|False|Extended|If createOption is <code>Copy</code>, this is the ARM ID of the source snapshot or disk. If creationOption is <code>Restore</code>, this is the ARM-like ID of the source disk restore point.|
+|source_uri|String|False|Extended|If creationOption is <code>Import</code>, this is a URI to a blob to be imported into a managed disk. If creationOption is <code>Copy</code>, this is a relative URI containing the ID of the source snapshot to be copied into a managed disk|
+|volume_type|String|True|Core|The type of disk. Valid values are <code>SSD</code> and <code>HDD</code>.|</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of the disk.</td>
+</tr>
+<tr>
+<td>show</td>
+<td>String</td>
+<td>The details of the disk.</td>
+</tr>
+<tr>
+<td>source_volid</td>
+<td>String</td>
+<td>The ID of the disk.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<p>This example creates an empty disk:</p>
+<pre><code>  storage-volume_empty:
+    type: OS::Cinder::Volume
+    properties:
+      name: storagevolumeempty
+      size: 2
+      volume_type: &quot;ssd&quot;
+    metadata:
+      azure_properties:
+        resource_group: { get_param: resource_group }
+        creation_option: &quot;Empty&quot;
+</code></pre>
+
+<p>This example copies an existing disk:</p>
+<pre><code>  storage-volume_import:
+    type: OS::Cinder::Volume
+    properties:
+      name: storagevolumeimport
+      size: 40
+      volume_type: &quot;hdd&quot;
+    metadata:
+      azure_properties:
+        resource_group: { get_param: resource_group }
+        creation_option: &quot;Copy&quot;
+        source_resource_id: &quot;/subscriptions/SUBSCRIPTION/resourceGroups/CUSTOMIMAGE/providers/Microsoft.Compute/disks/DISK_NAME&quot;
+</code></pre>
+
+<p>This example creates a disk from a snapshot:</p>
+<pre><code>  storage-volume_snapshot:
+    type: OS::Cinder::Volume
+    properties:
+      name: storagevolumesnapshot
+      size: 30
+      volume_type: &quot;hdd&quot;
+    metadata:
+      azure_properties:
+        resource_group: { get_param: resource_group }
+        creation_option: &quot;Copy&quot;
+        source_uri: &quot;/subscriptions/SUBSCRIPTION/resourceGroups/RESOURCE_GROUP/providers/Microsoft.Compute/snapshots/MY_SNAPSHOT&quot; 
+</code></pre>
+
+<p>This example imports a disk:</p>
+<pre><code>  storage-volume_copy:
+    type: OS::Cinder::Volume
+    properties:
+      name: storagevolumecopy
+      size: 30
+      volume_type: &quot;hdd&quot;
+    metadata:
+      azure_properties:
+        resource_group: { get_param: resource_group }
+        creation_option: &quot;Import&quot;
+        source_uri: &quot;https://blob.core.windows.net/vhds/jkedbaf7ef5.vhd&quot;
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_azure_ov/">Microsoft Azure resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_azure_disk.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

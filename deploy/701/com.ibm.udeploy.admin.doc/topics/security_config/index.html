@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_config/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Authorization realms", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="authorization-realms">Authorization realms</h1>
+<p>Use the Authorization Realms pane to create authorization realms and user groups for the server. Groups can be imported from external systems, such as LDAP.</p>
+<p>The available authorization realms for the server are as follows:</p>
+<ul>
+<li>
+<p><strong>Internal Storage</strong></p>
+<p>Uses internal role management. The default authorization realm (Internal Security) is of this type.</p>
+</li>
+<li>
+<p><strong>LDAP or Active Directory</strong></p>
+<p>Uses external LDAP role management.</p>
+</li>
+<li>
+<p><strong>SSO</strong></p>
+<p>Provides single sign-on authorization.</p>
+</li>
+<li>
+<p><strong><a href="../security_config_internal_realm/">Creating an internal storage authorization realm</a></strong><br />
+Internal storage realms do not retrieve users from any external source. Instead, you add users to internal storage authorization realms manually.</p>
+</li>
+<li><strong><a href="../security_config_ldap_realm/">Creating an LDAP authorization realm</a></strong><br />
+An LDAP authorization realm defines how to use an external LDAP server for group authorization.</li>
+<li><strong><a href="../security_config_SSO_realm/">Creating an SSO authorization realm</a></strong><br />
+A single sign-on (SSO) authorization realm uses an external server for authorization.</li>
+<li><strong><a href="../security_groups/">Creating groups manually</a></strong><br />
+Groups are logical containers that are mechanisms that grant permissions to multiple users; members automatically share a group's permissions. Only authorization realms of the internal storage type can have manually created groups. Others types, such as LDAP, import groups cannot have manually created groups.</li>
+<li><strong><a href="../security_groupsAddUsers/">Adding users to groups manually</a></strong><br />
+Authorization realms of the internal storage type can have manually created users. Others types, such as LDAP, import user groups cannot have manually created users.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_config.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

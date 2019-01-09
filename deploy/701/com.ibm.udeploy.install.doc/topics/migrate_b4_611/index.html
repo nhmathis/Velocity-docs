@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/migrate_b4_611/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Migrating data from versions before 6.1.1 - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Migrating data from versions before 6.1.1", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="migrating-data-from-versions-before-611">Migrating data from versions before 6.1.1</h1>
+<p>Upgrade the server, agents, and agent relays before upgrading the IBM® z/OS® deployment tools.</p>
+<p>If you have version data and deployment results that were created by a version of the z/OS agent and deployment tools before version 6.1.1, complete these migration steps.</p>
+<ol>
+<li>Determine the repository directory and deployment base directory in the current installation of the product. The repository directory is the value of the ucd.repository property in the profile data set. The location of the profile data set is recorded in the ISPF.conf file. The deployment base directory is typically set in the deploy.base.path environment property. </li>
+<li>
+<p>Install a new agent or upgrade the current agent. Then, copy files to the new repository and deployment directories. </p>
+<ul>
+<li>For version 6.2.4, the repository directory and the deploy directory are as follows:</li>
+</ul>
+</li>
+<li>
+<p>agent install dir/var/repository</p>
+</li>
+<li>agent install dir/var/deploy<ul>
+<li>For versions from 6.1.1 to 6.2.3, you can find the the repository directory and the deployment directory locations in the profile data set.</li>
+</ul>
+</li>
+<li>Verify the migration by deploying a current version of a component, and then by rolling back version. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../upgrade_zOS_agents/">Upgrading IBM z/OS agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/migrate_b4_611.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

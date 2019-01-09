@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/license_apply/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Applying licenses to servers and agents - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Applying licenses to servers and agents", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="applying-licenses-to-servers-and-agents">Applying licenses to servers and agents</h1>
+<p>To use licenses, you install a Rational® Common Licensing server, import your license keys, and link the HCL® UrbanCode™ Deploy servers or agents to the license server.</p>
+<p>Ensure that you have a Rational Common Licensing server with licenses for HCL UrbanCode Deploy.</p>
+<p>The following Roles and Permissions are needed to assign Licenses to an Agent:</p>
+<p><strong>Web UI:</strong> </p>
+<p>Resources Tab</p>
+<p><strong>Agent:</strong> </p>
+<p>View Agents</p>
+<p>Edit Basic Settings</p>
+<p>For more information regarding roles and permissions see <a href="../../../com.ibm.udeploy.admin.doc/topics/security_roles_permission_ref/">Permission reference</a> </p>
+<p>For information about the types of licenses, see <a href="../license_scenarios/">License scenarios</a>.</p>
+<ol>
+<li>On the HCL UrbanCode Deploy server, click <strong>Settings</strong> > <strong>System Settings</strong>.</li>
+<li>On the System Settings page, under <strong>Licensing</strong>, specify the connection information for the license server and click <strong>Save</strong>. You can specify the port and host name or IP address for the license server, such as <code>27000@RCLServer.example.com</code>. To avoid problems when a license server is not available, you can specify multiple license servers. In this case, separate each address with colons on Linux™ and UNIX™ or semicolons on Windows™, as in the following example: <code>27000@RCLServer.example.com;27000@backupRCLServer.example.com</code>. For more complicated license server scenarios, see this document: <a href="http://www-01.ibm.com/support/knowledgecenter/SSSTWP_8.1.4/com.ibm.rational.license.doc/topics/r_specify_lic_servers.html">http://www-01.ibm.com/support/knowledgecenter/SSSTWP_8.1.4/com.ibm.rational.license.doc/topics/r_specify_lic_servers.html</a>. For more information about setting up a Rational Common Licensing server and applying licenses, see the Rational Common Licensing help: <a href="http://www-01.ibm.com/support/knowledgecenter/SSSTWP_8.1.4/com.ibm.rational.license.doc/helpindex_RCL.html">Rational Common Licensing v8.1.4 - 8.1.4.9 documentation</a> For more information about licensing, see <a href="../../../com.ibm.udeploy.doc/topics/licenseManage/">License management</a>. The <strong>Server License Type</strong> field shows the type of licensing that the server is using.</li>
+<li>
+<p>If you are using virtual server and managed virtual server (Server Agent) licensing, specify whether to assign licenses to the agents automatically or manually. These steps are not necessary for the other types of licensing. </p>
+<ul>
+<li>To assign licenses to agents automatically, set <strong>Automatic Agent Licensing</strong> to <strong>On</strong> and then click <strong>Save</strong>. This setting is meaningful only if you are using virtual server and managed virtual server (Server Agent) licensing.</li>
+<li>To assign licenses to agents manually, follow these steps:</li>
+<li>Click <strong>Resources</strong> > <strong>Agents</strong>. </li>
+<li>Next to an agent, click <strong>Actions</strong> and then click <strong>License</strong>. This menu item is available only if the <strong>Server License Type</strong> field is set to <code>Server Agent</code> and <strong>Automatic Agent Licensing</strong> is set to <strong>Off</strong>.</li>
+<li>In the Confirmation window, click <strong>OK</strong>. The <strong>License</strong> column for the agent shows <strong>AUTHORIZED</strong> and the agent is licensed.
+If you are using a license scenario other than virtual server and managed virtual server (Server Agent) licensing, the HCL UrbanCode Deploy server assigns licenses to agents automatically. If you are using token licenses or floating licenses, the server attempts to retrieve the necessary license or licenses from the license servers that are available to the HCL UrbanCode Deploy server.</li>
+</ul>
+<p><strong>Note:</strong> If you provision cloud environments by using the blueprint designer and use virtual server and managed virtual server (Server Agent) licensing, configure the server to assign licenses to agents automatically.</p>
+</li>
+<li>
+<p>Restart the HCL UrbanCode Deploy server. You must restart the server for it to recognize the new type of license.</p>
+</li>
+</ol>
+<p>Now you can run processes on the licensed servers and agents.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/licenseManage/">License management</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/license_apply.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

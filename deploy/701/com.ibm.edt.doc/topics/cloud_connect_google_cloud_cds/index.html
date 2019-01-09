@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/cloud_connect_google_cloud_cds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Registering Google Cloud Platform public images - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Registering Google Cloud Platform public images", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="registering-google-cloud-platform-public-images">Registering Google Cloud Platform public images</h1>
+<p>To use Google Cloud Platform public images in the blueprint designer, you must register image project types and families with the cloud discovery service.</p>
+<p>After you configure operating system types, you can automatically access the latest version of the operating systems that are available on Google Cloud Platform. You can use these images in your blueprints.</p>
+<ol>
+<li>Open the cloud discovery service configuration file. If you do not have a cloud discovery service configuration file, see <a href="../../../com.ibm.udeploy.doc/topics/cds_configure/">Setting up images, regions, and flavors for the cloud discovery service and engine</a>.</li>
+<li>
+<p>In the section of this file that is labeled <code>google</code>, add image projects and families.You can obtain a list of available image types from Google Cloud. See <a href="https://cloud.google.com/compute/docs/images#os-compute-support">Images</a> in the Google Cloud Platform Compute Engine documentation. For example, the following code creates six different image project types:</p>
+<p>```
+ "google":{     <br />
+      "images":[<br />
+         {  "name":"centos-cloud",
+            "family":[<br />
+               "centos-7",
+               "centos-6"
+            ]
+         },
+        {   "name":"debian-cloud",
+            "family":[<br />
+               "debian-8"
+            ]
+         },
+         {<br />
+            "name":"rhel-cloud",
+            "family":[<br />
+               "rhel-6",
+               "rhel-7"
+            ]
+         },
+        {<br />
+            "name":"windows-cloud",
+            "family":[<br />
+               "windows-2008-r2",
+               "windows-2012-r2",
+               "windows-2016-core",
+               "windows-2016"
+            ]
+         },
+        {<br />
+            "name":"suse-cloud",
+            "family":[<br />
+               "sles-12",
+               "sles-11"
+            ]
+         },
+          {<br />
+            "name":"ubuntu-os-cloud",
+            "family":[<br />
+               "ubuntu-1204-lts",
+               "ubuntu-1404-lts",
+               "ubuntu-1610",
+               "ubuntu-1604-lts"            <br />
+            ]
+         }
+      ]<br />
+    }
+}</p>
+<p>```</p>
+<p>In this code, name is the image project name and family is the image family.</p>
+</li>
+<li>
+<p>Save the file and restart the cloud discovery service. To restart the cloud discovery service, see <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a> and <a href="../../../com.ibm.udeploy.install.doc/topics/stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+</ol>
+<p>You can add images from the families that you specified to your blueprints.</p>
+<p><strong>Parent topic:</strong> <a href="../cloud_connect_google_cloud/">Connecting to Google Cloud Platform</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/cloud_connect_google_cloud_cds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

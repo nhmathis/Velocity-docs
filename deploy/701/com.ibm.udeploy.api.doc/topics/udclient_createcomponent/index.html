@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/udclient_createcomponent/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>createComponent - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "createComponent", url: "#_top", children: [
+              {title: "Format", url: "#format" },
+              {title: "Parameters", url: "#parameters" },
+              {title: "Template", url: "#template" },
+              {title: "Example", url: "#example" },
+              {title: "Example JSON requests", url: "#example-json-requests" },
+              {title: "Example response", url: "#example-response" },
+              {title: "Team mappings", url: "#team-mappings" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="createcomponent">createComponent</h1>
+<p>Create a component</p>
+<h2 id="format">Format</h2>
+<pre><code>udclient [\[global-args...\]](../../com.ibm.udeploy.reference.doc/topics/cli_command_format.md) [\[global-flags...\]](../../com.ibm.udeploy.reference.doc/topics/cli_command_format.md)
+  createComponent [JSON file]
+</code></pre>
+
+<h2 id="parameters">Parameters</h2>
+<p>None.</p>
+<h2 id="template">Template</h2>
+<p>This command takes a JSON request string or file. Use the following template for the request:</p>
+<pre><code>{
+  &quot;cleanupCountToKeep&quot;: &quot;Number of most recent versions to 
+  keep; omit this parameter to inherit the system settings 
+  (Optional)&quot;,
+  &quot;cleanupDaysToKeep&quot;: &quot;Number of days to keep versions; 
+  omit this parameter to inherit the system settings 
+  (Optional)&quot;,
+  &quot;defaultVersionType&quot;: &quot;The default type to create 
+  versions with; valid values are FULL and INCREMENTAL&quot;,
+  &quot;description&quot;: &quot;Description&quot;,
+  &quot;importAutomatically&quot;: &quot;Specify true to import new 
+  versions automatically&quot;,
+  &quot;integrationAgent&quot;: &quot;ID of the Agent for importing new 
+  component versions (Optional)&quot;,
+  &quot;integrationTag&quot;: &quot;Name of existing tag to use 
+  (Optional)&quot;,
+  &quot;name&quot;: &quot;Component name or ID&quot;,
+  &quot;properties&quot;: {&quot;Source configuration plugin property 
+  name&quot;: &quot;Property value&quot;},
+  &quot;sourceConfigPlugin&quot;: &quot;The name of the source 
+  configuration plug-in to use; this property is required 
+  even if you are creating the component from a template&quot;,
+  &quot;teamMappings&quot;: [{
+    &quot;resourceRoleId&quot;: &quot;Id of Resource Type to apply to 
+  this team mapping (optional, can specify either this or 
+  resourceRoleLabel&quot;,
+    &quot;resourceRoleLabel&quot;: &quot;Name of Resource Type to apply 
+  to this team mapping (optional, can specify either this or 
+  resourceRoleId&quot;,
+    &quot;teamId&quot;: &quot;ID of a team, either this field or 
+  teamLabel are needed to specify a team&quot;,
+    &quot;teamLabel&quot;: &quot;Name of the team to map the environment 
+  to, either this field or teamId are needed to specify a 
+  team&quot;
+  }],
+  &quot;templateId&quot;: &quot;ID of the template to use (Optional)&quot;,
+  &quot;templateName&quot;: &quot;Name of a template to use; this 
+  parameter is ignored if  templateId is specified 
+  (Optional)&quot;,
+  &quot;templateVersion&quot;: &quot;Version number of the specified 
+  template (Optional)&quot;,
+  &quot;useVfs&quot;: &quot;Boolean&quot;
+}
+
+</code></pre>
+
+<h2 id="example">Example</h2>
+<pre><code>udclient -username jsmith -password passwd 
+  -weburl https://myserver.example.com:8443
+  createComponent newComponent.json
+
+</code></pre>
+
+<h2 id="example-json-requests">Example JSON requests</h2>
+<pre><code>{
+  &quot;name&quot;: &quot;My new component&quot;,
+  &quot;description&quot;: &quot;New component for command example&quot;,
+  &quot;importAutomatically&quot;: false,
+  &quot;useVfs&quot;: true,
+  &quot;sourceConfigPlugin&quot;: &quot;File System (Versioned)&quot;,
+  &quot;defaultVersionType&quot;: &quot;FULL&quot;,
+  &quot;properties&quot;: {
+    &quot;FileSystemVersionedComponentProperties\/basePath&quot;: 
+    &quot;/opt/newcomponent&quot;
+  }
+}
+</code></pre>
+
+<p>The properties attribute in the JSON template refers to properties for the source configuration plug-in, not custom properties. For example, the following code creates a component from a Maven repository. It includes properties that are prefixed with <code>MavenComponentProperties</code> to refer to the properties for that plug-in.</p>
+<pre><code>{
+  &quot;name&quot;: &quot;Component from Maven&quot;,
+  &quot;description&quot;: &quot;New component for command example for Maven&quot;,
+  &quot;importAutomatically&quot;: false,
+  &quot;useVfs&quot;: false,
+  &quot;sourceConfigPlugin&quot;: &quot;Maven&quot;,
+  &quot;defaultVersionType&quot;: &quot;FULL&quot;,
+  &quot;properties&quot;: {
+    &quot;MavenComponentProperties\/artifactId&quot;:&quot;MyArtifact&quot;,
+    &quot;MavenComponentProperties\/groupId&quot;:&quot;MyGroup&quot;,
+    &quot;MavenComponentProperties\/extension&quot;:&quot;ext&quot;,
+    &quot;MavenComponentProperties\/repoUrl&quot;:&quot;http:\/\/myserver.com&quot;
+  }
+}
+</code></pre>
+
+<p>To see the properties for a source configuration plug-in, create a component in the web interface and use the source configuration plug-in. Then, then export its information with the <a href="../udclient_getcomponent/">getComponent</a> command. The JSON that this command returns includes the properties for the source configuration plug-in. You can also look in the plugin.xml file in the plug-in.</p>
+<p>To create a component from a template, specify either the templateId attribute or the templateName attribute. Then, specify the templateVersion attribute; to use the most recent version of the template, specify an empty string. If the template contains property definitions, you can specify values for those properties with the attribute <code>template/propertyName</code>, where <code>propertyName</code> is the name of the property. For example, the following JSON code creates a component from the most recent version of the Template1 template. This code specifies the value <code>MyValue</code> for the parameter template/MyProperty.</p>
+<pre><code>{
+  &quot;name&quot;:&quot;NewComponent1&quot;, 
+  &quot;description&quot;:&quot;&quot;,
+  **&quot;templateName&quot;:&quot;Template1&quot;, 
+  &quot;templateVersion&quot;:&quot;&quot;,
+  &quot;template/MyProperty&quot;:&quot;MyValue&quot;,** 
+  &quot;componentType&quot;:&quot;STANDARD&quot;, 
+  &quot;sourceConfigPlugin&quot;:&quot;&quot;,
+  &quot;importAutomatically&quot;:&quot;false&quot;, 
+  &quot;useVfs&quot;:&quot;true&quot;,
+  &quot;defaultVersionType&quot;:&quot;FULL&quot;, 
+  &quot;importAgentType&quot;:&quot;inherit&quot;,
+  &quot;inheritSystemCleanup&quot;:&quot;true&quot;,
+  &quot;runVersionCreationProcess&quot;:&quot;false&quot;,
+  &quot;properties&quot;:{},
+  &quot;teamMappings&quot;:[]
+}
+</code></pre>
+
+<h2 id="example-response">Example response</h2>
+<pre><code>{
+  &quot;id&quot;: &quot;e84c7947-fad1-4399-8eb8-0d0d354b9e2b&quot;,
+  &quot;name&quot;: &quot;My new component&quot;,
+  &quot;description&quot;: &quot;New component for command example&quot;,
+  &quot;created&quot;: 1391456765556,
+  &quot;importAutomatically&quot;: false,
+  &quot;useVfs&quot;: true,
+  &quot;active&quot;: true,
+  &quot;deleted&quot;: false,
+  &quot;defaultVersionType&quot;: &quot;FULL&quot;,
+  &quot;cleanupDaysToKeep&quot;: 0,
+  &quot;cleanupCountToKeep&quot;: 0,
+  &quot;tags&quot;: [
+  ],
+  &quot;user&quot;: &quot;admin&quot;
+}
+</code></pre>
+
+<h2 id="team-mappings">Team mappings</h2>
+<p>When creating UrbanCode Deploy objects from the CLI we pass in JSON payloads that set the configuration.</p>
+<p>These JSON files can include a "teamMappings" attribute that looks like this:</p>
+<pre><code>&quot;teamMapping&quot;:[ 
+{ 
+&quot;teamId&quot; : &quot;TEAM UIID&quot;, &quot;teamLabel&quot;: &quot;TEAM NAME&quot;, (can specify teamId or teamLabel), 
+&quot;resourceRoleId&quot;: &quot;ResRole UUID&quot;, &quot;resourceRoleLabel&quot;:&quot;Name of Resource Role&quot; (can specify this or resRoleId) }
+,
+{ &quot;teamId&quot; : &quot;TEAM UIID2&quot;, &quot;teamLabel&quot;: &quot;TEAM NAME2&quot;, (can specify teamId or teamLabel), 
+&quot;resourceRoleId&quot;: &quot;ResRole UUID2&quot;, &quot;resourceRoleLabel&quot;:&quot;Name of Resource Role2&quot; (can specify this or resRoleId) }
+,
+{MORE TEAM MAPPINGS}
+]
+</code></pre>
+
+<p>Related REST command: <a href="../rest_cli_component_create_put/">Create a component</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.reference.doc/topics/cli_commands/">CLI Commands</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/udclient_createcomponent.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

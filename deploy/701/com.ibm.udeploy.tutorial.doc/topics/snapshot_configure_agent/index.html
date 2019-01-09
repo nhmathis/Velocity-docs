@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/snapshot_configure_agent/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring the server and target system - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring the server and target system", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-the-server-and-target-system">Configuring the server and target system</h1>
+<p>Modify the HCL® UrbanCode™ Deploy server that you used in the previous tutorial. Create another agent resource and incorporate a new environment property to allow for easy reuse.</p>
+<p>Before you begin the tutorial, make sure that you completed the <a href="../snapshot_intro/#prereqs">Prerequisites</a>.</p>
+<p>To work through this tutorial, you must use the target system that you configured in the <a href="../webapp_abstract/">Deploying a simple web application</a> tutorial.</p>
+<p>This system hosts the following items that are associated with your HCL UrbanCode Deploy JPetStore application:</p>
+<ul>
+<li>An HCL UrbanCode Deploy agent</li>
+<li>A MySQL database</li>
+<li>An instance of Apache Tomcat</li>
+</ul>
+<p>You must have MySQL and Apache Tomcat installed on the system. Follow these steps to set up an agent resource, create a new MySQL database, and redeploy your application to your environment:</p>
+<ol>
+<li>
+<p>Create another resource and add the existing agent to it. To reuse the agent with another environment on the same HCL UrbanCode Deploy server, you must associate the agent with another resource.</p>
+<ol>
+<li>On the HCL UrbanCode Deploy server, click the <strong>Resources</strong> tab. Be sure to click the <strong>Resources</strong> tab at the top of the page.</li>
+<li>From the <strong>Resource Tree</strong> tab that is displayed, click <strong>Create Top-Level Group</strong>. </li>
+<li>In the Create Resource window, provide the new group with a name such as Prod JPetStore agents and click <strong>Save</strong>. </li>
+<li>
+<p>On the same row as the new resource group, click <strong>Actions</strong> > <strong>Add Agent</strong>, as shown in the following figure: </p>
+<p><img alt="Adding an agent to the resource group" src="../../images/snapshot_configure_c.gif" /></p>
+</li>
+<li>
+<p>In the Create Resource window, select the agent in the <strong>Agent</strong> field and click <strong>Save</strong>. 
+The agent is listed as a child of both resource groups. By associating the agent with both resource groups, you can use the same agent with your existing environment and the one that you create in a later lesson.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Create an empty database for the application to use in another environment: </p>
+<ol>
+<li>
+<p>Log in to the MySQL command line as the MySQL root user. For example, if you installed MySQL as the root user, run this command from the command line:</p>
+<p><code>mysql -u root</code></p>
+<p>The command line shows a prompt that looks like this prompt:</p>
+<p><code>mysql&gt;</code></p>
+</li>
+<li>
+<p>Create the database with the following command: </p>
+<p><code>create database jpetstoreprod;</code></p>
+<p>If the command runs correctly, you see this message: <code>Query OK, 1 row affected</code>.</p>
+</li>
+<li>
+<p>Give the existing database user access rights to the database. The database user that has access to the <code>jpetstoredev</code> database must have access to the new database too. If you used the default user name in the <a href="../webapp_abstract/">Deploying a simple web application</a> tutorial, create another database by using the following command:</p>
+<p><code>grant all privileges on jpetstoreprod.* to 'jpetstore'@'localhost';</code></p>
+<p><strong>Note:</strong> If you used the default settings when you configured the original database, the password for user <code>jpetstore</code> is <code>jppwd</code>.</p>
+<p>If the command runs correctly, you see this message: <code>Query OK, 0 rows affected</code>.</p>
+</li>
+<li>
+<p>Type quit to exit the MySQL command line. </p>
+</li>
+<li>Verify that the user can access the database: </li>
+<li>
+<p>From the command line, log in to MySQL as the existing user: </p>
+<p><code>mysql -u jpetstore -pjppwd</code></p>
+</li>
+<li>
+<p>Run the following command to list the databases on the system: </p>
+<p><code>show databases;</code></p>
+</li>
+<li>
+<p>Verify that both the <code>jpetstoreprod</code> and <code>jpetstoredev</code> databases appear in the list, as shown in the following figure: </p>
+<p><img alt="The list of databases on the system, including the jpetstoreprod database" src="../../images/snapshot_configure_b.gif" /></p>
+</li>
+<li>
+<p>Type quit to exit the MySQL command line. </p>
+</li>
+<li>
+<p>Before you deploy your application, confirm that all environment properties contain the correct values: </p>
+</li>
+<li>
+<p>From the <strong>Applications</strong> tab of your HCL UrbanCode Deploy server, click the JPetStore application. </p>
+</li>
+<li>Open the environment by clicking the environment name. </li>
+<li>Open the environment properties by clicking <strong>Configuration</strong> and then clicking <strong>Environment Properties</strong>. Be sure to click the <strong>Configuration</strong> tab for your application, not the <strong>Configuration</strong> tab at the top of the page.
+The environment properties are displayed as shown in the following table:</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Example Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tomcat.home</code></td>
+<td>The Tomcat home folder on the target computer</td>
+<td>/opt/apache-tomcat-6.0.39 on Linux™ or C:\apache-tomcat-6.0.39 on Windows™</td>
+</tr>
+<tr>
+<td><code>tomcat.contextroot</code></td>
+<td>The Tomcat webapp folder on the target computer, which is an identifier in the application URL</td>
+<td>For both Tomcat version 6 and Tomcat version 7, specify <code>JPetStoreDev</code></td>
+</tr>
+<tr>
+<td><code>db.url</code></td>
+<td>The URL to the MySQL database, relative to the target system</td>
+<td>If you installed MySQL on the same system as the agent and used the database name <code>jpetstore</code>, the URL looks like the following example: <code>jdbc:mysql://localhost:3306/jpetstore</code></td>
+</tr>
+<tr>
+<td><code>tomcat.manager.url</code></td>
+<td>The location of the Tomcat manager application</td>
+<td>For Tomcat version 6, specify <code>http://localhost:8081/manager</code> ; for Tomcat version 7, specify <code>http://localhost:8081/manager/text</code></td>
+</tr>
+<tr>
+<td><code>tomcat.start</code></td>
+<td>The location of the startup script for Tomcat</td>
+<td>/opt/apache-tomcat-6.0.39/bin/startup.sh on Linux or C:\apache-tomcat-6.0.39\bin\startup.bat on Windows</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>To ensure that the JPetStore-DB component is deployed correctly, confirm that component version 1.1 is an incremental version. An incremental component version contains only the changes that are associated with that version. For the component to be complete, you must deploy the previous versions of the component as well.</p>
+<ol>
+<li>From the <strong>Components</strong> tab, click the JPetStore-DB component. </li>
+<li>Click the <strong>Versions</strong> tab to display the available component versions, and then click 1.1 to display its attributes. </li>
+<li>Click the <strong>Configuration</strong> tab. Make sure to click the <strong>Configuration</strong> tab that is within the component, not the <strong>Configuration</strong> tab at the top of the page. </li>
+<li>
+<p>On the <strong>Basic Settings</strong> panel, confirm that Incremental is selected from the <strong>Type</strong> list, as shown in the following figure: </p>
+<p><img alt="The Version 1.1 component's Type is Incremental" src="../../images/snapshot_configure_a.gif" /></p>
+</li>
+<li>
+<p>If JPetStore-DB version <code>1.1</code> is not set to <strong>Incremental</strong>, from the <strong>Type</strong> list, select <strong>Incremental</strong>, and then click <strong>Save</strong>. </p>
+</li>
+<li>To confirm that you configured your environment and component correctly, redeploy the application to your environment: </li>
+<li>Click the <strong>Applications</strong> tab, and then click the JPetStore application. </li>
+<li>In the same row as your environment, click the <strong>Request Process</strong> icon. The Run Process window opens.</li>
+<li>Clear the <strong>Only Changed Versions</strong> check box. </li>
+<li>In the <strong>Process</strong> list, select Deploy JPetStore. </li>
+<li>Click <strong>Choose Versions</strong>. The Component Versions window opens.</li>
+<li>In the <strong>Select For All</strong> list, click <strong>Latest Available</strong>. </li>
+<li>In the same row as <code>JPetStore-DB</code>, click <strong>Add</strong>. </li>
+<li>
+<p>From the displayed list, select 1.0. Your list of <strong>Versions to Deploy</strong> resembles the following figure:</p>
+<p><img alt="The list of Versions to deploy: 1.0, 1.1, and both 1.0 and 1.1" src="../../images/snapshot_configure_d.gif" /></p>
+</li>
+<li>
+<p>To record your version selections, click <strong>OK</strong>. </p>
+</li>
+<li>To deploy your application, click <strong>Submit</strong>. HCL UrbanCode Deploy runs the application process, and your application is de ployed.</li>
+</ol>
+</li>
+</ol>
+<p>The agent and the target system are configured for your work with the sample application. You need the password that you used and locations that you specified in this lesson later.</p>
+<p><strong>Parent topic:</strong> <a href="../snapshot_abstract/">Creating and deploying snapshots</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/snapshot_configure_agent.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_process_run/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Running application processes - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Running application processes", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="running-application-processes">Running application processes</h1>
+<p>To run an application process, specify the environment to use and the process to run. In many cases, you also specify the component versions to deploy.</p>
+<ul>
+<li>Create an environment.</li>
+<li>
+<p>Create an application process.</p>
+</li>
+<li>
+<p>Click <strong>Applications</strong>, click the application, and then next to the environment, click <strong>Request Process</strong> <img alt="" src="../../images/request_process_icon.gif" />. </p>
+</li>
+<li>In the <strong>Run Process</strong> window, in the <strong>Process</strong> list, select the application process.</li>
+<li>To skip component versions that have not changed since the previous deployment, select the <strong>Only Changed Versions</strong> check box.If you clear this check box, all of the component versions that you select are deployed, even if they are already in the inventory.</li>
+<li>If the process you selected deploys component versions, you must specify the component versions to deploy. In this case, you can use the component versions in a snapshot, or you can select component versions manually.</li>
+<li>To use the component versions in a snapshot, select the snapshot in the <strong>Snapshot</strong> list.</li>
+<li>
+<p>To specify component versions manually, follow these steps: </p>
+<ol>
+<li>Click <strong>Choose Versions</strong>. </li>
+<li>
+<p>In the Component Versions window, specify the component versions to use completing one of these actions: </p>
+<ul>
+<li>To specify the versions for each component individually, click the <strong>Add</strong> link next to a component in the table, click <strong>Version Lookups</strong>, and then click one of these options:<ul>
+<li>Click <strong>Latest Available</strong> to select the most recent component version at the time that you make this selection regardless of when the process runs. If you schedule a process to run, for example, a week after you make this selection and you want to use the most recent version that is available then, click <strong>Latest Available at Execution Time</strong>.</li>
+<li>Click <strong>Latest with Status</strong> to select the most recent component version at the time that you make this selection. If you schedule a process to run, for example, a week after you make this selection and you want to use the most recent version that has the specified status that is available at the later time, click <strong>Latest with Status at Execution Time</strong>.</li>
+<li>Click <strong>Latest Available at Execution Time</strong> to select the latest component version that is available when the process starts. The version that is used might be generated after you make this selection.</li>
+<li>Click <strong>Latest with Status at Execution Time</strong> to select components that have a status that you specify in the next dialog box. The version that is used might be generated after you make this selection.</li>
+<li>Click <strong>Current Environment Inventory at Execution Time</strong> to use the environment inventory that is available when the process starts. The environment inventory might be different from the inventory that is available when you make this selection.</li>
+</ul>
+</li>
+<li>To specify versions for all the components at one time, click <strong>Select For All</strong>, and then click one of the following options:<ul>
+<li>Click <strong>Latest Available</strong> to select the most recent component version at the time that you make this selection regardless of when the process runs. If you schedule a process to run, for example, a week after you make this selection and you want to use the most recent version that is available then, click <strong>Latest Available at Execution Time</strong>.</li>
+<li>Click <strong>Latest with Status</strong> to select the most recent component version at the time that you make this selection. If you schedule a process to run, for example, a week after you make this selection and you want to use the most recent version that has the specified status that is available at the later time, click <strong>Latest with Status at Execution Time</strong>.</li>
+<li>Click <strong>Versions With Name</strong> to select the most recent component version whose name matches a string.</li>
+<li>Click <strong>Current Environment Inventory</strong> to use the versions that are listed for that environment when you select it. This selection is typically related to the last version that was deployed to a certain environment of each component. For example, say that you deployed component A, version 1, to your environment. Then, in a separate deployment, you deployed an incremental version 1.1 to the same environment. If you look at the current environment inventory in the Application view, you see that the environment contains versions 1 and 1.1. Typically, you don't want to redeploy what is already there. However, this selection is useful when a deployment fails or is modified on the target computer itself, outside of HCL® UrbanCode™ Deploy. So if the deployment of version 1.1 succeeded on 10 agents but failed on two, you can schedule essentially a retry. Use of this selection is not common.</li>
+<li>Click <strong>Latest Available at Execution Time</strong> to select the latest component version that is available when the process starts. The version that is used might be generated after you make this selection.</li>
+<li>Click <strong>Latest with Status at Execution Time</strong> to select components that have a status that you specify in the next dialog box. The version might be generated after you make this selection.</li>
+<li>Click <strong>Current Environment Inventory at Execution Time</strong> to use the environment inventory that is available when the process starts. The environment inventory might be different from the inventory that is available when you make this selection.</li>
+<li>Click <strong>None (Clear All)</strong> to clear your selections.
+<strong>Note:</strong> If you select multiple versions for one component, the versions are installed in the order that you select them in the <strong>Run Process</strong> window.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Click <strong>OK</strong>.</p>
+<p><strong>Note:</strong> Make sure to select a version for each component. If you do not select a version for a component, that component is not included in the application process.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>If the process has properties, specify values for those properties.</p>
+</li>
+<li>To schedule the deployment for a later date, click <strong>Schedule Deployment?</strong> and then specify when to run the deployment.</li>
+<li>Click <strong>Submit</strong>.</li>
+</ul>
+<p>The server runs the application process with the specified component versions. You can view the process requests by going to the <strong>History</strong> tab for the environment or application. Typically, resources are mapped for each component version that is deployed by the application process. You can use the same application process for different environments, some of which do not have mappings for all components. If you run an application process on an environment where not all components are mapped, the resulting status for those components is Not Mapped.</p>
+<p>You can view the progress of the process by going to the <strong>History</strong> tab and opening the process request. The application process request shows each step in the process. Within each process, the steps are not shown in the order that they run in. Instead, steps are shown in the order of appearance in the process editor, from the steps at the top of the canvas to the steps at the bottom of the canvas.</p>
+<p><strong>Parent topic:</strong> <a href="../app_process/">Application processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_process_run.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

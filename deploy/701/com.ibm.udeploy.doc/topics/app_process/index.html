@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_process/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Application processes", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="application-processes">Application processes</h1>
+<p>You can use application processes to deploy or to roll back components.</p>
+<p>HCL® UrbanCode™ Deploy provides several common process steps. Otherwise, application processes are assembled from processes that are defined for their associated components. Application processes, like component processes, are created with the process editor.</p>
+<p>Application processes can run manually, automatically on some trigger condition, or on a user-defined schedule. When a component has several processes, the application determines which ones run and in which order. For instance, an n-tiered application might have a web tier, a middleware tier, and a database tier. And, continuing the example, the database tier must be updated before the other two, which are then deployed concurrently. An application can orchestrate the entire process, including putting target servers online and offline for load balancing as required.</p>
+<p>An application process is always associated with a target environment. When an application process runs, it interacts with a specific environment. At least one environment must be associated with the application before the process can run. Application processes are independent of environment; processes can be designed independently of any particular environment. These application processes enable a single application to interact with separate environments, such as QA, or production. To use the same application process with multiple environments (a typical scenario), you associate each environment with the application and run the process separately for each one.</p>
+<p>In addition to deployments, several other common processes are available, such as rolling-back deployments. HCL UrbanCode Deploy tracks the history of each component version, which enables application processes to restore environments to any point.</p>
+<p>Application processes and the steps that they comprise are configured with the process editor. For information about using the process editor, see <a href="../comp_workflow/">Processes</a>. For information about individual process steps, see <a href="../app_processSteps/">Process steps: Reference</a>.</p>
+<ul>
+<li><strong><a href="../app_process_create/">Creating application processes</a></strong><br />
+You can use application processes to deploy or to roll back components.</li>
+<li><strong><a href="../app_process_deploy_comp/">Deploying components in an application process</a></strong><br />
+You can deploy one or more components in an application process by calling component processes.</li>
+<li><strong><a href="../app_process_run/">Running application processes</a></strong><br />
+To run an application process, specify the environment to use and the process to run. In many cases, you also specify the component versions to deploy.</li>
+<li><strong><a href="../deployapp_repeatrequest/">Running the same process again</a></strong><br />
+The repeat request function is available after an application deployment completes. The <strong>Repeat Request</strong> feature is on the Process Request page for the application.</li>
+<li><strong><a href="../app_process_deploy_uninstall/">Uninstalling components with an application process</a></strong><br />
+You can uninstall components by using an Uninstall Component step in an application process.</li>
+<li><strong><a href="../app_process_deploy_rollback/">Rolling back to a snapshot</a></strong><br />
+You can roll back a component to the versions that are in a snapshot. In this case, you use a <strong>Rollback Component</strong> step with the <strong>Remove Undesired Incremental Versions</strong> option.</li>
+<li><strong><a href="../app_process_deploy_rollback_last/">Rolling back components that fail to deploy</a></strong><br />
+If an application process fails to deploy a component, you can add a rollback step to the process to reverse the deployment. In this case, you use the <strong>Replace with Last Deployed</strong> option.</li>
+<li><strong><a href="../app_process_advanced_ov/">Modeling blue-green, rolling, and canary deployments</a></strong><br />
+The For Each Agent and For Each Tag steps provide ways to deploy to large environments in stages, allowing you to run flexible blue-green or rolling deployments, with or without updating canary nodes first.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../comp_workflow/">Processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_process.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

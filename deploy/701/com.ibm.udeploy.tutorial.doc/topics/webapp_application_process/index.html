@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/webapp_application_process/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lesson 4 Creating an application process - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lesson 4: Creating an application process", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="lesson-4-creating-an-application-process">Lesson 4: Creating an application process</h1>
+<p>Application processes tie together component processes.</p>
+<p>In this lesson, you create an application process to install the components by calling each component process.</p>
+<ol>
+<li>Click the <strong>Applications</strong> tab, and then click the <strong>JPetStore</strong> application. </li>
+<li>Click <strong>Processes</strong>, and then click <strong>Create Process</strong>. Be sure to click the <strong>Processes</strong> tab within the application and not the <strong>Processes</strong> tab at the top of the page, which leads to generic processes.</li>
+<li>In the Create an Application Process window, name the new application process Deploy JPetStore. </li>
+<li>Accept the default values for the other fields, and click <strong>Save</strong>. </li>
+<li>Click the new process to open it in the process editor. The process editor for application processes is similar to the process editor for component processes. However, for application processes, the steps are limited to calling component processes and a few utility steps.</li>
+<li>Add a step to deploy the application component: <ol>
+<li>From the list of steps, add an <strong>Install Component</strong> step to the process editor.This step calls component processes that have a process type of <code>Deployment</code>.</li>
+<li>In the Edit Properties window, name the step Deploy application component. </li>
+<li>In the <strong>Component</strong> list, select the <code>JPetStore-APP</code> component.</li>
+<li>In the <strong>Component Process</strong> list, select the <code>Deploy Application Component</code> component process.</li>
+<li>Click <strong>OK</strong>. </li>
+</ol>
+</li>
+<li>Similarly, add a step that is named Deploy web component to deploy the web component.</li>
+<li>Similarly, add a step that is named Deploy database component to deploy the database component.</li>
+<li>Verify that the <code>Start</code> step is connected to the <code>Deploy application component</code> step. </li>
+<li>Instead of connecting the remaining steps in a straight line, follow these steps to connect the steps so that they run at the same time.Use the figure at the end of this step as a reference point.<ol>
+<li>Connect the <code>Deploy application component</code> step to the <code>Deploy web component</code> step.</li>
+<li>Connect the <code>Deploy application component</code> step to the <code>Deploy database component</code> step. Now these two steps will run at the same time, after the application step.</li>
+<li>Connect both the <code>Deploy web component</code> step and the <code>Deploy database component</code> step to the <code>Finish</code> step. </li>
+</ol>
+</li>
+<li>Save the process.</li>
+</ol>
+<p>The complete application process deploys the application component first and then deploys the web component and database components at the same time. The application process looks like the following figure:</p>
+<p><img alt="The complete application process with three steps that call component processes" src="../../images/webapp_application_process_a.gif" /></p>
+<p><strong>Parent topic:</strong> <a href="../webapp_abstract/">Deploying a simple web application</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/webapp_application_process.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

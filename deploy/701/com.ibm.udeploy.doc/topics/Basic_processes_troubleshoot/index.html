@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/Basic_processes_troubleshoot/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Troubleshooting processes - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Troubleshooting processes", url: "#_top", children: [
+              {title: "Other troubleshooting tips", url: "#other-troubleshooting-tips" },
+              {title: "What issues are you observing or experiencing?", url: "#what-issues-are-you-observing-or-experiencing" },
+          ]},
+          {title: "!/bin/sh", url: "#binsh", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="troubleshooting-processes">Troubleshooting processes</h1>
+<p>You can answer a number of questions to help isolate the issue behind problems and process failures.</p>
+<p>Take these initial approaches to avoid problems with your processes and check these areas before you take more complicated troubleshooting steps:</p>
+<ul>
+<li>If a process is failing, look for information about the failure in the process request. To open a process request, click the application, and go to the <strong>History</strong> tab. Find the process in the table, and click <strong>View Request</strong>. Within the request, expand the steps until you find the step that failed. Failed steps have an error log <img alt="" src="../../images/steperrorlog.gif" /> that provides more information about the failure. All steps have an output log <img alt="" src="../../images/steplog.gif" /> that includes information about the step progress and any logging messages that the step created. For information about viewing logs, see <a href="../log_audit/">Viewing logs</a>.</li>
+<li>Step through each process element. Verify that you <a href="../ud_properties_using/">refer to properties</a> by using the correct syntax.</li>
+<li>Verify that the steps are wired together, meaning that each step is connected to another step within a process. Then, verify that the correct step result is selected. That is, on the arrow that connects one step with the next, select the correct condition for proceeding: <strong>Run On Success</strong>, <strong>Run On Failure</strong>, or <strong>Run on Both</strong>.</li>
+<li>Verify that the process is wired in to the <strong>Finish</strong> step.</li>
+<li>Consider running each process step's equivalent function in a command-line environment to verify that each step works as planned. For example, if the step runs a shell script, try running the shell script on the command line to see whether the same problem happens. If the step starts an application server, make sure that you can start the application server on the command line by using the same commands.</li>
+<li>Verify that you are using the correct component processes type. For information about component process types, see <a href="../comp_process_types/">Component process types</a>.</li>
+<li>Trace all the way through your process step-by-step. Steps are essentially commands to be run. See this IBM support article: <a href="http://www-01.ibm.com/support/docview.wss?uid=swg21653769">MustGather: How to trace the execution of a process</a>.</li>
+<li>Verify that no typographical errors are included in the process steps. Review each property and script carefully.</li>
+<li>If properties are a factor in the problem, you can view the properties for an application process by opening the process request and clicking the <strong>Properties</strong> tab. You can also view the properties that each component process step used by clicking <strong>Input/Output Properties</strong> <img alt="" src="../../images/viewproperties.gif" />. For more information about properties, see <a href="../ud_properties_overview/">Properties</a> and associated topics.</li>
+<li>Check the log for messages that pertain to memory size. You can generate a report of requirements for your operating systems and product version: <a href="http://www-969.ibm.com/software/reports/compatibility/clarity/hardwareReqsForProduct.html">Hardware requirements for a specific product</a>.</li>
+<li>If you are running a UNIX™ based operating system, are your file handles configured correctly according to the <a href="../../../com.ibm.udeploy.install.doc/topics/sysRequire/#file_handles">documentation</a>?</li>
+<li>If you are using sudo commands, permissions can be a problem. Verify that the command is configured correctly. Also, verify that the user is configured in sudo and does not need to specify a password. Make sure that the directory can be accessed by the operating system user that is running the HCL UrbanCode Deploy agent, the impersonated user, and the tool that you are calling. For information about sudo commands, see <a href="../arch_appx_sudo_using/">Impersonation on Linux™ systems</a>.</li>
+<li>Review the step output for steps that cause problems. On a command line, run a problem line or step as the same user that HCL UrbanCode Deploy uses to run the step or line. Be sure to pass the user and the group.</li>
+</ul>
+<h2 id="other-troubleshooting-tips">Other troubleshooting tips</h2>
+<ul>
+<li>If your process branches, look closely at the way the process branches to ensure that the process is running in the way that you expect. See <a href="../comp_process_join/">Branching and joining steps</a>.</li>
+<li>
+<p>If the agent does not respond to server requests quickly enough because of performance problems or network issues, the server adds an output property to the step. This property is named <code>ackTimeout</code> and the value is <code>The step has timed out because the agent did not respond with an acknowledgement within the specified time.</code> To extend the time that the server waits, add the following line to the server installed.properties file:</p>
+<p><code>com.urbancode.ds.plugin.PluginAckTimeoutRunnable.TIMEOUT_INTERVAL=3600000</code></p>
+</li>
+</ul>
+<h2 id="what-issues-are-you-observing-or-experiencing">What issues are you observing or experiencing?</h2>
+<ul>
+<li><a href="#procss_no_start">A process doesn't start</a>.</li>
+<li><a href="#fail-no_log">A process fails, but no errors are logged</a>.</li>
+<li><a href="#fail_after_upgrade">Process failures occur after an upgrade</a>.</li>
+<li><a href="#run_no_stop">A process runs, but it does not stop</a>.</li>
+<li><a href="#proc_fail_intermitt">Processes fail intermittently</a>.</li>
+<li><a href="#proc_hang">Processes stop before completion</a>.</li>
+<li><a href="#branch_probs">Processes with branches do not run correctly</a>.</li>
+<li><a href="#impersonation_probs">Processes using impersonation do not run correctly</a>.</li>
+</ul>
+<p><strong>A process doesn't start</strong></p>
+<ul>
+<li>Can you run the process while you use the built-in ID? Running the process that way checks for a permission issue on the resource.</li>
+<li>Is the agent running? For information about agents, see <a href="../resources_agents/">Agents</a>.</li>
+<li>Can any processes run on the agent? If required, create a simple “echo Hello World” shell step, and see whether you can run it on the agent. Running this shell step confirms that communication between the server and resource are established.<ul>
+<li>If the simple shell step works, what's different between the working step and the failing step?</li>
+</ul>
+</li>
+<li>Are the components mapped? See <a href="../app_environment_mapping/">Mapping resources and components to environments</a>.</li>
+<li>Are any errors logged in the step output? See <a href="../log_audit/">Viewing logs</a>.</li>
+<li>Check the server log file for errors, permissions issues, or configuration issues. See <a href="../log_audit/">Viewing logs</a>.</li>
+</ul>
+<p><strong>A process fails, but no errors are logged</strong></p>
+<ul>
+<li>Confirm that the version of HCL UrbanCode Deploy and the agents and agent relays are the same.</li>
+<li>Check the agent log file for errors that point to a configuration issue. For example, a port might be blocked or a URL is incorrect. Check the server log file for errors. For example, a port might be blocked or URL is incorrect. See <a href="../log_audit/">Viewing logs</a>. See also <a href="../../../com.ibm.udeploy.install.doc/topics/agent_firewalls/">Firewall and communication configuration</a>.</li>
+<li>If you are using high-availability, check to see whether there was a failover.</li>
+<li>If this result happens for only this process, what might be different between this process and the other processes that succeed at running the step?</li>
+<li>Can the process succeed when the built-in admin ID runs it. When you run the process this way, incorrect permission configuration does not impact process execution.</li>
+<li>Does this problem happen with any other steps? If not, how is this step different?</li>
+<li>If you run a process with just this step, does it fail in the same way?</li>
+</ul>
+<p><strong>Process failures occur after an upgrade</strong></p>
+<ul>
+<li>
+<p>Does the new version support the installed Java™ Runtime Environment or Java Development kit?</p>
+<p><strong>Important:</strong> </p>
+<p>For best results, download and use the latest available version of the IBM® Java Runtime Environment (JRE) for the HCL UrbanCode Deploy server and agent relays. An IBM JRE is available as a separate download. See the <a href="https://www.ibm.com/developerworks/java/jdk/">IBM developer kits</a> page to get the latest version. Install the IBM JRE according to the documentation on the page. Be sure to set the JAVA_HOME system variable to the location of the IBM JRE. If you are updating or changing the JRE to the latest version, see <a href="../jre_change/">Changing or updating the JRE of servers</a> and <a href="../update_JRE_agent_relays/">Updating the JRE location for agent relays</a> for instructions. For documentation on the IBM JRE, see <a href="https://www.ibm.com/support/knowledgecenter/SSYKE2/welcome_javasdk_family.html">IBM SDK, Java Technology Edition</a>.</p>
+<p>Using JREs or Java development kits other than those provided by IBM might cause unexpected results.</p>
+</li>
+<li>
+<p>Were there any errors in the upgrade process?</p>
+</li>
+<li>Check the agent log file for errors that point to a configuration issue. For example, a port might be blocked or a URL is incorrect. Check the server log file for errors. For example, a port might be blocked or URL is incorrect. See <a href="../log_audit/">Viewing logs</a>.</li>
+<li>If you use an agent relay, confirm that the agent relay was upgraded to the same version as the server.<ul>
+<li>Check the <strong>Agent Relays</strong> tab to verify that the agent relay version is supported. To open the <strong>Agent Relays</strong> tab, click the main <strong>Resources</strong> tab, and then click the <strong>Agent Relays</strong> tab. See the minimum recommended and minimum required versions for the listed agent relays in the upper-right corner of the tab. You might have to upgrade an agent relay or agent relays. For information about upgrading an agent relay, see <a href="../../../com.ibm.udeploy.install.doc/topics/upgrade_agent_relay/">Upgrading agent relays</a>.</li>
+</ul>
+</li>
+<li>Check the <strong>Agents</strong> tab to verify that the server supports the agent version. To open the <strong>Agents</strong> tab, click the main <strong>Resources</strong> tab, and then click the <strong>Agents</strong> tab. See the minimum recommended and minimum required versions for the listed agents in the upper-right corner of the tab. You might have to upgrade an agent or agents. For information about upgrading an agent, see <a href="../../../com.ibm.udeploy.install.doc/topics/upgradeAgents/">Upgrading agents</a>.</li>
+<li>Did you create this process in the upgraded version? If the process was created in a previous version, did it work correctly in the previous version? If so, were any changes made to the process after the upgrade?</li>
+</ul>
+<p><strong>A process runs, but it does not stop</strong></p>
+<ul>
+<li>Has this process ever run to completion previously? See this IBM support article: <a href="http://www-01.ibm.com/support/docview.wss?uid=swg21653769">MustGather: How to trace the execution of a process</a>.</li>
+<li>Is the process wired to the <strong>Finish</strong> step?</li>
+<li>If the step that fails is a shell step, is the standard output is redirected for child processes to https://developer.ibm.com/urbancode/plugindoc/ibmucd/shell/5-562693/usage/?</li>
+</ul>
+<p><strong>Processes fail intermittently</strong></p>
+<ul>
+<li>Does the server log contain exceptions that this issue generated?</li>
+<li>On which step does the process fail? Does the step output contain errors?</li>
+<li>At which times does the process fail? Check for network outages, maintenance intervals during that time.</li>
+<li>Is the Download Artifacts step failing with the error <code>java.io.FileNotFoundException: Artifact set not found</code>? Ensure that CodeStation has enough time to store the artifacts before they are requested, particularly in high-availability clusters, in which the servers share the artifacts. The solution for this issue is typically to add a Wait step with a few seconds wait time before the Download Artifacts step.</li>
+</ul>
+<p><strong>Processes stop before completion</strong></p>
+<ul>
+<li>Check the agent and server log files for errors.</li>
+<li>Check the process system output.</li>
+<li>Consider running each process step's equivalent function in a command-line environment to verify that each step works as planned.</li>
+<li>Can the built-in admin ID run processes with success?</li>
+<li>If the steps that fail are shell steps, redirect the standard output of child processes to https://developer.ibm.com/urbancode/plugindoc/ibmucd/shell/5-562693/usage/.</li>
+<li>
+<p>Do you have sufficient memory on the HCL UrbanCode Deploy server?</p>
+<p><strong>Tip:</strong> The workflow execution engine that runs the process runs on the HCL UrbanCode Deploy server.</p>
+</li>
+<li>
+<p>On which screen or activity do you see no progress?</p>
+</li>
+<li>How long did the process stop? How long do you expect this activity to take?</li>
+<li>Are there any agents for which this behavior does <em>not</em> happen? If so, what differences exist between the processes that work and the processes that do not.</li>
+<li>Did this behavior always happen? If not, what changed immediately before this problem surfaced?</li>
+</ul>
+<p><strong>Processes with branches do not run correctly</strong></p>
+<ul>
+<li>Look closely at the way the process branches to ensure that the process is running in the way as expected. See <a href="../comp_process_join/">Branching and joining steps</a>. See this IBM support article: <a href="http://www-01.ibm.com/support/docview.wss?uid=swg21653769">MustGather: How to trace the execution of a process</a>.</li>
+</ul>
+<p><strong>Processes using impersonation do not run correctly</strong></p>
+<ul>
+<li>
+<p>Reproduce the problem with a simple shell step, use the <code>#!</code> syntax at the top to specify the shell to use. For example:</p>
+<p>```</p>
+<h1 id="binsh">!/bin/sh</h1>
+<p>```</p>
+<p>In the example, <code>/bin/sh</code> resolves to different shells depending on the operating system. For example, it resolves to <code>/bin/ksh</code> on AIX and Solaris operating systems and to <code>/bin/bash</code> on a RedHat Enterprise Linux operating system.</p>
+</li>
+<li>
+<p>Put the shell script of the step into a separate file and execute it from the HCL UrbanCode Deploy interface or from a command line.</p>
+</li>
+<li>
+<p>Enable logging on the agent to verify that the command ran. To enable logging put the following line in the agent-home/conf/agent/log4j.properties file. Start the agent again for the change to take affect.</p>
+<p><code>log4j.logger.com.urbancode.shell.impersonation.unix.UnixImpersonateCommand=DEBUG</code></p>
+</li>
+<li>
+<p>Add to the separate script file a call to printenv and execute the script from a HCL UrbanCode Deploy step or from a command line. Compare the two processes for differences.</p>
+</li>
+<li>Execute the separate script using the commands configured in the <strong>sudoFormat</strong> and <strong>suFormat</strong> agent properties described in the <a href="../arch_appx_sudo_using/">Impersonation on Linux and UNIX systems</a> topic.</li>
+<li>
+<p>In the agent installed.properties file, add the following property to verify that the command executes successfully after the impersonation.</p>
+<p><code>com.urbancode.shell.impersonation.unix.scriptPostExecuteAction=echo</code></p>
+</li>
+<li>
+<p>Update your Java fixpack level or Java version to a higher level.</p>
+</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../trouble_serveragents_ov/">Troubleshooting the HCL UrbanCode Deploy server and agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/Basic_processes_troubleshoot.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

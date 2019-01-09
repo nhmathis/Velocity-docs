@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_roles/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Roles and permissions", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="roles-and-permissions">Roles and permissions</h1>
+<p>A role is a list of permissions that users have on the HCL® UrbanCode™ Deploy server. These permissions include the ability to create, edit, and delete objects, such as applications, environments, and components. The permission also includes the parts of the server interface that users can access.</p>
+<p>When you assign users to a role, they get all permissions that are granted to the role. However, these permissions apply only to the team on which the user has the role. For example, if a user has the Developer role on team A, that user has the role permissions on the environments, applications, and components that are assigned to team A. The user does not have any permissions on the environments, applications, and components that are assigned to team B unless you assign that user a role on team B.</p>
+<p>You can assign permissions to a user only by giving that user a role on a team. You cannot assign a user to a role without also putting that user on a team. Similarly, you cannot assign a user to a team without giving that user a role on the team.</p>
+<p>Typically, the permissions that are granted to a role define a particular activity that a user might do, such as running deployments. Users can be assigned to more than one role, and users can have different roles on different teams. You decide the number of roles and their permissions that you assign to users. Initially, HCL UrbanCode Deploy provides one role, the Administrator role, which has all possible permissions granted to it.</p>
+<p><strong>Note:</strong> If a role grants the Create permission for some object type, such as components, it is important that the role also grant the Edit Basic Settings and Manage Teams permissions for that type. Otherwise, the options for creating the object are limited.</p>
+<p>The Create permission is different from other permission types. The create type is not scoped to a specific resource but is more broadly scoped. Team members with a create-type permission can create resources of the related type without team members first being attached to a specific resource. To continue the environment example, users with the create environment permission can create environments even if their team is not attached to a specific environment.</p>
+<p>Most objects have the create, view, and edit permissions that most object types. Environments and processes have an execute permission. This permission controls the ability to run processes.</p>
+<ul>
+<li><strong><a href="../security_roles_create/">Creating roles and assigning permissions</a></strong><br />
+You can create roles on the server and assign permissions to them.</li>
+<li><strong><a href="../security_system/">Setting server configuration security</a></strong><br />
+Set the server configuration permissions to define what users can do with the HCL UrbanCode Deploy server security, also referred to as system security. Typically, these permissions are granted to administrative roles.</li>
+<li><strong><a href="../security_roles_permission_ref/">Permission reference</a></strong><br />
+This table lists the permissions on the server that you can assign to roles.</li>
+<li><strong><a href="../app_template_ref/">Permissions reference for using application templates</a></strong><br />
+Permissions for roles that create applications from templates.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_roles.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

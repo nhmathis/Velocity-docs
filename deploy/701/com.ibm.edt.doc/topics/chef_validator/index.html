@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/chef_validator/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Modifying the Chef validator key - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modifying blueprints to access the Chef validator key in version 6.2.1 and later", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modifying-blueprints-to-access-the-chef-validator-key-in-version-621-and-later">Modifying blueprints to access the Chef validator key in version 6.2.1 and later</h1>
+<p>If you upgrade your blueprint design server to version 6.2.1 or later, you might need to modify references to the Chef validator key before you provision environments from existing blueprints.</p>
+<p>In version 6.2.1 of the blueprint design server, the method of providing the Chef validator key changed. Instead of obtaining the key value from an external location during provisioning, the blueprint design server itself provides the key value to the Chef server.</p>
+<p>If you used Chef in versions of the blueprint designer before 6.2.1 and upgraded to version 6.2.1 or later, you might need to modify your existing blueprints before you provision an environment from it. For example, if you are using a different Chef server or stopped hosting the key value in an external location, you must make the following changes before you provision.</p>
+<ol>
+<li>
+<p>Add a chef_validator_key parameter. The parameter resembles the following code:</p>
+<p><code>chef_validator_key:
+  type: string
+  description: 'The Chef validator private key'
+  hidden: true</code></p>
+</li>
+<li>
+<p>In the OS::Heat::SoftwareDeployment resource for each Chef role, replace the CHEF_VALID_PEM_URL input value property with the CHEF_VALIDATOR_KEY input value property. The input property must reference the chef_validator_key parameter and resembles the following code:</p>
+<p><code>Chef_role:
+  type: OS::Heat::SoftwareDeployment
+  properties:
+    config: { get_resource: Chef_role_sw_config }
+    server: { get_resource: image }
+    input_values:
+      **CHEF\_VALIDATOR\_KEY: \{ get\_param: chef\_validator\_key \}**</code></p>
+</li>
+<li>
+<p>In the OS::Heat::SoftwareConfig resource for the Chef roles, replace the CHEF_VALID_PEM_URL input property with the CHEF_VALIDATOR_KEY input property. The input property must reference the chef_validator_key parameter and resembles the following code:</p>
+<p><code>Chef_role_sw_config:
+  type: OS::Heat::SoftwareConfig
+  properties:
+    group: chef
+    inputs:
+      - name: **CHEF\_VALIDATOR\_KEY**
+        type: String</code></p>
+</li>
+</ol>
+<p>Provision an environment from the blueprint. See <a href="../env_provision_edt/">Provisioning environments from the blueprint designer (through OpenStack Heat)</a>.</p>
+<p><strong>Note:</strong> Before you provision an environment, you must also upgrade the Chef hook on the images on your cloud. See <a href="../cloud_update_chef_images/">Updating Chef-compatible images</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_create/">Editing blueprints with the blueprint designer</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/chef_validator.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

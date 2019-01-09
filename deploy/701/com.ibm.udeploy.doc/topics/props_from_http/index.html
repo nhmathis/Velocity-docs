@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/props_from_http/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Retrieving property values from external files - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Retrieving property values from external files", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="retrieving-property-values-from-external-files">Retrieving property values from external files</h1>
+<p>You can specify that a property takes a value from an XML or JSON file over HTTP. Then, when you run the process, the server prompts you with a list of values from that file.</p>
+<p>On a computer that is accessible from the HCL® UrbanCode™ Deploy, host an XML or JSON file that contains the values for the property. You can format this file in several different ways. You must also identify the path to the values with three parameters. Examples of these path parameters are included with the example files.</p>
+<p>The simplest way to format the file is to provide a simple list of values for the property, as in the following examples:</p>
+<pre><code>&lt;company&gt;
+  &lt;employee&gt;Alice&lt;/employee&gt;
+  &lt;employee&gt;Bob&lt;/employee&gt;
+  &lt;employee&gt;Chris&lt;/employee&gt;
+&lt;company&gt;
+</code></pre>
+
+<p>For XML files, you use XPath to specify the path to the values. In the previous XML file, the Base Path parameter is the XPath expression <code>//company/employee</code> and parameters Value Path and Label Path are blank.</p>
+<p>The following example shows the equivalent file in JSON:</p>
+<pre><code>{
+  company: {
+    employee: [
+      &quot;Alice&quot;,
+      &quot;Bob&quot;,
+      &quot;Chris&quot;
+    ]
+  }
+}
+</code></pre>
+
+<p>In the previous JSON file, the Base Path parameter is <code>company.employee</code> and parameters Value Path and Label Path are blank.</p>
+<p>You can include separate label and value information in the file. For example, the following XML file includes names and ID numbers.</p>
+<pre><code>&lt;company&gt;
+  &lt;employee&gt;
+    &lt;name&gt;Alice&lt;/name&gt;
+    &lt;id&gt;1&lt;/id&gt;
+  &lt;/employee&gt;
+  &lt;employee&gt;
+    &lt;name&gt;Bob&lt;/name&gt;
+    &lt;id&gt;2&lt;/id&gt;
+  &lt;/employee&gt;
+  &lt;employee&gt;
+    &lt;name&gt;Chris&lt;/name&gt;
+    &lt;id&gt;3&lt;/id&gt;
+  &lt;/employee&gt;
+&lt;/company&gt;
+</code></pre>
+
+<p>In this case, the Base Path parameter is the XPath expression <code>//company/employee</code>. The Value Path parameter is an XPath expression that shows the path to the value relative to the base path; in this case the expression is <code>./id</code>. Similarly, the Label Path parameter an XPath expression that shows the path to the label relative to the base path; in this case the expression is <code>./name</code>.</p>
+<p>The following JSON file is equivalent to the previous XML file:</p>
+<pre><code>{
+  company: {
+    employees: [
+      { name: &quot;Alice&quot;, employee.id: 1 },
+      { name: &quot;Bob&quot;, employee.id: 2 },
+      { name: &quot;Chris&quot;, employee.id: 3}
+    ]
+  }
+} 
+</code></pre>
+
+<p>In this case, the Base Path parameter is <code>company.employees</code>. The Value Path parameter is <code>employee\.id</code> and the Label Path parameter is <code>name</code>.</p>
+<p><strong>Note:</strong> When specify the path for a JSON file, escape periods in attribute names with backslashes, as in the Value Path parameter in the previous example.</p>
+<p>When you use attributes in an XML file, use the <code>@</code> character to specify an attribute in XPath. For example, the following XML file has values in attributes:</p>
+<pre><code>&lt;company&gt;
+  &lt;employee id=&quot;1&quot;&gt;Alice&lt;/employee&gt;
+  &lt;employee id=&quot;2&quot;&gt;Bob&lt;/employee&gt;
+  &lt;employee id=&quot;3&quot;&gt;Chris&lt;/employee&gt;
+&lt;company&gt;
+</code></pre>
+
+<p>In this case, the Base Path parameter is the XPath expression <code>//company/employee</code>. The Value Path parameter is <code>./@id</code> and the Label Path parameter is a period (<code>.</code>).</p>
+<p>You can use these remote property values in property definitions, such as component environment properties, but not in general properties such as system properties, application properties, or component properties.</p>
+<ol>
+<li>Create a property definition.For example, click a component, go to the <strong>Configuration</strong> tab, click <strong>Environment Property Definitions</strong>, and click <strong>Add Property</strong>.</li>
+<li>Specify the <strong>Name</strong>, <strong>Description</strong>, <strong>Label</strong>, <strong>Pattern</strong>, and <strong>Required</strong> fields as usual.</li>
+<li>In the <strong>Type</strong> list, select <strong>HTTP Select</strong> for a single property value or select <strong>HTTP Multi Select</strong> to allow multiple property values. Several new fields appear.</li>
+<li>
+<p>Specify the following fields.These fields are specific to parameters from external files.</p>
+<ul>
+<li>
+<p><strong><em>*URL</em></strong>*</p>
+<p>Specify the URL of the external XML or JSON file.</p>
+</li>
+<li>
+<p><strong><em>*Username</em></strong>*</p>
+<p>If the URL requires a user name, specify it here.</p>
+</li>
+<li>
+<p><strong><em>*Password</em></strong>*</p>
+<p>If the URL requires a password, specify it here.</p>
+</li>
+<li>
+<p><strong><em>*Data Format</em></strong>*</p>
+<p>Specify the type of file: <strong>JSON</strong> or <strong>XML</strong>.</p>
+</li>
+<li>
+<p><strong><em>*Base Path</em></strong>*</p>
+<p>For XML files, specify an XPath expression to the data. For JSON files, specify the path through the JSON attributes to the data, separating paths with periods (<code>.</code>). See the examples at the top of this page.</p>
+</li>
+<li>
+<p><strong><em>*Value Path</em></strong>*</p>
+<p>Specify the path to the parameter values, relative to the <strong>Base Path</strong> parameter.</p>
+</li>
+<li>
+<p><strong><em>*Label Path</em></strong>*</p>
+<p>Specify the path to the parameter labels, relative to the <strong>Base Path</strong> parameter.</p>
+</li>
+<li>
+<p><strong><em>*Default Value</em></strong>*</p>
+<p>Specify the default value for the parameter.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+</ol>
+<p>Now when you run the process, the Run Process window includes a parameter that retrieves values from the external file.</p>
+<p><strong>Parent topic:</strong> <a href="../resources_properties/">Creating, setting, and editing properties</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/props_from_http.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

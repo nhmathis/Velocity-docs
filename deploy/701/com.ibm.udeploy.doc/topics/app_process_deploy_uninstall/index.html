@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_process_deploy_uninstall/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Uninstalling components with an application process - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Uninstalling components with an application process", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="uninstalling-components-with-an-application-process">Uninstalling components with an application process</h1>
+<p>You can uninstall components by using an Uninstall Component step in an application process.</p>
+<ul>
+<li>Create an uninstall-type component process for each component version to remove. This process is run by the Uninstall Component step in an application process.</li>
+<li>If you intend to uninstall the component as part of a rollback process, create an application snapshot that contains the component versions to restore.</li>
+</ul>
+<p>There are several ways to uninstall a component. To replace an existing component version, you can install another version over it by running an application process that contains a deployment process for the component. To remove a component version, you run an application process that includes the Uninstall Component step.</p>
+<ol>
+<li>To uninstall a component version, complete these steps:</li>
+<li>Create an application process that contains the Uninstall Component step. </li>
+<li>In the Uninstall Component step, select the component to remove and the uninstall-type component process that is defined for it. </li>
+<li>In the <strong>Uninstall Type</strong> field, specify <strong>All Existing</strong> to remove all versions of the component from the environment's inventory. Otherwise, specify <strong>All Selected For Process</strong> to remove only the versions that you select when you run the application process. </li>
+<li>Run the application process. The selected component versions are no longer in the environment inventory.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../app_process/">Application processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_process_deploy_uninstall.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

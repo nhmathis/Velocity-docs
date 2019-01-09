@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/agent_install_silent/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing agents in silent mode - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing agents in silent mode", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-agents-in-silent-mode">Installing agents in silent mode</h1>
+<p>In silent mode, you specify the installation properties in a text file and then run the installation without command-line prompts.</p>
+<ul>
+<li>
+<p>For production environments, create a user account that is dedicated to running the agent on the computer where the agent is installed.</p>
+<p><strong>Note:</strong> This user account must have access to all working directories that are used in the processes that this agent runs. If this user does not have access to the working directory specified in a process step, that step fails.</p>
+<p>If you are installing the agent on z/OS®, review <a href="../../../com.ibm.udeploy.admin.doc/topics/security_zos/">Security requirements on the IBM z/OS computers</a>.</p>
+</li>
+<li>
+<p>Ensure that each computer where you are installing an agent has a supported version of the Java™ Runtime Environment (JRE) or Java developer kit. For more information, see <a href="http://www-01.ibm.com/support/docview.wss?uid=swg27038801">System Requirements for IBM UrbanCode Deploy</a>.</p>
+</li>
+<li>
+<p>If the target computer has an IBM JRE or Java developer kit, update to a supported version of the IBM JRE or Java developer kit.</p>
+</li>
+<li>
+<p>Set the JAVA_HOME system variable to the location of the JRE or JDK that you are using.</p>
+</li>
+<li>Make sure that your networks and firewalls allow communication on the required ports. See <a href="../agent_firewalls/">Firewall and communication configuration</a>.</li>
+<li>Ensure that there is no limit on the maximum memory size and virtual memory size. For example, on most Linux™ systems, you can run the <code>ulimit -m</code> and <code>ulimit -v</code> commands and ensure that both return the value <code>unlimited</code>. To find out how to remove the limit on the maximum memory size and virtual memory size, see the documentation for the operating system.</li>
+</ul>
+<p>You specify the installation properties in a properties file. The example.agent.install.properties file is provided as an example of a properties file. The example.agent.install.properties file is in the ucd-agent.zip archive.</p>
+<ol>
+<li>Copy the following file from the HCL UrbanCode Deploy server to the target system: installation_folder/opt/tomcat/webapps/ROOT/tools/ucd-agent.zip. </li>
+<li>
+<p>Extract the ucd-agent.zip archive file. </p>
+<p><strong>Note:</strong> If you are installing the agent on IBM z/OS by extracting files to the UNIX file system, you must convert the character encoding for several text-type files in the installation package to IBM-1047 encoding. If you are installing the agent by using SMP/E, you do not have to convert the character encoding. Move the installation files to the z/OS computer, and then extract the files. If the unzip program is not installed on the z/OS computer, use the jar command to extract the files. For instance, type the following text on the command line:</p>
+<p><code>JAVA_HOME/bin/jar xvf ucd-agent.zip</code></p>
+<p>Run the convertFilesForZos.sh script to convert the character encoding of the relevant files to IBM-1047 encoding. After you convert the files, continue with installation.</p>
+<p>If you used the jar command to extract files, add execute permission to convertFilesForZos.sh script first.</p>
+<p><strong>Note:</strong> If you are installing the agent on IBM i, you must run the commands through the IBM Portable Application Solutions Environment for i (PASE for i) shell. Move the installation files to the i system, and then extract the files. Run the ibmi-compatability-fix.sh script to update the installer to use the PASE for i shell. After you run the script, continue with installation.</p>
+</li>
+<li>
+<p>Open the example.agent.install.properties file for editing, or copy the example.agent.install.properties file to a new properties file.</p>
+</li>
+<li>Customize the installation by editing the properties file. If you do not specify a property, the default value is used. Some properties in the example file are commented out by default. For a list of these properties, see <a href="../agent_properties/">Agent installation properties</a>.</li>
+<li>Save the file.</li>
+<li>
+<p>Run the installation file with the install-agent-from-file.bat command on Windows™ or the ./install-agent-from-file.sh command on Linux. Provide the properties file as a command-line argument. On Windows, if the properties file is named install.properties, type the following command:</p>
+<p><code>install-agent-from-file install.properties</code></p>
+</li>
+</ol>
+<p>The installation program installs the agent.</p>
+<p>Start the agent. See <a href="../run_agent/">Starting agents</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../agent_install_ov/">Installing agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/agent_install_silent.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

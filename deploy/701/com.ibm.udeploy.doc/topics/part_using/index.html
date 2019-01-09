@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/part_using/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modeling software deployment", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modeling-software-deployment">Modeling software deployment</h1>
+<p>Modeling software deployment in HCL® UrbanCode™ Deploy includes configuring components and component processes and adding those components to applications. Then, you use processes to deploy the components to environments.</p>
+<p>The general steps in this typical workflow include:</p>
+<ol>
+<li>Import the parts of the application as components. See <a href="../comp_create/">Creating components</a>.</li>
+<li>Create processes that deploy components. See <a href="../comp_process/">Component processes</a>.</li>
+<li>Create an application to group the components together. See <a href="../applications_ch/">Applications</a>.</li>
+<li>Create an application process that runs each component process. See <a href="../app_process_create/">Creating application processes</a>.</li>
+<li>Create one or more environments on which to deploy the components. See <a href="../app_environment_create/">Creating environments</a>.</li>
+<li>Run the application process to deploy the components. See <a href="../deployment_ch/">Deploying applications</a>.</li>
+<li>Take snapshots of working deployments so you can save these arrangements and deploy them to other environments. See <a href="../app_snapshot_create/">Creating snapshots</a>.</li>
+</ol>
+<p>The following diagram illustrates this workflow:</p>
+<p><img alt="A diagram that shows the basic workflow of using HCL UrbanCode Deploy" src="../../images/part_using_a.gif" /></p>
+<ul>
+<li><strong><a href="../comp_ch/">Components</a></strong><br />
+Components represent deployable items along with user-defined processes that operate on them, usually by deploying them.</li>
+<li><strong><a href="../resources_ch/">Resources</a></strong><br />
+A resource is a logical deployment target that typically resolves to an agent and a user-defined construct that is based on the architectural model of HCL UrbanCode Deploy.</li>
+<li><strong><a href="../applications_ch/">Applications</a></strong><br />
+Applications are responsible for bringing together all the components that must be deployed together.</li>
+<li><strong><a href="../inventory_ch/">Inventories</a></strong><br />
+You use different inventories to track installed components and properties in HCL UrbanCode Deploy elements.</li>
+<li><strong><a href="../comp_workflow/">Processes</a></strong><br />
+Processes are automated tasks that run on agents.</li>
+<li><strong><a href="../comp_version_status/">Statuses</a></strong><br />
+Create and apply statuses to track component inventory states or to track component versions in environments and resources.</li>
+<li><strong><a href="../ud_properties_overview/">Properties</a></strong><br />
+Properties are variables that store information about many different elements, including components, environments, processes, and applications. You can also set global properties for the system.</li>
+<li><strong><a href="../tags_ch/">Tags</a></strong><br />
+A tag is a user-defined, shared, short label that you use to classify, view, and conduct operations on objects such as applications, components, agents, and resources.</li>
+</ul>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/part_using.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

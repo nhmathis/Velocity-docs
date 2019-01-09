@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/agentInstall/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing agents from the command line - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing agents from the command line", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-agents-from-the-command-line">Installing agents from the command line</h1>
+<p>Installing an agent from the command line involves running a batch file or shell script and specifying information about how the agent connects to the server or agent relay.</p>
+<ul>
+<li>
+<p>For production environments, create a user account that is dedicated to running the agent on the server where the agent is installed.</p>
+<p><strong>Note:</strong> This user account must have access to all working directories that are used in the processes that this agent runs. If this user does not have access to the working directory specified in a process step, that step fails.</p>
+<p>If you are installing the agent on z/OS®, review <a href="../../../com.ibm.udeploy.admin.doc/topics/security_zos/">Security requirements on the IBM z/OS computers</a>.</p>
+</li>
+<li>
+<p>Make sure that your networks and firewalls allow communication on the required ports. See <a href="../agent_firewalls/">Firewall and communication configuration</a>.</p>
+</li>
+<li>
+<p>Ensure that each computer where you are installing an agent has a supported version of the Java™ Runtime Environment (JRE) or Java developer kit. For more information, see <a href="http://www-01.ibm.com/support/docview.wss?uid=swg27038801">System Requirements for IBM UrbanCode Deploy</a>.</p>
+</li>
+<li>
+<p>If the target computer has an IBM JRE or Java developer kit, update to a supported version of the IBM JRE or Java developer kit.</p>
+</li>
+<li>
+<p>Set the JAVA_HOME system variable to the location of the JRE or JDK that you are using.</p>
+</li>
+<li>Ensure that there is no limit on the maximum memory size and virtual memory size. For example, on most Linux™ systems, you can run the <code>ulimit -m</code> and <code>ulimit -v</code> commands and ensure that both return the value <code>unlimited</code>. To find out how to remove the limit on the maximum memory size and virtual memory size, see the documentation for the operating system.</li>
+</ul>
+<p>Agents can also be installed directly from the HCL UrbanCode Deploy web application, see <a href="../../../com.ibm.udeploy.doc/topics/agent_installremote/">Installing agents remotely</a>.</p>
+<p>For simple evaluations, the administrative user can run the agent on the computer where the server is located. Because agent workloads can be resource-intensive, for production environments, do not install agents on the computer where the HCL UrbanCode Deploy server is located. If you plan to run deployments on several target servers, install a separate agent on each one. If, for example, your testing environment consists of three servers, install an agent on each one. Follow the same procedure for each environment the application uses.</p>
+<p>Each agent requires the appropriate rights to communicate with the HCL UrbanCode Deploy server.</p>
+<p>At a minimum, each agent must have these permissions:</p>
+<ul>
+<li>Open a TCP connection. A JMS agent uses a TCP connection to communicate with the server's JMS port, and a Web agent uses one for its WebSocket connection.</li>
+<li>Open a HTTP(S) connection. The agent must be able to connect to the HCL UrbanCode Deploy user interface to download artifacts from the CodeStation repository.</li>
+<li>Access the file system. Many agents need read/write permissions to items on the file system.</li>
+</ul>
+<p>If the agent communicates with HCL UrbanCode Deploy by using an agent relay, you can install the agent from the command line.</p>
+<ol>
+<li>To install an agent from the command line:</li>
+<li>
+<p>Download and extract the agent installer to the computer to install the agent on. Complete one of the following steps: </p>
+<ul>
+<li>To download the installer, log in to the server and click the <strong>Help</strong> icon <img alt="" src="../../images/help_button.gif" /> at the upper right of any page on the server, and click <strong>Tools</strong>. Then, click <strong>HCL UrbanCode Deploy Agent</strong>, and download and extract the file.</li>
+<li>
+<p>To find the installer on the server with the command line, go to the following location, and copy the file to the target computer: installation_folder/opt/tomcat/webapps/ROOT/tools/ucd-agent.zip</p>
+<p><strong>Note:</strong> If you are installing the agent on IBM z/OS by extracting files to the UNIX™ file system, you must convert the character encoding for several text-type files in the installation package to IBM-1047 encoding. If you are installing the agent by using SMP/E, you do not have to convert the character encoding. Move the installation files to the z/OS computer, and then extract the files. If the unzip program is not installed on the z/OS computer, use the jar command to extract the files. For instance, type the following text on the command line:</p>
+<p><code>JAVA_HOME/bin/jar xvf ucd-agent.zip</code></p>
+<p>Run the convertFilesForZos.sh script to convert the character encoding of the relevant files to IBM-1047 encoding. After you convert the files, continue with installation.</p>
+<p>If you used the jar command to extract files, add execute permission to convertFilesForZos.sh script first.</p>
+<p><strong>Note:</strong> If you are installing the agent on IBM i, you must run the commands through the IBM Portable Application Solutions Environment for i (PASE for i) shell. Move the installation files to the i system, and then extract the files. Run the ibmi-compatability-fix.sh script to update the installer to use the PASE for i shell. After you run the script, continue with installation.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>After you download and expand the installation package, open the installer directory. </p>
+</li>
+<li>
+<p>From this directory, run the install-agent.bat command (Windows™) or install-agent.sh (UNIX, Linux, Mac OS, or IBM z/OS). </p>
+<p><strong>Note:</strong> If you install the agent as a Windows service, the user account must have the following privileges:</p>
+<ul>
+<li>SE_INCREASE_QUOTA_NAME "Adjust memory quotas for a process"</li>
+<li>SE_ASSIGNPRIMARYTOKEN_NAME "Replace a process level token"</li>
+<li>
+<p>SE_INTERACTIVE_LOGON_NAME "Logon locally"
+The HCL UrbanCode Deploy agent installer is displayed and prompts you to provide the following information. You can accept the default values (displayed in brackets) by pressing Enter. If two options are given, such as <code>Y/n</code>, the uppercase option is the default value. Depending on the options that you select, different prompts display.</p>
+</li>
+<li>
+<p>For all agents, provide values for the following prompts: </p>
+<ul>
+<li>
+<p><strong><em>*Enter the directory where agent should be installed.</em></strong>*</p>
+<p>For example, enter <code>C:\Program Files\UCDeploy-agent</code> (Windows™) or <code>/opt/IBM/ucd/agent</code> (UNIX™). If the directory does not exist, enter Y to instruct the Installer to create it for you. If you enter an existing directory, the program gives you the option to upgrade the agent. For information about upgrading, see <a href="../upgradeAgents/">Upgrading agents</a>.</p>
+<p><strong>Note:</strong> Do not use any shell expansions or abbreviations, such as the tilde character (<code>~</code>).</p>
+<p>The agent directory length must not exceed 38 characters on IBM® z/OS®.</p>
+</li>
+<li>
+<p><strong><em>*Please enter the home directory of the JRE/JDK used to run this agent.</em></strong>*</p>
+<p>If Java™ is already installed, HCL® UrbanCode™ Deploy suggests the Java™ location as the default value. To accept the default value, press Enter. Otherwise, override the default value, and enter the correct path.</p>
+</li>
+<li>
+<p><strong><em>*Does this agent use web or JMS communication?</em></strong>*</p>
+<p>The default value is <code>web</code>. Introduced with HCL® UrbanCode™ Deploy version 7.0.0, Web-type agents use WebSockets for communication instead of JMS technology. Web-type agents are more scalable than the older agent type, now called JMS agents. You can use both types of agents in a single installation.</p>
+</li>
+<li>
+<p><strong><em>*Will the agent connect to an agent relay instead of directly to the server?</em></strong>*</p>
+<p>The default value is <code>N</code>. To configure a connection to an agent relay instead of a connection to the server, specify Y. If you connect directly to a server, complete step <a href="#server_direct">3.b</a>. If you connect to an agent relay, complete step <a href="#agent_relay">3.c</a>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If the agent connects directly to the server, provide values for the following prompts: </p>
+<ul>
+<li>
+<p><strong> </strong>Enter the full URI for the server this agent will connect to.****</p>
+<p>If you are installing a Web-type agent, specify the secure WebSocket connection URI. The format is <code>wss://hostname:port</code>. The default value is <code>wss://localhost:7919</code>.</p>
+</li>
+<li>
+<p><strong><em>*Enter the hostname or address of the server the agent will connect to.</em></strong>*</p>
+<p>If you are connecting the agent to a high-availability cluster of servers, specify one server in the cluster here and add the other servers as failover connections. Do not specify the host name of the load balancer. The default value is <code>localhost</code>.</p>
+</li>
+<li>
+<p><strong><em>*Enter the agent communication port for the server</em></strong>*</p>
+<p>If you are installing a JMS agent, this is the port the JMS agent uses to communicate with the server. The default value is <code>7918</code>.</p>
+</li>
+<li>
+<p><strong><em>*Do you want to configure another failover server connection?</em></strong>*</p>
+<p>The default value is <code>N</code>. If you are using a high-availability cluster of servers, specify a failover connection to each other server in the cluster.</p>
+<p><strong>Restriction:</strong> The failover list must contain only servers or only agent relays. An agent can not have both servers and agent relays in its failover list.</p>
+<p>If you specify <code>Y</code>, you give information for one or more additional servers. When the agent starts, it contacts one of the specified servers at random. If that server fails, it switches to another server from the list. For more information, see <a href="../configure_agent_failover/">Configuring agents for failover</a>.</p>
+<p>To configure a failover server, type <code>y</code> and then press Enter.</p>
+<ul>
+<li>
+<p><strong><em>*Enter the hostname or address of the server the agent will connect to.</em></strong>*</p>
+<p>The default value is <code>localhost</code>.</p>
+</li>
+<li>
+<p><strong><em>*Enter the agent communication port for the server.</em></strong>*</p>
+<p>The default value is <code>7918</code>.</p>
+</li>
+<li>
+<p><strong><em>*Do you want to configure another failover server connection?</em></strong>*</p>
+<p>The default value is <code>N</code>. To specify another failover server, press <code>Y</code>.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>If the agent connects to an agent relay, provide values for the following prompts: </p>
+<ul>
+<li>
+<p><strong><em>*Enter the hostname or address of the agent relay the agent will connect to.</em></strong>*</p>
+<p>Enter the host name or IP address of the agent relay. Specify the value that you used when you installed the agent relay.</p>
+</li>
+<li>
+<p><strong><em>*Enter the agent communication port for the agent relay.</em></strong>*</p>
+<p>Enter the port that the agent uses for JMS-based communications with the agent relay. The default value is <code>7916</code>.</p>
+</li>
+<li>
+<p><strong><em>*Do you want to configure another failover relay connection?</em></strong>*</p>
+<p>The default value is <code>N</code>. If you specify <code>Y</code>, you give information for one or more additional relays. When the agent starts, it contacts one of the specified relays at random. If that relay fails, it switches to another relay from the list. For more information, see <a href="../configure_agent_failover/">Configuring agents for failover</a>.</p>
+<p><strong>Restriction:</strong> The failover list must contain only servers or only agent relays. An agent can not have both servers and agent relays in its failover list.</p>
+<p>To configure a failover server, type <code>y</code> and then press Enter.</p>
+<ul>
+<li>
+<p><strong><em>*Enter the hostname or address of the agent relay the agent will connect to.</em></strong>*</p>
+<p>You must provide the hostname or address of the agent relay.</p>
+</li>
+<li>
+<p><strong><em>*Enter the agent communication port for the agent relay.</em></strong>*</p>
+<p>The default value is <code>7916</code>.</p>
+</li>
+<li>
+<p><strong><em>*Do you want to configure another failover agent relay connection?</em></strong>*</p>
+<p>The default value is <code>N</code>. To specify another failover server, press <code>Y</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><em>*Enter the hostname or address of the HTTP proxy server for the agent relay.</em></strong>*</p>
+<p>The default value is the hostname or address of the agent relay that you provided.</p>
+</li>
+<li>
+<p><strong><em>*Enter the HTTP proxy port for the agent relay.</em></strong>*</p>
+<p>Enter the port that the agent uses for HTTP communications with the agent relay. The default value is <code>20080</code>.</p>
+</li>
+<li>
+<p><strong><em>*Do you want to disable HTTP Failover Handling?</em></strong>*</p>
+<p>The default value is <code>N</code>. You must disable HTTP failover handling if the relay is behind a firewall and accessed through a load balancer. To disable HTTP failover handling, press <code>Y</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>For JMS agents, provide values for the following prompts: </p>
+<ul>
+<li>
+<p><strong><em>*Enable mutual (two-way) authentication with SSL for server/agent JMS communication?</em></strong>*</p>
+<p>The default value is <code>N</code>.</p>
+<p>This setting must match the setting of the server. If you use mutual authentication, you must manually exchange a key between the server and each JMS agent or agent relay. For more information about this option, see <a href="../ssl_mutual_auth/">Configuring mutual authentication</a>.</p>
+<p><strong>Note:</strong> Mutual authentication is not used with Web agents.</p>
+</li>
+<li>
+<p><strong><em>*Disable end-to-end encryption for server/agent JMS communication?</em></strong>*</p>
+<p>The default value is <code>N</code>.</p>
+<p>To enable end-to-end encryption, the agent installer must connect to the HCL® UrbanCode™ Deploy server via HTTPS to set up keys. For more information about this option, see <a href="../ssl_addl_security_2/">Ensuring end-to-end JMS encryption</a>.</p>
+</li>
+<li>
+<p><strong><em>*Enable the agent to verify the server HTTPS certificate?</em></strong>*</p>
+<p>The default value is <code>N</code>.</p>
+<p>If enabled, you must import the server certificate to the JRE keystore on the agent. For more information about this option, see <a href="../ssl_addl_security/">Enabling server identity verification</a>.</p>
+</li>
+<li>
+<p><strong><em>*Enter the full web URL for the central HCL® UrbanCode™ Deploy server.</em></strong>*</p>
+<p>Enter the URL with the protocol and port number, as shown in the following example: https://server.example.com:8443. This URL is required to enable end-to-end JMS encryption. The server must be running when you enter the URL. For information on starting the server, see <a href="../run_server/">Starting and stopping the server</a>.</p>
+</li>
+<li>
+<p><strong><em>*Enter the name for this agent.</em></strong>*</p>
+<p>Enter a unique name. The server uses this name to identify this agent. Names are limited to 256 characters and cannot be changed.</p>
+</li>
+<li>
+<p><strong><em>*Enter teams (and types) to add this agent to, separated by commas.</em></strong>*</p>
+<p>The default value is <code>None</code>.</p>
+<p>Agents can be added to teams the first time they connect to the server. The agent is assigned to the specific teams the first time that it connects to the server. Separate multiple teams by commas. Trailing spaces are ignored. Team names that do not exist are also ignored. To specify the agent's security type for a team, provide the team and security type in the following format: team:type.</p>
+</li>
+<li>
+<p><strong><em>*Do you want to install the Agent as Windows service?</em></strong>*</p>
+<p>This parameter applies only to Windows™. The default value is <code>N</code>. When installed as a service, HCL® UrbanCode™ Deploy captures only the value for the PATH variable. Values that are captured during installation are always used, even if you change them later. For recent versions of Windows™, you must run the command as Administrator.</p>
+</li>
+<li>
+<p><strong><em>*Enter the full web URL for the central HCL® UrbanCode™ Deploy server.</em></strong>*</p>
+<p>Enter the URL with the protocol and port number, as shown in the following example: https://server.example.com:8443. This URL is required to enable end-to-end JMS encryption. The server must be running when you enter the URL. For information on starting the server, see <a href="../run_server/">Starting and stopping the server</a>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>For Web and JMS agents, provide values for the following prompts: </p>
+<ul>
+<li>
+<p><strong><em>*Enter the name for this agent.</em></strong>*</p>
+<p>Enter a unique name. The server uses this name to identify this agent. Names are limited to 256 characters and cannot be changed.</p>
+</li>
+<li>
+<p><strong><em>*Enter teams (and types) to add this agent to, separated by commas.</em></strong>*</p>
+<p>The default value is <code>None</code>.</p>
+<p>Agents can be added to teams the first time they connect to the server. The agent is assigned to the specific teams the first time that it connects to the server. Separate multiple teams by commas. Trailing spaces are ignored. Team names that do not exist are also ignored. To specify the agent's security type for a team, provide the team and security type in the following format: team:type.</p>
+</li>
+<li>
+<p><strong><em>*Do you want to install the Agent as Windows service?</em></strong>*</p>
+<p>This parameter applies only to Windows™. The default value is <code>N</code>. When installed as a service, HCL® UrbanCode™ Deploy captures only the value for the PATH variable. Values that are captured during installation are always used, even if you change them later. For recent versions of Windows™, you must run the command as Administrator.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>For IBM z/OS, provide values for the following prompts: </p>
+<ul>
+<li>
+<p><strong>Enter the high-level qualifier to install product data sets. [Default: BUZ]</strong></p>
+<p>Specify the high-level qualifier to install product data sets. If the agent is installed by using SMP/E, the high-level qualifier must be the same qualifier that was used in the SMP/E installation.</p>
+</li>
+<li>
+<p><strong>Enter the volume serial to install product data sets.</strong></p>
+<p>Specify the volume serial number to install product data sets. If the agent is installed by using SMP/E, the volume serial number must be the same as that was used in the SMP/E installation.</p>
+</li>
+<li>
+<p><strong>Enter the URL of the HCL® UrbanCode™ Deploy server. [Default: https://hostname:8443/]</strong></p>
+<p>Enter the URL with the protocol and port number. The default value is generated using the input hostname and the default port 8443.</p>
+</li>
+<li>
+<p><strong>Enter the authentication token for the UrbanCode Deploy server. You can modify the token later in installed.properties file. [Default: empty]</strong></p>
+<p>Specify an authentication token to be used to import z/OS® component versions. To create a token in HCL® UrbanCode™ Deploy, click <strong>Settings</strong> > <strong>Tokens</strong> > <strong>Create Token</strong>. The token is stored in the installed.properties file and can be updated when a new token must be used. The token is encrypted after the first time it is used.</p>
+</li>
+<li>
+<p><strong>Do you want to store versions in the UCD server CodeStation? If you choose No, versions will be stored in local directory. Y,n [Default: Y]</strong></p>
+<p>Storing versions in the local directory keeps the version artifacts in the same mainframe environment where the versions are taken from. Storing versions in CodeStation copies artifacts to the artifact repository, typically on a network storage drive or in a directory in the server installation location. For more information, see <a href="../codestation_choose_plan/">Choosing a CodeStation and planning storage</a>.</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>When you install on IBM z/OS by using downloaded .zip file, submit a job to load the agent data sets. </p>
+<p>Locate the job JCL at agent install dir/mvs/BUZEXPD. The JCL, except the job parameter, has already been customized based on your input. Edit and submit the job to load the agent data sets. For example, use the following command in OMVS to edit or submit the JCL:</p>
+<p><code>oedit agent install dir/mvs/BUZEXPD
+submit agent install dir/mvs/BUZEXPD</code></p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../agent_install_ov/">Installing agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/agentInstall.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

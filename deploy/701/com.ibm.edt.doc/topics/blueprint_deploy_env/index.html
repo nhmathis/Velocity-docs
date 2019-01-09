@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_deploy_env/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Deploying components with blueprints - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Deploying components with blueprints", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="deploying-components-with-blueprints">Deploying components with blueprints</h1>
+<p>Add components to a blueprint so that when you provision environments from the blueprint, the engine automatically installs the components.</p>
+<ul>
+<li>On the HCL® UrbanCode™ Deploy server, create an application, and add components to it.</li>
+<li>Create a blueprint for the target cloud, including adding virtual images:<ul>
+<li><a href="../blueprint_edit_softlayer/">Modeling environments for SoftLayer</a></li>
+<li><a href="../blueprint_edit_ec2/">Modeling environments for Amazon Web Services</a></li>
+<li><a href="../blueprint_edit_vc/">Modeling environments for VMware vCenter</a></li>
+<li><a href="../blueprint_edit_vra/">Modeling environments for VMware vRealize Automation</a></li>
+<li><a href="../blueprint_edit_os/">Modeling environments for OpenStack and OpenStack-based clouds</a></li>
+<li><a href="../blueprint_edit_azure/">Modeling environments for Microsoft Azure</a>.</li>
+<li><a href="../blueprint_edit_google_cloud/">Modeling environments for Google Cloud Platform</a></li>
+</ul>
+</li>
+</ul>
+<p>When you include components in the blueprint, the blueprint appears as an application process on the HCL UrbanCode Deploy server. Then, you can apply the blueprint to an environment by running the application process or by creating an environment. When you provision the environment, you create agents on images that contain HCL UrbanCode Deploy that deploy the components. If you assign the same tag to each component that you deploy to an environment, you can quickly add all the components to the blueprint.</p>
+<p>You can also deploy complete applications by using existing application processes. See <a href="../blueprint_deploy_app/">Deploying applications with blueprints</a>.</p>
+<ol>
+<li>
+<p>In HCL UrbanCode Deploy, create component processes that deploy components. If you add components to the blueprint by using tags, assign each deployment process the same name. These component processes must run independently of application processes. You can adapt existing component processes to run outside of application processes.</p>
+<p><strong>Note:</strong> These component processes cannot access properties that are outside the components, such as application properties and environment properties.</p>
+</li>
+<li>
+<p>If the component processes require information about the environment, such as the locations of other systems, create component environment properties to represent that information. When you provision the environment, the blueprint design server provides values for these properties. You can use only component environment properties in this way, and no other types of property.</p>
+</li>
+<li>If you provision an environment that contains multiple components of the same application, create a new tag and add it to each component. If you add this tag to an image in the blueprint designer, then the blueprint designer assigns all components that contain the tag to the image.</li>
+<li>
+<p>Log in to the blueprint designer as a user who has the permissions to create and edit blueprints and to access components. </p>
+<p><strong>Note:</strong> The components that you can see in the blueprint editor depend on your permissions. If your blueprint design server account is connected to an account on the HCL UrbanCode Deploy server, you see the components that you have access to on that server. If your blueprint design server account is not connected to an account on the HCL UrbanCode Deploy server, you see the components that are associated with the token or user account that is on the <strong>System Settings</strong> page.</p>
+</li>
+<li>
+<p>Open the blueprint that you created for the target cloud. </p>
+</li>
+<li>
+<p>Add components to the virtual images in the blueprint: </p>
+<ol>
+<li>From the palette, in the <strong>Component</strong> drawer, drag a component or tag to a virtual image in the blueprint. If you drag a tag to a virtual image, the blueprint designer assigns all components that contain this tag to the image.</li>
+<li>
+<p>In the Choose Application window, specify the application, as in the following image. The window shows a check box for each application that the component or tag currently belongs to.</p>
+<p><img alt="Specifying the application that a component belongs to" src="../../images/blueprint_deploy_env_a.gif" /></p>
+<p>Each additional component that you add to the blueprint must be part of the same application. If you add a component that is not part of the application or if a tag contains a component that is not part of the application, the editor prompts you to add the component to the application.</p>
+</li>
+<li>
+<p>Accept the default values for the <strong>Application Process</strong> and <strong>Application Snapshot</strong> lists. </p>
+</li>
+<li>In the <strong>Base Resource Group</strong> list, select the resource group that contains the resources in the blueprint. If no resource groups are on the server, select <strong>Default</strong> to create a resource group.</li>
+<li>In the <strong>Team</strong> list, select the team to assign to the component or component tag. </li>
+<li>
+<p>Click <strong>OK</strong>. </p>
+<p>The <code>resource_tree</code> resource is added to the blueprint. This resource represents additions to the resource tree on the HCL UrbanCode Deploy server. This resource is displayed only in the source view, not in the diagram view. The resource contains information about the connection to the server and what updates the blueprint makes to the server. The following code is an example of the <code>resource_tree</code> resource, which shows that you specified an application that is named <code>JPetStore</code>:</p>
+<p><code>resource_tree:
+  type: IBM::UrbanCode::ResourceTree
+  properties: 
+     urbancode_deploy_url: { get_param: ucd_server_url }
+     username: { get_param: ucd_user }
+     password: { get_param: ucd_password }
+     team_mappings: 
+     application: JPetStore
+     base_resource_group: JPetStore agents</code></p>
+<p>This resource includes properties that specify the location and credentials for the HCL UrbanCode Deploy server. You can change these properties in the source code, or you can select the component in the diagram view and set the properties on the left side of the page.</p>
+<p>Also, two resources are added to the blueprint for each component. The resource of the type <a href="../../../com.ibm.edt.heat.reference.doc/topics/res_ibm_urbancode_softwaredeploy_ucd/">IBM::UrbanCode::SoftwareDeploy::UCD</a> represents the deployment instance of the component or tag, including the version of the component and a reference to the server on which the component is deployed. The resource of the <a href="../../../com.ibm.edt.heat.reference.doc/topics/res_ibm_urbancode_softwareconfig_ucd/">IBM::UrbanCode::SoftwareConfig::UCD</a> type represents the configuration properties for the component or tag, such as its application and any properties that it has.</p>
+<p>Also, the editor adds a resource that represents the HCL UrbanCode Deploy agent, which is installed automatically on each virtual image. The resource is named either <code>ucd_agent_install_win</code> or <code>ucd_agent_install_linux</code>, depending on the operating system that is installed on the virtual image. You can edit the code that is embedded in this resource to change how the agent is installed. To learn more about options that are available when the agent is installed, see <a href="../blueprint_agent_options/">Options for deploying agents</a>. The blueprint designer automatically detects the operating system based on the image name.</p>
+</li>
+<li>
+<p>Specify the version of each component or tag in either the diagram editor or the blueprint source code: </p>
+<ul>
+<li>If you added a component to the image, from the diagram editor, in the lower left of an image, click <strong>LATEST</strong>, which is the most recent component version. From the Choose Component Version dialog box, select the version of the component, and then click <strong>OK</strong>.</li>
+<li>
+<p>If you added a component to the image, from the source code view, in the deployment instance resource, in the <code>version</code> property, specify the version of each component. For example, the following code specifies version 1.0 of the <code>JPetStore-APP</code> component.</p>
+<p><code>JPetStore-APP:
+  type: IBM::UrbanCode::SoftwareDeploy::UCD
+  properties:
+    apply_config: { get_resource: JPetStore-APP_sw_config }
+    server: basic_compute_node
+    **version: "1.0"**
+    agent_timeout: "360"</code></p>
+<p>The component version name is in double quotation marks. To use the most recent version of a component, specify <code>"LATEST"</code>.</p>
+</li>
+<li>
+<p>If you added a tag to the image, by default the latest version of each component is deployed. You can also specify the version of each component that is associated with a tag. In the source code view, in the deployment instance resource, in the <code>version</code> property of the tag, specify the version of each component. For example, the following code specifies the version for the components on the <code>JPetStoreComp</code> tag. The process deploys version 2.1 of the <code>JPetStore-APP</code> component, version 2.1.1 of the <code>JPetStore-DB</code> component, and the latest version of all other components.</p>
+<p><code>JPetStoreComp:
+    type: IBM::UrbanCode::SoftwareDeploy::UCD
+    properties:
+      apply_config: { get_resource: JPetStoreComp_sw_config }
+      server: ci-toolchain-landscaper-6_1_3
+      **version: "Latest, JPetStore-APP: 2.1, JPetStore-DB: 2.1.1" **
+      agent_timeout: "360"</code></p>
+<p>If you specify a component version that does not exist, the component version is deployed.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>For each component or tag, specify the component process to run in either the diagram editor or the blueprint source code: </p>
+<ul>
+<li>From the diagram editor, in the lower center of an image, click the process icon <img alt="" src="../../images/icons/deploy.gif" />. (The process icon name is the name of one process that was created for the component.) From the Choose Component Process dialog box, select the process to run, and then click <strong>OK</strong>.</li>
+<li>
+<p>From the source code view, in the configuration property resource, in the <code>component_process</code> property, specify the component process to run. The following example specifies the <code>Deploy application component</code> component process of the <code>JPetStore-APP</code> component.</p>
+<p><code>JPetStore-APP_sw_config:
+  type: IBM::UrbanCode::SoftwareConfig::UCD
+  properties: 
+    name: JPetStore-APP
+    **component\_process: Deploy application component**
+    ucd_server_url: { get_param: ucd_server_url } 
+    ucd_username: { get_param: ucd_user }
+    ucd_password: { get_param: ucd_password }
+    application: { get_attr: [resource_tree, application_name] }
+    environment_name: { get_attr: [resource_tree, environment_name] }</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>If the components contain component environment properties, specify values for those properties in the <code>input</code> section of the IBM::UrbanCode::SoftwareConfig::UCD resource. Component environment properties one of two types of properties that you can pass from a blueprint to the HCL UrbanCode Deploy in this way.</p>
+<p><strong>Note:</strong> If you added a tag to the image, you cannot define component environment properties for the individual components that contain the tag.</p>
+<p>For example, the following code shows component environment properties that are named <code>ServerName</code> and <code>IntegerValue</code>:</p>
+<p><code>ComponentA_config:
+  type: IBM::UrbanCode::SoftwareConfig::UCD
+  properties: 
+    name: ComponentA
+    component_process: deploy
+    ucd_server_url: { get_param: ucd_server_url } 
+    ucd_username: { get_param: ucd_user }
+    ucd_password: { get_param: ucd_password }
+    application: { get_attr: [resource_tree, application_name] }
+    inputs:
+      ServerName : { get_param: Referenced_Image_server_name }
+      IntegerValue : 25</code></p>
+<p>The engine passes these properties to the server at provisioning time. You can use these properties in processes. For example, to refer to the <code>ServerName</code> property in a component process, use this code: <code>${p:environment/ServerName}</code>.</p>
+</li>
+<li>
+<p>If the component maps to a WebSphere® Application Server cell and you use the WebSphere Application Server - Deploy plug-in, add the <code>subgroup</code> property to the <code>properties</code> section and set the <code>subgroup</code> property to the name of the cell. For example, the following code shows a subgroup property that is set to <code>WebSphereCell</code>:</p>
+<p><code>ComponentA_config:
+  type: IBM::UrbanCode::SoftwareConfig::UCD
+  properties: 
+    subgroup: WebSphereCell</code></p>
+<p>After the automatic discovery process runs, the component is nested in the resource tree under the WebSphere Application Server cell resource. To learn more about automatic discovery, see <a href="../../../com.ibm.udeploy.doc/topics/resources_import_was/">Importing resources from WebSphere Application Server</a>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>If the image that contains your HCL UrbanCode Deploy components is attached to multiple networks, change the agent name. To ensure that you can access the agent, you can modify the blueprint to use this agent name pattern: <code>application\_name.environment\_name.image\_key</code>. To customize the provisioned image name and the agent name, you can modify the image's key parameter value in the blueprint properties.</p>
+<ol>
+<li>
+<p>In the <code>IBM::UrbanCode::SoftwareDeploy::UCD</code> resource, add the <code>agent_naming_scheme</code> property.The resource resembles the following code:</p>
+<p><code>ComponentName:
+    type: IBM::UrbanCode::SoftwareDeploy::UCD
+    properties:
+      apply_config: { get_resource: ComponentName_sw_config }
+      server: server_key
+      version: LATEST
+      agent_timeout: "360"
+      **agent\_naming\_scheme:**</code></p>
+</li>
+<li>
+<p>From the blueprint diagram, select the component.</p>
+</li>
+<li>In the component properties, for <strong>Agent Naming Scheme</strong>, provide the following value: server-name.</li>
+<li>Select the image and modify the <strong>Key</strong> value.</li>
+<li>If you add multiple components to an image, repeat these steps for each component.</li>
+<li>To connect the agents on the virtual images to an agent relay, specify the URL of the agent relay in the ucd_relay_url parameter. </li>
+</ol>
+<p>By default, the blueprint design server installs an agent on each virtual machine in the environment. By default, these agents connect directly to the server. If the server is behind a firewall, inside a VPN, or otherwise inaccessible, you must connect the agents to an agent relay.</p>
+<p>For example, if the URL of the agent relay is <code>http://relay.example.com</code>, the parameter looks like the following code:</p>
+<p><code>ucd_relay_url:
+    type: string
+    default: "http://relay.example.com"</code></p>
+</li>
+<li>
+<p>Specify the deployment order of the components. </p>
+<p><strong>Note:</strong> </p>
+<ul>
+<li>If you added a tag to the image, you cannot define the deployment order of the individual components that contain the tag. The deployment order is determined by a database query, and the components are usually deployed in alphabetical order of component name.</li>
+<li>If your blueprint contains VMware vRealize Automation Enterprise software components, all vRealize Automation components deploy before the HCL UrbanCode Deploy components deploy. You can specify separate deployment orders for each type of component.</li>
+<li>
+<p>From the <strong>Policies</strong> drawer of the Palette, drag the <strong>Deployment Sequence</strong> resource to the components, starting with the component to deploy first. Because the deployment sequence is modeled as a tree, and not a sequential list, more than one component can have the same deployment sequence number. Subsequent components are not deployed until all previous components are deployed. Components without deployment sequence numbers are deployed asynchronously. Numbers are displayed on the components to indicate the deployment order, as shown in the following figure:</p>
+<p><img alt="An image on a blueprint; the components on the image have numbers that indicate which components are deployed first and which component is deployed second" src="../../images/blueprint_deploy_env_b.gif" /></p>
+</li>
+<li>
+<p>When you drag the <strong>Deployment Sequence</strong> resource to other components, specify the order for the components by selecting the number on the component. In the following figure, the cursor is dragging the <strong>Deployment Sequence</strong> resource over a component. The component shows numbers that indicate the potential deployment order for the component. The number on which you release the <strong>Deployment Sequence</strong> resource specifies its deployment order.</p>
+<p><img alt="Dragging the Deployment Sequence resource to a component; the numbers on the component represent the potential deployment order positions" src="../../images/blueprint_deploy_env_c.gif" /></p>
+</li>
+<li>
+<p>To edit the order of all components, click the deployment order number of one component, use the arrow push buttons to change the order in the Deployment Sequence window, and then click <strong>Save</strong>. The following figure shows the Deployment Sequence window:</p>
+<p><img alt="Editing the order for all components in the Deployment Sequence window" src="../../images/blueprint_deploy_env_d.gif" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Save the blueprint. </p>
+</li>
+</ol>
+<p>The blueprint appears as an application process on the HCL UrbanCode Deploy server. You can use this blueprint through the application process, just like you use any application process on the server. For example, you can apply the blueprint to an existing environment by running the application process. For more information, see <a href="../env_provision_ov/">Provisioning cloud environments</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_edit_clouds/">Modeling environments for clouds through OpenStack Heat</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_deploy_env.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

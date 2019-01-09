@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/ISPF_client_gateway_req/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>ISPF client gateway requirements - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "ISPF client gateway requirements", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ispf-client-gateway-requirements">ISPF client gateway requirements</h1>
+<p>HCL® UrbanCode™ Deploy uses the z/OS® Time Sharing Option-Interactive System Productivity Facility (TSO-ISPF) gateway when it imports and deploys component versions.</p>
+<p>You must install several PTF Services for the ISPF gateway to function correctly with the z/OS deployment tools. See the following technical support document for more information about: <a href="http://www.ibm.com/support/docview.wss?uid=swg27042018">http://www.ibm.com/support/docview.wss?uid=swg27042018</a>.</p>
+<p>If you plan to run multiple deployments concurrently, install the following ISPF Client Gateway APAR corrections:</p>
+<ul>
+<li>UA77460 - z/OS 1.13</li>
+<li>UA77461 - z/OS 2.1</li>
+</ul>
+<p>After you install the z/OS agent, customize and verify TSO/ISPF client gateway by completing these steps:</p>
+<ol>
+<li>Customize the configuration if the TSO/ISPF client gateway is not installed in the default location.<ol>
+<li>If the TSO/ISPF client gateway is not installed to the default location, the directory to the ISPF gateway executable file must be included in the PATH environment variable in OMVS. The default location of the TSO/ISPF client gateway is the /usr/lpp/ispf/bin directory.</li>
+<li>If the ISP library is not installed in the default high-level qualifier (ISP), the ISPF.conf file must be updated with the correct high-level qualifier. The ISPF.conf file that HCL UrbanCode Deploy uses is in the agent install dir/conf/toolkit directory.</li>
+</ol>
+</li>
+<li>
+<p>To test the TSO/ISPF client gateway, go the agent install dir/bin directory, and run this command:</p>
+<p><code>startispf.sh time</code></p>
+<p>If the command succeeds, the result of the TSO TIME command is displayed.</p>
+</li>
+<li>
+<p>Customize the ISPF.conf file to run your own programs or REXX.</p>
+<p>If you plan to run programs or REXX executable files during a deployment by calling a TSO/ISPF command, add the program or REXX executable libraries to the concatenations in the ISPF.conf file. In the ISPF.conf file, make load-module data sets available in the ISPLLIB concatenation, and make executable files available in the SYSPROC or SYSEXEC concatenations. For example, the following ISPF.conf file concatenations load modules for programs and REXX executable files. The modules that are loaded are MYPROJ.MYCLIST, MYPROJ.MYREXX, and MYPROJ.LOAD</p>
+<ul>
+<li>
+<p>sysproc=ISP.SISPCLIB,hlq.SUCDEXEC,MYPROJ.MYCLIST</p>
+</li>
+<li>
+<p>sysexec=ISP.SISPEXEC,MYPROJ.MYREXX</p>
+</li>
+<li>
+<p>ispmlib=ISP.SISPMENU,hlq.SBUZMENU</p>
+</li>
+<li>
+<p>isptlib=ISP.SISPTENU</p>
+</li>
+<li>
+<p>ispplib=ISP.SISPPENU</p>
+</li>
+<li>
+<p>ispslib=ISP.SISPSLIB</p>
+</li>
+<li>
+<p>ispllib=ISP.SISPLOAD,MYPROJ.LOAD
+The ISPF.conf file that HCL UrbanCode Deploy uses is in the agent install dir/conf/toolkit directory.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../zos_installing_ov/">Installing the z/OS agent</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/ISPF_client_gateway_req.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

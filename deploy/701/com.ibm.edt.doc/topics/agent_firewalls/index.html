@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/agent_firewalls/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Firewall and communication configuration - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Firewall and communication configuration", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="firewall-and-communication-configuration">Firewall and communication configuration</h1>
+<p>Before you install the server, you must ensure that servers, agents, and other systems can connect to each other through your networks and firewalls.</p>
+<p>The following diagram shows the main default ports that are involved in communication between agents, agent relays, and the server.</p>
+<p><img alt="A diagram of the ports that agents, agent relays, and servers use to communicate; these are the same posts in the lists above" src="../../../com.ibm.udeploy.doc/images/arch_agents_a.png" /></p>
+<p>The following diagram shows the default port numbers that HCL® UrbanCode™ Deploy uses for communication. Most of these ports can change depending on your choices at installation time. The following diagram is only a summary of the defaults.</p>
+<p><img alt="A topology that shows the ports that each part of HCL UrbanCode Deploy uses for communication" src="../../../com.ibm.udeploy.install.doc/images/urbancode_deployports700.png" /></p>
+<p>The server must have network access to the following ports:</p>
+<ul>
+<li>The server must be able to initiate connections to the license server. The default port for Rational® Common Licensing is 27000. However, in some situations, the server uses different ports to connect to the license server. For more information, or to change the port, see <a href="http://www-01.ibm.com/support/docview.wss?uid=swg21454410">http://www-01.ibm.com/support/docview.wss?uid=swg21454410</a>.</li>
+<li>The server must be able to accept connections from agents and agent relays. By default, agents and relays connect on port 7918.</li>
+<li>Users and agents that do not use a relay must be able to initiate connections to the server through HTTP or HTTPS. The default ports are 8080 for HTTP and 8443 for HTTPS.</li>
+<li>Installing agents remotely on Linux™ or UNIX™ systems requires the server to initiate connections to the SSH port of the agent computer. The default port for SSH is 22.</li>
+<li>Remote discovery of agents requires the server to initiate connections to port 22 for Linux agents and port 135 for Windows™ agents. See <a href="../../../com.ibm.udeploy.doc/topics/agent_discovery/">Discovering agents automatically</a>.</li>
+<li>The server might require access to other ports if you connect to external systems, such as an SMTP server for notifications or to cloud systems that use virtual system patterns, like PureApplication® System or IBM® Cloud Orchestrator.</li>
+</ul>
+<p>As shown in the diagram, agents can connect to servers directly or through agent relays. You must ensure that the agent communication can get to the server through any firewalls or other limitations.</p>
+<p>If your agents connect to the server through an agent relay, you must configure your networks and firewalls to allow the following communication. In this case, you install the agent relay on the same network and the same side of the firewall as the agents.</p>
+<ul>
+<li>Agents must be able to open network connections on the agent relay JMS port. The default agent relay JMS port is 7916.</li>
+<li>Agents must be able to open network connections on the agent relay HTTP proxy port. The default agent relay HTTP proxy port is 20080.</li>
+<li>Agents must be able to open a network connection to the Agent Relay CodeStation proxy port (HTTP_proxy + 1, by default 20081).</li>
+<li>Installing agents remotely on Windows systems requires the WinRS agent to initiate connections on ports 80 and 5985 on the target computer.</li>
+<li>If you are using artifact caching as described in <a href="../../../com.ibm.udeploy.doc/topics/arch_agents/">Agent security and communication</a>, agents must be able to open network connections on the agent relay artifact caching port. The agent relay artifact caching port is 20081.</li>
+<li>Agents run steps from automation plug-ins and source configuration plug-ins. Some of these steps require that agents create network connections to an external system.</li>
+<li>Agent relays must be able to open network connections on the server JMS port. The default server JMS port is 7918.</li>
+<li>Agent relays must be able to open network connections on the server HTTP and HTTPs ports. The default HTTP(S) ports are 8080 and 8443. It is not possible to reverse the direction of this connection.</li>
+</ul>
+<p>For example, if your server is on an internal network and your agents are on an external network such as a public cloud, you install the agent relay on the cloud and have the agents connect to the agent relay. Then, the agent relay connects through the firewall to the internal network.</p>
+<p>If your agents connect directly to the server, you must configure your networks and firewalls to allow the following communication:</p>
+<ul>
+<li>Agents must be able to open network connections on the server JMS port. The default server JMS port is 7918.</li>
+<li>Agents must be able to open network connections on the server HTTP and HTTPS ports. The default HTTP(S) ports are 8080 and 8443.</li>
+<li>Agents run steps from automation plug-ins and source configuration plug-ins. Some of these steps require that agents create network connections to an external system.</li>
+</ul>
+<p>For more information on communication between the server, agents, and agent relays, see <a href="../../../com.ibm.udeploy.doc/topics/arch_agents/">Agent security and communication</a> and <a href="../../../com.ibm.udeploy.doc/topics/arch_agent_relays/">Agent relays</a>.</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/agent_firewalls.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

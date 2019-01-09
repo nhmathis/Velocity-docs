@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/ref_create_properties/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Step properties the properties element - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Step properties: the properties element", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="step-properties-the-properties-element">Step properties: the <code>properties</code> element</h1>
+<p>The <code>properties</code> element is a container for properties, which are defined with the <code>property</code> tag.</p>
+<p>Each step has a single <code>properties</code> element; a <code>properties</code> element can contain any number of <code>property</code> child elements.</p>
+<p>A <code>property</code> tag has a mandatory <code>name</code> attribute, optional <code>required</code> attribute, and two child elements, <code>property-ui</code> and <code>value</code>, which are defined in the following table.</p>
+<table>
+<thead>
+<tr>
+<th><code>&lt;property&gt;</code> Child Elements</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;property-ui&gt;</code></td>
+<td>Defines how the property is presented to users in the HCL® UrbanCode™ Deploy editor. This element has several attributes: -   <code>label</code></td>
+</tr>
+</tbody>
+</table>
+<p>Identifies the property in the editor's Edit Properties dialog box.</p>
+<ul>
+<li><code>description</code></li>
+</ul>
+<p>Text that is displayed to users in the associated roll-over help box.</p>
+<ul>
+<li><code>default-value</code></li>
+</ul>
+<p>Property value that is displayed when the Edit Properties dialog box is displayed; used if unchanged.</p>
+<ul>
+<li><code>type</code></li>
+</ul>
+<p>Identifies the type of widget that is displayed to users. Possible values are:</p>
+<pre><code>-   `textBox`
+</code></pre>
+<p>Enables users to enter an arbitrary amount of text, limited to 4064 characters.</p>
+<pre><code>-   `textAreaBox`
+</code></pre>
+<p>Enables users to enter an arbitrary amount of text (larger input area than textBox), limited to limited to 4064 characters.</p>
+<pre><code>-   `secureBox`
+</code></pre>
+<p>Used for passwords. Similar to textBox except values are redacted.</p>
+<pre><code>-   `checkBox`
+</code></pre>
+<p>Displays a check box. If checked, a value of true is used; otherwise the property is not set.</p>
+<pre><code>-   `selectBox`
+</code></pre>
+<p>Requires a list of one or more values, which are displayed in a list. Configuring a value is described below.</p>
+<p>|
+|<code>&lt;value&gt;</code> |Used to specify values for a selectBox. Each value has a mandatory <code>label</code> attribute, which is displayed to users, and a value that is used by the property when selected. Values are displayed in the order they are defined.|</p>
+<p>Here is a sample <code>&lt;property&gt;</code> definition:</p>
+<pre><code>&lt;property name=&quot;onerror&quot; required=&quot;true&quot;&gt;
+  &lt;property-ui type=&quot;selectBox&quot;
+    default-value=&quot;abort&quot;
+    description=&quot;Action to perform when statement fails: continue, stop, abort.&quot;
+    label=&quot;Error Handling&quot;/&gt;
+  &lt;value label=&quot;Abort&quot;&gt;abort&lt;/value&gt;
+  &lt;value label=&quot;Continue&quot;&gt;continue&lt;/value&gt;
+  &lt;value label=&quot;Stop&quot;&gt;stop&lt;/value&gt;
+&lt;/property&gt;
+
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../ref_create_steptype/">Plug-in steps: The step-type element</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/ref_create_properties.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

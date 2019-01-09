@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_import/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating composite blueprints - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating composite blueprints", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-composite-blueprints">Creating composite blueprints</h1>
+<p>You can create a composite blueprint by importing the contents of a saved blueprint into your active blueprint.</p>
+<p>Create a blueprint to import into another blueprint. This blueprint can contain infrastructure items, components that are assigned to images, or components that are not assigned to images. See <a href="../blueprint_diagram/">Editing blueprint diagrams</a>.</p>
+<p><strong>Restriction:</strong> This blueprint cannot contain an imported blueprint.</p>
+<p>You can import saved blueprints into your active blueprint. By importing a blueprint, you quickly add the resource tree, components, infrastructure items, or images that the imported blueprint contains to the active blueprint. A link is created between the active composite blueprint and the imported blueprint. You cannot delete individual items from the imported blueprint, and you can make limited changes to imported images. For example, you can add a component to an imported image or connect the imported image to a different network, but you cannot change the image security or IP address.</p>
+<p><strong>Restriction:</strong> If your heat engine is at the Juno level, you cannot provision from a composite blueprint.</p>
+<ol>
+<li>In the blueprint designer, create or open a blueprint. </li>
+<li>Click <strong>Import Blueprints</strong> <img alt="" src="../../images/icons/import_blueprint.gif" />. The Import Blueprint dialog box opens.</li>
+<li>From the Import Blueprint dialog box, select the blueprint to import, and then click <strong>Import</strong>. The Imported Blueprint Properties dialog box opens.</li>
+<li>
+<p>From the Imported Blueprint Properties dialog box, specify the behavior of the imported blueprint. </p>
+<ol>
+<li>
+<p>Select the method of referring to the imported blueprint. </p>
+<ul>
+<li>
+<p>Select <strong>path / imported_blueprint_name</strong> to refer to the imported blueprint as a relative or absolute file path. This option adds the .yaml file path into the type. In the parent blueprint source code, the imported blueprint is represented with the following code:</p>
+<p><code>resources:
+  imported\_blueprint\_name:
+    type: path/imported\_blueprint\_name.yaml
+    properties:
+      imported\_property: { get_param: imported\_property }</code></p>
+</li>
+<li>
+<p>Select <strong>UC::Blueprint::imported_blueprint_name</strong> to refer to the imported blueprint as a custom type that is resolved in the resource_registry section of a configuration file for the parent blueprint. In the parent blueprint source code, the imported blueprint is represented with the following code:</p>
+<p><code>resources:
+  imported\_blueprint\_name:
+    type: UC::Blueprint::imported\_blueprint\_name
+    properties:
+      imported\_property: { get_param: imported\_property }</code></p>
+<p><strong>Note:</strong> In version 6.2.1.1 and earlier, only this method of specifying an imported blueprint is available.</p>
+</li>
+<li>
+<p>Select <strong>$path/imported_blueprint_name</strong> to refer to the imported blueprint as a property, which can be defined when you provision the blueprint. In the parent blueprint source code, the imported blueprint is represented with the following code:</p>
+<p><code>parameters:
+  imported\_blueprint\_name_url:
+    type: string
+    description: 'Path of imported\_blueprint\_name.yaml'
+    default: '.'
+resources:
+  imported\_blueprint\_name:
+    type: {str_replace: { params: { $imported\_blueprint\_name_url: { get_param: imported\_blueprint\_name_url } }, template: $imported\_blueprint\_nameurl/imported\_blueprint\_name.yaml }}
+    properties:
+      imported\_property: { get_param: imported\_property }</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Determine the properties that the parent blueprint uses. By default, all available properties are selected, but you can customize which properties that the parent blueprint uses.</p>
+</li>
+<li>Click <strong>OK</strong>. 
+The imported blueprint and the infrastructure items that the blueprint contains are shown in the diagram. The contents of an imported blueprint might resemble the following image:</li>
+</ol>
+<p><img alt="A network and two images that are imported from a blueprint." src="../../images/blueprint_import_b.gif" /></p>
+<p>To hide the infrastructure items that you imported, click the <strong>Toggle Filter</strong> icon in the lower right of the imported blueprint.</p>
+<p>An imported blueprint that contains only components might resemble the following image:</p>
+<p><img alt="A blueprint that contains an imported blueprint that contains three components." src="../../images/blueprint_import_a.gif" /></p>
+<p>Components that the imported blueprint contains that are not assigned to an image are shown in the <strong>Imported</strong> drawer. You must add these components to images before you provision the blueprint.</p>
+</li>
+<li>
+<p>Assign all components that are listed in the <strong>Imported</strong> drawer to images in the blueprint. </p>
+</li>
+</ol>
+<p>Import more blueprints or add other infrastructure items to the blueprint.</p>
+<p><strong>Important:</strong> You cannot have multiple resource trees in a blueprint.</p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_create/">Editing blueprints with the blueprint designer</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_import.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

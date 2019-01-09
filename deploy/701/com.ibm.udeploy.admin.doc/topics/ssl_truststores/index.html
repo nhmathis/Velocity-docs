@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/ssl_truststores/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Implementing custom trust stores - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Implementing custom trust stores", url: "#_top", children: [
+              {title: "Agent", url: "#agent" },
+              {title: "Server", url: "#server" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="implementing-custom-trust-stores">Implementing custom trust stores</h1>
+<p>A trust store defines the roots of the certificate trust chain. Typically, these are the certificate authority root certificates that sign other certificates. It can also be end entity certificates that are directly trusted. Java® includes a default trust store that contains certificate authority root certificates for many well-known authorities. This trust store is a file called cacerts and is contained in the Java installation. The file has the same format as a keystore, but it never contains a private key. It is possible to modify or replace this file to alter the trust roots with the keytool program. Otherwise, a custom trust store must be used instead.</p>
+<p>A custom trust store is simply another keystore file containing the custom trust roots. It is even possible to copy cacerts and modify the copy to expand the set of trust roots. Unlike with the default trust store, a configuration step is required enable use of a custom trust store.</p>
+<p>You can turn on custom trust stores selectively. For example, you can configure agents to always verify the server without the server doing any verification, or you can have the servers verify each other only in the client role.</p>
+<p><strong>Note:</strong> Trust stores can be used with agents and servers, but not agent relays. The agent relay has no custom trust store support for web agent communication because it does not participate in authenticating communications.</p>
+<h2 id="agent">Agent</h2>
+<p>For web agent communication, the agent permits a custom trust store for validating connections to the server. For the custom trust store to take effect, verify.server.identity must be set to true. This parameter can be configured in the installer (<a href="../../../com.ibm.udeploy.install.doc/topics/agent_properties/">Agent installation properties</a>), although it can also be set without configuring a custom trust store.</p>
+<p>By default, setting this property will use the default trust store in the cacerts file. It also performs an extra hostname verification on the server certificate, which is the same as in a web browser.</p>
+<p>A custom trust store is configured by setting agentcomm.truststore to the path of trust store file and setting agentcomm.truststore.password to the keystore file password. If unset, it will default to changeit.</p>
+<pre><code>installed.properties:
+  verify.server.identity=true
+  agentcomm.truststore=&lt;path&gt;
+  agentcomm.truststore.password=&lt;password&gt;
+</code></pre>
+
+<h2 id="server">Server</h2>
+<p>The server's use of a trust store is similar to the agent, but has potentially two custom trust stores, depending on the role of the server in the connection. The trust stores are independent and can be selectively enabled, or both can be configured to share the same trust store file.</p>
+<p><strong>Server: Server Role</strong></p>
+<p>When the server is in the server role, it will authenticate clients, which are both agents and other servers in the same cluster. In this scenario, verify.client.identity must be set to true.</p>
+<p>The default cacerts trust store is used. There is no hostname verification step because client certificates do not contain a hostname. agentcomm.serverTruststore is set to the path of the trust store file. agentcomm.serverTruststore.password is set to the trust store file password (changeit by default). Unlike the agent, the password property is stored in secured-installed.properties with other passwords.</p>
+<p><strong>Note:</strong> Although the trust store is configured for the server role, that server verifies the identity of clients. This explains the asymmetry in the names of this group of properties. When the server is in the client role, the naming is reversed.</p>
+<pre><code>installed.properties:
+  verify.client.identity=true
+  agentcomm.serverTruststore=&lt;path&gt;
+
+secured-installed.properties
+  agentcomm.serverTruststore.password=&lt;password&gt;
+</code></pre>
+
+<p><strong>Server: Client Role</strong></p>
+<p>When the server is the client role, it is only verifying the identity of the other server members of its cluster. In this scenario, verify.server.identity must be set to true.</p>
+<p>The default cacerts trust store is used. As required by the client role, a hostname verification step is also performed. agentcomm.serverTruststore is set to the path of the trust store file. agentcomm.serverTruststore.password is set to the trust store file password (changeit by default).</p>
+<pre><code>installed.properties:
+  verify.server.identity=true
+  agentcomm.clientTruststore=&lt;path&gt;
+
+secured-installed.properties
+  agentcomm.clientTruststore.password=&lt;password&gt;
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/SSLinstall/">SSL configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/ssl_truststores.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

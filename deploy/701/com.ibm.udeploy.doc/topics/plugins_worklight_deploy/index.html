@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/plugins_worklight_deploy/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Deploying mobile applications - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Deploying mobile applications", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="deploying-mobile-applications">Deploying mobile applications</h1>
+<p>You can use the process steps in the IBM® MobileFirst Platform Foundation (formerly Worklight®) plug-in to deploy mobile applications to MobileFirst Platform Foundation Server.</p>
+<ul>
+<li>If it is not already installed, install the MobileFirst Platform Foundation plug-in. For more information about installing this plug-in, see <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_plugins/">Installing plug-ins</a>.</li>
+<li>Install the plug-in that corresponds to the application server that is running the MobileFirst Platform Foundation Server. You use this plug-in to deploy the WAR file to the MobileFirst Platform Foundation Server. For example, install one of the following plug-ins:<ul>
+<li>Apache Tomcat</li>
+<li>IBM WebSphere® Application Server</li>
+<li>IBM WebSphere Application Server Liberty Profile</li>
+</ul>
+</li>
+<li>
+<p>Verify that your process steps use the path to the JAR files that correspond to your MobileFirst Platform Foundation Server version. For example, if you are using MobileFirst Platform Foundation plug-in Version 2.0 or later and a version of MobileFirst Platform Foundation Server later than 6.0, you must update your process steps.</p>
+<p><strong>Tip:</strong> The following JAR files are available for use from MobileFirst Platform Foundation plug-in Version 2.0 or later:</p>
+<ul>
+<li>
+<p><strong>worklight-ant.jar</strong></p>
+<p>Used to deploy artifacts to the IBM® Worklight® Server Version 6.0.</p>
+</li>
+<li>
+<p><strong>worklight-ant-deployer.jar</strong></p>
+<p>Used to deploy artifacts to the IBM® Worklight® Server Version 6.1 or later.</p>
+</li>
+<li>
+<p><strong>applicationcenterdeploytool.jar</strong></p>
+<p>Used to interact with an Application Center installed on an IBM® Worklight® Server version 6.0 or later.</p>
+</li>
+<li>
+<p><strong>json4j.jar</strong></p>
+<p>Used with the IBM® Worklight® Server Version 6.0 or later.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>In the process editor, you can modify component processes to include steps to deploy the following mobile application artifacts to your MobileFirst Platform Foundation Server:</p>
+<ul>
+<li>Native applications (Android .apk or iOS .ipa MobileFirst Platform Foundation Adapters (.adapter)</li>
+<li>MobileFirst Platform Foundation Applications (.wlapp)</li>
+<li>MobileFirst Platform Foundation project (.war)</li>
+</ul>
+<p>The following sequence is a suggested order for deploying the mobile application artifacts:</p>
+<ol>
+<li>Deploy the .war file to the application server by using a process step from the corresponding plug-in for the type of application server that is running the MobileFirst Platform Foundation Server.</li>
+<li>
+<p>The following artifacts can be deployed in parallel or in either order:</p>
+<ul>
+<li>Deploy the MobileFirst Platform Foundation Adapter (.adapter) file to the MobileFirst Platform Foundation Server Console by using the Deploy Adapter to Worklight Server step.</li>
+<li>Deploy the MobileFirst Platform Foundation Application (.wlapp) file to the MobileFirst Platform Foundation Server Console by using the Deploy Worklight Application to Worklight Server step.
+For more information about the steps in the MobileFirst Platform Foundation plug-in, see <a href="https://developer.ibm.com/urbancode/plugindoc/ibmucd/worklight-plug/1-2/">MobileFirst Platform Foundation plug-in - documentation</a>.</li>
+</ul>
+</li>
+<li>
+<p>Deploy the Android application package (.apk) or iOS application (.ipa) file to the Application Center by using the Upload Application to Application Center step.</p>
+</li>
+</ol>
+<p>The following simple example process deploys a mobile application to the MobileFirst Platform Foundation Server Console and Application Center.</p>
+<ol>
+<li>The Download Artifacts step retrieves the binary files.</li>
+<li>
+<p>The Install or Update Application step deploys the .war file to WebSphere Application Server (the application server that is used in this example).</p>
+<p><strong>Note:</strong> The Install or Update Application step in this example is provided by the WebSphere Application Server - Deploy plug-in (not the MobileFirst Platform Foundation plug-in).</p>
+</li>
+<li>
+<p>In parallel, the .adapter and .wlapp files are deployed to the MobileFirst Platform Foundation Server Console by the Deploy Adapter to Worklight Server step and the Deploy Worklight Application to Worklight Server step.</p>
+</li>
+<li>The .apk (Android) or .ipa (iOS) file is deployed to the Application Center by the Upload Native Application to the Application Center step.</li>
+</ol>
+<p><img alt="A simple process for deploying the WAR file, adapters, and native application to the MobileFirst Platform Foundation Server." src="../../images/deploy_process.gif" /></p>
+<p><strong>Parent topic:</strong> <a href="../plugins_worklight_buildanddeploy/">Building and deploying mobile applications</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/plugins_worklight_deploy.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

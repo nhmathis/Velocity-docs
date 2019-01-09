@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/ha_config_engine/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Setting up clusters of engines - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Setting up clusters of engines", url: "#_top", children: [
+          ]},
+          {title: "---------------------------------------------------------------------", url: "#-", children: [
+          ]},
+          {title: "Example configuration for a possible web application.  See the", url: "#example-configuration-for-a-possible-web-application-see-the", children: [
+          ]},
+          {title: "full configuration options online.", url: "#full-configuration-options-online", children: [
+          ]},
+          {title: "http://haproxy.1wt.eu/download/1.4/doc/configuration.txt", url: "#httphaproxy1wteudownload14docconfigurationtxt", children: [
+          ]},
+          {title: "---------------------------------------------------------------------", url: "#-_1", children: [
+          ]},
+          {title: "---------------------------------------------------------------------", url: "#-_2", children: [
+          ]},
+          {title: "Global settings", url: "#global-settings", children: [
+          ]},
+          {title: "---------------------------------------------------------------------", url: "#-_3", children: [
+          ]},
+          {title: "---------------------------------------------------------------------", url: "#-_4", children: [
+          ]},
+          {title: "common defaults that all the 'listen' and 'backend' sections will", url: "#common-defaults-that-all-the-listen-and-backend-sections-will", children: [
+          ]},
+          {title: "use if not designated in their block", url: "#use-if-not-designated-in-their-block", children: [
+          ]},
+          {title: "---------------------------------------------------------------------", url: "#-_5", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="setting-up-clusters-of-engines">Setting up clusters of engines</h1>
+<p>To set up clusters of engines, you store shared files on a system and set multiple engines to use those files.</p>
+<ul>
+<li>These steps are appropriate for engines that you install with HCL® UrbanCode™ Deploy and use to connect to non-OpenStack clouds. To set up clusters of OpenStack engines that you use to connect to OpenStack clouds, see the OpenStack documentation.</li>
+<li>Each engine in the cluster must run the same version of HCL UrbanCode Deploy.</li>
+<li>Install an HCL UrbanCode Deploy server and create a token that the blueprint design servers can use to access it.</li>
+<li>Set up a system to host the databases and load balancer. These resources can be on the same system or on separate systems. If you have a cluster of servers or blueprint design servers, you can use the same cluster resources or set up separate cluster resources for the engine cluster.</li>
+<li>If you use HCL UrbanCode Deploy version 6.2.1.1 or later, install the databases on a Red Hat Enterprise Linux™ (RHEL) version 7 server. Make sure that the system is connected to a package manager, such as a Yum server.</li>
+</ul>
+<p>To set up blueprint design servers and engines in a clustered configuration, you install them on separate systems and connect them to the same database and network storage. You can install as many blueprint design servers and engines as you need. You can also install blueprint design servers and engines as cold-standby servers to serve as disaster recovery units. You can install a blueprint design server and an engine on each cluster node, or you can install blueprint design servers and engines on separate nodes. If you install an engine and a blueprint designer on the same node, ensure that your operating system is compatible with the engine.</p>
+<p>You do not need to install the same number of blueprint design servers and engines. Most high-availability setups need more engines than blueprint design servers.</p>
+<p>Then, you configure a load balancer to distribute the traffic to the blueprint design servers. Instead of accessing the blueprint design servers and engines directly, users access the load balancer URL. To the users, that URL appears to host a single instance of the blueprint design server or engine.</p>
+<p>A complete high-availability system of blueprint designers and engines includes the following systems:</p>
+<ul>
+<li>One or more blueprint design server nodes</li>
+<li>One or more engine nodes</li>
+<li>A database for the engine nodes and the RabbitMQ service</li>
+<li>A database for the blueprint design server nodes</li>
+<li>A shared file system for the blueprint design server nodes</li>
+<li>A load balancer</li>
+</ul>
+<p>You can install each of these systems on a separate server, or you can combine some of them to reduce the number of overall nodes. For example, you can use the same database for the engine nodes and the blueprint design server nodes. You can also install one or more of the databases, shared file system, and load balancer on the same server. However, for greatest reliability, install the load balancer, databases, and shared file system on separate servers. For example, the following topology diagram includes three blueprint design server nodes, three engine nodes, and a single server that hosts the databases, RabbitMQ, and shared file system. This type of topology is appropriate for connecting to non-OpenStack clouds such as AWS and Azure.<img alt="A clustered high-availability topology with multiple blueprint design servers and engines" src="../../images/ov_systems_f.gif" /></p>
+<p>To connect to OpenStack-based clouds, the topology is different because the Heat engines are installed via the OpenStack server, not via HCL UrbanCode Deploy:<img alt="A clustered high-availability topology with multiple blueprint design servers that connect to OpenStack-based clouds" src="../../images/ov_systems_k.gif" /></p>
+<p><strong>Note:</strong> These instructions host the RabbitMQ service, the databases for the engine and Keystone service on a single server, and the shared file system on a single server. For a truly high-availability setup and to facilitate disaster recovery, you must ensure that these systems are stable and reliable. For example, you can configure automatic backups and have a cold standby system ready.</p>
+<p>You can set up a cluster of blueprint design servers and engines independently of the HCL UrbanCode Deploy server. You do not necessarily have to have a cluster of HCL UrbanCode Deploy servers.</p>
+<ol>
+<li>
+<p>If you use HCL UrbanCode Deploy version 6.2.1.1 or later, run a configuration script to set up and configure the databases and the RabbitMQ service. The script is provided with the installation media for the Heat engine that is provided with HCL UrbanCode Deploy. You must run this script on a RHEL version 7 server. The engines and Keystone services for these versions of HCL UrbanCode Deploy always use MariaDB databases.</p>
+<p>To use the configuration script, run the following command:</p>
+<p><code>/extracted\_location/ibm-ucd-patterns-install/engine-install/resources/tools/ha/create-backend-services.sh</code></p>
+<p>In this command, extracted_location is the location that you extracted the engine installation media.</p>
+</li>
+<li>
+<p>If you use a version of HCL UrbanCode Deploy before 6.2.1.1, set up and configure the database and RabbitMQ service. The engines and Keystone services for these versions of HCL UrbanCode Deploy always use MySQL databases. These commands are for RHEL version 6 servers.</p>
+<ol>
+<li>
+<p>On the database system, install the engine as described in <a href="../../../com.ibm.udeploy.install.doc/topics/install_engine/">Installing the engine</a>. You do not actually run the engine on this system, but you must install the engine to configure the database for the other cluster engines.</p>
+<p><strong>Important:</strong> Do not start the engine.</p>
+<p>The installation program installs a MySQL database and RabbitMQ service and populates them with information for the engines.</p>
+</li>
+<li>
+<p>Stop the OpenStack Keystone service by running the following command: </p>
+<p><code>service openstack-keystone stop</code></p>
+</li>
+<li>
+<p>Ensure that the OpenStack Keystone and engine services do not restart if the system reboots by running the following commands: </p>
+<p><code>chkconfig openstack-heat-api off</code></p>
+<p><code>chkconfig openstack-heat-api-cfn off</code></p>
+<p><code>chkconfig openstack-heat-api-cloudwatch off</code></p>
+<p><code>chkconfig openstack-heat-engine off</code></p>
+<p><code>chkconfig openstack-keystone off</code></p>
+</li>
+<li>
+<p>Update the database so the other engine nodes can access it. For example, if you are using a MySQL database, log in to MySQL and run the following commands:</p>
+<p><code>GRANT ALL PRIVILEGES ON *.* TO 'heat'@'%' IDENTIFIED BY 'heat';</code></p>
+<p>```</p>
+<p>GRANT ALL PRIVILEGES ON <em>.</em> TO 'keystone'@'%' IDENTIFIED BY 'keystone';
+```</p>
+<p>```</p>
+<p>GRANT ALL PRIVILEGES ON <em>.</em> TO 'root'@'%' IDENTIFIED BY 'passw0rd';
+```</p>
+<p>These commands change the database user accounts to allow connections from other nodes, not just the node that hosts the database.</p>
+</li>
+<li>
+<p>To configure the rabbitmq service for access from the other nodes, open the file /etc/rabbitmq/rabbitmq.config in a text editor. If this file does not exist, create it. </p>
+</li>
+<li>
+<p>Add the following line of code to the file, including the period at the end: </p>
+<p><code>[{rabbit, [{loopback_users, []}]}].</code></p>
+</li>
+<li>
+<p>Restart the rabbitmq service: </p>
+<p><code>service rabbitmq-server restart</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Set up online and offline backups for the engines. <a href="../../../com.ibm.udeploy.install.doc/topics/backup_engine/">Backing up engines</a>.</p>
+</li>
+<li>
+<p>Install a load balancer to send requests to the nodes. For example, the HAProxy load balancer can distribute traffic to a cluster of blueprint design servers and engines: <a href="http://www.haproxy.org/">http://www.haproxy.org/</a>. The following steps describe a basic HAProxy setup:</p>
+<ol>
+<li>
+<p>Install HAProxy. For example, on Linux systems that use the yum package manager, run the following command:</p>
+<p><code>yum install -y haproxy</code></p>
+</li>
+<li>
+<p>Set up the file /etc/haproxy/haproxy.cfg to distribute load to the nodes. The load balancer must distribute traffic on the following ports to the blueprint design server nodes:</p>
+<ul>
+<li>8080</li>
+<li>
+<p>7575
+The load balancer must distribute traffic on the following ports to the engine nodes:</p>
+</li>
+<li>
+<p>5000</p>
+</li>
+<li>35357</li>
+<li>8004</li>
+<li>8000
+The following example file distributes load to three blueprint design server nodes that have the host names <code>designer1.example.com</code>, <code>designer2.example.com</code>, and <code>designer3.example.com</code>. It also distributes load to three engine nodes that have the host names <code>engine1.example.com</code>, <code>engine2.example.com</code>, and <code>engine3.example.com</code>.</li>
+</ul>
+<p>```</p>
+<h1 id="-">---------------------------------------------------------------------</h1>
+<h1 id="example-configuration-for-a-possible-web-application-see-the">Example configuration for a possible web application.  See the</h1>
+<h1 id="full-configuration-options-online">full configuration options online.</h1>
+<h1 id="_1"></h1>
+<h1 id="httphaproxy1wteudownload14docconfigurationtxt">http://haproxy.1wt.eu/download/1.4/doc/configuration.txt</h1>
+<h1 id="_2"></h1>
+<h1 id="-_1">---------------------------------------------------------------------</h1>
+<h1 id="-_2">---------------------------------------------------------------------</h1>
+<h1 id="global-settings">Global settings</h1>
+<h1 id="-_3">---------------------------------------------------------------------</h1>
+<p>global
+    # to have these messages end up in /var/log/haproxy.log you will
+    # need to:
+    #
+    # 1) configure syslog to accept network log events.  This is done
+    #    by adding the '-r' option to the SYSLOGD_OPTIONS in
+    #    /etc/sysconfig/syslog
+    #
+    # 2) configure local2 events to go to the /var/log/haproxy.log
+    #   file. A line like the following can be added to
+    #   /etc/sysconfig/syslog
+    #
+    #    local2.*                       /var/log/haproxy.log
+    #
+    log         127.0.0.1 local2</p>
+<pre><code>chroot      /var/lib/haproxy
+pidfile     /var/run/haproxy.pid
+maxconn     4000
+user        haproxy
+group       haproxy
+daemon
+
+# turn on stats unix socket
+stats socket /var/lib/haproxy/stats
+</code></pre>
+<h1 id="-_4">---------------------------------------------------------------------</h1>
+<h1 id="common-defaults-that-all-the-listen-and-backend-sections-will">common defaults that all the 'listen' and 'backend' sections will</h1>
+<h1 id="use-if-not-designated-in-their-block">use if not designated in their block</h1>
+<h1 id="-_5">---------------------------------------------------------------------</h1>
+<p>defaults
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 3000</p>
+<p>listen stats *:1936
+    mode http
+    log global</p>
+<pre><code>maxconn 10
+timeout client       100s
+timeout server       100s
+timeout connect      100s
+timeout queue        100s
+
+stats enable
+stats refresh 7s
+stats show-node
+stats uri /haproxy?stats
+</code></pre>
+<p>frontend keystone_api
+    bind *:5000
+    default_backend keystone_api_back</p>
+<p>frontend keystone_admin
+    bind *:35357
+    default_backend keystone_admin_back</p>
+<p>frontend heat_api
+    bind *:8004
+    default_backend heat_api_back</p>
+<p>frontend heat_cfn
+    bind *:8000
+    default_backend heat_cfn_back</p>
+<p>frontend heat_cloudwatch
+    bind *:8003
+    default_backend heat_cloudwatch_back</p>
+<p>frontend ucdp
+    bind *:8080
+    default_backend ucdp_back</p>
+<p>frontend cds
+    bind *:7575
+    default_backend cds_back</p>
+<p>backend keystone_api_back
+    balance     roundrobin
+    server      enginenode1 engine1.example.com:5000 check
+    server      enginenode2 engine2.example.com:5000 check
+    server      enginenode3 engine3.example.com:5000 check
+    option      httpchk</p>
+<p>backend keystone_admin_back
+    balance     roundrobin
+    server      enginenode1 engine1.example.com:35357 check
+    server      enginenode2 engine2.example.com:35357 check
+    server      enginenode3 engine3.example.com:35357 check
+    option      httpchk</p>
+<p>backend heat_api_back
+    balance     roundrobin
+    server      enginenode1 engine1.example.com:8004 check
+    server      enginenode2 engine2.example.com:8004 check
+    server      enginenode3 engine3.example.com:8004 check
+    option      httpchk</p>
+<p>backend heat_cfn_back
+    balance     roundrobin
+    server      enginenode1 engine1.example.com:8000 check
+    server      enginenode2 engine2.example.com:8000 check
+    server      enginenode3 engine3.example.com:8000 check
+    option      httpchk</p>
+<p>backend heat_cloudwatch_back
+    balance     roundrobin
+    server      enginenode1 engine1.example.com:8003 check
+    server      enginenode2 engine2.example.com:8003 check
+    server      enginenode3 engine3.example.com:8003 check
+    option      httpchk</p>
+<p>backend ucdp_back
+    balance     roundrobin
+    server      designernode1 designer1.example.com:8080 check
+    server      designernode2 designer2.example.com:8080 check
+    server      designernode3 designer3.example.com:8080 check
+    option      httpchk OPTIONS /
+    option      forwardfor
+    option      http-server-close
+    appsession JSESSIONID len 52 timeout 3h</p>
+<p>backend cds_back
+    balance     roundrobin
+    server      designernode1 designer1.example.com:7575 check
+    server      designernode2 designer2.example.com:7575 check
+    server      designernode3 designer3.example.com:7575 check
+    option      httpchk</p>
+<p>```</p>
+</li>
+<li>
+<p>Ensure that HAProxy runs at system startup. For example, on Red Hat Enterprise Linux (RHEL) version 7, run the following command:</p>
+<p><code>systemctl enable haproxy.service</code></p>
+</li>
+<li>
+<p>Start HAProxy or restart the service if it is already running. For example, on RHEL version 7, run the following command:</p>
+<p><code>systemctl start  haproxy.service</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Verify that the load balancer is running and that it is ready to distribute traffic to the nodes. For example, if HAProxy is installed on a system with the host name <code>ucd-patterns.example.com</code>, you can go to the following URL to see the status of the nodes: <code>http://ucd-patterns.example.com:1936/haproxy?stats</code> </p>
+</li>
+</ol>
+<p>After you configure the load balancer to distribute connections to the systems, users can connect to a single URL and use the entire cluster. The servers also ensure that the correct number of licenses are used, even if a user accesses multiple servers.</p>
+<p>Several server processes behave differently than with individual servers. See <a href="../../../com.ibm.udeploy.admin.doc/topics/ha_servers/">High-availability server processes</a>.</p>
+<p>Add engines to the cluster. See <a href="../ha_add_engine/">Adding engines to clusters</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/server_install_clustered/">Setting up high-availability clusters</a></p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_configuring/">Configuring</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/ha_config_engine.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

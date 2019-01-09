@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/upgrade_key_strength/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Upgrading encryption key strength - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Upgrading encryption key strength", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="upgrading-encryption-key-strength">Upgrading encryption key strength</h1>
+<p>When you upgrade the server from version 6.0.1.1 or earlier to a version later than version 6.0.1.1, you can upgrade the SSL encryption.</p>
+<p>This upgrade is optional, but it strengthens server security. The keytool application is included in the Java™ developer kit and is not part of HCL® UrbanCode™ Deploy.</p>
+<ol>
+<li>
+<p>Upgrade the HTTPS certificate for the server: </p>
+<ol>
+<li>On the server, open a command-line window to the server_install/opt/tomcat/conf folder, where server_install is the server installation folder.The default server installation directory is /opt/ucd/server on Linux™ and C:\Program Files\ucd\server on Windows™. </li>
+<li>
+<p>Delete the existing certificate with the following command: </p>
+<p><code>keytool -delete 
+  -alias tomcat 
+  -keystore tomcat.keystore 
+  -storepass changeit</code></p>
+<p><strong>Note:</strong> Each command in this example must be written on one line. Also, the commands in the following examples must be written on one line. The commands are written on multiple lines for clarity.</p>
+</li>
+<li>
+<p>Create a certificate with the following command: </p>
+<p><code>keytool -genkey 
+  -alias tomcat 
+  -storepass changeit 
+  -keypass changeit 
+  -keyalg RSA 
+  -sigalg SHA256withRSA 
+  -keysize 2048 
+  -validity 7305 
+  -dname CN=host\_name 
+  -keystore tomcat.keystore</code></p>
+<p>For <code>host\_name</code>, use the host name of the server.</p>
+</li>
+<li>
+<p>Go to the folder app_data/conf. </p>
+</li>
+<li>
+<p>Delete the existing entry to the keystore with the following command:</p>
+<p><code>keytool -delete 
+  -alias server 
+  -keystore server.keystore 
+  -storepass changeit</code></p>
+</li>
+<li>
+<p>Create an entry to the keystore with the following command: </p>
+<p><code>keytool -genkey 
+  -alias server 
+  -storepass changeit 
+  -keypass changeit 
+  -keyalg RSA 
+  -sigalg SHA256withRSA 
+  -keysize 2048 
+  -validity 7305 
+  -dname CN=host\_name 
+-keystore server.keystore</code></p>
+<p>For <code>host\_name</code>, use the host name of the server.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>For each of your agent relays, upgrade the encryption with the following steps: </p>
+<ol>
+<li>In a command-line window, go to the relay_install/conf/jms-relay folder, where relay_install is the relay installation folder. </li>
+<li>
+<p>Delete the existing entry in the keystore for the agent relay with the following command:</p>
+<p><code>keytool -delete 
+  -alias agentrelay 
+  -keystore agentrelay.keystore 
+  -storepass changeit</code></p>
+</li>
+<li>
+<p>Add an entry with the new encryption level with the following command:</p>
+<p><code>keytool -genkey 
+  -alias agentrelay 
+  -keystore agentrelay.keystore 
+  -storepass changeit 
+  -keypass changeit 
+  -keyalg RSA 
+  -sigalg SHA256withRSA 
+  -keysize 2048 
+  -validity 7305 
+  -dname CN=host\_name</code></p>
+<p>For <code>host\_name</code>, use the host name of the server.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>If you are using mutual encryption between servers and agents, upgrade the encryption on each agent: </p>
+<ol>
+<li>In a command-line window, go to the agent_install/conf/jms-relay folder, where agent_install is the agent installation folder. </li>
+<li>
+<p>Delete the existing entry in the keystore for the agent with the following command:</p>
+<p><code>keytool -delete 
+  -alias alias 
+  -keystore keystore\_file 
+  -storepass changeit</code></p>
+<p>Replace the alias variable with the alias of the server certificate in the agent keystore. The keystore_file variable represents the keystore file. The default name of the keystore file is agent.keystore. To find the alias, run the following command, and look for the alias name in the output:</p>
+<p><code>keytool -list -v -keystore keystore\_file</code></p>
+</li>
+<li>
+<p>Follow the steps in <a href="../ssl_mutual_auth/">Configuring mutual authentication</a> to add the new server certificate to the agent. </p>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_upgrading/">Upgrading and migrating</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/upgrade_key_strength.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

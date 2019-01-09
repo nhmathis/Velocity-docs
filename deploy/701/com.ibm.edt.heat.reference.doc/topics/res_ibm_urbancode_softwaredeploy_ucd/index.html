@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_urbancode_softwaredeploy_ucd/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM UrbanCode SoftwareDeploy UCD - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::UrbanCode::SoftwareDeploy::UCD", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmurbancodesoftwaredeployucd">IBM::UrbanCode::SoftwareDeploy::UCD</h1>
+<p>This resource type represents a deployment instance of a component.In most cases, this resource type is associated with a <a href="../res_ibm_urbancode_softwareconfig_ucd/">IBM::UrbanCode::SoftwareConfig::UCD</a> resource.</p>
+<p>The blueprint uses the core properties and extended properties, if any, from this resource type. Review and configure the applicable heat resources that apply to your configuration information.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent_naming_scheme</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The naming scheme used for an agent, when set to <code>server-name</code>, then the server name of the operating system node will be appended to the agent name</td>
+</tr>
+<tr>
+<td>agent_timeout</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The amount of time in seconds that the resource waits for the agent to come online</td>
+</tr>
+<tr>
+<td>alt_process</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Name of the new process to be run by the component</td>
+</tr>
+<tr>
+<td>apply_config</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>A resource reference that captures configuration information</td>
+</tr>
+<tr>
+<td>inputs</td>
+<td>Map</td>
+<td>False</td>
+<td>Core</td>
+<td>The resource properties on an HCL® UrbanCode™ Deploy component</td>
+</tr>
+<tr>
+<td>server</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>A resource reference to the server that hosts this deployment</td>
+</tr>
+<tr>
+<td>subgroup</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>Name of the subgroup to check for under the agent</td>
+</tr>
+<tr>
+<td>version</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The name or identifier of the component version to deploy, or "LATEST" for the most recent version</td>
+</tr>
+<tr>
+<td>ucd_client_timeout</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The amount of time in seconds for REST API calls to the HCL UrbanCode Deploy server to complete</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>application_name</td>
+<td>The name of the application to modify on the server.</td>
+</tr>
+<tr>
+<td>component_name</td>
+<td>The name of the component to deploy or update.</td>
+</tr>
+<tr>
+<td>component_path</td>
+<td>The fully qualified hierarchical path of the component in the resource tree.</td>
+</tr>
+<tr>
+<td>component_process</td>
+<td>The name or ID of the component process to run for the component.</td>
+</tr>
+<tr>
+<td>component_tag</td>
+<td>The name or ID of the component tag to be deployed or updated.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>The status of the deployment.</td>
+</tr>
+<tr>
+<td>ucd_password</td>
+<td>The password or token of the user to authenticate as with the server.</td>
+</tr>
+<tr>
+<td>ucd_server_url</td>
+<td>The web URL of the IBM UrbanCode Deploy server. For example, https://mydevops-server.com:8443</td>
+</tr>
+<tr>
+<td>ucd_username</td>
+<td>The user name to authenticate as with the server.</td>
+</tr>
+<tr>
+<td>url</td>
+<td>The URL of the deployed component</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_ucd_ov/">HCL UrbanCode Deploy resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_urbancode_softwaredeploy_ucd.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

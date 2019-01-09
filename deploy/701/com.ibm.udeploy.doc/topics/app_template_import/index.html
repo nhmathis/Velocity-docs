@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_template_import/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Importing application templates - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Importing application templates", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="importing-application-templates">Importing application templates</h1>
+<p>If you exported an application template, you can import the template to a different server. When you import an application template, you can create an entirely new template or upgrade an existing one.</p>
+<p>To move application templates between servers, you export the templates and import them to a different server.</p>
+<p>When you export components, applications, processes, or templates, and then import them on a different computer, the same versions of the same plug-ins must be installed on both computers.</p>
+<p><strong>Note:</strong> You must create the JSON file that contains a template on a server that uses the same version of HCL® UrbanCode™ Deploy as the destination server.</p>
+<p>When you import an application template, all resource templates, environment templates, approval processes, application processes, generic processes, and tags that it uses are also imported.</p>
+<ol>
+<li>Open the Import Application Template dialog box by clicking <strong>Applications</strong> > <strong>Templates</strong> > <strong>Import Application Template</strong>. </li>
+<li>Click <strong>Choose File</strong>, and then select the name of the JSON file that contains the template. </li>
+<li>
+<p>To upgrade an existing application template, select <strong>Upgrade Template</strong>. To create a template, leave <strong>Upgrade Template</strong> cleared. If the name of the application template in the JSON file (not the name of the file itself) matches an existing template name, then the template parameters are upgraded. If items such as processes or properties exist, new versions are created. New items, such as processes, environment templates, resource templates, or properties, are also added. If the name of the application template is not found, the import action has no effect.</p>
+<p><strong>Note:</strong> The application template name is the first parameter in the JSON file. The following example shows the first parameter in the JSON file:</p>
+<p><code>"name": "JPetStore",</code></p>
+</li>
+<li>
+<p>If the application template's processes contain generic processes, use the <strong>Generic Process Upgrade Type</strong> list to specify how the generic processes that are called in the application processes are upgraded or created. This selection affects only generic processes, not the application processes in the application template. The import process has different results depending on whether the generic processes exist.</p>
+<p><strong>Note:</strong> The server tracks generic processes by name. If a generic process on the destination server is assigned the same name as a generic process that is imported, then the generic process exists on the server.</p>
+<ul>
+<li>To import an application template without updating the generic processes that are on your server, select <strong>Use Existing Generic Process</strong>. If the generic process does not exist, a generic process is created. If a generic process with that name exists, another version is not created.</li>
+<li>To create generic processes, select <strong>Create Generic Process</strong>. A copy of the generic process is always created. If a generic process with that name exists, a unique string is added to the new generic process's name. When run, the application process calls the new generic process.</li>
+<li>
+<p>To create a fresh installation and ensure that generic processes are not on the importing server, select <strong>Fail if Generic Process Exists</strong>. If you are creating an application template, it creates both an application template and generic processes unless generic processes exist, in which case the import action fails.</p>
+<p>If you are upgrading an application template, the upgrade fails if the imported application template's generic processes exist.</p>
+</li>
+<li>
+<p>To ensure that generic processes are on the importing server, select <strong>Fail if Generic Process Does Not Exist</strong>. If you are creating an application template, it creates both the application template and generic processes, unless the generic processes do not exist, in which case the import action fails.</p>
+</li>
+<li>To upgrade the generic processes, select <strong>Upgrade if Generic Process Exists</strong>. This option creates an application template and versions of the generic processes on the importing server. If the generic processes do not exist, processes are created.</li>
+<li>In the <strong>Resource Template Upgrade Type</strong> list, specify how to handle resource templates that are being imported, along with the application templates that have the same names as existing resource templates. </li>
+<li>To import an application template without updating the resource templates that are on your server, select <strong>Use Existing Resource Template</strong>. If the resource templates do not exist, resource templates are created. If a resource template with that name exists, another version is not created.</li>
+<li>To create resource templates, select <strong>Create Resource Template</strong>. Copies of the resource templates are always created. If a resource template with that name exists, a unique string is added to the new resource template's name. When run, the application process calls the new resource template.</li>
+<li>
+<p>To create a fresh installation and ensure that resource templates are not on the importing server, select <strong>Fail If Resource Template Exists</strong>. If you are creating an application template, it creates both the application template and resource templates unless resource templates exist, in which case the import action fails.</p>
+<p>If you are upgrading an application template, the upgrade fails if the imported application template's resource templates exist.</p>
+</li>
+<li>
+<p>To ensure that resource templates are on the importing server, select <strong>Fail If Resource Template Does Not Exist</strong>. If you are creating an application template, it creates both the application template and resource templates unless the resource templates do not exist, in which case the import action fails.</p>
+</li>
+<li>To upgrade the resource templates, select <strong>Upgrade Resource Template If Exists</strong>. This option creates an application template and versions of the resource templates on the importing server. If the resource templates do not exist, resource templates are created.</li>
+<li>Click <strong>Submit</strong>. </li>
+</ul>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../app_template/">Application templates</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_template_import.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

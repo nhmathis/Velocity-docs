@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_ref_resources/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Modeling environments with referenced resources - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modeling environments with referenced resources", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modeling-environments-with-referenced-resources">Modeling environments with referenced resources</h1>
+<p>Rather than adding specific resources to a blueprint, you can add referenced resources. Referenced resources include images, networks, routers, storage volumes, security groups, and components. Referenced resources are generic when you create the blueprint. You can then specify the exact resource to use at provisioning time. By using referenced resources, you can create one blueprint that you can provision on multiple clouds. For example, you can create a blueprint that you can provision for a development environment and for a testing environment, and use different resources in the two environments.</p>
+<ul>
+<li>Connect the blueprint design server to a cloud system. See <a href="../security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</li>
+<li>Make sure that your user account is authenticated to a cloud system. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_auth_bds/">Setting up access to clouds in the blueprint designer</a>.</li>
+<li>Connect the blueprint design server to the server. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Log in to the blueprint designer.</li>
+<li>
+<p>At the top of the page, select the cloud project and region to use.</p>
+</li>
+<li>
+<p>In the blueprint designer, on the <strong>Diagram</strong> tab, create a blueprint. For information on creating and editing blueprints, see <a href="../blueprint_edit/">Creating files with the blueprint designer</a>.</p>
+</li>
+<li>Add a referenced resource to the blueprint. For example, add a Referenced Network resource to the blueprint. The Reference Parameter window is displayed.</li>
+<li>Specify values for <strong>Key</strong>, <strong>Label</strong>, and <strong>Description</strong> for the resource, or accept the defaults. The <strong>Key</strong> value is used to identify the resource in the source code of the blueprint. The <strong>Label</strong> value is used to identify the resource in the blueprint diagram. The <strong>Description</strong> text is available when you provision the blueprint. The referenced resource is added to the blueprint diagram, and the corresponding parameters and parameter groups are added to the blueprint source code.</li>
+<li>Continue adding resources to complete the blueprint. When you add a Referenced Security Group or Referenced Storage Volume resource to a blueprint, you can reuse any existing references of those types by selecting them from the <strong>Reuse Existing Reference</strong> list on the Reference Parameter window. You can create a blueprint that contains only referenced resources.</li>
+<li>To adjust a parameter or parameter group, click the <strong>Edit Parameters</strong> icon at the top of the graphical editor. The Parameters window is displayed, listing all parameters in the blueprint. You can edit and delete parameters and parameter groups in the Parameters window.</li>
+<li>To place constraints on a parameter, edit the parameter as described in the previous step and then select a constraint from the <strong>Constraint</strong> list. For example, if you select the <strong>Allowed Pattern</strong> constraint, you can then specify a regular expression or select a pre-defined <strong>Pattern</strong> value, and specify <strong>Error Message</strong> text to display if the parameter does not match the pattern. The source code for the referenced resource now includes a constraints value. In the Parameters window, constrained parameters are indicated by (P).</li>
+</ul>
+<p>When you provision a blueprint that contains referenced resources, the parameters in the blueprint are separated into parameter groups and identified with the labels that you specified. Click a parameter group name to open that group, and then select values for each parameter.</p>
+<p>Typically, you create a configuration file for each environment where you provision the blueprint, as described in the <a href="../env_provision_edt/">Provisioning environments from the blueprint designer (through OpenStack Heat)</a> topic.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/blueprint_props_ov/">Blueprint properties, attributes, and parameters</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_ref_resources.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

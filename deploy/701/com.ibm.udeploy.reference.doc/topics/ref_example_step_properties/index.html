@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/ref_example_step_properties/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Step properties - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Step properties", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="step-properties">Step properties</h1>
+<p>In the context of our discussion, properties are values that are used by the step's command. Step properties are defined with the property element.</p>
+<p>As you can see in <a href="../reference_plugins_example/">Example plug-in</a>, the Create File step has three properties:</p>
+<ul>
+<li><code>file</code> contains the name of the file the command creates; it is represented as a text box in the process designer</li>
+<li><code>contents</code> contains the content of the file; it is represented by a text-area box, which can contain a large amount of data</li>
+<li><code>overwrite</code> is used to specify whether the file can overwrite an existing file; it is represented by a check box in the process designer</li>
+</ul>
+<p>These properties are displayed in the dialog box that appears when the step is added to a component process. The other properties in the dialog are displayed for every step (post-processing is discussed below). Property values can be entered into the dialog box by the process designer at design-time, or left to be furnished at runtime by the user that runs the application.</p>
+<p>You can configure most properties with the property-ui child element (the <code>selectBox</code> type requires the <code>value</code> child element as well). See <a href="../reference_plugins_create/">Creating plug-ins</a> for information about the options available for presentation in the UI. Default values can be defined when you create the step.</p>
+<p>In addition to a step's own properties, a command has access to properties set earlier by other steps within the process, to properties set by the application that started the component process, to properties on the target environment and resource.</p>
+<p>The following illustration shows the properties that are available to an individual step. Step property values become unavailable after the component process ends.</p>
+<p><img alt="An illustration that shows the scope of the properties that a step has access to" src="../../images/prop-lifer.png" /></p>
+<p>Runtime defined properties are combined with the properties that were defined earlier and together sent to the agent. Earlier properties (those properties that were defined outside the current process) are retrieved from the database. How properties are processed and consumed is discussed further in the next section.</p>
+<p><strong>Parent topic:</strong> <a href="../reference_plugins_example/">Example plug-in</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/ref_example_step_properties.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

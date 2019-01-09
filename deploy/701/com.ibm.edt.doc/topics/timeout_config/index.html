@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/timeout_config/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating a HCL UrbanCode Deploy timeout configuration file - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating a HCL UrbanCode Deploy timeout configuration file", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-a-hcl-urbancode-deploy-timeout-configuration-file">Creating a HCL UrbanCode Deploy timeout configuration file</h1>
+<p>You can create a configuration file to store the default timeout values for the blueprint designer to use with HCL® UrbanCode™ Deploy agent, process, and server communication variables.</p>
+<p>When you provision images that contain HCL UrbanCode Deploy components, you must allow time for the server to respond. You provide timeout values to specify how long to wait for agents to install, for component processes to complete, and for the HCL UrbanCode Deploy server to return REST API calls to the blueprint designer. You can create a configuration file to store these timeout values, and the values that you set are applied to each blueprint that you provision. If you do not create a configuration file, you can specify these timeout values in the HCL UrbanCode Deploy resources of each blueprint that you provision. See <a href="../../../com.ibm.edt.heat.reference.doc/topics/ref_heat_types_ucd_ov/">HCL UrbanCode Deploy resource types</a>. If you create a configuration file and specify timeout values in the blueprint, when you provision, the blueprint designer uses the timeout values that you specify in the blueprint.</p>
+<ol>
+<li>
+<p>On the computer that hosts the Heat engine, create a configuration file. In the /usr/lib/heat/ibm-sw-orch/heat/ folder, create a file that is named user_settings.conf. Use the following template for the file.</p>
+<p>```
+[user-settings]
+timeout:
+  {
+    "agent": 300,
+    "component_process": 300,
+    "ucd_client": 300,
+    "agent_subgroup": 30,
+    "sleep_delay": 10,
+    "application_process":480
+  }</p>
+<p>```</p>
+<p>Provide appropriate values, in seconds, for the parameters. In the previous example, the values for the agent, component_process, and ucd_client timeout timeouts are each set to 300 seconds.</p>
+<ul>
+<li>For the agent value, specify the amount of time to wait for the agent to install. If you specify a value for the <code>agent_timeout</code> property on the <code>IBM::UrbanCode::SoftwareDeploy::UCD</code> resource in a blueprint, it replaces the agent value.</li>
+<li>For the component_process value, specify the total amount of time to allow for all the component deployment processes to complete. If you specify a value for the <code>component_process_timeout</code> property on the <code>IBM::UrbanCode::SoftwareConfig::UCD</code> resource in a blueprint, it replaces the component_process value.</li>
+<li>For the ucd_client value, specify the amount of time to allow for the return of REST API calls from the server. If you specify a value for the <code>ucd_client_timeout</code> property on the <code>IBM::UrbanCode::SoftwareDeploy::UCD</code> or <code>IBM::UrbanCode::ResourceTree</code> resource in a blueprint, it replaces the ucd_client value.</li>
+<li>For the agent_subgroup value, specify the amount of time to allow for the server to create groups that are attached to an agent. This value is used only if you use the WebSphere® Application Server - Deployment plug-in to locate WebSphere Application Server cells during automatic discovery. To learn more about automatic discovery, see <a href="../../../com.ibm.udeploy.doc/topics/resources_import_was/">Importing resources from WebSphere Application Server</a>.</li>
+<li>
+<p>For the sleep_delay value, specify the amount of time to delay processes if the agent that runs the process is not connected.</p>
+<p><strong>Note:</strong> For best processor performance, set this parameter to <code>10</code>.</p>
+</li>
+<li>
+<p>For the application_process value, specify the amount of time to wait for the agent to complete an application process request. If you specify a value for the <code>ucd_client_timeout</code> property on the <code>IBM::UrbanCode::ApplicationProces::UCD</code> resource in a blueprint, it replaces the application_process value.</p>
+</li>
+<li>Update the timeout for your cloud projects. If the sum of the agent and component_process values is greater than the stack timeout value for a cloud project, you must update the stack timeout.</li>
+<li>Click <strong>Settings</strong> > <strong>Clouds</strong>. </li>
+<li>Select a cloud. </li>
+<li>In the <strong>Timeout in Mins</strong> field, specify the amount of time in minutes to wait for a provision request to be completed. </li>
+<li>Click <strong>Save</strong>. </li>
+</ul>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../c_node_administering_bds/">Blueprint design server configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/timeout_config.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

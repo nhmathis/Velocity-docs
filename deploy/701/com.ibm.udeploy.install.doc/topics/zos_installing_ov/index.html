@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/zos_installing_ov/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing the z/OS agent", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-the-zos-agent">Installing the z/OS agent</h1>
+<p>Before you deploy to the IBM® z/OS® platform, you must install the z/OS agent and configure the z/OS server for communication with HCL® UrbanCode™ Deploy. If the build process runs on a different logical partition (LPAR), then you must additionally install the agent on the build LPAR. You can install the z/OS agent and deployment tools by using the IBM System Modification Program Extended (SMP/E) or by extracting archive files to the z/OS UNIX™ file system.</p>
+<p><strong>Note:</strong> Beginning with version 6.2.4. the z/OS deployment tools have become part of the z/OS agent. The deployment tools no longer require a separate installation. If you are upgrading from a version earlier than 6.2.4, see <a href="../upgrade_zOS_agents/">Upgrading IBM z/OS agents</a> for details about the changes.</p>
+<p>Review the system requirements, and then plan the installation:</p>
+<ul>
+<li>Review <a href="../codestation_choose_plan/">Choosing a CodeStation and planning storage</a>.</li>
+<li>Review <a href="../../../com.ibm.udeploy.admin.doc/topics/security_zos/">Security requirements on IBM z/OS computers</a>.</li>
+<li>Review <a href="../ISPF_client_gateway_req/">ISPF client gateway requirements</a>.</li>
+<li>
+<p>Review <a href="../install_config_binary/">Installing the binary and config files to different directories</a>.</p>
+</li>
+<li>
+<p>To install the agent by using SMP/E, complete these steps: </p>
+<ol>
+<li>Install the z/OS agent by using SMP/E. See <a href="../../../com.ibm.udeploy.doc/topics/zos_installing_smpe/">Installing the z/OS agent and deployment tools by using SMP/E</a>. </li>
+<li>Install agents from the command line. See <a href="../agentInstall/">Installing agents from the command line</a>, and start with step 3. </li>
+</ol>
+</li>
+<li>
+<p>To install by extracting files to the z/OS UNIX file system, see <a href="../agentInstall/">Installing agents from the command line</a>. </p>
+</li>
+<li>
+<p><strong><a href="../../../com.ibm.udeploy.doc/topics/zos_installing_smpe/">Installing the z/OS agent and deployment tools by using SMP/E</a></strong><br />
+IBM System Modification Program/Extended (SMP/E) is a tool for installing and maintaining software on z/OS systems. SMP/E controls software changes at the element level. Job Control Language (JCL) is submitted by using 3270 emulation.</p>
+</li>
+<li><strong><a href="../zos_using_job_monitor/">Deploying by using the Job Monitor</a></strong><br />
+You use the Job Monitor to submit jobs and to monitor the job status in your deployment. You must ensure that you have a Job Monitor task running and that you run the Urban Code Deploy process to submit or to monitor the job. Then, you must set up Job Monitor connection properties in your HCL UrbanCode Deploy environment.</li>
+<li><strong><a href="../codestation_choose_plan/">Choosing a CodeStation and planning storage</a></strong><br />
+After installation, you can change the CodeStation where version artifacts are stored. The IBM z/OS agent that is used to import version stores artifact versions when the choice of CodeStation is HFS. Every z/OS agent that is used to deploy projects stores backups of old artifacts so that a rollback can be done when required. Plan the agent directory to ensure there is sufficient space for CodeStation and backup.</li>
+<li><strong><a href="../ISPF_client_gateway_req/">ISPF client gateway requirements</a></strong><br />
+HCL UrbanCode Deploy uses the z/OS Time Sharing Option-Interactive System Productivity Facility (TSO-ISPF) gateway when it imports and deploys component versions.</li>
+<li><strong><a href="../install_config_binary/">Installing the binary and config files to different directories</a></strong><br />
+By default, the agent installer installs the binary and config files into the same directory. You can customize the installation so that these files are installed into different directories. Also, multiple agent configurations can share the same copy of binary files which makes security control and product upgrading easier.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../install_ch/">Installing HCL UrbanCode Deploy</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/zos_installing_ov.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

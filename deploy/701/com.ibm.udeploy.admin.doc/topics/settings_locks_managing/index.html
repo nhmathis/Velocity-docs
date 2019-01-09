@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/settings_locks_managing/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Managing locks - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Managing locks", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="managing-locks">Managing locks</h1>
+<p>A lock ensures that processes do not interfere with one another. Normally, locks are released after they are no longer needed. Sometimes, a lock is not released, and its associated process is unable to complete.The lock management feature helps you to identify and resolve abnormal lock conditions.</p>
+<p>Follow these steps to view and resolve locks.</p>
+<ol>
+<li>A running process with a lock, like all active processes, is shown on the Dashboard tab with a status of <code>Running</code>. If a locked process takes longer to complete than expected, you can cancel the process from the Dashboard, or investigate it fully with the Settings tab.</li>
+<li>
+<p>Display the Locks pane by clicking the <strong>Locks</strong> link on the Settings tab (<strong>Settings</strong> > <strong>Locks</strong>).The Locks pane displays the following information:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>The name identifies the lock. The displayed name is a concatenation of the component or application name (depending on type) + process name + resource name.</td>
+</tr>
+<tr>
+<td>Type</td>
+<td>Indicates whether the process that created the lock is a component or application type. Locks can be applied only to component or application processes.</td>
+</tr>
+<tr>
+<td>Component/Application</td>
+<td>Displays the name of the component or application that contains the lock. Clicking an item displays (depending on the type) the Component pane, or Application pane, where you can investigate the lock.</td>
+</tr>
+<tr>
+<td>Resource/Environment</td>
+<td>Displays the name of the resource or environment that contains the lock. Clicking an item displays (depending on the type) the Resource pane, or Environment pane.</td>
+</tr>
+<tr>
+<td>Process</td>
+<td>Displays the name of the process that contains the lock. Clicking an item displays the process in the process editor.</td>
+</tr>
+<tr>
+<td>Actions</td>
+<td>Lists the available actions.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Resolve the lock by selecting an action:</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>View Request</td>
+<td>Displays the process log for the process that contains the lock. You can use the <strong>Actions</strong> field on the displayed pane to see the name of the process step that is causing the lock.</td>
+</tr>
+<tr>
+<td>Release</td>
+<td>Releases the lock, which enables the associated process to continue processing.</td>
+</tr>
+</tbody>
+</table>
+<p>If the HCL® UrbanCode™ Deploy server and or agents go down while a locked process is running, HCL UrbanCode Deploy automatically restores any interrupted processes along with any locks they might contain after service is restored.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/settings_ch/">Server settings and configuration</a></p>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/settings_locks_managing.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

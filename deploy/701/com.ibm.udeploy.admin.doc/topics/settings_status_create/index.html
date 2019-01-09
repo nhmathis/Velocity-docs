@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/settings_status_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating statuses - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating statuses", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-statuses">Creating statuses</h1>
+<p>Define component version and inventory statuses on the <strong>Statuses</strong> tab.</p>
+<ol>
+<li>Click <strong>Settings</strong> > <strong>Statuses</strong>.</li>
+<li>For the status type to create, click <strong>Add Status</strong>. </li>
+<li>
+<p>Configure the status in the Add Status window: </p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>Identifies the status and is included in many UI elements.</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Conveys more information about the process.</td>
+</tr>
+<tr>
+<td><strong>Color</strong></td>
+<td>Defines the status color that is displayed in the UI.</td>
+</tr>
+<tr>
+<td><strong>Unique</strong></td>
+<td>When checked, specifies that only a single instance of the status describes a component. For inventory or snapshot statuses, an application removes the status from existing versions in the environment or resource inventory. For version statuses, the status can be used by only one version at a time.</td>
+</tr>
+<tr>
+<td><strong>Required Role</strong></td>
+<td>Specifies the user role that is necessary for a user to assign the status.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Save your work when finished.Statuses are stored in the HCL® UrbanCode™ Deploy database.</p>
+<p><strong>Tip:</strong> Default statuses are defined in an XML file, which you can freely edit to add your own values.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/comp_version_status/">Statuses</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/settings_status_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

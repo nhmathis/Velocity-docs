@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/inventory_ch/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Inventories - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Inventories", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="inventories">Inventories</h1>
+<p>You use different inventories to track installed components and properties in HCL® UrbanCode™ Deploy elements.</p>
+<p>Inventories provide a complete view of the status and contents of your components. There are different views of the current inventory, depending on your location in HCL UrbanCode Deploy. Inventory information is available on individual components, for every application environment, for each agent resource, and for each component resource.</p>
+<ul>
+<li>The component inventory lists all the resources on which a component is deployed. To see the inventory for a component, click <strong>Components</strong>, click the component, and look on the <strong>Dashboard</strong> tab, under <strong>Inventory for Component</strong>.</li>
+<li>The environment inventory lists all the component versions that are deployed to an environment. To see the inventory for an environment, click <strong>Applications</strong>, click the application, and on the <strong>Environments</strong> tab, expand the environment.</li>
+<li>
+<p>The resource inventory lists all the components that are deployed to an agent resource. To see the inventory for an agent resource, click <strong>Resources</strong>, and expand the resource tree to see which components are installed on which agent resources, as shown in the following figure.</p>
+<p><img alt="The resource tree, showing an agent resource and the components that are installed on that agent" src="../../images/inventory_ch_a.gif" /></p>
+</li>
+<li>
+<p>The resource configuration inventory lists all the properties that are associated with a component resource's elements. To view the configuration inventory for a component resource, click <strong>Resources</strong>, expand the resource tree, select a component, and, from within the component, click the <strong>Inventory</strong> tab. Locate the properties within the Configuration Inventory, and click <strong>View</strong> to display the Property Details dialog box.</p>
+</li>
+</ul>
+<p>When you create application processes, you have the option of allowing the server to manage the environment inventory and compliance automatically, or to manage the inventory yourself. See <a href="../inventory_manage_app/">Managing environment inventory and compliance</a>. HCL UrbanCode Deploy always tracks the component, resource, and resource configuration inventories automatically.</p>
+<ul>
+<li><strong><a href="../env_compliance/">Environment inventory and compliance</a></strong><br />
+The inventory for an environment lists the component versions that are intended to be deployed to that environment. Compliance shows whether the environment contains those component versions.</li>
+<li><strong><a href="../configuration_properties/">Viewing resource configuration inventories</a></strong><br />
+You can view the configuration inventory for a component, which includes all properties that are associated with the component resource.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../part_using/">Modeling software deployment</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/inventory_ch.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

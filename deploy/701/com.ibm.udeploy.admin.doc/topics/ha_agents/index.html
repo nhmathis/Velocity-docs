@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/ha_agents/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>High-availability agent communication - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "High-availability agent communication", url: "#_top", children: [
+              {title: "JMS communication", url: "#jms-communication" },
+              {title: "HTTP or HTTPS communication", url: "#http-or-https-communication" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="high-availability-agent-communication">High-availability agent communication</h1>
+<p>Agents communicate with the server over JMS and HTTP or HTTPS. These modes of communication are handled differently in a high availability scenario.</p>
+<h2 id="jms-communication">JMS communication</h2>
+<p>JMS communications is subscription-based. All agents subscribe to all topics and filter the list with their agent ID. For this reason, assigning unique IDs to agents is required.</p>
+<p>For JMS-based communications, agents can be configured in two ways:</p>
+<ul>
+<li>Approach 1: Agents are individually configured for failover. If an agent fails to connect to a server or agent relay, the agent connects to failover servers or agent relays. See <a href="../../../com.ibm.udeploy.install.doc/topics/configure_agent_failover/">Configuring agents for failover</a>.</li>
+<li>Approach 2: Agents connect to a single agent relay that is configured for failover. See <a href="../../../com.ibm.udeploy.install.doc/topics/configure_relay_failover/">Configuring agent relays for failover</a>.</li>
+</ul>
+<p>Approach 1 works best because it allows for you to configure stable failover configurations in ActiveMQ.</p>
+<p><strong>Note:</strong> Do not configure a load balancer to distribute requests for the agent communication JMS port. To ensure agent and agent relay availability, configure them for failover.</p>
+<h2 id="http-or-https-communication">HTTP or HTTPS communication</h2>
+<p>A standard load balancer handles HTTP or HTTPS server-agent communications. Authentication is run on every request; any server can run validation for any request. You configure HTTP or HTTPS server-agent communication when you configure your cluster of servers. See <a href="../../../com.ibm.udeploy.doc/topics/ha_config_server/">Setting up clusters of servers</a>.</p>
+<p>In case of server failure, user-server authentication must be redone unless the ‘remember me’ cookie is used.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/ha_overview/">High availability overview</a></p>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/ha_agents.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

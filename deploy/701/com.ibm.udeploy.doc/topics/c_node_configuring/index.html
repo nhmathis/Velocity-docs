@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/c_node_configuring/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring">Configuring</h1>
+<p>Learn how to configure settings in HCL® UrbanCode™ Deploy elements and communication between the elements.</p>
+<ul>
+<li><strong><a href="../ha_config_ov/">High availability and failover</a></strong><br />
+You can configure clustered HCL UrbanCode Deploy servers, blueprint design servers, and agents for high availability. You can also configure agents and agent relays for failover.</li>
+<li><strong><a href="../server_install_clustered/">Setting up high-availability clusters</a></strong><br />
+To configure a high-availability cluster, you store shared files on network storage. Then, you configure multiple servers, set each server to access the same files and database, and configure a load balancer to distribute the traffic between the servers.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/server_install_cold/">Adding cold standby servers</a></strong><br />
+You can add cold standby servers to serve as a backup server or for disaster recovery. You must start the secondary server or servers when the active server fails, and network traffic is routed to the secondary servers.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/dr_config_bds/">Configuring disaster recovery for the blueprint design server</a></strong><br />
+You can configure the blueprint design server and engine for disaster recovery by adding cold standby servers to serve as backup servers. You must start the secondary server or servers when the active server fails, and network traffic is routed to the secondary servers.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/configure_agent_failover/">Configuring agents for failover</a></strong><br />
+To configure agents for failover, you specify two or more target servers for the agent to use. If one of the servers fails, the agent switches to another server from the list.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/configure_relay_failover/">Configuring agent relays for failover</a></strong><br />
+To configure agent relays for failover, you specify two or more target servers for the agent relay to use. If one of the servers fails, the agent relay switches to another server from the list.</li>
+<li><strong><a href="../settings_ch/">Server settings and configuration</a></strong><br />
+After you install HCL UrbanCode Deploy, you can modify the server configuration and configure more options.</li>
+<li><strong><a href="../../../com.ibm.udeploy.admin.doc/topics/prefs_ov/">Setting user preferences</a></strong><br />
+Each user can specify display options for the server, including the language for the server and how the server shows times and dates.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/c_node_administering_bds/">Blueprint design server configuration</a></strong><br />
+Learn how to configure the blueprint design server.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/cost_ov/">Estimating the cost for cloud environments</a></strong><br />
+You can specify cost centers for cloud systems and for HCL UrbanCode Deploy components. Then, the blueprint design server estimates the cost of new environments by using that information.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/ha_add_bds/">Adding blueprint design servers to clusters</a></strong><br />
+To add a blueprint design server to a cluster, connect it to the shared database and network storage. Then, configure the load balancer to send traffic to it.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/ha_add_engine/">Adding engines to clusters</a></strong><br />
+To add an engine to a cluster, connect it to the shared database. Then, configure the load balancer to send traffic to it.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/ha_config_bds/">Setting up clusters of blueprint design servers</a></strong><br />
+You can set up clusters of blueprint design servers for a high-availability configuration. As with setting up clusters of servers, you store shared files on a system and set multiple blueprint design servers to use those files.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/ha_config_engine/">Setting up clusters of engines</a></strong><br />
+To set up clusters of engines, you store shared files on a system and set multiple engines to use those files.</li>
+<li><strong><a href="../configure_agents/">Agents and agent relay configuration</a></strong><br />
+After you install an agent for HCL UrbanCode Deploy, you can modify its configuration or create an agent relay to facilitate communication to remote relays.</li>
+<li><strong><a href="../licenseManage/">License management</a></strong><br />
+HCL UrbanCode Deploy provides a 60-day license-free evaluation period. To use all product features after the evaluation period, you must have a license.</li>
+<li><strong><a href="../config_wizard/">Setting up the wizard for new users</a></strong><br />
+HCL UrbanCode Deploy includes a wizard to help users become familiar with the procedures and steps in creating a deployment. Some configuration is required before the wizard can be used.</li>
+<li><strong><a href="../ssl_config/">Configuring SSL on Apache Tomcat and LDAP servers</a></strong><br />
+The steps for configuring secure HTTP connections with the HCL UrbanCode Deploy server are similar to the steps for any Java™ Platform, Enterprise Edition server.</li>
+<li><strong><a href="../SSLinstall/">SSL configuration</a></strong><br />
+With Secure Sockets Layer (SSL) technology, clients and servers can communicate securely by encrypting all communications. Data is encrypted before it is sent and decrypted by the recipient. This communication cannot be deciphered or modified by third-parties. In addition to encryption, SSL can also support authentication.</li>
+</ul>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/c_node_configuring.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

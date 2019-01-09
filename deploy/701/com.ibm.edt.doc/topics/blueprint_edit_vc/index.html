@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_edit_vc/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Modeling environments for VMware vCenter - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modeling environments for VMware vCenter", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modeling-environments-for-vmware-vcenter">Modeling environments for VMware vCenter</h1>
+<p>To model a VMware vCenter environment, log in with a VCenter cloud project and specify the VCenter-specific information in a blueprint.</p>
+<ul>
+<li>Connect the blueprint design server to a cloud system. See <a href="../security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</li>
+<li>Make sure that your user account is authenticated to a cloud system. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_auth_bds/">Setting up access to clouds in the blueprint designer</a>.</li>
+<li>Connect the blueprint design server to the server. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Log in to the blueprint designer.</li>
+<li>
+<p>At the top of the page, select the cloud project and region to use.</p>
+</li>
+<li>
+<p>Create the blueprint. See <a href="../blueprint_edit/">Creating files with the blueprint designer</a>.</p>
+</li>
+<li>Add resources from the palette to the blueprint, such as virtual images. The palette shows resources from the currently connected cloud, which is shown in the upper-right corner of the page. For more information on working with the blueprint designer, see <a href="../blueprint_diagram/">Editing blueprint diagrams</a> and <a href="../blueprint_source/">Editing blueprint source code</a>.</li>
+<li>
+<p>Specify the property for the customization specification. VMware Tools must be installed on the image to specify the customization spec. In the OS::Nova::Server resource for the image, add and define the customization_spec extended property, as shown in the following code:</p>
+<p><code>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:
+    vmware_properties:
+      **customization\_spec: your-customization-spec-name
+      use\_cloudinit: False
+      init\_password: password
+      init\_username: user\_name**</code></p>
+<p>In the <code>vmware_properties</code> property, specify the following properties:</p>
+<ul>
+<li>
+<p><strong>customization_spec</strong></p>
+<p>The name of an existing vCenter customization specification.</p>
+</li>
+<li>
+<p><strong>use_cloudinit</strong></p>
+<p>Whether to use cloud-init. In most cases, the value of this property is False. Set this value to True only if you apply Chef roles to images.</p>
+</li>
+<li>
+<p><strong>init_password</strong></p>
+<p>The password for the user name. For Linux™ images, you must provide a value. For Windows™ images, you do not provide a value.</p>
+</li>
+<li>
+<p><strong>init_username</strong></p>
+<p>The user name for the virtual image. For Linux™ images, provide a value if you are not using root. For Windows™ images, you do not provide a value.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>To provision the images in a specific folder on the cloud, add a destination_folder extended property to each image, as in the following example code. The target folder must already exist on the vCenter system.</p>
+<p><code>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:
+    vmware_properties:
+      destination_folder: "/MyImageFolder/MyNewImages"</code></p>
+</li>
+<li>
+<p>Specify whether to provision the images on a cluster or on a resource pool. </p>
+<ul>
+<li>
+<p>To provision the images on a cluster, the cluster must have enabled support for DRS (Distributed Resource Scheduler). Then, on each image, specify the cluster extended property on the image, as in the following example. You can specify a literal value or you can make this property a parameter and specify it at provisioning time.</p>
+<p><code>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:
+    vmware_properties:
+      cluster: { get_param: cluster }</code></p>
+</li>
+<li>
+<p>To provision the images on a resource pool, specify the resource_pool extended property, as in the following example. You can specify a literal value or you can make this property a parameter and specify it at provisioning time.</p>
+<p><code>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+  metadata:
+    vmware_properties:
+      resource pool: { get_param: resourcePool }</code></p>
+</li>
+</ul>
+<p><strong>Note:</strong> Do not specify both the cluster and resource_pool extended properties. If you do, the environment fails to provision.</p>
+</li>
+<li>
+<p>To provision Linux images to a static network in a cloud, specify the properties for the network. In the OS::Nova::Server resource for the image, add and define the fixed_ips property and the vmware_properties extended properties, as shown in the following code:</p>
+<p><code>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    name: "My image A"
+    image: "MyImage123"
+**    fixed\_ips:
+      - ip\_address: 10.10.10.212
+        subnet: 255.255.255.0**
+  metadata:
+**    vmware\_properties:
+      gateway: 10.10.10.1
+      dns: \['11.110.135.31', '11.110.135.52'\]
+      hostname: your-host-name
+      domain\_name: your-domain-name.com**</code></p>
+<p>In the <code>fixed_ips</code> property, specify the following properties:</p>
+<ul>
+<li>
+<p><strong>ip_address</strong></p>
+<p>The IP address that is wanted in the subnet for this port.</p>
+</li>
+<li>
+<p><strong>subnet</strong></p>
+<p>The subnet in which to allocate the IP address for this port.</p>
+</li>
+</ul>
+<p>In the <code>vmware_properties</code> metadata, specify the following properties:</p>
+<ul>
+<li>
+<p><strong>gateway</strong></p>
+<p>The IP address of the gateway.</p>
+</li>
+<li>
+<p><strong>dns</strong></p>
+<p>A list of DNS name servers to be used.</p>
+</li>
+<li>
+<p><strong>hostname</strong></p>
+<p>The hostname of the instance.</p>
+</li>
+<li>
+<p><strong>domain_name</strong></p>
+<p>The domain name of the DHCP pool.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If you configured your provisioned virtual image for SSH, to access to the virtual image through SSH, you must add resources to the blueprint source code. </p>
+<ul>
+<li>
+<p>If your virtual image does not contain a component, add the <code>OS::Heat::MultipartMime</code> and <code>OS::Heat::CloudConfig</code> resources:</p>
+<p>```
+  multipart:
+    type: OS::Heat::MultipartMime
+    properties:
+      parts:
+        - config: {get_resource: cloud_config}
+        subtype: cloud-config</p>
+<p>cloud_config:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        users:
+          - default
+          - name: "user_ID"
+            lock-passwd: true
+            sudo: ALL=(ALL) NOPASSWD:ALL
+            ssh-authorized-keys:
+              - { get_param: key_name }
+```</p>
+<ul>
+<li>For the user_ID, specify the login ID for the virtual image.</li>
+<li>Ensure that the resource name of the <code>OS::Heat::CloudConfig</code> resource is specified in the - config: {get_resource: cloud_config} property in the <code>OS::Heat::MultipartMime</code> resource.</li>
+<li>
+<p>The key_name parameter must be in the following form:</p>
+<p><code>parameters:
+  key_name: "ssh-rsa s1AAB3Nza45yc2EA27AADAQADDABAQC jsmith@example.com"</code></p>
+</li>
+</ul>
+<p>Additionally, the <code>OS::Nova::Server</code> resource must contain the <code>user_data_format</code> and <code>user_data</code> properties. For example, if your virtual image name is linux_image_B, the <code>OS::Nova::Server</code> resource contains the following code:</p>
+<p><code>linux_image_B:
+  type: OS::Nova::Server
+  properties:
+    user_data_format: SOFTWARE_CONFIG
+    user_data: {get_resource: multipart}</code></p>
+<p>Ensure that the resource name of the <code>OS::Heat::MultipartMime</code> resource is specified in the user_data: {get_resource: multipart} property in the <code>OS::Nova::Server</code> resource.</p>
+</li>
+<li>
+<p>If your virtual image does contain a component, add the <code>OS::Heat::CloudConfig</code> resource:</p>
+<p>```
+  cloud_config:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        users:
+          - default
+          - name: "user_ID"
+            lock-passwd: true
+            sudo: ALL=(ALL) NOPASSWD:ALL
+            ssh-authorized-keys:
+              - { get_param: key_name }</p>
+<p>```</p>
+<ul>
+<li>For the user_ID, specify the login ID for the virtual machine.</li>
+<li>
+<p>The key_name parameter must be in the following form:</p>
+<p><code>parameters:
+  key_name: "ssh-rsa s1AAB3Nza45yc2EA27AADAQADDABAQC jsmith@example.com"</code></p>
+</li>
+</ul>
+<p>Additionally, the <code>OS::Heat::MultipartMime</code> must contain the <code>- config: {get_resource: cloud_config}</code> resource. For example, if your virtual image name is linux_image_B, the <code>OS::Heat::MultipartMime</code> resource resembles the following code:</p>
+<p><code>linux_image_B_cloudinit_mime:
+    type: OS::Heat::MultipartMime
+    properties:
+      parts:
+        - config: {get_resource: ucd_agent_install_linux }
+        - config: {get_resource: cloud_config}
+        subtype: cloud-config</code></p>
+</li>
+<li>
+<p>If you configured a virtual image for SSH and later added a component to it, you must add the following property to the <code>OS::Heat::MultipartMime</code> resource: <code>- config: {get_resource: ucd_agent_install_linux }</code></p>
+<p>The <code>OS::Heat::MultipartMime</code> resource resembles the following code:</p>
+<p><code>multipart:
+    type: OS::Heat::MultipartMime
+    properties:
+      parts:
+        - config: {get_resource: cloud_config}
+        subtype: cloud-config
+        - config: {get_resource: ucd_agent_install_linux }</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Create a configuration file and externalize properties to the file.See <a href="../blueprint_configs/">Editing configuration files</a>.</p>
+</li>
+<li>
+<p>In the configuration file, ensure that the core OpenStack types are mapped to VMware vCenter types.The configuration file must have mapping similar to the following code:</p>
+<p><code>resource_registry:
+  OS::Nova::Server : IBM::VCenter::Server
+  OS::Neutron::Port : IBM::VCenter::Port
+  OS::Neutron::Net : IBM::VCenter::Network</code></p>
+</li>
+</ul>
+<p>Add the components of your application to the blueprint. See <a href="../blueprint_deploy_env/">Deploying components with blueprints</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_edit_clouds/">Modeling environments for clouds through OpenStack Heat</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_edit_vc.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

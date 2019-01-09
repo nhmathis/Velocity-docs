@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_properties/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Component properties - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Component properties", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="component-properties">Component properties</h1>
+<p>Components can have several types of properties. The server keeps track of changes to component properties as property versions.</p>
+<p>To define component properties, click the <strong>Components</strong> tab, click the component, and then go to the <strong>Configuration</strong> tab. The following table describes the types of properties that are available on components.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Component properties</td>
+<td>Component properties are values that are assigned on individual components.</td>
+</tr>
+</tbody>
+</table>
+<p>Referenced: <code>${p:component/propertyName}</code>.</p>
+<p>|
+|Component properties that are inherited from component templates| Components inherit properties from component templates. These properties cannot be changed on the component.</p>
+<p>Referenced: <code>${p:component/template/propertyName}</code>.</p>
+<p>|
+|Component environment properties| Component environment properties are defined on components. However, the property value is not set until the component is deployed to an environment. In this way, a component environment property can have a different value for each deployed instance of the component.</p>
+<p>However, a value that is set on a component environment property does not override an environment property that has the same name. The environment property has precedence over the component environment property.</p>
+<p>Referenced: <code>${p:environment/propertyName}</code>.</p>
+<p>|
+|Component version properties| Component version properties are defined on components. However, the property value is not set until a component version is created. In this way, a component version property can have a different value for each component version.</p>
+<p>Referenced: <code>${p:version/propertyName}</code>.</p>
+<p>|
+|Component resource properties| Component resource properties are defined on components. However, the property value is not set until you map a component to an environment and create a component resource. The property value is set on this component resource. In this way, if you need to deploy multiple copies of a component to the same environment, you can set a different property value for each copy.</p>
+<p>Component resource properties also generate resource roles on the component resources.</p>
+<p>Referenced: <code>${p:resource/propertyName}</code>.</p>
+<p>|
+|Component property definitions|Aside from component template properties that become component properties, component templates can also have custom properties. These properties appear on the component <strong>Basic Settings</strong> tab. Referenced: <code>${p:component/custom/propertyName}</code>.</p>
+<p>|</p>
+<p><strong>Parent topic:</strong> <a href="../comp_ch/">Components</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_properties.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

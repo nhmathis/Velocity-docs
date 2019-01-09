@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_teams_resources/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Assigning teams directly to items - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Assigning teams directly to items", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="assigning-teams-directly-to-items">Assigning teams directly to items</h1>
+<p>You can assign a team to an object (such as components or applications) when you create the object.</p>
+<p>You can assign your teams to the objects that you create. When a team is assigned to an object, only team members with the appropriate permissions can interact with the affected object. To assign a team, the assigner must be a team member and have the manage teams subpermission.</p>
+<p>Teams can be assigned when an object is created (in the associated Create item window) and by using the Configuration page after the item is created.</p>
+<p>You can also assign teams by mapping a team to the object by using the mapping security feature. See <a href="../security_teams_mapping/">Mapping teams to objects</a>.</p>
+<p><strong>Note:</strong> By default, new objects are assigned to all the teams that you are a member of. To specify which teams to assign new objects to, see <a href="../prefs_teams/">Setting the teams for your account</a>.</p>
+<ol>
+<li>
+<p>On the server, open the <strong>Configuration</strong> pane or Create dialog box for an object, such as a component. For a list of product areas that you can assign teams to, see <a href="../security_types/">Security types</a>. </p>
+<p>In the following figure, the <strong>Teams</strong> field is displayed in the Create Component window.</p>
+<p><img alt="Specifying a team" src="../../images/security_team1.gif" /></p>
+</li>
+<li>
+<p>Click the plus-sign <img alt="" src="../../images/team-security4.png" />, and then select a team from the <strong>Teams</strong> list. </p>
+</li>
+<li>Select a security type for the object from the <strong>Type</strong> list. The type defines the set of object permissions that are available to the team. Security types for the current object type are available. Initially, a type of object, such as components, has a single type that is defined for it, the standard type. For information about security types, see <a href="../security_types/">Security types</a>. </li>
+<li>
+<p>Click <strong>Add</strong>. More than one team can be added to an item.The selected team or teams can interact with the object immediately. Teams and their security type are listed on the Configuration page that is associated with the object. In the following figure, the NE-1 team with the cHolder security type is assigned to a component.</p>
+<p><img alt="Specifying a type" src="../../images/security_team3.gif" /></p>
+</li>
+<li>
+<p>To remove a team from an object, click the cancel icon <img alt="" src="../../images/x.gif" /> for the team.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../security_teams/">Security teams</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_teams_resources.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/migrate_engine_ucdp_script/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Migrating engines that you installed with HCL UrbanCode Deploy - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Migrating engines that you installed with HCL UrbanCode Deploy", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="migrating-engines-that-you-installed-with-hcl-urbancode-deploy">Migrating engines that you installed with HCL UrbanCode Deploy</h1>
+<p>To migrate the Heat engine that is required for the HCL® UrbanCode™ Deploy blueprint designer from Red Hat Enterprise Linux™ (RHEL) version 6 to RHEL 7, stop the related Heat services, migrate the databases, install the new version, and restart the services</p>
+<ul>
+<li>You must have installed a Heat engine that was provided with HCL UrbanCode Deploy version 6.2.1.0 or earlier.</li>
+<li>You must have <code>root</code> access to the RHEL 6 system that hosts the Heat engine.</li>
+<li>You must use the default user name and password for the Heat engine's MySQL database. If the database user name is not root or the root user's MySQL password is not passw0rd, you must update the values for the DBUSER and DBPASSWD parameters in the /extracted_location/ibm-ucd-patterns-install/engine_install/resources/tools/fromJuno2Kilo-prep.sh file, where extracted_location is where you extracted the engine installation media.</li>
+<li>You must have access to the Heat engine and Keystone service by using the command line interface.</li>
+<li>You must have access to a server that runs RHEL 7 and can host the new engine. Configure the target system with the prerequisites that are listed in <a href="../install_engine_interactive/">Installing an engine in interactive mode</a>.</li>
+<li>If you connect to an OpenStack cloud, then you must upgrade the cloud to the Kilo version.</li>
+</ul>
+<p>In HCL UrbanCode Deploy version 6.2.1.1, the default Heat engine was changed from a Juno version that must be installed on RHEL 6 to a Kilo engine that must be installed on RHEL 7. To upgrade the engine, you must migrate your engine to a new server. If you installed the default OpenStack Identity Service (Keystone), you must also migrate it.</p>
+<p>These steps are for engines that you installed with the HCL UrbanCode Deploy installer. If you extended an existing engine as described in <a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>, use the instructions in <a href="../upgrade_engine_extended/">Upgrading engines that you extended</a>. These steps include instructions to also migrate a default OpenStack Identity Service (Keystone) to the new server.</p>
+<p>If you do not want to migrate the engine, but you need access to the updated Heat types, extend your existing engine. See <a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>.</p>
+<p>To upgrade an engine to a version before 6.2.1.1 to version 6.2.1.1 or later, see <a href="../install_engine_interactive/">Installing an engine in interactive mode</a>.</p>
+<ol>
+<li>
+<p>On the system that hosts the OpenStack Juno engine, remove all of the environments that have the status of <code>CREATE_FAILED</code>: </p>
+<ol>
+<li>
+<p>Run the following command to identify the environments: </p>
+<p><code>heat stack-list | grep CREATE_FAILED</code></p>
+</li>
+<li>
+<p>Delete each environment by running the following command: </p>
+<p><code>heat stack-delete stackID</code></p>
+<p>Use the ID of the environment for <code>stackID</code>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>To reduce the size of the database for the Keystone service, remove expired security tokens. Run the following command to remove the expired tokens:</p>
+<p><code>keystone-manage token_flush</code></p>
+</li>
+<li>
+<p>Stop the Heat services by running the following commands: </p>
+<p><code>service openstack-heat-engine stop</code></p>
+<p><code>service openstack-heat-api stop</code></p>
+<p><code>service openstack-heat-api-cfn stop</code></p>
+<p><code>service openstack-heat-api-cloudwatch stop</code></p>
+</li>
+<li>
+<p>Stop the Keystone service by running the following command: </p>
+<p><code>service openstack-keystone stop</code></p>
+</li>
+<li>
+<p>Copy the fromJuno2Kilo-prep.sh file from the installation media of HCL UrbanCode Deploy version 6.2.1.1 or later to the system that hosts the OpenStack Juno engine. The file is in the /extracted_location/ibm-ucd-patterns-install/engine_install/resources/tools folder, where extracted_location is the location to which you extracted the installation media.</p>
+</li>
+<li>
+<p>To package the database backups and configuration files that the new system requires, on the system that hosts the OpenStack Juno engine, run the following command: </p>
+<p><code>/transfer\_location/fromJuno2Kilo-prep.sh</code></p>
+<p>where transfer_location is the folder that you transferred the file to. Backup files for the Heat engine and Keystone service and necessary configuration files are stored in the ./migration.toolkit.number.tar.gz file, where number represents the time of package creation.</p>
+</li>
+<li>
+<p>Transfer the ./migration.toolkit.number.tar.gz to the RHEL 7 computer and extract it. The extracted files are in the /transfer_location/migration.toolkit.number folder, where number represents the time of package creation.</p>
+</li>
+<li>On the RHEL 7 computer, install a new engine and Keystone service and start their services. See <a href="../install_engine/">Installing the engine</a>.</li>
+<li>
+<p>Verify that the engine installed correctly. </p>
+<ol>
+<li>Change directory to the /root/ folder. </li>
+<li>
+<p>To verify that the engine is running, run the following commands: </p>
+<p><code>source clientrc</code></p>
+<p><code>heat resource-type-list</code></p>
+<p><code>heat stack-list</code></p>
+<p>If the Heat engine is running, the resource types and stacks that the engine contains are displayed.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Review the contents of the heat.conf, keystone.conf, and my.cnf files that are in the /transfer_location/engine.info.number/conf, and add any custom values that they contain to the following files: </p>
+<ul>
+<li>/etc/heat/heat.conf</li>
+<li>/etc/keystone/keystone.conf</li>
+<li>/etc/my.cnf</li>
+</ul>
+</li>
+<li>
+<p>Migrate the databases for the Heat engine and Keystone service by running the following command: </p>
+<p><code>/extracted\_location/migration.toolkit.number/fromJuno2Kilo.sh host\_name</code></p>
+<p>where extracted_location is the location to which you extracted the /migration.toolkit.number.tar.gz folder and host_name is the fully qualified host name or IP address of the RHEL 7 system.</p>
+</li>
+<li>
+<p>Configure the new Heat engine and Keystone service. After you migrate the databases for the Heat engine and Keystone service, you must create the OpenStack project, users, and roles that are used in the databases. You must also configure new OpenStack identity endpoints for the new Keystone service. To complete these setup and configuration scripts, run the add-keystonev3-after-migration.sh script that is provided with the engine installation media.</p>
+<p>Run the following command:</p>
+<p><code>/extracted\_location/ibm-ucd-patterns-install/engine_install/resources/tools/add-keystonev3-after-migration.sh</code></p>
+<p>In this command, extracted_location is the location to which you extracted the installation media.</p>
+</li>
+<li>
+<p>Stop and start the engine. See <a href="../stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a> and <a href="../start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+<li>In the system settings in the blueprint designer, update the new URLs for the Keystone service and Heat engine, and then test the connections. </li>
+<li>On the <strong>Environments</strong> page, confirm that your environments are listed. </li>
+<li>To confirm that the Heat engine functions correctly, create a blueprint and provision it. See <a href="../env_provision_edt/">Provisioning environments from the blueprint designer (through OpenStack Heat)</a>.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../upgrade_engine/">Upgrading engines</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/migrate_engine_ucdp_script.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/resources_agents/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Agents - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Agents", url: "#_top", children: [
+              {title: "Agent prototypes", url: "#agent-prototypes" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="agents">Agents</h1>
+<p>An agent is a lightweight process that runs on a deployment-target host and communicates with the HCL® UrbanCode™ Deploy server.</p>
+<p>There are two agent types. Web agents use WebSocket connections and HTTP(S) for agent-server communication. <a href="../web_agents/">Web agents were introduced with version 7.0.0</a>. Agents delivered before version 7.0.0 are called JMS agents. JMS agent use JMS and HTTP(S) to communicate with the server. You determine agent type when you install the agent.</p>
+<p>Agents do the actual work of deploying components and so relieve the server from the task, making large deployments that involve thousands of targets possible. Usually, an agent runs on the same host on which the resources it handles are located. A single agent can handle all the resources on its host. If a host has several resources, an agent process is started separately for each one. Depending on the number of hosts in an environment, a deployment might require many agents. For example, a test environment might contain a single web server, a single middleware server, and a single database server all running on the same host. A deployment to this environment might have one agent and three separate resources.</p>
+<p>Agents have one or more matching agent resources, which represent the agents in the resource tree.</p>
+<p>Agents are installed with the batch files that are provided with the installation files, see <a href="../../../com.ibm.udeploy.install.doc/topics/agentInstall/">Installing agents from the command line</a>. You can install agents on UNIX™ systems with the web application. Agents are run with the batch files that are included with the installation package.</p>
+<p>Agents are unobtrusive and secure. Agent communications use SSL encryption and mutual key-based authentication for server-agent communication and employ JMS, HTTP, and HTTPS protocols to communicate with the server. See <a href="../arch_agents/">Agent security and communication</a>.</p>
+<p>Agent configuration consists of assigning an agent to at least one environment; agents can be assigned to multiple environments. If an agent is assigned to several environments, it can do work on behalf of all of them.</p>
+<p>To manage agents, see <a href="../configure_agents/">Agents and agent relay configuration</a>.</p>
+<h2 id="agent-prototypes">Agent prototypes</h2>
+<p>An agent prototype is a resource that represents one or more agents that are not yet installed or connected to an environment. You can use agent prototypes in resource templates to represent resources that are not yet available. When you import a resource template from the cloud, an agent prototype is created for each node in the cloud pattern.</p>
+<p>If you create a resource template instead of importing a resource template from the cloud, you can specify an <strong>Agent Name Pattern</strong> for any agent prototype that you add to the resource template. The agent name pattern can include the properties <code>${p:application.name}</code> and <code>${p:environment.name}</code>, but no other properties or wildcards.</p>
+<p><strong>Parent topic:</strong> <a href="../resources_ch/">Resources</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/resources_agents.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

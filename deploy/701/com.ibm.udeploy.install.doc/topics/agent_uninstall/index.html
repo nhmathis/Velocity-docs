@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/agent_uninstall/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Uninstalling agents - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Uninstalling agents", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="uninstalling-agents">Uninstalling agents</h1>
+<p>To uninstall the agent, stop it, remove its service and registry keys, and delete its files.</p>
+<p>You must be an administrator to uninstall an agent.</p>
+<ol>
+<li>Change to the directory that hosts the agent. </li>
+<li>
+<p>Stop the agent.You can stop the agent from the command line or from the server. To stop the agent from the command line, use the following commands:</p>
+<ul>
+<li>
+<p>On Windows™, run this command:</p>
+<p><code>agent.cmd stop</code></p>
+</li>
+<li>
+<p>On Linux™ or UNIX™, run this command:</p>
+<p><code>./agent stop</code></p>
+</li>
+<li>
+<p>On z/OS®, cancel the started task for the agent. For example, if the name of the started task is BUZAGNT, run this command:</p>
+<p><code>C BUZAGNT</code></p>
+<p>If the name of the started task is 8 characters long, specify the address space ID in the cancel command. Cancel the started task and the two spawned tasks. For example, if the name of the started task is UCZAGENT and the address space IDs are 22, 46, and 86, run these commands:</p>
+<p><code>C UCZAGENT,A=22
+C UCZAGENT,A=46
+C UCZAGENT,A=86</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>If the agent is running as a service on Windows, remove the service and registry keys. </p>
+<ol>
+<li>Change to the C:\installed_agent\bin\service folder, where installed_agent is the location of the agent. </li>
+<li>
+<p>Remove the service by running the following command: </p>
+<p><code>_agent.cmd remove service\_name</code></p>
+<p>Use the name of the service for <code>service\_name</code>. To find the service name, open the services view and find the entry that starts with <code>HCL® UrbanCode™ Deploy Agent</code>. The service name is in parentheses in this entry.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Delete the agent installation directory.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../uninstall_ch/">Uninstalling HCL UrbanCode Deploy</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/agent_uninstall.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/rest_api_ref_using/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Running REST commands - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Running REST commands", url: "#_top", children: [
+              {title: "Example: Running simple REST commands with curl", url: "#example-running-simple-rest-commands-with-curl" },
+              {title: "Passing parameters to REST commands", url: "#passing-parameters-to-rest-commands" },
+              {title: "Passing JSON strings to commands", url: "#passing-json-strings-to-commands" },
+              {title: "Composing JSON strings", url: "#composing-json-strings" },
+              {title: "Accessing blueprints in REST commands", url: "#accessing-blueprints-in-rest-commands" },
+              {title: "Responses", url: "#responses" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="running-rest-commands">Running REST commands</h1>
+<p>Many different programs can run REST commands. To run the command, you call a method on a REST resource and pass parameters or a request in JSON format.</p>
+<p><strong>Note:</strong> Using REST commands requires the same permissions as using the web interface. For information about permissions, see <a href="../../../com.ibm.udeploy.admin.doc/topics/security_roles/">Roles and permissions</a>.</p>
+<h2 id="example-running-simple-rest-commands-with-curl">Example: Running simple REST commands with curl</h2>
+<p>The Linux™ program curl is a simple way to run REST commands. To run a REST command, put together the URL of one of the REST resources, specify the method to use, and add any parameters. For example, the following curl command retrieves a list of all active components. The command calls the GET method of the <code>component</code> resource and passes the value <code>true</code> for the parameter active:</p>
+<pre><code>curl -k -u jsmith:passw0rd 
+  https://hostname:port/cli/component?active=true 
+  -X GET
+</code></pre>
+
+<p><strong>Note:</strong> You must enter this command on a single line. It is split onto different lines here for clarity.</p>
+<p><strong>Note:</strong> This example uses the <code>-k</code> switch to connect to the server without checking SSL certificate validity. To set up authentication, see <a href="../rest_api_ref_authenticating/">Authenticating for REST commands</a>.</p>
+<p>This example uses the user name <code>jsmith</code> and the password <code>passw0rd</code>. In most cases, create a dedicated user account for the REST commands to use and give that account the appropriate permissions.</p>
+<p>Use the host name and port of your server for <code>hostname</code> and <code>port</code>. For example, if the host name is <code>ucdeploy.example.com</code> and the port is the default value of 8443, the <code>curl</code> command might look like the following example:</p>
+<pre><code>curl -k -u jsmith:passw0rd 
+  https://ucdeploy.example.com:8443/cli/component?active=true 
+  -X GET
+</code></pre>
+
+<p>The response for this command is a JSONArray list of all active components on the server. For an example of this response, see <a href="../../../com.ibm.udeploy.api.doc/topics/rest_cli_component_get/">Get information about all components on the server</a>.</p>
+<h2 id="passing-parameters-to-rest-commands">Passing parameters to REST commands</h2>
+<p>Many REST commands have one or more parameters. To pass these parameters, add them to the URL. For example, the GET method of the <code>version/getLink</code> command takes three parameters: the name or ID of the application, the name or ID of the version, and the name of the link. To get a link on the <code>JPetStore-APP</code> component, the command might look like the following example:</p>
+<pre><code>curl -k -u jsmith:passw0rd 
+  &quot;https://ucdeploy.example.com:8443/cli/
+  version/getLink?component=JPetStore-APP
+  &amp;version=1.0
+  &amp;linkName=IBM%20web%20site&quot;
+</code></pre>
+
+<p>In this case, each parameter and value pair are appended to the URL, after a question mark (<code>?</code>). An ampersand (<code>&amp;</code>) separates each pair. Because <code>curl</code> is a Linux command and the ampersand has a special meaning on the Linux command line, the URL, including the parameters, is enclosed in quotes.</p>
+<p><strong>Note:</strong> All parameter values must be URL encoded. The previous example passed the value <code>IBM web site</code> as the value for the linkName parameter. To include this parameter as part of the URL, the spaces must be changed to the URL encoded value <code>%20</code>.</p>
+<h2 id="passing-json-strings-to-commands">Passing JSON strings to commands</h2>
+<p>For more complex commands, you must send a JSON string or file instead of or in addition to the parameters.</p>
+<p>For example, the PUT method of the <code>application/create</code> resource creates an application. To use this command, you must pass a JSON string that specifies the name, description, and some properties of the new application. The JSON string for this command must follow this template:</p>
+<pre><code>{
+  &quot;description&quot;: &quot;Description&quot;,
+  &quot;enforceCompleteSnapshots&quot;: &quot;Specify true to require 
+     an explicit version for each component&quot;,
+  &quot;name&quot;: &quot;Application name or ID&quot;,
+  &quot;notificationScheme&quot;: &quot;Notification scheme&quot;
+}
+</code></pre>
+
+<p>This template is listed in the reference information for the command; see <a href="../../../com.ibm.udeploy.api.doc/topics/rest_cli_application_create_put/">Create an application from a JSON file</a>.</p>
+<p>For example, the following JSON string represents an application that is named <code>My Application</code>:</p>
+<pre><code>{
+  &quot;description&quot;: &quot;My new application&quot;,
+  &quot;enforceCompleteSnapshots&quot;: &quot;false&quot;,
+  &quot;name&quot;: &quot;My Application&quot;,
+  &quot;notificationScheme&quot;: &quot;Default Notification Scheme&quot;
+}
+</code></pre>
+
+<p>To pass this JSON string to the <code>application/create</code> resource, you can either save the string to a file or include it in the command. For example, if you save the string to a file that is named newApplication.json, the command looks like the following example:</p>
+<pre><code>curl -k -u jsmith:passw0rd 
+  https://ucdeploy.example.com:8443/cli/application/create 
+  -X PUT -d @newApplication.json
+</code></pre>
+
+<p>You can also pass the string directly to the command, as shown in the following example:</p>
+<pre><code>curl -k -u jsmith:passw0rd 
+  https://ucdeploy.example.com:8443/cli/application/create 
+  -X PUT 
+  -d {&quot;description&quot;:&quot;My new application&quot;,
+      &quot;enforceCompleteSnapshots&quot;:&quot;false&quot;,
+      &quot;name&quot;:&quot;My Application 67&quot;,
+      &quot;notificationScheme&quot;:&quot;Default Notification Scheme&quot;}
+</code></pre>
+
+<p><strong>Note:</strong> The string that you pass to the command must be a valid JSON string.</p>
+<h2 id="composing-json-strings">Composing JSON strings</h2>
+<p>There are two main ways to get the template of the JSON string for a command. The templates are listed in the reference information for each command. You can also run the equivalent command-line client command with the <code>-t</code> option. Running the CLI command with this option prints the JSON template.</p>
+<p>Because the server interface uses the REST API, you can also log in to the server as usual and monitor the requests that the web application generates. You can monitor these requests with web browser extensions or external programs. For example, to see the JSON string for the PUT method of the <code>resource/create</code> resource, create a resource on the web server as usual and then look at the JSON string in the browser request, as shown in the following figure. The JSON string for the REST commands is the same or similar to this string.</p>
+<p><img alt="Using a web browser extension to monitor the JSON strings that the server uses" src="../../images/rest_api_ref_using_a.gif" /></p>
+<h2 id="accessing-blueprints-in-rest-commands">Accessing blueprints in REST commands</h2>
+<p>Most blueprint commands accept both a URL parameter and a Location header. For example, the command <a href="../../../com.ibm.edt.api.doc/topics/rest_bpid_get/">Get the contents of a blueprint</a> has two parameters that refer to the target blueprint: the {blueprintId} parameter in the URL and the Location header. When commands have both of these parameters, the Location header takes precedence. Therefore, if you specify the complete location of the blueprint in the Location header, such as <code>/landscaper/orion/file/jsmith_8a6bfff7_2c77_45db_a235_adda61ad6653-OrionContent/myTeam/myBlueprint/myBlueprint.yml</code>, the command uses that blueprint regardless of the value of the {blueprintId} parameter. You can get the location of a blueprint with the <a href="../../../com.ibm.edt.api.doc/topics/rest_blueprint__get/">List blueprints</a> command.</p>
+<p>If the Location header is not specified, the command uses the value of the {blueprintId} parameter. In this case, the command assumes that the blueprint is in the default repository. It also assumes that the blueprint file name is the value of the {blueprintId} parameter plus the extension <code>.yml</code>.</p>
+<h2 id="responses">Responses</h2>
+<p>After a successful command, most commands return either a simple string value or a JSON string.</p>
+<p>In addition to the result of the command, the commands return standard HTTP status codes. The following list includes the most common status codes that REST commands return.</p>
+<ul>
+<li>
+<p><strong>200</strong></p>
+<p>The command was successful.</p>
+</li>
+<li>
+<p><strong>400®</strong></p>
+<ul>
+<li>You do not have permission to run the command.</li>
+<li>You did not specify a required parameter.</li>
+<li>The resource path in the URL is incorrect.</li>
+<li><strong>404</strong></li>
+</ul>
+<p>The object that you are trying to retrieve does not exist.</p>
+</li>
+<li>
+<p><strong>405</strong></p>
+<p>The HTTP method name is incorrect.</p>
+</li>
+<li>
+<p><strong>415</strong></p>
+<p>The content type in the request header is incorrect.</p>
+</li>
+<li>
+<p><strong>500</strong></p>
+<p>The server encountered an error.</p>
+</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../rest_api_ref_overview/">REST API reference</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/rest_api_ref_using.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

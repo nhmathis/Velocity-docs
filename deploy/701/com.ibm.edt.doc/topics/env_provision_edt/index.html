@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/env_provision_edt/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Provisioning environments from the blueprint designer \(through OpenStack Heat\ - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Provisioning environments from the blueprint designer (through OpenStack Heat)", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="provisioning-environments-from-the-blueprint-designer-40through-openstack-heat41">Provisioning environments from the blueprint designer (through OpenStack Heat)</h1>
+<p>If you connect to the target cloud through OpenStack Heat, you can provision an environment directly from the blueprint designer.</p>
+<p>This method works only for blueprints that were created with the blueprint designer, not with blueprints that you create on the HCL® UrbanCode™ Deploy server.</p>
+<ul>
+<li>Connect to a cloud system.</li>
+<li>Create a blueprint and configuration file, and ensure that these files are appropriate for the target cloud system. Depending on your cloud system, see<ul>
+<li><a href="../blueprint_edit_softlayer/">Modeling environments for SoftLayer</a></li>
+<li><a href="../blueprint_edit_ec2/">Modeling environments for Amazon Web Services</a></li>
+<li><a href="../blueprint_edit_vc/">Modeling environments for VMware vCenter</a></li>
+<li><a href="../blueprint_edit_vra/">Modeling environments for VMware vRealize Automation</a></li>
+<li><a href="../blueprint_edit_os/">Modeling environments for OpenStack and OpenStack-based clouds</a></li>
+<li><a href="../blueprint_edit_azure/">Modeling environments for Microsoft Azure</a>.</li>
+<li><a href="../blueprint_edit_google_cloud/">Modeling environments for Google Cloud Platform</a></li>
+</ul>
+</li>
+<li>Confirm that you have access to the <code>ucd-agent-linux-ppc64</code>, <code>ucd-agent-linux-x86_64</code>, <code>ucd-agent-win-x86_64</code>, and <code>ucd-agent-linux-s390x</code> agent components. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_teams_mapping/">Mapping teams to objects</a>.</li>
+</ul>
+<p>By default, when you provision an environment from a blueprint, the environment is created by using the cloud account information of its cloud project. However, when you create a blueprint for most kinds of clouds, you can specify different user credentials. See <a href="../blueprint_credentials/">Providing cloud credentials in a blueprint</a>.</p>
+<ol>
+<li>
+<p>Make sure that you are connected to the cloud project and region with which you want to provision the environment.Select the cloud project and region from the menu in the upper-right corner of the screen in the blueprint design server, as shown in the following figures. The region is either a geographical cloud location or a physical data center.</p>
+<p><img alt="Selecting the cloud project and region to use" src="../../images/env_provision_edt_a.gif" /></p>
+<p>The cloud project and region are shown at the top of the screen, as shown in the following figure:</p>
+<p><img alt="The current cloud project and region, which is shown at the top of the screen" src="../../images/env_provision_edt_b.gif" /></p>
+</li>
+<li>
+<p>Open the blueprint, and then click <strong>Provision</strong>. The Provision Blueprint to new Environment window opens.</p>
+</li>
+<li>In the <strong>Cloud Project</strong> field, select the cloud project. </li>
+<li>In the <strong>Cloud Region</strong> field, select the cloud region. </li>
+<li>In the <strong>Orchestration Provider</strong> field, select the orchestration provider. </li>
+<li>In the <strong>Environment Name</strong> field, specify the name of the environment. </li>
+<li>
+<p>In most cases, select a configuration file from the <strong>Configuration</strong> list. Configuration files are not necessary if you are deploying to OpenStack and OpenStack-based clouds. If you are deploying to any other supported cloud, you must use a configuration file. You can also create a configuration file by opening the <strong>Configuration</strong> list and clicking <strong>Create Configuration</strong>.</p>
+<p><strong>Note:</strong> If you do not select a configuration file, the blueprint is provisioned on the OpenStack server that is associated with your user account.</p>
+<p>Click <strong>Set The Parameter Values For This Environment</strong> to show the parameters in the blueprint and the values in the configuration file. The window includes sections for parameter groups that are in the blueprint. To view parameter values, click the appropriate section name to open the section. The window also validates the blueprint and the configuration file. If the configuration file includes parameters that are not in the blueprint, then only the parameters that are in the blueprint are used.</p>
+</li>
+<li>
+<p>Customize the parameter values in the window. The Provision Blueprint to new Environment window includes sections for parameter groups that are in the blueprint, such as <strong>Image Parameters</strong>, <strong>Network Parameters</strong>, and <strong>Agent Parameters</strong>. To view and change parameter values, click the appropriate section name to open the section. For example, for some clouds, click <strong>Image Parameters</strong> and then specify the zone for the environment in the <strong>Availability Zone</strong> field. To supply a value for a secure component resource property or secure component environment property, locate the property in the <strong>Agent Parameters</strong> section and specify the value in the <strong>Property name Secure Property</strong> field.</p>
+<p>For some clouds, click <strong>Image Parameters</strong> and then specify the flavor for the environment images in the <strong>Flavor</strong> field. If the list of flavors does not contain the flavors that you expect, make sure that you registered the flavors with the cloud discovery service. See <a href="../cloud_connect_softlayer_flavors/">Configuring SoftLayer image flavors</a> or <a href="../cloud_connect_vmware_flavors/">Configuring VMware vCenter image flavors</a>.</p>
+<p>In most cases, you select an SSH key by name in the <strong>Key Name</strong> field under <strong>Image Parameters</strong>. However, for VMware clouds, paste the contents of the SSH public key in this field.</p>
+<p>If you configured a cost center for the cloud, the Provision Blueprint to new Environment window shows the estimated cost for the environment. See the following information for Microsoft Azure:</p>
+<ul>
+<li>In the <strong>Admin User</strong> and <strong>Admin Pass</strong> fields, specify the name and password of the administrative user on the new virtual machines. The administrative user cannot be named <code>root</code> on a Linux™ system. Azure requires a complex password for the administrator account.</li>
+<li>In the <strong>Availability Zone</strong> field, accept the default value. Selecting a different availability zone is not supported.</li>
+<li>In the <strong>Resource Group</strong> field, select the resource group for the new environment.</li>
+<li>In the <strong>Storage Account</strong> field, select the storage account for the new environment.</li>
+<li>If you change the parameters, you can save the changes to the configuration file by selecting the <strong>Save changes to configuration file</strong> check box. This check box is displayed only if you change parameters and are using a configuration file.</li>
+<li>Provision the environment. </li>
+<li>To validate all parameter values before you provision the environment, click <strong>Provision</strong>.</li>
+<li>To provision the environment without validating parameters, click <strong>Quick Provision</strong> <img alt="" src="../../images/quick_provision_icon.gif" />.</li>
+</ul>
+</li>
+</ol>
+<p>The new environment is displayed on the <strong>Environments</strong> page of the blueprint designer and in the list of application environments on the HCL UrbanCode Deploy server.</p>
+<p>You can see the status of a specific environment by selecting it from the <strong>Show all environments</strong> list at the top of the page. When you provision a standalone Heat engine, the environment name is a combination of the orchestration provider name and the word "HEAT," such as <code>Amazon (HEAT)</code>. When you provision an OpenStack engine, the environment name is a combination of the OpenStack cloud project name, the region, and the word "OPENSTACK," such as <code>OpenStack - RegionOne (OPENSTACK)</code>.</p>
+<p>To modify the images or the HCL UrbanCode Deploy components in a provisioned environment, update the blueprint and then click <strong>Apply</strong>.</p>
+<p><strong>Parent topic:</strong> <a href="../env_provision_ov/">Provisioning cloud environments</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/env_provision_edt.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

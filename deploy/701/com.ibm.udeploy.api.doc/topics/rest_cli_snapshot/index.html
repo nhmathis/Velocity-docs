@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/rest_cli_snapshot/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "snapshot resource", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="snapshot-resource">snapshot resource</h1>
+<p>Resources for creating snapshots.</p>
+<ul>
+<li>
+<p><strong><a href="../rest_cli_snapshot_addversiontosnapshot_put/">Add a component version to a snapshot</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_snapshot_addstatustosnapshot_put/">Add a status to a snapshot</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_snapshot_createsnapshot_put/">Create a snapshot</a></strong><br />
+This command creates a snapshot by specifying the components (optional) for the snapshot, rather than taking a snapshot of an environment.</p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_snapshot_deletesnapshot_delete/">Delete a snapshot</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_snapshot_getstatuslist_get/">Get a list of statuses on a snapshot</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_snapshot_getsnapshot_get/">Get information about a snapshot</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_snapshot_getsnapshotconfiguration_get/">Get the list of configuration objects in a snapshot</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_snapshot_getsnapshotversions_get/">Get the list of versions in a snapshot</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_snapshot_locksnapshotconfiguration_put/">Lock a snapshot's configuration</a></strong><br />
+This command locks the configuration included in a snapshot. This prevents the snapshot from being affected by any future changes to the relevant configuration and also prevents users from manually changing which configuration the snapshot is using. This cannot be reversed.</p>
+</li>
+<li><strong><a href="../rest_cli_snapshot_locksnapshotversions_put/">Lock a snapshot's version list</a></strong><br />
+This command locks the list of component versions included in a snapshot. This cannot be reversed and prevents any future changes to the list of versions included in the snapshot.</li>
+<li>
+<p><strong><a href="../rest_cli_snapshot_removeversionfromsnapshot_put/">Remove a component version from a snapshot</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../rest_cli_snapshot_createsnapshotofenvironment_put/">Take a snapshot of an environment</a></strong>  </p>
+</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.reference.doc/topics/rest_api_ref_commands/">REST commands for the HCL UrbanCode Deploy server</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/rest_cli_snapshot.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

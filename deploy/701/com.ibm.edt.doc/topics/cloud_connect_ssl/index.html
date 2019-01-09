@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/cloud_connect_ssl/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring SSL security for OpenStack clouds - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring SSL security for OpenStack clouds", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-ssl-security-for-openstack-clouds">Configuring SSL security for OpenStack clouds</h1>
+<p>If your OpenStack cloud uses SSL security, you must import the security certificate into the blueprint design server keystore.</p>
+<ul>
+<li>Install the blueprint design server.</li>
+<li>Create a cloud connection as described in <a href="../cloud_connect_openstack/">Connecting to OpenStack and OpenStack-based clouds</a>.</li>
+<li>On the blueprint design server, set the JAVA_HOME system variable to the location of the JRE or JDK on the system.</li>
+<li>
+<p>On the blueprint design server, set the PATH system variable to include the location of the JRE or JDK on the system.</p>
+</li>
+<li>
+<p>On the blueprint design server, in a command prompt, go to the lib/security folder of the JRE or JDK, such as /opt/IBM/ibm-java-x86_64-80/jre/lib/security. </p>
+</li>
+<li>
+<p>Using the following command, download the certificate: </p>
+<p>```
+echo -n | openssl s_client -connect hostname:5000 | 
+sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' </p>
+<blockquote>
+<p>/tmp/mycert.crt
+```</p>
+</blockquote>
+<p><strong>Note:</strong> This command is split on multiple lines for clarity, but you must enter the command on a single line.</p>
+<p>Use the host name or IP address of the cloud system for <code>hostname</code>.</p>
+</li>
+<li>
+<p>Import the certificate into the blueprint design server keystore with the following command: </p>
+<p><code>keytool -import -alias alias -file /tmp/mycert.crt 
+-keystore ./cacerts -storepass changeit -trustcacerts -noprompt</code></p>
+<p><strong>Note:</strong> This command is split on multiple lines for clarity, but you must enter the command on a single line.</p>
+<p>Substitute a name for the cloud system for <code>alias</code>.</p>
+</li>
+<li>
+<p>Using the alias that you specified in the previous command, verify that the certificate was imported:</p>
+<p><code>keytool -list -keystore cacerts -storepass changeit | grep -i alias</code></p>
+<p>If you imported the certificate correctly, the command prints information about the certificate.</p>
+</li>
+</ul>
+<p>Now the blueprint design server can communicate with the OpenStack server.</p>
+<p><strong>Parent topic:</strong> <a href="../cloud_connect_openstack/">Connecting to OpenStack and OpenStack-based clouds</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/cloud_connect_ssl.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/plugins_worklight_configserver/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring the MobileFirst Platform Foundation Server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring the MobileFirst Platform Foundation Server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-the-mobilefirst-platform-foundation-server">Configuring the MobileFirst Platform Foundation Server</h1>
+<p>You must configure the IBM® MobileFirst Platform Foundation Server before you can run the process steps to deploy mobile application artifacts.</p>
+<p>For each MobileFirst Platform Foundation project, you must configure the MobileFirst Platform Foundation Server. The one time MobileFirst Platform Foundation Server setup and configuration options for the MobileFirst Platform Foundation project WAR file are described in the MobileFirst Platform Foundation product help. See <a href="http://www-01.ibm.com/support/knowledgecenter/SSZH4A_6.1.0/com.ibm.worklight.deploy.doc/deploy/c_deploy_custom_war_file_to_app_server.html">Deploying a project WAR file and configuring the application server</a></p>
+<p>You can use any of the following methods to configure the MobileFirst Platform Foundation Server:</p>
+<ul>
+<li>Use Ant tasks to configure the server:<ul>
+<li>Use the command line to run the Ant script.</li>
+<li>Use the Ant process step within HCL® UrbanCode™ Deploy to run the Ant script with the MobileFirst Platform Foundation Ant tasks. To use the Ant process step, you must download and install the Ant plug-in for HCL UrbanCode Deploy.</li>
+</ul>
+</li>
+<li>Use the Server Configuration Tool to configure the server.</li>
+<li>Manually configure the server.</li>
+</ul>
+<p><strong>Tips:</strong> </p>
+<ul>
+<li>Sample scripts are available for configuring the MobileFirst Platform Foundation server and are in MobileFirst_installation_directory/Worklight/WorklightServer/configuration-samples. The sample script combines the two steps in the following procedure by creating a database and deploying the project WAR file.</li>
+<li>
+<p>For information about configuring a secure MobileFirst Platform Foundation Console for IBM WebSphere® Application Server Liberty Profile and required values, see <a href="http://www-01.ibm.com/support/knowledgecenter/SSZH4A_6.0.0/com.ibm.worklight.help.doc/admin/r_protecting_ibm_worklight_console.html">Testing the Worklight® Console login screen</a>.</p>
+</li>
+<li>
+<p>To configure the MobileFirst Platform Foundation Server for a MobileFirst Platform Foundation project:</p>
+</li>
+<li>
+<p><a href="http://www-01.ibm.com/support/knowledgecenter/SSZH4A_6.1.0/com.ibm.worklight.deploy.doc/deploy/c_config_dbs.html">Creating and configuring the databases</a>: </p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Use Ant tasks to create and configure the databases</strong></td>
+<td><a href="http://www-01.ibm.com/support/knowledgecenter/SSZH4A_6.1.0/com.ibm.worklight.deploy.doc/devref/r_ant_tasks_configure_dbs.html">Creating and configuring the databases with Ant tasks</a></td>
+</tr>
+<tr>
+<td><strong>Use the Server Configuration Tool to create and configure the databases</strong></td>
+<td><a href="http://www-01.ibm.com/support/knowledgecenter/SSZH4A_6.1.0/com.ibm.worklight.deploy.doc/deploy/c_using_server_config_tool.html">Deploying, updating, and undeploying a Worklight Server by using the Server Configuration Tool</a></td>
+</tr>
+<tr>
+<td><strong>Manually create and configure the databases</strong></td>
+<td><a href="http://www-01.ibm.com/support/knowledgecenter/?lang=en#!/SSZH4A_6.1.0/com.ibm.worklight.deploy.doc/admin/c_manually_configuring_databases.html">Creating and configuring the databases manually</a></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><a href="http://www-01.ibm.com/support/knowledgecenter/SSZH4A_6.1.0/com.ibm.worklight.deploy.doc/deploy/c_deploy_custom_war_file_to_app_server.html">Deploying a project WAR file and configuring the application server</a>: </p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Documentation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Use Ant tasks to install the MobileFirst Platform Foundation project</strong></td>
+<td><a href="http://www-01.ibm.com/support/knowledgecenter/SSZH4A_6.1.0/com.ibm.worklight.deploy.doc/devref/r_ant_tasks_configure_appserver.html">Deploying a project WAR file and configuring the application server with Ant tasks</a></td>
+</tr>
+<tr>
+<td><strong>Use the Server Configuration Tool to install the MobileFirst Platform Foundation project</strong></td>
+<td><a href="http://www-01.ibm.com/support/knowledgecenter/SSZH4A_6.1.0/com.ibm.worklight.deploy.doc/deploy/c_using_server_config_tool.html">Deploying, updating, and undeploying a Worklight Server by using the Server Configuration Tool</a></td>
+</tr>
+<tr>
+<td><strong>Manually install the MobileFirst Platform Foundation project</strong></td>
+<td><a href="http://www-01.ibm.com/support/knowledgecenter/SSZH4A_6.1.0/com.ibm.worklight.deploy.doc/admin/c_manually_configuring_app_server.html">Deploying a project WAR file and configuring the application server manually</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important:</strong> If you are configuring multiple projects on a single MobileFirst Platform Foundation server, then see the MobileFirst Platform Foundation topic <a href="http://www-01.ibm.com/support/knowledgecenter/SSZH4A_6.1.0/com.ibm.worklight.deploy.doc/devref/c_ant_tasks_configuring_multiple_wl_projects.html">Configuring multiple IBM Worklight projects</a>. If you run multiple projects on a single MobileFirst Platform Foundation server, install the .war files from multiple MobileFirst Platform Foundation projects in the same application server, and then have them operate in parallel and independently.</p>
+<p><strong>Note:</strong> The MobileFirst Platform Foundation project WAR file deployment that is described in this step is a one time configuration. When you deploy your mobile application, update the WAR file on the application server by using the plug-in process steps.</p>
+</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../plugins_worklight_buildanddeploy/">Building and deploying mobile applications</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/plugins_worklight_configserver.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

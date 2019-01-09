@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_teams_mapping/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Mapping teams to objects - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Mapping teams to objects", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="mapping-teams-to-objects">Mapping teams to objects</h1>
+<p>In addition to assigning a team to an object (such as a component or application), when you create the object, you can use the Teams page on the server to map teams to objects.</p>
+<p>To map a team to an object, you must be a member of the team and have the manage teams subpermission for that type of object.</p>
+<p>You can assign teams to many of the objects that you create. When you create an object, you can assign teams by using the associated Create item window. You can also assign teams by using the Configuration page for the object. You can also map teams to objects as described here. When you assign a team to an object, such as an environment, only team members with the appropriate permissions can interact with the affected object. By default, new objects are assigned to all the teams that you are a member of. To specify which teams to assign new objects to, see <a href="../prefs_teams/">Setting the teams for your account</a>.</p>
+<ol>
+<li>On the server, click <strong>Settings</strong> > <strong>Teams</strong>. </li>
+<li>From the list of teams, select the team to use.</li>
+<li>
+<p>Under <strong>Team Object Mappings</strong>, in the <strong>View</strong> list, select the type of object. The table shows the objects that are associated with the team.</p>
+<p><img alt="The Team Object Mappings area" src="../../images/security_team_mapping.gif" /></p>
+</li>
+<li>
+<p>From the <strong>Type</strong> list, select the security type. </p>
+</li>
+<li>
+<p>Click <strong>Add</strong>.A list of user-created objects that are not already assigned to the current product area is displayed.</p>
+<p><img alt="Selecting the objects to map to the team" src="../../images/security_team_mapping2.gif" /></p>
+</li>
+<li>
+<p>Select the appropriate check boxes for the objects to assign to the team, and then click <strong>OK</strong>. </p>
+</li>
+</ol>
+<p>Teams that are mapped to objects are displayed on the associated object page.</p>
+<p><strong>Parent topic:</strong> <a href="../security_teams/">Security teams</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_teams_mapping.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

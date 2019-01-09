@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/cost_center_components/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Specifying component costs - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Specifying costs for HCL UrbanCode Deploy components", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="specifying-costs-for-hcl-urbancode-deploy-components">Specifying costs for HCL UrbanCode Deploy components</h1>
+<p>If components have a cost to deploy, you can assign a cost to them. Then, when you provision an environment, the blueprint design server includes the cost of the components in the cost estimate for the environment.</p>
+<p>Connect the blueprint design server to the server. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</p>
+<ol>
+<li>In the blueprint designer, as an administrator, click <strong>Settings</strong> > <strong>Cost Centers</strong>. </li>
+<li>Click <strong>Add Cost Center</strong>.</li>
+<li>Specify a name for the cost center, such as HCL® UrbanCode™ Deploy components. </li>
+<li>In the <strong>Source</strong> list, select <strong>UrbanCode Deploy</strong>.</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Add one or more components to the cost center: <ol>
+<li>In the <strong>Cost Centers</strong> section, click the new cost center to select it.</li>
+<li>In the <strong>Component</strong> list, click <strong>Add Component</strong>.</li>
+<li>In the <strong>Component Id</strong> field, specify the ID of the component in HCL UrbanCode Deploy. </li>
+<li>In the <strong>Name</strong> field, specify the name of the component on the HCL UrbanCode Deploy server. </li>
+<li>Click <strong>Save</strong>.</li>
+<li>Repeat the process to add components to the cost center. </li>
+</ol>
+</li>
+<li>
+<p>Specify the cost per hour of the components: </p>
+<ol>
+<li>With the cost center selected, go to the <strong>Cost Metrics</strong> tab.</li>
+<li>In the table of components, specify the cost per hour of each component.</li>
+<li>Click <strong>Save</strong>.
+The table of components shows the cost per hour of each component, as shown in the following image. The image shows two components. The <code>Application</code> component costs $0.10 per hour, and the <code>Database</code> component costs $0.20 per hour.</li>
+</ol>
+<p><img alt="The table of components, showing the cost for each component" src="../../images/cost_center_components_a.gif" /></p>
+</li>
+</ol>
+<p>When you provision an environment from the blueprint designer as described in <a href="../env_provision_edt/">Provisioning environments from the blueprint designer (through OpenStack Heat)</a>, the blueprint design server includes the cost of the components in the cost estimate. To find the cost of the components, the blueprint design server first retrieves values from the ID and name fields of the components in the blueprint. Then, it looks for matching IDs and names in the cost center. It adds the cost of the components to the costs from any other cost centers that are associated with the cloud.</p>
+<p><strong>Note:</strong> You cannot estimate the cost for cloud environments that you provisioned by using a composite blueprint.</p>
+<p><strong>Parent topic:</strong> <a href="../cost_ov/">Estimating the cost for cloud environments</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/cost_center_components.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

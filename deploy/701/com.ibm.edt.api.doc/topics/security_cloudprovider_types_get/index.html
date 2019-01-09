@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.api.doc/topics/security_cloudprovider_types_get/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Get a list of cloud provider types - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Get a list of cloud provider types", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example", url: "#example" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="get-a-list-of-cloud-provider-types">Get a list of cloud provider types</h1>
+<h2 id="request">Request</h2>
+<pre><code>GET http://{hostname}:{port}
+  /landscaper/security/cloudprovider/types
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<pre><code>curl -u jsmith:passwd 
+  http://myserver.example.com:8080/landscaper/security/cloudprovider/types
+</code></pre>
+
+<h2 id="example-response">Example response</h2>
+<pre><code>[
+    {
+        &quot;id&quot;: &quot;OPENSTACK&quot;,
+        &quot;name&quot;: &quot;Openstack&quot;,
+        &quot;properties&quot;: [
+            {
+                &quot;description&quot;: &quot;The full URL to the Identity server. It should begin with 'http://' or 'https://'.&quot;,
+                &quot;id&quot;: &quot;ff247cc6-f498-4dfb-8681-40528e2f2746&quot;,
+                &quot;label&quot;: &quot;Identity URL&quot;,
+                &quot;name&quot;: &quot;url&quot;,
+                &quot;required&quot;: true,
+                &quot;type&quot;: &quot;VALIDATION_TEXT&quot;,
+                &quot;value&quot;: &quot;http://localhost:5000/v2.0/&quot;
+            },
+            {
+                &quot;description&quot;: &quot;The timeout for provisioning a stack from the heat request.&quot;,
+                &quot;id&quot;: &quot;fb5401ca-cd22-4b63-8663-017d5d9a8e22&quot;,
+                &quot;label&quot;: &quot;Timeout in Mins&quot;,
+                &quot;name&quot;: &quot;timeoutMins&quot;,
+                &quot;required&quot;: true,
+                &quot;type&quot;: &quot;VALIDATION_TEXT&quot;,
+                &quot;value&quot;: &quot;10&quot;
+            },
+            {
+                &quot;description&quot;: &quot;Use the default orchestration engine configured with the keystone.&quot;,
+                &quot;id&quot;: &quot;2e900ebf-34e5-4c1a-bedd-20bf857f6fa1&quot;,
+                &quot;label&quot;: &quot;Use default orchestration engine&quot;,
+                &quot;name&quot;: &quot;useDefaultOrchestration&quot;,
+                &quot;required&quot;: false,
+                &quot;type&quot;: &quot;CHECKBOX&quot;,
+                &quot;value&quot;: &quot;true&quot;
+            },
+            {
+                &quot;description&quot;: &quot;Url of orchestration engine.&quot;,
+                &quot;id&quot;: &quot;a674540a-ec07-4bcc-b1b1-da4c6bc980d7&quot;,
+                &quot;label&quot;: &quot;Orchestration Engine URL&quot;,
+                &quot;name&quot;: &quot;orchestrationEngineUrl&quot;,
+                &quot;required&quot;: true,
+                &quot;type&quot;: &quot;VALIDATION_TEXT&quot;,
+                &quot;value&quot;: &quot;http://localhost:8004&quot;
+            }
+        ]
+    },
+    {
+        &quot;id&quot;: &quot;AMAZON&quot;,
+        &quot;name&quot;: &quot;Amazon EC2&quot;,
+        &quot;properties&quot;: [
+            {
+                &quot;description&quot;: &quot;The full URL to the Identity server. It should begin with 'http://' or 'https://'.&quot;,
+                &quot;id&quot;: &quot;221f7473-aafa-4e2e-9667-cdc2dade2a5e&quot;,
+                &quot;label&quot;: &quot;Identity URL&quot;,
+                &quot;name&quot;: &quot;url&quot;,
+                &quot;required&quot;: true,
+                &quot;type&quot;: &quot;VALIDATION_TEXT&quot;,
+                &quot;value&quot;: &quot;http://localhost:5000/v2.0/&quot;
+            },
+            {
+                &quot;description&quot;: &quot;The timeout for provisioning a stack from the heat request.&quot;,
+                &quot;id&quot;: &quot;2e934daa-9bdd-4917-9b9a-3b3dc399fc13&quot;,
+                &quot;label&quot;: &quot;Timeout in Mins&quot;,
+                &quot;name&quot;: &quot;timeoutMins&quot;,
+                &quot;required&quot;: true,
+                &quot;type&quot;: &quot;VALIDATION_TEXT&quot;,
+                &quot;value&quot;: &quot;10&quot;
+            },
+            {
+                &quot;description&quot;: &quot;Use the default orchestration engine configured with the keystone.&quot;,
+                &quot;id&quot;: &quot;c3308df8-01d6-4708-bdb9-87720565ee15&quot;,
+                &quot;label&quot;: &quot;Use default orchestration engine&quot;,
+                &quot;name&quot;: &quot;useDefaultOrchestration&quot;,
+                &quot;required&quot;: false,
+                &quot;type&quot;: &quot;CHECKBOX&quot;,
+                &quot;value&quot;: &quot;true&quot;
+            },
+            {
+                &quot;description&quot;: &quot;Url of orchestration engine.&quot;,
+                &quot;id&quot;: &quot;c7e83636-c290-42b0-8c4f-4966b92cd467&quot;,
+                &quot;label&quot;: &quot;Orchestration Engine URL&quot;,
+                &quot;name&quot;: &quot;orchestrationEngineUrl&quot;,
+                &quot;required&quot;: true,
+                &quot;type&quot;: &quot;VALIDATION_TEXT&quot;,
+                &quot;value&quot;: &quot;http://localhost:8004&quot;
+            }
+        ]
+    },
+    {
+        &quot;id&quot;: &quot;VMWARE&quot;,
+        &quot;name&quot;: &quot;VMware&quot;,
+        &quot;properties&quot;: [
+            {
+                &quot;description&quot;: &quot;The full URL to the Identity server. It should begin with 'http://' or 'https://'.&quot;,
+                &quot;id&quot;: &quot;2ba6b7ed-7d6b-4ae3-aea8-06319c0681a1&quot;,
+                &quot;label&quot;: &quot;Identity URL&quot;,
+                &quot;name&quot;: &quot;url&quot;,
+                &quot;required&quot;: true,
+                &quot;type&quot;: &quot;VALIDATION_TEXT&quot;,
+                &quot;value&quot;: &quot;http://localhost:5000/v2.0/&quot;
+            },
+            {
+                &quot;description&quot;: &quot;The timeout for provisioning a stack from the heat request.&quot;,
+                &quot;id&quot;: &quot;a97a0feb-2179-496d-a2cd-31f9945de9db&quot;,
+                &quot;label&quot;: &quot;Timeout in Mins&quot;,
+                &quot;name&quot;: &quot;timeoutMins&quot;,
+                &quot;required&quot;: true,
+                &quot;type&quot;: &quot;VALIDATION_TEXT&quot;,
+                &quot;value&quot;: &quot;10&quot;
+            },
+            {
+                &quot;description&quot;: &quot;Use the default orchestration engine configured with the keystone.&quot;,
+                &quot;id&quot;: &quot;1679e93f-ce60-406c-94eb-6d330d2f9a2a&quot;,
+                &quot;label&quot;: &quot;Use default orchestration engine&quot;,
+                &quot;name&quot;: &quot;useDefaultOrchestration&quot;,
+                &quot;required&quot;: false,
+                &quot;type&quot;: &quot;CHECKBOX&quot;,
+                &quot;value&quot;: &quot;true&quot;
+            },
+            {
+                &quot;description&quot;: &quot;Url of orchestration engine.&quot;,
+                &quot;id&quot;: &quot;906db3b0-a390-4b33-b23e-806db257042c&quot;,
+                &quot;label&quot;: &quot;Orchestration Engine URL&quot;,
+                &quot;name&quot;: &quot;orchestrationEngineUrl&quot;,
+                &quot;required&quot;: true,
+                &quot;type&quot;: &quot;VALIDATION_TEXT&quot;,
+                &quot;value&quot;: &quot;http://localhost:8004&quot;
+            }
+        ]
+    }
+]
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../security_cloudprovider_/">security/cloudprovider resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.api.doc/topics/security_cloudprovider_types_get.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

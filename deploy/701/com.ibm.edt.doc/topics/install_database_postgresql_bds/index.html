@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/install_database_postgresql_bds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring a PostgreSQL database for the blueprint design server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring a PostgreSQL database for the blueprint design server", url: "#_top", children: [
+          ]},
+          {title: "TYPE  DATABASE    USER        CIDR-ADDRESS          METHOD", url: "#type-database-user-cidr-address-method", children: [
+          ]},
+          {title: "\"local\" is for Unix domain socket connections only", url: "#local-is-for-unix-domain-socket-connections-only", children: [
+          ]},
+          {title: "IPv4 connections:", url: "#ipv4-connections", children: [
+          ]},
+          {title: "IPv6 connections:", url: "#ipv6-connections", children: [
+          ]},
+          {title: "TYPE  DATABASE    USER        CIDR-ADDRESS          METHOD", url: "#type-database-user-cidr-address-method_1", children: [
+          ]},
+          {title: "\"local\" is for Unix domain socket connections only", url: "#local-is-for-unix-domain-socket-connections-only_1", children: [
+          ]},
+          {title: "IPv4 connections:", url: "#ipv4-connections_1", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-a-postgresql-database-for-the-blueprint-design-server">Configuring a PostgreSQL database for the blueprint design server</h1>
+<p>To use a PostgreSQL database with the blueprint design server, before you install the blueprint design server, install the PostgreSQL database.</p>
+<p>Before you install the blueprint design server, install PostgreSQL. If you are evaluating HCL® UrbanCode™ Deploy, you can install the database on the same system as the blueprint design server.</p>
+<p>For example, the command to install PostgreSQL on a Red Had Enterprise Linux™ (RHEL) 7 system might look like the following example:</p>
+<pre><code>yum -y install postgresql-server
+</code></pre>
+
+<p>The command to initialize and start the PostgreSQL database on a RHEL 7 system might look like the following example:</p>
+<pre><code>postgresql-setup initdb ; systemctl start postgresql
+</code></pre>
+
+<p><strong>Note:</strong> The blueprint design server requires data from the database to be encoded in UTF-8.</p>
+<p>The installation files for the blueprint designer contain the JDBC file that is required for the blueprint design server to communicate with the PostgreSQL database.</p>
+<ol>
+<li>
+<p>Open a command-line window and log in to the database as a user with table-creation privileges. The default PostgreSQL user is <code>postgres</code>.</p>
+<p><strong>Restriction:</strong> If you install PostgreSQL on RHEL, you cannot access the database with the root user account. If you are logged in to RHEL 7 as the root user, you can access the <code>postgres</code> account by running the following command:</p>
+<p><code>su - postgres</code></p>
+<p>The command to log in to the database server might look like this example:</p>
+<p><code>psql</code></p>
+</li>
+<li>
+<p>Create a database. The following commands are an example of how you might create this database:</p>
+<p><code>CREATE DATABASE ibm_ucdp;</code></p>
+<p><code>CREATE USER ibm_ucdp WITH PASSWORD 'password';</code></p>
+<p><code>GRANT ALL PRIVILEGES ON DATABASE ibm_ucdp TO ibm_ucdp;</code></p>
+</li>
+<li>
+<p>To exit the PostgreSQL command line, type <code>\q</code>. </p>
+</li>
+<li>
+<p>Configure the PostgreSQL database to communicate with the blueprint design server. </p>
+<ol>
+<li>Open the configuration file for host-based authentication. You specify the location of this file at server start. By default, the file is named pg_hba.conf. By default, on RHEL 7 , the file is at /var/lib/pgsql/data/, and on Windows™, the file is at C:\Program Files\PostgreSQL\version_number\data\.</li>
+<li>
+<p>In the configuration file for host-based authentication, configure password-based authentication for the connection to your blueprint design server. For example, to specify hashed passwords for either an IPv4 or an IPv6 connection, set the METHOD parameter to md5. The settings resemble the following code:</p>
+<p>```</p>
+<h1 id="type-database-user-cidr-address-method">TYPE  DATABASE    USER        CIDR-ADDRESS          METHOD</h1>
+<h1 id="local-is-for-unix-domain-socket-connections-only">"local" is for Unix domain socket connections only</h1>
+<p>local   all         all                               ident</p>
+<h1 id="ipv4-connections">IPv4 connections:</h1>
+<p>host    all         all         192.168.2.0/24        <strong>md5</strong></p>
+<h1 id="ipv6-connections">IPv6 connections:</h1>
+<p>host    all         all         ::/0                  <strong>md5</strong>
+```</p>
+<p><strong>Note:</strong> You must not change your local authentication method.</p>
+</li>
+<li>
+<p>In the configuration file for host-based authentication, specify the CIDR address for your blueprint design server. The CIDR address contains both the IP address of the connection and its routing prefix. See <a href="http://www.postgresql.org/docs/9.3/static/auth-pg-hba-conf.html">http://www.postgresql.org/docs/9.3/static/auth-pg-hba-conf.html</a>. For example, if you use an IPv4 connection, set the CIDR-ADDRESS to <code>ip\_address/routing\_prefix</code>. In the following code, the IPv4 CIDR-ADDRESS is set to 192.168.2.0/24:</p>
+<p>```</p>
+<h1 id="type-database-user-cidr-address-method_1">TYPE  DATABASE    USER        CIDR-ADDRESS          METHOD</h1>
+<h1 id="local-is-for-unix-domain-socket-connections-only_1">"local" is for Unix domain socket connections only</h1>
+<p>local   all         all                               ident</p>
+<h1 id="ipv4-connections_1">IPv4 connections:</h1>
+<p>host    all         all         <strong>192.168.2.0/24</strong>        md5</p>
+<p>```</p>
+</li>
+<li>
+<p>Open the PostgreSQL configuration file. The file is named postgresql.conf. By default, on RHEL 7, the file is at /var/lib/pgsql/data/, and on Windows, the file is at C:\Program Files\PostgreSQL\version_number\data\.</p>
+</li>
+<li>
+<p>In the PostgreSQL configuration file, open the database communication port. Uncomment the line that contains the port parameter and provide the appropriate value. For example, to specify the default communication port for the JDBC connection, set the port to 5432. The line resembles the following code:</p>
+<p><code>port = 5432</code></p>
+</li>
+<li>
+<p>In the PostgreSQL configuration file, provide the IP addresses to listen on. Uncomment the line that contains the listen_addresses parameter and provide the appropriate value. For example, to listen on all addresses, set the listen_addresses to '*'. The line resembles the following code:</p>
+<p><code>listen_addresses = '*'</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Restart the database. For example, to restart in RHEL 7, run the following command:</p>
+<p><code>systemctl restart postgresql</code></p>
+</li>
+<li>
+<p>Begin server installation. See <a href="../install_server_bds/">Installing the blueprint design server</a> . When you are prompted for the database type, enter postgres. </p>
+</li>
+<li>Provide the JDBC driver class that the blueprint design server uses to connect to the database. The default value is <code>org.postgresql.Driver</code>.</li>
+<li>
+<p>Next, provide the JDBC connection string. Typically, it uses this format:</p>
+<p><code>jdbc:postgresql://DB\_URL:DB\_PORT/DB\_NAME</code></p>
+<p>This example shows a JDBC connection string:</p>
+<p><code>jdbc:postgresql://localhost:5432/ibm_ucdp</code></p>
+</li>
+<li>
+<p>Enter the database user name and password that you created. </p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../install_database_bds_ov/">Blueprint design server database configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/install_database_postgresql_bds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

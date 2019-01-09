@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_index/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Modifying file indexing - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modifying file indexing", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modifying-file-indexing">Modifying file indexing</h1>
+<p>You can index the blueprint and configuration files that you store in the default and team-based Git repositories for your blueprint designer.</p>
+<p>In version 6.2.1.1 and later of the HCL® UrbanCode™ Deploy blueprint designer, the blueprint design server automatically indexes the blueprints and configuration files that are stored in the default and team-based Git repositories. These files all use the <code>.yml</code> or <code>.yaml</code> file extensions. You can modify the indexing frequency or disable indexing.</p>
+<ol>
+<li>Stop the blueprint design server. See <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</li>
+<li>Open the server_installation_directory/conf/server/server.properties file. </li>
+<li>Set the indexing behavior of your blueprint design server. By default, the lucene.allowIndexing parameter is set to true. To deactivate indexing, set the lucene.allowIndexing parameter to false.</li>
+<li>Set the indexing frequency of your blueprint design server. If you set the lucene.allowIndexing to true, enter the interval in minutes to index the files. By default, the lucene.frequency parameter is set to 2. Frequently indexing the contents of your Git repositories might impact blueprint designer performance.</li>
+<li>Save your changes to the /conf/server/server.properties file. </li>
+<li>Restart the blueprint design server. See <a href="../../../com.ibm.udeploy.install.doc/topics/stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../blueprint_storage/">Blueprint storage on the blueprint design server</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_index.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

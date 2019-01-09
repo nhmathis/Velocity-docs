@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_workflow/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Processes - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Processes", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="processes">Processes</h1>
+<p>Processes are automated tasks that run on agents.</p>
+<p>There are three types of processes:</p>
+<ul>
+<li>Generic processes run outside the context of components or applications. Generic processes are shown on the top-level <strong>Processes</strong> tab. You can use generic processes in these instances, for example:<ul>
+<li>In conjunction with a number of different component processes that do not fit well into a component template</li>
+<li>When you want to run processes that directly affect HCL® UrbanCode™ Deploy agents that are unrelated to component, such as changing the agent configuration</li>
+</ul>
+</li>
+<li>Application processes run within the context of applications. In many cases, application processes call component processes. For example, an application process can call the component processes that deploy their associated components.</li>
+<li>Component processes run tasks on a single component, such as deploying it, uninstalling it, or running configuration tasks on it.</li>
+</ul>
+<p>Processes are lists of steps and connections between those steps. Each step is an individual command that runs on a target computer. Steps can manipulate files, run system commands, download files, and run programs. Plug-ins contribute most of these steps; plug-ins are available that work with many different types of software. For information about steps that are provided by plug-ins, see the documentation for the individual plug-in on IBM® developerWorks®: <a href="https://developer.ibm.com/urbancode/plugins/ibm-urbancode-deploy">IBM UrbanCode™ Deploy Plug-ins</a>.</p>
+<p>You use the process editor to work with processes. See <a href="../comp_workflow_edit/">Editing processes</a>.</p>
+<p>Each time you request a process, the server keeps a log of information about the process and the individual logs from each step. To download these logs, open the process request and click <strong>Download All Logs</strong>.</p>
+<ul>
+<li><strong><a href="../process_steps/">Process step types and logic</a></strong><br />
+When you design processes, you use different kinds of process steps and joining techniques. You can assign properties to process steps and use them to control step execution.</li>
+<li><strong><a href="../intro_component_processes/">Component processes</a></strong><br />
+A component process is a series of user-defined steps that operate on a component's artifacts. Each component has at least one process that is defined for it and can have several.</li>
+<li><strong><a href="../app_process/">Application processes</a></strong><br />
+You can use application processes to deploy or to roll back components.</li>
+<li><strong><a href="../genProcess_ch/">Generic processes</a></strong><br />
+Generic processes are not specific to a particular component and can be used in any number of applications. They are like general purpose processes. You can use generic processes to download and install packages on the system or perform other configuration management related tasks such as configuring SSH or completing FTP tasks. With a generic process, for example, you can update Linux agents that were recently installed by using SSH to run as a service on a Linux computer. Linux agents cannot be updated in this way during a remote installation.</li>
+<li><strong><a href="../comp_workflow_edit/">Editing processes</a></strong><br />
+In the process editor you organize the steps in a process, specify their properties, and connect them to each other.</li>
+<li><strong><a href="../process_drafts/">Working on processes in safe edit mode</a></strong><br />
+Safe editing enables you to test component processes before making them available in normal environments. Make updates to your component process, test those updates safely, and then promote to a new version when you are ready.</li>
+<li><strong><a href="../comp_workflow_running/">Running processes</a></strong><br />
+The way you run a process is different for each type of process.</li>
+<li><strong><a href="../comp_workflow_property/">Adding process properties</a></strong><br />
+A process property provides a way to add user-supplied information to a process. A running process can prompt users for information and then incorporate it into the process. For example, if the process entails authenticating with another server, you can require that a user enter an ID and a password for the process to continue. Properties are defined in the Edit Property dialog box.</li>
+<li><strong><a href="../comp_workflow_copy/">Copying process steps</a></strong><br />
+You can copy and paste process steps in all process types: component, application, approval, and generic.</li>
+<li><strong><a href="../process_token_restrict/">Manage process step authentication</a></strong><br />
+Use token restrictions to manage process step authentication.</li>
+<li><strong><a href="../arch_appx_sudo/">User impersonation for process steps</a></strong><br />
+HCL UrbanCode Deploy can use user impersonation when an agent must run a command for which it might not otherwise have permission, or when a specific user must be employed for a process.</li>
+<li><strong><a href="../app_processSteps/">Process steps: Reference</a></strong><br />
+Application processes, component processes, and generic processes are created with the process editor.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../part_using/">Modeling software deployment</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_workflow.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

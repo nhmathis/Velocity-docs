@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/ssl_mutual_authServers/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Sharing secured properties among servers - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Sharing secured properties among servers", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="sharing-secured-properties-among-servers">Sharing secured properties among servers</h1>
+<p>To share applications that have secured properties among HCL® UrbanCode™ Deploy servers, exchange keys from each server's encryption keystore.</p>
+<p>Make sure that the location of the Java™ keytool command is on the PATH variable of the servers. The keytool application is included in the Java developer kit and is not part of HCL UrbanCode Deploy.</p>
+<p>To share applications that have secured properties, export the server's key and import it into each target server. This process enables applications from the exporting server to be used by the other servers. Repeat the process for each server with applications that you want to share.</p>
+<ol>
+<li>On the first server, open a command-line window, and go to the server installation conf/server directory. </li>
+<li>
+<p>Find the value of the encryption.keystore.alias property in the install/conf/server/installed.properties file. For example, the following code shows a value of <code>abcdkey1234</code>:</p>
+<p><code>encryption.keystore=../app_data/conf/encryption.keystore
+encryption.keystore.alias=abcdkey1234</code></p>
+<p>You must have this alias to complete the next steps.</p>
+</li>
+<li>
+<p>Go to the folder that contains the keystore file encryption.keystore. The default location is appData/conf/encryption.keystore, where appData is the application data folder.</p>
+</li>
+<li>
+<p>Run the following command to import the server key into a temporary keystore.You must enter this command on a single line.</p>
+<p><code>keytool -importkeystore -srckeystore encryption.keystore 
+  -srcstorepass srcPassword 
+  -srcstoretype jceks 
+  -alias alias 
+  -destkeystore temp.keystore 
+  -deststorepass tempPassword 
+  -deststoretype jceks</code></p>
+<ul>
+<li>For the srcPassword variable, specify the password for the server keystore. The default password is <code>changeit</code>.</li>
+<li>For the alias variable, specify the value of the encryption.keystore.alias property.</li>
+<li>For the tempPassword variable, specify a password for the temporary keystore. You will use this password later.</li>
+<li>Copy the temporary keystore, which is named temp.keystore in the previous example and store it in the appropriate folder on the second server. Check the <strong>server.appdata.dir</strong> property in the installed.properties file to determine where to store the keystore.</li>
+<li>If the <strong>server.appdata.dir</strong> property has a value of two periods (..), copy the keystore to the install/conf/ folder on the second server.</li>
+<li>If the property has a value other than two periods, the server uses an application data folder. Copy the keystore to the appdata/conf/ folder on the second server.</li>
+<li>On the second server, open a command-line window, and go to the server installation install/conf/server directory. </li>
+<li>Run the following command to import the key in the temporary keystore into the server keystore.You must enter this command on a single line.</li>
+</ul>
+<p><code>keytool -importkeystore -srckeystore temp.keystore 
+  -srcstorepass tempPassword 
+  -srcstoretype jceks 
+  -alias alias 
+  -destkeystore encryption.keystore 
+  -deststorepass destPassword 
+  -deststoretype jceks</code></p>
+<ul>
+<li>For the tempPassword variable, specify the password for the temporary keystore.</li>
+<li>For the alias variable, specify the encryption.keystore.alias property of the first server, not the current server.</li>
+<li>For the destPassword password, specify the password for the current server keystore.</li>
+<li>Restart the second server. </li>
+<li>Delete the temporary keystore file from each server.</li>
+</ul>
+</li>
+</ol>
+<p>The encryption key from the first server keystore is now on the second server keystore. As a result, the second server can now decrypt applications from the first server.</p>
+<p>You can verify that the second server keystore has the key by running the following command on the second server:</p>
+<pre><code>keytool -list -keystore encryption.keystore 
+  -storepass password 
+  -storetype jceks
+</code></pre>
+
+<p>For the password variable, use the password of the server keystore.</p>
+<p>This command lists the keys in the server keystore. If you copied the keys successfully, the list includes at least two keys: one from each of the servers. These keys are listed according to the encryption.keystore.alias properties of the respective servers. For example, the following output shows two keys:</p>
+<pre><code>Keystore type: jceks
+Keystore provider: IBMJCE
+
+Your keystore contains 2 entries
+
+efghkey5678, Oct 15, 2013, SecretKeyEntry,
+abcdkey1234, Nov 22, 2013, SecretKeyEntry,
+</code></pre>
+
+<p>Repeat this process to copy keys between other servers.</p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/ssl_mutual_authServers.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

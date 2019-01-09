@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/resources_templates_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating resource templates - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating resource templates", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-resource-templates">Creating resource templates</h1>
+<p>To create a resource template, specify the contents and organization of the template, including resources, groups, and agent prototypes.</p>
+<ol>
+<li>Click <strong>Resources</strong> > <strong>Resource Templates</strong> and then click <strong>Create Resource Template</strong>. </li>
+<li>
+<p>Specify a name for the template. </p>
+<p><strong>Restriction:</strong> If you use this resource template with a blueprint that you provision to a cloud that uses virtual system patterns, the name cannot contain asterisk (*), backslash (\), or forward slash (/) characters. See <a href="../../../com.ibm.edt.doc/topics/blueprint_edit_clouds_vsp/">Modeling environments for clouds that use virtual system patterns</a>.</p>
+</li>
+<li>
+<p>In the <strong>Teams</strong> fields, specify the access information for the new resource template. </p>
+</li>
+<li>Click <strong>Save</strong>. The resource hierarchy for the new template opens in the editor. The hierarchy contains a top-level group.</li>
+<li>Add resources to the template hierarchy by selecting the top-level group or another resource or group in the template, clicking <strong>Actions</strong>, and clicking a task, such as <strong>Add Group</strong>. The template can contain any number of resources.</li>
+<li>
+<p>Add agent prototypes to the resource template. An agent prototype is a resource that represents one or more agents that are not yet installed or connected to an environment. </p>
+<ol>
+<li>Next to a folder in the resource template, click <strong>Actions</strong> > <strong>Add Agent Prototype</strong>. You can add only one agent prototype to each folder.</li>
+<li>In the Create Resource window, specify a description for the agent prototype. </li>
+<li>
+<p>Specify a name pattern for the agents that the agent prototype represents. You might use an agent name pattern if you have a system for provisioning agents that is not cloud-based. When you create an environment from an application blueprint that is based on this resource template, you map agents that match the name pattern to the corresponding agent prototypes in the blueprint. For any agent prototypes that do not match existing agents, an entry is created in the environment for an agent with the expected name.</p>
+<p><strong>Note:</strong> When you specify an agent name pattern, you can not use wildcards or regular expressions. You can use the following special properties as variables that represent the application name and the environment name: <code>$\{p:application.name\}</code> and <code>$\{p:environment.name\}</code>.</p>
+</li>
+<li>
+<p>Click <strong>Save</strong>. </p>
+</li>
+<li>
+<p>Add components to the agent prototypes. </p>
+</li>
+<li>
+<p>Next to an agent prototype in the resource template, click <strong>Actions</strong> > <strong>Add Component</strong>. </p>
+</li>
+<li>From the <strong>Component</strong> list, select a component that runs on the agent prototype. </li>
+<li>Enter a description. </li>
+<li>Define default user impersonation credentials. For information about setting impersonation credentials, see <a href="../resources_impersonation/">Defining default user impersonation credentials</a>.</li>
+<li>Click <strong>Save</strong>. 
+<strong>Note:</strong> If you create an environment with an environment template and then add component mappings to the resource template used by the template, the new component mappings are added to the environment. However, if you remove component mappings from the resource template, the component mappings are not removed from the environment.</li>
+</ol>
+</li>
+<li>
+<p>Add component tags to the agent prototypes. </p>
+<p><strong>Note:</strong> If you use this resource template in an application template and assign component tags to the application template, add those component tags to agent prototypes.</p>
+<ol>
+<li>Next to an agent prototype in the resource template, click <strong>Actions</strong> > <strong>Add Component Tag</strong>. </li>
+<li>From the <strong>Component Tag</strong> list, select a tag for the component that runs on the agent prototype. </li>
+<li>Enter a description. </li>
+<li>Define default user impersonation credentials. For information about setting impersonation credentials, see <a href="../resources_impersonation/">Defining default user impersonation credentials</a>.</li>
+<li>Click <strong>Save</strong>. </li>
+</ol>
+</li>
+</ol>
+<p>For example, the following resource template contains a single agent prototype.</p>
+<p><img alt="A simple resource template with an agent prototype that hosts a component" src="../../images/resources_templates_a.gif" /></p>
+<p><strong>Parent topic:</strong> <a href="../resources_templates/">Resource templates</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/resources_templates_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

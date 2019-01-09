@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/propertiesreference/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Default properties - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Default properties", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="default-properties">Default properties</h1>
+<p>Many default properties are available for use while a process runs. These properties provide information about the process and the elements that are involved in the process, such as applications, components, and resources.</p>
+<p>To see the properties that are available to a process, run the process. When the process is finished, go to the <strong>Properties</strong> tab of the process request. This tab lists all the properties that are available to the process.</p>
+<p>The following table lists properties that are automatically available to processes and the types of processes that can access each property.</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+<th>Process types</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent.id</td>
+<td>The unique ID of the agent.</td>
+<td>Generic processes and component processes</td>
+</tr>
+<tr>
+<td>agent.name</td>
+<td>The name of the agent.</td>
+<td>Generic processes and component processes</td>
+</tr>
+<tr>
+<td>application.id</td>
+<td>The unique ID of the application.</td>
+<td>Application processes, component processes</td>
+</tr>
+<tr>
+<td>application.name</td>
+<td>The name of the application.</td>
+<td>Application processes, component processes</td>
+</tr>
+<tr>
+<td>applicationProcess.id</td>
+<td>The unique ID of the application process.</td>
+<td>Application processes</td>
+</tr>
+<tr>
+<td>applicationProcess.name</td>
+<td>The name of the application process.</td>
+<td>Application processes</td>
+</tr>
+<tr>
+<td>component.id</td>
+<td>The unique ID of the component.</td>
+<td>Application processes, component processes</td>
+</tr>
+<tr>
+<td>component.name</td>
+<td>The name of the component.</td>
+<td>Application processes, component processes</td>
+</tr>
+<tr>
+<td>componentProcess.defaultWorkDir</td>
+<td>The default working directory for the component. The value of this property is equivalent to ${p:resource/work.dir}/${p:component.name}, where ${p:resource/work.dir} is the default working directory for the agent and ${p:component.name} is the component name.</td>
+<td>Component processes</td>
+</tr>
+<tr>
+<td>componentProcess.id</td>
+<td>The ID of the component process.</td>
+<td>Component processes</td>
+</tr>
+<tr>
+<td>componentProcess.name</td>
+<td>The name of the component process.</td>
+<td>Component processes</td>
+</tr>
+<tr>
+<td>currentVersion.id</td>
+<td>The ID of the component version that is used in the process.</td>
+<td>Component processes</td>
+</tr>
+<tr>
+<td>currentVersion.name</td>
+<td>The name of the component version that is used in the process.</td>
+<td>Component processes</td>
+</tr>
+<tr>
+<td>currentVersion.type</td>
+<td>Whether the component version is a full version or incremental version.</td>
+<td>Component processes</td>
+</tr>
+<tr>
+<td>environment.id</td>
+<td>The unique ID of the environment.</td>
+<td>Application processes, component processes</td>
+</tr>
+<tr>
+<td>environment.name</td>
+<td>The name of the environment.</td>
+<td>Application processes, component processes</td>
+</tr>
+<tr>
+<td>finalStatus</td>
+<td>Whether the process succeeded (<code>Success</code>) or failed (<code>Failure</code>).</td>
+<td>Application processes, generic processes, component processes</td>
+</tr>
+<tr>
+<td>parentRequest.id</td>
+<td>The ID of the parent process.</td>
+<td>Application processes, component processes</td>
+</tr>
+<tr>
+<td>request.id</td>
+<td>The unique ID of the process request.</td>
+<td>Application processes, generic processes, component processes</td>
+</tr>
+<tr>
+<td>request.user.displayName</td>
+<td>The name of the user that requested the process.</td>
+<td>Application processes, generic processes, component processes</td>
+</tr>
+<tr>
+<td>request.user.id</td>
+<td>The unique ID of the user that requested the process.</td>
+<td>Application processes, generic processes, component processes</td>
+</tr>
+<tr>
+<td>request.user.name</td>
+<td>The user name of the user that requested the process.</td>
+<td>Application processes, generic processes, component processes</td>
+</tr>
+<tr>
+<td>resource</td>
+<td>The unique ID of the resource that the process runs on.</td>
+<td>Generic processes</td>
+</tr>
+<tr>
+<td>resource.id</td>
+<td>The unique ID of the resource that the process runs on.</td>
+<td>Generic processes, component processes</td>
+</tr>
+<tr>
+<td>resource.name</td>
+<td>The name of the resource that the process runs on.</td>
+<td>Generic processes, component processes</td>
+</tr>
+<tr>
+<td>resource.parent.path</td>
+<td>The parent of the resource that the process runs on</td>
+<td>Generic processes, component processes</td>
+</tr>
+<tr>
+<td>resource.path</td>
+<td>The location of the resource in the resource tree.</td>
+<td>Generic processes, component processes</td>
+</tr>
+<tr>
+<td>resource/system/work.dir</td>
+<td>The working directory on the agent resource.</td>
+<td>Generic processes</td>
+</tr>
+<tr>
+<td>resource/work.dir</td>
+<td>The working directory on the agent resource.</td>
+<td>Generic processes</td>
+</tr>
+<tr>
+<td>server.url</td>
+<td>The URL of the HCL® UrbanCode™ Deploy server.</td>
+<td>Application processes, component processes, generic processes</td>
+</tr>
+<tr>
+<td>snapshot.name</td>
+<td>The name of the snapshot that was used to specify the component versions. This snapshot is sent only when a snapshot is being deployed.</td>
+<td>Application processes</td>
+</tr>
+<tr>
+<td>snapshot.id</td>
+<td>The unique ID of the snapshot that was used to specify the component versions. This snapshot is sent only when a snapshot is being deployed.</td>
+<td>Application processes</td>
+</tr>
+<tr>
+<td>version.id</td>
+<td>The unique ID of the component version.</td>
+<td>The built-in version of this property is available only to component processes that are not of the Operation(no version required) type.</td>
+</tr>
+<tr>
+<td>version.name</td>
+<td>The name of the component version.</td>
+<td>The built-in version of this property is available only to component processes that are not of the Operation(no version required) type.</td>
+</tr>
+<tr>
+<td>working.dir</td>
+<td>The working directory for the process.</td>
+<td>Generic processes</td>
+</tr>
+</tbody>
+</table>
+<p>Steps in component processes also have access to the output properties of previous steps, as in this table:</p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stepName/exitCode</code></td>
+<td>The exit code of the component process step. 0 indicates success; any other value indicates failure.</td>
+</tr>
+<tr>
+<td><code>stepName/LOI</code></td>
+<td>The lines of interest (LOIs) are lines of code that the postprocessing script finds in the step's output log. See <a href="../../../com.ibm.udeploy.reference.doc/topics/ref_create_postprocessing/">The post-processing element</a>.</td>
+</tr>
+<tr>
+<td><code>stepName/Status</code></td>
+<td>Whether the step succeeded (<code>Success</code>) or failed (<code>Failure</code>).</td>
+</tr>
+<tr>
+<td><code>stepName/outputProperty</code></td>
+<td>An output property from a previous step. See <a href="../comp_postprocess_examples/">Examples of post-processing scripts</a>.</td>
+</tr>
+</tbody>
+</table>
+<p>For example, if a prior step in the process is named <code>step1</code>, later steps can access properties such as <code>step1/exitCode</code>. If the step <code>step1</code> creates an output property that is named <code>output1</code>, later steps can access that property with the code <code>step1/output1</code>.</p>
+<p><strong>Parent topic:</strong> <a href="../ud_properties_overview/">Properties</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/propertiesreference.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

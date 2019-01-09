@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/ref_create_command/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>The command element - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "The command element", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="the-command-element">The <code>command</code> element</h1>
+<p>Steps are run by starting the scripting tool or interpreter that is specified by the <code>&lt;command&gt;</code> element. The <code>&lt;command&gt;</code> element's <code>program</code> attribute defines the location of the tool that runs the command.</p>
+<p>It bears repeating that the tool must be on the host and the agent that starts the tool must have access to it. In the following example, the location of the tool that runs the command (the Java™ scripting tool Groovy in this instance) is defined.</p>
+<pre><code>&lt;command program='${GROOVY_HOME}/bin/groovy'&gt;
+
+</code></pre>
+
+<p>The actual command and any parameters it requires are passed to the tool by the <code>&lt;command&gt;</code> element's <code>&lt;arg&gt;</code> child element. Any number of <code>&lt;arg&gt;</code> elements can be used. The <code>&lt;arg&gt;</code> element has several attributes:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;value&gt;</code></td>
+<td>Specifies a parameter that is passed to the tool. Format is tool-specific; must be enclosed by quotation marks.</td>
+</tr>
+<tr>
+<td><code>&lt;path&gt;</code></td>
+<td>Path to files or classes that are required by the tool. Must be enclosed by quotation marks.</td>
+</tr>
+<tr>
+<td><code>&lt;file&gt;</code></td>
+<td>Specifies the path to any files or classes that are required by the tool. Format is tool-specific; must be enclosed by quotation marks.</td>
+</tr>
+</tbody>
+</table>
+<p>Because <code>&lt;arg&gt;</code> elements are processed in the order they are defined, ensured the order conforms to the order that is expected by the tool.</p>
+<pre><code>
+&lt;command program='${GROOVY_HOME}/bin/groovy'&gt;
+  &lt;arg value='-cp' /&gt;
+  &lt;arg path='classes:${sdkJar}:lib/commons-codec.jar:
+    lib/activation-1.1.1.jar:
+    lib/commons-logging.jar:lib/httpclient-cache.jar:
+    lib/httpclient.jar:lib/httpcore.jar:
+    lib/httpmime.jar:lib/javamail-1.4.1.jar' /&gt;
+  &lt;arg file='registerInstancesWithLB.groovy' /&gt;
+  &lt;arg file='${PLUGIN_INPUT_PROPS}' /&gt;
+  &lt;arg file='${PLUGIN_OUTPUT_PROPS}' /&gt;
+&lt;/command&gt;
+
+</code></pre>
+
+<p>The <code>&lt;arg file='${PLUGIN_INPUT_PROPS}'/&gt;</code> specifies the location of the tool-supplied properties file. The <code>&lt;arg file='${PLUGIN_OUTPUT_PROPS}'/&gt;</code> specifies the location of the output file for the step-generated properties.</p>
+<p>Note: new lines are not supported by the <code>&lt;arg&gt;</code> element and are shown in this example only for presentation.</p>
+<p><strong>Parent topic:</strong> <a href="../reference_plugins_create/">Creating plug-ins</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/ref_create_command.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

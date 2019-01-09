@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/t_upgrade_to_new_format/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Automatic upgrades of files stored in the server CodeStation - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Automatic upgrades of files stored in the server CodeStation", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="automatic-upgrades-of-files-stored-in-the-server-codestation">Automatic upgrades of files stored in the server CodeStation</h1>
+<p>When you upgrade to HCL® UrbanCode™ Deploy version 6.1 or later, the server automatically upgrades all artifacts that are stored in its CodeStation.</p>
+<p>When you start the server, the CodeStation upgrade process starts automatically and runs in the background. The upgrade proceeds sequentially through all versions. Versions are upgraded one at a time so that the process does not cause excessive IO and performance issues. There is no server downtime during the upgrade process.</p>
+<p>Before the upgrade, if the server is running on Linux™ and you want to spread the files over multiple disks for the upgrade, you can use soft links. The upgrade creates the following folders:</p>
+<ul>
+<li>app_data/var/repository/blob</li>
+<li>app_data/var/repository/ptr</li>
+<li>app_data/var/repository/stage</li>
+</ul>
+<p>Most of the files are stored in the folder app_data/var/repository/blob. Within this folder, files are stored in up to 256 subfolders based on a hexadecimal hash, such as app_data/var/repository/blob/00 or app_data/var/repository/blob/01. If you want to spread the files over multiple disks, create these folders before the upgrade and link the folders to the appropriate disks. In this case, the upgrade stores the files on the targeted disks.</p>
+<p>While the upgrade process is in progress, you can continue working in the deployment tool. You can request deployments of a specific artifact version at any time, even before the server upgrades the version. When you send a deployment request for a specific version, the server checks whether the version is upgraded. If version is not upgraded, the upgrade process starts immediately.</p>
+<p>For example, if you request a deployment with a specific component version, but it is not upgraded, the server upgrades the version before it continues with the deployment.</p>
+<p>To monitor the upgrade process, click <strong>Settings</strong> > <strong>CodeStation</strong>, and view the progress bar and percentage. When the upgrade process finishes, the progress bar closes.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_upgrading/">Upgrading and migrating</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/t_upgrade_to_new_format.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

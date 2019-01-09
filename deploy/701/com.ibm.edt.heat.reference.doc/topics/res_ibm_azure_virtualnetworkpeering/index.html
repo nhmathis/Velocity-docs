@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_azure_virtualnetworkpeering/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM Azure VirtualNetworkPeering - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::Azure::VirtualNetworkPeering", url: "#_top", children: [
+              {title: "Example", url: "#example" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmazurevirtualnetworkpeering">IBM::Azure::VirtualNetworkPeering</h1>
+<p>This type represents a Microsoft™ Azure virtual network peering.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>allow_forwarded_traffic</td>
+<td>Boolean</td>
+<td>False</td>
+<td>Core</td>
+<td>Specify <code>True</code> to allow forwarded traffic from the virtual machines in the remote virtual network.</td>
+</tr>
+<tr>
+<td>allow_gateway_transit</td>
+<td>Boolean</td>
+<td>False</td>
+<td>Core</td>
+<td>Specify <code>True</code> if gateway links can be used in remote virtual networking to link to this virtual network.</td>
+</tr>
+<tr>
+<td>allow_virtual_network_access</td>
+<td>Boolean</td>
+<td>False</td>
+<td>Core</td>
+<td>Specify <code>True</code> to allow the virtual machines in the linked virtual network space to be able to access all of the virtual machines in the local virtual network space.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The virtual network peering name. If the specified name exists, a new, unique name is created.</td>
+</tr>
+<tr>
+<td>remove_virtual_network</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The name or ID of the remote virtual network. If the name is used, it assumes the same resource group as the <code>virtual_network_name</code> parameter value.</td>
+</tr>
+<tr>
+<td>resource_group</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The resource group name.</td>
+</tr>
+<tr>
+<td>use_remote_gateways</td>
+<td>Boolean</td>
+<td>False</td>
+<td>Core</td>
+<td>Specify <code>True</code> if the remote gateways can be used on this virtual network. If the flag is set to <code>True</code>, and the allowGatewayTransit parameter on remote peering is also true, the virtual network uses the gateways of the remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if the virtual network already has a gateway.</td>
+</tr>
+<tr>
+<td>virtual_network_name</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The virtual network name for the peering.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The virtual network peering name.</td>
+</tr>
+<tr>
+<td>peering_id</td>
+<td>String</td>
+<td>The Azure ID of the virtual network peering.</td>
+</tr>
+<tr>
+<td>peering_state</td>
+<td>String</td>
+<td>The peering state of the virtual network peering. Valid values are:-   <code>Initiated</code></td>
+</tr>
+<tr>
+<td>-   <code>Connected</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>Disconnected</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|
+|show|String|The virtual network details.|</p>
+<h2 id="example">Example</h2>
+<p>These examples creates two virtual networks:</p>
+<pre><code> azure_vnet_1:
+    type: IBM::Azure::VirtualNetwork
+    properties:
+      name: testvnet1
+    metadata:
+      azure_properties:
+        resource_group: test-rg
+        address_prefixes:
+          - '10.0.0.0/16'
+
+</code></pre>
+
+<pre><code> azure_vnet_2:
+    type: IBM::Azure::VirtualNetwork
+    properties:
+      name: testvnet2
+    metadata:
+      azure_properties:
+        resource_group: test-rg
+        address_prefixes:
+          - '192.0.0.0/16'
+</code></pre>
+
+<p>This example creates bi-directional virtual network peering by using the remote network names:</p>
+<pre><code> azure_vnet_peering_1_to_2:
+    type: IBM::Azure::VirtualNetworkPeering
+    properties:
+      resource_group: test-rg
+      name: testpeering1_to_2
+      virtual_network_name: { get_resource: azure_vnet_1 }
+      remote_virtual_network: { get_resource: azure_vnet_2 } #testvnet2
+      allow_virtual_network_access: True
+      allow_forwarded_traffic: True
+      allow_gateway_transit: True
+      use_remote_gateways: False
+
+</code></pre>
+
+<p>This example creates bi-directional virtual network peering by using the remote network IDs:</p>
+<pre><code> azure_vnet_peering_2_to_1:
+    type: IBM::Azure::VirtualNetworkPeering
+    properties:
+      resource_group: test-rg
+      name: testpeering2_to_1
+      virtual_network_name: { get_resource: azure_vnet_2 }
+      remote_virtual_network: { get_attr: [azure_vnet_1, virtual_network_id]}
+      allow_virtual_network_access: True
+      allow_forwarded_traffic: True
+      allow_gateway_transit: True
+      use_remote_gateways: False
+
+
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_azure_ov/">Microsoft Azure resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_azure_virtualnetworkpeering.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

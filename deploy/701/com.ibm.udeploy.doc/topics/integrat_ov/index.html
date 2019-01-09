@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/integrat_ov/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Overview of integrations", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="overview-of-integrations">Overview of integrations</h1>
+<p>HCL® UrbanCode™ Deploy supports integrations with other IBM® products, products from others, and certain cloud systems.</p>
+<p>HCL UrbanCode Deploy integrates with IBM UrbanCode Release so that you can manage the release of complex interdependent applications. See <a href="http://www-01.ibm.com/support/knowledgecenter/SS4GCC_6.1.1/com.ibm.urelease.doc/topics/installIntegrate_udeploy.html">Integrating with HCL UrbanCode Deploy</a>.</p>
+<p>Most integrations with HCL UrbanCode Deploy are accomplished by using plug-ins. Plug-ins provide tools for creating component processes and integrations.</p>
+<p>See the following page on IBM developerWorks® for information about plug-ins that support other products: <a href="https://developer.ibm.com/urbancode/plugins/ibm-urbancode-deploy">UrbanCode Deploy Plug-ins</a>.</p>
+<ul>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/security_cloud_connection/">Connecting to clouds through the blueprint designer</a></strong><br />
+To create a connection to a cloud to use with the blueprint designer, you use OpenStack Heat. You specify the location of the identity server and the engine to use. The steps are different for each type of cloud.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/cloud_connect_vm_requirements/">Configuring images for use with the blueprint designer</a></strong><br />
+You must configure images to work with the blueprint designer.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/install_engine_new_keystone/">Connecting engines to Keystone servers</a></strong><br />
+If you have an engine that is configured to work with the blueprint design server, you can connect it to a Keystone server for a new cloud.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/integrate_chef/">Integrating with Chef</a></strong><br />
+Chef can automate infrastructure tasks, such as installing databases and application servers. By integrating the blueprint designer with Chef, you can apply Chef roles to images in blueprints. When you provision environments, the environments run the Chef automation scripts that are based on those roles.</li>
+<li><strong><a href="../cloud_integrate_vsp_ov/">Connecting to clouds through HCL UrbanCode Deploy</a></strong><br />
+The HCL UrbanCode Deploy server can use virtual system patterns from cloud systems such as IBM Cloud Orchestrator to create dynamic environments.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/cloud_configure/">Configuring virtual system pattern-based clouds</a></strong><br />
+To create dynamic environments on a cloud system that uses virtual system patterns, you must install a script package on your cloud system.</li>
+</ul>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/integrat_ov.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/config_wizard/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Setting up the wizard for new users - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Setting up the wizard for new users", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="setting-up-the-wizard-for-new-users">Setting up the wizard for new users</h1>
+<p>HCL® UrbanCode™ Deploy includes a wizard to help users become familiar with the procedures and steps in creating a deployment. Some configuration is required before the wizard can be used.</p>
+<p>At least one agent must be installed and accessible to users to start and complete the introductory wizard.</p>
+<p>The wizard is enabled with new installations of HCL UrbanCode Deploy. If you are working with an upgrade, the <strong>Welcome</strong> tab that includes the push button to open the wizard must be enabled. To enable the <strong>Welcome</strong> tab, open the installed.properties file, and add this entry: <code>server.enable.welcome.tab=true</code>. By default, this file is in this folder: <code>/opt/ibm-ucd/server/conf/server</code>.</p>
+<ol>
+<li>
+<p><strong>Tip:</strong> You don't have to create a role to assign so that they can follow the wizard. You can assign users to the Automation Engineer role, which is included on the server during installation. This Automation Engineer role has all the permissions that are required to complete the introductory wizard. If you want to create a separate role for wizard users, complete this procedure.</p>
+</li>
+<li>
+<p>Create a role with these permissions: </p>
+<ul>
+<li>Create Application</li>
+<li>Create Component</li>
+<li>Create Environment</li>
+<li>Create Resource</li>
+<li>View Agent</li>
+</ul>
+</li>
+<li>Give this role access to at least one agent. </li>
+<li>Assign this role to users so that they can start and follow the wizard. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../c_node_configuring/">Configuring</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/config_wizard.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/backup_bds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Backing up the blueprint design server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Backing up the blueprint design server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="backing-up-the-blueprint-design-server">Backing up the blueprint design server</h1>
+<p>To back up the blueprint design server, back up its database and the folders in which it stores blueprints and configuration files.</p>
+<p><strong>Note:</strong> Always back up the database and folders at the same time. Using a backup of the database and folders from different times can cause problems when you restore the backup.</p>
+<ol>
+<li>Stop the blueprint design server and the cloud discovery service. See <a href="../stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</li>
+<li>Create a full backup of the database. For instructions on backing up the database, see the documentation for your database.</li>
+<li>Copy the repository and workspace folders to a secure backup location. By default, these folders are in the following locations:<ul>
+<li>/opt/ibm-ucd-patterns/repositories</li>
+<li>/opt/ibm-ucd-patterns/workspace</li>
+</ul>
+</li>
+<li>Copy the server configuration files to a secure backup location. The default location of these files is /opt/ibm-ucd-patterns/conf.</li>
+<li>If you imported certificates, back them up. By default, certificates are stored in the /opt/ibm-ucd-patterns/java/jre/lib/security/cacerts file.</li>
+<li>If you installed patches, back them up. The default location of these patches is /opt/ibm-ucd-patterns/patches.</li>
+<li>If you customized the cloud discovery service configuration file, back that file up. The location of the cloud discovery service configuration file is in the system variable CLOUDDISCOVERYSERVICE_SETTINGS_FILE. If this system variable is not set, the cloud discovery service is using a default configuration file and there is no need to back up the service.</li>
+<li>Start the blueprint design server and cloud discovery service. See <a href="../start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a> </li>
+</ol>
+<p>To restore HCL® UrbanCode™ Deploy from a backup, see <a href="../../../com.ibm.udeploy.doc/topics/arch_data_recovery/">Restoring a backup</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../backup_recover/">Backing up and recovering</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/backup_bds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

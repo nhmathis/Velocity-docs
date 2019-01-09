@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.api.doc/topics/security_cloudprovider__get/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>List cloud providers - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "List cloud providers", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example", url: "#example" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="list-cloud-providers">List cloud providers</h1>
+<h2 id="request">Request</h2>
+<pre><code>GET http://{hostname}:{port}
+  /landscaper/security/cloudprovider/
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<pre><code>curl -u jsmith:passwd 
+  http://myserver.example.com:8080/landscaper/security/cloudprovider/
+</code></pre>
+
+<h2 id="example-response">Example response</h2>
+<pre><code>[
+    {
+        &quot;dateCreated&quot;: 1406666374772,
+        &quot;description&quot;: &quot;&quot;,
+        &quot;id&quot;: &quot;a06832c2-cb76-465d-b33b-c123423490&quot;,
+        &quot;name&quot;: &quot;Amazon&quot;,
+        &quot;properties&quot;: [
+            {
+                &quot;id&quot;: &quot;39723aa6-c8b9-45fa-8920-7cb1bb23432aaf&quot;,
+                &quot;label&quot;: &quot;&quot;,
+                &quot;name&quot;: &quot;orchestrationEngineUrl&quot;,
+                &quot;secure&quot;: false,
+                &quot;value&quot;: &quot;&quot;
+            },
+            {
+                &quot;id&quot;: &quot;6823466-5d4e-4dfb-9c51-374d16f9306f&quot;,
+                &quot;label&quot;: &quot;&quot;,
+                &quot;name&quot;: &quot;timeoutMins&quot;,
+                &quot;secure&quot;: false,
+                &quot;value&quot;: &quot;10&quot;
+            },
+            {
+                &quot;id&quot;: &quot;423422c-7f02-4a90-8d56-66bfa4fd6052&quot;,
+                &quot;label&quot;: &quot;&quot;,
+                &quot;name&quot;: &quot;url&quot;,
+                &quot;secure&quot;: false,
+                &quot;value&quot;: &quot;http://localhost:5000/v2.0/&quot;
+            },
+            {
+                &quot;id&quot;: &quot;1234cdbc-62f7-4ab3-90b1-4b019a2d0df8&quot;,
+                &quot;label&quot;: &quot;&quot;,
+                &quot;name&quot;: &quot;useDefaultOrchestration&quot;,
+                &quot;secure&quot;: false,
+                &quot;value&quot;: &quot;true&quot;
+            }
+        ],
+        &quot;readOnly&quot;: false,
+        &quot;type&quot;: &quot;AMAZON&quot;
+    },
+    {
+        &quot;dateCreated&quot;: 1406666208932,
+        &quot;description&quot;: &quot;&quot;,
+        &quot;id&quot;: &quot;fe8b00b5-2343-473a-b355-0f2294cd12b7&quot;,
+        &quot;name&quot;: &quot;OS 104&quot;,
+        &quot;properties&quot;: [
+            {
+                &quot;id&quot;: &quot;212f4dac-eeee-4bc6-9031-0dc2c2343245c6&quot;,
+                &quot;label&quot;: &quot;&quot;,
+                &quot;name&quot;: &quot;authentication_realm_id&quot;,
+                &quot;secure&quot;: false,
+                &quot;value&quot;: &quot;e3abe6f2423d-69d1-4f45-8b1b-edd7d64495e4&quot;
+            }
+        ],
+        &quot;readOnly&quot;: true,
+        &quot;type&quot;: &quot;AUTH_REALM&quot;
+    }
+]
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../security_cloudprovider_/">security/cloudprovider resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.api.doc/topics/security_cloudprovider__get.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/config_deploy_sequence/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring deployment sequence settings - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring deployment sequence settings", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-deployment-sequence-settings">Configuring deployment sequence settings</h1>
+<p>You can configure the blueprint design server to use a list format instead of a tree format for deployment sequences.</p>
+<p>In the blueprint designer, by default you edit deployment sequences in a tree format. You can configure the product to use the previous deployment sequence format, which is a sequential list.</p>
+<ol>
+<li>In the blueprint designer, open the config.properties file for editing. By default, the config.properties file is stored in the /opt/ibm-ucd-patterns/conf/server/config.properties directory.</li>
+<li>
+<p>Add the following line to the config.properties file. </p>
+<p><code>feature.componentDepencyDialog=simple</code></p>
+</li>
+<li>
+<p>Save the config.properties file, and then restart the Tomcat server. For instructions on stopping and starting the Tomcat server, see <a href="../../../com.ibm.udeploy.install.doc/topics/upgrade_server/">Upgrading the server in interactive mode</a>.</p>
+</li>
+</ol>
+<p>Now the <strong>Deployment Sequence</strong> resource can be used to create a sequential list of components to deploy, instead of a tree.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.edt.doc/topics/c_node_administering_bds/">Blueprint design server configuration</a></p>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/config_deploy_sequence.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

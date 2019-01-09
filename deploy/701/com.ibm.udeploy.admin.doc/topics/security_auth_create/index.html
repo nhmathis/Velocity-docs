@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_auth_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating authentication realms - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating authentication realms", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-authentication-realms">Creating authentication realms</h1>
+<p>To create an authentication realm on the server, specify where to store information about the users, such as internal storage on the server, a single sign-on service, or on an LDAP server.</p>
+<ol>
+<li>On the server, click <strong>Settings</strong> > <strong>Authentication (Users)</strong> > <strong>Create Realm</strong>. The Create Authentication Realm pane opens. </li>
+<li>Enter a name, description. </li>
+<li>Enter the number of user login attempts to accept in the <strong>Allowed Login Attempts</strong> field. A blank value means that an unlimited number of attempts are allowed. If a user exceeds the attempt limit, use the <strong>Unlock User</strong> action on the Authentication page to unlock the user.</li>
+<li>
+<p>Select the authentication realm type from the <strong>Type</strong> list. The available types in the list are as follows: <strong>LDAP or Active Directory</strong>, <strong>Single Sign-on</strong> (SSO), and <strong>Internal Storage</strong>. If you select <strong>Internal Storage</strong>, no additional parameters are needed. If you select <strong>LDAP or Active Directory</strong>, or <strong>Single Sign-on</strong>, specify the following parameters:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LDAP URL</td>
+<td>LDAP</td>
+<td>The URL of the LDAP server that begins with <code>ldap://</code> or <code>ldaps://</code>. You can provide more than one URL, separated by spaces. If you provide more than one URL, the server tries the URLs one at a time until one succeeds.</td>
+</tr>
+<tr>
+<td>Search Anonymously</td>
+<td>LDAP</td>
+<td>Selected if LDAP accepts anonymous queries. If this check box is cleared, specify the LDAP search connection DN and associated password. This check box is selected by default.</td>
+</tr>
+<tr>
+<td>Search Connection DN</td>
+<td>LDAP</td>
+<td>Complete LDAP distinguished name to search. This parameter is used if the <strong>Search Anonymously</strong> check box is cleared.</td>
+</tr>
+<tr>
+<td>Search Connection Password</td>
+<td>LDAP</td>
+<td>Password that is used for LDAP searches. This parameter is used with the value in the <strong>Search Connection DN</strong> field.</td>
+</tr>
+<tr>
+<td>Specify how to search LDAP</td>
+<td>LDAP</td>
+<td>Specifies how LDAP is searched. If users exist in multiple directories, select <strong>LDAP users may exist in many directories; search across LDAP using a criteria</strong>; otherwise, select <strong>LDAP users exist in a single directory; use a pattern to create the DN for users.</strong>. Depending on the selection, more fields are displayed.</td>
+</tr>
+<tr>
+<td>User Search Base</td>
+<td>LDAP</td>
+<td>When you search multiple directories, specify the starting directory that is used for searches, such as <code>ou=employees,dc=mydomain,dc=com</code>.</td>
+</tr>
+<tr>
+<td>User Search Filter</td>
+<td>LDAP</td>
+<td>The LDAP filter expression to use when you search for group entries, such as <code>(&amp;(|(mail={0})(cn={0}))(objectclass=ePerson))</code>. The user name replaces the {1} variable in the search pattern, and the full user DN replaces the {0} variable. If the value is not part of the DN pattern, enclose the value in parenthesis, for example, <code>(accountName={0})</code>. For more information, see the help information for your LDAP server and look for information about creating user search filters.</td>
+</tr>
+<tr>
+<td>Search User Subtree</td>
+<td>LDAP</td>
+<td>When you search multiple directories, select this check box to search directories below the base directory.</td>
+</tr>
+<tr>
+<td>User DN Pattern</td>
+<td>LDAP</td>
+<td>When you search a single directory, the name is substituted in place of 0 in the pattern, for example, <code>cn={0},ou=employees,dc=yourcompany,dc=com</code>.</td>
+</tr>
+<tr>
+<td>Name Attribute</td>
+<td>LDAP</td>
+<td>Contains the user name in LDAP.</td>
+</tr>
+<tr>
+<td>Email Attribute</td>
+<td>LDAP</td>
+<td>Contains the user email address in LDAP.</td>
+</tr>
+<tr>
+<td>User Header Name</td>
+<td>SSO</td>
+<td>The header that contains the list of users.</td>
+</tr>
+<tr>
+<td>Email Header Name</td>
+<td>SSO</td>
+<td>A header that contains the list of user email addresses.</td>
+</tr>
+<tr>
+<td>Logout URL</td>
+<td>SSO</td>
+<td>The URL where the users are redirected after they log out of HCL® UrbanCode™ Deploy.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Select the authorization realm from the <strong>Authorization Realm</strong> list. The internal security realm is initially available. See <a href="../security_config/">Authorization realms</a>.</p>
+<p><strong>Note:</strong> If you use an LDAP authentication realm with an LDAP authorization realm, the settings on this authentication realm override the settings on the LDAP authorization realm. If you use an SSO authentication realm with an LDAP authorization realm, you must specify connection settings on the LDAP authorization realm.</p>
+</li>
+</ol>
+<p>When new users log on to the server and use their LDAP or SSO credentials, they are listed on the <strong>Authentication</strong> tab. In most cases, do not manage user passwords or remove users from the list. If an active user is removed from HCL UrbanCode Deploy, they are still able to log on to the server while their LDAP credentials are valid.</p>
+<p><strong>Parent topic:</strong> <a href="../security_auth/">Authentication realms</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_auth_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/troubleshooting_script/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Engine troubleshooting script - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Engine troubleshooting script", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="engine-troubleshooting-script">Engine troubleshooting script</h1>
+<p>If you have a problem with the HCL® UrbanCode™ Deploy engine, run the troubleshooting script to provide IBM® Software Support and developers information about the status of your engine. Consider running this script and having the results available before you call IBM Software Support. This script applies to OpenStack Heat orchestration engines that are at the Juno or Kilo level.</p>
+<p>If the default installation location is used, the engine-tools.sh script location is as follows: /engine_install/resources/tools/engine-tools.sh, where engine_install is the installation directory. Use the following options with the engine-tools.sh command to gather troubleshooting data about your engine. You can change to the directory or enter the path as part of the command. The options can be used in combination.</p>
+<p>If a high availability installation is used, you can use the ha-engine-tools.sh script instead. If the default installation location is used, script location is as follows: /engine_install/resources/tools/ha/ha-engine-tools.sh, where engine_install is the installation directory. Except for the <code>-r</code> option, the following options can be used with the ha-engine-tools.sh command.</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Argument</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-a</code></td>
+<td>None</td>
+<td>Store the configuration and log files in a .tar file. Use this option with other options such as <code>-c</code>, <code>-e</code>, <code>-i</code>, <code>-l</code>, and <code>-p</code>. For example, enter <code>./engine-tools.sh -c -a</code>.</td>
+</tr>
+<tr>
+<td><code>-c</code></td>
+<td>None</td>
+<td>Collect files and logs for HCL UrbanCode Deploy engine services.</td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>-   <code>on</code></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>off</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>status</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|Modify or view the heat debug setting. Specify <code>[ on|off|status ].</code> For example, enter <code>./engine-tools.sh -d off -s restart</code>.|
+|<code>-e</code>|None|Create a backup of the IBM UrbanCode Deploy engine plug-in by copying the contents of the /usr/lib directory|
+|<code>-i</code>| -   <code>system</code>
+-   <code>openstack</code>
+-   <code>database</code>
+-   <code>all</code></p>
+<p>|Collect system, OpenStack, or database information, such as host names, ports, process limits, and configuration details. Specify <code>[ system|openstack|database|all ]</code>.|
+|-l|None|Collect heat engine and Keystone logs.|
+|<code>-p</code>|None|Check the performance of the heat engine and redirect the performance output to the heat_performance.#.out file. Before you run this command, you must source the clientrc file that is located in the /root/ directory.|
+|<code>-r</code><strong>Restriction:</strong> This option is not available with the ha-engine-tools.sh script.</p>
+<p>| -   <code>status</code>
+-   <code>restart</code>
+-   <code>stop</code>
+-   <code>start</code></p>
+<p>|Report on, restart, stop, or start all the required services such as MySQL, MariaDB, and RabbitMQ. Specify <code>[ status|restart|stop|start ]</code>. For example, enter <code>./engine_tools.sh -r status</code>.|
+|<code>-s</code>| -   <code>status</code>
+-   <code>restart</code>
+-   <code>stop</code>
+-   <code>start</code></p>
+<p>|Check the status of the OpenStack services (engine and Keystone), or restart, stop, or start the services. Specify <code>[ status|restart|stop|start ]</code>. For example, enter <code>./engine_tools.sh -s restart</code>.|
+|<code>-t</code>|None|Tail the heat engine log and view real-time log values.|</p>
+<p><strong>Parent topic:</strong> <a href="../trouble_engines/">Troubleshooting engines</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/troubleshooting_script.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

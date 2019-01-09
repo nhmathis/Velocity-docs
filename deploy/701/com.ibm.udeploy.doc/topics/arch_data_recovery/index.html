@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/arch_data_recovery/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Restoring a backup - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Restoring a backup", url: "#_top", children: [
+              {title: "Restore a backup of the server", url: "#restore-a-backup-of-the-server" },
+              {title: "Restore a backup of the blueprint design server", url: "#restore-a-backup-of-the-blueprint-design-server" },
+              {title: "Restore a backup of the engine", url: "#restore-a-backup-of-the-engine" },
+              {title: "Restore a backup of the engine by using a script", url: "#restore-a-backup-of-the-engine-by-using-a-script" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="restoring-a-backup">Restoring a backup</h1>
+<p>To restore a backup of the server, stop the server and replace the existing files and databases with the backup files and databases.</p>
+<p>You can restore the server, the blueprint design server, and the engine all at once, or you can restore only individual systems.</p>
+<p><strong>Note:</strong> These instructions are for an engine that you installed through HCL® UrbanCode™ Deploy. If you extended a different Heat engine, follow the backup and restore instructions from the engine vendor.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.edt.doc/topics/backup_recover/">Backing up and recovering</a></p>
+<h2 id="restore-a-backup-of-the-server">Restore a backup of the server</h2>
+<ol>
+<li>To restore the server from a backup, follow these steps:</li>
+<li>Stop the server. </li>
+<li>Copy the server files from the backup to the application data directory, overwriting the current files. You must restore the backup files to the same location as the existing files because configuration files include system paths.</li>
+<li>
+<p>Restore the database from the backup. </p>
+<p><strong>Important:</strong> You must restore the database from a backup that was taken at the same time as the backup of the application data directory.</p>
+</li>
+<li>
+<p>Restart the server. </p>
+</li>
+</ol>
+<h2 id="restore-a-backup-of-the-blueprint-design-server">Restore a backup of the blueprint design server</h2>
+<ol>
+<li>To restore the blueprint design server from a backup, follow these steps:</li>
+<li>Stop the blueprint design server and cloud discovery service. </li>
+<li>Restore the repository and workspace folders from the backup. By default, these folders are in the following locations:<ul>
+<li>/opt/ibm-ucd-patterns/repositories</li>
+<li>/opt/ibm-ucd-patterns/workspace</li>
+</ul>
+</li>
+<li>Restore the other folders that you backed up by using the instructions in <a href="../../../com.ibm.udeploy.install.doc/topics/backup_bds/">Backing up the blueprint design server</a>. You backed up the following folder locations by default:<ul>
+<li>/opt/ibm-ucd-patterns/conf</li>
+<li>/opt/ibm-ucd-patterns/java/jre/lib/security/cacerts</li>
+<li>/opt/ibm-ucd-patterns/patches</li>
+</ul>
+</li>
+<li>Restore the database from the backup. </li>
+<li>If you backed up the cloud discovery service configuration file, restore that file and set the CLOUDDISCOVERYSERVICE_SETTINGS_FILE system variable to the location of the file. </li>
+<li>Restart the blueprint design server and cloud discovery service. </li>
+</ol>
+<h2 id="restore-a-backup-of-the-engine">Restore a backup of the engine</h2>
+<ol>
+<li>To restore the engine from a backup, follow these steps:</li>
+<li>Stop the engine Heat services. See <a href="../../../com.ibm.udeploy.install.doc/topics/stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</li>
+<li>
+<p>Restore the database from the backup. The engine MySQL database is installed automatically on the same system as the engine, except in the case of a high-availability installation. In high-availability installations, the engine uses an external MySQL database. For example, if you used the mysqldump command to create a backup file that is named engineDBBackup.sql, you can restore the backup by running the following command:</p>
+<p><code>mysql -u root -ppassw0rd &lt; engineDBBackup.sql</code></p>
+<p><strong>Attention:</strong> This command overwrites existing information in the database with the contents of the backup.</p>
+</li>
+<li>
+<p>If you backed up the engine configuration files, restore them to the /etc/heat folder. </p>
+</li>
+<li>Start the engine Heat services. See <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>. The RabbitMQ system that the engine uses is not persistent and therefore does not have any data to restore.</li>
+</ol>
+<h2 id="restore-a-backup-of-the-engine-by-using-a-script">Restore a backup of the engine by using a script</h2>
+<ol>
+<li>To restore the engine from a backup that you created from the back up script, follow these steps:</li>
+<li>Extract the backup package that you created by running the backup script. The backup package is named backup.package.number.tar.gz, where number represents the time of package creation and contains both the contents of your engine and configuration files and the script to restore them. See <a href="../../../com.ibm.udeploy.install.doc/topics/backup_engine/">Backing up engines</a>.</li>
+<li>
+<p>To restore the engine, run the following command: </p>
+<p><code>./extracted\_location/backup.package.number/restoreengine\_versionEngine.sh</code></p>
+<p>In this command, extracted_location is the folder where you extracted the compressed backup package and engine_version represents the level of the Heat engine that you restore.</p>
+</li>
+</ol>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/arch_data_recovery.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

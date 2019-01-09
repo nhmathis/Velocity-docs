@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/env_props_BDS/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Passing properties from blueprints to the resource tree - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Passing properties from blueprints to the resource tree", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="passing-properties-from-blueprints-to-the-resource-tree">Passing properties from blueprints to the resource tree</h1>
+<p>From the blueprint designer, you can set component environment properties and component resource properties in blueprint source code.</p>
+<p>Connect the blueprint designer to the server. See <a href="../ucdp_integrate/">Connecting the blueprint design server to the server</a>.</p>
+<p>You can pass the following properties from a blueprint to the resource tree:</p>
+<ul>
+<li>Component resource properties</li>
+<li>Component environment properties</li>
+<li>Secure component resource properties</li>
+<li>Secure environment resource properties</li>
+<li>Environment properties</li>
+</ul>
+<p>Blueprints can create environment properties, but component resource properties and component environment properties must exist on a component before you can pass values to them. If you do not provide values for these properties from the blueprint designer, the properties use the default values that were set in the HCL® UrbanCode™ Deploy.</p>
+<ol>
+<li>In the blueprint designer, open a blueprint. </li>
+<li>Add one or more virtual images to the blueprint. </li>
+<li>
+<p>To pass component environment properties, follow these steps: </p>
+<ol>
+<li>
+<p>On the server, on the <strong>Configuration</strong> tab for a component, create one or more component environment properties. For example, the following figure shows a component with two component environment properties:</p>
+<p><img alt="The Configuration tab for the component, showing two component environment properties" src="../../images/env_props_BDS_a.gif" /></p>
+</li>
+<li>
+<p>In the blueprint designer, from the <strong>Components</strong> drawer, add the component to a virtual image. On the <code>IBM::UrbanCode::SoftwareConfig::UCD</code> resource, in the <code>inputs</code> section, the component environment properties appear as name-value pairs. The properties also appear on the <strong>Properties</strong> tab of the editor. The following example code shows two component environment properties:</p>
+<p><code>component1_sw_config:
+  type: IBM::UrbanCode::SoftwareConfig::UCD
+  properties: 
+    name: "component1"
+    component_process: "Deploy component1"
+    component_process_timeout: "300"
+    ucd_server_url: { get_param: ucd_server_url }
+    ucd_username: { get_param: ucd_user }
+    ucd_password: { get_param: ucd_password }
+    application: { get_attr: [resource_tree, application_name] }
+    environment_name: { get_attr: [resource_tree, environment_name] }
+    inputs:
+      **CompEnvProp1 : "Default value for CompEnvProp1"
+      CompEnvProp2 : "Default value for CompEnvProp2"**</code></p>
+</li>
+<li>
+<p>Specify values for the component environment properties in the blueprint. You can specify literal values, or you can use the get_attr and get_param functions to retrieve attribute and parameter values.</p>
+</li>
+<li>To pass component resource properties, follow these steps: </li>
+<li>On the server, on the <strong>Configuration</strong> tab for a component, create one or more component resource properties. </li>
+<li>
+<p>In the blueprint editor, from the <strong>Components</strong> drawer, add the component to a virtual image. On the <code>IBM::UrbanCode::SoftwareDeploy::UCD</code> resource, in the <code>inputs</code> section, the component resource properties appear as name-value pairs. The properties also appear on the <strong>Properties</strong> tab of the editor. The following example code shows a component resource property:</p>
+<p><code>component1:
+  type: IBM::UrbanCode::SoftwareDeploy::UCD
+  properties:
+    apply_config: { get_resource: component1_sw_config }
+    server: my_server
+    version: LATEST
+    agent_timeout: "360"
+    inputs:
+      **CompResourceProp1 : "Default value for CompResourceProp1"**</code></p>
+</li>
+<li>
+<p>Specify values for the component resource properties in the blueprint. You can specify literal values, or you can use the get_attr and get_param functions to retrieve attribute and parameter values.</p>
+</li>
+<li>To pass environment properties, follow these steps: </li>
+<li>In the blueprint editor, from the <strong>Components</strong> drawer, add at least one component to a virtual image. This step is necessary to create and populate the <code>resource_tree</code> resource in the blueprint code.</li>
+<li>
+<p>On the <code>resource_tree</code> resource, in the <code>properties</code> section, add environment properties and specify values for them. For example, the following code shows an environment property that is named <code>tomcat_port</code>:</p>
+<p>```</p>
+<p>resource_tree:
+ properties:
+  inputs:
+   tomcat_port : "8443"
+```</p>
+</li>
+</ol>
+</li>
+<li>
+<p>To modify the value of a secure component resource or component environment properties, follow these steps: </p>
+<p><strong>Restriction:</strong> You cannot modify the value of these secure properties in the blueprint source code.</p>
+<ol>
+<li>On the server, on the <strong>Configuration</strong> tab for a component, create one or more component resource properties. </li>
+<li>
+<p>In the blueprint editor, from the <strong>Components</strong> drawer, add the component to a virtual image. On the <code>IBM::UrbanCode::SoftwareDeploy::UCD</code> resource, in the <code>inputs</code> section, the secure properties appear as name and get_param function pairs. Because the value of the property is secure, it is not displayed in the blueprint. The properties also appear on the <strong>Properties</strong> tab of the editor. The secure property names are appended with <code>-SECURE-PROPERTY</code>, as shown in the following example:</p>
+<p><code>component1:
+  type: IBM::UrbanCode::SoftwareDeploy::UCD
+  properties:
+    apply_config: { get_resource: component1_sw_config }
+    server: my_server
+    version: LATEST
+    agent_timeout: "360"
+    inputs:
+      **SecurePropertyName-SECURE-PROPERTY : \{get\_param: SecurePropertyName\_secure\_property\}**</code></p>
+<p>In the <code>parameters</code> section of the blueprint, the definition of each secure property is displayed. The secure property names are appended with <code>_secure_property</code>, and the description of each secure property and a placeholder string for the password are displayed, as shown in the following example:</p>
+<p><code>SecurePropertyName_secure_property
+  type: string
+  description: 'Secure property definition'
+  default: 'DefaultComponentPasswordValue'
+  hidden: **true**</code></p>
+</li>
+<li>
+<p>When you provision the blueprint, specify values for the secure properties. See <a href="../../../com.ibm.edt.doc/topics/env_provision_edt/">Provisioning environments from the blueprint designer (through OpenStack Heat)</a>.</p>
+</li>
+<li>Save the blueprint. </li>
+</ol>
+</li>
+</ol>
+<p>After you provision the environment, the blueprint designer passes the property values in the blueprint source code to the properties on the server. In processes, you can refer to the properties in the same format as referring to any other property. For example, you can refer to environment properties in this format: <code>${p:environment/property\_name}</code>.</p>
+<p><strong>Parent topic:</strong> <a href="../resources_properties/">Creating, setting, and editing properties</a></p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_props_ov/">Blueprint properties, attributes, and parameters</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/env_props_BDS.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

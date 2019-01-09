@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_create_udclient/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating component versions with the command-line client - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating component versions with the command-line client", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-component-versions-with-the-command-line-client">Creating component versions with the command-line client</h1>
+<p>If HCL® UrbanCode™ Deploy does not have a source configuration type for your external tool, you can use the udclient command-line client to manage components.</p>
+<p>To install the client, see <a href="../../../com.ibm.udeploy.reference.doc/topics/cli_install/">Installing the command-line client</a>.</p>
+<p>When you use the udclient client in this way, you can push new versions of components to the server, start processes, add links to external sources, and run many other tasks on the HCL UrbanCode Deploy server as part of your build or SCM publishing process. In this way, you can work with your components in HCL UrbanCode Deploy without changing your current technology.</p>
+<ol>
+<li>Follow these general steps to set up a component that uses the command-line client:</li>
+<li>
+<p>Create one or more components in HCL UrbanCode Deploy to represent the components of your build. Use the following parameters in the Create Component window: </p>
+<ul>
+<li>In the <strong>Source Configuration Type</strong> field, select <strong>None</strong>.</li>
+<li>Clear the <strong>Import Versions Automatically</strong> check box.</li>
+<li>Complete the rest of the fields in the window as usual.
+You can also use the udclient client to create components, but because component creation is a one-time process, components are typically created withe the Web UI.</li>
+</ul>
+</li>
+<li>
+<p>In the scripts for your component, add code that calls udclient client commands to create a component version and upload the artifacts to the HCL UrbanCode Deploy server. In most cases, you use several different commands to create the version. The following steps show examples of some of the commands you might use.</p>
+<p><strong>Note:</strong> These examples use code in an Apache Ant build file. Specifically, they call the udclient client with the Ant &lt;exec> command, which calls external programs. If you are using a different build or SCM technology, you can adapt the examples to your specific technology to call the udclient client.</p>
+<ol>
+<li>
+<p>Use the <a href="../../../com.ibm.udeploy.api.doc/topics/udclient_createversion/">createVersion</a> command to create the new version. The following example code creates a version of a component that is named <code>mycomponent</code>. The version name is set to the timestamp of the build. The variables <code>${udclient.weburl}</code>, <code>${udclient.username}</code>, and <code>${udclient.password}</code> represent the URL of the server and the user name and password for the server.</p>
+<p>```
+<exec executable="/bin/bash" 
+  outputproperty="mycomponent.component.output"></p>
+<p><arg value="/opt/udclient/udclient"/></p>
+<p><arg value="-weburl"/>
+  <arg value="${udclient.weburl}"/></p>
+<p><arg value="-username"/>
+  <arg value="${udclient.username}"/></p>
+<p><arg value="-password"/>
+  <arg value="${udclient.password}"/></p>
+<p><arg value="createVersion"/></p>
+<p><arg value="-component"/>
+  <arg value="mycomponent"/></p>
+<p><arg value="-name"/>
+  <arg value="${buildTimestamp}"/></p>
+<p></exec>
+```</p>
+</li>
+<li>
+<p>Use the <a href="../../../com.ibm.udeploy.api.doc/topics/udclient_addversionfiles/">addVersionFiles</a> command to upload the artifacts to the component version. The following example code uploads the files in the <code>${destdir}</code> folder to the version:</p>
+<p>```
+<exec executable="/bin/bash"></p>
+<p><arg value="/opt/udclient/udclient"/></p>
+<p><arg value="-weburl"/>
+  <arg value="${udclient.weburl}"/></p>
+<p><arg value="-username"/>
+  <arg value="${udclient.username}"/></p>
+<p><arg value="-password"/>
+  <arg value="${udclient.password}"/></p>
+<p><arg value="addVersionFiles"/></p>
+<p><arg value="-component"/>
+  <arg value="mycomponent"/></p>
+<p><arg value="-version"/>
+  <arg value="${buildTimestamp}"/></p>
+<p><arg value="-base"/>
+  <arg value="${destdir}"/></p>
+<p></exec>
+```</p>
+</li>
+<li>
+<p>Add links from the component version. With the <a href="../../../com.ibm.udeploy.api.doc/topics/udclient_addversionlink/">addVersionLink</a> command, you can add links from the version to external build resources, such as the page that shows information about the build result. These links appear at the top of the information page for the component version. The following figure shows a component version with a link to the related build job and the related build result in the source-code management system:</p>
+<p><img alt="A component version with two links in the Links section" src="../../images/comp_create_udclient_a.gif" /></p>
+<p>For example, the following code adds a link to the build result page at the URL <code>http://build.example.com/projects/mycomponent/${buildResultUUID}</code>:</p>
+<p>```
+<exec executable="/bin/bash"></p>
+<p><arg value="/opt/udclient/udclient"/></p>
+<p><arg value="-weburl"/>
+  <arg value="${udclient.weburl}"/></p>
+<p><arg value="-username"/>
+  <arg value="${udclient.username}"/></p>
+<p><arg value="-password"/>
+  <arg value="${udclient.password}"/></p>
+<p><arg value="addVersionLink"/></p>
+<p><arg value="-component"/>
+  <arg value="mycomponent"/></p>
+<p><arg value="-version"/>
+  <arg value="${buildTimestamp}"/></p>
+<p><arg value="-linkName"/>
+  <arg value="External build result"/></p>
+<p><arg value="-link"/>
+  <arg value="http://build.example.com/projects/mycomponent/${buildResultUUID}"/></p>
+<p></exec>
+```</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>Now, when you run a build in your external build tool, the build process creates a component version and uploads the artifacts for the version to the HCL UrbanCode Deploy server. From this point, you can work with the component and version on the server as usual, such as running processes with it.</p>
+<p>You can also add other commands to your build script. For example, you can start application processes with the <a href="../../../com.ibm.udeploy.api.doc/topics/udclient_requestapplicationprocess/">requestApplicationProcess</a> command.</p>
+<p><strong>Parent topic:</strong> <a href="../comp_create/">Creating components</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_create_udclient.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

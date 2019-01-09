@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_tasks_config_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating configuration files in component processes - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating configuration files in component processes", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-configuration-files-in-component-processes">Creating configuration files in component processes</h1>
+<p>Configuration templates are templates for files that are created during a component process. Typically, the data is for configurations for web servers, but the files can be used for any application that you deploy.</p>
+<p>A configuration template contains property names and property references. For example, the following line can be used in a configuration template:</p>
+<pre><code>database.username=@DB_USER@
+</code></pre>
+
+<p>When you deploy the component in an environment, the value of the DB_USER property that is defined for that environment is substituted for the <code>@DB_USER@</code> reference.</p>
+<p>As an alternative to using configuration templates, you can also use the Create File step. In this case, you specify the contents of the file in the <strong>Contents</strong> field and include property references in the usual syntax of <code>${scope/propertyname}</code>, where <code>scope</code> is the scope of the property and <code>propertyname</code> is the name of the property.</p>
+<ol>
+<li>
+<p>Click <strong>Components</strong> > <strong>selected_component</strong> > <strong>Configuration</strong> > <strong>Configuration File Templates</strong> > <strong>Create Configuration Template</strong> to open the Create Configuration Template window. </p>
+<p><img alt="The Create Configuration Template window" src="../../images/comp_tasks_config_create_a.gif" /></p>
+</li>
+<li>
+<p>Type a name in the <strong>Name</strong> field. </p>
+</li>
+<li>In the <strong>Template</strong> field, enter or paste the template text.Text can be in any script. The amount of text is based on the database that HCL® UrbanCode™ Deploy uses.</li>
+<li>Save the configuration template.</li>
+<li>
+<p>To use the configuration template in a process, add the Install Template step to a component process: </p>
+<ol>
+<li>In a component process, add the Install Template step. This step creates a file that is based on the configuration template.</li>
+<li>In the step properties, specify the name of the configuration template.</li>
+<li>In the step properties, select the <strong>Show Hidden Properties</strong> check box.</li>
+<li>
+<p>In the <strong>Environment Property List</strong> field, specify the properties to bring into scope.For example, to bring only the environment properties into scope, specify <code>${p:environment/allProperties}</code>. In this case, the configuration template can refer to only environment properties. To bring environment properties, agent properties, and resource properties into scope, specify the following value for the <strong>Environment Property List</strong> field:</p>
+<p><code>${p:environment/allProperties}, ${agent/allProperties}, ${resource/allProperties}</code></p>
+</li>
+<li>
+<p>Save the step and the process</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>When you run the component process, the Install Template step creates a file that is based on the configuration template. The step replaces the property references with the property values. The default name of the file is the same as the name of the configuration template.</p>
+<p><strong>Parent topic:</strong> <a href="../intro_component_processes/">Component processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_tasks_config_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

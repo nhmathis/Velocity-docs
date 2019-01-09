@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/udclient_getsystemconfiguration/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>getSystemConfiguration - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "getSystemConfiguration", url: "#_top", children: [
+              {title: "Format", url: "#format" },
+              {title: "Parameters", url: "#parameters" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="getsystemconfiguration">getSystemConfiguration</h1>
+<p>List system configuration properties</p>
+<p>These properties are available on the System Settings page of the server.</p>
+<h2 id="format">Format</h2>
+<pre><code>udclient [\[global-args...\]](../../com.ibm.udeploy.reference.doc/topics/cli_command_format.md) [\[global-flags...\]](../../com.ibm.udeploy.reference.doc/topics/cli_command_format.md)
+  getSystemConfiguration
+</code></pre>
+
+<h2 id="parameters">Parameters</h2>
+<p>None.</p>
+<h2 id="example-response">Example response</h2>
+<pre><code>{
+  &quot;externalURL&quot;: &quot;https://ucdeploy.example.com:8443&quot;,
+  &quot;externalUserURL&quot;: &quot;https://ucdeploy.example.com:8443&quot;,
+  &quot;repoAutoIntegrationPeriod&quot;: 15000,
+  &quot;deployMailHost&quot;: &quot;smtp.example.com&quot;,
+  &quot;deployMailPassword&quot;: &quot;&quot;,
+  &quot;deployMailPort&quot;: 25,
+  &quot;deployMailSecure&quot;: false,
+  &quot;deployMailSender&quot;: &quot;sender@example.com&quot;,
+  &quot;deployMailUsername&quot;: &quot;username&quot;,
+  &quot;cleanupHourOfDay&quot;: 0,
+  &quot;cleanupDaysToKeep&quot;: -1,
+  &quot;cleanupCountToKeep&quot;: -1,
+  &quot;cleanupArchivePath&quot;: &quot;&quot;,
+  &quot;enableInactiveLinks&quot;: false,
+  &quot;enablePromptOnUse&quot;: false,
+  &quot;requireComplexPasswords&quot;: false,
+  &quot;minimumPasswordLength&quot;: 0,
+  &quot;validateAgentIp&quot;: false,
+  &quot;enableUIDebugging&quot;: false,
+  &quot;failProcessesWithUnresolvedProperties&quot;: true,
+  &quot;artifactAgent&quot;: &quot;vm192-168&quot;,
+  &quot;serverLicenseType&quot;: &quot;Session&quot;,
+  &quot;rclServerUrl&quot;: &quot;27000@RCLServer.example.com&quot;,
+  &quot;agentAutoLicense&quot;: false
+}
+</code></pre>
+
+<p>Related REST command: <a href="../rest_cli_systemconfiguration_get/">List system configuration properties</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.reference.doc/topics/cli_commands/">CLI Commands</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/udclient_getsystemconfiguration.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

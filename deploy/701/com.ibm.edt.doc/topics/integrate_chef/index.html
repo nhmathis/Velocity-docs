@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/integrate_chef/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Integrating with Chef", url: "#_top", children: [
+          ]},
+          {title: "constraints=[", url: "#constraints", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="integrating-with-chef">Integrating with Chef</h1>
+<p>Chef can automate infrastructure tasks, such as installing databases and application servers. By integrating the blueprint designer with Chef, you can apply Chef roles to images in blueprints. When you provision environments, the environments run the Chef automation scripts that are based on those roles.</p>
+<p><strong>Note:</strong> These instructions are for using Chef when you provision environments on cloud systems via OpenStack Heat. To use Chef in component processes, see the <a href="https://developer.ibm.com/urbancode/plugin/chef/">Chef automation plugin</a>.</p>
+<ul>
+<li>Chef roles are supported on only OpenStack, VMware, and SoftLayer® clouds.</li>
+<li>To use Chef, you must have a Chef server that contains roles and cookbooks. For information about setting up Chef, see <a href="https://www.chef.io">https://www.chef.io</a>. The Chef server must have at least one Chef environment, which is not to be confused with cloud environments. By default, Chef servers have an environment that is named <code>_default</code>.</li>
+</ul>
+<p>To use Chef roles in blueprints, you must connect to a Chef server. Then, you configure the target images to use Chef roles. Then, you can add Chef roles to images in blueprints.</p>
+<ol>
+<li>Log in to the blueprint designer as an administrator. </li>
+<li>Click <strong>Settings</strong> > <strong>System Settings</strong>.</li>
+<li>
+<p>In the <strong>Chef Server</strong> section, specify the following information.If you don't see this section, open the config.properties file on the computer that hosts the blueprint design server, set the com.ibm.ucd-patterns.feature.chef-server property to <code>true</code>, and restart the blueprint design server.</p>
+<ul>
+<li>
+<p><strong><em>*Chef Server URL</em></strong>*</p>
+<p>The URL of the Chef server, such as <code>https://chef.example.com:443/organizations/myogranization</code>.</p>
+</li>
+<li>
+<p><strong><em>*Chef Validator Name</em></strong>*</p>
+<p>The name of the validator that clients use to connect to the Chef server.</p>
+</li>
+<li>
+<p><strong><em>*Chef Validator Key</em></strong>*</p>
+<p>The name of the key for the validator. Paste the content from the validator key file that is in the chef-starter.zip file (starter kit).</p>
+</li>
+<li>
+<p><strong><em>*Chef Client Name</em></strong>*</p>
+<p>The name of a Chef user that has access to the Chef server.</p>
+</li>
+<li>
+<p><strong><em>*Chef Client Key</em></strong>*</p>
+<p>The key for the client. Paste the content from the client key file that is in the chef-starter.zip file (starter kit).</p>
+</li>
+</ul>
+<p><strong>Note:</strong> If you used Chef in versions of the blueprint designer before 6.2.1 and upgraded to version 6.2.1 or later, the value that you provided for the <strong>Chef Validator Key URL</strong> cannot be modified. To use a different validator key, before you provision an environment that contains Chef roles, you must modify the blueprint. See <a href="../chef_validator/">Modifying blueprints to access the Chef validator key in version 6.2.1 and later</a>.</p>
+</li>
+<li>
+<p>Click <strong>Save</strong>. </p>
+</li>
+<li>To connect to the Chef server via SSL, see <a href="../integrate_chef_ssl/">Configuring SSL/TLS security for Chef</a>. </li>
+<li>
+<p>If you use a Kilo, Liberty, or Mitaka level Heat engine that you extended, modify the engine to be compatible with Chef. On the system that hosts the Heat engine, run the following command:</p>
+<p><code>sed -i '125,127 s/^/#/' /usr/lib/python2.7/site-packages/heat/engine/resources/openstack/heat/software_deployment.py
+sed -n '125,127p' /usr/lib/python2.7/site-packages/heat/engine/resources/openstack/heat/software_deployment.py</code></p>
+<p>The following text is displayed in the command line:</p>
+<p>```</p>
+<h1 id="constraints">constraints=[</h1>
+<pre><code>constraints.CustomConstraint('nova.server')# ]
+</code></pre>
+<p>```</p>
+</li>
+</ol>
+<p>Configure the virtual images for Chef. See <a href="../integrate_chef_images/">Creating Chef-compatible images</a>.</p>
+<ul>
+<li><strong><a href="../integrate_chef_images/">Creating Chef-compatible images</a></strong><br />
+To use images with Chef and the blueprint designer, you must create the images with certain prerequisites.</li>
+<li><strong><a href="../cloud_update_chef_images/">Updating Chef-compatible images</a></strong><br />
+If your image uses Chef recipes, after you upgrade to HCL® UrbanCode™ Deploy version 6.2.1 or later, you must manually update the Chef hook on the images in your cloud.</li>
+<li><strong><a href="../integrate_chef_ssl/">Configuring SSL/TLS security for Chef</a></strong><br />
+If your Chef server uses SSL/TLS security, you must import the Chef server key into the blueprint design server keystore.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/integrat_ov/">Overview of integrations</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/integrate_chef.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

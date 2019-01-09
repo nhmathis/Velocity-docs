@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/cloud_connect_google_cloud_images/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring Google Cloud Platform images - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring Google Cloud Platform images", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-google-cloud-platform-images">Configuring Google Cloud Platform images</h1>
+<p>You can configure a custom image to use in your Google Cloud Platform environments.</p>
+<p>After you configure the cloud discovery service for Google Cloud Platform image projects, you can access the latest version of the operating systems that Google Cloud offers. You can also configure custom images to use in your blueprints.</p>
+<ol>
+<li>Create an image disk in Google Cloud Platform.<ol>
+<li>From the Google Cloud Platform dashboard, click <strong>Compute Engine</strong>.</li>
+<li>Click <strong>Disks</strong>, and then click <strong>Create disk</strong>.</li>
+<li>Provide a name and optionally provide a description.</li>
+<li>From the <strong>Zone</strong> list, select the zone in which to use the custom image.</li>
+<li>From the <strong>Source image</strong> list, select an operating system image.</li>
+<li>Specify the size of the image disk.</li>
+<li>Click <strong>Create</strong>.</li>
+</ol>
+</li>
+<li>Use the disk image to create a new operating system image.<ol>
+<li>Click <strong>CREATE IMAGE</strong>.</li>
+<li>Provide a name for the image.</li>
+<li>From the <strong>Source</strong> list, select the image disk that you created.</li>
+<li>Click <strong>Create</strong>.</li>
+</ol>
+</li>
+</ol>
+<p>You can add the custom image to your blueprints and provision them to any available region in Google Cloud. See <a href="../blueprint_edit_google_cloud/">Modeling environments for Google Cloud Platform</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../cloud_connect_google_cloud/">Connecting to Google Cloud Platform</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/cloud_connect_google_cloud_images.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

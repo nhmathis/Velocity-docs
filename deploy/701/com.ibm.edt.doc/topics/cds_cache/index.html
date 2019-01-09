@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/cds_cache/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Caching artifacts on the cloud discovery service - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Caching artifacts on the cloud discovery service", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="caching-artifacts-on-the-cloud-discovery-service">Caching artifacts on the cloud discovery service</h1>
+<p>You can cache information about flavors, regions, and images on the cloud discovery service to speed up communication between the blueprint design server and clouds. By default, the blueprint designer does not use this cached information, but you can enable it.</p>
+<p>The caching service stores cloud resources the first time you connect to a cloud provider or test the connection to a cloud provider. It does not store cloud resources preemptively. The caching settings are in the /usr/lib/python2.7/site-packages/clouddiscoveryservice/default_settings.py file.</p>
+<p>Caching is enabled by default on the cloud discovery service, but by default, the blueprint designer does not use the cached information. To use the cached information, you must configure settings in the cloud discovery service and enable the cache in the blueprint designer system settings.</p>
+<ol>
+<li>Open the default_settings.py file in a text editor. </li>
+<li>To disable caching, set the LIVEDATA property to <code>True</code>. Now the blueprint design server always retrieves the latest data from the target cloud.</li>
+<li>To enable caching, set the LIVEDATA property to <code>False</code> (the default). </li>
+<li>In the CLOUD_CACHE_SETTINGS section, in the cache_life field, specify how often to clear the entire cache, in hours. This setting specifies when to clear the caches for all cloud providers. This setting overrides the individual settings for each cloud provider.</li>
+<li>In the frequency field, specify how often to clear the caches for individual cloud providers, in hours. You can override this default for each cloud provider.</li>
+<li>In the settings for each cloud provider, in the frequency field, specify how often to clear the caches for that cloud provider. </li>
+<li>
+<p>In the settings for each cloud provider, specify which resources to cache. For example, the following settings for AWS clear the cache every 5 hours and cache several different types of resources:</p>
+<p><code>CLOUD_CACHE_SETTINGS = '''
+{
+    "default":{
+        "frequency":10,
+        "cache_life":168
+    },
+    "amazon": {
+        "resources": [
+            "images",
+            "networks",
+            "regions",
+            "volumes",
+            "asg_resources",
+            "cache_clusters",
+            "database_instances",
+            "keypairs",
+            "locations",
+            "security_groups",
+            "replication_groups"
+        ],
+        "frequency":"5"
+        },</code></p>
+<p>By default, the default_settings.py file lists all of the resource types that can be cached. You can remove resources that you do not want to cache.</p>
+</li>
+<li>
+<p>Save the file and restart the cloud discovery service. See <a href="../../../com.ibm.udeploy.install.doc/topics/stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a> and <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+<li>
+<p>In the blueprint designer, open the system settings and enable the <strong>Cloud Resource Cache</strong> setting, as shown in the following figure: </p>
+<p><img alt="The Cloud Resource Cache setting" src="../../images/cds_cache_a.gif" /></p>
+</li>
+</ol>
+<p>Now when you access a cloud provider for the first time, the cloud discovery service caches the resources from that cloud, based on the settings file. The cloud delivery service also cleans the cache based on the schedule in the default_settings.py file. You can also manually clear the cache by clicking <strong>Clean Cache Data</strong>.</p>
+<p><strong>Parent topic:</strong> <a href="../c_node_administering_bds/">Blueprint design server configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/cds_cache.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

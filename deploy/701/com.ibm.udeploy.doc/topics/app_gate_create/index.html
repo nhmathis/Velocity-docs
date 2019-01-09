@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_gate_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating environment gates - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating environment gates", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-environment-gates">Creating environment gates</h1>
+<p>To create an environment gate, specify the conditions that must be met before component versions can be deployed to the environment.</p>
+<p>Create one or more component version statuses. To see available statuses, click <strong>Settings</strong> > <strong>Statuses</strong> and then under <strong>Version Statuses</strong>, click <strong>Add Status</strong>.</p>
+<ol>
+<li>
+<p>Display the Environment Gates pane for the target application or application template (<strong>Applications</strong> > <strong>selected application</strong> > <strong>Configuration</strong> > <strong>Environment Gates</strong> or <strong>Applications</strong> > <strong>Templates</strong> > <strong>selected application template</strong> > <strong>Configuration</strong> > <strong>Environment Gates</strong>). This pane lists the environments and the gates for each environment.</p>
+<p><strong>Note:</strong> You cannot modify environment gates if the environment was created by using an application template.</p>
+</li>
+<li>
+<p>Next to an environment, select a value from the <strong>Add a new condition</strong> list.</p>
+<p><img alt="Selecting a condition for the an environment gate in an application" src="../../images/app_gate_create_a.gif" /></p>
+<p>The available statuses are defined in the default.xml file. You supply your own status values.</p>
+<p>Selecting a value provides both <code>And</code> and <code>Or</code> selection boxes.</p>
+<p><img alt="The new condition for the gate" src="../../images/app_gate_create_b.gif" /></p>
+<p>Using the <strong>And</strong> box adds another value to the condition that must be satisfied. For example, if you define a gate with the conditions <code>Passed unit tests</code> and <code>Latest</code>, only component versions with both of these statuses can be deployed into the environment.</p>
+<p>Using the <strong>Or</strong> box adds another condition to the gate. Additional conditions are defined in the same way as the first one. A gate with two or more conditions means that the component version can be deployed if it meets any of the conditions. For example, if you define a gate with the conditions <code>Passed unit tests</code> and <code>Latest</code>, a component version passes the gate if it has either status (or both). A single gate can have any number of conditions.</p>
+</li>
+<li>
+<p>Repeat these steps for other environments.Each environment can have different gates.</p>
+</li>
+<li>Click <strong>Save Conditions</strong> to save your changes. </li>
+</ol>
+<p>Component versions cannot be deployed to the environments unless they have the specified statuses. To assign statuses to component versions, see <a href="../comp_version_status/">Statuses</a>.</p>
+<ul>
+<li><strong><a href="../app_gate/">Environment gates</a></strong><br />
+An environment gate is a requirement that must be met before component versions can be deployed to an environment. For example, a component version might need to pass certain tests or receive an approval.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../app_environment/">Application environments</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_gate_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

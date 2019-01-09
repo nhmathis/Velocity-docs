@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/rest_cli_agentcli_info_get/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Get information about an agent - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Get information about an agent", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example", url: "#example" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="get-information-about-an-agent">Get information about an agent</h1>
+<p>This command returns a JSON representation of an agent.</p>
+<h2 id="request">Request</h2>
+<pre><code>GET https://{hostname}:{port}
+    /cli/agentCLI/info?{parameters}
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>agent</td>
+<td>string</td>
+<td>true</td>
+<td>Name or ID of the agent</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<pre><code>curl -k -u jsmith:passwd 
+
+  &quot;https://myserver.example.com:8443/cli/agentCLI/info
+  ?agent=myAgent&quot;
+</code></pre>
+
+<h2 id="example-response">Example response</h2>
+<pre><code>{
+  &quot;id&quot;: &quot;18cc6e9c-0c18-44bc-b34d-53c8609d9c44&quot;,
+  &quot;securityResourceId&quot;: &quot;4c9f52c0-6f90-4e6a-94a9-5a68c8081796&quot;,
+  &quot;name&quot;: &quot;myAgent&quot;,
+  &quot;active&quot;: true,
+  &quot;licensed&quot;: false,
+  &quot;licenseType&quot;: &quot;NONE&quot;,
+  &quot;status&quot;: &quot;ONLINE&quot;,
+  &quot;version&quot;: &quot;6.2.5.0.918945&quot;,
+  &quot;lastContact&quot;: 1498229460223,
+  &quot;dateCreated&quot;: 1497277343513,
+  &quot;workingDirectory&quot;: &quot;\/opt\/ibm-ucd\/agent\/var\/work\/&quot;,
+  &quot;impersonationPassword&quot;: &quot;****&quot;,
+  &quot;impersonationUseSudo&quot;: false,
+  &quot;impersonationForce&quot;: false,
+  &quot;tags&quot;: [],
+  &quot;security&quot;: {
+    &quot;read&quot;: true,
+    &quot;execute&quot;: true,
+    &quot;Add to Agent Pool&quot;: true,
+    &quot;Create Resources&quot;: true,
+    &quot;Delete&quot;: true,
+    &quot;Edit Basic Settings&quot;: true,
+    &quot;Execute on Agents&quot;: true,
+    &quot;Manage Impersonation&quot;: true,
+    &quot;Manage Properties&quot;: true,
+    &quot;Manage Teams&quot;: true,
+    &quot;Manage Version Imports&quot;: true,
+    &quot;View Agents&quot;: true
+  },
+  &quot;propSheet&quot;: {
+    &quot;id&quot;: &quot;42763bdd-66b5-4021-9a57-62ba3dd745fd&quot;,
+    &quot;path&quot;: &quot;agents\/18cc6e9c-0c18-44bc-b34d-53c8609d9c44\/propSheet&quot;,
+    &quot;version&quot;: 2,
+    &quot;versionCount&quot;: 2,
+    &quot;commit&quot;: 55,
+    &quot;versioned&quot;: true
+  },
+  &quot;extendedSecurity&quot;: {
+    &quot;read&quot;: true,
+    &quot;execute&quot;: true,
+    &quot;Add to Agent Pool&quot;: true,
+    &quot;Create Resources&quot;: true,
+    &quot;Delete&quot;: true,
+    &quot;Edit Basic Settings&quot;: true,
+    &quot;Execute on Agents&quot;: true,
+    &quot;Manage Impersonation&quot;: true,
+    &quot;Manage Properties&quot;: true,
+    &quot;Manage Teams&quot;: true,
+    &quot;Manage Version Imports&quot;: true,
+    &quot;View Agents&quot;: true,
+    &quot;teams&quot;: [{
+      &quot;teamId&quot;: &quot;8213c4ec-1f66-4b4a-9a73-e24bf8b8102f&quot;,
+      &quot;teamLabel&quot;: &quot;My team&quot;,
+      &quot;resourceTypeId&quot;: &quot;20000000000000000000000000000106&quot;,
+      &quot;resourceTypeName&quot;: &quot;Agent&quot;
+    }]
+  }
+}
+
+</code></pre>
+
+<p>Related CLI command: <a href="../udclient_getagent/">getAgent</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../rest_cli_agentcli/">agentCLI resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/rest_cli_agentcli_info_get.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/trouble_design/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Troubleshooting the blueprint design server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Troubleshooting the blueprint design server", url: "#_top", children: [
+          ]},
+          {title: "cat var/logs/patterns.out | grep \"Timeout occurred while waiting for a", url: "#cat-varlogspatternsout-grep-timeout-occurred-while-waiting-for-a", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="troubleshooting-the-blueprint-design-server">Troubleshooting the blueprint design server</h1>
+<p>If you are having trouble with the blueprint design server, here are some things that might help.</p>
+<ul>
+<li>
+<p><strong>Derby conflict during installation</strong></p>
+<p>If you install HCL® UrbanCode™ Deploy and the blueprint design server on the same system and use Derby for both systems, you might see this error during the blueprint design server installation:</p>
+<p><code>Starting embedded database ...
+Stopping embedded database ...
+[ant:java] : /opt/ibm-ucd-patterns/var/db is not a valid directory
+        at org.apache.tools.ant.taskdefs.Java.setupWorkingDir(Java.java:855)
+        at org.apache.tools.ant.taskdefs.Java.setupExecutable(Java.java:825)</code></p>
+<p>In this case, use a different database for either system; do not use Derby for both HCL® UrbanCode™ Deploy and the blueprint design server.</p>
+</li>
+<li>
+<p><strong>Palette does not show virtual images</strong></p>
+<p>If you do not see your virtual images in the palette, make sure that the images are configured properly. For example, Amazon EC2 images must be registered with the cloud discovery service; see <a href="../integrate_ec2_image/">Registering Amazon EC2 images with the cloud discovery service</a>. For all clouds, see <a href="../cloud_connect_vm_requirements/">Configuring images for use with the blueprint designer</a>.</p>
+<p>Make sure that you are connected to the correct cloud project and that you have permission to see the images.</p>
+</li>
+<li>
+<p><strong><em>*Files</em>* list does not display folders</strong></p>
+<p>If you do not see the default or team folders in the <strong>Files</strong> list in the blueprint designer, reset the file storage cache.</p>
+<ol>
+<li>Stop the blueprint design server. See <a href="../../../com.ibm.udeploy.install.doc/topics/stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</li>
+<li>Remove the cache folder.<ul>
+<li>On Linux™, delete the /installed_location/ibm-ucd-patterns/opt/tomcat/work/Catalina/localhost/landscaper/eclipse directory. The installed_location is the location where you installed the blueprint designer, and the default value is <code>opt</code>.</li>
+<li>On Windows™, delete the C:/installed_location/ibm-ucd-patterns/opt/tomcat/work/Catalina/localhost/landscaper/eclipse directory. The installed_location is the location where you installed the blueprint designer, and the default value is <code>Program Files</code>.</li>
+</ul>
+</li>
+<li>Restart the blueprint design server. See <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</li>
+<li><strong><em>*Files</em>* list does not display team folders</strong></li>
+</ol>
+<p>If you do not see the team folders in the <strong>Files</strong> list in the blueprint designer and cannot log into the local Git server, modify the user file for the Git server.</p>
+<p>On the system that hosts the blueprint design server, open the users.conf file in the /installed_directory/repositories/gitblit/data/ folder. The installed_directory is the location where you installed the blueprint design server, and the default value is opt/ibm-ucd-patterns. Add the following code to the file:</p>
+<p><code>[user "gitadmin"]
+ password = password
+ role = "#admin"
+ role = "#notfederated"</code></p>
+</li>
+<li>
+<p><strong>Check the logs</strong></p>
+<p>The default location for the blueprint design server logs is /opt/ibm-ucd-patterns/logs.</p>
+</li>
+<li>
+<p><strong>Increase Hystrix timeout values</strong></p>
+<p>While you check the logs for problems, you might see timeout errors. For example, in the var/logs/patterns.out file, you might view an error that is similar to this entry:</p>
+<p>```</p>
+<h1 id="cat-varlogspatternsout-grep-timeout-occurred-while-waiting-for-a">cat var/logs/patterns.out | grep "Timeout occurred while waiting for a</h1>
+<pre><code>response" | cut -d" " -f6- | sort  | uniq -c  | sort -n -r
+6 com.urbancode.landscape.persistence.versionedfs.VFSAbstractCommand -  Timeout occurred while
+waiting for a response from service tier.  Consider increasing timeout for
+VFSListWorkspaces.
+3 com.urbancode.landscape.component.engine.UCLFindAllArtifactsCommand -  Timeout occurred while
+waiting for a response from service tier.  Consider increasing timeout for
+FindAllArtifacts.
+</code></pre>
+<p>```</p>
+<p>You can find the following <code>VFSListWorkspaces</code>, <code>FindAllArtifacts</code>, or <code>UCDGetAuthTokens</code> entries in the /opt/ibm-ucd-patterns/conf/server/ folder in one of these properties files:</p>
+<ul>
+<li>config.properties</li>
+<li>engine-services-client.properties</li>
+<li>heat-api-client.properties</li>
+<li>versioned-filesystem-client.properties
+Open the ./conf/server/versioned-filesystem-client.properties file, and increase the timeout value from, for example, <code>5000</code> to <code>15000</code>. Enter the new value in this property:</li>
+</ul>
+<p><code>hystrix.command.VFSListWorkspaces.execution.isolation.thread.timeoutInMilliseconds=15000</code></p>
+<p>Open the ./conf/server/heat-api-client.properties file, and increase the timeout value from, for example, <code>10000</code> to <code>20000</code>. Enter the new value in this property:</p>
+<p><code>hystrix.command.FindAllArtifacts.execution.isolation.thread.timeoutInMilliseconds=20000</code></p>
+<p>Open the ./conf/server/engine-services-client.properties file, and increase the timeout value from, for example, <code>15000</code> to <code>30000</code>. Enter the new value in this property:</p>
+<p><code>hystrix.command.FindAllArtifacts.execution.isolation.thread.timeoutInMilliseconds=30000</code></p>
+</li>
+<li>
+<p><strong>Permissions</strong></p>
+<p>Ensure that your user account has access to the correct cloud projects and other resources. To use the blueprint designer, a user account must be on a team and, and the account must have a role on that team. The team must have access to a cloud project. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_ov/">Configuring security for the blueprint design server</a>.</p>
+<p>If your user account is imported from HCL® UrbanCode™ Deploy, the components that you can see in the blueprint editor are limited by your permissions on the blueprint design server.</p>
+</li>
+<li>
+<p><strong>Check the cloud discovery service</strong></p>
+<p>The cloud discovery service receives many concurrent requests from the blueprint design server. Each request opens a file on the discovery service. If many users are using the blueprint designer at the same time, the discovery service might reach the open file limit. In this case, the blueprint design server does not respond normally. To resolve the problem, increase the number of files that can be open on the discovery service. On a Linux™ system, increase the <code>ulimit</code> value to allow more open files.</p>
+<p>In versions before version 6.1.1.1, the discovery service could be installed automatically as part of an engine or separately from other components of the product. Beginning in version 6.1.1.1, the discovery service is installed as part of the blueprint design server.</p>
+</li>
+<li>
+<p><strong>Check the DNS access to the blueprint design server host name</strong></p>
+<p>If your blueprint design server is running on a cloud system that does not provide DNS lookup for host names, the blueprint design server might not function properly. In this case, blueprints do not appear on the dashboard page or in the list of files on the blueprint design server. You might also see errors when you create or update blueprints. In the log, you see errors that say <code>Timeout occurred while waiting for a response from service tier</code>.</p>
+<p>To resolve this issue, add a reference that relates the host name to the IP address in the /etc/hosts file on the computer that hosts the blueprint design server.</p>
+</li>
+<li>
+<p><strong>Indentation problem B</strong></p>
+<p>Indentation is significant in Heat templates. Therefore, you must keep the indentation consistent throughout the template. To fix this problem, convert spaces to tabs and make sure that each indentation level in the template has the same number of tabs. This error tends to appear when you copy and paste from other editors into the blueprint editor.</p>
+</li>
+<li>
+<p><strong>Resized virtual machines on VMware did not change size</strong></p>
+<p>If you change the size of a VMware virtual machine in the blueprint designer, you might need to extend the file system to see the change on the virtual machine. See <a href="http://kb.vmware.com/selfservice/microsites/search.do?language=en_US&amp;cmd=displayKC&amp;externalId=1004071">Increasing the size of a disk partition</a>.</p>
+</li>
+</ul>
+<p>For more troubleshooting information, see the UrbanCode community on IBM® developerWorks®: <a href="https://developer.ibm.com/answers/?community=urbancode">https://developer.ibm.com/answers/?community=urbancode</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/trouble_blueprints_ov/">Troubleshooting modeling and provisioning cloud environments</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/trouble_design.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/rest_cli_applicationprocessrequest_request_put/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Run an application process - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Run an application process", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example JSON request", url: "#example-json-request" },
+              {title: "Example JSON request", url: "#example-json-request_1" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="run-an-application-process">Run an application process</h1>
+<p>A version may be set to 'latest' to deploy the latest version of that component.</p>
+<h2 id="request">Request</h2>
+<pre><code>PUT https://{hostname}:{port}
+    /cli/applicationProcessRequest/request
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p>This command takes a JSON request string or file. Use the following template for the request:</p>
+<pre><code>{
+  &quot;application&quot;: &quot;Application name or ID&quot;,
+  &quot;applicationProcess&quot;: &quot;Application process name or ID&quot;,
+  &quot;date&quot;: &quot;Date and time to schedule the process for. 
+  (Optional) Supports unix timecodes or the format yyyy-mm-
+  dd HH:mm&quot;,
+  &quot;description&quot;: &quot;Description for the request (Optional)&quot;,
+  &quot;environment&quot;: &quot;Environment name or ID&quot;,
+  &quot;onlyChanged&quot;: &quot;Specify false to force deployment of 
+  versions that are already in the inventory (Optional)&quot;,
+  &quot;post-deploy-message&quot;: &quot;The body of the PUT message. You 
+  can use the variable ${p:finalStatus}, which holds the 
+  state of the process. The possible states are:Success, 
+  Failure, Approval Rejected, Awaiting Approval, Running, 
+  Scheduled, Cancelled, and Unknown. (Optional)&quot;,
+  &quot;post-deploy-put-url&quot;: &quot;The URL that the post-deploy-
+  message is PUT to. (Optional)&quot;,
+  &quot;properties&quot;: {&quot;Property name&quot;: &quot;Property value 
+  (Optional)&quot;},
+  &quot;recurrencePattern&quot;: &quot;To make a scheduled process recur, 
+  specify 'D' (daily), 'W' (weekly), or 'M' (monthly). 
+  (Optional)&quot;,
+  &quot;snapshot&quot;: &quot;Snapshot name or ID (Optional)&quot;,
+  &quot;versions&quot;: [{
+    &quot;component&quot;: &quot;Component name or ID for the version, if 
+  you are using version name instead of ID.&quot;,
+    &quot;version&quot;: &quot;Version name or ID (Repeat as necessary. 
+  Not used with snapshots)&quot;
+  }]
+}
+
+</code></pre>
+
+<h2 id="example-json-request">Example JSON request</h2>
+<pre><code>{
+  &quot;application&quot;: &quot;JPetStore&quot;,
+  &quot;description&quot;: &quot;Requesting deployment&quot;,
+  &quot;applicationProcess&quot;: &quot;Deploy JPetStore&quot;,
+  &quot;environment&quot;: &quot;Tutorial environment 1&quot;,
+  &quot;onlyChanged&quot;: &quot;false&quot;,
+  &quot;properties&quot;: {
+    &quot;Prop1&quot;: &quot;value1&quot;
+  },
+  &quot;versions&quot;: [
+    {
+      &quot;version&quot;: &quot;1.0&quot;,
+      &quot;component&quot;: &quot;JPetStore-APP&quot;
+    },
+    {
+      &quot;version&quot;: &quot;1.0&quot;,
+      &quot;component&quot;: &quot;JPetStore-WEB&quot;
+    },
+    {
+      &quot;version&quot;: &quot;1.0&quot;,
+      &quot;component&quot;: &quot;JPetStore-DB&quot;
+    }
+  ]
+}
+</code></pre>
+
+<h2 id="example-json-request_1">Example JSON request</h2>
+<p>You can also use the keywords <code>latest</code>, <code>latestVersion</code>, and <code>newest</code> in place of component version names. In this case, the process uses the most recently created component version. The following example shows how you can use these keywords in the JSON request.</p>
+<pre><code>{
+  &quot;application&quot;: &quot;JPetStore&quot;,
+  &quot;description&quot;: &quot;Deploying newest versions&quot;,
+  &quot;applicationProcess&quot;: &quot;Deploy JPetStore&quot;,
+  &quot;environment&quot;: &quot;Tutorial environment 1&quot;,
+  &quot;onlyChanged&quot;: &quot;false&quot;,
+  &quot;properties&quot;: {
+    &quot;Prop1&quot;: &quot;value1&quot;
+  },
+  &quot;versions&quot;: [
+    {
+      &quot;version&quot;: &quot;newest&quot;,
+      &quot;component&quot;: &quot;JPetStore-APP&quot;
+    },
+    {
+      &quot;version&quot;: &quot;latest&quot;,
+      &quot;component&quot;: &quot;JPetStore-WEB&quot;
+    },
+    {
+      &quot;version&quot;: &quot;latestVersion&quot;,
+      &quot;component&quot;: &quot;JPetStore-DB&quot;
+    }
+  ]
+}
+</code></pre>
+
+<h2 id="example-response">Example response</h2>
+<pre><code>{
+  &quot;requestId&quot;: &quot;f7e7b00d-8ea6-4a95-ad74-0ff853125232&quot;
+}
+</code></pre>
+
+<p>Related CLI command: <a href="../udclient_requestapplicationprocess/">requestApplicationProcess</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../rest_cli_applicationprocessrequest/">applicationProcessRequest resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/rest_cli_applicationprocessrequest_request_put.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

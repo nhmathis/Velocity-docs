@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_version_import/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Importing versions manually - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Importing versions manually", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="importing-versions-manually">Importing versions manually</h1>
+<p>If the component does not import new versions automatically, you can import versions manually.</p>
+<p>To set up a component to import versions manually, see <a href="../comp_create/">Creating components</a>.</p>
+<p><strong>Note:</strong> Do not give component versions the name <code>latest</code>, <code>latestVersion</code>, or <code>newest</code>. These names are reserved to represent the most recently created version for certain CLI commands, including <a href="../../../com.ibm.udeploy.api.doc/topics/udclient_requestapplicationprocess/">requestApplicationProcess</a> and <a href="../../../com.ibm.udeploy.api.doc/topics/udclient_createsnapshot/">createSnapshot</a>. You cannot use these keywords to represent component versions in the web interface.</p>
+<ol>
+<li>
+<p>Display the Version pane for the component you want to use (<strong>Components</strong> > <strong>selected component</strong> > <strong>Versions</strong>). </p>
+<p><img alt="The component version pane, showing the list of versions for a component and the Import New Versions button" src="../../images/comp_version_import_a.gif" title="Component Version pane" /></p>
+</li>
+<li>
+<p>Click <strong>Import New Versions</strong>.Depending on the source configuration type, you might see a window that prompts you for more information, such as the name of the version to import.</p>
+</li>
+</ol>
+<p>The new version or versions appear in the table of versions.</p>
+<p><strong>Parent topic:</strong> <a href="../comp_version/">Component versions</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_version_import.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

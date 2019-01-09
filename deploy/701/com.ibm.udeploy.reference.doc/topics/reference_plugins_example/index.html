@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/reference_plugins_example/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Example plug-in - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Example plug-in", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="example-plug-in">Example plug-in</h1>
+<p>A plug-in consists of one or more steps. A step represents a unit of functionality that can be user-configured and combined with other steps into a process. Creating a plug-in consists in defining its individual steps and then grouping them together for presentation in HCL® UrbanCode™ Deploy.</p>
+<p>Plug-in steps are run by an agent that is installed in the target environment. This means that plug-ins can be written in any scripting language as long as the agent can access the required scripting tools on the host.</p>
+<p>In this section, we examine the mechanics of plug-ins by examining a plug-in step in detail. The example plug-in that we use is FileUtils, which contains several steps that are related to file manipulation. The FileUtils plug-in is shipped with HCL UrbanCode Deploy.</p>
+<p>Each plug-in step is an individually configurable object in the editor. In the following illustration, you can see some of FileUtils' individual steps in the process editor.</p>
+<p><img alt="An illustration of the steps in the code of the plug-in and the matching steps in the process editor" src="../../images/samp_plug1.png" /></p>
+<p>We examine the <code>Create File</code> step in this example. Create File is straightforward and (as the name implies) creates a file.</p>
+<p>Each step (step-type element) has the same structure:</p>
+<ul>
+<li><code>properties</code> element can contain any number of <code>&lt;property&gt;</code> child elements; property values can be supplied at design time or runtime</li>
+<li><code>post-processing</code> element provides error-handling and sets property values that can be used by other steps</li>
+<li><code>command</code> element performs the step's function. The function can be defined completely by the element, or be constructed in part or entirely from the step's properties at design time or runtime</li>
+</ul>
+<p>The following figure illustrates the structure of the Create File step.</p>
+<p><img alt="The structure of the step shows the properties of the step, which correspond to the properties in the Edit Properties window" src="../../images/samp_plug2.png" /></p>
+<ul>
+<li><strong><a href="../ref_example_step_properties/">Step properties</a></strong><br />
+In the context of our discussion, properties are values that are used by the step's command. Step properties are defined with the property element.</li>
+<li><strong><a href="../ref_example_step_commands/">Step commands</a></strong><br />
+The step's <code>command</code> element specifies the scripting tool that runs the step and identifies the file that contains the actual script.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../plugin_ch/">Plug-ins</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/reference_plugins_example.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

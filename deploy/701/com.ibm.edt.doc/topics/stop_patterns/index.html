@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/stop_patterns/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Stopping the blueprint designer, cloud discovery service, and engine - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Stopping the blueprint designer, cloud discovery service, and engine", url: "#_top", children: [
+              {title: "Stopping the cloud discovery service", url: "#stopping-the-cloud-discovery-service" },
+              {title: "Stopping the blueprint design server", url: "#stopping-the-blueprint-design-server" },
+              {title: "Stopping the engine Heat services", url: "#stopping-the-engine-heat-services" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="stopping-the-blueprint-designer-cloud-discovery-service-and-engine">Stopping the blueprint designer, cloud discovery service, and engine</h1>
+<p>To stop the blueprint designer and its associated services, you must stop the cloud discovery service, the blueprint design server, and the engine Heat services.</p>
+<p>Depending on your system configuration, these components might be on different computers. Be sure to stop the cloud discovery service, the blueprint design server, and the engine Heat services on the correct computers.</p>
+<p><strong>Parent topic:</strong> <a href="../runProduct/">Starting the HCL UrbanCode Deploy blueprint designer</a></p>
+<h2 id="stopping-the-cloud-discovery-service">Stopping the cloud discovery service</h2>
+<ol>
+<li>
+<p>Stop the cloud discovery service. On version 6.1.1.1 and later, the cloud discovery service is installed along with the blueprint design server.</p>
+<ul>
+<li>
+<p>On Linux™ systems that manage services with the systemd system manager, use the systemctl command:</p>
+<p><code>systemctl stop ibm-cloud-discovery.service</code></p>
+<p><strong>Note:</strong> If you started the cloud discovery service with the systemctl command, you must use the systemctl command to stop the cloud discovery service.</p>
+</li>
+<li>
+<p>On other versions of Linux:</p>
+<ul>
+<li>
+<p>Using the ps command, find the process IDs of the cloud discovery service:</p>
+<p><code>ps aux | grep -i -e "cloud" | grep -v "grep"</code></p>
+<p>For example, the output of the command might look like the following code:</p>
+<p>```
+root      1218  0.0  1.5 319048 29932 ?        Sl   Dec08   0:00 /usr/bin/python /usr/bin/cloud-discovery-service</p>
+<p>```</p>
+</li>
+<li>
+<p>Using the kill command, stop the processes. For example:</p>
+<p><code>kill 1218</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>On Windows™:</p>
+<ul>
+<li>Using the Task Manager program, find the cloud-discovery-service process.</li>
+<li>Right-click the cloud-discovery-service process and click <strong>End task</strong>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="stopping-the-blueprint-design-server">Stopping the blueprint design server</h2>
+<ol>
+<li>
+<p>Stop the blueprint design server: </p>
+<p><code>server\_installation\_directory/bin/server stop</code></p>
+<p>Use the server installation directory for <code>server\_installation\_directory</code>. The default installation directory is /opt/ibm-ucd-patterns on Linux and C:\Program Files\ibm-ucd-patterns on Windows. By default, the command looks like this code:</p>
+<p><code>/opt/ibm-ucd-patterns/bin/server stop</code></p>
+</li>
+</ol>
+<h2 id="stopping-the-engine-heat-services">Stopping the engine Heat services</h2>
+<ol>
+<li>
+<p>Stop the Heat services. Run the following commands:</p>
+<p><code>systemctl stop openstack-heat-engine.service</code></p>
+<p><code>systemctl stop openstack-heat-api.service</code></p>
+<p><code>systemctl stop openstack-heat-api-cfn.service</code></p>
+<p><code>systemctl stop openstack-heat-api-cloudwatch.service</code></p>
+</li>
+<li>
+<p>If you installed a Keystone server when you installed the engine, stop it. Run the following command:</p>
+<p><code>systemctl stop openstack-keystone.service</code></p>
+</li>
+</ol>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/stop_patterns.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

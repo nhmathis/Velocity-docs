@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/agent_manageremote/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Managing agents remotely - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Managing agents remotely", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="managing-agents-remotely">Managing agents remotely</h1>
+<p>After an agent is installed, you can manage (with the monitor process) many of its features from the HCL® UrbanCode™ Deploy web application.</p>
+<p>We characterize an agent as a single process, but technically an agent consists of two processes: a worker process and a monitor process. Worker processes do the actual work of deployment, such as handling plug-in steps. Monitor processes manage the worker process, such as handling restarts, upgrades, and tests. Agent properties can be changed directly by editing the agent's conf/agent/installed.properties file and restarting the agent.</p>
+<ol>
+<li>Display the Agents pane (<strong>Resources</strong> > <strong>Agents</strong>). </li>
+<li>
+<p>Click an action link for the agent.Actions are described in the following table.</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Edit</td>
+<td>This option edits the agent's description.</td>
+</tr>
+<tr>
+<td>Restart</td>
+<td>This option shuts down and restarts the agent. While the agent is shut down, its status is <code>Offline</code>.</td>
+</tr>
+<tr>
+<td>Upgrade</td>
+<td>This option shuts down the agent and applies the upgrade. While the agent is shut down, its status is <code>Offline</code>. After the upgrade is applied, the agent is restarted.</td>
+</tr>
+<tr>
+<td>Test</td>
+<td>This option runs an agent settings and connection test. Test results are displayed in the Connection Test dialog.</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>Removes the agent.</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../configure_agents/">Agents and agent relay configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/agent_manageremote.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

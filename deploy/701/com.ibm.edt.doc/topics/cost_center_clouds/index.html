@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/cost_center_clouds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Specifying costs for cloud resources manually - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Specifying costs for cloud resources manually", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="specifying-costs-for-cloud-resources-manually">Specifying costs for cloud resources manually</h1>
+<p>To estimate the cost of your environments, you can specify information about the prices that your cloud system charges for specific resources.</p>
+<p>Connect to a cloud. See <a href="../security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</p>
+<p>As an alternative, you can import some cost information from clouds; see <a href="../cost_center_import/">Importing cost information from clouds</a>.</p>
+<p>You must provide the following information about the prices that the cloud system charges:</p>
+<ul>
+<li>The image flavors that are available on the cloud, including the number of processors, amount of memory, and the storage space on each flavor.</li>
+<li>The types of instances that are available, such as different operating systems.</li>
+<li>The regions on which you can provision instances.</li>
+<li>The types of storage volumes that are available, such as magnetic storage and solid-state storage.</li>
+</ul>
+<p>Then, you specify the costs for different combinations of those factors.</p>
+<ol>
+<li>Specify information about the cost factors for environments on the cloud system:</li>
+<li>In the blueprint designer, as an administrator, click <strong>Settings</strong> > <strong>Cost Centers</strong>. </li>
+<li>Click <strong>Add Cost Center</strong>. </li>
+<li>Specify a name for the cost center.You can name the cost center after the cloud that it applies to. If multiple clouds use the same cost structure, you can give the cost center a generic name that applies to the multiple clouds.</li>
+<li>In the <strong>Source</strong> list, select <strong>Cloud</strong>.</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Next, specify the factors that the cloud system uses to determine the cost of environments. Later, you map prices to these factors.</li>
+<li>
+<p>Specify the image flavors that are available: </p>
+<ol>
+<li>Under <strong>Cost Centers</strong>, click the cost center to select it.</li>
+<li>On the <strong>Cost Factors</strong> tab, go to the <strong>Flavor</strong> subtab.</li>
+<li>In the <strong>Flavor</strong> list, click <strong>Add Flavor</strong>.</li>
+<li>
+<p>Specify the properties of the new flavor:</p>
+<ul>
+<li>
+<p><strong><em>*Flavor Id</em></strong>*</p>
+<p>The ID of the flavor. See the cloud system for information about the ID of flavors.</p>
+</li>
+<li>
+<p><strong><em>*Name</em></strong>*</p>
+<p>A label for the flavor.</p>
+</li>
+<li>
+<p><strong><em>*CPU</em></strong>*</p>
+<p>The number of virtual processors.</p>
+</li>
+<li>
+<p><strong><em>*RAM (GB)</em></strong>*</p>
+<p>The amount of memory, in gigabytes.</p>
+</li>
+<li>
+<p><strong><em>*Disk Size (GB)</em></strong>*</p>
+<p>The amount of storage space, in gigabytes.</p>
+</li>
+<li>
+<p><strong><em>*Disk Count</em></strong>*</p>
+<p>The number of virtual disks.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+<li>Repeat these steps to specify information about the flavors that are available on the cloud.
+The list of flavors looks like the following image. This image shows four flavors: Tiny, Small, Medium, and Large. It shows the details of the Large flavor, which includes six virtual processors and 8 gigabytes of memory.</li>
+</ol>
+<p><img alt="The Flavor subtab, showing information about the virtual hardware that is available on a specific flavor" src="../../images/cost_center_cloud_a.gif" /></p>
+</li>
+<li>
+<p>Specify the types of instances that are available. For example, many clouds provide base instances of different operating systems or instances with certain software preinstalled on them.</p>
+<ol>
+<li>Under <strong>Cost Centers</strong>, click the cost center to select it.</li>
+<li>On the <strong>Cost Factors</strong> tab, go to the <strong>Instance Type</strong>subtab.</li>
+<li>In the <strong>Instance Type</strong> list, click <strong>Add Instance Type</strong>.</li>
+<li>
+<p>Specify the properties for the new instance type: </p>
+<ul>
+<li>
+<p><strong><em>*Instance Type Id</em></strong>*</p>
+<p>The ID of the instance type. See the cloud system for information about the ID of instance types.</p>
+</li>
+<li>
+<p><strong><em>*Name</em></strong>*</p>
+<p>A label for the instance type, such as a description of the operating system or contents of the instance.</p>
+</li>
+<li>
+<p><strong><em>*Tags</em></strong>*</p>
+<p>Search terms for the instance type, which are separated by commas. When the blueprint design server estimates the cost of an environment, it uses these search terms to match a node on a blueprint to the instance type.</p>
+</li>
+<li>
+<p><strong><em>*Default</em></strong>*</p>
+<p>If you select this check box, this instance type is used as the default instance if no other instance types match the nodes in a blueprint.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Click <strong>Save</strong>.
+The <strong>Instance Type</strong> subtab looks like the following image. This image shows several Windows™ and Linux™ instance types, including Windows Server 2008, Red Hat Enterprise Linux, and SUSE Linux Enterprise Server.</p>
+</li>
+</ol>
+<p><img alt="TheInstance Type subtab, showing information about the instances that are available on the cloud system" src="../../images/cost_center_cloud_b.gif" /></p>
+</li>
+<li>
+<p>Specify the regions that are available.Some cloud systems have different prices for environments in different locations. If your cloud system charges the same price for different locations, or if it has only one location, create one region and use it for all environments.</p>
+<ol>
+<li>Under <strong>Cost Centers</strong>, click the cost center to select it.</li>
+<li>On the <strong>Cost Factors</strong> tab, go to the <strong>Region</strong> subtab.</li>
+<li>In the <strong>Region</strong> list, click <strong>Add Region</strong>.</li>
+<li>
+<p>Specify the properties for the new region:</p>
+<ul>
+<li>
+<p><strong><em>*Region Id</em></strong>*</p>
+<p>The ID of the region.</p>
+</li>
+<li>
+<p><strong><em>*Name</em></strong>*</p>
+<p>A label for the region.</p>
+</li>
+<li>
+<p><strong><em>*Country</em></strong>*</p>
+<p>The country that contains the region.</p>
+</li>
+<li>
+<p><strong><em>*Default</em></strong>*</p>
+<p>If you select this check box, this region is used as the default region.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+<li>Specify the types of volumes that are available, such as magnetic storage and solid-state storage.You specify the cost per gigabyte later.</li>
+<li>Under <strong>Cost Centers</strong>, click the cost center to select it.</li>
+<li>On the <strong>Cost Factors</strong> tab, go to the <strong>Volume</strong> subtab.</li>
+<li>In the <strong>Volume</strong> list, click <strong>Add Volume</strong>.</li>
+<li>
+<p>Specify the properties for the new volume type: </p>
+<ul>
+<li>
+<p><strong><em>*Volume Id</em></strong>*</p>
+<p>The ID for the volume type. See the cloud system for this information.</p>
+</li>
+<li>
+<p><strong><em>*Name</em></strong>*</p>
+<p>A label for the volume type, such as Magnetic or Solid-state.</p>
+</li>
+<li>
+<p><strong><em>*Default</em></strong>*</p>
+<p>If you select this check box, this volume type is used as the default type.</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>Now that you specified the factors that the cloud considers when it calculates environment cost, you must specify the prices for each of these factors.</p>
+</li>
+<li>
+<p>Specify the costs for each flavor: </p>
+<ol>
+<li>Under <strong>Cost Centers</strong>, click the cost center to select it, and then go to the <strong>Cost Metrics</strong> tab. </li>
+<li>Under <strong>Cost Metrics</strong>, click <strong>Instance</strong> to select it.The <strong>Instance</strong> section shows tables of the flavors and the cost for each flavor.</li>
+<li>In the <strong>Region</strong> and <strong>Instance Type</strong> lists, select a region and instance type. </li>
+<li>In the table of flavors, in the <strong>Cost per Hour</strong> column, specify the cost in US dollars for each flavor in the specified region and instance type.</li>
+<li>Repeat the process for each region and each instance type.</li>
+<li>Click <strong>Save</strong>.
+Now the <strong>Instance</strong> section shows the cost per hour for each flavor, taking into account the region and instance type. The following image shows a table of flavors and their costs for environments on the <code>Main data center</code> region and the <code>Red Hat Enterprise Linux 6.5</code> instance type.</li>
+</ol>
+<p><img alt="The Instance section, showing a table of information about flavors, including the virtual hardware on each flavor and the cost per hour of each flavor" src="../../images/cost_center_cloud_c.gif" /></p>
+</li>
+<li>
+<p>Bind the cost center to the appropriate clouds: </p>
+<ol>
+<li>Click <strong>Clouds</strong>, and then click the cloud.</li>
+<li>Click <strong>Edit</strong>.</li>
+<li>In the <strong>Cost Center</strong> list, select the cost center for the cloud.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+</li>
+</ol>
+<p>When you provision an environment from the blueprint designer, as described in <a href="../env_provision_edt/">Provisioning environments from the blueprint designer (through OpenStack Heat)</a>, the blueprint design server estimates the cost per hour of the environment.</p>
+<p><strong>Note:</strong> You cannot estimate the cost for cloud environments that you provisioned by using a composite blueprint.</p>
+<p><strong>Parent topic:</strong> <a href="../cost_ov/">Estimating the cost for cloud environments</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/cost_center_clouds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

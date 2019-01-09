@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_process_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating application processes - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating application processes", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-application-processes">Creating application processes</h1>
+<p>You can use application processes to deploy or to roll back components.</p>
+<ol>
+<li>
+<p>Display the Create an Application Process dialog box (<strong>Applications</strong> > <strong>select application</strong> > <strong>Processes</strong> > <strong>Create Process</strong>), and enter the following information: </p>
+<p><img alt="The Create an Application Process window" src="../../images/app_process_create_a.gif" /></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong> and <strong>Description</strong></td>
+<td>Typically the name and description correspond to the application you plan on deploying.<strong>Note:</strong> You must specify a unique name. Your application process name cannot contain the same sequence of alphanumeric characters with different capitalization as an existing application process.</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<p>|
+    |<strong>Inventory Management</strong>|If you want to handle inventory manually, select <code>Advanced</code>. To have inventory that is handled automatically, leave the default value, <code>Automatic</code>, selected. See <a href="../inventory_ch/">Inventories</a>.|
+    |<strong>Offline Agent Handling</strong>|Specify how the process reacts if expected agents are offline:     -   <strong>Check Before Execution</strong>: checks to see whether expected agents are online before you start the process. If agents are offline, the process does not run.
+    -   <strong>Use All Available</strong>; <strong>Report Failure</strong>: process runs while at least one agent is online; reports any failed deployments because of offline agents. Useful for rollbacks or configuration deployments.
+    -   <strong>Always Report Success</strong>: process runs while at least one agent is online; reports successful deployments.
+ |
+    |<strong>Required Role</strong>|Use this list to select the role that a user must have to run the process. You will need to be in the required role for the team on the environment you are trying to run the process on. For more information, see <a href="../../../com.ibm.udeploy.admin.doc/topics/security_roles/">Roles and permissions</a>. The default value is <code>None</code>.|</p>
+<ol>
+<li>Save your work.</li>
+</ol>
+<p>Edit the process in the process editor. See <a href="../comp_workflow_edit/">Editing processes</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../app_process/">Application processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_process_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

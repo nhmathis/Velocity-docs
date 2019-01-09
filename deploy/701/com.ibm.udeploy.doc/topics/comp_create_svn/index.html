@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_create_svn/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating components from Subversion - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating components from Subversion", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-components-from-subversion">Creating components from Subversion</h1>
+<p>Subversion is a source-code management system.</p>
+<p>Install the Subversion client on the HCL® UrbanCode™ Deploy server. For example, on Linux™, you can use the package manager to install Subversion with a command that is similar to these examples:</p>
+<pre><code>yum install subversion
+</code></pre>
+
+<pre><code>apt-get install subversion
+</code></pre>
+
+<pre><code>zypper install subversion
+</code></pre>
+
+<p>All Subversion server configurations are supported.</p>
+<ol>
+<li>In HCL UrbanCode Deploy, click <strong>Components</strong>, and then click <strong>Create Component</strong>. </li>
+<li>In the Create Component window, specify a name and description for the component. </li>
+<li>In the <strong>Teams</strong> fields, specify the access information for the new component.</li>
+<li>To use a template for the new component, select a template from the <strong>Template</strong> list. In this case, the component inherits source configuration, properties, and processes from the template. For information about templates, see <a href="../comp_template/">Component templates</a>.</li>
+<li>In the <strong>Source Configuration Type</strong> list, select <strong>Subversion</strong>. </li>
+<li>
+<p>Specify the following parameters for the component: </p>
+<ul>
+<li>
+<p><strong><em>*Repository URL</em></strong>*</p>
+<p>The location of the Subversion repository, such as</p>
+<p><code>http://svn.example.com/svn/myrepository</code></p>
+</li>
+<li>
+<p><strong><em>*Watch for tags</em></strong>*</p>
+<p>Select this check box to use tags as the basis for new component versions.</p>
+</li>
+<li>
+<p><strong><em>*Includes</em></strong>*</p>
+<p>A list of file patterns to include in the component. Separate each pattern with a carriage return.</p>
+</li>
+<li>
+<p><strong><em>*Excludes</em></strong>*</p>
+<p>A list of file patterns to exclude from the component. Separate each pattern with a carriage return.</p>
+</li>
+<li>
+<p><strong><em>*User</em></strong>*</p>
+<p>The user name for the repository.</p>
+</li>
+<li>
+<p><strong><em>*Password</em></strong>*</p>
+<p>The password for the repository.</p>
+</li>
+<li>
+<p><strong><em>*SVN Path</em></strong>*</p>
+<p>The path to the svn executable file on the HCL® UrbanCode™ Deploy server. If you added the executable file to the system PATH variable, you can specify the name of the executable file, such as svn. If you did not add the executable file to the system PATH variable, specify the complete path, such as /usr/bin/svn.</p>
+</li>
+<li>
+<p><strong><em>*Preserve Execute Permissions</em></strong>*</p>
+<p>For Linux™ and UNIX™ operating systems, select this check box to retain the execute permissions for each file.</p>
+</li>
+<li>
+<p><strong><em>*Extensions of files to Convert</em></strong>*</p>
+<p>If text-type files must be converted into another character set, type the list of file extensions to be converted. Matching file types are converted into the default or system character set of the system where the agent is located. Separate list items with commas, for example:</p>
+<p><code>txt,log,ini,sh</code></p>
+</li>
+<li>
+<p><strong><em>*Proxy Hostname</em></strong>*</p>
+<p>If you connect to the Subversion repository through a proxy server, specify the host name or IP address of the proxy server.</p>
+</li>
+<li>
+<p><strong><em>*Proxy Port Number</em></strong>*</p>
+<p>Specify the port number that is used by the proxy server for client connections.</p>
+</li>
+<li>
+<p><strong><em>*Proxy Username</em></strong>*</p>
+<p>If the proxy server requires authentication, specify the user name.</p>
+</li>
+<li>
+<p><strong><em>*Proxy Password</em></strong>*</p>
+<p>If the proxy server requires authentication, specify the password.</p>
+</li>
+<li>
+<p><strong><em>*Import Versions Automatically</em></strong>*</p>
+<p>Select this check box to check for new versions periodically and to import new versions automatically. If you do not import versions automatically, you can import versions manually by clicking <strong>Components</strong> > <strong>selected component</strong> > <strong>Versions</strong> and then clicking <strong>Import New Versions</strong>.</p>
+</li>
+<li>
+<p><strong><em>*Copy to CodeStation</em></strong>*</p>
+<p>This option, which is selected by default, creates tamper-protected copies of the artifacts and stores them in the embedded artifact management system, CodeStation. If the check box is cleared, only metadata about the artifacts is imported. In most cases, keep this check box selected. The default for this setting is in the system setting <strong>Components copy to CodeStation by default</strong>; see <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_system/">Server settings</a>.</p>
+</li>
+<li>
+<p><strong><em>*Default Version Type</em></strong>*</p>
+<p>Specify how to import versions into CodeStation:</p>
+<ul>
+<li>
+<p><strong><em>*Full</em></strong>*</p>
+<p>Each version is comprehensive and contains all artifacts.</p>
+</li>
+<li>
+<p><strong><em>*Incremental</em></strong>*</p>
+<p>Each version contains a subset of artifacts.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><em>*Use the system's default version import agent/tag</em></strong>*</p>
+<p>If this parameter is selected, the agent or tag that you specified on the System Settings page is used to import component artifacts. Agents must have access to the system where the artifacts are located. See <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_system/">Server settings</a></p>
+</li>
+<li>
+<p><strong><em>*Import new component versions using a single agent</em></strong>*</p>
+<p>If this parameter is selected, use the <strong>Agent for Version Imports</strong> field to identify the agent that is used to import artifacts into the component. The agent must have access to the system where the artifacts are located. To import artifacts from where the server is located, install an agent in the same location and specify that agent.</p>
+</li>
+<li>
+<p><strong><em>*Import new component versions using any agent with the specified tag</em></strong>*</p>
+<p>If this parameter is selected, use the <strong>Agent Tag for Version Imports</strong> field to identify the tag that is used to select agents to import artifacts into the component. All tagged agents must have access to the system where the artifacts are located.</p>
+</li>
+<li>
+<p><strong><em>*Use Default Artifact Cleanup Settings</em></strong>*</p>
+<p>To apply the component version cleanup settings that are specified on the System Settings page, select the <strong>Use Default Artifact Cleanup Settings</strong> check box. If this check box is cleared, you must specify how long to keep component versions. For more information about cleaning up component versions, see <a href="../settings_system_preview/">Cleaning up component versions</a>.</p>
+</li>
+<li>
+<p><strong><em>*Run Process after a Version is Created</em></strong>*</p>
+<p>To automatically run a process after versions are imported, select this check box, and then specify an application process and an environment for the process. The process runs only when the version is imported automatically, not when you import versions manually. Similarly, the process does not run when you create versions with the REST API or the <code>udclient</code> command. If the automatic version import finds multiple versions, the process runs only once.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Click <strong>Save</strong>.</p>
+</li>
+</ol>
+<p>The new component is listed on the Components page. The Versions tab shows the available versions of the component. If you selected the <strong>Import Versions Automatically</strong> check box, versions are displayed automatically. Otherwise, click <strong>Import New Versions</strong> to show the available versions. Depending on the number and size of the artifacts, it might take time before the versions are displayed. To see the artifacts in the component, click a component version.</p>
+<p>Create processes for the component. See <a href="../comp_process_configure/">Creating component processes</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../comp_create_scm/">Creating components from source-code management systems</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_create_svn.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

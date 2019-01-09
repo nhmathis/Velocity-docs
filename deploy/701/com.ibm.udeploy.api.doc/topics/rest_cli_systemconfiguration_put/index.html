@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/rest_cli_systemconfiguration_put/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Update the system configuration - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Update the system configuration", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example JSON request", url: "#example-json-request" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="update-the-system-configuration">Update the system configuration</h1>
+<p>Use this command to set any of the properties on the System Settings page of the server. The JSON template for this command lists all of the properties that you can change, but you can omit properties that you are not changing.</p>
+<h2 id="request">Request</h2>
+<pre><code>PUT https://{hostname}:{port}
+    /cli/systemConfiguration
+
+</code></pre>
+
+<p>This command takes a JSON request string or file. Use the following template for the request:</p>
+<pre><code>{
+  &quot;agentAutoLicense&quot;: &quot;Specify true to automatically 
+  assign licenses to agents&quot;,
+  &quot;artifactAgent&quot;: &quot;Specify a default agent for component 
+  version imports.&quot;,
+  &quot;auditLogCleanupEnabled&quot;: &quot;Whether the audit logs will 
+  be deleted after a given number of days.&quot;,
+  &quot;auditLogCleanupHour&quot;: &quot;The hour when audit logs are 
+  cleaned; the value must be an integer from 0 (midnight) to 
+  23 (11pm).&quot;,
+  &quot;auditLogCleanupMinute&quot;: &quot;The minute when audit logs are 
+  cleaned; the value must be an integer from 0 to 59.&quot;,
+  &quot;auditLogReadEntriesEnabled&quot;: &quot;Controls whether READ 
+  events are captured in the audit log.&quot;,
+  &quot;auditLogRetentionLength&quot;: &quot;The number of days to retain 
+  audit log entries.&quot;,
+  &quot;cleanupArchivePath&quot;: &quot;The path for archived component 
+  versions&quot;,
+  &quot;cleanupCountToKeep&quot;: &quot;The number of component versions 
+  to keep&quot;,
+  &quot;cleanupDaysToKeep&quot;: &quot;The number of days component 
+  versions are kept&quot;,
+  &quot;cleanupHourOfDay&quot;: &quot;The time when versions are cleaned; 
+  the value must be an integer from 0 (midnight) to 23 (11 
+  pm)&quot;,
+  &quot;defaultLocale&quot;: &quot;The default locale to use for the 
+  system (determines language and date formats.)&quot;,
+  &quot;deployMailHost&quot;: &quot;The host name of the mail server that 
+  is used for notifications&quot;,
+  &quot;deployMailPassword&quot;: &quot;The user password for sending 
+  email notifications&quot;,
+  &quot;deployMailPort&quot;: &quot;The SMTP port that is used by the 
+  notifications mail server&quot;,
+  &quot;deployMailSecure&quot;: &quot;Specifies whether the SMTP 
+  connection is secure&quot;,
+  &quot;deployMailSender&quot;: &quot;The sender address for email 
+  notifications&quot;,
+  &quot;deployMailUsername&quot;: &quot;The user name for sending email 
+  notifications&quot;,
+  &quot;enableAllowFailure&quot;: &quot;Controls whether the 'allow 
+  failure' option can be used on the steps in a workflow.&quot;,
+  &quot;enableInactiveLinks&quot;: &quot;Specify true to show links to 
+  inactive objects&quot;,
+  &quot;enablePromptOnUse&quot;: &quot;Controls whether user-entered 
+  values can be specified at process run time&quot;,
+  &quot;enableUIDebugging&quot;: &quot;Changes how the UI resources are 
+  loaded so it is easier to debug problems in the UI if set. 
+  Enabling reduces UI performance.&quot;,
+  &quot;envCompPropsOverrideEnvProps&quot;: &quot;Determines whether or 
+  not environment component properties will override 
+  environment properties.&quot;,
+  &quot;externalURL&quot;: &quot;The URL that agents use to connect to 
+  the server&quot;,
+  &quot;externalUserURL&quot;: &quot;The URL that users enter to connect 
+  to the server&quot;,
+  &quot;failProcessesWithUnresolvedProperties&quot;: &quot;Determines 
+  whether or not a process will fail when it encounters a 
+  property that cannot be resolved.&quot;,
+  &quot;historyCleanupDaysToKeep&quot;: &quot;The number of days 
+  application process history is to be kept. -1 will disable 
+  application process history cleanup.&quot;,
+  &quot;historyCleanupDuration&quot;: &quot;The maxiumum number of hours 
+  per day the history cleanup process can take; the value 
+  must be an integer from 1 to 23.&quot;,
+  &quot;historyCleanupEnabled&quot;: &quot;The system will not delete any 
+  process history unless this is enabled.&quot;,
+  &quot;historyCleanupHour&quot;: &quot;The time when application process 
+  history is cleaned; the value must be an integer from 0 
+  (midnight) to 23 (11pm).&quot;,
+  &quot;historyCleanupMinute&quot;: &quot;The minute when process history 
+  is cleaned; the value must be an integer from 0 to 59.&quot;,
+  &quot;integrationTag&quot;: &quot;Specify an agent tag to use any agent 
+  with the given tag for version imports.&quot;,
+  &quot;licenseServerUrl&quot;: &quot;The host name and port of the 
+  license server&quot;,
+  &quot;minimumPasswordLength&quot;: &quot;Determines the minimum length 
+  for passwords&quot;,
+  &quot;repoAutoIntegrationPeriod&quot;: &quot;The number of seconds 
+  between the times that the server polls components for new 
+  versions&quot;,
+  &quot;requireCommentForProcessChanges&quot;: &quot;When enabled, the 
+  user must provide a comment when saving changes to any 
+  process design.&quot;,
+  &quot;requireComplexPasswords&quot;: &quot;If selected, passwords must 
+  contain at least two of the four character classes and 
+  must be at least as long as the specified minimum length&quot;,
+  &quot;skipCollectPropertiesForExistingAgents&quot;: &quot;Controls 
+  whether or not agent properties will be updated when an 
+  existing agent reconnects to the server.&quot;,
+  &quot;use.default.atr.if.not.specified&quot;: &quot;Use the Default 
+  Auth Token Restriction for plugin steps that do not have 
+  an auth token restriction set. If false this will not 
+  restrict auth token usage at all. Any new version will 
+  have an auth token restriction.&quot;,
+  &quot;validateAgentIp&quot;: &quot;Controls validation of agent IPs and 
+  hostnames. The first time the agent connects, its IP and 
+  hostname will be saved. In subsequent connections, if 
+  either has changed, the agent will be prevented from 
+  coming online.&quot;,
+  &quot;winRSAgent&quot;: &quot;The agent to use for running agent 
+  installation processes on Windows machines. The agent must 
+  be installed on a Windows machine.&quot;
+}
+
+</code></pre>
+
+<h2 id="example-json-request">Example JSON request</h2>
+<pre><code>{
+  &quot;minimumPasswordLength&quot;: &quot;9&quot;,
+  &quot;requireComplexPasswords&quot;: &quot;true&quot;
+}
+</code></pre>
+
+<p>Related CLI command: <a href="../udclient_setsystemconfiguration/">setSystemConfiguration</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../rest_cli_systemconfiguration/">systemConfiguration resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/rest_cli_systemconfiguration_put.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

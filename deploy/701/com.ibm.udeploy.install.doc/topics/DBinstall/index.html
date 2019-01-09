@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/DBinstall/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing the server database", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-the-server-database">Installing the server database</h1>
+<p>HCL® UrbanCode™ Deploy requires a database. You can use the following database types for an evaluation or production server.</p>
+<p>If you are installing an evaluation server, you can also allow the server installation program to install an Apache Derby database for you. In this case, you do not need to install a database yourself. However, you cannot use Derby for production servers. Derby is for evaluation only. To use this method, run the installation program, and when the program prompts you for the type of database, specify Derby.</p>
+<ul>
+<li><strong><a href="../dbinstall_db2/">Configuring a DB2 database for the HCL UrbanCode Deploy server</a></strong><br />
+To use a DB2® database with the server, before you install the server, install the IBM® DB2® database and provide the JDBC JAR file for the server installation process.</li>
+<li><strong><a href="../dbinstall_oracle/">Configuring an Oracle server database for the HCL UrbanCode Deploy server</a></strong><br />
+To use an Oracle database with the server, before you install the server, install the Oracle database and provide the JDBC JAR file for the server installation process.</li>
+<li><strong><a href="../dbinstall_mysql/">Configuring a MySQL or MariaDB database for the HCL UrbanCode Deploy server</a></strong><br />
+To use a MySQL or MariaDB database with the server, before you install the server, install the database, and provide the JDBC JAR file for the server installation process.</li>
+<li><strong><a href="../dbinstall_sqlserver/">Configuring a Microsoft SQL Server database for the HCL UrbanCode Deploy server</a></strong><br />
+To use an SQL Server database with the server, before you install the server, install the SQL Server database and provide the driver file for the server installation process.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../install_ch/">Installing HCL UrbanCode Deploy</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/DBinstall.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

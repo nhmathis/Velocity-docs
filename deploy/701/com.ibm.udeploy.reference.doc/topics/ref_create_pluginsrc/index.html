@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/ref_create_pluginsrc/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating source plug-ins - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating source plug-ins", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-source-plug-ins">Creating source plug-ins</h1>
+<p>Source-type plug-ins are defined the same way that automation-type plug-ins are defined except for some modifications to the plugin.xml file.</p>
+<p>Like automation plug-ins, source plug-ins are defined with two files, an info.xml file and a plugin.xml file. The structure of the first file is identical for both plug-in types. The structure of the plugin.xml file varies depending on the type of plug-in. For information about the plugin.xml file for automation plug-ins, see <a href="../ref_create_pluginxml/">The plugin.xml file for automation plug-ins</a>.</p>
+<p>The following code fragment is an example of a source plug-in file. The <code>&lt;server:plugin-type&gt;Source&lt;/server:plugin-type&gt;</code> tag identifies the type of plug-in. For source plug-ins, the type must be <code>Source</code>:</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!-- the xmlns:server argument is necessary to parse the tags with the server prefix --&gt;
+&lt;plugin xmlns=&quot;http://www.urbancode.com/PluginXMLSchema_v1&quot; 
+    xmlns:server=&quot;http://www.urbancode.com/PluginServerXMLSchema_v1&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
+  &lt;header&gt;
+    &lt;identifier id=&quot;com.urbancode.air.plugin.source.Name&quot; name=&quot;Plugin Name&quot; version=&quot;1&quot;/&gt;
+    &lt;description&gt;Short description&lt;/description&gt;
+    &lt;tag&gt;SCM/Name&lt;/tag&gt;
+
+   ** &lt;server:plugin-type\&gt;Source&lt;/server:plugin-type\&gt;**
+  &lt;/header&gt;
+
+
+</code></pre>
+
+<p>A source plug-in has one step, which must be named <code>Import Version</code>:</p>
+<pre><code>
+
+    ** &lt;step-type name=&quot;Import Version&quot;\&gt;**
+      &lt;description&gt;Creates a new component version and imports artifacts&lt;/description&gt;
+      &lt;properties&gt;
+      &lt;/properties&gt;
+      &lt;post-processing&gt;&lt;![CDATA[
+        if (properties.get(&quot;exitCode&quot;) != 0) {
+            properties.put(new java.lang.String(&quot;Status&quot;), new java.lang.String(&quot;Failure&quot;));
+        }
+        else {
+            properties.put(&quot;Status&quot;, &quot;Success&quot;);
+        }
+     ]]&gt;&lt;/post-processing&gt;
+
+      &lt;command program=&quot;${JAVA_HOME}/bin/java&quot;&gt;
+        &lt;arg value=&quot;${JAVA_OPTS}&quot;/&gt;
+        &lt;arg value=&quot;-jar&quot;/&gt;
+        &lt;arg file=&quot;FileSystemSourceConfig.jar&quot;/&gt;
+        &lt;arg value=&quot;ImportVersion&quot;/&gt;
+        &lt;arg file=&quot;${PLUGIN_INPUT_PROPS}&quot;/&gt;
+        &lt;arg file=&quot;${PLUGIN_OUTPUT_PROPS}&quot;/&gt;
+      &lt;/command&gt;
+
+    &lt;/step-type&gt;
+
+
+</code></pre>
+
+<p>As shown in the following code fragment, source plug-ins have two property groups. <code>Component</code> type properties are configured with the Create Component window. <code>Import</code> type properties are configured with the Import Component window.</p>
+<pre><code>
+
+
+    &lt;!-- ==================================== --&gt;
+    &lt;!--   Properties                         --&gt;
+    &lt;!-- ==================================== --&gt;
+
+   ** &lt;server:property-group type=&quot;Component&quot; name=&quot;FileSystemComponentProperties&quot;\&gt;**
+      &lt;server:property name=&quot;property-name&quot; required=&quot;true&quot;&gt;
+        &lt;server:property-ui type=&quot;textBox&quot;
+                            label=&quot;property-label&quot;
+                            description=&quot;property-description&quot; /&gt;
+      &lt;/server:property&gt;
+    &lt;/server:property-group&gt;
+
+       &lt;!-- If left empty or omitted then no dialog will appear --&gt;
+  **  &lt;server:property-group type=&quot;Import&quot; name=&quot;FileSystemImportProperties&quot;\&gt;**
+      &lt;server:property name=&quot;property-name&quot; required=&quot;true&quot;&gt;
+        &lt;server:property-ui type=&quot;textBox&quot;
+                            label=&quot;property-label&quot;
+                            description=&quot;property-description&quot; /&gt;
+      &lt;/server:property&gt;
+    &lt;/server:property-group&gt;
+&lt;/plugin&gt;
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../reference_plugins_create/">Creating plug-ins</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/ref_create_pluginsrc.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

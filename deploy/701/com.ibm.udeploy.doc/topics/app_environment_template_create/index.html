@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_environment_template_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating environment templates - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating environment templates", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-environment-templates">Creating environment templates</h1>
+<p>When you create an application template, you can define environment templates that model environments for the applications that you create by using the application template.</p>
+<p>Ensure that you have a resource template that describes the resource tree for this environment in the application. Include both the component tags that the application templates uses and agent prototypes. See <a href="../resources_templates/">Resource templates</a>.</p>
+<ol>
+<li>
+<p>Click <strong>Applications</strong> > <strong>Templates</strong>, select your application template, and then click <strong>Environment Templates</strong> > <strong>Create Environment Template</strong>. The Create Environment Template dialog box opens, as shown in the following figure:</p>
+<p><img alt="The Create Environment Template window, which shows fields for the name, description, resource template, teams, and other properties" src="../../images/app_environment_template_create_a.gif" /></p>
+</li>
+<li>
+<p>Specify the environment name. If you create an environment from this template, the environment is assigned this name by default. The name is used as part of the deployment process and typically corresponds to the target environment.</p>
+</li>
+<li>Provide the following information: <ol>
+<li>Specify a description. </li>
+<li>In the <strong>Resource Template</strong> list, select the resource template to use for the environment. </li>
+<li>To set the environment security type, from the <strong>Type</strong> list, select the security type. The security type is automatically assigned to environments that you create when you create an application from a template. If you specify an environment template when you add an environment to an existing application, you must manually assign the security type.</li>
+<li>To grant teams access to the environment and set the security type for the environment template, click the <strong>plus sign</strong> icon by <strong>Teams</strong>, select values from the <strong>Team</strong> and <strong>Type</strong> lists, and click <strong>Add</strong>. </li>
+<li>To ensure that components cannot be deployed to the environment without first being approved, select the <strong>Require Approvals</strong> check box. If selected, HCL® UrbanCode™ Deploy enforces an approval process before the deployment can be deployed to the environment. Initial deployments are typically done in uncontrolled environments. After the deployment works as designed, you can configure an approval process as the application moves along the development pipeline. If you are setting up more than one environment, consider creating an approval process for at least one of them. </li>
+<li>To prohibit the user who makes the approval request from approving the same request, select <strong>No Self-Approvals</strong>. </li>
+<li>To exempt processes from approvals, click <strong>None</strong> by <strong>Exempt Processes</strong>, select the check boxes beside the application processes to exempt, and click <strong>OK</strong>. </li>
+<li>To prevent changes to snapshots in this environment after you deploy them, select the <strong>Lock Snapshots</strong> check box. </li>
+<li>If you selected the <strong>Lock Snapshots</strong> check box, from the <strong>Snapshot Lock Type</strong> list, select the lock type: <ul>
+<li>To lock only component versions, select <strong>Only Component Versions</strong>.</li>
+<li>To lock snapshot configurations, select <strong>Only Configuration</strong>.</li>
+<li>To lock both component versions and configurations, select <strong>Component Versions and Configuration</strong>.</li>
+<li>To use the system default value, select <strong>System Default</strong>. The default value is determined by the <strong>Default Snapshot Lock Type</strong> field on the System Settings page. For information about system settings, see <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_system/">Server settings</a>.</li>
+</ul>
+</li>
+<li>Select a color to apply to the environment. </li>
+<li>To apply the cleanup values that are specified on the System Settings page, select the <strong>Use Default Artifact Cleanup Settings</strong> check box. If this check box is cleared, you must specify how long to keep snapshots and component versions. For more information about cleaning up component versions, see <a href="../settings_system_preview/">Cleaning up component versions</a>. For more information about cleaning up snapshots, see <a href="../app_snapshot_cleanup/">Cleaning up snapshots</a>. </li>
+<li>To use deployment history cleanup, select <strong>Use Deloyment History Retention</strong>. You can use the default settings that are specified on the Systems Settings page by clicking <strong>Use Default Deployment History Retention</strong>, or in <strong>Days to Retain Deployment History</strong> you can specify a number of days to retain deployment history records.</li>
+</ol>
+</li>
+<li>
+<p>Click <strong>Save</strong>. </p>
+<p><strong>Note:</strong> If you create an environment with an environment template and then add component mappings to the resource template, the new component mappings are added to the environment. However, if you remove component mappings from the resource template, the component mappings are not removed from the environment.</p>
+</li>
+</ol>
+<p>The <strong>Configuration</strong> tab for the environment template is displayed. When you use the application template to create an application, you can create environments by using this environment template.</p>
+<p><strong>Parent topic:</strong> <a href="../app_template/">Application templates</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_environment_template_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

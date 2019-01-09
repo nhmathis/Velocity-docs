@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/dr_config_bds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring disaster recovery for the blueprint design server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring disaster recovery for the blueprint design server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-disaster-recovery-for-the-blueprint-design-server">Configuring disaster recovery for the blueprint design server</h1>
+<p>You can configure the blueprint design server and engine for disaster recovery by adding cold standby servers to serve as backup servers. You must start the secondary server or servers when the active server fails, and network traffic is routed to the secondary servers.</p>
+<ul>
+<li>Set up a blueprint design server cluster as described in <a href="../ha_config_bds/">Setting up clusters of blueprint design servers</a>.</li>
+<li>Set up an engine cluster that uses the engine that is provided with HCL® UrbanCode™ Deploy version 6.2.1.1 or later as described in <a href="../ha_config_engine/">Setting up clusters of engines</a>.</li>
+<li>Both the cluster of blueprint design servers and the cluster of engines must be running.</li>
+</ul>
+<p>For the blueprint designer and engine, the topology for disaster recovery is similar to the topology for high availability. However, instead of running all instances of the blueprint designer and engine simultaneously, instances are installed in separate data centers. The servers in only one data center are used at a time, and, if the servers in the first data center fail, you start the secondary servers in the second data center. A load balancer distributes all traffic to the servers in the data center that is active. You connect all servers to the same databases, network storage, and supporting services. The following diagram shows the distribution of components between the data centers.</p>
+<p><img alt="A clustered cold-standby topology with multiple blueprint design servers and engines" src="../../images/dr_config_bds_a.gif" /></p>
+<p>Since you use a load balancer, instead of accessing the blueprint design servers directly, users access the load balancer URL. To the users, that URL appears to host a single instance of the server with high capacity; the users are not aware of the multiple servers. You must ensure that the servers that host the load balancer, file storage, and databases are stable and reliable or configure the components for high availability.</p>
+<ol>
+<li>Install and configure cold standby blueprint design servers in two different data centers. See <a href="../ha_add_bds/">Adding blueprint design servers to clusters</a>.</li>
+<li>Install and configure two cold standby engine servers in the same data centers where you installed the blueprint design servers. See <a href="../ha_add_engine/">Adding engines to clusters</a>.</li>
+<li>Configure online and offline backups for the servers. See <a href="../../../com.ibm.udeploy.install.doc/topics/server_backup/">Backing up the server</a>.</li>
+<li>Verify that the load balancer is sending traffic to the new nodes. For example, if HAProxy is installed on a system with the host name <code>ucd-patterns.example.com</code>, you can go to the following URL to see the status of the nodes: <code>http://ucd-patterns.example.com:1936/haproxy?stats</code> </li>
+<li>Shut down both the engine and blueprint design server in the second data center. </li>
+<li>If you use DNS, configure the server routing path. </li>
+<li>Configure the load balancer to automatically start the backup Heat engine and blueprint design server. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_configuring/">Configuring</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/dr_config_bds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

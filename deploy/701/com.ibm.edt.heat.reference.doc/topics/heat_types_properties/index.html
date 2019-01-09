@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/heat_types_properties/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Resource type properties core and extended - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Resource type properties: core and extended", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="resource-type-properties-core-and-extended">Resource type properties: core and extended</h1>
+<p>In blueprints, Heat resource types have two types of properties: core and extended. Core properties are inherited from a base type and extended properties are added to a type that comes with HCL® UrbanCode™ Deploy.</p>
+<p>In the blueprint designer, when you drag a resource from the palette to a blueprint, the blueprint designer creates a resource in the blueprint. You might expect the blueprint designer to create a resource that is specific to the type of cloud that you are connected to. For example, if you are using Amazon EC2 and you create a virtual machine in a blueprint, you might expect to see the Amazon resource type <code>IBM::EC2::Server</code> in the blueprint. Instead, the blueprint designer creates a resource of the core OpenStack resource type <code>OS::Nova::Server</code>.</p>
+<p>The blueprint designer uses core OpenStack resource types for portability. You later use a configuration file to map the core OpenStack types to cloud-specific types for your target cloud. You can also create resources from cloud-specific types in a blueprint, but in this case you must write the blueprint code manually.</p>
+<p>Therefore, most resource types have two types of properties:</p>
+<ul>
+<li>Core properties that are inherited from the core OpenStack Heat resource type. Not all of these inherited properties are implemented in the cloud-specific types. See the individual topics about the custom types for details about which properties are implemented.</li>
+<li>Extended properties that are defined on the cloud-specific type that is provided by HCL UrbanCode Deploy. When you map the resource in the blueprint to a cloud-specific resource type, these properties are applied to that cloud-specific resource type.</li>
+</ul>
+<p>Properties are identified as core or extended in the reference information for each resource type.</p>
+<p>Resources also have attributes, which are output values that can be referenced from other places.</p>
+<p>For example, assume that you connect to Amazon and create a server in a blueprint. The blueprint designer creates a resource of the type <code>OS::Nova::Server</code>, as in the following code:</p>
+<pre><code>resources:
+  MyVirtualImage:
+    type: OS::Nova::Server
+    properties:
+      name: MyVirtualImage
+      image: &quot;ami-06c4cb11&quot; # ubuntu/images/hvm-ssd/ubuntu-yakkety-16.10-amd64-server-20161214
+      flavor: { get_param: flavor }
+      key_name: { get_param: key_name }
+      availability_zone: { get_param: availability_zone }
+      metadata: 
+        &quot;__os_type__&quot; : &quot;Linux&quot;
+</code></pre>
+
+<p>You can add both core and extended properties to the resource here, but the properties must be in the appropriate place.</p>
+<p>Core properties go in the main <code>properties</code> section. For example, the previous example code includes the core properties name, image, flavor, key_name, and availability_zone. More information about these properties and other core properties is available in the reference information for the resource type: <a href="../res_ibm_ec2_server/">IBM::EC2::Server</a>.</p>
+<p>Extended properties go in the <code>metadata</code> section, in a subsection that is named for the target cloud. For example, the Amazon resource type <code>IBM::EC2::Server</code> has the extended property subnet_id, so you can add that property to the <code>metadata/ec2_properties</code> metadata section, as in the following example:</p>
+<pre><code>resources:
+  MyVirtualImage:
+    type: OS::Nova::Server
+    properties:
+      name: MyVirtualImage
+      image: &quot;ami-06c4cb11&quot; # ubuntu/images/hvm-ssd/ubuntu-yakkety-16.10-amd64-server-20161214
+      flavor: { get_param: flavor }
+      key_name: { get_param: key_name }
+      availability_zone: { get_param: availability_zone }
+      metadata: 
+        &quot;__os_type__&quot; : &quot;Linux&quot;
+ **       ec2\_properties:
+          subnet\_id: \{ get\_param: mySubnet \}**
+</code></pre>
+
+<p>Each type of non-OpenStack target cloud has a different metadata section for its extended properties:</p>
+<ul>
+<li>Amazon EC2: <code>metadata/ec2_properties</code></li>
+<li>SoftLayer: <code>metadata/softlayer_properties</code></li>
+<li>VMware vCenter: <code>metadata/vmware_properties</code></li>
+<li>VMware vRealize Automation: <code>metadata/vra_properties</code></li>
+<li>Microsoft Azure: <code>metadata/azure_properties</code></li>
+<li>Google Cloud: <code>medata/google_properties</code></li>
+</ul>
+<p>For examples of blueprints, see <a href="../../../com.ibm.edt.doc/topics/blueprint_edit_clouds/">Modeling environments for clouds through OpenStack Heat</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_ov/">Heat resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/heat_types_properties.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

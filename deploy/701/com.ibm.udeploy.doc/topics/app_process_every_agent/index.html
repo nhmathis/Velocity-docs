@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_process_every_agent/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>For Each Agent - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "For Each Agent", url: "#_top", children: [
+              {title: "Iteration properties", url: "#iteration-properties" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="for-each-agent">For Each Agent</h1>
+<p>This step creates a loop that iterates over the agents in the environment.</p>
+<p><strong>Tip:</strong> </p>
+<p>Applications, components, and generic processes share some process steps. This step applies only to application processes, including application processes that are associated with application templates.</p>
+<p>This step provides vertical iterations, or iteration containers, for application processes. If, for example, you have numerous application servers, you can use this step to employ all agents in the environment to simultaneously deploy components to the servers. In this case, using this step means that overall deployment is not impacted even if one application server is slow.</p>
+<p>This step runs the process that is defined within the container for each agent in the application environment. The workflow in the container has its own context, and its own start and finish steps, as shown in the following figure. You can use any application process step in the subprocess. An iteration container can connect to any step, even other iteration containers, but you cannot include other iteration containers within an iteration container.</p>
+<p><img alt="A process that includes a For Each Agent step" src="../../images/app_process_all_agents.gif" /></p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>A name for the iteration container.</td>
+</tr>
+<tr>
+<td><strong>Limit to Resource Tags</strong></td>
+<td>A list of resource tags that limit the container. The subprocess runs only on the agent resources that have one or more of the specified resource tags.</td>
+</tr>
+<tr>
+<td><strong>Maximum number of concurrent processes</strong></td>
+<td>The maximum number of agents that run the subprocess at a time. To run the subprocess on every agent at once, specify <code>-1</code>. To limit the number of agents to deploy to at once, as in blue/green deployments or rolling deployments, specify an integer. The server attempts to resolve the value to an integer. If the value does not resolve to an integer, then the <code>-1</code> value is used by default. You can use a property in this field, as long as the property resolves to an integer.</td>
+</tr>
+</tbody>
+</table>
+<p>|</p>
+<h2 id="iteration-properties">Iteration properties</h2>
+<p>The For Each Agent step has properties, called iteration properties, that can be used to reference steps within the iteration context. By using these properties, for example, you can identify the current agent within the context. To reference iteration properties, use the following format: <code>${p:iteration/&lt;name&gt;}</code>. For example, the current agent name is in the property <code>${p:iteration/agent.name}</code>.</p>
+<p><img alt="Iteration properties for the For Each Agent step" src="../../images/app_process_all_agents_it_prop.gif" /></p>
+<p>To view the iteration properties for the step, follow these steps:</p>
+<ol>
+<li>Open the log for the application process request by clicking <strong>Applications</strong> > <strong>application_name</strong> > <strong>History</strong> > <strong>View Request</strong>.</li>
+<li>Expand the container step and, next to one of the iterations, click <strong>Iteration Properties</strong><img alt="" src="../../images/viewproperties.gif" />.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../app_processSteps/">Process steps: Reference</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_process_every_agent.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

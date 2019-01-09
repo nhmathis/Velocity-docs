@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/keystore_agentrelay_change_password/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Changing passwords for the agent relay keystores - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Changing passwords for the agent relay keystores", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="changing-passwords-for-the-agent-relay-keystores">Changing passwords for the agent relay keystores</h1>
+<p>You can change the Java™ keystore passwords for the agent relay.</p>
+<p>Each agent relay contains two keystores. The agentrelay keystore controls the JMS connection between the agent relay and the server and agents. The codestation keystore controls HTTPS connections to the agent relay and is used with server identity verification. See <a href="../../../com.ibm.udeploy.install.doc/topics/ssl_addl_security/">Enabling server identity verification</a>.</p>
+<p>By default, the password for each agent relay Java keystore must be identical to its certificate password. After you change both a keystore password and the corresponding certificate password, you must update the password in the agent relay properties.</p>
+<p>Changing the passwords requires the keytool application, which is included in the Java developer kit and is not part of HCL® UrbanCode™ Deploy.</p>
+<ol>
+<li>Stop the agent relay.</li>
+<li>
+<p>Change the agentrelay keystore password for the agent relay. </p>
+<ol>
+<li>Open a command-line window, and go to the /agent-relay-install/conf/jms-relay directory. By default, the agent-relay-install location is <code>/opt/ibm/agentrelay</code> on Linux™ and <code>C:\Program Files\IBM\agentrelay</code> on Windows™. </li>
+<li>
+<p>Change the agentrelay keystore password by using this command: </p>
+<p><code>keytool -storepasswd -new newpassword -keystore agentrelay.keystore
+-storepass changeit</code></p>
+<p>The default password for this keystore is changeit.</p>
+</li>
+<li>
+<p>Change the agentrelay certificate by using this command: </p>
+<p><code>keytool -keypasswd -alias agentrelay -keypass changeit -new newpassword -keystore agentrelay.keystore -storepass newpassword</code></p>
+<p>The default keystore alias is agentrelay, and its value is shown in the <code>agentrelay.cert.alias</code> property in the agent-relay-install/conf/agentrelay.properties file.</p>
+</li>
+<li>
+<p>In a text editor, open the agent-relay-install/conf/agentrelay.properties file. </p>
+</li>
+<li>
+<p>Specify the new Java keystore password for the agent relay in the following line of code: </p>
+<p><code>agentrelay.keystore.password=newPassword</code></p>
+<p><strong>Note:</strong> For best results, make the Java keystore password and certificate password identical. If the passwords cannot be identical, add the <code>agentrelay.cert.password=certpassword</code> property to a new line in the agent-relay-install/conf/agentrelay.properties file.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Change the codestation keystore password for the agent relay. </p>
+<ol>
+<li>Open a command-line window, and go to the /agent-relay-install/conf directory. By default, the agent-relay-install location is <code>/opt/ibm/agentrelay</code> on Linux and <code>C:\Program Files\IBM\agentrelay</code> on Windows. </li>
+<li>
+<p>Change the codestation keystore password by using this command: </p>
+<p><code>keytool -storepasswd -new newpassword -keystore codestation.keystore
+-storepass changeit</code></p>
+<p>The default password for this keystore is changeit.</p>
+</li>
+<li>
+<p>Change the codestation certificate password by using this command: </p>
+<p><code>keytool -keypasswd -alias agentrelay -keypass changeit -new newpassword -keystore codestation.keystore -storepass newpassword</code></p>
+<p>The default keystore alias is agentrelay, and its value is shown in the <code>codestation.cert.alias</code> property in the agent-relay-install/conf/agentrelay.properties file.</p>
+</li>
+<li>
+<p>In a text editor, open the agent-relay-install/conf/agentrelay.properties file. </p>
+</li>
+<li>
+<p>Specify the new Java keystore password for the agent relay in the following line of code: </p>
+<p><code>codestation.keystore.password=newPassword</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p>Start the agent relay.</p>
+</li>
+</ol>
+<p>The agent relay keystore passwords are changed and are obfuscated in the agent-relay-installconf\server\agentrelay.properties file.</p>
+<p><strong>Parent topic:</strong> <a href="../configure_agents/">Agents and agent relay configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/keystore_agentrelay_change_password.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

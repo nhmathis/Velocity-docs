@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/security_roles_permission_ref/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Permission reference - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Permission reference", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="permission-reference">Permission reference</h1>
+<p>This table lists the permissions on the server that you can assign to roles.</p>
+<p>The following table lists the product areas with their available permissions. Because of the large number of edit subpermissions, they are provided in a separate column.</p>
+<table>
+<thead>
+<tr>
+<th>Product area</th>
+<th>Available permissions</th>
+<th>Subpermissions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent</td>
+<td>-   <strong>Execute on agents</strong>: run processes on the agent</td>
+<td></td>
+</tr>
+<tr>
+<td>-   <strong>View Agents</strong>: access agents in the UI but cannot modify them</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <strong>Edit</strong>: modify and delete agents</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|Edit-   <strong>Add to Agent Pool</strong>: assign agents to agent pools
+-   <strong>Create Resources</strong>: create agent-type resources
+-   <strong>Delete</strong>: delete agents
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Impersonation</strong>: set up user impersonation for agents
+-   <strong>Manage Properties</strong>: create and modify agent properties
+-   <strong>Manage Teams</strong>: assign agents to teams
+-   <strong>Manage Version Imports</strong>: import component versions with the agent
+-   <strong>Upgrade Agents</strong>: upgrade agents</p>
+<p>|
+|Agent pool| -   <strong>Create Agent Pools</strong>: create agent pools
+-   <strong>View Agent Pools</strong>: access agent pools in the UI but cannot modify them
+-   <strong>Edit</strong>: modify and delete agent pools</p>
+<p>|Edit-   <strong>Create Resources</strong>: create agent pool resources
+-   <strong>Delete</strong>: delete agent pools
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Pool Members</strong>: change the agents that are in a pool
+-   <strong>Manage Teams</strong>: assign agent pools to teams</p>
+<p>|
+|Agent relay| -   <strong>View Agent Relays</strong>: see the agent relays that are listed on the <strong>Resources</strong> tab</p>
+<p>|Edit-   <strong>Delete</strong>: delete agent relays
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Teams</strong>: assign agent relays to teams</p>
+<p>|
+|Application| -   <strong>View Applications</strong>: access applications in the UI but cannot modify them
+-   <strong>Create</strong>: create applications
+-   <strong>Edit</strong>: modify and delete applications</p>
+<p>|Create-   <strong>Create Applications</strong>: create applications without using a template
+-   <strong>Create Applications From Template</strong>: create applications by using templates to define their attributes</p>
+<p>Edit-   <strong>Delete</strong>: delete applications
+-   <strong>Delete Snapshot</strong>: delete snapshot
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Blueprints</strong>: create and modify blueprints
+-   <strong>Manage Components</strong>: add and remove components
+-   <strong>Manage Environments</strong>: create and modify environments
+-   <strong>Manage Processes</strong>: create application processes
+-   <strong>Manage Properties</strong>: create and modify application properties
+-   <strong>Manage Snapshots</strong>: create and modify snapshots
+-   <strong>Manage Teams</strong>: assign teams to applications
+-   <strong>Run Component Processes</strong>: run processes that are defined for components that are attached to the application</p>
+<p>|
+|Application template| -   <strong>Create Application Templates</strong>
+-   <strong>View Application Templates</strong>
+-   <strong>Edit</strong></p>
+<p>|Edit-   <strong>Delete</strong>: delete applications
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Blueprints</strong>: create and modify blueprints
+-   <strong>Manage Component Tags</strong>: add and remove component tags
+-   <strong>Manage Environment Templages</strong>: create and modify environment templates
+-   <strong>Manage Processes</strong>: create application processes
+-   <strong>Manage Properties</strong>: create and modify application properties
+-   <strong>Manage Teams</strong>: assign teams to applications</p>
+<p>|
+|Cloud connection| -   <strong>Create Cloud Connections</strong>: create connections
+-   <strong>View Cloud Connections</strong>: access connections in the UI but cannot modify them
+-   <strong>Edit</strong>: modify and delete connections</p>
+<p>|Edit-   <strong>Delete</strong>: delete cloud connections
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Teams</strong>: assign teams to cloud connections</p>
+<p>|
+|Component| -   <strong>View Components</strong>: access components in the UI but cannot modify them
+-   <strong>Create</strong>: create components
+-   <strong>Edit</strong>: modify and delete components</p>
+<p>|Create-   <strong>Create Components</strong>: create components without using a template
+-   <strong>Create Components From Template</strong>: create components by using templates to define their attributes</p>
+<p>Edit-   <strong>Delete</strong>: delete components
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Edit Components</strong>: create and modify components
+-   <strong>Manage Configuration Templates</strong>: create configuration templates
+-   <strong>Manage Processes</strong>: create component processes
+-   <strong>Manage Properties</strong>: create component properties
+-   <strong>Manage Teams</strong>: assign teams to components
+-   <strong>Manage Versions</strong>: import component versions</p>
+<p>|
+|Component template| -   <strong>Create Component Templates</strong>: create component templates
+-   <strong>View Component Templates</strong>: access component templates in the UI but cannot modify them
+-   <strong>Edit</strong>: modify and delete component templates</p>
+<p>|Edit-   <strong>Delete</strong>: delete component templates
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Processes</strong>: create and modify component template processes
+-   <strong>Manage Properties</strong>: create and modify component template properties
+-   <strong>Manage Teams</strong>: assign teams to component templates</p>
+<p>|
+|Environment| -   <strong>Execute on Environments</strong>: run parent applications
+-   <strong>View Environments</strong>: access environments in the UI but not modify them
+-   <strong>Create</strong>: create environments
+-   <strong>Edit</strong>: modify and delete environments</p>
+<p>|Create-   <strong>Create Environments</strong>: create environments without using a template
+-   <strong>Create Enviornments From Template</strong>: create environments by using templates to define their attributes</p>
+<p>Edit-   <strong>Delete</strong>: delete environments
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Approval Processes</strong>: create and modify approvals and notifications
+-   <strong>Manage Base Resources</strong>: add base resources to environments
+-   <strong>Manage Properties</strong>: create and modify environment properties
+-   <strong>Manage Teams</strong>: assign teams to environments</p>
+<p>|
+|Environment template| -   <strong>Create Environment Templates</strong>
+-   <strong>View Environment Templates</strong>
+-   <strong>Edit</strong></p>
+<p>|Edit-   <strong>Delete</strong>: delete applications
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Approval Processes</strong>: create modify approvals and notifications
+-   <strong>Manage Properties</strong>: create and modify environment properties
+-   <strong>Manage Teams</strong>: assign teams to environments</p>
+<p>|
+|Process| -   <strong>Create Processes</strong>: create processes
+-   <strong>Execute Processes</strong>: run processes
+-   <strong>View Processes</strong>: access process definitions in the UI but cannot modify them
+-   <strong>Edit</strong>: modify and delete processes</p>
+<p>|Edit-   <strong>Delete</strong>: delete generic processes
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Properties</strong>: create and modify generic process properties
+-   <strong>Manage Teams</strong>: assign teams to generic processes</p>
+<p>|
+|Resource| -   <strong>Create Resources</strong>: create resources
+-   <strong>Execute on Resources</strong>: Run processes on agent resources
+-   <strong>View Resources</strong>: access resources in the UI but cannot modify them
+-   <strong>Edit</strong>: modify and delete resources</p>
+<p>|Edit-   <strong>Delete</strong>: delete resources
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Children</strong>: create, modify, and delete resource hierarchies
+-   <strong>Manage Impersonation</strong>: set up user impersonation for agent and agent pool resources
+-   <strong>Manage Properties</strong>: create and modify resource properties
+-   <strong>Manage Teams</strong>: assign teams to resources
+-   <strong>Map to Environments</strong>: assign resources to application environments</p>
+<p>|
+|Resource template| -   <strong>Create Resource Templates</strong>: create resource templates
+-   <strong>View Resource Templates</strong>: access resource templates in the UI but cannot modify them
+-   <strong>Edit</strong>: modify and delete resource templates</p>
+<p>|Edit-   <strong>Delete</strong>: delete resource templates
+-   <strong>Edit Basic Settings</strong>: edit configuration settings on the Basic Settings panel
+-   <strong>Manage Resources</strong>: create, modify, and delete resource hierarchies
+-   <strong>Manage Teams</strong>: assign teams to resource templates</p>
+<p>|</p>
+<p>The page of permissions also includes <strong>Server Configuration</strong> and <strong>Web UI</strong> sections. These permissions affect how users can modify security settings on the server and which pages in the server user interface they can see.</p>
+<table>
+<thead>
+<tr>
+<th>Permission</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add Team Members</td>
+<td>Add users to roles that have the same or fewer permissions than those of the granting user.</td>
+</tr>
+<tr>
+<td>Edit Basic System Settings</td>
+<td>Enables users to edit the options on the System Settings page. See, <a href="../settings_system/">Server settings</a>. This activity is written to the audit log.</td>
+</tr>
+<tr>
+<td>Edit Network Settings</td>
+<td>Grants users the permission to access the Network page and manage servers in a server cluster.</td>
+</tr>
+<tr>
+<td>Manage Audit Log</td>
+<td>Grants users the permission to manually cleanup the audit log, and configure automatic cleanup settings. If you have this permission but not the edit basic settings permission, you can edit the audit cleanup settings from the Audit Log page. This activity is written to the audit log.</td>
+</tr>
+<tr>
+<td>Manage Auth Token Restrictions</td>
+<td>Create, modify and delete token restrictions. See, <a href="../security_token_restrict/">Restricting authentication tokens</a></td>
+</tr>
+<tr>
+<td>Manage Blueprint Designer Integrations</td>
+<td>Grants users the permission to view and create Blueprint Designer integrations. These activities are written to the audit log.</td>
+</tr>
+<tr>
+<td>Manage Diagnostics</td>
+<td>Enable users to access the diagnostics information including the Rest Call Log, Java Thread dumps, and Metadata indexing. This activity is written to the audit log.</td>
+</tr>
+<tr>
+<td>Manage Logging Settings</td>
+<td>Grants users the permission to view the Logging page and edit the log4j configuration. This activity is written to the audit log.</td>
+</tr>
+<tr>
+<td>Manage Notifications Schemes</td>
+<td>Enable users to manage notification schemes used for notification emails. See, <a href="../../../com.ibm.udeploy.doc/topics/notify_create/">Creating Notifications in a Notification Scheme</a>. This activity is written to the audit log.</td>
+</tr>
+<tr>
+<td>Manage Plug-ins</td>
+<td>Grants users the permission to install new plug-ins; see <a href="../settings_plugins/">Installing plug-ins</a>. Install and delete activities are written to the audit log.</td>
+</tr>
+<tr>
+<td>Manage Post Processing Scripts</td>
+<td>Enable users to manage the post-processing scripts used by process steps. See, <a href="../../../com.ibm.udeploy.reference.doc/topics/ref_create_postprocessing/">The post-processing element</a>.</td>
+</tr>
+<tr>
+<td>Manage Resource Roles</td>
+<td>Grants users the permission to create and delete resource roles, which are created by some plug-ins. In most cases, you do not need to add or change resource roles because they are used internally.</td>
+</tr>
+<tr>
+<td>Manage Security</td>
+<td>Grants users the permission to create and edit version,inventory, and snapshot statuses.</td>
+</tr>
+<tr>
+<td>Manage Statuses</td>
+<td>Grants users the permission to manage security configuration, including roles, authentication realms, authorization realms, and tokens. Users without this permission cannot access or change the security functions. This activity is written to the audit log.</td>
+</tr>
+<tr>
+<td>Manage System Properties</td>
+<td>Grants users the permission to create and edit system properties. This activity is written to the audit log.</td>
+</tr>
+<tr>
+<td>Read Artifact Set List</td>
+<td>Enables agent relays to use component version replication by status. Assign a user with this permission to an authentication token intended for an agent relay.</td>
+</tr>
+<tr>
+<td>Release Locks</td>
+<td>Enables users to manually release any locks currently held. See, <a href="../settings_locks_managing/">Managing locks</a>. This action is written to the audit log.</td>
+</tr>
+<tr>
+<td>View Audit Log</td>
+<td>Grants users the permission to view the Audit Log page and download log files. This activity is written to the audit log.</td>
+</tr>
+<tr>
+<td>View Basic System Settings</td>
+<td>Enables users to view the options on the System Settings page. See, <a href="../settings_system/">Server settings</a>.</td>
+</tr>
+<tr>
+<td>View Locks</td>
+<td>Enables users to view any locks currently held. See, <a href="../settings_locks_managing/">Managing locks</a>. This action is written to the audit log.</td>
+</tr>
+<tr>
+<td>View Network Settings</td>
+<td>Grants users the permission to access the Network page.</td>
+</tr>
+<tr>
+<td>View Output Log</td>
+<td>Grants users the permission to view the Output Log page and download log files. This activity is written to the audit log.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Permission</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Applications Tab</td>
+<td>Access to the Applications tab; see <a href="../../../com.ibm.udeploy.doc/topics/applications_ch/">Applications</a></td>
+</tr>
+<tr>
+<td>Components Tab</td>
+<td>Access to the Components tab; see <a href="../../../com.ibm.udeploy.doc/topics/comp_ch/">Components</a></td>
+</tr>
+<tr>
+<td>Configuration Tab</td>
+<td>Access to the Configuration tab; see <a href="../../../com.ibm.udeploy.doc/topics/resources_properties/">Creating, setting, and editing properties</a></td>
+</tr>
+<tr>
+<td>Dashboard Tab</td>
+<td>Access to the Dashboard tab.</td>
+</tr>
+<tr>
+<td>Deployment Calendar Tab</td>
+<td>Access to the Calendar tab; see <a href="../../../com.ibm.udeploy.doc/topics/schedules_ch/">Scheduling deployments</a></td>
+</tr>
+<tr>
+<td>Processes Tab</td>
+<td>Access to the Processes tab; see <a href="../../../com.ibm.udeploy.doc/topics/genProcess_ch/">Generic processes</a></td>
+</tr>
+<tr>
+<td>Reports Tab</td>
+<td>Access to the Reports tab; see <a href="../../../com.ibm.udeploy.doc/topics/reports_ch/">Reporting</a></td>
+</tr>
+<tr>
+<td>Resources Tab</td>
+<td>Access to the Resources tab; see <a href="../../../com.ibm.udeploy.doc/topics/resources_ch/">Resources</a></td>
+</tr>
+<tr>
+<td>Settings Tab</td>
+<td>Access to the Settings tab; see <a href="../../../com.ibm.udeploy.doc/topics/settings_ch/">Server settings and configuration</a></td>
+</tr>
+<tr>
+<td>Work Items Tab</td>
+<td>Access to the Work Items tab; see <a href="../../../com.ibm.udeploy.doc/topics/app_approvals_workitems/">Work items</a></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../security_roles/">Roles and permissions</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/security_roles_permission_ref.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_process_advanced_ov/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Modeling blue-green, rolling, and canary deployments - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modeling blue-green, rolling, and canary deployments", url: "#_top", children: [
+              {title: "Blue-green deployments", url: "#blue-green-deployments" },
+              {title: "Rolling deployments", url: "#rolling-deployments" },
+              {title: "Canary deployments", url: "#canary-deployments" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modeling-blue-green-rolling-and-canary-deployments">Modeling blue-green, rolling, and canary deployments</h1>
+<p>The For Each Agent and For Each Tag steps provide ways to deploy to large environments in stages, allowing you to run flexible blue-green or rolling deployments, with or without updating canary nodes first.</p>
+<p>Two application process steps, the <a href="../app_process_every_agent/">For Each Agent</a> step and the <a href="../app_process_every_tag/">For Each Tag</a> step, provide flexible ways to deploy to multi-node environments in stages. You can use these steps to select subsets of agents and deploy to those subsets in specific orders. The following scenarios are just a few examples of how you can use these steps to control how deployments happen in multi-node environments.</p>
+<h2 id="blue-green-deployments">Blue-green deployments</h2>
+<p>For a video demo of blue-green deployments, see <a href="https://developer.ibm.com/urbancode/videos/bluegreen-deployments-ibm-urbancode/">Blue-green deployments with IBM UrbanCode Deploy</a>. For an article that covers a blue-green deployment scenario in detail, see <a href="https://developer.ibm.com/urbancode/docs/setting-blue-green-deployments-ibm-urbancode-deploy-6-2-4/">Setting Up Blue-Green Deployments in IBM UrbanCode Deploy 6.2.4</a>.</p>
+<p>Blue-green deployments use two identical environments. While clients are using one active environment, you can update the other environment without interrupting the active environment. Then, when the other environment is ready, you set a load balancer to send client traffic to the updated environment. Updating environments in this way allows for zero-downtime deployments and keeps a second working environment ready at all times in case anything goes wrong with the active environment.</p>
+<p>To set up a blue-green deployment, first set up matching environments on the server. These environments can point to the same physical environments as long as they have different agent resources. These different agent resources allow you to distinguish the two environments, as shown in the following figure.</p>
+<p><img alt="The resource tree showing two matching collections of agent resources" src="../../images/app_process_advanced_a.gif" /></p>
+<p>Then, apply resource tags to select subsets of the agent resources. For example, large deployments often update a few test nodes first, called canary nodes. You can apply a resource tag to your canary nodes to run deployments on those agent resources first. For example, the following figure shows the same resource tree with the addition of "canary" tags on the canary node and "mainSystem" tags on the other nodes:</p>
+<p><img alt="The resource tree showing resource tags on the agent resources" src="../../images/app_process_advanced_b.gif" /></p>
+<p>Then, in your application processes, run deployments based on the tags or agents. For example, to run a deployment on the canary agent resources first, and all of the other agent resources second, use a For Each Tag loop. In the loop, use the canary tag first and then a tag that represents the other resources. The following figure shows the For Each Tag step in use, and the next figure shows the properties for that step:</p>
+<p><img alt="The For Each Tag step in use in an application process" src="../../images/app_process_advanced_c.gif" /></p>
+<p><img alt="The properties of the For Each Tag step" src="../../images/app_process_advanced_d.gif" /></p>
+<p>When you request the process, you can set the tags to use for that request, as shown in the following figure:</p>
+<p><img alt="Setting the tags to iterate over when you request the process" src="../../images/app_process_advanced_e.gif" /></p>
+<p>There are many other ways to organize this type of deployment. For example, instead of using separate environments, you could use a single environment and tag the nodes Blue and Green with resource tags. How you organize your environments and apply resource tags to them depends on the order in which you want to update your nodes.</p>
+<h2 id="rolling-deployments">Rolling deployments</h2>
+<p>Rolling deployments update large environments a few nodes at a time. The setup for rolling deployments can be similar to blue-green deployments, but this time with a single logical environment. The environment can have many nodes, as shown in the following figure:</p>
+<p><img alt="An environment with six nodes" src="../../images/app_process_advanced_f.gif" /></p>
+<p>To deploy to these nodes one at a time, use the For Each Agent step. For example, the following application process runs deployments on these nodes within the For Each Agent step. It pauses for a manual task after each deployment to ensure that the deployment ran correctly on that node. You could use any manual or automatic test in place of that manual task. In the properties for the loop, the <strong>Max Concurrent Agents</strong> property is set to 1 to run the deployment to a single agent at a time.</p>
+<p><img alt="An application process that loops; in the loop is an installation step and a manual task step" src="../../images/app_process_advanced_g.gif" /></p>
+<h2 id="canary-deployments">Canary deployments</h2>
+<p>Canary deployments are deployments that start by updating a single node or a subset of nodes. That way, you can test the update on a small subset of your system before you update every node. Canary deployments can be part of many other deployment scenarios. For example, the scenario in <a href="https://developer.ibm.com/urbancode/docs/setting-blue-green-deployments-ibm-urbancode-deploy-6-2-4/">Setting Up Blue-Green Deployments in IBM UrbanCode Deploy 6.2.4</a> includes deployment to a canary node first.</p>
+<p>All you need to do to use a canary node in your deployment is to pick one or a few nodes and make sure that you deploy to those nodes first. Then, you must run automated or manual tests to make sure that the canary node or nodes are working well with the new version.</p>
+<p>A straightforward way to deploy to canary nodes first is to apply a resource tag to them and to deploy to that resource tag first. For example, the scenario in the article <a href="https://developer.ibm.com/urbancode/docs/deploying-applications-canary-nodes/">Deploying applications with canary nodes</a> applies the resource tag <code>canary</code> to one node and the resource tag <code>mainSystem</code> to the other nodes. The article shows several ways to use those tags, but a simple way is to use a For Each Tag loop. This loop contains a simple sub-process that deploys the components and runs automated tests:</p>
+<p><img alt="A simple process with a For Each Tag loop that deploys a component, test, it and optionally rolls it back" src="../../images/app_process_advanced_h.gif" /></p>
+<p>In the properties of the loop, you select the tags and then set the order for those tags. In this case, the <code>canary</code> tag runs first and the <code>mainSystem</code> tag runs second:</p>
+<p><img alt="The properties of the For Each Tag loop, showing that the canary tag runs first" src="../../images/app_process_advanced_i.gif" /></p>
+<p><strong>Parent topic:</strong> <a href="../app_process/">Application processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_process_advanced_ov.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

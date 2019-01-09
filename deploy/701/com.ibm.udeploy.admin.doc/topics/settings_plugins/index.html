@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/settings_plugins/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Installing plug-ins - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing plug-ins", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-plug-ins">Installing plug-ins</h1>
+<p>Plug-ins can be installed at any time. You do not need to restart the server after you install a plug-in.</p>
+<p>You can upgrade a plug-in by installing the new version over the old version.</p>
+<ol>
+<li>
+<p>Download the installation files for one or more plug-ins from the following site: <a href="https://developer.ibm.com/urbancode/plugins/ibm-urbancode-deploy/">https://developer.ibm.com/urbancode/plugins/ibm-urbancode-deploy/</a> </p>
+<p>Documentation for plug-ins and the steps in the plug-ins is available on that site.</p>
+</li>
+<li>
+<p>Load the plug-ins: </p>
+<ol>
+<li>For automation plug-ins, click <strong>Settings</strong> > <strong>Automation Plugins</strong> and click <strong>Load Plugin</strong>.</li>
+<li>For source plug-ins, click <strong>Settings</strong> > <strong>Source Config Plugins</strong> and click <strong>Load Plugin</strong>.</li>
+<li>Enter the path to the compressed plug-in file, and then click <strong>Submit</strong>.</li>
+</ol>
+</li>
+</ol>
+<p>The plug-in is listed on either the Automation Plugins pane or the Source Config Plugins pane. After the plug-in is installed, it is available immediately.</p>
+<p><strong>Note:</strong> You cannot roll back a plug-in version to a previous version. To move to a previous version of a plug-in, follow these steps:</p>
+<ol>
+<li>
+<p>Uninstall the later version of the plug-in. Now, in all processes, steps from that plug-in are shown with the text "PLUGIN DELETED." The processes cannot run until you install a new version of the plug-in and recreate the steps.</p>
+<p><strong>Note:</strong> If the plug-in is used in one or more snapshots, the server retains the pertinent steps to avoid breaking the snapshots. However, you cannot add these steps to new processes after you delete the plug-in.</p>
+</li>
+<li>
+<p>Install the earlier version of the plug-in.</p>
+</li>
+<li>In each process that used steps from that plug-in, recreate the steps and delete the steps that are labeled "PLUGIN DELETED." The process steps do not work until you recreate them, even if you have installed a new version of the plug-in.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.install.doc/topics/install_ch/">Installing HCL UrbanCode Deploy</a></p>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/settings_plugins.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

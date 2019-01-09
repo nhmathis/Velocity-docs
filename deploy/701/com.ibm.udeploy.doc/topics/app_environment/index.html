@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_environment/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Application environments", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="application-environments">Application environments</h1>
+<p>An environment is a user-defined collection of resources that hosts an application.</p>
+<p>An environment is the application's mechanism for bringing together components with the agent that deploys them. Environments are typically modeled on some stage of the software project lifecycle, such as development, QA, or production. A resource is a deployment target, such as a database or Java™ Platform, Enterprise Edition container. Usually, resources are found on the same host where the agent that manages them is located. A host can be a physical system, virtual machine, or be cloud-based.</p>
+<p>Environments can have different topologies, for example: an environment can consist of a single server; be spread over several servers; or spread over clusters of servers. Environments are assigned to specific applications. Although multi-tenant systems can be the target of multiple applications, most IT organizations use application-specific environments. Additionally, approvals can be assigned to specific environments.</p>
+<p>HCL® UrbanCode™ Deploy maintains an inventory of every artifact that is deployed to each environment and tracks the differences between them.</p>
+<p>Environment properties can be created with the environment's Properties pane (<strong>Applications</strong> > <strong>selected application</strong> > <strong>Environments</strong> > <strong>selected environment</strong> > <strong>Properties</strong>).</p>
+<p>A value that is set on a component environment property overrides an environment property that has the same name.</p>
+<p>Referenced: <code>${p:environment/propertyName}</code>.</p>
+<ul>
+<li><strong><a href="../app_environment_create/">Creating environments</a></strong><br />
+Before you can run a deployment, you must define at least one application environment that associates components with an agent on the target host.</li>
+<li><strong><a href="../examples_websphere_import_cell/">Creating environments from WebSphere Application Server cells</a></strong><br />
+You can import information about a WebSphere® Application Server cell into resources and then use those resources in an environment.</li>
+<li><strong><a href="../app_gate_create/">Creating environment gates</a></strong><br />
+To create an environment gate, specify the conditions that must be met before component versions can be deployed to the environment.</li>
+<li><strong><a href="../app_environment_mapping/">Mapping resources and components to environments</a></strong><br />
+Specify where components are deployed by adding a resource or resource group to the environment. Then, map the components to those resources.</li>
+<li><strong><a href="../app_environment_compare/">Comparing environments</a></strong><br />
+You can compare two environments to see differences in their inventories or property values.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../applications_ch/">Applications</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_environment.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

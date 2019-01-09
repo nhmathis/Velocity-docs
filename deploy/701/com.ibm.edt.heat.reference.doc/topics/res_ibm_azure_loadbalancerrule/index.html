@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_azure_loadbalancerrule/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>IBM Azure LoadBalancingRule - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "IBM::Azure::LoadBalancingRule", url: "#_top", children: [
+              {title: "Example", url: "#example" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ibmazureloadbalancingrule">IBM::Azure::LoadBalancingRule</h1>
+<p>This type represents a Microsoft™ Azure load balancing rule. It can create a load balancing rule for a load balancer.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>backend_address_pool</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The name or ID of the backend address pool for the load balancing rule.</td>
+</tr>
+<tr>
+<td>backend_port</td>
+<td>Integer</td>
+<td>True</td>
+<td>Core</td>
+<td>The port for the internal endpoint. The value must be between 1 and 65534.</td>
+</tr>
+<tr>
+<td>enable_floating_ip</td>
+<td>Boolean</td>
+<td>False</td>
+<td>Core</td>
+<td>Configures a virtual machine's endpoint for the floating IP capability that is required for configuring a SQL AlwaysOn Availability Group.</td>
+</tr>
+<tr>
+<td>frontend_ip_configuration</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The name or ID of the front-end IP configuration for the load balancing rule.</td>
+</tr>
+<tr>
+<td>frontend_port</td>
+<td>Integer</td>
+<td>True</td>
+<td>Core</td>
+<td>The port for the external endpoint. Port numbers for each rule must be unique within the load balancer, and the value must be between 1 and 65534.</td>
+</tr>
+<tr>
+<td>idle_timeout</td>
+<td>Integer</td>
+<td>False</td>
+<td>Core</td>
+<td>Timeout, in minutes, for the TCP idle connection. The default is <code>4</code> minutes, and the value must be between 4 and 30 minutes.</td>
+</tr>
+<tr>
+<td>load_balancer</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The name of the load balancer to add the load balancing rule to.</td>
+</tr>
+<tr>
+<td>load_distribution</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The load distribution policy for the rule. Valid values are:-   <code>Default</code></td>
+</tr>
+<tr>
+<td>-   <code>SourceIP</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-   <code>SourceIPProtocol</code></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>|
+|name|String|True|Core|The name of the load balancing rule.|
+|probe|String|True|Core|The ID of the problem for the load balancing rule.|
+|protocol|String|True|Core|The transport protocol for the external endpoint. Valid values are <code>Udp</code> and <code>Tcp</code>.|
+|resource_group|String|True|Core|The resource group name.|</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>The name of the load balancing rule.</td>
+</tr>
+<tr>
+<td>load_balancing_rule_id</td>
+<td>String</td>
+<td>The Azure ID of the load balancing rule.</td>
+</tr>
+<tr>
+<td>show</td>
+<td>String</td>
+<td>The details of the load balancing rule.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<p>This example creates a load balancing rule and associates it with a load balancer:</p>
+<pre><code> azure_lb_rule:
+    type: IBM::Azure::LoadBalancingRule
+    properties:
+      name: test-lbrule-1
+      resource_group: test-rg
+      load_balancer: test-lb
+      frontend_ip_configuration: LoadBalancerFrontEnd
+      backend_address_pool: testpool
+      frontend_port: 8080
+      backend_port: 80
+      protocol: Tcp
+      probe: testprobe
+      load_distribution: SourceIP
+
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_azure_ov/">Microsoft Azure resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_azure_loadbalancerrule.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

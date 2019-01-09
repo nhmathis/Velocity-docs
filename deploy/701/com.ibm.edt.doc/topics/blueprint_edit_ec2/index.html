@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_edit_ec2/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Modeling environments for Amazon Web Services - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Modeling environments for Amazon Web Services", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="modeling-environments-for-amazon-web-services">Modeling environments for Amazon Web Services</h1>
+<p>To model an Amazon Web Services (AWS) environment, log in with an AWS cloud project and specify the AWS-specific information in a blueprint.</p>
+<ul>
+<li>Connect the blueprint design server to a cloud system. See <a href="../security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</li>
+<li>Make sure that your user account is authenticated to a cloud system. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_auth_bds/">Setting up access to clouds in the blueprint designer</a>.</li>
+<li>Connect the blueprint design server to the server. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Log in to the blueprint designer.</li>
+<li>
+<p>At the top of the page, select the cloud project and region to use.</p>
+</li>
+<li>
+<p>Create the blueprint. See <a href="../blueprint_edit/">Creating files with the blueprint designer</a>.</p>
+</li>
+<li>Add resources from the palette to the blueprint, such as virtual images. The palette shows resources from the currently connected cloud, which is shown in the upper-right corner of the page. For more information on working with the blueprint designer, see <a href="../blueprint_diagram/">Editing blueprint diagrams</a> and <a href="../blueprint_source/">Editing blueprint source code</a>.</li>
+<li>
+<p>Customize the blueprint source code for your configuration of AWS. For example, you might have to change the mount points of volumes from defaults like <code>/dev/vdc</code> to specific locations like <code>/dev/xvdc</code>, as in the following example:</p>
+<p><code>linux_image_1_volume_1_attachment:
+  type: OS::Cinder::VolumeAttachment
+  properties:
+    volume_id: vol-4d4aaa04
+    instance_uuid: { get_resource: linux_image_1_volume_1_attachment }
+    mountpoint: /dev/xvdc</code></p>
+<p>In another example, to ensure that nodes and volumes are created in the same zone, you might need to update the <code>availability_zone</code> property to resources in the blueprint, as in the following example:</p>
+<p>```
+parameters:
+  availability_zone:
+    type: string
+    <strong>default: us-east-1d</strong>
+    description: Name of availability zone in which to create the instance</p>
+<p>resources:
+linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    flavor: { get_param: flavor }
+    image: "LinuxImageA"
+    key_name: { get_param: key_name }
+    name: "images/linux_image_A"
+    <strong>availability_zone: { get_param: availability_zone }</strong>
+  metadata:
+    ec2_properties:
+      access_id: ABC12345
+      secret_key: 67890DEF
+linux_image_A_volumeA_attachment:
+  type: OS::Cinder::VolumeAttachment
+  properties:
+    volume_id: volumeA
+    instance_uuid: { get_resource: linux_image_A }
+    mountpoint: /dev/xvdc
+  metadata:
+    ec2_properties:
+      access_id: ABC12345
+      secret_key: 67890DEF</p>
+<p>volumeA:
+  type: OS::Cinder::Volume
+  properties:
+    name: volumeA
+    <strong>availability_zone: { get_param: availability_zone }</strong>
+    size: 1
+  metadata:
+    ec2_properties:
+      access_id: ABC12345
+      secret_key: 67890DEF
+```</p>
+<p>For more information, see the Amazon Web Services documentation.</p>
+</li>
+<li>
+<p>In the blueprint source code, specify any additional core or extended properties for the resources in the blueprint. Specify core properties in the <code>properties</code> section of the resource code, as in the following example:</p>
+<p>```</p>
+<p>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    flavor: { get_param: flavor }
+    image: "LinuxImageA"
+    key_name: { get_param: key_name }
+    name: "images/linux_image_A"
+    availability_zone: { get_param: availability_zone }
+```</p>
+<p>Specify extended properties in the <code>metadata/ec2_properties</code> section of the resource code, as in the following example. This example applies two tags to a virtual image.</p>
+<p>```</p>
+<p>linux_image_A:
+  type: OS::Nova::Server
+  properties:
+    flavor: { get_param: flavor }
+    image: "LinuxImageA"
+    key_name: { get_param: key_name }
+    name: "images/linux_image_A"
+    availability_zone: { get_param: availability_zone }
+  metadata:
+    ec2_properties:
+      cluster: blue
+      database_type: mysql
+```</p>
+<p>For information about the properties that are available for resource types, see <a href="../../../com.ibm.edt.heat.reference.doc/topics/ref_heat_types_ov/">Heat resource types</a>.</p>
+</li>
+<li>
+<p>Create a configuration file and externalize properties to the file.See <a href="../blueprint_configs/">Editing configuration files</a>.</p>
+</li>
+<li>
+<p>In the configuration file, ensure that the core OpenStack types are mapped to Amazon Elastic Compute Cloud (EC2) types. The configuration file must have mapping similar to the following code:</p>
+<p><code>resource_registry:
+  OS::Nova::Server : IBM::EC2::Server
+  OS::Cinder::Volume : IBM::EC2::Volume
+  OS::Cinder::VolumeAttachment : IBM::EC2::VolumeAttachment
+  OS::Neutron::Port : IBM::EC2::Port
+  OS::Neutron::Net : IBM::EC2::VPC
+  OS::Neutron::Subnet : IBM::EC2::Subnet
+  OS::Neutron::Router : IBM::EC2::RouteTable
+  OS::Neutron::RouterGateway : IBM::EC2::InternetGateway
+  OS::Neutron::RouterInterface : IBM::EC2::RouteTableAssociation</code></p>
+</li>
+</ul>
+<p>Add the components of your application to the blueprint. See <a href="../blueprint_deploy_env/">Deploying components with blueprints</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../blueprint_edit_clouds/">Modeling environments for clouds through OpenStack Heat</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_edit_ec2.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

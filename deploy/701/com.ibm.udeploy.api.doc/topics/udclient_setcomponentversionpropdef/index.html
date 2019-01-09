@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/udclient_setcomponentversionpropdef/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>setComponentVersionPropDef - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "setComponentVersionPropDef", url: "#_top", children: [
+              {title: "Format", url: "#format" },
+              {title: "Parameters", url: "#parameters" },
+              {title: "Example", url: "#example" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="setcomponentversionpropdef">setComponentVersionPropDef</h1>
+<p>Set a version property for a component</p>
+<p>Component version properties are available to each version of the component.</p>
+<h2 id="format">Format</h2>
+<pre><code>udclient [\[global-args...\]](../../com.ibm.udeploy.reference.doc/topics/cli_command_format.md) [\[global-flags...\]](../../com.ibm.udeploy.reference.doc/topics/cli_command_format.md)
+  setComponentVersionPropDef [parameters]
+</code></pre>
+
+<h2 id="parameters">Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>component</td>
+<td>string</td>
+<td>true</td>
+<td>Name or ID of the component</td>
+</tr>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>true</td>
+<td>Name of the property to set</td>
+</tr>
+<tr>
+<td>description</td>
+<td>string</td>
+<td>false</td>
+<td>Description of the property</td>
+</tr>
+<tr>
+<td>required</td>
+<td>string</td>
+<td>false</td>
+<td>Whether the property is a required value on versions (true/false, optional - defaults to false)</td>
+</tr>
+<tr>
+<td>label</td>
+<td>string</td>
+<td>false</td>
+<td>Label for the property when presented in forms. (Optional. Defaults to the name.)</td>
+</tr>
+<tr>
+<td>value</td>
+<td>string</td>
+<td>false</td>
+<td>Default value of the property definition</td>
+</tr>
+<tr>
+<td>allowedValues</td>
+<td>string</td>
+<td>false</td>
+<td>Comma separated list of allowed values in SELECT or MULTI_SELECT properties</td>
+</tr>
+<tr>
+<td>pattern</td>
+<td>string</td>
+<td>false</td>
+<td>A regular expression to enforce that values for this property match a certain pattern. Leave blank to allow any values.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>false</td>
+<td>The type of property definition; valid values are TEXT (the default), , TEXTAREA, CHECKBOX, SELECT, MULTI_SELECT, DATETIME, and SECURE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example">Example</h2>
+<pre><code>udclient -username jsmith -password passwd 
+  -weburl https://myserver.example.com:8443
+  setComponentVersionPropDef 
+  -component JPetStore-APP 
+  -name Prop1 
+  -value true 
+  -type CHECKBOX
+</code></pre>
+
+<h2 id="example-response">Example response</h2>
+<pre><code>{
+  &quot;id&quot;: &quot;870bc2f5-55e2-4cb9-b3ab-f750688754b9&quot;,
+  &quot;name&quot;: &quot;Prop1&quot;,
+  &quot;type&quot;: &quot;CHECKBOX&quot;,
+  &quot;value&quot;: &quot;prop1&quot;,
+  &quot;required&quot;: false
+}
+</code></pre>
+
+<p>Related REST command: <a href="../rest_cli_component_versionpropdefs_put/">Set a version property for a component</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.reference.doc/topics/cli_commands/">CLI Commands</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/udclient_setcomponentversionpropdef.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_workflow_running/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Running processes - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Running processes", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="running-processes">Running processes</h1>
+<p>The way you run a process is different for each type of process.</p>
+<p>To run a process, you must have permissions to access the processes and to run processes on the target agent resource.</p>
+<ul>
+<li>
+<p><strong>Component processes</strong></p>
+<p>You cannot run a component process directly. Instead, you add one or more component processes to an application process and then run the application process.</p>
+</li>
+<li>
+<p><strong>Application processes</strong></p>
+<p>To run an application process, you must have an application environment. Click <strong>Applications</strong>, click the application, and then next to the environment, click <strong>Request Process</strong> <img alt="" src="../../images/request_process_icon.gif" />. Then, specify the application process and the versions of the components to use. For more information, see <a href="../app_process_run/">Running application processes</a>.</p>
+</li>
+<li>
+<p><strong>Generic processes</strong></p>
+<p>To run a generic process, click <strong>Processes</strong>, and then click the generic process. On the <strong>Dashboard</strong> tab for the process, specify a resource (in most cases, an agent) in the <strong>Resource</strong> list, and then click <strong>Submit</strong>.</p>
+<p><strong>Tip:</strong> You can set a default resource for generic processes:</p>
+<ol>
+<li>Click the generic process to open it.</li>
+<li>Open the <strong>Configuration</strong> tab.</li>
+<li>Click <strong>Basic Settings</strong>.</li>
+<li>In the <strong>Default Resource</strong> field, specify the default resource to run the process on. In most cases, specify an agent.</li>
+<li>Click <strong>Save</strong>.</li>
+</ol>
+</li>
+</ul>
+<p>Each time you request a process, the server keeps a log of information about the process and the individual logs from each step. To download these logs, open the process request and click <strong>Download All Logs</strong>.</p>
+<p><strong>Parent topic:</strong> <a href="../comp_workflow/">Processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_workflow_running.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

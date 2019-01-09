@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/migrate_database/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Migrating the server database - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Migrating the server database", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="migrating-the-server-database">Migrating the server database</h1>
+<p>The server installation files include a script that migrates the server database from Derby to another database system. You can not migrate from any database other than Derby.</p>
+<p>Install the database that you want to migrate to and create an account for the server to use.</p>
+<ol>
+<li>Download and extract the installation files for HCL® UrbanCode™ Deploy. These files are available for download from the IBM® Passport Advantage® website. See the <a href="https://www.ibm.com/software/passportadvantage/pao_customer.html">IBM UrbanCode Deploy download document</a>. </li>
+<li>Place the JAR file for the new database in the lib/ext folder of the installation files. </li>
+<li>Stop the server.</li>
+<li>Back up the current database.</li>
+<li>
+<p>From the command line, run the database migration script. </p>
+<ul>
+<li>On Windows™, run the migrate-database.bat file.</li>
+<li>On Linux™, run the migrate-database.sh file.
+Depending on your system settings, you might need to run this file as an administrator.</li>
+</ul>
+</li>
+<li>
+<p>Follow the instructions in the migration script, specifying the current location of the server and the connection information for the new database.</p>
+</li>
+<li>
+<p>When the migration script is finished, restart the server and verify that the data has been migrated.</p>
+<p>If the migration fails due to memory issues, increase the memory that is available to the script. To increase the memory, open the migration script and find the line of code that says <code>'ANT_OPTS="-Xmx1024m"</code>. The <code>1024m</code> in this code represents 1024 megabytes of memory. Increase this number and run the migration script again.</p>
+</li>
+</ol>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/migrate_database.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/deployapp_repeatrequest/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Running the same process again - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Running the same process again", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="running-the-same-process-again">Running the same process again</h1>
+<p>The repeat request function is available after an application deployment completes. The <strong>Repeat Request</strong> feature is on the Process Request page for the application.</p>
+<p><img alt="Screen capture of Process Request page for an application" src="../../images/repeatrestart.jpg" /></p>
+<p>It repeats the same deployment that was previously requested, including the selected versions. Repeating a previous deployment might result in receiving an Already Installed message. When an application process step completes successfully, it is tagged with a version number. If a process does not complete successfully, it remains at the same version. Therefore, starting a repeat request function where some processes completed successfully and which some failed, a mixture of updated versions and remaining versions exist.</p>
+<p>During the deployment process, the inventory of resources is verified. The resource version is compared to the requested deployment version. If the resource was successful in the previous build, the Already Installed message is displayed because the resource was successfully installed during the previous deployment process and it is not installed again.</p>
+<p>Eliminating the Already Installed message, depends on how the request process is defined. For example, when a failed installation process results in mixed versions, you can manage environment inventory manually and remove artifacts for failed resources.</p>
+<p>To start the deployment process without using the repeat request feature, start the request in the same manner as before and clear the <strong>Only changed versions</strong> options. Using this option causes the inventory check to be bypassed.</p>
+<p><strong>Parent topic:</strong> <a href="../app_process/">Application processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/deployapp_repeatrequest.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

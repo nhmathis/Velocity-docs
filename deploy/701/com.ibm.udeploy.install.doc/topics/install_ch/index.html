@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/install_ch/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Installing HCL UrbanCode Deploy", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="installing-hcl-urbancode-deploy">Installing HCL UrbanCode Deploy</h1>
+<p>An HCL® UrbanCode™ Deploy installation consists of the HCL UrbanCode Deploy server, a database, and at least one agent. The installation can include the blueprint design server and its engine and database.</p>
+<p>Typically, the server, database, agents, engine, and blueprint design server are installed on separate systems, although for a simple evaluation they can all be installed on the same system.</p>
+<p>Installing HCL UrbanCode Deploy usually involves the following general steps:</p>
+<ol>
+<li>Review the system requirements. See <a href="../sysRequire/">System requirements and performance considerations</a>.</li>
+<li>Install a Rational® Common Licensing server. See <a href="http://www-01.ibm.com/support/knowledgecenter/SSSTWP_8.1.4/com.ibm.rational.license.doc/topics/c_managing_lic.html">Rational Common Licensing overview</a>.</li>
+<li>Add licenses to the server. For more information about the licenses that are available, see <a href="../../../com.ibm.udeploy.doc/topics/licenseManage/">License management</a>.</li>
+<li>If you are using a database other than Apache Derby, install the database before you install the server. See <a href="../DBinstall/">Installing the server database</a>. Apache Derby is appropriate for evaluation installations only. If you choose Apache Derby, the server installation steps install Derby automatically, so you do not need to install it manually.</li>
+<li>Install the server. See <a href="../serverInstall/">Installing the server</a>.</li>
+<li>Install agent relays. See <a href="../agentRelayInstall/">Installing agent relays</a>.</li>
+<li>Install one or more agents. See <a href="../agent_install_ov/">Installing agents</a>.</li>
+<li>Start the server. See <a href="../run_server/">Starting and stopping the server</a>.</li>
+<li>Optional: Install plug-ins. See <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_plugins/">Installing plug-ins</a>.</li>
+<li>Optional: Install and configure the blueprint design server. To use the blueprint designer, you must complete the following steps:<ol>
+<li>Acquire a Heat orchestration engine. To connect to OpenStack and OpenStack-based clouds, extend the existing Heat engine for the cloud; see <a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>. To connect to non-OpenStack clouds, such as Amazon Web Services and MIcrosoft Azure, install an engine with HCL UrbanCode Deploy; see <a href="../install_engine/">Installing the engine</a>.</li>
+<li>Configure a database for the blueprint design server. See <a href="../install_database_bds_ov/">Blueprint design server database configuration</a>.</li>
+<li>Install the blueprint design server. See <a href="../install_server_bds/">Installing the blueprint design server</a>.</li>
+<li>Connect the blueprint design server to the server. See <a href="../../../com.ibm.udeploy.doc/topics/ucdp_integrate/">Connecting the blueprint design server to the server</a>.</li>
+<li>Integrate with the cloud. See <a href="../../../com.ibm.edt.doc/topics/security_cloud_connection/">Connecting to clouds through the blueprint designer</a>.</li>
+<li>Set up access control. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_ov/">Configuring security for the blueprint design server</a>.</li>
+</ol>
+</li>
+</ol>
+<p>The following diagram illustrates this process:</p>
+<p><img alt="A diagram that shows the basic steps that are involved in installing HCL UrbanCode Deploy" src="../../images/install_ch_a.gif" /></p>
+<p>For information about accessing the HCL UrbanCode Deploy web application, see <a href="../access_server/">Accessing HCL UrbanCode Deploy</a>.</p>
+<ul>
+<li><strong><a href="../sysRequire/">System requirements and performance considerations</a></strong><br />
+The HCL UrbanCode Deploy server runs on Windows and UNIX systems. Following some guidelines can improve the performance of the server and agents.</li>
+<li><strong><a href="../agent_firewalls/">Firewall and communication configuration</a></strong><br />
+Before you install the server, you must ensure that servers, agents, and other systems can connect to each other through your networks and firewalls.</li>
+<li><strong><a href="../DBinstall/">Installing the server database</a></strong><br />
+HCL UrbanCode Deploy requires a database. You can use the following database types for an evaluation or production server.</li>
+<li><strong><a href="../serverInstall/">Installing the server</a></strong><br />
+The server provides services such as the user interface used to configure application deployments, the workflow engine, the security service, and the artifact repository, among others. Installing the server involves specifying configuration information for the server, such as the ports that the server uses.</li>
+<li><strong><a href="../docker_cloud_over/">Installing the server in a Kubernetes cluster</a></strong><br />
+The HCL UrbanCode Deploy server can be installed in a cloud-based environment, as a containerized server cluster, managed by Kubernetes. UrbanCode Deploy works with Kubernetes to simplify application deployment and manage versions in the containers.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/install_ch_bpd/">Installing the blueprint designer</a></strong><br />
+The installation can include the blueprint design server and its engine and database.</li>
+<li><strong><a href="../agent_install_ov/">Installing agents</a></strong><br />
+You can install agents from the server or from the command line on the agent system. To configure a failover server for an agent, you must install the agent from the command line.</li>
+<li><strong><a href="../zos_installing_ov/">Installing the z/OS agent</a></strong><br />
+Before you deploy to the IBM® z/OS® platform, you must install the z/OS® agent and configure the z/OS® server for communication with HCL UrbanCode Deploy. If the build process runs on a different logical partition (LPAR), then you must additionally install the agent on the build LPAR. You can install the z/OS® agent and deployment tools by using the IBM® System Modification Program Extended (SMP/E) or by extracting archive files to the z/OS® UNIX file system.</li>
+<li><strong><a href="../agentRelayInstall/">Installing agent relays</a></strong><br />
+An agent relay is a communication proxy for agents that are located behind a firewall or in another network location. You can install agent relays in interactive mode or in silent mode.</li>
+<li><strong><a href="../../../com.ibm.udeploy.admin.doc/topics/settings_plugins/">Installing plug-ins</a></strong><br />
+Plug-ins can be installed at any time. You do not need to restart the server after you install a plug-in.</li>
+<li><strong><a href="../runProduct/">Starting HCL UrbanCode Deploy</a></strong><br />
+Both UNIX and Windows installations require the HCL UrbanCode Deploy server and at least one agent. If you are using a database other than Derby, make sure that the appropriate driver is installed and configured.</li>
+<li><strong><a href="../backup_recover/">Backing up and recovering</a></strong><br />
+You can back up and recover the contents of your HCL UrbanCode Deploy installation.</li>
+<li><strong><a href="../server_install_testfix/">Installing and uninstalling test fixes (patches) from the server</a></strong><br />
+Test fixes are provided by IBM® support to correct specific issues. They are applied to the server as patches.</li>
+</ul>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/install_ch.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

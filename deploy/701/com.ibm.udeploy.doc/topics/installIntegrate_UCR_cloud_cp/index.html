@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/installIntegrate_UCR_cloud_cp/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Integrating with cloud and mobile services with IBM Bluemix DevOps Connect - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Integrating with cloud and mobile services with IBM Bluemix DevOps Connect", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="integrating-with-cloud-and-mobile-services-with-ibm-bluemix-devops-connect">Integrating with cloud and mobile services with IBM Bluemix DevOps Connect</h1>
+<p>IBM® Bluemix DevOps Connect coordinates communication between IBM UrbanCode™ Release, HCL® UrbanCode Deploy, and the IBM Cloud and Bluemix services.</p>
+<p>You download DevOps Connect from IBM developerWorks, and install it on a computer that has access to IBM UrbanCode Release or HCL UrbanCode Deploy. DevOps Connect comes with several plug-ins installed that you can use to integrate IBM UrbanCode Release and HCL UrbanCode Deploy with IBM Cloud and Bluemix services. You can update existing plug-ins or <a href="../installIntegrate_UCR_cloud_plugin/">install new ones by using the DevOps Connect web-based dashboard</a>.</p>
+<p>You can start creating integrations with the installed plug-ins as soon as you register for DevOps Connect. DevOps Connect includes the following plug-ins:</p>
+<ul>
+<li><strong>IBM UrbanCode Deploy for Mobile</strong>. This plug-in provides HCL UrbanCode Deploy data to IBM UrbanCode Mobile users.</li>
+<li><strong>IBM UrbanCode Release for Mobile</strong>. This plug-in provides IBM UrbanCode Release data to IBM UrbanCode Mobile users.</li>
+<li><strong>IBM UrbanCode Deploy for Cloud Reporting</strong>. This plug-in sends data from DevOps Connect to Delivery Insights.</li>
+</ul>
+<p>After you install DevOps Connect, use the installed plug-ins to create integrations with IBM UrbanCode Release and HCL UrbanCode Deploy. Integrations run periodically and sync data between the integrated products and the IBM Bluemix services. Integrations use encrypted SSL connections and store data in encrypted databases. DevOps Connect encrypts the data before it provides it to the IBM Bluemix services.</p>
+<p>The first time that you run DevOps Connect, register it by using your IBMid. You cannot use DevOps Connect until you register it. DevOps Connect generates a unique ID and receives a token that together forms its credentials. The credentials are used to establish secure connections and store configuration information and data in the cloud. The credentials are stored in the sync.properties file. For information about the sync.properties file, see <a href="../installIntegrate_UCR_sync/">Installing IBM Bluemix DevOps Connect</a>.</p>
+<p>DevOps Connect uses SSL to communicate with the cloud services. The DevOps Connect web-based dashboard also uses SSL.</p>
+<ul>
+<li><strong><a href="../installIntegrate_UCR_sync/">Installing IBM Bluemix DevOps Connect</a></strong><br />
+Install IBM Bluemix DevOps Connect to share data between HCL UrbanCode Deploy, IBM UrbanCode Release, and IBM UrbanCode Cloud services and Bluemix Services.</li>
+<li><strong><a href="../installIntegrate_UCR_cloud_plugin/">Installing plug-ins into IBM Bluemix DevOps Connect</a></strong><br />
+Install and upgrade plug-ins in IBM Bluemix DevOps Connect.</li>
+<li><strong><a href="../installIntegrate_UCD_cloud_sync/">Integrating IBM UrbanCode Deploy with UrbanCode Mobile</a></strong><br />
+Use IBM Bluemix™ DevOps Connect to integrate HCL UrbanCode Deploy with UrbanCode Mobile.</li>
+<li><strong><a href="../installIntegrate_UCR_mobile/">Configuring the UrbanCode Mobile app</a></strong><br />
+Connect your UrbanCode Mobile application to the IBM Cloud service and receive deployment data on your mobile devices.</li>
+</ul>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/installIntegrate_UCR_cloud_cp.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/integrate_azure_private/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Registering Azure custom images with the cloud discovery service - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Registering Azure custom images with the cloud discovery service", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="registering-azure-custom-images-with-the-cloud-discovery-service">Registering Azure custom images with the cloud discovery service</h1>
+<p>To use Microsoft™ Azure custom images in the blueprint designer, you must register the images with the cloud discovery service.</p>
+<ul>
+<li>Configure the cloud discovery service. See <a href="../../../com.ibm.udeploy.doc/topics/cds_configure/">Setting up images, regions, and flavors for the cloud discovery service and engine</a>.</li>
+<li>Create one or more Azure Resource Manager templates from Linux or Windows images. See <a href="https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-capture-image/">https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-linux-capture-image/</a>.</li>
+<li>Ensure that the Azure account in the blueprint designer cloud connection has access to the Azure Resource Manager templates.</li>
+<li>Ensure that the Azure resource group that each custom image is stored in contains appropriate networks and standard storage accounts. Blueprints must contain custom images, networks, and storage accounts from the same resource group. You can determine which resource group contains these resources through the Azure web portal or command-line client.</li>
+</ul>
+<p>Custom images are Azure Resource Manager templates for virtual machines. You can preconfigure these images with software and configuration settings, and then store them as a template to reuse in the blueprint designer. Storing an image as a template removes information such as IP addresses and host names that can conflict with other images. In this way, you can create multiple images from this template without creating conflicts.</p>
+<p>Only Azure Resource Manager templates are supported; classic deployment model templates are not supported.</p>
+<ol>
+<li>Obtain the following information for each custom image that you want to use in the blueprint designer: <ul>
+<li>The resource group that the custom image is stored in.</li>
+<li>The storage account that the custom image is stored in.</li>
+<li>The name of the Blob container that the custom image VHD file is stored in. To find the name of the Blob container, in the Azure web portal, open the storage container and then open the Blob service. The data in the Blob service is stored in folders that are called containers. You need only the name of the top-level Blob container that stores the VHD file, even if the files are in subfolders.</li>
+</ul>
+</li>
+<li>Open the cloud discovery service configuration file in a text editor. </li>
+<li>
+<p>If the cloud discovery service configuration file does not have an Azure section, create the Azure section: </p>
+<ol>
+<li>
+<p>To the <code>CLOUD_SETTINGS</code> section, add a section that looks like the following code: </p>
+<p>```
+"azure": {
+    "private_images": [</p>
+<pre><code>]
+</code></pre>
+<p>}</p>
+<p>```</p>
+</li>
+</ol>
+</li>
+<li>
+<p>To the Azure section of the cloud discovery service configuration file, add entries for the Blob containers that have templates that you want to use. Each entry follows this format:</p>
+<p><code>"resource_group":"resourceGroup",
+"storage_account":"storageAccount",
+"container_list":[containerList]</code></p>
+<ul>
+<li>For <code>resourceGroup</code>, specify the resource group.</li>
+<li>For <code>storageAccount</code>, specify the storage account.</li>
+<li>For <code>containerList</code>, specify a comma-separated list of Blob containers, in quotes.
+For example, the following code includes Blob containers that are named <code>container1</code> and <code>container2</code>:</li>
+</ul>
+<p>```
+"azure": {
+    "private_images": [
+        {
+            "resource_group": "myResourceGroup",
+            "storage_account": "myStorageAccount",
+            "container_list": ["container1","container2"]
+        }
+    ]
+}</p>
+<p>```</p>
+<p>The complete section looks like the following example:</p>
+<p>```
+"azure": {
+    "private_images": [{
+          "resource_group": "myResourceGroup",
+          "storage_account": "myStorageAccount",
+          "container_list": ["container1","container2"]
+}],
+    "images": [
+        {
+            "publisher": "openlogic",
+            "sku": ["6.5","6.6","6.7","7.0","7.1","7.2"],
+            "offer": "CentOS",
+            "display_name" : "CentOS"
+        },
+        {
+            "publisher": "Canonical",
+            "sku": ["12.04.5-LTS","14.04.4-LTS","15.10"],
+            "offer": "UbuntuServer",
+            "display_name": "Ubuntu Server"
+        },
+        {
+            "publisher": "MicrosoftWindowsServer",
+            "sku": ["2012-R2-Datacenter","2008-R2-SP1"],
+            "offer": "WindowsServer",
+            "display_name": "Windows Server"
+        }
+    ]
+}</p>
+<p>```</p>
+</li>
+<li>
+<p>Save the file and restart the cloud discovery service. To restart the cloud discovery service, see <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a> and <a href="../../../com.ibm.udeploy.install.doc/topics/stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+</ol>
+<p>Now you can add the images to blueprints. When you add a custom image to a blueprint, the blueprint designer asks whether the image is a Windows or Linux image. Custom images appear in a separate drawer in the palette; this drawer appears only if the cloud discovery service successfully loads at least one custom image. If the drawer is not visible, ensure that the cloud discovery service configuration file has the correct format and the correct information about the images.</p>
+<p><strong>Parent topic:</strong> <a href="../cloud_connect_azure/">Connecting to Microsoft Azure</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/integrate_azure_private.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/groupingtags_tsk/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Grouping servers by using tags - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Grouping servers by using tags", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="grouping-servers-by-using-tags">Grouping servers by using tags</h1>
+<p>You can use tagging to group target servers for organized deployments.</p>
+<p>By using tags and filtering, you can separate resources that represent production servers into two logical groups. If you tag half the resources with a blue tag and half with a green tag, then you can run deployments in a fashion that is sometimes called blue-green deployment. When you plan to deploy a new version of an application to a production environment, deploy it to the blue group first. Meanwhile, the green group of servers still provides the older version of the application. After the new version of the application is deployed to the blue group, repeat the process with the green group. In this way, you can deploy a new version of software while still providing uninterrupted service in your production environment.</p>
+<ol>
+<li>Tag resources, which represent target servers, in two groups. To learn more about tagging, see <a href="../addingtags_tsk/">Adding tags to objects</a>. If you have resources that are organized in groups, you can apply a tag to a top-level group. For example, create top-level groups for the Blue servers and the Green servers. If you tag the two top-level groups as Blue and Green, then all resources that a particular group contains are included in deployment steps when you limit deployment to a specific tag.</li>
+<li>Create two application deployment processes that correspond to the two tags.When you add an Install Component step to an application process, you can use the <strong>Limit to Tag</strong> field to restrict the deployment to resources that have a specific tag.</li>
+<li>Deploy the new version of an application by using the first application deployment process.For example, deploy the application to a group of servers that are tagged as Blue servers.</li>
+<li>Check that the new version of the application is running as expected.</li>
+<li>Deploy the new version of an application by using the other application deployment process.For example, deploy the application to a group of servers that are tagged as Green servers.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../tags_ch/">Tags</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/groupingtags_tsk.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

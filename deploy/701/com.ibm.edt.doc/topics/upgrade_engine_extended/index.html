@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/upgrade_engine_extended/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Upgrading engines that you extended - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Upgrading engines that you extended", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="upgrading-engines-that-you-extended">Upgrading engines that you extended</h1>
+<p>To upgrade a Heat orchestration engine that you extended, rerun the script that extends the engine.</p>
+<ul>
+<li>Root access is required for installation.</li>
+<li>The operating system must be configured with required packages and dependencies before you install the engine. The system might need network access to install these packages. Make sure that the system is connected to a package manager, such as a Yum server.</li>
+<li>
+<p>If the <code>akonadi</code> package is installed, remove it:</p>
+<p><code>yum remove -y akonadi</code></p>
+</li>
+<li>
+<p>Determine whether the program <code>qpid</code> is installed on the system.</p>
+<ul>
+<li>
+<p>On RHEL version 7, run the following command:</p>
+<p><code>systemctl status qpidd.service</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>If the program <code>qpid</code> is running on the system, stop its service.</p>
+<ul>
+<li>
+<p>On RHEL version 7, run the following command:</p>
+<p><code>systemctl stop qpidd.service</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>These steps are for upgrading Heat orchestration engines that you extended as described in <a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a> or for upgrading Heat engines that you installed with HCL® UrbanCode™ Deploy version 6.2.1.1 or later. For other Heat engines, use the instructions in <a href="../upgrade_engine_ucdp/">Upgrading engines that you installed with HCL UrbanCode Deploy</a>.</p>
+<ol>
+<li>
+<p>Check the current version of the custom types in the engine. You need to know the current version of the types so you will know if the upgrade was successful. To check the current version, log in to the system that hosts the engine and run the following command:</p>
+<p><code>pip list | grep ibm-cloud-ext</code></p>
+<p>Then, find the version of the <code>ibm-cloud-ext</code> package in the output of the command. For example, assume that the output looks like the following code:</p>
+<p><code>ibm-cloud-ext (6.2.1.dev70)</code></p>
+<p>In this example, the version of the custom types is <code>(6.2.1.dev70)</code>.</p>
+</li>
+<li>
+<p>Download and extract the installation files for the engine. These files are available for download from the IBM® Passport Advantage® website. See the <a href="https://www.ibm.com/software/passportadvantage/pao_customer.html">IBM UrbanCode Deploy download document</a>. </p>
+</li>
+<li>Change to the ibm-ucd-patterns-install/engine-install/ directory. </li>
+<li>From the command line, run the ./extend-ucd-existing-engine.sh command to install the HCL UrbanCode Deploy plug-in. </li>
+<li>The installer asks if you have satisfied the dependencies. If you configured the system with the prerequisites for the engine, press <code>Y</code>. </li>
+<li>Read the license agreements for the software package. Press Space to show one page at a time, or press <code>F</code> to show the entire license. </li>
+<li>If you agree to the terms of all of the license agreements, press <code>Y</code>, and then press Enter. </li>
+<li>Restart the engine and the Heat API. See the documentation for your cloud system.</li>
+<li>
+<p>Run the following command and verify that the version of the <code>ibm-cloud-ext</code> package has been updated: </p>
+<p><code>pip list | grep ibm-cloud-ext</code></p>
+</li>
+</ol>
+<p>The engine is updated.</p>
+<p><strong>Parent topic:</strong> <a href="../upgrade_engine/">Upgrading engines</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/upgrade_engine_extended.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

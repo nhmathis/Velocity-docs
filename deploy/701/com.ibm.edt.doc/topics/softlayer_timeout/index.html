@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/softlayer_timeout/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring the timeout value for SoftLayer clouds - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring the timeout value for SoftLayer clouds", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-the-timeout-value-for-softlayer-clouds">Configuring the timeout value for SoftLayer clouds</h1>
+<p>To accommodate variations in responsiveness of the SoftLayer® cloud and to allow enough time for it to return resources to the blueprint designer, you can set a SoftLayer timeout value.</p>
+<ol>
+<li>
+<p>On the computer that hosts the Heat engine, update the timeout value in the clouds_user_settings.conf file. This file is in the /usr/lib/heat/ibm-cloud-ext/resources/ folder. For the timeout value, provide the amount of time, in seconds, that the Heat engine waits for SoftLayer cloud to provide resource information. For the check_create_complete_timeout value, provide the amount of time, in seconds, that the Heat engine waits for a virtual machine resource to complete. In the following example, the timeout value is set to 120 seconds, and the check_create_complete_timeout is set to 300 seconds:</p>
+<p><code>[softlayer]
+client:
+     {
+        "timeout": 120
+        "check_create_complete_timeout": 300
+     }</code></p>
+</li>
+<li>
+<p>On the computer that hosts the cloud discovery service and the blueprint design server, create a configuration file. Use the following template for the file.</p>
+<p><code>[softlayer]
+client:
+     {
+        "timeout": 120
+     }</code></p>
+<p>For the timeout variable, provide the amount of time, in seconds, that the cloud discovery service waits for the SoftLayer cloud to provide resource information. In the previous template, the timeout value is set to 120 seconds,</p>
+</li>
+<li>
+<p>Set the system variable CDS_CLOUDS_SETTINGS_FILE to the location of the file. The file can be in any location on the system that hosts the cloud discovery service.</p>
+</li>
+<li>
+<p>In versions 6.2.1.1 and later that are installed on Red Hat Enterprise Linux™ version 7, provide the system variable to the cloud discovery service. In the Service section of the /usr/lib/systemd/system/ibm-cloud-discovery.service file, add an Environment parameter that defines the location of the system variable. The configuration file resembles the following code:</p>
+<p>```
+[Unit]
+Description=IBM Cloud Discovery Service
+After=syslog.target network.target</p>
+<p>[Service]
+<strong>Environment="CDS_CLOUDS_SETTINGS_FILE=/usr/lib/heat/ibm-cloud-ext/resources/clouds_user_settings.conf"</strong>
+Type=simple
+Restart=on-failure
+RestartSec=0
+ExecStart=/usr/bin/python -m clouddiscoveryservice.runserver</p>
+<p>[Install]
+WantedBy=network-online.target 
+```</p>
+</li>
+<li>
+<p>Restart the cloud discovery service. See <a href="../../../com.ibm.udeploy.install.doc/topics/stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a> and <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+<li>Start the cloud discovery service. See <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../cloud_connect_softlayer/">Connecting to the SoftLayer cloud</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/softlayer_timeout.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

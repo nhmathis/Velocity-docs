@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/rest_api_ref_authenticating/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Authenticating for REST commands - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Authenticating for REST commands", url: "#_top", children: [
+              {title: "Authenticating with a user name and password", url: "#authenticating-with-a-user-name-and-password" },
+              {title: "Authenticating in scripts and programs", url: "#authenticating-in-scripts-and-programs" },
+              {title: "Authenticating in a Groovy script", url: "#authenticating-in-a-groovy-script" },
+              {title: "Importing the server certificate", url: "#importing-the-server-certificate" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="authenticating-for-rest-commands">Authenticating for REST commands</h1>
+<p>The way that you authenticate to run REST commands depends on how the server is set up and the tool that you are using to run the commands.</p>
+<p><strong>Note:</strong> Using REST commands requires the same permissions as using the web interface. For information about permissions, see <a href="../../../com.ibm.udeploy.admin.doc/topics/security_roles/">Roles and permissions</a>.</p>
+<h2 id="authenticating-with-a-user-name-and-password">Authenticating with a user name and password</h2>
+<p>The simplest way to authenticate for REST commands is to use a user name and password. For example, if you are using the <code>curl</code> program, you can specify the user name and password in the command, as in the following code:</p>
+<pre><code>curl -k -u jsmith:passwd
+  https://myserver.example.com:8443/cli/application/info
+  ?application=JPetStore
+</code></pre>
+
+<h2 id="authenticating-in-scripts-and-programs">Authenticating in scripts and programs</h2>
+<p>Many programming and scripting languages can call REST commands.</p>
+<p>The following example is a Python script that authenticates by adding the password to the request header.</p>
+<pre><code>#!/usr/bin/env python
+
+import urllib2
+import json
+import base64
+import sys
+
+if not len(sys.argv) == 3:
+  print 'usage: script &lt;username&gt; &lt;password&gt;'
+  exit(1)
+
+username = sys.argv[1]
+password = sys.argv[2]
+
+epass = base64.b64encode(username + ':' + password)
+print 'base64 encoded: ' + epass
+baseUrl = 'ucdeploy.example.org:8443'
+
+url = 'https://' + baseUrl + '/cli/application/info' + '?application=JPetStore'
+
+opener = urllib2.build_opener(urllib2.HTTPHandler)
+req = urllib2.Request(url)
+req.add_header('Authorization', 'Basic '+epass)
+req.get_method = lambda: 'GET'
+
+resp = opener.open(req)
+print resp.read()
+</code></pre>
+
+<h2 id="authenticating-in-a-groovy-script">Authenticating in a Groovy script</h2>
+<p>For an example of authenticating in a Groovy script, see the following repository: <a href="https://github.com/IBM-UrbanCode/groovy-sample-scripts-UCD">https://github.com/IBM-UrbanCode/groovy-sample-scripts-UCD</a></p>
+<h2 id="importing-the-server-certificate">Importing the server certificate</h2>
+<p>The default server certificate is unsigned. Some tools do not connect to servers with unsigned certificates by default. To access a server with a self-signed certificate, you can instruct the tool to connect insecurely, or you can import the certificate into your client. Follow these steps to import the certificate into your client:</p>
+<ol>
+<li>
+<p>Export the server certificate to a file:</p>
+<ol>
+<li>On the computer that hosts the HCL UrbanCode Deploy server, open the server.xml file in a text editor. By default, this file is in the location server_install/opt/tomcat/conf/server.xml. The default server installation directory is /opt/ucd/server on Linux™ and C:\Program Files\ucd\server on Windows™.</li>
+<li>
+<p>In the server.xml file, find the following lines of code and note the values of the keystoreFile and keystorePass attributes:</p>
+<p><code>sslProtocol="TLS"
+keystoreFile="conf/tomcat.keystore"
+keystorePass="changeit" /&gt;</code></p>
+</li>
+<li>
+<p>In a command-line window, run the following command:</p>
+<p><code>keytool -v -list -keystore keyStoreFileName</code></p>
+<p>The keytool application is included in the Java™ developer kit and is not part of HCL UrbanCode Deploy. Use the name of the keystoreFile attribute from the server.xml file for <code>keyStoreFileName</code>. When the command prompts you for a password, specify the value of the keystorePass attribute. The default value is <code>changeit</code>.</p>
+</li>
+<li>
+<p>From the result of the command, find the alias of the server. For example, the result of the command might look like the following code:</p>
+<p>```
+Keystore type: JKS
+Keystore provider: SUN</p>
+<p>Your keystore contains 1 entry</p>
+<p>Alias name: server
+Creation date: Mar 19, 2014
+Entry type: PrivateKeyEntry
+```</p>
+<p>In this code, the alias is <code>server</code>.</p>
+</li>
+<li>
+<p>Run the following command to export the certificate to a file and specify the password again:</p>
+<p><code>keytool -exportcert 
+  -alias serverAlias 
+  -keystore keyStoreFileName 
+  -storetype jks 
+  -file server.cert</code></p>
+<p>Use the alias of the server for <code>serverAlias</code>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Copy the server.cert file to the client computer.</p>
+</li>
+<li>Import the server.cert file into the keystore of the client computer:<ol>
+<li>
+<p>In a command-line window on the client computer, run the following command and specify the password for the keystore on the client. The default is <code>changeit</code>.</p>
+<p><code>jreLocation\jre\bin\keytool.exe -importcert 
+  -alias serverAlias
+  -file tomcat.cert 
+  -storetype jks 
+  -keystore jreLocation\jre\lib\security\cacerts</code></p>
+<p>Use the location of the JRE or JDK for <code>jreLocation.</code></p>
+</li>
+</ol>
+</li>
+</ol>
+<p>Now, some tools that use this JRE or JDK accept the server certificate. Other tools, such as <code>curl</code>, might still not accept the server certificate because it is unsigned. To resolve this problem, set up a signed certificate for the server.</p>
+<p><strong>Parent topic:</strong> <a href="../rest_api_ref_overview/">REST API reference</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/rest_api_ref_authenticating.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

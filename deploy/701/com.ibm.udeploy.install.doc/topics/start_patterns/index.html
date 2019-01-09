@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/start_patterns/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Starting the blueprint designer, cloud discovery service, and engine - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Starting the blueprint designer, cloud discovery service, and engine", url: "#_top", children: [
+              {title: "Starting the cloud discovery service", url: "#starting-the-cloud-discovery-service" },
+              {title: "Starting the engine Heat services", url: "#starting-the-engine-heat-services" },
+              {title: "Starting the blueprint design server", url: "#starting-the-blueprint-design-server" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="starting-the-blueprint-designer-cloud-discovery-service-and-engine">Starting the blueprint designer, cloud discovery service, and engine</h1>
+<p>To start the blueprint designer and its associated services, you must start the cloud discovery service, the blueprint design server, and the engine Heat services.</p>
+<p>Depending on your system configuration, these components might be on different computers. Be sure to start the cloud discovery service, the blueprint design server, and the engine Heat services on the correct computers.</p>
+<h2 id="starting-the-cloud-discovery-service">Starting the cloud discovery service</h2>
+<ol>
+<li>
+<p>Start the cloud discovery service: </p>
+<ul>
+<li>
+<p>On Linux™ systems that manage services with the systemd system manager, use the systemctl command:</p>
+<p><code>systemctl start ibm-cloud-discovery.service</code></p>
+<p><strong>Note:</strong> If you start the cloud discovery service with the systemctl command, you must use the systemctl command to stop the cloud discovery service.</p>
+</li>
+<li>
+<p>On Linux systems that do not use the systemd system, run the following command:</p>
+<p><code>cloud-discovery-service &amp;</code></p>
+</li>
+</ul>
+<p>On Windows™, run the following command:</p>
+<p><code>C:\python\_installation\_directory\Scripts\cloud-discovery-service.exe</code></p>
+<p>Use the location where Python is installed for <code>python\_installation\_directory</code>. The default installation directory is C:\Python27. By default, the command looks like this code:</p>
+<p><code>C:\Python27\Scripts\cloud-discovery-service.exe</code></p>
+</li>
+</ol>
+<h2 id="starting-the-engine-heat-services">Starting the engine Heat services</h2>
+<ol>
+<li>
+<p>Restart the engine database. Run the following command:</p>
+<p><code>systemctl start mariadb.service</code></p>
+</li>
+<li>
+<p>Restart the RabbitMQ service. Run the following command:</p>
+<p><code>systemctl start rabbitmq-server.service</code></p>
+</li>
+<li>
+<p>Start the Heat services. Run the following commands:</p>
+<p><code>systemctl start openstack-heat-engine.service</code></p>
+<p><code>systemctl start openstack-heat-api.service</code></p>
+<p><code>systemctl start openstack-heat-api-cfn.service</code></p>
+<p><code>systemctl start openstack-heat-api-cloudwatch.service</code></p>
+</li>
+<li>
+<p>If you use the default Keystone service that is provided with the engine, start it. Run the following command:</p>
+<p><code>systemctl start openstack-keystone.service</code></p>
+</li>
+</ol>
+<h2 id="starting-the-blueprint-design-server">Starting the blueprint design server</h2>
+<ol>
+<li>
+<p>Start the blueprint design server: </p>
+<ul>
+<li>
+<p>On Linux, run the following command:</p>
+<p><code>server\_installation\_directory/bin/server start</code></p>
+<p>Use the location of the blueprint design server installation for <code>server\_installation\_directory</code>. The default installation directory is /opt/ibm-ucd-patterns. By default, the command looks like the following code:</p>
+<p><code>/opt/ibm-ucd-patterns/bin/server start</code></p>
+</li>
+<li>
+<p>On Windows, run the following command:</p>
+<p><code>C:\server\_installation\_directory\bin\start_server</code></p>
+<p>Use the location of the blueprint design server installation for <code>server\_installation\_directory</code>. The default installation directory is C:\Program Files\ibm-ucd-patterns. By default, the command looks like the following code:</p>
+<p><code>"C:\Program Files\ibm-ucd-patterns\bin\start_server"</code></p>
+</li>
+</ul>
+</li>
+</ol>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/start_patterns.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

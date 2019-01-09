@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/rest_api_ref_provision_example/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Provisioning environments by using REST commands an example - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Provisioning environments by using REST commands: An example", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="provisioning-environments-by-using-rest-commands-an-example">Provisioning environments by using REST commands: An example</h1>
+<p>The following example describes how to use the REST commands to provision an environment through the blueprint design server and engine.</p>
+<p>Create a blueprint and ensure that you can provision an environment from the blueprint by using the blueprint designer user interface.</p>
+<p>To provision environments with REST commands, you must have the following information:</p>
+<ul>
+<li>
+<p><strong>The ID of the cloud project to use</strong></p>
+<p>You can get this information from this REST command: <a href="../../../com.ibm.edt.api.doc/topics/security_cloudproject__get/">List cloud projects</a>.</p>
+</li>
+<li>
+<p><strong>The name of the blueprint and the location of the blueprint on the blueprint design server</strong></p>
+<p>You can get this information from this REST command: <a href="../../../com.ibm.edt.api.doc/topics/rest_blueprint__get/">List blueprints</a>.</p>
+</li>
+<li>
+<p><strong>The name and location of the configuration file on the blueprint design server (Optional)</strong></p>
+<p>To use a configuration file, you must have the name and complete location of that file. You can get this information from this REST command: <a href="../../../com.ibm.edt.api.doc/topics/rest_bpid_configuration_get/">List configuration files for a blueprint</a>.</p>
+</li>
+<li>
+<p><strong>The parameters that are required to provision an environment from the blueprint</strong></p>
+<p>To provision an environment from a blueprint, you must specify the parameters for that blueprint. You can see the required parameters for a blueprint by clicking <strong>Provision</strong> and selecting the blueprint. You can also get this information from these REST commands: <a href="../../../com.ibm.edt.api.doc/topics/rest_bpid_parameters_get/">List the parameters required to provision a blueprint</a> or <a href="../../../com.ibm.edt.api.doc/topics/rest_bpid_confid_parameters_get/">List the parameters required to provision a blueprint with a configuration file</a>.</p>
+<p><strong>Note:</strong> For the command to be successful, you must provide exactly these parameters. Any missing parameters or additional parameters cause the command to fail.</p>
+</li>
+<li>
+<p><strong>A session key for the blueprint design server</strong></p>
+<p>The session key authenticates you to the server. You can get a session key by running a command on the server with a user name and password and examining the session key in the return headers. See <a href="../rest_api_ref_authenticating/">Authenticating for REST commands</a>.</p>
+</li>
+</ul>
+<p>To provision an environment from the API, use this REST PUT command: <a href="../../../com.ibm.edt.api.doc/topics/rest_bpid_deploy_put/">Provision a blueprint</a>.</p>
+<p>Use the following URL string for the request:</p>
+<pre><code>http://hostname:port/landscaper/rest/blueprint/\{blueprintId\}/deploy
+</code></pre>
+
+<p>Use the host name and port of the blueprint designer for <code>hostname</code> and <code>port</code> and the name of the blueprint for <code>\{blueprintId\}</code>.</p>
+<p>Include the following headers with the PUT request:</p>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UCR_SESSION_KEY</td>
+<td><code>347e9240-dcc9-424e-af31-3614df52b245</code></td>
+<td>The session key that you retrieve from running a simple command with a user name and password</td>
+</tr>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>Specify <code>application/json</code> as the type of information that the command returns</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td><code>application/json</code></td>
+<td>Specify <code>application/json</code> as the type of information that you are sending to the command</td>
+</tr>
+<tr>
+<td>Location</td>
+<td><code>/landscaper/orion/file/jsmith_00000000_0000_0000_0000_000000000002- OrionContent/Internal-Team/myBlueprint/myBlueprint.yml</code></td>
+<td>The location of the blueprint on the blueprint design server</td>
+</tr>
+<tr>
+<td>X-Region-Name</td>
+<td><code>MyCloudRegion</code></td>
+<td>(Optional) The region for the environment</td>
+</tr>
+</tbody>
+</table>
+<p>Pass a JSON document that is similar to the following example as the request body. This example uses an authentication token for the server instead of a user name and password.</p>
+<pre><code>{
+  &quot;environmentName&quot;: &quot;myNewEnvironment1&quot;,
+  &quot;configuration&quot;: &quot;myConfigFile&quot;,
+  &quot;cloudProjectId&quot;:&quot;3d16879f-7b43-4909-9862-12767dad7f04&quot;,
+  &quot;configurationLocation&quot;:&quot;/landscaper/orion/file/jsmith_00000000_2-OrionContent/default/configurations/myConfigFile.yml&quot;,
+  &quot;parameters&quot;: {
+    &quot;availability_zone&quot; : &quot;nova&quot;,
+    &quot;flavor&quot; : &quot;m1.tiny&quot;,
+    &quot;key_name&quot; : &quot;myKey&quot;,
+    &quot;ucd_password&quot;:&quot;cc99a431-d96c-4154-99d6-1a5532275015&quot;,
+    &quot;ucd_relay_url&quot;:&quot;None&quot;,
+    &quot;ucd_server_url&quot;:&quot;http://ucd.example.com:9080&quot;,
+    &quot;ucd_user&quot;:&quot;PasswordIsAuthToken&quot;
+  },
+  &quot;teamMappings&quot;:[],
+  &quot;validate&quot;: &quot;true&quot;
+}
+</code></pre>
+
+<p>This JSON document contains the following information:</p>
+<table>
+<thead>
+<tr>
+<th>JSON property</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cloudProjectId</td>
+<td><code>3d16879f-7b43-4909-9862-12767dad7f04</code></td>
+<td>The ID of the cloud project; to get this ID, you can use the command <a href="../../../com.ibm.edt.api.doc/topics/security_cloudproject__get/">List cloud projects</a></td>
+</tr>
+<tr>
+<td>configuration</td>
+<td><code>myConfigFile</code></td>
+<td>(Optional) The name of the configuration file to use</td>
+</tr>
+<tr>
+<td>configurationLocation</td>
+<td><code>/landscaper/orion/file/jsmith_00000000_2-OrionContent/default/configurations/myConfigFile.yml</code></td>
+<td>The location of the configuration file on the server</td>
+</tr>
+<tr>
+<td>environmentName</td>
+<td>myNewEnvironment1</td>
+<td>A name for the new environment</td>
+</tr>
+<tr>
+<td>parameters</td>
+<td><code>{ "availability_zone" : "nova", "flavor" : "m1.tiny", "key_name" : "myKey", "ucd_password":"cc99a431-d96c-4154-99d6-1a5532275015", "ucd_relay_url":"None", "ucd_server_url":"http://ucd.example.com:9080", "ucd_user":"PasswordIsAuthToken" }</code></td>
+<td>A JSON array of parameters to pass to the provisioning process, including the parameters that you would specify if you provisioned the environment from the designer server user interface. To get a list of the required parameters, use the command <a href="../../../com.ibm.edt.api.doc/topics/rest_bpid_parameters_get/">List the parameters required to provision a blueprint</a> or <a href="../../../com.ibm.edt.api.doc/topics/rest_bpid_confid_parameters_get/">List the parameters required to provision a blueprint with a configuration file</a>.</td>
+</tr>
+<tr>
+<td>teamMappings</td>
+<td> </td>
+<td>An array of teams to add the environment to</td>
+</tr>
+<tr>
+<td>validate</td>
+<td><code>true</code></td>
+<td>Whether to validate the request before running it</td>
+</tr>
+</tbody>
+</table>
+<p>If you use the Linux™ program curl, the command might look like the following example. This command must be written on a single line.</p>
+<pre><code>curl -k -u jsmith:passwd
+  &quot;http://myserver.example.com:8080/landscaper/rest/blueprint/myBlueprint/deploy&quot; 
+  -X PUT 
+  -H &quot;Accept: application/json&quot; 
+  -H &quot;Content-Type: application/json&quot; 
+  -H &quot;UCR_SESSION_KEY: 347e9240-dcc9-424e-af31-3614df52b245&quot; 
+  -H &quot;Location:
+  /landscaper/orion/file/jsmith_00000000_0000_0000_0000_000000000002- OrionContent/Internal-Team/myBlueprint/myBlueprint.yml&quot; 
+  -H &quot;X-Region-Name: MyCloudRegion&quot; 
+  -d @provisionEnvironment.json
+</code></pre>
+
+<p>This example command uses a JSON file that is named newEnvironment.json.</p>
+<p><strong>Parent topic:</strong> <a href="../rest_api_ref_overview/">REST API reference</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/rest_api_ref_provision_example.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

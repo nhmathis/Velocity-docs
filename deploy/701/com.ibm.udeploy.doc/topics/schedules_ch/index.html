@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/schedules_ch/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Scheduling deployments - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Scheduling deployments", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="scheduling-deployments">Scheduling deployments</h1>
+<p>HCL® UrbanCode™ Deploy has a built-in deployment scheduling system for setting regular deployments, or even black-out dates, for your Deployments.</p>
+<p>Deployments for an individual application are scheduled on a per-environment basis, set when you run a deployment of a snapshot or deployment process. Black-out dates are set within the individual environments.</p>
+<p>HCL UrbanCode Deploy stores all times relative to Coordinated Universal Time and displays them based on your time zone. A process that you schedule during Daylight Saving Time moves back an hour after Daylight Saving Time ends.</p>
+<p>To set up a scheduled deployment, click <strong>Applications</strong>, click your application, and next to the environment, click <strong>Request Process</strong><img alt="" src="../../images/request_process_icon.gif" />, and in the Run Process window, select the <strong>Schedule Deployment?</strong> check box.</p>
+<p>When you select the <strong>Schedule Deployment?</strong> check box, the <strong>Date</strong> and <strong>Time</strong> fields appear for you to specify the date and time for the deployment to run. The <strong>Make Recurring</strong> setting deploys the application on a regular schedule. For example, if you are practicing continuous delivery, the <code>Daily</code> option deploys the application to the target environment every day.</p>
+<p>After you schedule the deployment, it is added to the calendar. There, if you click the scheduled deployment, you can edit, delete, or investigate the deployment. You can also add scheduled deployments directly from the calendar by opening the calendar and clicking <strong>Schedule Process</strong>.</p>
+<p><strong>Note:</strong> Do not change the starting time of a scheduled deployment. Instead, delete the recurring deployment and recreate it.</p>
+<p>A blackout is a set per-environment, per-application. After the blackout is set, no deployments or snapshots can be scheduled to occur in that environment. Any previously scheduled deployments to the environment fail if they fall within the blackout date you set. To set up a blackout, go to (<strong>Application</strong> > <strong>Environments</strong> > <strong>Calendar</strong> > <strong>Add Blackout</strong>). If you must set blackouts for more than one environment, you must set a separate blackout for each environment. HCL UrbanCode Deploy prompts you to give the dates and times for the blackout.</p>
+<p><strong>Parent topic:</strong> <a href="../deployment_ov/">Deploying</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/schedules_ch.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

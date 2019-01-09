@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/plugin_ch/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Plug-ins", url: "#_top", children: [
+              {title: "Automation-type plug-ins", url: "#automation-type-plug-ins" },
+              {title: "Source-type plug-ins", url: "#source-type-plug-ins" },
+              {title: "Viewing and obtaining plug-ins", url: "#viewing-and-obtaining-plug-ins" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="plug-ins">Plug-ins</h1>
+<p>HCL® UrbanCode™ Deploy plug-ins provide tools for creating component processes and integrations.HCL UrbanCode Deploy provides plug-ins for several common deployment processes, and others are available to integrate with a wide variety of tools, such as middleware tools, databases, and servers.</p>
+<p>Plug-ins provide processing and integration functions. There are two types of plug-ins:</p>
+<ul>
+<li>Source-type plug-ins integrate with external systems to import artifacts and create component versions.</li>
+<li>Automation-type plug-ins provide process steps that manipulate components, typically by deploying them.</li>
+</ul>
+<p>Both types of plug-ins consist of distinct processes called steps. Each step consists of a number of properties, a command that runs the step, and post-processing instructions. (Post-processing typically ensures that expected results occur.) Step properties can serve various purposes, from providing input to the command to supplying some, or all, the actual command itself. Automation-type plug-in properties can be set at design time in the process editor, or at run time in the user interface. Source-type plug-in properties are typically defined when a component is created.</p>
+<h2 id="automation-type-plug-ins">Automation-type plug-ins</h2>
+<p>You use automation plug-ins to deploy components or otherwise manage them. Each step is a self-contained unit with inputs, outputs, and properties. By combining automation plug-in steps in the process editor, you can create fully automated deployment processes. When you create a process, you drag steps onto the design area and define the properties as you go. Property values can be specified when you define the process or at run time. The process flow is defined by drawing connections between steps. The following illustration, shows a series of automation-type plug-in steps and the connections between them.</p>
+<p><img alt="A simple component process that uses the WebSphere Application Server plug-in to deploy an application" src="../../images/plugin_ch.gif" /></p>
+<p>For information about creating component processes, see <a href="../../../com.ibm.udeploy.doc/topics/comp_process/">Component processes</a>.</p>
+<p>At deployment time, component processes are run by agents that are installed in the target environment. For a process to run, the agent must have access to all resources, tools, and files that are required by the plug-in steps in the process. When you install an agent, ensure that these conditions are met:</p>
+<ul>
+<li>The agent that runs the process has the necessary user permissions to run commands and can access required resources. Assigning these permissions typically entails granting permissions if an external tool is installed as a different user; installing the agent as a service; or impersonating the appropriate user. See <a href="../../../com.ibm.udeploy.doc/topics/arch_appx_sudo/">User impersonation for process steps</a>.</li>
+<li>External tools that plug-in steps require are installed in the target environment.</li>
+<li>The required minimum version of an external tool is installed.</li>
+</ul>
+<p>For information about installing agents, see <a href="../../../com.ibm.udeploy.install.doc/topics/agentInstall/">Installing agents from the command line</a>.</p>
+<h2 id="source-type-plug-ins">Source-type plug-ins</h2>
+<p>You use source plug-ins to import artifacts and create component versions. A source plug-in defines the type of artifacts that can be imported and identifies where the artifacts are located. Source-type plug-ins are configured when components are created, you do not use the process editor to configure source-type plug-ins. Unlike automation plug-ins, source plug-ins always have a single step, the Import Version step.</p>
+<p>Artifacts are imported into component versions by agents that are running in the environment where the artifacts are located. For a component version to be created, the agent must have the required permissions and access to all required resources and files. For information about installing agents that run source plug-ins, see <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_system/">Server settings</a>.</p>
+<h2 id="viewing-and-obtaining-plug-ins">Viewing and obtaining plug-ins</h2>
+<p>A number of plug-ins come with the product and many others are available that can be downloaded and installed. For information about installing plug-ins, see <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_plugins/">Installing plug-ins</a>.</p>
+<p>View plug-ins that are installed by using the user interface:</p>
+<ul>
+<li>To view source config plug-ins, click <strong>Settings</strong> > <strong>Source Config Plugins</strong>. For information on how to use the source config plug-ins that are provided with HCL UrbanCode Deploy, see <a href="../../../com.ibm.udeploy.doc/topics/comp_create/">Creating components</a>.</li>
+<li>To view automation plug-ins, click <strong>Settings</strong> > <strong>Automation Plugins</strong></li>
+</ul>
+<p>Plug-ins can be developed and updated more frequently than HCL UrbanCode Deploy provides release cycles.</p>
+<p>Browse, download, and get documentation for plug-ins at the IBM® developerWorks® site in the <a href="https://developer.ibm.com/urbancode/plugins/ibm-urbancode-deploy">IBM UrbanCode™ Deploy Plug-ins</a> section. The site contains many more plug-ins than are packaged with the HCL UrbanCode Deploy product.</p>
+<p>The site includes plug-ins that are developed by these sources:</p>
+<ul>
+<li>
+<p><strong>IBM® Corporation</strong></p>
+<p>Your HCL® UrbanCode™ Deploy license entitles you to download and install the plug-ins that are developed by IBM® Corporation.</p>
+<p>Support is provided through the developerWorks® community and through IBM® technical support.</p>
+</li>
+<li>
+<p><strong>Partners</strong></p>
+<p>Plug-ins that are provided by partners can be purchased from the partner website.</p>
+<p>Support for each partner plug-in is provided exclusively by the partner who provided the plug-in.</p>
+</li>
+<li>
+<p><strong>Community</strong></p>
+<p>Plug-ins are provided by members of the HCL® UrbanCode™ Deploy community on the <a href="https://developer.ibm.com/urbancode/plugins/development-community/">HCL® UrbanCode™ Deploy Development Community website</a>. Search for urbancode or ucplugin to find plug-ins. You can contribute to code in the community or use code posted there to incorporate into your own.</p>
+<p>Support is provided exclusively through the community.</p>
+</li>
+<li>
+<p><strong><a href="../reference_plugins_create/">Creating plug-ins</a></strong><br />
+You can create your own plug-ins for use with HCL UrbanCode Deploy. A plug-in consists of XML files and supporting script files that the plug-in requires.</p>
+</li>
+<li><strong><a href="../reference_plugins_example/">Example plug-in</a></strong><br />
+A plug-in consists of one or more steps. A step represents a unit of functionality that can be user-configured and combined with other steps into a process. Creating a plug-in consists in defining its individual steps and then grouping them together for presentation in HCL UrbanCode Deploy.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_extending/">Extending product function</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/plugin_ch.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

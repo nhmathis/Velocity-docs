@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/SSLinstall/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "SSL configuration", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="ssl-configuration">SSL configuration</h1>
+<p>With Secure Sockets Layer (SSL) technology, clients and servers can communicate securely by encrypting all communications. Data is encrypted before it is sent and decrypted by the recipient. This communication cannot be deciphered or modified by third-parties. In addition to encryption, SSL can also support authentication.</p>
+<p>HCL® UrbanCode™ Deploy servers and agents communicate via HTTP and Java™ Message Service (JMS) protocols. JMS is used for basic commands and information that is exchanged between the server and an agent. Typically, HTTP is used for file transfers between the server and an agent. For example, HTTP is used when an agent is downloading a new plug-in, or when an agent is uploading or downloading version artifacts.</p>
+<p>For JMS connections, HCL UrbanCode Deploy supports communication via SSL in two modes: unauthenticated and mutual authentication. In unauthenticated mode, communication is encrypted but users do not have to authenticate or verify their credentials. SSL unauthenticated mode can also be used for HTTP communication. You can implement this mode for HTTP communication during server, agent, or agent relay installation. You can also activate it afterward.</p>
+<p><strong>Important:</strong> </p>
+<p>HCL UrbanCode Deploy automatically uses SSL in unauthenticated mode for JMS-based communications between the server and agents. You cannot disable SSL in unauthenticated mode, but you can enable mutual authentication for JMS-based server-agent communication. Because agent relays do not automatically activate SSL security, you must turn on SSL security when you install an agent relay or at least before you connect to the relay. Without SSL security active, agent relays cannot communicate with the server or remote agents.</p>
+<p>In mutual authentication mode, servers, local agents, and agent relays each provide a digital certificate to one another. A digital certificate is a cryptographically signed document that is intended to assure others about the identity of the certificate's owner. HCL UrbanCode Deploy certificates are self-signed. When mutual authentication mode is active, HCL UrbanCode Deploy uses it for HTTP-based server, local agents, and agent relay communication.</p>
+<p>In mutual authentication mode, the HCL UrbanCode Deploy server provides a digital certificate to each local agent and agent relay, and each local agent and agent relay provides one to the server. Agent relays, in addition to swapping certificates with the server, must swap certificates with the remote agents that use the relay. Remote agents do not have to swap certificates with the server, just with the agent relay it uses to communicate with the server. This mode can be implemented during installation or activated afterward.</p>
+<p><strong>Note:</strong> When you use mutual authentication mode, you must turn it on for the server, agents, and agent relays; otherwise, they cannot connect to one another. If one party uses mutual authentication mode, they all must use it.</p>
+<ul>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/ssl_mutual_auth/">Configuring mutual authentication</a></strong><br />
+To use mutual authentication, servers and JMS agents must exchange keys. You export a server key as a certificate and import it into the JMS agent keystore. Then, you reverse the process by exporting the agent key and importing it into the server keystore.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/ssl_addl_security/">Enabling server identity verification</a></strong><br />
+Starting with version 6.2.1.1 of the product, you can enable extra security to configure the agents to verify the identity of the server for communication that uses the HTTPS protocol.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/ssl_addl_security_2/">Ensuring end-to-end JMS encryption</a></strong><br />
+All JMS traffic between the JMS agent and the server is encrypted with Transport Layer Security (TLS). However, starting with version 6.2.2 of the HCL UrbanCode Deploy, the server creates by default a unique key for JMS agents that connect to it and encrypts all JMS traffic to the agent with this key. This encryption ensures that instructions that are meant for an agent can't be read or used by another client on the JMS mesh.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/ssl_compatibility/">Supported TLS and SSL protocols and ciphers</a></strong><br />
+HCL UrbanCode Deploy supports multiple SSL protocols and ciphers for communication between servers.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/ssl_mutual_authServers/">Sharing secured properties among servers</a></strong><br />
+To share applications that have secured properties among HCL UrbanCode Deploy servers, exchange keys from each server's encryption keystore.</li>
+<li><strong><a href="../ssl_config/">Configuring SSL on Apache Tomcat and LDAP servers</a></strong><br />
+The steps for configuring secure HTTP connections with the HCL UrbanCode Deploy server are similar to the steps for any Java Platform, Enterprise Edition server.</li>
+<li><strong><a href="../../../com.ibm.udeploy.admin.doc/topics/ssl_truststores/">Implementing custom trust stores</a></strong><br />
+A trust store defines the roots of the certificate trust chain. Typically, these are the certificate authority root certificates that sign other certificates. It can also be end entity certificates that are directly trusted. Java® includes a default trust store that contains certificate authority root certificates for many well-known authorities. This trust store is a file called cacerts and is contained in the Java installation. The file has the same format as a keystore, but it never contains a private key. It is possible to modify or replace this file to alter the trust roots with the keytool program. Otherwise, a custom trust store must be used instead.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.admin.doc/topics/security_ch/">Managing security</a></p>
+<p><strong>Parent topic:</strong> <a href="../c_node_configuring/">Configuring</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/SSLinstall.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

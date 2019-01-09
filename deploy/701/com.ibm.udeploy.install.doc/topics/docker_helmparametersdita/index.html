@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/docker_helmparametersdita/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Helm chart configuration parameters - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Helm chart configuration parameters", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="helm-chart-configuration-parameters">Helm chart configuration parameters</h1>
+<p>The Helm chart has the following values that can be overridden using the --set parameter.</p>
+<table>
+<thead>
+<tr>
+<th>Qualifier</th>
+<th>Parameter</th>
+<th>Definition</th>
+<th>Allowed Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>arch</td>
+<td> </td>
+<td>The desired worker node architecture</td>
+<td>amd64, s390x, or ppc64le</td>
+</tr>
+<tr>
+<td>image</td>
+<td>pullPolicy</td>
+<td>Image Pull Policy</td>
+<td>Always, Never, or IfNotPresent. Defaults to Always</td>
+</tr>
+<tr>
+<td> </td>
+<td>repository</td>
+<td>Name of image, including repository prefix (if required)</td>
+<td>See <a href="https://docs.docker.com/engine/reference/commandline/tag/#extended-description">Extended description of Docker tags</a></td>
+</tr>
+<tr>
+<td> </td>
+<td>tag</td>
+<td>Docker image tag</td>
+<td>See <a href="https://docs.docker.com/engine/reference/commandline/tag/">Docker tag description</a></td>
+</tr>
+<tr>
+<td> </td>
+<td>secret</td>
+<td>An image pull secret used to authenticate with the image registry</td>
+<td>Empty (default) if no authentication is required to access the image registry.</td>
+</tr>
+<tr>
+<td>service</td>
+<td>type</td>
+<td>Specify type of service</td>
+<td>Valid options are NodePort and LoadBalancer (for clusters that support LoadBalancer). Default is NodePort</td>
+</tr>
+<tr>
+<td>database</td>
+<td>type</td>
+<td>The type of database UCD will connect to</td>
+<td>Valid values are db2, db2zos, mysql, mariadb, oracle, and sqlserver</td>
+</tr>
+<tr>
+<td> </td>
+<td>name</td>
+<td>The name of the database to use</td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td>hostname</td>
+<td>The hostname/IP of the database server</td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td>port</td>
+<td>The database port to connect to</td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td>username</td>
+<td>The user to access the database with</td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td>password</td>
+<td>The password of the database user</td>
+<td> </td>
+</tr>
+<tr>
+<td>security</td>
+<td>ucdInitPassword</td>
+<td>The admin password for the UCD UI</td>
+<td>Default value is "admin"</td>
+</tr>
+<tr>
+<td>extLibVolume</td>
+<td>name</td>
+<td>The base name used when the Persistent Volume and/or Persistent Volume Claim for the extlib directory is created by the chart.</td>
+<td>Default value is "ext-lib"</td>
+</tr>
+<tr>
+<td> </td>
+<td>storageClassName</td>
+<td>The name of the storage class to use when persistence.useDynamicProvisioning is set to "true".</td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td>size</td>
+<td>Size of the volume used to hold the JDBC driver .jar files</td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td>existingClaimName</td>
+<td>Persistent volume claim name for the volume that contains the JDBC driver file(s) used to connect to the UCD database.</td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td>configMapName</td>
+<td>Name of an existing ConfigMap which contains a script named script.sh. This script is run before UrbanCode Deploy server installation and is useful for copying database driver .jars to a Persistent Volume.</td>
+<td> </td>
+</tr>
+<tr>
+<td>persistence</td>
+<td>enabled</td>
+<td>Determines if persistent storage will be used to hold the UCD server appdata directory contents. This should always be true to preserve server data on container restarts.</td>
+<td>Default value "true"</td>
+</tr>
+<tr>
+<td> </td>
+<td>useDynamicProvisioning</td>
+<td>Set to "true" if the cluster supports dynamic storage provisoning</td>
+<td>Default value "false"</td>
+</tr>
+<tr>
+<td>appDataVolume</td>
+<td>name</td>
+<td>The base name used when the Persistent Volume and/or Persistent Volume Claim for the UCD server appdata directory is created by the chart.</td>
+<td>Default value is "appdata"</td>
+</tr>
+<tr>
+<td> </td>
+<td>existingClaimName</td>
+<td>The name of an existing Persistent Volume Claim that references the Persistent Volume that will be used to hold the UCD server appdata directory.</td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td>storageClassName</td>
+<td>The name of the storage class to use when persistence.useDynamicProvisioning is set to "true".</td>
+<td> </td>
+</tr>
+<tr>
+<td> </td>
+<td>size</td>
+<td>Size of the volume to hold the UCD server appdata directory</td>
+<td> </td>
+</tr>
+<tr>
+<td>resources</td>
+<td>constraints.enabled</td>
+<td>Specifies whether the resource constraints specified in this helm chart are enabled.</td>
+<td>false (default) or true</td>
+</tr>
+<tr>
+<td> </td>
+<td>limits.cpu</td>
+<td>Describes the maximum amount of CPU allowed</td>
+<td>Default is 2000m. See Kubernetes - <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu">meaning of CPU</a></td>
+</tr>
+<tr>
+<td> </td>
+<td>limits.memory</td>
+<td>Describes the maximum amount of memory allowed</td>
+<td>Default is 2Gi. See Kubernetes - <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory">meaning of Memory</a></td>
+</tr>
+<tr>
+<td> </td>
+<td>requests.cpu</td>
+<td>Describes the minimum amount of CPU required - if not specified will default to limit (if specified) or otherwise implementation-defined value.</td>
+<td>Default is 1000m. See Kubernetes - <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu">meaning of CPU</a></td>
+</tr>
+<tr>
+<td> </td>
+<td>requests.memory</td>
+<td>Describes the minimum amount of memory required If not specified, the memory amount will default to the limit (if specified) or the implementation-defined value</td>
+<td>Default is 1Gi. See Kubernetes - <a href="https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory">meaning of Memory</a></td>
+</tr>
+<tr>
+<td>readinessProbe</td>
+<td>initialDelaySeconds</td>
+<td>Number of seconds after the container has started before the readiness probe is initiated</td>
+<td>Default is 30</td>
+</tr>
+<tr>
+<td> </td>
+<td>periodSeconds</td>
+<td>How often (in seconds) to perform the readiness probe</td>
+<td>Default is 30</td>
+</tr>
+<tr>
+<td> </td>
+<td>failureThreshold</td>
+<td>When a Pod starts and the probe fails, Kubernetes will try this number times before giving up. In the case of the readiness probe, the Pod will be marked Unready.</td>
+<td>Default is 10</td>
+</tr>
+<tr>
+<td>livenessProbe</td>
+<td>initialDelaySeconds</td>
+<td>Number of seconds after the container has started before the liveness probe is initiated</td>
+<td>Default is 300</td>
+</tr>
+<tr>
+<td> </td>
+<td>periodSeconds</td>
+<td>How often (in seconds) to perform the liveness probe</td>
+<td>Default is 300</td>
+</tr>
+<tr>
+<td> </td>
+<td>failureThreshold</td>
+<td>When a Pod starts and the probe fails, Kubernetes will try this number times before giving up. Giving up in the case of the liveness probe means restarting the Pod.</td>
+<td>Default is 3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../docker_cloud_over/">Installing the server in a Kubernetes cluster</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/docker_helmparametersdita.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/upgrade_zOS_agents/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Upgrading z/OS agents - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Upgrading IBM z/OS agents", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="upgrading-ibm-zos-agents">Upgrading IBM z/OS agents</h1>
+<p>You can upgrade IBM® z/OS® agents. However, you must upgrade the server before you upgrade the agents.</p>
+<p>Depending on how the z/OS agents are installed, you have several options for upgrading the agents.</p>
+<p>If you are upgrading to version 6.2.4 from a previous version, review <a href="../zOS_624_agent_changes/">IBM z/OS agent changes in version 6.2.4</a>.</p>
+<p>If you are upgrading to version 6.2.4 from a version earlier than 6.1.1, see <a href="../migrate_b4_611/">Migrating data from versions before 6.1.1</a>.</p>
+<ol>
+<li>
+<p>To upgrade from SMP/E installation, complete these steps: </p>
+<ol>
+<li>If a different high-level qualifier than that for the previous installation is used, edit each agent's installed.properties file, specifying the new high-level qualifier. </li>
+<li>Follow the instructions in the Program Directory for HCL® UrbanCode™ Deploy for z/OS. </li>
+<li>Upgrade each agent by using one of the options in <a href="../upgradeAgents/">Upgrading agents</a> 
+<strong>Note:</strong> </li>
+</ol>
+<p>After the SMP/E installation, the UNIX installer is already on your file system so you can skip the first few steps in the typical command-line install or upgrade guide and start from running the shell commands. If you are following the instructions in <a href="../upgrade_agent_cli/">Upgrading agents from the command line</a> or <a href="../upgrade_agent_silent/">Upgrading agents in silent mode</a> topics, you can skip the steps that download and extract the installer. Start with running the install-agent.sh or install-agent-from-file.sh script from your SMP/E installation directory.</p>
+</li>
+<li>
+<p>To upgrade from a non-SMP/E installation, complete these steps: </p>
+<ol>
+<li>Upgrade by using one of the options in <a href="../upgradeAgents/">Upgrading agents</a>. </li>
+<li>
+<p>Submit a job to load the agent data sets. Locate the job JCL at agent install dir/mvs/BUZEXPD. The JCL, except the job parameter, is already customized, based on the agent configuration. Edit and submit the job to load the agent data sets. For example, use the following commands in OMVS to edit or submit the JCL: </p>
+<p><code>oedit agent install dir/mvs/BUZEXPD
+submit agent install dir/mvs/BUZEXPD</code></p>
+</li>
+</ol>
+</li>
+<li>
+<p><strong><a href="../zOS_624_agent_changes/">IBM z/OS agent changes in version 6.2.4</a></strong>  </p>
+</li>
+<li>
+<p><strong><a href="../migrate_b4_611/">Migrating data from versions before 6.1.1</a></strong><br />
+Upgrade the server, agents, and agent relays before upgrading the IBM z/OS deployment tools.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../upgradeAgents/">Upgrading agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/upgrade_zOS_agents.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/plugins_worklight_buildresources/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Build computer resources - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Build computer resources", url: "#_top", children: [
+              {title: "Workspace resources", url: "#workspace-resources" },
+              {title: "Static resources", url: "#static-resources" },
+              {title: "SDKs", url: "#sdks" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="build-computer-resources">Build computer resources</h1>
+<p>Before you run a mobile application build script on a build computer, you must ensure that the required resources exist on the build computer.</p>
+<h2 id="workspace-resources">Workspace resources</h2>
+<p>The following workspace resources must exist on the build computer:</p>
+<ul>
+<li>The mobile application project source code that you want to build.</li>
+<li>The Ant build scripts that direct the build.</li>
+</ul>
+<p>Using a Rational® Team Concert™ repository workspace to manage your MobileFirst Platform Foundation project source code and build scripts offers the following advantages:</p>
+<table>
+<thead>
+<tr>
+<th>Advantage</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Source control</td>
+<td>Changes to source code and build scripts can be requested, developed, reviewed, approved, delivered, and tracked based on the requirements of your development project. Build scripts are living files, just like the source code.</td>
+</tr>
+<tr>
+<td>Build automation</td>
+<td>The Jazz™ Build Engine automatically loads the workspace to build onto the build computer early in the processing of a build request. You can create and use a dedicated build workspace for each build definition. Do not point a build definition directly to a stream or to a workspace that is meant for another purpose. For example, do not point a build definition directly to the personal workspace of a user or a team integration workspace. <strong>Note:</strong> The Jazz Build Engine is a component of the Build System Toolkit; it refers to the process that runs on a build computer and runs Ant scripts.</td>
+</tr>
+</tbody>
+</table>
+<p>|</p>
+<h2 id="static-resources">Static resources</h2>
+<p>The build administrator must manually install the static resources on each build computer.</p>
+<p><strong>Tip:</strong> Install these resources into the same relative locations on each build computer. You can specify the relative locations within either of the following types of build dependency resources:</p>
+<ul>
+<li>
+<p><strong>Build property files</strong></p>
+<p>Specify the relative locations of the static resources within the build property files. If you install static resources into different locations on different build computers, a location that is specified within a build property file that works on one build computer might fail on another build computer.</p>
+</li>
+<li>
+<p><strong>Build definitions within Rational® Team Concert™</strong></p>
+<p>Specify the relative locations of the static resources within the build definitions in Rational® Team Concert™. If you install static resources into different locations on different build computers, a build definition that works on one build computer might fail on another build computer.</p>
+</li>
+</ul>
+<p>The following static resources must exist on the build computer:</p>
+<table>
+<thead>
+<tr>
+<th>Static resource</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Oracle JDK</td>
+<td>Use this JDK for running the Ant scripts and Android SDK tools that are run by the build scripts. Ensure that you install a JDK, not a JRE, because some Ant tasks require Java™ tools that are available only in the JDK.</td>
+</tr>
+<tr>
+<td>Apache Ant</td>
+<td>Use Apache Ant to run the Ant scripts.</td>
+</tr>
+<tr>
+<td>JAR library files</td>
+<td>The following JAR library files provide and enable the MobileFirst Platform Foundation Ant tasks that are used in the build scripts:-   <strong>worklight-ant.jar</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Use the worklight-ant.jar file if you are building applications on the IBM® Worklight® Server Version 6.0. This file is contained in the WorklightServer folder of the IBM® Worklight® Server installation.</p>
+<ul>
+<li><strong>worklight-ant-builder.jar</strong></li>
+</ul>
+<p>Use the worklight-ant-builder.jar file if you are building applications on the IBM® Worklight® Server Version 6.1.0. This file is contained in the WorklightServer folder of the IBM® Worklight® Server installation.</p>
+<p><strong>Important:</strong> Ensure that the version of the JAR library file that you use (worklight-ant.jar or worklight-ant-builder.jar) matches the version on the target server.</p>
+<p><strong>Tip:</strong> An alternative approach to preinstalling the JAR library files on each build computer is to include them in your build workspace. This approach allows your build definitions and engines to build with different versions of MobileFirst Platform Foundation. This approach also supports the generation of reproducible builds.</p>
+<p>The disadvantage of this approach is that the JAR library files can be large. The large file size might affect the performance of builds and build computers.</p>
+<p>If you share a build system and build computers across multiple teams, use this alternative approach to manage the JAR library files.</p>
+<p>|
+|Optional. Dojo Toolkit|Install the Dojo Toolkit on each build computer in the following situations:-   The mobile applications under development use Dojo.
+-   The mobile application projects either include the Dojo Toolkit (in the workspace project) or access it over a Content Delivery Network.</p>
+<p>|</p>
+<h2 id="sdks">SDKs</h2>
+<p>Install one of the following SDKs on each build computer:</p>
+<table>
+<thead>
+<tr>
+<th>SDK</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apple Xcode SDK</td>
+<td>Install on OS X build computers that run builds to produce iOS IPA applications. For more information about installing the Apple Xcode SDK, see <a href="http://public.dhe.ibm.com/software/mobile-solutions/worklight/docs/v600/01_02_Setting_up_your_iOS_development_environment.pdf">Getting Started with IBM Worklight Module 02.1 Setting Up Your iOS Development Environment</a>.</td>
+</tr>
+<tr>
+<td>Android SDK</td>
+<td>Install on build computers that run builds to produce Android APK applications. For more information about installing the Android SDK, see <a href="http://public.dhe.ibm.com/software/mobile-solutions/worklight/docs/v600/01_03_Setting_up_your_Android_development_environment.pdf">Getting Started with IBM Worklight Module 02.2 Setting Up Your Android Development Environment</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../plugins_worklight_build/">Building mobile applications</a></p>
+<p><strong>Next topic:</strong> <a href="../plugins_worklight_buildtemplates/">Build scripts</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/plugins_worklight_buildresources.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

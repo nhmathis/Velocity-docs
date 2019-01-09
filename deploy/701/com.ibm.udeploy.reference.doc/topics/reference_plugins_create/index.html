@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/reference_plugins_create/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating plug-ins - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating plug-ins", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-plug-ins">Creating plug-ins</h1>
+<p>You can create your own plug-ins for use with HCL® UrbanCode™ Deploy. A plug-in consists of XML files and supporting script files that the plug-in requires.</p>
+<ul>
+<li>The plugin.xml file defines the steps that constitute the plug-in; plug-in steps define a plug-in's functions. Each step is an independently configurable entity in the HCL UrbanCode Deploy editor.</li>
+<li>The info.xml file contains a version ID and other information that describes the plug-in.</li>
+</ul>
+<p><strong>Note:</strong> The plug-in files must use UTF-8 encoding.</p>
+<p>A plug-in step is defined by a <code>&lt;step-type&gt;</code> element that contains these elements:</p>
+<ul>
+<li>One <code>&lt;properties&gt;</code> element</li>
+<li>One <code>&lt;command&gt;</code> element</li>
+<li>One <code>&lt;post-processing&gt;</code> element</li>
+</ul>
+<p>The <code>&lt;properties&gt;</code> element is a container for <code>&lt;property&gt;</code> child elements, and can contain any number of <code>&lt;property&gt;</code> elements. Property values can be specified at design time or run time. The <code>&lt;post-processing&gt;</code> element provides error-handling capabilities and sets property values that other steps can use. The <code>&lt;command&gt;</code> element runs the step's function. The function can be defined completely by the element or be constructed in part or entirely from the step's properties at design time or run time.</p>
+<p>A command can access these properties:</p>
+<ul>
+<li>The step's own properties</li>
+<li>Properties that were set earlier by other steps in the process</li>
+<li>Properties that were set by the application that started the process</li>
+<li>Properties on the target environment and resource</li>
+</ul>
+<p>Step property values become unavailable after the component process ends.</p>
+<p>Plug-in steps are run by an agent that is installed in the target environment. Thus, plug-ins can be written in any scripting language, and the agent can access the required scripting tools on the host. After a plug-in is created, upload it into HCL UrbanCode Deploy to make it available to users. To upload a plug-in, create an archive file that contains the XML files (plugin.xml and info.xml) and scripts that the plug-in requires. Then, import the archive file with the Automation Plugins pane for automation-type plug-ins or the Source Config Plugins pane for source plug-ins.</p>
+<p>To troubleshoot plug-ins, you can retrieve the information from each step that ran in a process request. To download these logs, open the process request and click <strong>Download All Logs</strong>.</p>
+<p>See <a href="http://hub.jazz.net/project/ucplugin/UrbanCode%20Deploy%20Plug-in%20For%20Eclipse%20Development/overview">UrbanCode Deploy Plug-in for Eclipse Development</a> in the <a href="http://hub.jazz.net">IBM® Bluemix® DevOps Services</a> community for a tool that can you save time in developing plug-ins.</p>
+<ul>
+<li><strong><a href="../ref_create_pluginxml/">The plugin.xml file for automation plug-ins</a></strong><br />
+An automation plug-in is defined with the plugin.xml file.</li>
+<li><strong><a href="../ref_create_pluginsrc/">Creating source plug-ins</a></strong><br />
+Source-type plug-ins are defined the same way that automation-type plug-ins are defined except for some modifications to the plugin.xml file.</li>
+<li><strong><a href="../ref_create_steptype/">Plug-in steps: The step-type element</a></strong><br />
+You define plug-in steps with the <code>step-type</code> element; each <code>step-type</code> element represents a single step in the HCL UrbanCode Deploy process editor.</li>
+<li><strong><a href="../ref_create_command/">The command element</a></strong><br />
+Steps are run by starting the scripting tool or interpreter that is specified by the <code>&lt;command&gt;</code> element. The <code>&lt;command&gt;</code> element's <code>program</code> attribute defines the location of the tool that runs the command.</li>
+<li><strong><a href="../ref_create_postprocessing/">The post-processing element</a></strong><br />
+When a plug-in step's <code>&lt;command&gt;</code> element finishes processing, the step's mandatory <code>&lt;post-processing&gt;</code> element runs.</li>
+<li><strong><a href="../ref_create_upgrading/">Upgrading plug-ins</a></strong><br />
+This example shows how to upgrade a plug-in.</li>
+<li><strong><a href="../ref_create_infoxml/">The info.xml file</a></strong><br />
+Use the info.xml file is required for each plug-in. It describes the plug-in and provides release notes to users for each version.</li>
+<li><strong><a href="../ref_import_obj/">Automatically importing objects from plug-ins</a></strong><br />
+You can add objects to plug-ins so that they are automatically imported when the plug-in is installed or upgraded. Objects include applications, components, component templates, and processes. For example, you can add a component template that implements a standard process to a plug-in, so that the plug-in user does not have to create the component template.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../plugin_ch/">Plug-ins</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/reference_plugins_create.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

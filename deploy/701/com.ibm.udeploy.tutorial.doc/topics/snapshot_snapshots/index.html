@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/snapshot_snapshots/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lesson 1 Adding snapshots - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lesson 1: Adding snapshots", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="lesson-1-adding-snapshots">Lesson 1: Adding snapshots</h1>
+<p>Creating a snapshot involves saving a collection of component versions that are part of an application.</p>
+<p>These steps describe how to create a snapshot that uses components of the sample application. In the <a href="../webapp_abstract/">Deploying a simple web application</a> tutorial, you deployed the JPetStore application twice to the same environment. In the second deployment, you used two components that contain new information. In this lesson, you create a snapshot that uses the same components as the deployed environment. You create a snapshot from a functioning development environment in preparation for deployment to the next phase of your continuous delivery pipeline. In a later lesson, you deploy this snapshot to a new environment. By deploying with snapshots in HCL UrbanCode Deploy, you can quickly bring a new environment to a specific state.</p>
+<p><strong>Before you begin:</strong> Make sure that your HCL UrbanCode Deploy server has the prerequisites that are listed in <a href="../snapshot_intro/#prereqs">Prerequisites</a> and that you completed the steps in <a href="../snapshot_configure_agent/">Configuring the server and target system</a>.</p>
+<ol>
+<li>Click the <strong>Applications</strong> tab, and then click JPetStore. </li>
+<li>
+<p>In the same row as your environment, click the <strong>Create Snapshot</strong><img alt="" src="../../images/snapshot_snapshots_a.gif" /> icon, as shown in the following figure: </p>
+<p><img alt="Clicking Create Snapshot on an environment" src="../../images/snapshot_snapshots_b.gif" /></p>
+</li>
+<li>
+<p>In the Create Snapshot window, specify the name to be Version 1.1.</p>
+</li>
+<li>Accept the default values in the other field, and then click <strong>Save</strong>. </li>
+<li>
+<p>Click the <strong>Component Versions</strong> tab. The snapshot is shown as in the following image:</p>
+<p><img alt="The snapshot is present and contains version 1.0 for JPetStore-APP, version 1.0 and 1.1 for JPetStore-DB, and 1.1 for JPetStore-WEB." src="../../images/snapshot_snapshots_e.gif" /></p>
+<p>The JPetStore-DB component uses incremental versions and must contain both the 1.0 and 1.1 versions to deploy. If the JPetStore-DB component does not contain both versions, you must update the component version. See <a href="../snapshot_configure_agent/#increment">Configuring the server and target system</a>.</p>
+</li>
+</ol>
+<p>In this lesson, you added a snapshot to the application. The snapshot is based on the components in the application that are currently deployed to an environment.</p>
+<p>On the application's Snapshots page, you have a snapshot, as shown in the following figure:</p>
+<p><img alt="The snapshot on the Snapshots tab" src="../../images/snapshot_snapshots_d.gif" /></p>
+<p>In the next lesson, you create an environment to for the next step in the JPetStore application's delivery pipeline.</p>
+<p>After you create a snapshot that describes a collection of components, you can deploy the snapshots to an environment. In the next lesson, you create another environment.</p>
+<p>For more information about creating snapshots, see <a href="../../../com.ibm.udeploy.doc/topics/app_snapshot_create/">Creating snapshots</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../snapshot_abstract/">Creating and deploying snapshots</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/snapshot_snapshots.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

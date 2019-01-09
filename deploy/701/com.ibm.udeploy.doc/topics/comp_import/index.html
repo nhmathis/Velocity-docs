@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_import/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Importing components - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Importing components", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="importing-components">Importing components</h1>
+<p>Importing and exporting can be especially useful if you have multiple HCL® UrbanCode™ Deploy servers, for example, and must quickly move or update components.</p>
+<p>When you import components, you can create components or upgrade existing components. Additionally, if the imported components were created from a template, you can use the template or create one.</p>
+<p>When you export components, applications, processes, or templates, and then import them on a different computer, the same versions of the same plug-ins must be installed on both computers.</p>
+<p><strong>Note:</strong> If the imported components have the Import Versions Automatically parameter set to <code>true</code>, the new components automatically import component versions if the artifacts are accessible to the importing server.</p>
+<ol>
+<li>To import one or more components:</li>
+<li>
+<p>Open the Import Component window by clicking <strong>Components</strong> > <strong>Import Components</strong>.</p>
+<p><img alt="The Import Components window" src="../../images/comp_import_a.gif" /></p>
+</li>
+<li>
+<p>Click <strong>Choose File</strong>, and then select the JSON file that contains the component definition. </p>
+<p><strong>Note:</strong> You must create the JSON file that contains the component definition on a server that uses the same version of HCL UrbanCode Deploy as the destination server.</p>
+</li>
+<li>
+<p>To upgrade existing components, select the <strong>Upgrade Component</strong> check box. To create components, leave the check box cleared. If the component name in the JSON file (not the name of the file itself) matches an existing component name, then the component parameters are updated. If items such as processes or properties exist, new versions are created. New items, such as processes or properties, are also added. If the name of the component is not found, the import action has no effect.</p>
+<p><strong>Note:</strong> The component name is the first parameter in the JSON file. This example shows the first parameter:</p>
+<p><code>"name": "helloWorld",</code></p>
+</li>
+<li>
+<p>If the imported components were created from a template, use the <strong>Component Template Upgrade Type</strong> list to specify how to use the template.For these options, the template must be on the importing server. If the imported components were not created from a template, these options are ignored.</p>
+<ul>
+<li>
+<p>To use the imported components' template, select <strong>Use Existing Template</strong>. The new components are an exact copy of the imported components. They contain a pointer to the imported components' template. This option is especially useful if you are importing many components that are based on the same template.</p>
+<p>If you are upgrading, the components also point to the imported template.</p>
+</li>
+<li>
+<p>To create a template, select <strong>Create Template</strong>. The new components are an exact copy of the imported components. They contain a pointer to the newly created template, which is based on the imported components' template.</p>
+<p>If you are upgrading components, a template is also created.</p>
+</li>
+<li>
+<p>To ensure that the server uses the newly imported template, select <strong>Fail if Template Exists</strong>. In this case, if the server already contains the template, the import action fails.</p>
+</li>
+<li>
+<p>To create a fresh installation and ensure that a template is not on the importing server, select <strong>Fail if Template Exists</strong>. If you are creating components, the server creates both new components and a template unless the template exists, in which case the components are not imported.</p>
+<p>If you are upgrading components, the upgrade fails if the imported components' template exists.</p>
+</li>
+<li>
+<p>To ensure that the template is on the importing server, select <strong>Fail if Template Does Not Exist</strong>. If you are creating components, it creates both components and a template unless the template does not exist, in which case the components are not imported.</p>
+<p>If you are upgrading components, the upgrade fails if the imported components' template does not exist on the importing server.</p>
+</li>
+<li>
+<p>To upgrade the template, select <strong>Upgrade if Exists</strong>. This option creates components and upgrades the template on the importing server. If the template does not exist, a template is created.</p>
+</li>
+<li>If the processes of the imported components call generic processes, use the <strong>Generic Process Upgrade Type</strong> list to specify how the generic processes are upgraded or created. The import process has different results if the generic processes exist or do not exist. </li>
+</ul>
+<p><strong>Note:</strong> The server tracks generic processes by name. If a generic process on the server is assigned the same name as a generic process that is imported, then the generic process already exists on the server.</p>
+<ul>
+<li>To import a component without updating the generic processes that are on your server, select <strong>Use Existing Generic Process</strong>. If the generic process does not exist, a generic process is created. If a generic process with that name exists, another version is not created.</li>
+<li>To create new generic processes, select <strong>Create Generic Process</strong>. A copy of the generic process is always created. If a generic process with that name exists, a unique string is added to the new generic process's name. When run, the component process calls the new generic process.</li>
+<li>
+<p>To create a fresh installation and ensure that generic processes are not on the importing server, select <strong>Fail if Generic Process Exists</strong>. If you are creating components, the server creates both new components and new generic processes unless generic processes exist, in which case the import action fails.</p>
+<p>If you are upgrading components, the upgrade fails if the imported components' generic processes exist.</p>
+</li>
+<li>
+<p>To ensure that generic processes are on the importing server, select <strong>Fail if Generic Process Does Not Exist</strong>. If you are creating components, it creates both new components and generic processes unless the generic processes do not exist, in which case the import action fails.</p>
+</li>
+<li>To upgrade the generic processes, select <strong>Upgrade if Generic Process Exists</strong>. This option creates components and new versions of the generic processes on the importing server. If the generic processes do not exist, processes are created.</li>
+<li>Click <strong>Submit</strong>.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../comp_create/">Creating components</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_import.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

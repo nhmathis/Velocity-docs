@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/ssl_mutual_auth/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring mutual authentication - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring mutual authentication", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-mutual-authentication">Configuring mutual authentication</h1>
+<p>To use mutual authentication, servers and JMS agents must exchange keys. You export a server key as a certificate and import it into the JMS agent keystore. Then, you reverse the process by exporting the agent key and importing it into the server keystore.</p>
+<p>Before you exchange keys, ensure that the following properties are set:</p>
+<ol>
+<li>The server.jms.mutualAuth property in the server's installed.properties file (in the server_install/conf/server directory) is set to <code>true</code>.</li>
+<li>For each JMS agent, the locked/agent.mutual_auth property in the agent's installed.properties file (in the agent_install\conf\agent directory) is set to <code>true</code>.</li>
+<li>For each agent relay, the agentrelay.jms_proxy.secure property in the relay's agentrelay.properties file (in the relay_install\conf directory) is set to <code>true</code>.</li>
+<li>For each agent relay, the agentrelay.jms_proxy.mutualAuth property in the relay's agentrelay.properties file is set to <code>true</code>.</li>
+</ol>
+<p>Additionally, ensure that the keytool utility, which is provided with the Java™ developer kit and is not part of HCL® UrbanCode™ Deploy, is available in the system path on each server, agent, and agent relay.</p>
+<p>Each server, JMS agent, and agent relay contains a key that identifies that system. Mutual authentication ensures the identity of each of those systems by exchanging these keys with each other. The keys are stored in the file encryption.keystore in the conf folder of each server, JMS agent, and agent relay. In the following steps, you export the key from each system and import it into each other system using the keytool utility.</p>
+<p>To configure mutual authentication for high-availability environments, swap all JMS agent, or agent relay, certificates with each server. Ensure that all JMS agents and agent relays have certificates from all servers, and all servers have certificates from all JMS agents and agent relays. Importantly, ensure that each server uses the same certificate. For this purpose, load balancers can be ignored.</p>
+<p><strong>Note:</strong> Mutual authentication is not used with Web agents.</p>
+<ol>
+<li>
+<p>Copy the certificate from the server to each JMS agent or agent relay that connects directly to the server: </p>
+<ol>
+<li>On the server, open a command-line window and go to the folder that contains the file server.keystore. By default, this folder is at the location app_data/conf, where app_data is the application data folder that you set at installation. The default application data folder is /opt/ucd/server/appdata on Linux™ and C:\Program Files\ucd\server\appdata on Windows™. In the case of a high-availability cluster, the application data folder is usually on a shared remote directory.</li>
+<li>
+<p>Export the server key by running the following command: </p>
+<p><code>keytool -exportcert -keystore server.keystore -storepass changeit -alias server -file server.crt</code></p>
+<p>If the certificate was exported, you see this message: <code>Certificate stored in file server.crt</code>.</p>
+</li>
+<li>
+<p>Copy the exported key file server.crt to each JMS agent installation conf directory or the agent relay installation conf/jms-relay directory. </p>
+</li>
+<li>
+<p>Import the server certificate into the JMS agent or agent relay keystore by running the following command from within the agent's conf directory or the agent relay's jms-relay directory: </p>
+<p><code>keytool -importcert -keystore keystoreFile -storepass changeit -alias server -file server.crt -keypass changeit -noprompt</code></p>
+<p>For keystoreFile, use agent.keystore for JMS agents and agentrelay.keystore for agent relays. If the certificate was imported, you see this message: <code>Certificate was added to keystore</code>. The agent.keystore and encryption.keystore files are not generated until the first time the JMS agent is run.</p>
+</li>
+<li>
+<p>Repeat the process for each JMS agent and agent relay that connects directly to the server. </p>
+<p><strong>Note:</strong> JMS agents that communicate with the server through agent relays do not have to swap certificates with the server. Only the agent relay that connects to the server must swap certificates with the server. However, you must swap certificates between the agent relay and each remote JMS agent.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Copy the certificate from each JMS agent or agent relay that connects directly to the server and import that certificate into the server keystore: </p>
+<ol>
+<li>On the system that hosts the JMS agent or agent relay, open a command-line window and go to the folder that contains the file agent.keystore or agentrelay.keystore. </li>
+<li>
+<p>Export the certificate by running the following command: </p>
+<p><code>keytool -exportcert -keystore keystoreFile -storepass changeit 
+-alias ucd_agent -file agentName.crt</code></p>
+<p>For keystoreFile, use agent.keystore for JMS agents and agentrelay.keystore for agent relays. The default JMS agent alias is <code>ucd_agent</code>. For agentName, specify a unique string identifier for the agent or agent relay. If the certificate was exported, you see this message: <code>Certificate stored in file agentName.crt</code>.</p>
+</li>
+<li>
+<p>Copy the exported key file to the server app_data/conf folder, where app_data is the application data folder. </p>
+</li>
+<li>
+<p>Import the JMS agent or agent relay certificate into the server keystore by running the following command: </p>
+<p><code>keytool -importcert -keystore server.keystore -storepass changeit 
+-alias uniqueAlias -file agentName.crt -keypass changeit -noprompt</code></p>
+<p>For uniqueAlias, use a unique key alias that identifies the JMS agent. If the certificate was imported, you see this message: <code>Certificate was added to keystore</code>. The agent.keystore and encryption.keystore files are not generated until the first time the JMS agent is run.</p>
+</li>
+<li>
+<p>Repeat the process for each JMS agent and agent relay that connects directly to the server. </p>
+<p><strong>Note:</strong> JMS agents that communicate with the server through agent relays do not have to swap certificates with the server. Only the agent relay that connects to the server must swap certificates with the server. However, you must swap certificates between the agent relay and each remote JMS agent.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>For each local JMS agent or agent relay, set the key alias to the same value that you used on the server. From the JMS agent's conf directory or the agent relay's jms-relay directory, run the following command:</p>
+<p><code>keytool -changealias -destalias uniqueAlias -alias defaultAlias -keystore agent.keystore -storepass changeit</code></p>
+<p>The default JMS agent alias is <code>ucd_agent</code>, and the default agent relay alias is <code>agentrelay</code>.</p>
+</li>
+<li>
+<p>If you use agent relays, use the established methods to connect remote JMS agents to them. Each remote JMS agent must import the certificate for the relay, and the relay must import the certificate from each remote JMS agent in addition to the certificate from the server.</p>
+</li>
+<li>Restart the server, JMS agents, and agent relays. </li>
+</ol>
+<p>Ensure that the JMS agents and agent relays can connect to the server.</p>
+<p>You can also list the certificates that are loaded into a keystore by running the following command from within the conf directory:</p>
+<pre><code>keytool -list -keystore keystoreFile -storepass changeit
+</code></pre>
+
+<p>For more information about exchanging keys among servers, see <a href="../ssl_mutual_authServers/">Sharing secured properties among servers</a>.</p>
+<p>To revoke the keys that the JMS agent uses to connect to the server, follow these steps:</p>
+<ol>
+<li>Log in as a user with the "Manage Security" permission.</li>
+<li>Open the JMS agent and then click <strong>Configuration</strong> > <strong>Agent Security</strong>. This tab is only shown if you have the "Manage Security" permission and if the JMS agent uses mutual authentication to connect to the server.</li>
+<li>To revoke the API key that the JMS agent uses, click <strong>Forget API Key</strong>. Clicking this button is equivalent to removing the API key on the <strong>Settings</strong> > <strong>API Keys and Certificates</strong> > <strong>API Keys</strong> and removing the key there.</li>
+<li>To revoke the JMS certificate that the agent uses to connect to the server, click <strong>Revoke API Key</strong>.</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/SSLinstall/">SSL configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/ssl_mutual_auth.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

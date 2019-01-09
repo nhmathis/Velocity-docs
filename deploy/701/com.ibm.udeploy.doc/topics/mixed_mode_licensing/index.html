@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/mixed_mode_licensing/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Mixed mode licensing - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Mixed mode licensing", url: "#_top", children: [
+              {title: "Automatic agent license type", url: "#automatic-agent-license-type" },
+              {title: "Set license type", url: "#set-license-type" },
+              {title: "Agent license types", url: "#agent-license-types" },
+              {title: "Server licensing modes", url: "#server-licensing-modes" },
+              {title: "Agent license types usable by servers with server license mode", url: "#agent-license-types-usable-by-servers-with-server-license-mode" },
+              {title: "Valid agent license types for specific server licensing mode", url: "#valid-agent-license-types-for-specific-server-licensing-mode" },
+              {title: "Server licensing", url: "#server-licensing" },
+              {title: "Server licensing in HA (high availability)", url: "#server-licensing-in-ha-40high-availability41" },
+              {title: "Server evaluation mode", url: "#server-evaluation-mode" },
+              {title: "Agent licensing", url: "#agent-licensing" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="mixed-mode-licensing">Mixed mode licensing</h1>
+<p>Mixed Mode Licensing gives you the ability to use both Authorized Agent licenses and Floating licenses on the same UrbanCode instance for greater flexibility.</p>
+<h2 id="automatic-agent-license-type">Automatic agent license type</h2>
+<ul>
+<li>Go to <strong>Settings > System Settings</strong>, under the new Licensing field it displays the current server license mode.</li>
+<li>To enable <strong>Automatic Agent License Type</strong> click on drop down box which lists valid license types that you can set for the current server license mode. This will automatically set new agent license type to the specified type when they come online.</li>
+</ul>
+<h2 id="set-license-type">Set license type</h2>
+<ul>
+<li>Agent license types are displayed on the Agents page, <strong>Resources > Agents</strong>.</li>
+<li>Select agents that you want to set license type for then under <strong>Actions</strong> scroll down and click on <strong>Set License Type</strong>.</li>
+<li>You can set the license type of one or more agents at a time.</li>
+<li>Only valid license types for the current server license mode are listed.</li>
+</ul>
+<h2 id="agent-license-types">Agent license types</h2>
+<ol>
+<li>Authorized - agents use the Authorized Agent License.</li>
+<li>Floating - agents use Floating Agent (Simultaneous Session) licenses.</li>
+<li>RDT - agents are z/OS development agents and do not require a license. The RDT license type is automatically set when the server detects the zOS-RDT property on the agent. A RDT agent cannot change their type from RDT.</li>
+<li>Unlicensed - agents have no license and cannot be used in deployments.</li>
+</ol>
+<h2 id="server-licensing-modes">Server licensing modes</h2>
+<ol>
+<li>PVU – Requires a Server PVU license. Any number of agents connected to a PVU licensed server may have the "PVU-Agent" license type, except for RDT agents – those will always be licensed. It is the responsibility of the user to not exceed any usage limitations they have from their licensing agreement with IBM. Additional information about PVU licensing may be found <a href="https://www-03.ibm.com/software/sla/sladb.nsf/lilookup/627F88E77EC9516E8525829E0072B8AE?OpenDocument#ibm-top">here</a>.</li>
+<li>Mixed – Requires an Authorized Server License. "Mixed" means we support Authorized and Floating agents simultaneously.</li>
+<li>Floating – requires that the Rational License Key Server (RLKS) has a Floating Agent Feature. It only allows agents licensed with Floating licenses to be used.</li>
+<li>Unlicensed – there are no valid server licenses (or floating agent licenses) in the license server and the server is running on a platform that supports the license library. Unlicensed servers cannot run deployments outside of the trial period.</li>
+<li>Unavailable - the server is running on a system which does not support licensing, such as zLinux.</li>
+</ol>
+<p>UrbanCode Deploy is configured with a finite number of Server Agent licenses for an organization. When the maximum number of licenses are in use, any additional agents configured will become unlicensed and cannot run processes. Any processes that are running on an unlicensed agent will log an error message. To resolve licensing warnings, additional licenses must be obtained, or existing licenses must be reassigned among the agents.</p>
+<h2 id="agent-license-types-usable-by-servers-with-server-license-mode">Agent license types usable by servers with server license mode</h2>
+<p>Only certain agent license types are available to be set on an agent depending on the server license mode. These are laid out in the following table:</p>
+<table>
+<thead>
+<tr>
+<th>Server Mode</th>
+<th>Authorized Agent</th>
+<th>Floating Agent</th>
+<th>PVU-Agent</th>
+<th>RDT</th>
+<th>Unlicensed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PVU Server</td>
+<td>NO</td>
+<td>NO</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>Floating Server</td>
+<td>NO</td>
+<td>YES</td>
+<td>NO</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>Mixed Mode</td>
+<td>YES</td>
+<td>YES</td>
+<td>NO</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>Unlicensed</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+<td>YES</td>
+</tr>
+<tr>
+<td>Unavailable</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+</tbody>
+</table>
+<h2 id="valid-agent-license-types-for-specific-server-licensing-mode">Valid agent license types for specific server licensing mode</h2>
+<p>The Server License Mode will dictate which agents are allowed to run processes depending on what license type the agent has assigned to it.</p>
+<table>
+<thead>
+<tr>
+<th>Server Mode</th>
+<th>Authorized Agent</th>
+<th>Floating Agent</th>
+<th>PVU-Agent</th>
+<th>RDT</th>
+<th>Unlicensed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PVU Server</td>
+<td>NO</td>
+<td>NO</td>
+<td>YES</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>Floating Server</td>
+<td>NO</td>
+<td>YES</td>
+<td>NO</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>Mixed Mode</td>
+<td>YES</td>
+<td>YES</td>
+<td>NO</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>Unlicensed</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>Unavailable</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+</tbody>
+</table>
+<h2 id="server-licensing">Server licensing</h2>
+<ul>
+<li>When a server starts it communicates with the IBM Rational Common Licensing (RCL) server, and the server's license mode will be set.</li>
+<li>Updating the server licensing mode does not change the license type of any existing agents, instead, the server will restrict agents with an unsupported license type from running deployments.</li>
+<li>If the server is on a platform that supports the licensing library, and if no licenses are available to the server, the server mode will remain unlicensed.</li>
+<li>
+<p>The server will attempt to checkout server licenses in the following order of priority:</p>
+<ul>
+<li>Authorized Server License</li>
+<li>PVU License</li>
+</ul>
+</li>
+<li>
+<p>The server will set the license mode on startup based on the server license it checked out. If there are no server licenses but there exists a floating agent license, the server license mode will be set to Floating.</p>
+</li>
+<li>If the license library is unsupported (for example, on zLinux or powerLE machines) then the server licensing mode will be set to Unavailable and all agent license types are allowed to be used / set.</li>
+<li>If a server is in Mixed Mode and the Rational License Key Server (RLKS) does not support Floating licenses, then a display message in the UI will state that there are no floating licenses loaded in the license server.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Authorized</th>
+<th>PVU</th>
+<th>Agent Floating</th>
+<th>Server License Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+<td>Mixed</td>
+</tr>
+<tr>
+<td>x</td>
+<td>x</td>
+<td> </td>
+<td>Mixed</td>
+</tr>
+<tr>
+<td>x</td>
+<td> </td>
+<td>x</td>
+<td>Mixed</td>
+</tr>
+<tr>
+<td>x</td>
+<td> </td>
+<td> </td>
+<td>Mixed</td>
+</tr>
+<tr>
+<td> </td>
+<td>x</td>
+<td>x</td>
+<td>PVU</td>
+</tr>
+<tr>
+<td> </td>
+<td>x</td>
+<td> </td>
+<td>PVU</td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td>x</td>
+<td>Floating</td>
+</tr>
+<tr>
+<td> </td>
+<td> </td>
+<td> </td>
+<td>Unlicensed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="server-licensing-in-ha-40high-availability41">Server licensing in HA (high availability)</h2>
+<ul>
+<li>The server license mode is stored such that each server in the cluster can reference the current license mode.</li>
+<li>Each server will checkout licenses, they use a clustering ID to allow all servers in the cluster to consume the same license.</li>
+<li>If a server cluster attempts to checkout a license that is already checked out from another server cluster – it will fail, and the servers will be Unlicensed.</li>
+<li>The first server online in a cluster will determine the server licensing mode and propagate that information to the other servers in the cluster.</li>
+<li>
+<p>When a server is started, if the server:</p>
+<p><code>is in HA:
+          n = countAuthAgents() 
+          CheckoutLicenses(Auth, n) 
+      else:
+          mark all agents offline 
+          Set all floating agents “licensed” column to false 
+          True-up other agents based on license type (ensure RDT agents are licensed, etc)</code></p>
+</li>
+</ul>
+<h2 id="server-evaluation-mode">Server evaluation mode</h2>
+<ul>
+<li>The UCD Server Evaluation Mode is available for sixty days.</li>
+<li>While in evaluation mode, neither the server or agent are licensed.</li>
+<li>Licenses are not required to run deployments during the evaluation period.</li>
+<li>After the evaluation period concludes the server licensing mode will be set to Unlicensed.</li>
+<li>After a connection to the IBM Rational License Key Server (RLKS) has been establish the evaluation period will end, and the server will set its license mode.</li>
+</ul>
+<h2 id="agent-licensing">Agent licensing</h2>
+<ul>
+<li>Agents require a license type to be specified.</li>
+<li>All deployments using an unlicensed agent will fail with an error message.</li>
+<li>When an agent's license type is changed the currently held license will be returned to the license server.</li>
+<li>You will need an "edit license type" permission to successfully change the agent's license type.</li>
+<li>Authorized licenses are acquired as soon as the agent's license type is set.</li>
+<li>When a process is run on an agent with the Floating license type, the server will attempt to checkout a floating license. When that process concludes the floating license will be checked back into the license server.<ul>
+<li>Agents will not fail if a floating license cannot be checked out at time of deployment, but a warning will be written to the server log.</li>
+</ul>
+</li>
+<li>Changing the license type of an agent while it is being used will have an undefined effect on any processes using that agent which are currently in progress.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../licenseManage/">License management</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/mixed_mode_licensing.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

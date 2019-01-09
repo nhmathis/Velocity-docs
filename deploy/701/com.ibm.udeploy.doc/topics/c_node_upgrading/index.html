@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/c_node_upgrading/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Overview - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Upgrading and migrating", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="upgrading-and-migrating">Upgrading and migrating</h1>
+<p>Learn how to upgrade HCL® UrbanCode™ Deploy elements, including the server, agents, and blueprint design server, and how to migrate data.</p>
+<ul>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/upgradeInstall/">Upgrading the server</a></strong><br />
+You can upgrade the HCL UrbanCode Deploy server to incorporate to a later version. Always upgrade agents, agent relays, and the blueprint design server in addition to upgrading the server. Upgrading the server, agents, agent relays, and blueprint design server are each completed independently. Unless specified, upgrade the server before you upgrade the agents.</li>
+<li><strong><a href="../../../com.ibm.udeploy.admin.doc/topics/ha_upgrading/">Upgrading high-availability installations</a></strong><br />
+All servers that are configured for the HA feature must be on the same version. Thus, all servers must be upgraded at the same time.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/upgradeAgents/">Upgrading agents</a></strong><br />
+In most cases, you upgrade agents from the server interface, but you can also upgrade the agents from the command line. Always upgrade agents and agent relays in addition to upgrading the server.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/upgrade_agent_relay/">Upgrading agent relays</a></strong><br />
+When you upgrade the server, be sure to always upgrade agents and agent relays.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/upgrade_key_strength/">Upgrading encryption key strength</a></strong><br />
+When you upgrade the server from version 6.0.1.1 or earlier to a version later than version 6.0.1.1, you can upgrade the SSL encryption.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/migrate_database/">Migrating the server database</a></strong><br />
+The server installation files include a script that migrates the server database from Derby to another database system. You can not migrate from any database other than Derby.</li>
+<li><strong><a href="../../../com.ibm.udeploy.install.doc/topics/t_upgrade_to_new_format/">Automatic upgrades of files stored in the server CodeStation</a></strong><br />
+When you upgrade to HCL UrbanCode Deploy version 6.1 or later, the server automatically upgrades all artifacts that are stored in its CodeStation.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/upgrade_server_bds/">Upgrading the blueprint design server</a></strong><br />
+To upgrade the blueprint design server, stop the Tomcat server, install the new version, and restart the blueprint design server. When you upgrade the blueprint design server, you must also upgrade the engine.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/upgrade_engine/">Upgrading engines</a></strong><br />
+The instructions that you use to upgrade an engine depends on how you installed the engine. When you upgrade the engine, you must also upgrade the blueprint design server.</li>
+<li><strong><a href="../../../com.ibm.edt.doc/topics/migrate_ov/">Moving blueprints and configuration files</a></strong><br />
+After you upgrade from a version of the blueprint design server earlier than version 6.1.1, you must move blueprints and configuration files from the file system to the Git repository.</li>
+</ul>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/c_node_upgrading.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

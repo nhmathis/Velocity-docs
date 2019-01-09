@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/trouble_permissions/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Troubleshooting security and permissions - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Troubleshooting security and permissions", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="troubleshooting-security-and-permissions">Troubleshooting security and permissions</h1>
+<p>To troubleshoot permissions, look carefully at the roles and teams of the user and the teams of the object that the user is trying to access.</p>
+<ul>
+<li>
+<p><strong>User cannot access a page on the server</strong></p>
+<p>If a user cannot see pages on the server, make sure that the user's role has the permission to see that page. Open the user's role, go to the Web UI category, and specify the pages that the user can access. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_roles_create/">Creating roles and assigning permissions</a>.</p>
+</li>
+<li>
+<p><strong>User cannot access an object</strong></p>
+<p>If a user cannot access an object, such as an application or environment, check the following things:</p>
+<ul>
+<li>Ensure that the object is part of a team and that the user is a member of the same team. You can add an object to a team only if you are a member of that team.</li>
+<li>Ensure that the user has a role on that team, and that the role includes permission to access the object.</li>
+<li>If the object has a security type other than the standard security type for that object, make sure that the role includes permissions for that security type.</li>
+<li>Ensure that the user has access to the related pages on the server, such as the <strong>Applications</strong> tab or <strong>Components</strong> tab.</li>
+<li>If the user can create an object but cannot set configuration options for it, make sure that the user's role has the Edit Basic Settings and Manage Teams permissions for that type, because otherwise the options for creating the object are limited.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../trouble_serveragents_ov/">Troubleshooting the HCL UrbanCode Deploy server and agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/trouble_permissions.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

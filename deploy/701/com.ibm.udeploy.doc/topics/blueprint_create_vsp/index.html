@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/blueprint_create_vsp/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating blueprints for cloud environments that use virtual system patterns - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating blueprints for cloud environments that use virtual system patterns", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-blueprints-for-cloud-environments-that-use-virtual-system-patterns">Creating blueprints for cloud environments that use virtual system patterns</h1>
+<p>Blueprints for clouds that use virtual system patterns (VSPs) map the components of an application to the agents on the virtual images in the VSP.</p>
+<ul>
+<li>Connect to a cloud that uses VSPs. See <a href="../cloud_integrate_vsp_ov/">Connecting to clouds through HCL UrbanCode Deploy</a>. The following clouds that use VSPs are supported by the HCL UrbanCode Deploy server:<ul>
+<li>IBM Cloud Orchestrator version 2.4 or later</li>
+<li>IBM SmartCloud® Orchestrator versions 2.2 and 2.3</li>
+<li>IBM PureApplication® System version 1.0 or later</li>
+<li>IBM Workload Deployer version 3.1.0.6 or later</li>
+</ul>
+</li>
+<li>
+<p>Import a resource template from the cloud. See <a href="../resources_template_import_cloud/">Importing resource templates from clouds</a>.</p>
+</li>
+<li>
+<p>On the HCL UrbanCode Deploy server, click <strong>Applications</strong>, click your application, and then click <strong>Blueprints</strong>. </p>
+</li>
+<li>Click <strong>Create Blueprint</strong>. </li>
+<li>Specify a name for the blueprint and select the resource template. </li>
+<li>Click <strong>Save</strong>. The new blueprint opens, showing the contents of the template, including the agent prototypes.</li>
+<li>
+<p>Map the components of the application to the agent prototypes: </p>
+<ol>
+<li>Hover the mouse over an agent prototype and then click <strong>Actions</strong> > <strong>Add Component</strong>. </li>
+<li>In the window that opens, select a component, specify its information, and click <strong>Save</strong>. </li>
+<li>Repeat this process to add the application components to the agent prototypes. Depending on how your application is organized, you can add the same component to multiple agent prototypes or multiple components to the same agent prototype.
+<strong>Note:</strong> If you create an environment from this blueprint and then add component mappings to the blueprint, the component mappings are also added to the environment. However, if you remove component mappings from the blueprint, the component mappings are not removed from the environment.</li>
+</ol>
+</li>
+</ul>
+<p>The complete application blueprint shows how the components are mapped to the agent prototypes. The following example shows a simple blueprint. The resource template contains two agent prototypes. In the blueprint, one component is mapped to each agent prototype.</p>
+<p><img alt="A simple blueprint that was created from a two-node resource template" src="../../images/app_blueprint_create_a.gif" /></p>
+<p>Provision environments from this blueprint. See <a href="../env_provision_vsp/">Provisioning environments through the server (through virtual system patterns)</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.edt.doc/topics/blueprint_edit_clouds_vsp/">Modeling environments for clouds that use virtual system patterns</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/blueprint_create_vsp.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

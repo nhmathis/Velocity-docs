@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/ref_example_groovy/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>create_file.groovy - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "create_file.groovy", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="create95filegroovy">create_file.groovy</h1>
+<p>The create_file.groovy file contains the Groovy script that runs the step's command.</p>
+<p>Groovy is a dynamic scripting language (similar to Python, Ruby, and Perl) for the Java™ platform. Most Java code is also syntactically valid Groovy, which makes Groovy popular with Java programmers. Groovy provides native support for regular expressions.</p>
+<p>The first lines of the script create a properties object, <code>props</code>. Then it attempts to load the properties from the file that is sent from the server (specified by the <code>${PLUGIN_OUTPUT_PROPS}</code> variable). If it can load the file, it populates <code>props</code>; otherwise, it throws an exception.</p>
+<pre><code>final def workDir = new File('.').canonicalFile
+final def props = new Properties();
+final def inputPropsFile = new File(args[0]);
+try {
+inputPropsStream = new FileInputStream(inputPropsFile);
+props.load(inputPropsStream);
+}
+catch (IOException e) {
+throw new RuntimeException(e);
+}
+
+</code></pre>
+
+<p>To run the command (create a file), the script uses the properties that are defined by the step itself. The script retrieves the three properties from <code>props</code> and creates corresponding local variables.</p>
+<p>Next, the script creates a file with a name specified by <code>fileName</code>, and tests the <code>overwrite</code> Boolean variable. If a file with the same name exists and <code>overwrite</code> is false, the script ends (fails) with an exit code of 1. Exit codes can be examined during post-processing.</p>
+<p>Otherwise, the file is written with the content of <code>contents</code>. A message is written to the output log, and the exit code is set to 0 (success).</p>
+<pre><code>final def fileName = props['file']
+final def overwrite = props['overwrite']?.toBoolean()
+final def contents = props['contents']?:''
+
+try {
+def file = new File(fileName).canonicalFile
+if (file.exists() &amp;&amp; !overwrite) {
+println &quot;File $file already exists!&quot;
+System.exit 1
+}
+else {
+file.write(contents)
+println &quot;Successfully ${overwrite?'replaced':'created'} file 
+$file with contents:&quot;
+println contents
+}
+}
+catch (Exception e) {
+println &quot;Error creating file $file: ${e.message}&quot;
+System.exit(1)
+}
+
+System.exit(0)
+
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../ref_example_step_commands/">Step commands</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/ref_example_groovy.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

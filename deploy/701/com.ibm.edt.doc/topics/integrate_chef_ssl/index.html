@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/integrate_chef_ssl/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring SSL/TLS security for Chef - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring SSL/TLS security for Chef", url: "#_top", children: [
+          ]},
+          {title: "!/bin/bash", url: "#binbash", children: [
+          ]},
+          {title: "Retrieve the certificate from the remote service", url: "#retrieve-the-certificate-from-the-remote-service", children: [
+          ]},
+          {title: "Import the certificate into the JRE trust store.", url: "#import-the-certificate-into-the-jre-trust-store", children: [
+          ]},
+          {title: "Verify that the certificate was imported correctly.", url: "#verify-that-the-certificate-was-imported-correctly", children: [
+          ]},
+          {title: "Restart the service.", url: "#restart-the-service", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-ssltls-security-for-chef">Configuring SSL/TLS security for Chef</h1>
+<p>If your Chef server uses SSL/TLS security, you must import the Chef server key into the blueprint design server keystore.</p>
+<p>On the blueprint design server, set the PATH system variable to include the location of the JRE or JDK on the system.</p>
+<p>If the Chef server is configured with an IP address as the host name, the IP address must be in the subjectAltName field of the Chef server certificate. Contact the issuer of the Chef server SSL certificate for confirmation of whether the subjectAltName field is configured correctly.</p>
+<p>The following script imports the Chef server key into the blueprint design server keystore. You can adapt this script to import the key for any remote system into the blueprint design server keystore.</p>
+<ol>
+<li>
+<p>On the blueprint design server, create a script from the following template: </p>
+<p>```</p>
+<h1 id="binbash">!/bin/bash</h1>
+<p>export DOMAIN_NAME=hostname</p>
+<h1 id="retrieve-the-certificate-from-the-remote-service">Retrieve the certificate from the remote service</h1>
+<p>openssl s_client -connect $DOMAIN_NAME:443 -showcerts </dev/null\
+ 2>/dev/null | openssl x509 -outform PEM | tee ~/$DOMAIN_NAME.crt</p>
+<h1 id="import-the-certificate-into-the-jre-trust-store">Import the certificate into the JRE trust store.</h1>
+<p>cd /opt/ibm-ucd-patterns/java/jre
+./bin/keytool -import -trustcacerts -keystore ./lib/security/cacerts -storepass changeit\
+ -noprompt -alias $DOMAIN_NAME -file ~/$DOMAIN_NAME.crt</p>
+<h1 id="verify-that-the-certificate-was-imported-correctly">Verify that the certificate was imported correctly.</h1>
+<p>./bin/keytool -list -trustcacerts -keystore ./lib/security/cacerts\
+ -storepass changeit | grep $DOMAIN_NAME</p>
+<h1 id="restart-the-service">Restart the service.</h1>
+<p>/opt/ibm-ucd-patterns/bin/server stop
+/opt/ibm-ucd-patterns/bin/server start
+```</p>
+</li>
+<li>
+<p>In the script, replace the variable <code>hostname</code> with the host name of the Chef server. </p>
+</li>
+<li>Update the line <code>cd /opt/ibm-ucd-patterns/java/jre</code> to point to the jre folder in the blueprint design server installation. </li>
+<li>Update the final two lines of the script to stop and start the blueprint design server on your system. See <a href="../../../com.ibm.udeploy.install.doc/topics/stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a> and <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</li>
+<li>Run the script. </li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../integrate_chef/">Integrating with Chef</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/integrate_chef_ssl.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

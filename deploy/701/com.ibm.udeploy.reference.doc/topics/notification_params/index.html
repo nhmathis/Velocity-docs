@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.reference.doc/topics/notification_params/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Parameters for notification templates - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Parameters for notification templates", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="parameters-for-notification-templates">Parameters for notification templates</h1>
+<p>Depending on the context of the notification, you can insert parameters into the notification template. When the notification is sent, these parameters are replaced with values such as the names and information about applications, components, and processes.</p>
+<p><strong>Note:</strong> Not all parameters are available in all contexts. For example, when you run a generic process, parameters that are related to applications are not available.</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$externalUrl()</td>
+<td>The URL of the server</td>
+<td><code>http://myserver.example.com:8443</code></td>
+</tr>
+<tr>
+<td>$request</td>
+<td>The request that caused the notification, such as an application process request</td>
+<td><code>ApplicationProcessRequest#74ae3853-3444-4d7d-a0f3-68107f47b29f</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$application.getName()</td>
+<td>The name of the application</td>
+<td><code>My application</code></td>
+</tr>
+<tr>
+<td>$application.getId()</td>
+<td>The ID of the application</td>
+<td><code>b37054b7-7b20-49b6-973d-fd0ee0b1b62b</code></td>
+</tr>
+<tr>
+<td>$application.getDescription()</td>
+<td>The description of the application</td>
+<td><code>This is my application</code></td>
+</tr>
+<tr>
+<td>$application.getPath()</td>
+<td>The URL path of the application</td>
+<td><code>applications/b37054b7-7b20-49b6-973d-fd0ee0b1b62b</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$applicationProcess.getId()</td>
+<td>The ID of the application process</td>
+<td><code>50d5bca2-d8d9-47f2-a0ce-5b75b3f24d3b</code></td>
+</tr>
+<tr>
+<td>$applicationProcess.getName()</td>
+<td>The name of the application process</td>
+<td><code>Deploy application</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$environment.getId()</td>
+<td>The ID of the application</td>
+<td><code>072a54df-8c3a-4b23-a660-323cf205c86c</code></td>
+</tr>
+<tr>
+<td>$environment.getName()</td>
+<td>The name of the environment</td>
+<td><code>Environment 1</code></td>
+</tr>
+<tr>
+<td>$environment.getDescription()</td>
+<td>The description of the environment</td>
+<td> </td>
+</tr>
+<tr>
+<td>$environment.getColor()</td>
+<td>The color that is assigned to the environment in the table of environments</td>
+<td><code>#00B2EF</code></td>
+</tr>
+<tr>
+<td>$environment.isRequireApprovals()</td>
+<td>True if the environment requires approvals</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p>You can retrieve an array of application process versions with the parameter $versions. For the size of the array, use the parameter $versions.size(). To access individual versions within this array, access them with a loop as in the following example:</p>
+<pre><code>&lt;div class=&quot;data-table-container&quot;&gt;
+#if ($versions.size() &gt; 0)
+  &lt;h3&gt;Versions Included:&lt;/h3&gt;
+  &lt;table class=&quot;data-table&quot; cellpadding=&quot;4&quot; cellspacing=&quot;1&quot; width=&quot;100%&quot;&gt;
+   &lt;thead class=&quot;data-table-head&quot;&gt;
+      &lt;th style=&quot;text-align:left;&quot; scope=&quot;col&quot; valign=&quot;middle&quot;&gt;Component&lt;/th&gt;
+      &lt;th style=&quot;text-align:left;&quot; scope=&quot;col&quot; valign=&quot;middle&quot;&gt;Version&lt;/th&gt;
+      &lt;th style=&quot;text-align:left;&quot; scope=&quot;col&quot; valign=&quot;middle&quot;&gt;Description&lt;/th&gt;
+   &lt;/thead&gt;
+   &lt;tbody&gt;
+    #foreach ($version in $versions)
+      #if ($velocityCount % 2 == 1)
+          #set ($rowClass = &quot;odd&quot;)
+      #else
+          #set ($rowClass = &quot;even&quot;)
+      #end
+      &lt;tr class=&quot;$rowClass&quot;&gt;
+       &lt;td&gt;$version.getComponent().getName()&lt;/td&gt;
+       &lt;td&gt;$version.getName()&lt;/td&gt;
+       &lt;td&gt;
+         #if ($version.getDescription())
+           $version.getDescription()
+         #end
+       &lt;/td&gt;
+     &lt;/tr&gt;
+    #end
+   &lt;/tbody&gt;
+  &lt;/table&gt;
+#else
+  &lt;h3&gt;No Versions Included&lt;/h3&gt;
+#end
+&lt;/div&gt;
+</code></pre>
+
+<p>Within the loop, you can access information about the individual versions with the parameters in the following table:</p>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$version.getName()</td>
+<td>The name of the component version</td>
+<td> </td>
+</tr>
+<tr>
+<td>$version.getComponent()</td>
+<td>The component</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$snapshot.getId()</td>
+<td>The ID of the snapshot</td>
+<td><code>5d95883f-be45-4abe-8664-3ca6a7635a12</code></td>
+</tr>
+<tr>
+<td>$snapshot.getName()</td>
+<td>The name of the snapshot</td>
+<td><code>My snapshot</code></td>
+</tr>
+<tr>
+<td>$snapshot.getDescription()</td>
+<td>The description of the snapshot</td>
+<td> </td>
+</tr>
+<tr>
+<td>$snapshot.getCreatedDate()</td>
+<td>The creation date of the snapshot</td>
+<td><code>Fri Mar 20 09:56:42 EDT 2015</code></td>
+</tr>
+<tr>
+<td>$snapshot.getCreatedTime()</td>
+<td>The creation time of the snapshot in UNIX™ format</td>
+<td><code>1418136059500</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$user.getId()</td>
+<td>The ID of the user</td>
+<td><code>20000000000000000000000001000000</code></td>
+</tr>
+<tr>
+<td>$user.getName()</td>
+<td>The user name</td>
+<td><code>jsmith</code></td>
+</tr>
+<tr>
+<td>$user.getActualName()</td>
+<td>The full name of the user</td>
+<td><code>Joe Smith</code></td>
+</tr>
+<tr>
+<td>$user.getEmail()</td>
+<td>The email address of the user</td>
+<td><code>jsmith@example.com</code></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$processname</td>
+<td>The name of the requested process</td>
+<td> </td>
+</tr>
+<tr>
+<td>$scheduledDate</td>
+<td>The date for which the process is scheduled</td>
+<td><code>Fri Apr 10 13:16:53 EDT 2015</code></td>
+</tr>
+<tr>
+<td>$appRequest.getDescription()</td>
+<td>The description of the application process request</td>
+<td> </td>
+</tr>
+<tr>
+<td>$requestType</td>
+<td>The type of request</td>
+<td><code>applicationProcessRequest</code></td>
+</tr>
+<tr>
+<td>$roles</td>
+<td>The roles that a user must have to approve the request</td>
+<td><code>[Role: Administrator]</code></td>
+</tr>
+<tr>
+<td>$appRequest</td>
+<td>For application process requests, the application process request ID</td>
+<td><code>ApplicationProcessRequest#81701a8b-332c-47dd-8efe-87aab8fa2dfd</code></td>
+</tr>
+</tbody>
+</table>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.reference.doc/topics/notification_params.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

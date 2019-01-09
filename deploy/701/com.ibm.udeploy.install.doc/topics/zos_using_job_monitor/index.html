@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/zos_using_job_monitor/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Deploying by using the Job Monitor - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Deploying by using the Job Monitor", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="deploying-by-using-the-job-monitor">Deploying by using the Job Monitor</h1>
+<p>You use the Job Monitor to submit jobs and to monitor the job status in your deployment. You must ensure that you have a Job Monitor task running and that you run the Urban Code Deploy process to submit or to monitor the job. Then, you must set up Job Monitor connection properties in your HCL® UrbanCode™ Deploy environment.</p>
+<p>Install the following agent or product and use the Job Monitor that is bundled with it:</p>
+<ul>
+<li>z/OS agent</li>
+<li>IBM Developer for IBM Z</li>
+<li>IBM Rational Team Concert</li>
+</ul>
+<p><strong>Note:</strong> For the z/OS agent, the Job Monitor is installed automatically in the <strong>hlq.SBUZAUTH</strong> data set. Also, the LOOPBACK_ONLY property must be set to OFF in the Job Monitor configuration file.</p>
+<p><strong>Submitting and monitoring jobs in deployment processes</strong></p>
+<ol>
+<li>Start the Job Monitor task and check that a task that is called <strong>JMON</strong> is running.</li>
+<li>To submit or to monitor jobs, run the UrbanCode Deploy process that uses the Submit Job or Wait For Job steps.</li>
+<li>
+<p>Set the following Job Monitor connection properties in the HCL UrbanCode Deploy environment or resource:</p>
+<p>```
+jes.host=localhost
+jes.user=z/OS user ID
+jes.password=Password of the user. Set blank to use PassTicket authentication.
+jes.monitor.port=The port number for Job Monitor host server. The default port is 6715.</p>
+<p>```</p>
+</li>
+</ol>
+<p><strong>Authenticating with a user ID and Password</strong></p>
+<p>To use a password to authenticate, store the password in the jes.password property.</p>
+<p><strong>Note:</strong> As you complete the <strong>Submit Job</strong> or <strong>Wait For Job</strong> step, do not store the password directly in the <strong>Password</strong> field. The <strong>Password</strong> field contains plain text only and this field must be used to reference a property.</p>
+<p><strong>Authenticating with PassTickets</strong></p>
+<p>If you do not provide a password, the plug-in uses PassTicket authentication. You can use PassTickets authentication to eliminate the requirement to store user passwords in HCL UrbanCode Deploy.</p>
+<p>To configure your system to use PassTickets, complete the following steps:</p>
+<ol>
+<li>
+<p>Activate the <strong>RACF PTKTDATA</strong> class if it is not already active. The following code shows sample RACF commands: </p>
+<p><code>SETROPTS GENERIC(PTKTDATA) SETROPTS CLASSACT(PTKTDATA) RACLIST(PTKTDATA) 
+RDEFINE PTKTDATA IRRPTAUTH.FEKAPPL.USER1 UACC(NONE)</code></p>
+</li>
+<li>
+<p>To create a PTKTDATA profile that defines the secret key and the application name to which it applies for the Job Monitor, complete the following steps: </p>
+<ol>
+<li>Define the application name as <strong>FEKAPPL</strong>.</li>
+<li>Define the key as a 64-bit number (16 hex characters).</li>
+<li>
+<p>Replace the key16 placeholder with a user-supplied 16 character hex string (characters 0-9 and A-F) as shown in the following sample RACF commands:</p>
+<p><code>RDEFINE PTKTDATA FEKAPPL UACC(NONE) SSIGNON(KEYMASKED(key16)) APPLDATA('NO REPLAY PROTECTION – DO NOT CHANGE') DATA('URBANCODE DEPLOY')</code></p>
+<p>The following example shows the command with the key16 value replaced:</p>
+<p>```</p>
+<p>RDEFINE PTKTDATA FEKAPPL UACC(NONE) - DATA('URBANCODE DEPLOY') - APPLDATA('NO REPLAY PROTECTION - DO NOT CHANGE') - SSIGNON(KEYMASKED(0123456789ABCDEF))</p>
+<p>```</p>
+</li>
+<li>
+<p>Read the following scenarios:</p>
+<ol>
+<li>If the <strong>PTKTDATA</strong> class is already defined, verify that it is defined as a generic class before you create the profile that was shown previously. The support for generic characters in the PTKTDATA class is new in the z/OS V1.7 release, with the introduction of a Java interface to PassTickets.</li>
+<li>If a cryptographic product is installed and available on the system, you can encrypt the secured sign-on application key for added protection. Use the KEYENCRYPTED keyword instead of the KEYMASKED keyword. For more information, see the Security Server RACF Security Administrator's Guide (SA22-7683).</li>
+<li>If the Rational Developer for System z or the Rational Team Concert server components are already installed on the system, the <strong>PTKTDATA</strong> profile might be defined already.</li>
+</ol>
+</li>
+<li>To define a profile to generate a PassTicket, you must define the <strong>IRRPTAUTH</strong> profile in the <strong>PTKTDATA</strong> class. Then, this profile controls for which user ID a PassTicket is generated, as shown here: </li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Profile name</th>
+<th>Required access</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generate PassTicket</td>
+<td><code>IRRPTAUTH.application.target-userid</code></td>
+<td>Update</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>To set permissions for the UrbanCode Deploy Agent to generate a PassTicket so that the UrbanCode Deploy Agent generates a PassTicket, the user ID of the agent or the impersonated ID must have UPDATE access in the PTKTDATA profile that you created in the previous step. For more information, see the following RACF commands: </p>
+<p><code>PERMIT IRRPTAUTH.FEKAPPL.USER1 CLASS(PTKTDATA) ID(AGNTUSR) ACCESS(UPDATE)</code></p>
+</li>
+<li>
+<p>To refresh the <strong>PTKTDATA</strong> class for the new profiles and permissions to take effect, see the following commands: </p>
+<p>```
+SETROPTS RACLIST (PTKTDATA) REFRESH</p>
+<p>```</p>
+</li>
+</ol>
+<p>See the following PassTicket examples:</p>
+<p>Example 1. Agent is started by user AGNTUSR. In a deployment process, a Job needs to be submitted on behalf of user USER1.</p>
+<pre><code>RDEFINE PTKTDATA IRRPTAUTH.FEKAPPL.USER1 UACC(NONE) 
+PERMIT IRRPTAUTH.FEKAPPL.USER1 CLASS(PTKTDATA) ID(AGNTUSR) ACCESS(UPDATE) 
+SETROPTS RACLIST (PTKTDATA) REFRESH
+
+</code></pre>
+
+<p>Example 2. Agent is started by user AGNTUSR. Allow this agent to submit jobs on behalf of any user.</p>
+<pre><code>RDEFINE PTKTDATA IRRPTAUTH.FEKAPPL.* UACC(NONE) 
+PERMIT IRRPTAUTH.FEKAPPL.* CLASS(PTKTDATA) ID(AGNTUSR) ACCESS(UPDATE) 
+SETROPTS RACLIST (PTKTDATA) REFRESH
+
+</code></pre>
+
+<p>Example 3. Agent is started by user AGNTUSR. Allow this agent to submit job on behalf of user AGNTUSR:</p>
+<pre><code>RDEFINE PTKTDATA IRRPTAUTH.FEKAPPL.AGNTUSR UACC(NONE) 
+PERMIT IRRPTAUTH.FEKAPPL.AGNTUSR CLASS(PTKTDATA) ID(AGNTUSR) ACCESS(UPDATE) 
+SETROPTS RACLIST (PTKTDATA) REFRESH
+
+</code></pre>
+
+<p>More JES security considerations are described in the IBM Developer for IBM Z documentation. For more information, see <a href="http://www-01.ibm.com/support/knowledgecenter/SSQ2R2_9.0.0/com.ibm.guide.hostconfig.reference.doc/topics/jessecurity.html?lang=en">JES Security</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../zos_installing_ov/">Installing the z/OS agent</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/zos_using_job_monitor.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

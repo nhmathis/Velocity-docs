@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/app_environment_mapping/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Mapping resources and components to environments - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Mapping resources and components to environments", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="mapping-resources-and-components-to-environments">Mapping resources and components to environments</h1>
+<p>Specify where components are deployed by adding a resource or resource group to the environment. Then, map the components to those resources. </p>
+<p>Resources and resource groups identify the agents that do the work of deploying components and provide other configuration information. You must identify the resources for the environment and then specify which components run on which resources.</p>
+<p>If you are using IBM® WebSphere® Application Server, you can import information from cells as resources; see <a href="../resources_import_was/">Importing resources from WebSphere Application Server</a>.</p>
+<ol>
+<li>Open the environment by clicking <strong>Applications</strong>, clicking the application, and then clicking the environment. </li>
+<li>
+<p>Display the Add Resource to Environment window for the selected environment by clicking <strong>Add Base Resources</strong>. All previously defined resources are available for use, as shown in the following figure:</p>
+<p><img alt="Selecting resources for an environment" src="../../images/app_create-5.png" /></p>
+</li>
+<li>
+<p>Select the check box that is associated with the resource or resource group to use.You can select more than one resource. Selecting a resource that was previously added to the environment has no effect.</p>
+</li>
+<li>Click <strong>OK</strong>. The selected resource or resource group is added to the environment.</li>
+<li>To remove resources from the environment, in the same row as the resource, click <strong>Actions</strong> > <strong>Remove From Environment</strong>. </li>
+<li>Map each component in the application to the resources. Each component must be mapped to at least one resource. You can map the same component to multiple resources. Or to specify that the component is deployed more than once to the environment, you can map the component multiple times to the same resource. There are several ways to map components to resources:<ul>
+<li>To add components one at a time, in the same row as the resource, click <strong>Actions</strong> > <strong>Add Component</strong>, and then select the component.</li>
+<li>To drag components, click <strong>Show</strong> > <strong>Components</strong>. Then, in the list of components that are associated with the application, drag one or more components to the resource.</li>
+<li>To add multiple components at once, ensure that each component has the same tag. Then, in the same row as the resource, click <strong>Actions</strong> > <strong>Add Component Tag</strong>, and specify the tag that identifies the components.</li>
+</ul>
+</li>
+</ol>
+<p>The environment is populated with resources and components.</p>
+<p>After mapping components and resources, create an application process. For information about creating application processes, see <a href="../app_process_create/">Creating application processes</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../app_environment/">Application environments</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/app_environment_mapping.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

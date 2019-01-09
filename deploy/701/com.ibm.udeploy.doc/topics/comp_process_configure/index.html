@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/comp_process_configure/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Creating component processes - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Creating component processes", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="creating-component-processes">Creating component processes</h1>
+<p>A component process is a series of user-defined steps that operate on a component's artifacts. You create a component process in two steps: first, you configure basic information, such as name; second, you use the process editor to assemble the process.</p>
+<ol>
+<li>
+<p>Display the Create Process dialog box by clicking <strong>Components</strong> > <strong>selected component</strong> > <strong>Processes</strong> > <strong>Create Process</strong>. </p>
+<p><img alt="The Create Process window" src="../../images/comp_process_configure_a.gif" /></p>
+</li>
+<li>
+<p>Complete the following fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>Identifies the process; appears in many UI elements. Required. <strong>Note:</strong> Name character limit is 255.</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<p>|
+    | <strong>Description</strong> |The optional description can be used to convey more information about the process.|
+    | <strong>Process Type</strong> |Defines the process type. Required. Selecting the correct process type is critical for the associated application process to run correctly. <strong>Important:</strong> If you are deploying components you must select the <strong>Deployment</strong> process type. If another type is selected for a component that you plan to deploy with an application process, the application process will fail. For more information, see <a href="../comp_process_types/">Component process types</a>.</p>
+<p>|
+    |<strong>Inventory Status</strong> |Status that is applied to component versions after being successfully run by this process. <code>Active</code> indicates that the component version is deployed to its target resource. The status appears on the Inventory panes for the component itself and environments that ran the process. Required.|
+    | <strong>Default Working Directory</strong> |Defines the location that the agent uses to run the process (for temporary files, and so on). The default value is ${p:resource/work.dir}/${p:component.name}, where ${p:resource/work.dir} is the default working directory for the agent and ${p:component.name} is the component name. The default value resolves to agent_directory\work\component_name_directory and is stored in the componentProcess.defaultWorkDir property. The default properties work for most components; you might need to change it if a component process cannot be run at the agent's location. Required.|
+    | <strong>Required Role</strong> |Restricts who can run the process. The available options are derived from the HCL® UrbanCode™ Deploy security system. The default value is <code>None</code>, meaning anyone can run the process. For information about security roles, see <a href="../../../com.ibm.udeploy.admin.doc/topics/security_ch/">Managing security</a>.|</p>
+<ol>
+<li>Save your work when you are finished.The process is listed on the Processes pane for the associated component.</li>
+</ol>
+<p>Edit the process in the process editor. See <a href="../comp_workflow_edit/">Editing processes</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../intro_component_processes/">Component processes</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/comp_process_configure.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

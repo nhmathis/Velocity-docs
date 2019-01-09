@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/quickstart_application/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lesson 3 Create an application - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lesson 3: Create an application", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="lesson-3-create-an-application">Lesson 3: Create an application</h1>
+<p>Applications manage components, typically by deploying them into environments.</p>
+<p>To create an application, you identify the components that it manages; define at least one environment into which the components are deployed; and create a process to do the work. An environment maps components to agents and handles inventory, among other things. An application process is similar to but not identical to a component process. Application processes are primarily intended to direct underlying component processes and orchestrate multi-component deployments. In this lesson, you create an application and assign the helloWorld component to it.</p>
+<ol>
+<li>Click the <strong>Applications</strong> tab, and then click <strong>Create Application</strong>. </li>
+<li>Name the new application something like hello Application.</li>
+<li>Accept the default values for the other fields, and click <strong>Create</strong>. For the tutorial, the default value for the <strong>Notification Scheme</strong> is fine. HCL® UrbanCode™ Deploy integrates with LDAP and email servers, which enables the product to send event-based notifications. For example, the <code>default notification scheme</code> sends an email (if an email server is configured, see <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_system/">Server settings</a>) when a deployment finishes. Notifications can also play a role in deployment approvals. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_ch/">Managing security</a> for information about security roles.</li>
+<li>Add the helloWorld component to the application: <ol>
+<li>From the Application: hello Application page, click the <strong>Components</strong> tab. This is the <strong>Components</strong> tab that is associated with the application, not the <strong>Components</strong> tab at the top of the page. </li>
+<li>Click <strong>Add Component</strong>. </li>
+<li>In the Add a Component window, select the <strong>helloWorld</strong> component, and then click <strong>Save</strong>. An application can deploy only components that are added to it.</li>
+</ol>
+</li>
+</ol>
+<p>The application includes the helloWorld component, as shown in the following figure. Applications can have any number of components, and components can be included in any number of applications.</p>
+<p><img alt="The helloWorld component is shown on the Components tab" src="../../images/qs-plugin-design-7.gif" /></p>
+<p>In this lesson, you created an application and assigned the helloWorld component to it. On the <strong>Components</strong> tab, you have the component that is managed by the application listed.</p>
+<p>For more information about creating applications, see <a href="../../../com.ibm.udeploy.doc/topics/app_create/">Creating applications</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../quickstart_abstract/">Create a simple helloWorld deployment</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/quickstart_application.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

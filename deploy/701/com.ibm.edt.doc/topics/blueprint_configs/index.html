@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_configs/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Editing configuration files - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Editing configuration files", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="editing-configuration-files">Editing configuration files</h1>
+<p>Configuration files are lists of properties and values. You can use configuration files to provision the same blueprint on multiple cloud systems.</p>
+<p>Create a blueprint. Configuration files apply only to blueprints that you create in the blueprint designer, not blueprints that you create with the HCL® UrbanCode™ Deploy server.</p>
+<p>In most cases, you create a blueprint with a default set of properties. Then, you use one or more configuration files to customize provisioning for specific clouds or specific situations. Since blueprints use only the properties in the configuration file that apply to it, you can also use a configuration file with more than one blueprint.</p>
+<p>Configuration files are not necessary if you are deploying to OpenStack and OpenStack-based clouds. If you are deploying to any other supported cloud, you must use a configuration file.</p>
+<p>The editor for configuration files is similar to the editor for blueprint source code. You can specify properties in a configuration file and substitute those properties when you provision the environment.</p>
+<ol>
+<li>Follow these steps to create a configuration file:</li>
+<li>In the blueprint editor, click <strong>New</strong>. </li>
+<li>In the Add a New File window, specify a name and description for the configuration file.</li>
+<li>If your workspace contains multiple repositories, select a project from the <strong>Repository</strong> list. If your workspace contains one repository, the <strong>Repository</strong> list is not displayed.</li>
+<li>In the <strong>Type</strong> list, select the configuration file type. </li>
+<li>
+<p>Click <strong>Save</strong>. The new configuration file opens in the editor. By default, if you created a configuration file for a cloud other than OpenStack, the configuration file includes resource type mappings. These resource type mappings translate the OpenStack resource types in the blueprint to the appropriate resource types for the target cloud. For example, if you created a configuration file for SoftLayer® clouds, the file maps the OpenStack resource type <code>OS::Nova::Server</code> to the SoftLayer resource type <code>IBM::SoftLayer::Server</code>, as shown in the following configuration file:</p>
+<p><img alt="A new configuration file for SoftLayer, showing the type mapping" src="../../images/blueprint_configs_b.gif" /></p>
+</li>
+<li>
+<p>To import properties from a blueprint, click <strong>Add</strong> <img alt="" src="../../images/icons/add.gif" />, then select the blueprint, and then click <strong>OK</strong>. </p>
+<p><strong>Note:</strong> You can import properties from more than one blueprint. In this case, the editor shows warnings on properties that exist in one blueprint but not in another. When you provision a blueprint, the blueprint uses only the properties in the configuration file that apply to it.</p>
+</li>
+<li>
+<p>In the configuration file, specify the properties for the deployment on the target cloud.</p>
+</li>
+</ol>
+<p>Now you can use this configuration file when you provision the environment. You can create multiple configuration files to customize blueprints for different situations or clouds.</p>
+<p>For example, suppose that your cloud systems provide different virtual images. Start by creating virtual images from one of the clouds in a blueprint, or use referenced images to represent generic images. Then, externalize each of the properties in the virtual images. In the following figure, the flavor, image ID, and name of the virtual image are bound to properties that are named <code>image_flavor</code>, <code>image_ID</code>, and <code>image_name</code>.</p>
+<p><img alt="A blueprint in the editor that shows a virtual image with externalized properties" src="../../images/blueprint_configs_a.gif" /></p>
+<p>The code for the blueprint shows the property names rather than literal values, as in the following example code:</p>
+<pre><code>virtual-image:
+  type: OS::Nova::Server
+  properties:
+    flavor: { get_param: image_flavor }
+    image: { get_param: image_ID }
+    name: { get_param: image_name }
+</code></pre>
+
+<p>Then, create a different configuration file for each cloud, import these properties, and specify values for a specific cloud system, as in the following example of a configuration file.</p>
+<pre><code>parameters:
+  image_name: virtual-image
+  image_ID: aea5549c-892f-4c67-a3c9-9f494f1c7ead
+  image_flavor: m1.small
+</code></pre>
+
+<p><strong>Parent topic:</strong> <a href="../blueprint_create/">Editing blueprints with the blueprint designer</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_configs.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

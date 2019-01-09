@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/quickstart_app_process/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Lesson 5 Create an application process - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Lesson 5: Create an application process", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="lesson-5-create-an-application-process">Lesson 5: Create an application process</h1>
+<p>Application processes direct underlying component processes and orchestrate multi-component deployments.</p>
+<p>An application process, like a component process, consists of steps that are configured with the process editor. In this lesson, you create an application process that installs the helloWorld component by calling the component process that you created earlier. You must use application processes to deploy components.</p>
+<ol>
+<li>Click the <strong>Applications</strong> tab, and then click <strong>hello Application</strong>. </li>
+<li>Click <strong>Processes</strong>, and then click <strong>Create Process</strong>. </li>
+<li>In the Create an Application Process window, name the new application process something like hello App Process.</li>
+<li>Accept the default values for the other fields, and click <strong>Save</strong>. </li>
+<li>To open the new process in the process editor, click the new process.</li>
+<li>Add a step that deploys the helloWorld component: <ol>
+<li>From the list of steps, add an <strong>Install Component</strong> step to the design area, and then on the process step click the <strong>Edit</strong> icon <img alt="" src="../../images/edit_icon.gif" />. </li>
+<li>In the Edit Properties window, name the step something like Deploy helloWorld. </li>
+<li>In the <strong>Component</strong> list, select the <strong>helloWorld</strong> component.All components that are associated with an application are available.</li>
+<li>In the <strong>Component Process</strong> list, select the <strong>helloProcess</strong> component process. If multiple processes were defined for the helloWorld component, they are listed.</li>
+<li>In the <strong>Limit to Tag</strong> list, select the <strong>blueCycle</strong> tag that you defined earlier. After you select <strong>blueCycle</strong>, the application deploys only components with this tag.</li>
+<li>Accept the default values for the other fields, and click <strong>OK</strong>. </li>
+</ol>
+</li>
+<li>Verify that the <strong>Start</strong> step is connected to the <strong>Deploy helloWorld</strong> step. </li>
+<li>Verify that the <strong>Deploy helloWorld</strong> step is connected to the <strong>Finish</strong> step. </li>
+<li>Save the process by clicking <strong>Save</strong>. </li>
+</ol>
+<p>The complete application process looks like the following figure:</p>
+<p><img alt="The complete application process" src="../../images/qs-plugin-design-8.gif" /></p>
+<p>In this lesson, you created an application process that deploys the helloWorld component.</p>
+<p>The <strong>Processes</strong> tab lists the application process.</p>
+<p>For more information about creating application processes, see <a href="../../../com.ibm.udeploy.doc/topics/app_process/">Application processes</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../quickstart_abstract/">Create a simple helloWorld deployment</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/quickstart_app_process.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

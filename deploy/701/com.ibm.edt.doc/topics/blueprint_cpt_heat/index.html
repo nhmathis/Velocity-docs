@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/blueprint_cpt_heat/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Blueprints for clouds that you connect to through OpenStack Heat - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Blueprints for clouds that you connect to through OpenStack Heat", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="blueprints-for-clouds-that-you-connect-to-through-openstack-heat">Blueprints for clouds that you connect to through OpenStack Heat</h1>
+<p>You can provision environments on clouds through HEAT-based blueprints that you model on the blueprint design server. Heat-based blueprints use OpenStack Heat Orchestration Templates to model the infrastructure of a cloud environment, including its virtual images, network, and storage. A heat-based blueprint can also include software components to be deployed in the environment.</p>
+<p>When you have modeled the cloud environment and software components in the blueprint, you can create or update a cloud environment based on that blueprint. The blueprint design server runs this provisioning or updating by using a Heat engine. If the blueprint includes software components, the provisioning or updating process also deploys those components through the automation processes that are specified in the blueprint. For example, blueprints can use component processes on the HCL® UrbanCode™ Deploy server. Blueprints can also specify other automation details, such as the deployment order for components.</p>
+<p>You edit this type of blueprint in the blueprint designer. See <a href="../blueprint_edit_clouds/">Modeling environments for clouds through OpenStack Heat</a>.</p>
+<p>The resources in a blueprint are instances of resource types. For more information about specific types, see <a href="../../../com.ibm.edt.heat.reference.doc/topics/ref_heat_types_ov/">Heat resource types</a>.</p>
+<p>A simple blueprint has the following sections:</p>
+<ul>
+<li>
+<p><strong>Description</strong></p>
+<p>The description is a text field that describes the blueprint.</p>
+</li>
+<li>
+<p><strong>Parameters</strong></p>
+<p>The parameters section is a list of values that you can refer to from resources. You can specify default values for these parameters in the blueprint, in a configuration file, or at provisioning time.</p>
+</li>
+<li>
+<p><strong>Outputs</strong></p>
+<p>Blueprints can have a list of output parameters.</p>
+</li>
+<li>
+<p><strong>Resources</strong></p>
+<p>The resources in a blueprint represent the resources in the provisioned environment, including virtual images, disks, and software components.</p>
+<p>The following resources are commonly found in this type of blueprint:</p>
+<ul>
+<li>
+<p><strong>Virtual machines (compute nodes)</strong></p>
+<p>Virtual machine resources (of the type <code>OS::Nova::Server</code>) include information about the virtual image for the machine and the networks to which the virtual machine is connected.</p>
+<p><strong>Restriction:</strong> To be used with the blueprint designer, the virtual images must meet the requirements in <a href="../cloud_connect_vm_requirements/">Configuring images for use with the blueprint designer</a>.</p>
+</li>
+<li>
+<p><strong>Software components and software configurations</strong></p>
+<p>Software components (of the type <a href="../../../com.ibm.edt.heat.reference.doc/topics/res_ibm_urbancode_softwaredeploy_ucd/">IBM::UrbanCode::SoftwareDeploy::UCD</a> for HCL® UrbanCode™ Deploy components and of the type <code>OS::Heat::SoftwareConfig</code> for other pieces of software) represent deployment instances of software. In most cases, components also have a resource of the type <a href="../../../com.ibm.edt.heat.reference.doc/topics/res_ibm_urbancode_softwareconfig_ucd/">IBM::UrbanCode::SoftwareConfig::UCD</a>, which represents configuration properties for the component, such as its application and any properties that it has.</p>
+<p>Blueprints also often have a resource that represents the HCL® UrbanCode™ Deploy agent. By default, this resource is named <code>ucd_agent_install_win</code> or <code>ucd_agent_install_linux</code>, based on the operating system of the virtual machine that is used in the blueprint. It contains the code to install an agent on the virtual machines. For more information on this resource, see <a href="../blueprint_agent_options/">Options for deploying agents</a>.</p>
+</li>
+<li>
+<p><strong>Storage volumes and volume attachments</strong></p>
+<p>Storage volumes (of the type <code>OS::Cinder::Volume</code>) represent new virtual disks that are created when the blueprint is provisioned. Storage volume attachments (of the type <code>OS::Cinder::VolumeAttachment</code>) represent the connection of a virtual machine to a new or existing storage volume.</p>
+</li>
+<li>
+<p><strong>Resource trees</strong></p>
+<p>The resource tree resource (of the type <a href="../../../com.ibm.edt.heat.reference.doc/topics/res_ibm_urbancode_resourcetree/">IBM::UrbanCode::ResourceTree</a>) represents changes or additions to the resource tree on the HCL® UrbanCode™ Deploy server. Other resources, such as virtual images, refer to the properties of the resource tree, such as the location of the server. The resource tree resource also specifies the name of the application that the blueprint relates to.</p>
+</li>
+<li>
+<p><strong>Network ports</strong></p>
+<p>When you add a network to a blueprint, the editor adds a resource of the type <code>OS::Neutron::Port</code>, which represents a port on the specified network.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../blueprint_cpt/">Overview of blueprints</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/blueprint_cpt_heat.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

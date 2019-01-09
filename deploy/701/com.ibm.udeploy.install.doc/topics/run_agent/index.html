@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/run_agent/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Starting agents - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Starting agents", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="starting-agents">Starting agents</h1>
+<p>To start an agent, run the shell script or batch file.</p>
+<p>Make sure that the server is running. Also, if the agent runs through an agent relay, make sure that the relay is started.</p>
+<ol>
+<li>Go to the agent_installation\bin directory. </li>
+<li>
+<p>Run the appropriate script: </p>
+<ul>
+<li>
+<p>On Windows™, run this command:</p>
+<p><code>agent.cmd start</code></p>
+</li>
+<li>
+<p>On Linux™ or UNIX™, run this command:</p>
+<p><code>./agent start</code></p>
+</li>
+<li>
+<p>On z/OS®, to run the agent as a started task, customize the sample <code>hlq.SBUZSAMP(BUZAGNT)</code> started task member, and then copy the task member to the <code>SYS1.PROCLIB</code> library. Provide the installation directory of the agent. The default installation directory of the agent is /opt/ucd/agent/bin. The following lines show sample code:</p>
+<p><code>//* 
+//* JES JOB MONITOR 
+//*
+//BUZAGNT  PROC AGENT='/opt/ucd/agent/bin'
+//*
+//BUZAGNT  EXEC PGM=BPXBATCH,REGION=0M,TIME=NOLIMIT,
+//            PARM='PGM &amp;AGENT./agent run'
+//STDOUT   DD SYSOUT=*
+//STDERR   DD SYSOUT=*
+//*
+//        PEND
+//*</code></p>
+</li>
+<li>
+<p>On IBM® i, you must start the agent through the IBM Portable Application Solutions Environment for i (PASE for i) shell.</p>
+</li>
+<li>After the agent starts, go to the HCL® UrbanCode™ Deploy web application, and under Resources, open the Agents page. </li>
+<li>Associate the agent user ID to the started task by setting up the STARTED class profile. To set up the STARTED class, enter these commands: </li>
+</ul>
+</li>
+</ol>
+<p>When the installation is complete, the agent is listed with a status of <code>Online</code>.</p>
+<p><strong>Parent topic:</strong> <a href="../runProduct/">Starting HCL UrbanCode Deploy</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/run_agent.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

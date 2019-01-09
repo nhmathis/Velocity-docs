@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/mass_agent_migration/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Migrating Agents to Web - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Migrating Agents to Web", url: "#_top", children: [
+              {title: "Prerequisites", url: "#prerequisites" },
+              {title: "About this task", url: "#about-this-task" },
+              {title: "Agent Configuration Templates", url: "#agent-configuration-templates" },
+              {title: "Agent Migration", url: "#agent-migration" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="migrating-agents-to-web">Migrating Agents to Web</h1>
+<p>Agent Configuration Templates allow you to migrate JMS agents on a server to Web agents with the ability to revert back to the original JMS configuration. This allows you to specify connection details for groups of agents.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>You must upgrade agents and server to IBM UrbanCode Deploy 7.0.1. For more information see<a href="../../../com.ibm.udeploy.install.doc/topics/upgradeAgents/">Upgrading agents</a> and <a href="../../../com.ibm.udeploy.install.doc/topics/upgradeInstall/">Upgrading the server</a>.</p>
+<h2 id="about-this-task">About this task</h2>
+<p>IBM UrbanCode Deploy 7.0 introduced a new server/agent communication protocol which offers many performance improvements, and increased scalability. See <a href="../web_agents/">Web agents</a>. UrbanCode Deploy 7.0.1 is extending this capability by adding Agent Configuration Templates which will allow you to define a reusable set of configuration that can be used to easily migrate existing JMS agents to WEB agents.</p>
+<h2 id="agent-configuration-templates">Agent Configuration Templates</h2>
+<p>Before you can migrate an agents from JMS to Web an Agent Configuration Template will need to be assigned to the agent or agents.</p>
+<ol>
+<li>Click <strong>Resources</strong>><strong>Agent Configuration Templates</strong>.</li>
+<li>Click on <strong>Create Agent Configuration Template</strong> on the right side of the page.</li>
+<li>Give the template a name and description in the designated boxes.</li>
+<li>Add teams that you want to give access.</li>
+<li>Enter the URLs of the servers or relays where you would like agents to connect.</li>
+<li>Click <strong>Save</strong>.</li>
+<li>Click on the template name and click <strong>Add Agents</strong> to apply agents to the specific template.</li>
+</ol>
+<p>After agents are added to templates they can be migrated to the new Web type.</p>
+<h2 id="agent-migration">Agent Migration</h2>
+<p>Before you can change agents types from the Agents page an Agent Configuration Template will need to be assigned to the agents.</p>
+<ol>
+<li>Click <strong>Resources</strong> ><strong>Agents</strong>.</li>
+<li>Select the agents that you want to convert.</li>
+<li>Click bulk <strong>Actions</strong> menu.</li>
+<li>From the <strong>Actions</strong> drop down dialog you can select <strong>Migrate to Web</strong> or <strong>Revert to JMS</strong>.</li>
+</ol>
+<p>If an agent is currently on a template there will be an icon next to <strong>Type</strong> on the <strong>Agents</strong> page. Clicking that icon will also prompt for agent migration.</p>
+<p>A confirmation message will appear when the migration was successfully started on all agents.</p>
+<p>The connection setting on newly migrated agents will be taken from the Agent Configuration Template that the agents belong to.</p>
+<p><strong>Note:</strong> If migration fails you can view the logs by clicking on the agent name and then clicking on the <strong>Logs</strong> section of specified agent.</p>
+<p><strong>Parent topic:</strong> <a href="../configure_agents/">Agents and agent relay configuration</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/mass_agent_migration.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

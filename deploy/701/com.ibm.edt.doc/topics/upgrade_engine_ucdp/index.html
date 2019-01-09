@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/upgrade_engine_ucdp/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Upgrading engines that you installed with HCL UrbanCode Deploy - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Upgrading engines that you installed with HCL UrbanCode Deploy", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="upgrading-engines-that-you-installed-with-hcl-urbancode-deploy">Upgrading engines that you installed with HCL UrbanCode Deploy</h1>
+<p>To upgrade the engine, stop the related Heat services, install the new version, and restart the services. When you upgrade the engine, you must also upgrade the blueprint design server.</p>
+<p>These steps are for engines that you installed with the HCL® UrbanCode™ Deploy installer in versions before 6.2.1.1. For all other engines, other processes apply:</p>
+<ul>
+<li>To upgrade an engine from before 6.2.1.1 to version 6.2.1.1 or later, you must transfer the engine from a Red Hat Enterprise Linux™ version 6 server to a Red Hat Enterprise Linux version 7 server. See <a href="../migrate_engine_ucdp_script/">Migrating engines that you installed with HCL UrbanCode Deploy</a>. If you do not want to migrate the engine, but you need access to the updated Heat types, extend your existing engine. See <a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>.</li>
+<li>If you are upgrading an engine that is version 6.2.1.1 or later, use the instructions in <a href="../upgrade_engine_extended/">Upgrading engines that you extended</a>.</li>
+<li>
+<p>If you extended an existing engine as described in <a href="../extending_an_engine_for_openstack/">Extending an existing OpenStack engine</a>, use the instructions in <a href="../upgrade_engine_extended/">Upgrading engines that you extended</a>.</p>
+</li>
+<li>
+<p>Stop the cloud discovery service. See <a href="../stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+<li>
+<p>Check to see whether the program <code>rabbitmq-server</code> is running: </p>
+<p><code>service rabbitmq-server status</code></p>
+</li>
+<li>
+<p>If the program <code>rabbitmq-server</code> is running, stop it: </p>
+<p><code>service rabbitmq-server stop</code></p>
+</li>
+<li>
+<p>Check to see whether the program <code>qpidd</code> is running: </p>
+<p><code>service qpidd status</code></p>
+</li>
+<li>
+<p>If the program <code>qpidd</code> is running, stop it: </p>
+<p><code>service qpidd stop</code></p>
+</li>
+<li>
+<p>Stop the Heat services by running the following commands: </p>
+<p><code>service openstack-heat-engine stop</code></p>
+<p><code>service openstack-heat-api stop</code></p>
+<p><code>service openstack-heat-api-cfn stop</code></p>
+<p><code>service openstack-heat-api-cloudwatch stop</code></p>
+</li>
+<li>
+<p>If you installed a Keystone server along with the engine, stop it: </p>
+<p><code>service openstack-keystone stop</code></p>
+</li>
+<li>
+<p>Install the new version of the engine. See <a href="../install_engine/">Installing the engine</a>.</p>
+</li>
+<li>
+<p>Start the Heat services: </p>
+<p><code>service openstack-heat-engine start</code></p>
+<p><code>service openstack-heat-api start</code></p>
+<p><code>service openstack-heat-api-cfn start</code></p>
+<p><code>service openstack-heat-api-cloudwatch stop</code></p>
+</li>
+<li>
+<p>If you installed a Keystone server when you installed the engine, start it by running the following command: </p>
+<p><code>service openstack-keystone start</code></p>
+</li>
+<li>
+<p>Start the cloud discovery service. See <a href="../start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+</ul>
+<p>A new file is in the /etc/heat/ folder. It is named /etc/heat/heat.conf.backup.n, where n is the largest numerical value for the present <code>.backup</code> files. You can still find the previous heat.conf files in this location.</p>
+<p>If you installed a Keystone server with your engine, new files are in the /etc/keystone/ and /root/ folders. They are named /etc/keystone/keystone.conf.backup.n and /root/keystonerc.backup.n files, where n is the largest numerical value for the present <code>.backup</code> files. These files contain the new service token value for your Keystone server. You can still find the previous keystone.conf and keystonerc files in those locations. Similarly, the file ~/clientrc file is backed up.</p>
+<p><strong>Parent topic:</strong> <a href="../upgrade_engine/">Upgrading engines</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/upgrade_engine_ucdp.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

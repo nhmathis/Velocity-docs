@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/agent_discovery/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Discovering agents automatically - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Discovering agents automatically", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="discovering-agents-automatically">Discovering agents automatically</h1>
+<p>You can use HCL® UrbanCode™ Deploy to discover potential agent locations on UNIX™ and Windows™.</p>
+<p>Ensure that the Nmap utility is installed on the system where HCL UrbanCode Deploy server is installed, and that the Nmap utility is on the path environment variable.</p>
+<p>This feature uses Nmap utility to search for locations where agents might be installed. The Nmap utility searches ports <code>22</code> and <code>135</code>. A location with port <code>22</code> that is open is assumed to be computer that is running UNIX. A location with port <code>135</code> that is open is assumed to be a computer that is running Windows.</p>
+<p><strong>Note:</strong> Agent discovery does not work on IBM® z/OS®.</p>
+<ol>
+<li>Click <strong>Resources</strong> > <strong>Agents</strong>.</li>
+<li>Click <strong>Discover Available Network Hosts</strong>. </li>
+<li>Using the Discover Available Network Hosts window, enter the subnets to search in the <strong>Subnet</strong> field. The format is <code>xxx.xxx.xxx.xxx/nn</code> where xxx.xxx.xxx.xxx is the IP address and nn is the network prefix. To search more than one subnet, enter each one on a separate line.</li>
+<li>
+<p>Click <strong>Save</strong> to start the search. Search times depend on the size and number of subnets that are searched. If you search a large subnet, or many subnets simultaneously, the search time might be lengthy. Discovered locations are listed on the Agents tab with the status of Installable.</p>
+<p><img alt="Agents with the status of Installable" src="../../images/agent-discover.gif" /></p>
+<p>A discovered agent is automatically given the same name as the discovered host. If the host name is unavailable, the discovered IP address is used instead.</p>
+</li>
+</ol>
+<p>You can install a discovered agent by using the <strong>Install Agent</strong> action that is associated with the agent on the Agents pane. For information about installing discovered agents, see <a href="../agent_installremote/">Installing agents remotely</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.install.doc/topics/agent_install_ov/">Installing agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/agent_discovery.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

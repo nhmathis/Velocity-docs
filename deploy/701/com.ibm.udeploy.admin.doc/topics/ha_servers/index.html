@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.admin.doc/topics/ha_servers/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>High-availability server processes - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "High-availability server processes", url: "#_top", children: [
+              {title: "Importing component versions (CodeStation)", url: "#importing-component-versions-40codestation41" },
+              {title: "Notifications", url: "#notifications" },
+              {title: "Running processes and handling failures", url: "#running-processes-and-handling-failures" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="high-availability-server-processes">High-availability server processes</h1>
+<p>While high-availability servers complete the same processes as standalone servers, they run slightly differently and access files in run slightly different locations than individual servers do.</p>
+<p>In a high-availability topology, all servers use the same database and a common network storage. The server log and CodeStation repository are stored in the common network storage. Most configuration information and runtime data is stored in the shared database. Each server maintains some independent configuration information, such as the connection information for the database and for JMS.</p>
+<p>Because the servers share the database, all servers run on the same interval.</p>
+<p>Many activities run the same on high-availability servers as on a standalone server. Some activities run slightly differently:</p>
+<h2 id="importing-component-versions-40codestation41">Importing component versions (CodeStation)</h2>
+<p>In a clustered high-availability configuration, any server can start the process that imports a component version. If components are configured for automatic imports, all servers poll for component version changes, but they are limited to the polling duration in the system settings. To prevent more than one server from importing a component version or checking for new versions, the database handles server synchronization and a server acquires a database lock before importing or polling.</p>
+<h2 id="notifications">Notifications</h2>
+<p>Notifications are handled by the server that runs the process or starts the related event. For more information, see <a href="../../../com.ibm.udeploy.doc/topics/notify_create/">Creating Notifications in a Notification Scheme</a>.</p>
+<h2 id="running-processes-and-handling-failures">Running processes and handling failures</h2>
+<p>While processes are running, step failures are shown in the process log as usual. Error handling is the responsibility of the process author; for example, processes can include steps that run when other steps fail, including automatic rollback steps.</p>
+<p>When a process is requested, a request is created in the database. Servers poll the database regularly for new process requests. The first server that finds the process request runs the requested process. Due to a limitation on the server, the process can not be transferred to another server in the cluster. Therefore, if the server fails in the middle of running a process, the process fails. The other servers in the high-availability cluster run future processes, but they can not take over processes that the failed server was running.</p>
+<p>If an agent relay stops while a connected agent is running a process, the agent uses its failover settings to connect to other servers or agent relays. If the agent exhausts its failover options, it continues trying to reconnect. If an agent relay or server comes back online, the agent continues to run the process.</p>
+<p>Step failures do not cause agents themselves to fail. If an agent stops while it is running a process, the server assumes that the agent is still running the process and does not mark the process as failed.</p>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/ha_overview/">High availability overview</a></p>
+<p><strong>Parent topic:</strong> <a href="../security_ch/">Managing security</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.admin.doc/topics/ha_servers.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

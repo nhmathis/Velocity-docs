@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.heat.reference.doc/topics/res_ibm_route53_recordset/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>AWS Route53 RecordSet - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "AWS::Route53::RecordSet", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="awsroute53recordset">AWS::Route53::RecordSet</h1>
+<p>This resource type represents a DNS record set, which translates host names to IP addresses.</p>
+<p>The blueprint uses the core properties and extended properties, if any, from this resource type. Review and configure the applicable heat resources that apply to your configuration information.</p>
+<p>In the blueprint designer, you can configure the properties that the following table includes. Properties are listed as either “core” or “extended.” Each type of property is located in separate sections of the heat resource that you can view in the blueprint designer. You set the core properties in the properties section and set the extended properties in the metadata section of the blueprint.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Core or extended</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>comment</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>A description for the record set.</td>
+</tr>
+<tr>
+<td>hosted_zone</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The ID of the hosted zone.</td>
+</tr>
+<tr>
+<td>identifier</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>An identifier that differentiates among multiple resource record sets that have the same combination of DNS name and type.</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>Name of the domain. This must be a fully specified domain, ending with a period as the last label indication.</td>
+</tr>
+<tr>
+<td>region</td>
+<td>String</td>
+<td>False</td>
+<td>Core</td>
+<td>The region for this record set, for latency-based routing.</td>
+</tr>
+<tr>
+<td>resource_records</td>
+<td>List</td>
+<td>True</td>
+<td>Core</td>
+<td>List of resource records to add.</td>
+</tr>
+<tr>
+<td>ttl</td>
+<td>Integer</td>
+<td>False</td>
+<td>Core</td>
+<td>The resource record cache time to live (TTL), in seconds.</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>True</td>
+<td>Core</td>
+<td>The type of records in the set, such as CNAME or A.</td>
+</tr>
+<tr>
+<td>weight</td>
+<td>Integer</td>
+<td>False</td>
+<td>Core</td>
+<td>The relative portion of traffic for the resource record set that is routed to the associated location.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Parent topic:</strong> <a href="../ref_heat_types_route53/">Amazon Route 53 resource types</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.heat.reference.doc/topics/res_ibm_route53_recordset.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

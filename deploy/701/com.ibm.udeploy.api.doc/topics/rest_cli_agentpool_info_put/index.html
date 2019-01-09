@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.api.doc/topics/rest_cli_agentpool_info_put/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Get information about an agent pool - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Get information about an agent pool", url: "#_top", children: [
+              {title: "Request", url: "#request" },
+              {title: "Example response", url: "#example-response" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="get-information-about-an-agent-pool">Get information about an agent pool</h1>
+<p>Returns a JSON representation of an agent pool.</p>
+<h2 id="request">Request</h2>
+<pre><code>PUT https://{hostname}:{port}
+    /cli/agentPool/info?{parameters}
+Accept: application/json
+
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pool</td>
+<td>string</td>
+<td>true</td>
+<td>Name or ID of the agent pool</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accept</td>
+<td><code>application/json</code></td>
+<td>true</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-response">Example response</h2>
+<pre><code>{
+  &quot;id&quot;: &quot;8bfa2e62-2376-466c-91c5-3f79b3e6f655&quot;,
+  &quot;name&quot;: &quot;Pool1&quot;,
+  &quot;active&quot;: true,
+  &quot;description&quot;: &quot;&quot;,
+  &quot;status&quot;: &quot;ONLINE&quot;,
+  &quot;security&quot;: {
+    &quot;read&quot;: true,
+    &quot;write&quot;: true
+  },
+  &quot;agentIds&quot;: &quot;897fa851-fab1-455f-bd84-fe83ae43c441,bdc2019c-78ae-403c-a528-22b31ae3c183&quot;,
+  &quot;extendedSecurity&quot;: {
+    &quot;read&quot;: true,
+    &quot;write&quot;: true,
+    &quot;Create Agent Pools&quot;: true,
+    &quot;Edit Agent Pools&quot;: true,
+    &quot;View Agent Pools&quot;: true,
+    &quot;teams&quot;: [
+      {
+        &quot;teamId&quot;: &quot;ea307e2e-d6be-4092-a7e8-e8e02274de7e&quot;,
+        &quot;teamLabel&quot;: &quot;My team&quot;
+      }
+    ]
+  }
+}
+</code></pre>
+
+<p>Related CLI command: <a href="../udclient_getagentpool/">getAgentPool</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../rest_cli_agentpool/">agentPool resource</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.api.doc/topics/rest_cli_agentpool_info_put.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

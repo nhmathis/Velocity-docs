@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.doc/topics/trouble_zos/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Troubleshooting problems on z/OS - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Troubleshooting problems on z/OS", url: "#_top", children: [
+              {title: "Agent log files", url: "#agent-log-files" },
+              {title: "Common problems", url: "#common-problems" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="troubleshooting-problems-on-zos">Troubleshooting problems on z/OS</h1>
+<p>To troubleshoot problems on agent computers that are running IBM® z/OS®, examine the agent log files.</p>
+<h2 id="agent-log-files">Agent log files</h2>
+<p>Agent log files are stored in the UTF-8 format. To read agent log files, use an editor that supports the UTF-8 format. For example, use IBM Rational® Developer for z Systems™ or the z/OS UNIX™ Directory List Utility.</p>
+<p>Alternately, convert the agent log files to a different format. To convert an agent log file to EBCDIC IBM-1047 encoding, type the following text at a command line:</p>
+<pre><code>iconv -f utf8 -t ibm1047 agent.out &gt; agent.out.1047
+</code></pre>
+
+<h2 id="common-problems">Common problems</h2>
+<ul>
+<li>
+<p><strong>Out of memory errors</strong></p>
+<p>If the agent does not start or the deployment tools do not run, and a message similar to the following message is displayed on the console or written to the agent/var/log/stdout log file, the OMVS segment is not in the user profile or the memory that is assigned to the user account is not sufficient for the OMVS segment.</p>
+<p><code>JVMJ9VM015W Initialization error for library j9jit24(11): cannot initialize JIT.
+Could not create the Java virtual machine.
+&lt;JIT: fatal error, failed to allocate 8192 Kb data cache&gt;</code></p>
+<p>To correct the problem, ensure that the agent user account meets the security requirements. To learn more, see <a href="../../../com.ibm.udeploy.admin.doc/topics/security_zos/">Security requirements on IBM z/OS computers</a>.</p>
+</li>
+<li>
+<p><strong>ISPF gateway is not configured correctly</strong></p>
+<p>The error message The ISPF gateway is not configured correctly is typically followed by an XML response that indicates the specific problem. Typical problems include the following issues:</p>
+<ul>
+<li>The user account does not have write access to the ispf_log_directory/WORKAREA directory.</li>
+<li>The user account does not have an ISPF profile.</li>
+<li>The ISPF gateway cannot allocate the data sets defined in the ISPF.conf file. By default, the ISPF.conf file is in the agent/conf/toolkit/ directory.</li>
+<li><strong>EDC5112I Response temporarily unavailable</strong></li>
+</ul>
+<p>The error message EDC5112I Response temporarily unavailable is displayed when no z/OS® UNIX™ processes are available to run the ISPF client gateway. To work around this behavior, set the PROCUSERMAX parameter in the OMVS segment of the user account Resource Access Control Facility profile to the value specified in the security requirements. To learn more, see <a href="../../../com.ibm.udeploy.admin.doc/topics/security_zos/">Security requirements on IBM z/OS computers</a>.</p>
+</li>
+<li>
+<p><strong>ISPF.SYSTSPRT error: EDC5129I No such file or directory.</strong></p>
+<p>The name of the ISPF client gateway log directory must be shorter than 51 bytes. If a directory with longer name is used, you will see the following errors when using the TSO/ISPF command plug-in step or creating a component version.</p>
+<p><code>*** fopen() error for
+ispf_log_directory/WORKAREA/WORKAREA/UCDUSER.ID00xxxx.ISPF.SYSTSPRT error: EDC5129I No such file or
+directory.</code></p>
+<p><code>Bad call : cp: ispf_log_directory/WORKAREA/UCDUSER.ID00xxxx.ISPF.SYSTSPRT: EDC5129I No such file or
+directory.</code></p>
+<p>To correct the problem, use a log directory which is shorter than 51 bytes. You can do this by reinstalling the agent and toolkit or by modifying the directory in the following two configuration files:</p>
+<ul>
+<li>agent_dir/conf/toolkit/ISPZXENV</li>
+<li>agent_dir/conf/toolkit/installed.properties</li>
+</ul>
+</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../trouble_serveragents_ov/">Troubleshooting the HCL UrbanCode Deploy server and agents</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.doc/topics/trouble_zos.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

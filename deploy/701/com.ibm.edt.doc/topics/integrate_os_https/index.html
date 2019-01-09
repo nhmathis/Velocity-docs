@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/integrate_os_https/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configuring HTTPS security for OpenStack clouds - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configuring HTTPS security for OpenStack clouds", url: "#_top", children: [
+          ]},
+          {title: "!/bin/bash", url: "#binbash", children: [
+          ]},
+          {title: "Retrieve the certificate from the remote service", url: "#retrieve-the-certificate-from-the-remote-service", children: [
+          ]},
+          {title: "Import the certificate into the JRE trust store.", url: "#import-the-certificate-into-the-jre-trust-store", children: [
+          ]},
+          {title: "Verify that the certificate was imported correctly.", url: "#verify-that-the-certificate-was-imported-correctly", children: [
+          ]},
+          {title: "Restart the service.", url: "#restart-the-service", children: [
+          ]},
+          {title: "$UCD_P_HOME/bin/server stop", url: "#ucd_p_homebinserver-stop", children: [
+          ]},
+          {title: "$UCD_P_HOME/bin/server start", url: "#ucd_p_homebinserver-start", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configuring-https-security-for-openstack-clouds">Configuring HTTPS security for OpenStack clouds</h1>
+<p>If your OpenStack server connects through HTTPS, you must import the OpenStack server key into the blueprint design server keystore.</p>
+<p>The following script imports the OpenStack server key into the blueprint design server keystore. You can adapt this script to import the key for any remote system into the blueprint design server keystore.</p>
+<ol>
+<li>
+<p>On the blueprint design server, create a script from the following template: </p>
+<p>```</p>
+<h1 id="binbash">!/bin/bash</h1>
+<p>while getopts "s:p:l:h" opt; do
+  case $opt in
+    s)
+      DOMAIN_NAME=$OPTARG
+      ;;
+    p)
+      PORT=$OPTARG
+      ;;
+    l)
+      UCD_P_HOME=$OPTARG
+      ;;
+    h)
+      echo "Usage: ./import_os_cert.sh -s <OpenStack_HOSTNAME> -p <PORT> -l <UCDP_INSTALLED_PATH>"
+      exit 0
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" &gt;&amp;2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." &gt;&amp;2
+      exit 1
+      ;;
+  esac
+done</p>
+<p>if [ -z "$DOMAIN_NAME" ]; then
+    echo "Please set the OpenStack hostanme"
+    exit 1
+fi</p>
+<p>if [ -z "$PORT" ]; then
+    echo "Please set the OpenStack port"
+    exit 1
+fi</p>
+<p>if [ -z "$UCD_P_HOME" ]; then
+    echo "Please set the UCDP Installed Directory"
+    exit 1
+fi</p>
+<h1 id="retrieve-the-certificate-from-the-remote-service">Retrieve the certificate from the remote service</h1>
+<p>openssl s_client -connect $DOMAIN_NAME:$PORT -showcerts </dev/null\
+ 2>/dev/null | openssl x509 -outform PEM | tee ~/$DOMAIN_NAME.crt</p>
+<h1 id="import-the-certificate-into-the-jre-trust-store">Import the certificate into the JRE trust store.</h1>
+<p>cd $UCD_P_HOME/java/jre
+./bin/keytool -import -trustcacerts -keystore ./lib/security/cacerts -storepass changeit\
+ -noprompt -alias $DOMAIN_NAME -file ~/$DOMAIN_NAME.crt</p>
+<h1 id="verify-that-the-certificate-was-imported-correctly">Verify that the certificate was imported correctly.</h1>
+<p>./bin/keytool -list -trustcacerts -keystore ./lib/security/cacerts\
+ -storepass changeit | grep $DOMAIN_NAME</p>
+<h1 id="restart-the-service">Restart the service.</h1>
+<h1 id="ucd_p_homebinserver-stop">$UCD_P_HOME/bin/server stop</h1>
+<h1 id="ucd_p_homebinserver-start">$UCD_P_HOME/bin/server start</h1>
+<p>```</p>
+</li>
+<li>
+<p>Run the script. Use the following command:</p>
+<p><code>./script\_name.sh -s OpenStack\_host -p port\_number -l blueprint\_desiger\_directory</code></p>
+<ul>
+<li>
+<p><strong><code>script\_name</code></strong></p>
+<p>The name of the script that you created.</p>
+</li>
+<li>
+<p><strong><code>port\_number</code></strong></p>
+<p>The OpenStack communication port number.</p>
+</li>
+<li>
+<p><strong><code>OpenStack\_host</code></strong></p>
+<p>The host name of the OpenStack server that contains the key.</p>
+</li>
+<li>
+<p><strong><code>blueprint\_desiger\_directory</code></strong></p>
+<p>The name of the folder the blueprint designer is installed in. By default, the value of blueprint_desiger_directory is <code>/opt/ibm-ucd-patterns</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Restart the blueprint designer. See <a href="../../../com.ibm.udeploy.install.doc/topics/stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a> and <a href="../../../com.ibm.udeploy.install.doc/topics/start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+</ol>
+<p><strong>Parent topic:</strong> <a href="../cloud_connect_openstack/">Connecting to OpenStack and OpenStack-based clouds</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/integrate_os_https.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

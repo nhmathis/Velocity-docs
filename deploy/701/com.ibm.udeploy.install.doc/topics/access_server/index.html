@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.install.doc/topics/access_server/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Accessing HCL UrbanCode Deploy - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Accessing HCL UrbanCode Deploy", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="accessing-hcl-urbancode-deploy">Accessing HCL UrbanCode Deploy</h1>
+<p>You can access the server and the blueprint designer with a web browser.</p>
+<ul>
+<li>Start the server. See <a href="../run_server/">Starting and stopping the server</a>.</li>
+<li>
+<p>Start the blueprint design server. See <a href="../start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a></p>
+</li>
+<li>
+<p>Open a web browser and go to the server host name that you configured during installation. The installation log shows the complete URL for the server. The default URL is <code>https://hostname:port</code>, where <code>hostname</code> host name of the computer on which the server is running and <code>port</code> is the HTTPS port that you used when you installed the server. The default HTTPS port is 8443.</p>
+</li>
+<li>Log on to the server by using the default credentials. The default user name is admin, and you specified the password when you installed the server. You can change these credentials later by using the Settings tab on the HCL® UrbanCode™ Deploy web application. See <a href="../../../com.ibm.udeploy.doc/topics/settings_ch/">Server settings and configuration</a> </li>
+<li>Check the Keep me logged in box option and the login cookie gets the expiration date one year in the future. </li>
+<li>Open a web browser and go to the blueprint designer host name that you configured during installation. The installation log shows the complete URL for the blueprint design server. The default URL is <code>https://hostname:port/landscaper</code> , where <code>hostname</code> is the host name of the blueprint design server, and <code>port</code> is the HTTP port that you specified when you installed the blueprint design server. The default HTTPS port is 8443.</li>
+<li>Log on to the blueprint design server by using the default credentials. The default administrator user name is <code>ucdpadmin</code>, and the default password is <code>ucdpadmin</code>. You can change these credentials later by using the Settings menu on the blueprint designer. See <a href="../../../com.ibm.udeploy.admin.doc/topics/security_ov/">Configuring security for the blueprint design server</a> </li>
+</ul>
+<p>If you set the server to use secure connections, your web browser might show a security warning that says that the connection is not secure. This warning appears because the server does not have a trusted certificate. See <a href="../../../com.ibm.udeploy.doc/topics/ssl_config/">Configuring SSL on Apache Tomcat and LDAP servers</a>.</p>
+<p><strong>Parent topic:</strong> <a href="../runProduct/">Starting HCL UrbanCode Deploy</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.install.doc/topics/access_server.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

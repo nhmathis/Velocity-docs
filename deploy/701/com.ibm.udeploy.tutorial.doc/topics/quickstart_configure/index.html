@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.udeploy.tutorial.doc/topics/quickstart_configure/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Configure the helloWorld tutorial system - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Configure the helloWorld tutorial system", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="configure-the-helloworld-tutorial-system">Configure the helloWorld tutorial system</h1>
+<p>To deploy the tutorial component, or any component, you must have an agent. An agent is a lightweight process that runs on a target computer and does the actual work of deploying components.</p>
+<p>Before you begin the tutorial, make sure that you completed the <a href="../quickstart_intro/#prereqs">Prerequisites</a>.</p>
+<p>To complete the tutorial, you must have an agent that is running on a target computer system. This target computer can be a virtual image, or a physical computer, including the one where the server is installed. You must have access to this computer and be able to install the agent on it. In addition, you must create several directories on the file system where the server is located. These directories contain the artifacts that you deploy.</p>
+<p>To prepare the tutorial system:</p>
+<ol>
+<li>Provision a computer for use as the target computer. This computer must meet the system requirements in <a href="../../../com.ibm.udeploy.install.doc/topics/sysRequire/">System requirements and performance considerations</a>.</li>
+<li>Install an agent on the target computer. You can install the agent from the HCL UrbanCode Deploy web interface as described in <a href="../../../com.ibm.udeploy.doc/topics/agent_installremote/">Installing agents remotely</a>. You can install the agent from the command line as described in <a href="../../../com.ibm.udeploy.install.doc/topics/agentInstall/">Installing agents from the command line</a>.</li>
+<li>Designate the agent for importing versions. By default, one system-wide agent is designated to import component versions. If you skip this step or if another agent is already designated, you can still use the new agent when you import your component version. To designate the agent, see <a href="../../../com.ibm.udeploy.admin.doc/topics/settings_system/">Server settings</a>.</li>
+<li>
+<p>On the HCL UrbanCode Deploy server, verify that the agent is installed by clicking <strong>Resources</strong> > <strong>Agents</strong>. Your agent must be included in the list of agents with a status of Online, as shown in the following figure: </p>
+<p><img alt="The agent in the list of agents; the Status column shows that the agent is online" src="../../images/webapp_configure_a.gif" /></p>
+</li>
+<li>
+<p>Add the agent as a resource: </p>
+<ol>
+<li>To the left of the <strong>Agents</strong> tab, click the <strong>Resource Tree</strong> tab. </li>
+<li>Click <strong>Create Top-Level Group</strong>, give the new group a name such as helloWorld Tutorial and click <strong>Save</strong>.This group is a container for resources, such as agents and components.</li>
+<li>
+<p>On the same line as the resource group, click <strong>Actions</strong> > <strong>Add Agent</strong>, as shown in the following figure: </p>
+<p><img alt="Adding an agent to the resource group" src="../../images/quickstart-resources.gif" /></p>
+</li>
+<li>
+<p>In the Create Resource window, select the agent in the <strong>Agent</strong> list, and click <strong>Save</strong>. 
+The agent is displayed as a child of the resource group.</p>
+</li>
+</ol>
+<p><img alt="Agent added to the resource group" src="../../images/quickstart-resources-online.gif" /></p>
+</li>
+<li>
+<p>On the computer where you installed the agent, add files that represent deployable artifacts to the file system. </p>
+<ol>
+<li>Create a directory and give it a name such as helloWorld on the file system where the agent is located.</li>
+<li>In the helloWorld directory, create a subdirectory that is named 1.0. The source configuration the tutorial uses treats each subdirectory in the target directory as a different component version.</li>
+<li>
+<p>In the 1.0 directory, place several files with any name and extension.The files represent the artifacts that the agent deploys by using the processes that you create. For the exercise, the number of files and their type is irrelevant, but, for best performance, limit their number and size.</p>
+<p><strong>Note:</strong> If z/OS® is used on your target computer, convert text-type files that are used for artifacts to IBM®-1047 encoding.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>The server and agent are configured for the tutorial, and the files that represent artifacts are ready to use. If you installed the agent on a remote system, you must know the credentials and locations that you specified.</p>
+<p><strong>Parent topic:</strong> <a href="../quickstart_abstract/">Create a simple helloWorld deployment</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.udeploy.tutorial.doc/topics/quickstart_configure.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

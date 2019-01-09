@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="UrbanCode">
+    <link rel="canonical" href="http://uc-doc-test.s3-website-us-east-1.amazonaws.com/deploy/701/com.ibm.edt.doc/topics/upgrade_server_bds/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Upgrading the blueprint design server - UrbanCode Deploy</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Upgrading the blueprint design server", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    <h1 id="upgrading-the-blueprint-design-server">Upgrading the blueprint design server</h1>
+<p>To upgrade the blueprint design server, stop the Tomcat server, install the new version, and restart the blueprint design server. When you upgrade the blueprint design server, you must also upgrade the engine.</p>
+<p>Upgrade the HCL® UrbanCode™ Deploy server. See <a href="../upgradeInstall/">Upgrading the server</a>.</p>
+<ol>
+<li>Stop the cloud discovery service. See <a href="../stop_patterns/">Stopping the blueprint designer, cloud discovery service, and engine</a>.</li>
+<li>
+<p>Stop the Tomcat service: </p>
+<ul>
+<li>
+<p>On Linux™, run the following command:</p>
+<p><code>server\_installation\_directory/bin/server stop</code></p>
+<p>Use the location of the blueprint design server installation for <code>server\_installation\_directory</code>. The default installation directory is /opt/ibm-ucd-patterns. By default, the command looks like the following code:</p>
+<p><code>/opt/ibm-ucd-patterns/bin/server stop</code></p>
+</li>
+<li>
+<p>On Windows™, run the following command:</p>
+<p><code>C:\server\_installation\_directory\bin\stop_server</code></p>
+<p>Use the location of the blueprint design server installation for <code>server\_installation\_directory</code>. The default installation directory is C:\Program Files\ibm-ucd-patterns. By default, the command looks like the following code:</p>
+<p><code>"C:\Program Files\ibm-ucd-patterns\bin\stop_server"</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Delete the contents of the following folder, including any subfolders: server_installation_directory/opt/tomcat/webapps/landscaper </p>
+</li>
+<li>Delete the following file, if it exists: server_installation_directory/opt/tomcat/webapps/landscaper.war </li>
+<li>Download and extract the installation files for the blueprint design server. These files are available for download from the IBM® Passport Advantage® website. See the <a href="https://www.ibm.com/software/passportadvantage/pao_customer.html">IBM UrbanCode Deploy download document</a>. </li>
+<li>If you are using a database other than Apache Derby or PostgreSQL, make the JDBC JAR file for your database available to the installer by completing one of these steps: <ul>
+<li>Place the JAR file for the database in the installation directory. On Linux, place it in the installation_directory/ibm-ucd-patterns-install/web-install/media/server/opt/tomcat/lib folder, and on Windows, place it in the installation_directory\media\server\opt\tomcat\lib folder.</li>
+<li>Record the location of the JAR file, and, when you are prompted by the installer, specify both the path and file name.</li>
+</ul>
+</li>
+<li>From the command line, run the installation program. On Windows, you must use the command line instead of the Windows PowerShell.<ul>
+<li>On Linux, change to the installation_directory/ibm-ucd-patterns-install/web-install/ folder, and run the install.sh file.</li>
+<li>On Windows, change to the installation_directory folder, and run the install.bat file.</li>
+</ul>
+</li>
+<li>Read the license agreements for the software package. Press the Space bar to show one page at a time, or press F to show the entire license text. </li>
+<li>If you agree to the terms of all of the license agreements, press Y, and then press Enter. </li>
+<li>At the prompt <code>Specify the directory where the blueprint design server for UrbanCode Deploy should be installed</code>, specify the current installation folder and press Enter. </li>
+<li>
+<p>At the prompt <code>A previous version exists in the specified directory. Do you want to upgrade the currently installed version? [y, n]</code>, press Y and then press Enter. The installation program installs the new version of the server and connects it to the existing database.</p>
+<p><strong>Note:</strong> If you upgraded from a version before 6.2.1.2 to version 6.2.1.2 or later and secured connections by using SSL, the server.xml file in the server_installation_directory/opt/tomcat folder was replaced. The previous server.xml file was retained and renamed server.xml.number, where number represents the time of the server upgrade.</p>
+</li>
+<li>
+<p>Start the Tomcat service: </p>
+<ul>
+<li>
+<p>On Linux, run the following command:</p>
+<p><code>server\_installation\_directory/bin/server start</code></p>
+<p>Use the location of the blueprint design server installation for <code>server\_installation\_directory</code>. The default installation directory is /opt/ibm-ucd-patterns. By default, the command looks like the following code:</p>
+<p><code>/opt/ibm-ucd-patterns/bin/server start</code></p>
+</li>
+<li>
+<p>On Windows, run the following command:</p>
+<p><code>C:\server\_installation\_directory\bin\start_server</code></p>
+<p>Use the location of the blueprint design server installation for <code>server\_installation\_directory</code>. The default installation directory is C:\Program Files\ibm-ucd-patterns. By default, the command looks like the following code:</p>
+<p><code>"C:\Program Files\ibm-ucd-patterns\bin\start_server"</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Start the cloud discovery service. See <a href="../start_patterns/">Starting the blueprint designer, cloud discovery service, and engine</a>.</p>
+</li>
+<li>If the blueprint design server is connected to an HCL UrbanCode Deploy server, update the agent components: <ol>
+<li>On the HCL UrbanCode Deploy server, delete the following components: <code>ucd-agent-linux-ppc64</code>, <code>ucd-agent-linux-x86_64</code>, <code>ucd-agent-win-x86_64</code>, and <code>ucd-agent-linux-s390x</code>. </li>
+<li>Install the agent components as described on step <a href="../ucdp_integrate/#agent_components_step">3</a> of <a href="../ucdp_integrate/">Connecting the blueprint design server to the server</a>. </li>
+</ol>
+</li>
+<li>If you provision environments in VMware vCenter, you must create new images to use with the blueprint designer.In versions 6.2.4 and later, you use VMware Tools and customization specifications to provision images to vCenter. See <a href="../cloud_connect_vmware_images/">Configuring VMware vCenter images</a>.</li>
+<li>If you are upgrading from before 6.1.2, provision environments in VMware vCenter, and use VMware NSX, provide VMware NSX credentials for your cloud project. If you provide VMware NSX credentials, you can create networks on vCenter clouds.<ol>
+<li>Log in to the blueprint designer as a user with the following permissions: <ul>
+<li>Configure Security</li>
+<li>Manage Users &amp; Groups</li>
+</ul>
+</li>
+<li>Click <strong>Settings</strong> > <strong>Clouds</strong>. </li>
+<li>From the Clouds pane, select the vCenter cloud connection to update. </li>
+<li>From the Authorization pane, select the project to update. </li>
+<li>
+<p>Select the <strong>Configure NSX access</strong> check box and specify the following information: </p>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NSX User ID</strong></td>
+<td>Enter the NSX user ID.</td>
+</tr>
+<tr>
+<td><strong>NSX Password</strong></td>
+<td>Enter the password for the NSX user ID.</td>
+</tr>
+<tr>
+<td><strong>NSX Host</strong></td>
+<td>Enter the VMWare NSX API host IP address and port number.</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>Note:</strong> You must upgrade the engine. See <a href="../upgrade_engine/">Upgrading engines</a>.</p>
+<p>If you use Chef recipes, you might need to take more steps.</p>
+<ul>
+<li>If you are upgrading from a version before version 6.2.1 and use Chef recipes, you must upgrade the Chef hook on the images on your cloud. See <a href="../cloud_update_chef_images/">Updating Chef-compatible images</a>.</li>
+<li>In versions of the blueprint designer before version 6.2.1, you hosted the Chef validator key a location that your cloud environments can access. You can remove the copy of the validator key that you hosted. If you remove the validator key, before you provision an environment that contains Chef roles, you must modify the blueprint. See <a href="../chef_validator/">Modifying blueprints to access the Chef validator key in version 6.2.1 and later</a>.</li>
+</ul>
+<p><strong>Parent topic:</strong> <a href="../../../com.ibm.udeploy.doc/topics/c_node_upgrading/">Upgrading and migrating</a></p>
+
+  <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+      <p>
+        <a href="https://github.com/IBM-UrbanCode/edit/master/docs/com.ibm.edt.doc/topics/upgrade_server_bds.md"><i class="fa fa-github"></i>
+Edit on GitHub</a>
+      </p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
