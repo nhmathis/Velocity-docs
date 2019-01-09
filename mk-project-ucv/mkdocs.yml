@@ -1,14 +1,21 @@
 site_name: UrbanCode Velocity
 
 docs_dir: docs
- 
-theme: windmill
 
-#theme_dir: cinder
+# theme: windmill
+theme:
+  name: null
+  custom_dir: '/c/Users/IBM_ADMIN/Documents/GitHub/mkdocs-windmill'
+  # # Copy settings from mkdocs_theme.yml, which is ignored by custom_dir themes.
+  # static_templates: [404.html]
+  # search_index_only: true
+  # include_search_page: true
+
+theme_dir: 'C:\Users\IBM_ADMIN\Documents\GitHub\mkdocs-windmill\mkdocs-windmill'
 
 nav:
 - Welcome: ucv_version_welcome.md
-- Overview: 
+- Overview:
   - Overview of UrbanCode Velocity: com.ibm.uvelocity.doc/topics/c_overview_se.md
   - Introduction to releases and pipelines: com.ibm.uvelocity.doc/topics/c_overview_release.md
   - Home page: com.ibm.uvelocity.doc/topics/c_overview_se_homepage.md
@@ -19,7 +26,7 @@ nav:
   - UrbanCode Velocity for GDPR Readiness: UCDVelocityGDPRguidelines.md
   - Setup the environment: com.ibm.uvelocity.doc/topics/c_node_setup.md
   - Getting started: com.ibm.insights.doc/topics/t_setup_gettingstarted.md
-- Installing the standard edition: 
+- Installing the standard edition:
   - Installing UrbanCode Velocity SE: com.ibm.uvelocity.doc/topics/c_install_se_roadmap.md
   - Installing onto Docker Compose: com.ibm.uvelocity.doc/topics/t_install_se_docker.md
   - Installing on Minikube: com.ibm.uvelocity.doc/topics/t_install_minikube.md
@@ -106,19 +113,19 @@ nav:
   - Properties overview: com.ibm.crelease.doc/topics/cr_properties_ov.md
   - Creating properties: com.ibm.crelease.doc/topics/cr_properties_create.md
   - Using properties: com.ibm.crelease.doc/topics/cr_properties_ref.md
-- Pipelines: 
+- Pipelines:
   - Pipelines overview: com.ibm.crelease.doc/topics/cr_pipelines_ov.md
   - Creating pipelines: com.ibm.crelease.doc/topics/cr_pipeline_create.md
   - Managing pipelines: com.ibm.crelease.doc/topics/cr_pipeline_manage.md
   - Running deployments with pipelines: com.ibm.crelease.doc/topics/cr_pipeline_run.md
-- Reports: 
+- Reports:
   - Overview: com.ibm.uvelocity.doc/topics/c_node_reports.md
   - Custom reports: com.ibm.insights.doc/topics/c_reports_custom.md
   - Cards: com.ibm.insights.doc/topics/c_reports_card.md
   - Charts: com.ibm.insights.doc/topics/c_reports_charts.md
   - Delivery Transformation reports: com.ibm.insights.doc/topics/c_reports_efficiency.md
   - Events: com.ibm.insights.doc/topics/c_reports_events.md
-- How to: 
+- How to:
   - About: com.ibm.uvelocity.doc/topics/c_node_howto.md
   - Access the user interface: com.ibm.insights.doc/topics/t_ui_access.md
   - Create a report: com.ibm.insights.doc/topics/t_report_create.md
@@ -126,7 +133,7 @@ nav:
   - Format Custom reports: com.ibm.insights.doc/topics/t_reports_format.md
   - Manage reports: com.ibm.insights.doc/topics/t_report_manage.md
   - Share reports: com.ibm.insights.doc/topics/t_reports_share.md
-- Troubleshooting: 
+- Troubleshooting:
   - Overview: com.ibm.uvelocity.doc/topics/c_node_troubleshoot.md
   - Contacting support: com.ibm.insights.doc/topics/c_troubleshoot_contactsupport.md
   - Viewing log files: com.ibm.insights.doc/topics/t_troubleshoot_logfiles.md
